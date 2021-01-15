@@ -1,4 +1,3 @@
-
 //====================================================================================================================================================
 // Copyright 2020 Lake Orion Robotics FIRST Team 302 
 //
@@ -14,34 +13,47 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-#pragma once
+#pragma once 
 
-//========================================================================================================
-///	 @class			MechanismTypes
-///  @brief      	This contains the enum for the mechanism types
-//========================================================================================================
-class MechanismTypes
+// C++ Includes
+#include <memory>
+
+// FRC includes
+
+// Team 302 includes
+#include <subsys/Mech1IndMotor.h>
+
+// Third Party Includes
+#include <ctre/phoenix/sensors/CANCoder.h>
+
+class IDragonMotorController;
+
+class ShooterHood : public Mech1IndMotor
 {
-	public:
+    public:
+        ShooterHood
+        (
+            std::shared_ptr<IDragonMotorController>             motorController,
+            std::shared_ptr<ctre::phoenix::sensors::CANCoder>   encoder
+        );
+        ~ShooterHood() override = default;
+        ShooterHood() = delete;
 
-        //==================================================================================
-        /// enum:           MECHANISM_TYPE
-        /// description:    Indicates the type of mechanism
-        //==================================================================================
-        enum MECHANISM_TYPE
-        {
-            UNKNOWN_MECHANISM = -1,
-            DRIVETRAIN_SIDE,
-            INTAKE,
-            IMPELLER,
-            BALL_TRANSFER,
-            TURRET,
-            SHOOTER,
-            SHOOTER_HOOD,
-            CONTROL_TABLE_MANIPULATOR,
-            CLIMBER,
-            CRAWLER,
-            HOOK_DELIVERY,
-            MAX_MECHANISM_TYPES
-        };
-};
+
+
+        /// @brief  Return the current position of the mechanism.  The value is in inches or degrees. 
+        /// @return double  position in inches (translating mechanisms) or degrees (rotating mechanisms) 
+            double GetPosition() const override; 
+
+
+        /// @brief  Get the current speed of the mechanism.  The value is in inches per second or degrees per second. 
+        /// @return double  speed in inches/second (translating mechanisms) or degrees/second (rotating mechanisms) 
+            double GetSpeed() const override;  
+
+
+
+         
+    private:  
+        std::shared_ptr<ctre::phoenix::sensors::CANCoder>   m_encoder;
+
+}; 

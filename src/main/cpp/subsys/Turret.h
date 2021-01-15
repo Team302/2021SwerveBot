@@ -1,4 +1,3 @@
-
 //====================================================================================================================================================
 // Copyright 2020 Lake Orion Robotics FIRST Team 302 
 //
@@ -13,35 +12,32 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
-
 #pragma once
 
-//========================================================================================================
-///	 @class			MechanismTypes
-///  @brief      	This contains the enum for the mechanism types
-//========================================================================================================
-class MechanismTypes
+// C++ Includes
+#include <memory>
+// FRC includes
+
+// Team 302 includes
+#include <subsys/Mech1IndMotor.h>
+
+// Third Party Includes
+
+class IDragonMotorController;
+
+class Turret : public Mech1IndMotor
 {
 	public:
+        /// @brief Create the Turret mechanism
+        Turret() = delete;
 
-        //==================================================================================
-        /// enum:           MECHANISM_TYPE
-        /// description:    Indicates the type of mechanism
-        //==================================================================================
-        enum MECHANISM_TYPE
-        {
-            UNKNOWN_MECHANISM = -1,
-            DRIVETRAIN_SIDE,
-            INTAKE,
-            IMPELLER,
-            BALL_TRANSFER,
-            TURRET,
-            SHOOTER,
-            SHOOTER_HOOD,
-            CONTROL_TABLE_MANIPULATOR,
-            CLIMBER,
-            CRAWLER,
-            HOOK_DELIVERY,
-            MAX_MECHANISM_TYPES
-        };
+        /// @brief Create the Turret mechanism
+        /// @param [in] IDragonMotorController* the motor controller that will run the turret
+        Turret
+        (
+            std::shared_ptr<IDragonMotorController>   motorController
+        );
+
+        /// @brief Destroy the object and free memory
+        ~Turret() override = default;
 };

@@ -1,4 +1,3 @@
-
 //====================================================================================================================================================
 // Copyright 2020 Lake Orion Robotics FIRST Team 302 
 //
@@ -13,35 +12,47 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
-
 #pragma once
 
-//========================================================================================================
-///	 @class			MechanismTypes
-///  @brief      	This contains the enum for the mechanism types
-//========================================================================================================
-class MechanismTypes
-{
-	public:
+// C++ Includes
+#include <memory>
 
-        //==================================================================================
-        /// enum:           MECHANISM_TYPE
-        /// description:    Indicates the type of mechanism
-        //==================================================================================
-        enum MECHANISM_TYPE
-        {
-            UNKNOWN_MECHANISM = -1,
-            DRIVETRAIN_SIDE,
-            INTAKE,
-            IMPELLER,
-            BALL_TRANSFER,
-            TURRET,
-            SHOOTER,
-            SHOOTER_HOOD,
-            CONTROL_TABLE_MANIPULATOR,
-            CLIMBER,
-            CRAWLER,
-            HOOK_DELIVERY,
-            MAX_MECHANISM_TYPES
-        };
+// FRC includes
+
+// Team 302 includes
+#include <subsys/Mech1IndMotor.h>
+#include <subsys/Mech1Solenoid.h>
+#include <utils/ControlPanelColors.h>
+
+// Third Party Includes
+#include <rev/ColorSensorV3.h>
+#include <rev/ColorMatch.h>
+
+class IDragonMotorController;
+class DragonSolenoid;
+
+
+class ControlPanel : public Mech1IndMotor, public Mech1Solenoid
+{
+    public:
+        
+        ControlPanel
+        (
+            std::shared_ptr<IDragonMotorController>             motorcontroller,
+            std::shared_ptr<DragonSolenoid>                     solenoid,
+            rev::ColorSensorV3*                                 colorSensor
+        );
+        ControlPanel() = delete;
+
+	    virtual ~ControlPanel() = default;
+
+        ControlPanelColors::COLOR GetColorSeen();
+    private:
+        rev::ColorSensorV3*                         m_color;
+        rev::ColorMatch*                            m_colorMatcher;
+
+        static constexpr frc::Color kBlueTarget = frc::Color(0.143, 0.427, 0.429);
+        static constexpr frc::Color kGreenTarget = frc::Color(0.197, 0.561, 0.240);
+        static constexpr frc::Color kRedTarget = frc::Color(0.561, 0.232, 0.114);
+        static constexpr frc::Color kYellowTarget = frc::Color(0.361, 0.524, 0.113);
 };
