@@ -1,6 +1,6 @@
 
 //====================================================================================================================================================
-// Copyright 2021 Lake Orion Robotics FIRST Team 302
+// Copyright 2020 Lake Orion Robotics FIRST Team 302
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
 // to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
@@ -29,12 +29,33 @@
 #pragma once
 
 // c++ includes
-
+#include <string>
 // wpilib includes
 #include <frc/TimedRobot.h>
+#include <frc/smartdashboard/SendableChooser.h>
 
 // team 302 includes
-
+#include <auton/CyclePrimitives.h>
+#include <states/chassis/ChassisStateMgr.h>
+#include <states/BallManipulator.h>
+//#include <states/controlPanel/ControlPanelStateMgr.h>
+//#include <states/climber/ClimberStateMgr.h>
+#include <states/intake/IntakeStateMgr.h>
+#include <frc/Solenoid.h>
+#include <hw/DragonLimelight.h>
+#include <test/ButtonBoxDisplay.h>
+#include <test/XboxDisplay.h>
+#include <test/IntakeStateMgrTest.h>
+#include <test/ImpellerStateMgrTest.h>
+#include <test/BallTransferStateMgrTest.h>
+#include <test/ShooterStateMgrTest.h>
+#include <ctre/Phoenix.h>
+#include <gamepad/TeleopControl.h>
+#include <hw/factories/LimelightFactory.h>
+#include <subsys/ChassisFactory.h>
+#include <subsys/interfaces/IChassis.h>
+#include <states/hookdelivery/HookDeliveryStateMgr.h>
+#include <states/climber/ClimberStateMgr.h>
 
 // third party includes
 
@@ -57,7 +78,59 @@ class Robot : public frc::TimedRobot
       void TestPeriodic() override;
 
   private:
- 
+      CyclePrimitives* m_cyclePrims;
+      ChassisStateMgr* m_chassisStateMgr;
+      //IntakeStateMgr* m_intake;
+      BallManipulator* m_powerCells;
+      // ControlPanelStateMgr* m_control;
+      // ClimberStateMgr* m_climer;
+
+
+      ButtonBoxDisplay* m_buttonBoxDisplay;
+      XboxDisplay* m_xBoxDisplay;
+	  IntakeStateMgrTest* m_intakeStateMgrTest;
+	  ImpellerStateMgrTest* m_impellerStateMgrTest;
+	  BallTransferStateMgrTest* m_ballTransferStateMgrTest;
+	  ShooterStateMgrTest* m_shooterStateMgrTest;
+      ClimberStateMgr*  m_winch;
+      HookDeliveryStateMgr* m_hook;
+
+      TeleopControl* m_controller;
+      std::shared_ptr<DragonLimelight> m_limelight;
+
+      TalonSRX* m_cpm;
+      TalonSRX* m_climber;
+
+      frc::Solenoid* m_cpmSolenoid;
+      frc::Solenoid* m_climberSolenoid;
+
+      bool m_climberState;
+      bool m_climberSolenoidState;
+      bool m_cpmState;
+      bool m_cpmSolenoidState;
+
+
+      frc::SendableChooser<std::string>   m_testChooser;                    
+      const std::string                   m_noTest = "No Test";      
+      const std::string                   m_buttonBoxTest = "Button Box";      
+      const std::string                   m_dragonXBoxTest = "Dragon XBox";      
+	  const std::string                   m_intakeTest = "Intake";
+	  const std::string                   m_impellerTest = "Impeller";
+	  const std::string                   m_ballTransferTest = "Ball Transfer";
+//	  const std::string                   m_shooterTest = "Shooter";
+      std::string                         m_testSelected; 
+
+      enum TEST_TO_RUN
+      {
+          NONE,
+          BUTTON_BOX,
+          XBOX,
+		  INTAKE,
+		  IMPELLER,
+		  TRANSFER,
+		  SHOOTER
+      };
+      TEST_TO_RUN   m_currentTest;      
 
 
 };
