@@ -59,8 +59,7 @@ IntakeStateMgr::IntakeStateMgr() : m_stateVector(),
     map<string, INTAKE_STATE> stateStringToEnumMap;
     stateStringToEnumMap["INTAKEOFF"] = INTAKE_STATE::OFF;
     stateStringToEnumMap["INTAKEON"]  = INTAKE_STATE::ON;
-    stateStringToEnumMap["INTAKEHUMANPLAYER"] = INTAKE_STATE::HUMANPLAYER;
-    m_stateVector.resize(3);
+    m_stateVector.resize(2);
 
     // create the states passing the configuration data
     for ( auto td: targetData )
@@ -78,13 +77,6 @@ IntakeStateMgr::IntakeStateMgr() : m_stateVector(),
                 switch ( stateEnum )
                 {
                     case INTAKE_STATE::ON:
-                    {   
-                        auto thisState = new IntakeState( controlData, target, solState );
-                        m_stateVector[stateEnum] = thisState;
-                    }
-                    break;
-
-                    case INTAKE_STATE::HUMANPLAYER:
                     {   
                         auto thisState = new IntakeState( controlData, target, solState );
                         m_stateVector[stateEnum] = thisState;
@@ -137,10 +129,6 @@ void IntakeStateMgr::RunCurrentState()
             else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::INTAKE_OFF ) )
             {
                 SetCurrentState( INTAKE_STATE::OFF, false );
-            }
-            else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::INTAKE_HUMAN_PLAYER))
-            {
-                SetCurrentState( INTAKE_STATE::HUMANPLAYER, false );
             }
         }
 

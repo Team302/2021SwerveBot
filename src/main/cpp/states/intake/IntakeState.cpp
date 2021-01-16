@@ -32,7 +32,6 @@
 #include <states/intake/IntakeState.h>
 #include <states/IState.h>
 #include <states/Mech1MotorState.h>
-#include <states/MechSolenoidState.h>
 #include <subsys/MechanismFactory.h>
 
 // Third Party Includes
@@ -44,27 +43,23 @@ IntakeState::IntakeState
 (
     ControlData* control,
     double target,
-    MechanismTargetData::SOLENOID solState
 ) : IState(),
     m_motorState( make_unique<Mech1MotorState>(MechanismFactory::GetMechanismFactory()->GetIntake().get(), control, target)),
-    m_solenoidState( make_unique<MechSolenoidState>(MechanismFactory::GetMechanismFactory()->GetIntake().get(), solState))
 {
 }
 
 void IntakeState::Init()
 {
     m_motorState.get()->Init();
-    m_solenoidState.get()->Init();
 }
 
 
 void IntakeState::Run()           
 {
     m_motorState.get()->Run();
-    m_solenoidState.get()->Run();
 }
 
 bool IntakeState::AtTarget() const
 {
-    return ( m_motorState.get()->AtTarget() && m_solenoidState.get()->AtTarget());
+    return ( m_motorState.get()->AtTarget());
 }

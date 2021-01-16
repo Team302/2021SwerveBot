@@ -29,8 +29,8 @@ class IntakeState : public IState
     IntakeState
     (
         ControlData* control,
-        double target,
-        MechanismTargetData::SOLENOID solState
+        double target
+        //Servo may be added later for releasing
     );
     IntakeState() = delete;
     ~IntakeState() = default;
@@ -41,6 +41,5 @@ class IntakeState : public IState
 
     private:
         std::unique_ptr<Mech1MotorState>    m_motorState;
-        std::unique_ptr<MechSolenoidState>  m_solenoidState;
 
 };

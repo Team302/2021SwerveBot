@@ -33,9 +33,7 @@ class IntakeStateMgr
         enum INTAKE_STATE
         {
             OFF,
-            ON,
-            HUMANPLAYER,
-            MAX_INTAKE_STATES
+            ON
         };
 
 		/// @brief  Find or create the state manmanager
