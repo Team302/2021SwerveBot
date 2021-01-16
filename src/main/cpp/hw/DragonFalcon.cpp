@@ -489,3 +489,8 @@ void DragonFalcon::SetDiameter
 {
 	m_diameter = diameter;
 }
+
+void DragonFalcon::SetVoltage(units::voltage::volt_t voltage)
+{
+    m_talon.get() -> SetVoltage(voltage);
+}

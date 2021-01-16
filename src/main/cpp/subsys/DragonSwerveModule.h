@@ -15,10 +15,11 @@
 
 class DragonSwerveModule {
     public:
-        DragonSwerveModule(int driveMotorChannel, int turningMotorChannel);
+        DragonSwerveModule(DragonFalcon* driveMotor, DragonFalcon* turningMotor);
         frc::SwerveModuleState GetState() const;
         void SetDesiredState(const frc::SwerveModuleState& state);
 
+        
     private:
         static constexpr auto WheelRadius = 0.0508_m; //TODO #1 Put values in from XML
         static constexpr int EncoderResolution = 4096;
