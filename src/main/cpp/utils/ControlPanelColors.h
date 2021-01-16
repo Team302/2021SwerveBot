@@ -17,44 +17,24 @@
 #pragma once
 
 // C++ Includes
-#include <map>
-#include <memory>
-#include <string>
 
 // FRC includes
 
 // Team 302 includes
 
-
 // Third Party Includes
 
-class DigitalInputUsage
-{
 
+class ControlPanelColors
+{
     public:
 
-        /// @enum DIGITAL_SENSOR_USAGE
-        /// @brief Defines digital input sensor usages.  This should be modified for each robot.
-        enum DIGITAL_SENSOR_USAGE
+        enum COLOR
         {
-            UNKNOWN_DIGITAL_TYPE = -1,
-            TURRET_ANGLE_MIN,
-            TURRET_ANGLE_MAX,
-            MAX_DIGITAL_TYPES
-        };
-
-        static DigitalInputUsage* GetInstance();
-
-        DIGITAL_SENSOR_USAGE GetUsage
-        ( 
-            std::string         usageString
-        );
-
-    private:
-        static DigitalInputUsage*    m_instance;
-        DigitalInputUsage();
-        ~DigitalInputUsage();
-        
-		std::map <std::string, DIGITAL_SENSOR_USAGE> m_usageMap;
-
+           GREEN  = 0 ,
+           BLUE   = 1 ,
+           YELLOW = 2 ,
+           RED    = 3 ,
+           UNKNOWN = 4
+        }; 
 };
