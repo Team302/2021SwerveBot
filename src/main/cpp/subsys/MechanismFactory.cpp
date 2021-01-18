@@ -40,6 +40,7 @@
 #include <hw/DragonServo.h>
 #include <hw/DragonAnalogInput.h>
 #include <hw/DragonDigitalInput.h>
+#include <subsys/BallTransfer.h>
 #include <subsys/MechanismFactory.h>
 #include <subsys/MechanismTypes.h>
 #include <utils/Logger.h>
@@ -48,7 +49,6 @@
 #include <subsys/ControlPanel.h>
 #include <subsys/HookDelivery.h>
 #include <subsys/Impeller.h>
-#include <subsys/BallTransfer.h>
 #include <subsys/Turret.h>
 #include <subsys/Shooter.h>
 #include <subsys/ShooterHood.h>
@@ -79,8 +79,9 @@ MechanismFactory* MechanismFactory::GetMechanismFactory()
 	return MechanismFactory::m_mechanismFactory;
 }
 
-MechanismFactory::MechanismFactory()  : m_intake()
-								/**   :  m_balltransfer(),
+MechanismFactory::MechanismFactory()  : m_balltransfer(),
+										m_intake()
+										/**   
 										m_shooter(),
 										m_turret() **/
 {
@@ -131,7 +132,6 @@ void  MechanismFactory::CreateIMechanism
 		}
 		break;
 		
-	/**
 
 		case MechanismTypes::MECHANISM_TYPE::BALL_TRANSFER:
 		{
@@ -149,7 +149,7 @@ void  MechanismFactory::CreateIMechanism
 			}
 		}
 		break;			
-		
+	/**	
 		case MechanismTypes::MECHANISM_TYPE::SHOOTER:
 		{
 			if ( m_shooter.get() != nullptr )
