@@ -17,8 +17,6 @@
 
 #include <states/IState.h>
 #include <states/Mech1MotorState.h>
-#include <states/MechSolenoidState.h>
-#include <controllers/MechanismTargetData.h>
 
 class ControlData;
 
