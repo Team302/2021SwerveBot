@@ -14,34 +14,39 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-#pragma once
+#pragma once 
 
-//========================================================================================================
-///	 @class			MechanismTypes
-///  @brief      	This contains the enum for the mechanism types
-//========================================================================================================
-class MechanismTypes
+// C++ Includes
+#include <memory>
+
+// FRC includes
+
+// Team 302 includes
+#include <subsys/Mech1IndMotor.h>
+
+// Third Party Includes
+#include <ctre/phoenix/sensors/CANCoder.h>
+
+class IDragonMotorController;
+
+class Impeller : public Mech1IndMotor
 {
 	public:
+        Impeller() = delete;
+        Impeller
+        (
+            std::shared_ptr<IDragonMotorController> motor,
+            std::shared_ptr<ctre::phoenix::sensors::CANCoder> encoder
+        );
 
-        //==================================================================================
-        /// enum:           MECHANISM_TYPE
-        /// description:    Indicates the type of mechanism
-        //==================================================================================
-        enum MECHANISM_TYPE
-        {
-            UNKNOWN_MECHANISM = -1,
-            DRIVETRAIN_SIDE,
-            INTAKE,
-            IMPELLER,
-            BALL_TRANSFER,
-            TURRET,
-            SHOOTER,
-            SHOOTER_HOOD,
-            CONTROL_TABLE_MANIPULATOR,
-            CLIMBER,
-            CRAWLER,
-            HOOK_DELIVERY,
-            MAX_MECHANISM_TYPES
-        };
+        ///@brief Return the current position of the impeller in degrees (positive is cw, negative is ccw)
+        ///@return  double position in degrees
+        double GetPosition() const override;
+
+        ///@brief Return the current position of the impeller in degrees per second (positive is cw, negative is ccw)
+        ///@return double speed in degrees per second
+        double GetSpeed() const override;
+
+        private:
+        std::shared_ptr<ctre::phoenix::sensors::CANCoder> m_encoder;
 };

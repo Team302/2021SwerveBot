@@ -31,10 +31,10 @@
 #include <hw/usages/DragonSolenoidMap.h>
 #include <hw/usages/ServoMap.h>
 
+#include <subsys/BallTransfer.h>
 #include <subsys/interfaces/IMech.h>
 #include <subsys/Intake.h>
 /**
-#include <subsys/BallTransfer.h>
 #include <subsys/Impeller.h>
 #include <subsys/Shooter.h>
 #include <subsys/Turret.h>
@@ -86,9 +86,9 @@ class MechanismFactory
 			std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder
 		);
 
+		inline std::shared_ptr<BallTransfer> GetBallTransfer() const { return m_balltransfer;};
 		inline std::shared_ptr<Intake> GetIntake() const { return m_intake;};
 		/**
-		inline std::shared_ptr<BallTransfer> GetBallTransfer() const { return m_balltransfer;};
 		inline std::shared_ptr<Shooter> GetShooter() const { return m_shooter;};
 		inline std::shared_ptr<Turret> GetTurret() const { return m_turret;};
 		**/
@@ -125,9 +125,9 @@ class MechanismFactory
 
 		static MechanismFactory*	m_mechanismFactory;
 
+		std::shared_ptr<BallTransfer> 	m_balltransfer;
 		std::shared_ptr<Intake> 		m_intake;
 		/**
-		std::shared_ptr<BallTransfer> 	m_balltransfer;
 		std::shared_ptr<Shooter>		m_shooter;
 		std::shared_ptr<Turret>			m_turret;
 		**/

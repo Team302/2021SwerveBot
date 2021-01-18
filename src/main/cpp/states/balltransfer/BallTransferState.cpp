@@ -1,4 +1,3 @@
-
 //====================================================================================================================================================
 /// Copyright 2020 Lake Orion Robotics FIRST Team 302 
 ///
@@ -14,35 +13,24 @@
 /// OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-#pragma once
 
-#include <subsys/interfaces/IMech1IndMotor.h>
-#include <states/IState.h>
+// C++ Includes
+
+// FRC includes
+
+// Team 302 includes
 #include <controllers/ControlData.h>
-#include <controllers/MechanismTargetData.h>
+#include <states/balltransfer/BallTransferState.h>
+#include <states/Mech1MotorState.h>
+#include <subsys/MechanismFactory.h>
 
-class Mech1MotorState : public IState
+// Third Party Includes
+
+
+BallTransferState::BallTransferState
+(
+    ControlData*                    control,
+    double                          target
+) : Mech1MotorState( MechanismFactory::GetMechanismFactory()->GetBallTransfer().get(), control, target )
 {
-    public:
-
-        Mech1MotorState
-        (
-            IMech1IndMotor*                 mechanism,
-            ControlData*                    control,
-            double                          target
-        );
-        Mech1MotorState() = delete;
-        ~Mech1MotorState() = default;
-
-        void Init() override;
-        void Run() override;
-        bool AtTarget() const override;
-
-    private:
-
-        IMech1IndMotor*                 m_mechanism;
-        ControlData*                    m_control;
-        double                          m_target;
-        bool                            m_positionBased;
-        bool                            m_speedBased;
-};
+}

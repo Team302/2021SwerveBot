@@ -1,4 +1,3 @@
-
 //====================================================================================================================================================
 // Copyright 2020 Lake Orion Robotics FIRST Team 302 
 //
@@ -14,34 +13,28 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-#pragma once
+#pragma once 
 
-//========================================================================================================
-///	 @class			MechanismTypes
-///  @brief      	This contains the enum for the mechanism types
-//========================================================================================================
-class MechanismTypes
+// C++ Includes
+#include <memory>
+
+// FRC includes
+
+// Team 302 includes
+#include <subsys/Mech1IndMotor.h>
+
+// Third Party Includes
+
+class IDragonMotorController;
+
+class HookDelivery : public Mech1IndMotor
 {
-	public:
-
-        //==================================================================================
-        /// enum:           MECHANISM_TYPE
-        /// description:    Indicates the type of mechanism
-        //==================================================================================
-        enum MECHANISM_TYPE
-        {
-            UNKNOWN_MECHANISM = -1,
-            DRIVETRAIN_SIDE,
-            INTAKE,
-            IMPELLER,
-            BALL_TRANSFER,
-            TURRET,
-            SHOOTER,
-            SHOOTER_HOOD,
-            CONTROL_TABLE_MANIPULATOR,
-            CLIMBER,
-            CRAWLER,
-            HOOK_DELIVERY,
-            MAX_MECHANISM_TYPES
-        };
+    public:
+        HookDelivery
+        (
+            std::shared_ptr<IDragonMotorController>   motorController
+        );
+        ~HookDelivery() override = default;
+        HookDelivery() = delete;
 };
+

@@ -16,33 +16,20 @@
 
 #pragma once
 
-#include <subsys/interfaces/IMech1IndMotor.h>
-#include <states/IState.h>
-#include <controllers/ControlData.h>
-#include <controllers/MechanismTargetData.h>
+#include <states/Mech1MotorState.h>
 
-class Mech1MotorState : public IState
+class ControlData;
+
+class BallTransferState : public Mech1MotorState
 {
     public:
 
-        Mech1MotorState
+        BallTransferState() = delete;
+        BallTransferState
         (
-            IMech1IndMotor*                 mechanism,
             ControlData*                    control,
             double                          target
         );
-        Mech1MotorState() = delete;
-        ~Mech1MotorState() = default;
-
-        void Init() override;
-        void Run() override;
-        bool AtTarget() const override;
-
-    private:
-
-        IMech1IndMotor*                 m_mechanism;
-        ControlData*                    m_control;
-        double                          m_target;
-        bool                            m_positionBased;
-        bool                            m_speedBased;
+        ~BallTransferState() = default;
 };
+

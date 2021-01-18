@@ -16,32 +16,25 @@
 
 #pragma once
 
-//========================================================================================================
-///	 @class			MechanismTypes
-///  @brief      	This contains the enum for the mechanism types
-//========================================================================================================
-class MechanismTypes
-{
-	public:
+// C++ Includes
 
-        //==================================================================================
-        /// enum:           MECHANISM_TYPE
-        /// description:    Indicates the type of mechanism
-        //==================================================================================
-        enum MECHANISM_TYPE
+// FRC includes
+
+// Team 302 includes
+
+// Third Party Includes
+
+
+class ControlPanelColors
+{
+    public:
+
+        enum COLOR
         {
-            UNKNOWN_MECHANISM = -1,
-            DRIVETRAIN_SIDE,
-            INTAKE,
-            IMPELLER,
-            BALL_TRANSFER,
-            TURRET,
-            SHOOTER,
-            SHOOTER_HOOD,
-            CONTROL_TABLE_MANIPULATOR,
-            CLIMBER,
-            CRAWLER,
-            HOOK_DELIVERY,
-            MAX_MECHANISM_TYPES
-        };
+           GREEN  = 0 ,
+           BLUE   = 1 ,
+           YELLOW = 2 ,
+           RED    = 3 ,
+           UNKNOWN = 4
+        }; 
 };

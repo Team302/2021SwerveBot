@@ -1,4 +1,3 @@
-
 //====================================================================================================================================================
 /// Copyright 2020 Lake Orion Robotics FIRST Team 302 
 ///
@@ -14,35 +13,32 @@
 /// OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-#pragma once
+#pragma once 
 
-#include <subsys/interfaces/IMech1IndMotor.h>
-#include <states/IState.h>
-#include <controllers/ControlData.h>
-#include <controllers/MechanismTargetData.h>
+// C++ Includes
+#include <memory>
 
-class Mech1MotorState : public IState
+// FRC includes
+
+// Team 302 includes
+#include <subsys/Mech1IndMotor.h>
+
+// Third Party Includes
+
+class IDragonMotorController;
+
+
+class Crawler : public Mech1IndMotor
 {
     public:
 
-        Mech1MotorState
+        Crawler
         (
-            IMech1IndMotor*                 mechanism,
-            ControlData*                    control,
-            double                          target
+            std::shared_ptr<IDragonMotorController>     crawlerMotor
         );
-        Mech1MotorState() = delete;
-        ~Mech1MotorState() = default;
 
-        void Init() override;
-        void Run() override;
-        bool AtTarget() const override;
+        Crawler() = delete;
 
-    private:
+        virtual ~Crawler() = default;
 
-        IMech1IndMotor*                 m_mechanism;
-        ControlData*                    m_control;
-        double                          m_target;
-        bool                            m_positionBased;
-        bool                            m_speedBased;
 };
