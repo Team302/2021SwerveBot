@@ -45,22 +45,17 @@
 #include <subsys/MechanismTypes.h>
 #include <utils/Logger.h>
 #include <subsys/Intake.h>
-/**
-#include <subsys/ControlPanel.h>
-#include <subsys/HookDelivery.h>
-#include <subsys/Impeller.h>
 #include <subsys/Turret.h>
+/**
 #include <subsys/Shooter.h>
 #include <subsys/ShooterHood.h>
 **/
 
 // Third Party Includes
-//#include <rev/ColorSensorV3.h>
 #include <ctre/phoenix/sensors/CANCoder.h>
 
 
 using namespace std;
-//using namespace rev;
 using namespace ctre::phoenix::sensors;
 
 
@@ -80,10 +75,11 @@ MechanismFactory* MechanismFactory::GetMechanismFactory()
 }
 
 MechanismFactory::MechanismFactory()  : m_balltransfer(),
-										m_intake()
+										m_intake(),
+										m_turret()
 										/**   
 										m_shooter(),
-										m_turret() **/
+										 **/
 {
 }
 
@@ -168,6 +164,7 @@ void  MechanismFactory::CreateIMechanism
 
 		}
 		break;		
+		**/
 		
 		case MechanismTypes::MECHANISM_TYPE::TURRET:
 		{
@@ -185,7 +182,6 @@ void  MechanismFactory::CreateIMechanism
 			}
 		}
 		break;
-	**/
 
 		default:
 		{

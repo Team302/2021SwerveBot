@@ -12,32 +12,33 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
-#pragma once
+
 
 // C++ Includes
-#include <memory>
+
 // FRC includes
 
 // Team 302 includes
-#include <subsys/Mech1IndMotor.h>
+#include <controllers/ControlData.h>
+#include <states/turret/HoldTurretPosition.h>
+#include <states/Mech1MotorState.h>
+#include <subsys/MechanismFactory.h>
 
 // Third Party Includes
 
-class IDragonMotorController;
 
-class Turret : public Mech1IndMotor
+HoldTurretPosition::HoldTurretPosition
+(
+    ControlData*                    control,
+    double                          target
+) : Mech1MotorState( MechanismFactory::GetMechanismFactory()->GetTurret().get(), control, target )
 {
-	public:
-        /// @brief Create the Turret mechanism
-        Turret() = delete;
+}
 
-        /// @brief Create the Turret mechanism
-        /// @param [in] IDragonMotorController* the motor controller that will run the turret
-        Turret
-        (
-            std::shared_ptr<IDragonMotorController>   motorController
-        );
+void HoldTurretPosition::Init()
+{
+    auto turret = MechanismFactory::GetMechanismFactory()->GetTurret();
+    auto pos = turret.get()->GetPosition();
 
-        /// @brief Destroy the object and free memory
-        ~Turret() override = default;
-};
+    turret.get()->UpdateTarget(pos);
+}

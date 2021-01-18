@@ -12,32 +12,30 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
-#pragma once
 
 // C++ Includes
 #include <memory>
+#include <string>
 // FRC includes
 
 // Team 302 includes
 #include <subsys/Mech1IndMotor.h>
+#include <subsys/Turret.h>
+#include <subsys/MechanismTypes.h>
 
 // Third Party Includes
 
-class IDragonMotorController;
 
-class Turret : public Mech1IndMotor
+using namespace std;
+
+/// @brief Create the BallTransfer mechanism
+/// @param [in] IDragonMotorController* the motor controller that will run the ball transfer
+Turret::Turret
+(
+    shared_ptr<IDragonMotorController>   motorController
+) : Mech1IndMotor( MechanismTypes::MECHANISM_TYPE::TURRET, 
+                    string("turret.xml"), 
+                    string("turretNT"), 
+                    motorController )
 {
-	public:
-        /// @brief Create the Turret mechanism
-        Turret() = delete;
-
-        /// @brief Create the Turret mechanism
-        /// @param [in] IDragonMotorController* the motor controller that will run the turret
-        Turret
-        (
-            std::shared_ptr<IDragonMotorController>   motorController
-        );
-
-        /// @brief Destroy the object and free memory
-        ~Turret() override = default;
-};
+}

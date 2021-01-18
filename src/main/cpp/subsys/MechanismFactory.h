@@ -34,10 +34,10 @@
 #include <subsys/BallTransfer.h>
 #include <subsys/interfaces/IMech.h>
 #include <subsys/Intake.h>
+#include <subsys/Turret.h>
 /**
 #include <subsys/Impeller.h>
 #include <subsys/Shooter.h>
-#include <subsys/Turret.h>
 **/
 
 
@@ -88,9 +88,9 @@ class MechanismFactory
 
 		inline std::shared_ptr<BallTransfer> GetBallTransfer() const { return m_balltransfer;};
 		inline std::shared_ptr<Intake> GetIntake() const { return m_intake;};
+		inline std::shared_ptr<Turret> GetTurret() const { return m_turret;};
 		/**
 		inline std::shared_ptr<Shooter> GetShooter() const { return m_shooter;};
-		inline std::shared_ptr<Turret> GetTurret() const { return m_turret;};
 		**/
 
 	private:
@@ -127,8 +127,8 @@ class MechanismFactory
 
 		std::shared_ptr<BallTransfer> 	m_balltransfer;
 		std::shared_ptr<Intake> 		m_intake;
+		std::shared_ptr<Turret>			m_turret;
 		/**
 		std::shared_ptr<Shooter>		m_shooter;
-		std::shared_ptr<Turret>			m_turret;
 		**/
 };
