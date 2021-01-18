@@ -42,9 +42,9 @@ using namespace std;
 IntakeState::IntakeState
 (
     ControlData* control,
-    double target,
+    double target
 ) : IState(),
-    m_motorState( make_unique<Mech1MotorState>(MechanismFactory::GetMechanismFactory()->GetIntake().get(), control, target)),
+    m_motorState( make_unique<Mech1MotorState>(MechanismFactory::GetMechanismFactory()->GetIntake().get(), control, target))
 {
 }
 

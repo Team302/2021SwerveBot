@@ -43,11 +43,11 @@
 #include <subsys/MechanismFactory.h>
 #include <subsys/MechanismTypes.h>
 #include <utils/Logger.h>
+#include <subsys/Intake.h>
 /**
 #include <subsys/ControlPanel.h>
 #include <subsys/HookDelivery.h>
 #include <subsys/Impeller.h>
-#include <subsys/Intake.h>
 #include <subsys/BallTransfer.h>
 #include <subsys/Turret.h>
 #include <subsys/Shooter.h>
@@ -79,8 +79,8 @@ MechanismFactory* MechanismFactory::GetMechanismFactory()
 	return MechanismFactory::m_mechanismFactory;
 }
 
-MechanismFactory::MechanismFactory() /** :  m_balltransfer(),
-										m_intake(),
+MechanismFactory::MechanismFactory()  : m_intake()
+								/**   :  m_balltransfer(),
 										m_shooter(),
 										m_turret() **/
 {
@@ -111,7 +111,6 @@ void  MechanismFactory::CreateIMechanism
 
 	bool found = false;
 	// Create the mechanism
-	/**
 	switch ( type )
 	{
 		case MechanismTypes::MECHANISM_TYPE::INTAKE:
@@ -121,11 +120,7 @@ void  MechanismFactory::CreateIMechanism
 				auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE );
 				if ( motor.get() != nullptr )
 				{
-					auto solenoid = GetSolenoid( solenoids, SolenoidUsage::SOLENOID_USAGE::INTAKE );
-					if ( solenoid.get() != nullptr )
-					{
-						m_intake = make_shared<Intake>( motor, solenoid );
-					}
+					m_intake = make_shared<Intake>( motor );
 				}
 			}
 			else
@@ -136,6 +131,7 @@ void  MechanismFactory::CreateIMechanism
 		}
 		break;
 		
+	/**
 
 		case MechanismTypes::MECHANISM_TYPE::BALL_TRANSFER:
 		{
@@ -189,6 +185,7 @@ void  MechanismFactory::CreateIMechanism
 			}
 		}
 		break;
+	**/
 
 		default:
 		{
@@ -198,7 +195,6 @@ void  MechanismFactory::CreateIMechanism
 		}
 		break;
 	}
-	**/
     // See if the mechanism was created already, if it wasn't create it
 	if ( found )
     {
