@@ -60,7 +60,6 @@ BallTransferStateMgr::BallTransferStateMgr() : m_currentState(),
     // initialize the xml string to state map
     map<string, BALL_TRANSFER_STATE> stateMap;
     stateMap["BALLTRANSFEROFF"] = BALL_TRANSFER_STATE::OFF;
-    stateMap["BALLTRANSPORTTOIMPELLER"]  = BALL_TRANSFER_STATE::TO_IMPELLER;
     stateMap["BALLTRANSFERTOSHOOTER"]  = BALL_TRANSFER_STATE::TO_SHOOTER;
     stateMap["BALLTRANSFEREJECT"] = BALL_TRANSFER_STATE::EJECT;
     m_stateVector.resize(4);
@@ -80,7 +79,6 @@ BallTransferStateMgr::BallTransferStateMgr() : m_currentState(),
                 {
                     case BALL_TRANSFER_STATE::OFF:
                     {   
-                        Logger::GetLogger()->LogError(string("creating ball transfer off"), string(""));
                         auto thisState = new BallTransferState( controlData, target );
                         m_stateVector[stateEnum] = thisState;
                         m_currentState = thisState;
@@ -89,17 +87,8 @@ BallTransferStateMgr::BallTransferStateMgr() : m_currentState(),
                     }
                     break;
 
-                    case BALL_TRANSFER_STATE::TO_IMPELLER:
-                    {   
-                        Logger::GetLogger()->LogError(string("creating ball transfer to impeller"), string(""));
-                        auto thisState = new BallTransferState( controlData, target );
-                        m_stateVector[stateEnum] = thisState;
-                    }
-                    break;
-
                     case BALL_TRANSFER_STATE::TO_SHOOTER:
                     {   
-                        Logger::GetLogger()->LogError(string("creating ball transfer to shooter"), string(""));
                         auto thisState = new BallTransferState( controlData, target );
                         m_stateVector[stateEnum] = thisState;
                     }
@@ -148,20 +137,18 @@ void BallTransferStateMgr::RunCurrentState()
             {
                 SetCurrentState( BALL_TRANSFER_STATE::OFF, false );
             }
-            // else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::BALL_TRANSFER_TO_IMPELLER ) &&
-            //         m_currentStateEnum != BALL_TRANSFER_STATE::TO_IMPELLER )
-            // {
-            //     SetCurrentState( BALL_TRANSFER_STATE::TO_IMPELLER, false );
-            // }
             else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::BALL_TRANSFER_TO_SHOOTER ) &&
                     m_currentStateEnum != BALL_TRANSFER_STATE::TO_SHOOTER )
             {
                 SetCurrentState( BALL_TRANSFER_STATE::TO_SHOOTER, false );
             }
+            else
+            {
+                // TODO: handle expel
+            }
+            
         }
         
-
-        Logger::GetLogger()->OnDash(string("Ball Transfer State"), to_string(m_currentStateEnum));
 
         // run the current state
         if ( m_currentState != nullptr )
