@@ -43,8 +43,9 @@ IntakeState::IntakeState
 (
     ControlData* control,
     double target
-) : IState(),
-    m_motorState( make_unique<Mech1MotorState>(MechanismFactory::GetMechanismFactory()->GetIntake().get(), control, target))
+) : IState()
+    //m_motorState( make_unique<Mech1MotorState>(MechanismFactory::GetMechanismFactory()->GetIntake().get(), control, target)),
+    //TODO Hook up MechanismFactory
 {
 }
 
