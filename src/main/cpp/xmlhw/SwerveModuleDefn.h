@@ -1,6 +1,6 @@
 
 //====================================================================================================================================================
-// Copyright 2020 Lake Orion Robotics FIRST Team 302
+// Copyright 2020 Lake Orion Robotics FIRST Team 302 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
 // to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
@@ -14,54 +14,38 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
+#pragma once
+
 // C++ Includes
-#include <map>
 #include <memory>
-#include <string>
 
 // FRC includes
 
 // Team 302 includes
-#include <hw/usages/MotorControllerUsage.h>
 
-// Third Party Includes
+// Third Party includes
+#include <pugixml/pugixml.hpp>
 
-using namespace std;
 
-MotorControllerUsage* MotorControllerUsage::m_instance = nullptr;
-MotorControllerUsage* MotorControllerUsage::GetInstance()
+/// @class SwerveModuleDefn
+/// @brief Create a chassis from an XML definition that includes the chassis type, wheel diameter, 
+///        wheel based (front to back distance) and track (side to side distance on axle).
+class SwerveModuleDefn
 {
-    if ( m_instance == nullptr )
-    {
-        m_instance = new MotorControllerUsage();
-    }
-    return m_instance;
-}
+	public:
+		/// @brief construct a SwerveModuleDefn object
+		SwerveModuleDefn() = default;
 
-MotorControllerUsage::MotorControllerUsage()
-{
-    m_usageMap["DRIVE"]  = MOTOR_CONTROLLER_USAGE::DRIVE;
-    m_usageMap["TURN"]   = MOTOR_CONTROLLER_USAGE::TURN;
+		/// @brief destroy a SwerveModuleDefn object and free the memory
+		virtual ~SwerveModuleDefn() = default;
 
-    m_usageMap["INTAKE"] = MOTOR_CONTROLLER_USAGE::INTAKE1;
-    m_usageMap["INTAKE"] = MOTOR_CONTROLLER_USAGE::INTAKE2;
-    m_usageMap["BALL_TRANSFER"] = MOTOR_CONTROLLER_USAGE::BALL_TRANSFER;
-    m_usageMap["TURRET"] = MOTOR_CONTROLLER_USAGE::TURRET;
-    m_usageMap["SHOOTER_1"] = MOTOR_CONTROLLER_USAGE::SHOOTER_1;
-    m_usageMap["SHOOTER_2"] = MOTOR_CONTROLLER_USAGE::SHOOTER_2;
-    m_usageMap["SHOOTER_HOOD"] = MOTOR_CONTROLLER_USAGE::SHOOTER_HOOD;
-}
-
-MotorControllerUsage::~MotorControllerUsage()
-{
-    m_usageMap.clear();
-}
-
-MotorControllerUsage::MOTOR_CONTROLLER_USAGE MotorControllerUsage::GetUsage
-(
-    string              usageString
-)
-{
-    return m_usageMap.find(usageString)->second;
-}
-
+    	/// @brief  Parse the chassie element (and it children).  When this is done a IChassis object exists.
+		///		   It can be retrieved from the factory.
+		/// @param [in]  pugi::xml_node the chassis element in the XML document
+    	/// @return std::shared_ptr<IChassis> 
+		// std::shared_ptr<IChassis> needs to be a swerve module
+		void  ParseXML
+		(
+			pugi::xml_node      SwerveModuleNode
+		);
+};

@@ -69,16 +69,8 @@ vector<MechanismTargetData*> StateDataDefn::ParseXML
     string filename = "/home/lvuser/config/states/";
     switch ( mechanism )
     {
-        case MechanismTypes::DRIVETRAIN_SIDE:
-            filename += string( "drivetrainside.xml");
-            break;
-
         case MechanismTypes::INTAKE:
             filename += string( "intake.xml");
-            break;
-
-        case MechanismTypes::IMPELLER:
-            filename += string( "impeller.xml");
             break;
 
         case MechanismTypes::BALL_TRANSFER:
@@ -95,22 +87,6 @@ vector<MechanismTargetData*> StateDataDefn::ParseXML
 
         case MechanismTypes::SHOOTER_HOOD:
             filename += string( "shooterhood.xml");
-            break;
-
-        case MechanismTypes::CONTROL_TABLE_MANIPULATOR:
-            filename += string( "controltablemanipulator.xml");
-            break;
-
-        case MechanismTypes::CLIMBER:
-            filename += string( "climber.xml");
-            break;
-
-        case MechanismTypes::CRAWLER:
-            filename += string( "crawler.xml");
-            break;
-
-        case MechanismTypes::HOOK_DELIVERY:
-            filename += string( "hookdelivery.xml");
             break;
 
         default:

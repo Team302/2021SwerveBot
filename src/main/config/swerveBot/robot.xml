@@ -36,8 +36,8 @@
 			 
         <swervemodule type="LEFT_FRONT">
             <motor  usage="DRIVE_MOTOR"
-                    canId="1"
-                    pdpID="1"
+                    canId="12"
+                    pdpID="12"
                     type="FALCON"
                     inverted="true"
                     sensorInverted="false"
@@ -55,8 +55,8 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>                  
              <motor  usage="TURN_MOTOR"
-                    canId="2"
-                    pdpID="2"
+                    canId="3"
+                    pdpID="3"
                     type="FALCON"
                     inverted="true"
                     sensorInverted="false"
@@ -78,8 +78,8 @@
 
         <swervemodule type="RIGHT_FRONT">
             <motor  usage="DRIVE_MOTOR"
-                    canId="3"
-                    pdpID="3"
+                    canId="1"
+                    pdpID="1"
                     type="FALCON"
                     inverted="true"
                     sensorInverted="false"
@@ -97,8 +97,8 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>                  
              <motor  usage="TURN_MOTOR"
-                    canId="4"
-                    pdpID="4"
+                    canId="0"
+                    pdpID="0"
                     type="FALCON"
                     inverted="true"
                     sensorInverted="false"
@@ -120,8 +120,8 @@
 
         <swervemodule type="LEFT_BACK">
             <motor  usage="DRIVE_MOTOR"
-                    canId="5"
-                    pdpID="5"
+                    canId="14"
+                    pdpID="14"
                     type="FALCON"
                     inverted="true"
                     sensorInverted="false"
@@ -139,8 +139,8 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>                  
              <motor  usage="TURN_MOTOR"
-                    canId="6"
-                    pdpID="6"
+                    canId="13"
+                    pdpID="13"
                     type="FALCON"
                     inverted="true"
                     sensorInverted="false"
@@ -162,8 +162,8 @@
 
         <swervemodule type="RIGHT_BACK">
             <motor  usage="DRIVE_MOTOR"
-                    canId="7"
-                    pdpID="7"
+                    canId="15"
+                    pdpID="15"
                     type="FALCON"
                     inverted="true"
                     sensorInverted="false"
@@ -181,8 +181,8 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>                  
              <motor  usage="TURN_MOTOR"
-                    canId="8"
-                    pdpID="8"
+                    canId="14"
+                    pdpID="14"
                     type="FALCON"
                     inverted="true"
                     sensorInverted="false"
@@ -210,8 +210,8 @@
     
 	<mechanism type="INTAKE">
 		<motor  usage="INTAKE1"
-                    canId="9"
-                    pdpID="9"
+                    canId="4"
+                    pdpID="4"
                     type="FALCON"
                     inverted="true"
                     sensorInverted="false"
@@ -232,8 +232,8 @@
     
 	<mechanism type="INTAKE">
 		<motor  usage="INTAKE2"
-                    canId="10"
-                    pdpID="10"
+                    canId="5"
+                    pdpID="5"
                     type="FALCON"
                     inverted="true"
                     sensorInverted="false"
@@ -254,8 +254,8 @@
   
 	<mechanism type="BALL_TRANSFER">
 		<motor  usage="BALL_TRANSFER"
-                    canId="11"
-                    pdpID="11"
+                    canId="6"
+                    pdpID="6"
                     type="FALCON"
                     inverted="true"
                     sensorInverted="false"
@@ -277,8 +277,8 @@
     
 	<mechanism type="SHOOTER">
 		<motor  usage="SHOOTER_1"
-				canId="12"
-				pdpID="12"
+				canId="7"
+				pdpID="7"
 				type="FALCON"
 				inverted="false"
 				sensorInverted="false"
@@ -296,8 +296,8 @@
 				reverselimitswitch="false"
 				reverselimitswitchopen="true"/>
 		<motor  usage="SHOOTER_2"
-				canId="13"
-				pdpID="13"
+				canId="8"
+				pdpID="8"
 				type="FALCON"
 				inverted="true"
 				sensorInverted="false"
@@ -318,8 +318,8 @@
     
 	<mechanism type="SHOOTER_HOOD">
 		<motor  usage="SHOOTER_HOOD"
-                canId="14"
-                pdpID="14"
+                canId="9"
+                pdpID="9"
                 type="FALCON"
                 inverted="true"
                 sensorInverted="false"
@@ -342,8 +342,8 @@
     
 	<mechanism type="TURRET">
 		<motor  usage="TURRET"
-                    canId="15"
-                    pdpID="15"
+                    canId="10"
+                    pdpID="10"
                     type="FALCON"
                     inverted="true"
                     sensorInverted="false"

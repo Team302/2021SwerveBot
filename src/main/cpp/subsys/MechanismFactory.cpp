@@ -32,13 +32,9 @@
 // Team 302 includes
 #include <hw/interfaces/IDragonMotorController.h>
 #include <hw/usages/IDragonMotorControllerMap.h>
-#include <hw/usages/AnalogInputMap.h>
 #include <hw/usages/DigitalInputMap.h>
-#include <hw/usages/DragonSolenoidMap.h>
 #include <hw/usages/ServoMap.h>
-#include <hw/DragonSolenoid.h>
 #include <hw/DragonServo.h>
-#include <hw/DragonAnalogInput.h>
 #include <hw/DragonDigitalInput.h>
 #include <subsys/BallTransfer.h>
 #include <subsys/MechanismFactory.h>
@@ -75,7 +71,8 @@ MechanismFactory* MechanismFactory::GetMechanismFactory()
 }
 
 MechanismFactory::MechanismFactory()  : m_balltransfer(),
-										m_intake(),
+										m_intake1(),
+										m_intake2(),
 										m_turret()
 										/**   
 										m_shooter(),
@@ -98,10 +95,8 @@ void  MechanismFactory::CreateIMechanism
 (
 	MechanismTypes::MECHANISM_TYPE			type,
 	const IDragonMotorControllerMap&        motorControllers,   // <I> - Motor Controllers
-	const DragonSolenoidMap&                solenoids,
 	const ServoMap&						    servos,
 	const DigitalInputMap&					digitalInputs,
-	const AnalogInputMap&                   analogInputs,
 	shared_ptr<CANCoder>					canCoder
 )
 {
@@ -112,19 +107,27 @@ void  MechanismFactory::CreateIMechanism
 	{
 		case MechanismTypes::MECHANISM_TYPE::INTAKE:
 		{
-			if (m_intake.get() == nullptr )
+			auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE1 );
+			if ( motor.get() != nullptr && m_intake1.get() == nullptr )
 			{
-				auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE );
-				if ( motor.get() != nullptr )
-				{
-					m_intake = make_shared<Intake>( motor );
-				}
+				m_intake1 = make_shared<Intake>( motor );
 			}
-			else
+			if ( motor.get() != nullptr )
 			{
 				found = true;
 			}
-			
+			else
+			{
+				motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE2 );
+				if ( motor.get() != nullptr && m_intake2.get() == nullptr)
+				{
+					m_intake2 = make_shared<Intake>( motor );
+				}		
+				else if ( motor.get() != nullptr )
+				{
+					found = true;
+				}
+			}
 		}
 		break;
 		
@@ -229,33 +232,7 @@ shared_ptr<IDragonMotorController> MechanismFactory::GetMotorController
 	return motor;
 }
 
-shared_ptr<DragonSolenoid> MechanismFactory::GetSolenoid
-(
-	const DragonSolenoidMap&						solenoids,
-	SolenoidUsage::SOLENOID_USAGE					usage
-)
-{
-	shared_ptr<DragonSolenoid> solenoid;
-	auto it = solenoids.find( usage );
-	if ( it != solenoids.end() )  // found it
-	{
-		solenoid = it->second;
-	}
-	else
-	{
-		string msg = "solenoid not found; usage = ";
-		msg += to_string( usage );
-		Logger::GetLogger()->LogError( string( "MechanismFactory::GetSolenoid" ), msg );
-	}
-	
-	if ( solenoid.get() == nullptr )
-	{
-		string msg = "solenoid is nullptr; usage = ";
-		msg += to_string( usage );
-		Logger::GetLogger()->LogError( string( "MechanismFactory::GetSolenoid" ), msg );
-	}
-	return solenoid;
-}
+
 shared_ptr<DragonServo> MechanismFactory::GetServo
 (
 	const ServoMap&									servos,
@@ -310,33 +287,6 @@ shared_ptr<DragonDigitalInput> MechanismFactory::GetDigitalInput
 		Logger::GetLogger()->LogError( string( "MechanismFactory::GetDigitalInput" ), msg );
 	}
 	return dio;
-}
-shared_ptr<DragonAnalogInput> MechanismFactory::GetAnalogInput
-(
-	const AnalogInputMap&							analogInputs,
-	AnalogInputUsage::ANALOG_SENSOR_USAGE			usage
-)
-{
-	shared_ptr<DragonAnalogInput> anIn;
-	auto it = analogInputs.find( usage );
-	if ( it != analogInputs.end() )  // found it
-	{
-		anIn = it->second;
-	}
-	else
-	{
-		string msg = "analog input not found; usage = ";
-		msg += to_string( usage );
-		Logger::GetLogger()->LogError( string( "MechanismFactory::GetAnalogInput" ), msg );
-	}
-	
-	if ( anIn.get() == nullptr )
-	{
-		string msg = "analog input is nullptr; usage = ";
-		msg += to_string( usage );
-		Logger::GetLogger()->LogError( string( "MechanismFactory::GetAnalogInput" ), msg );
-	}
-	return anIn;
 }
 
 

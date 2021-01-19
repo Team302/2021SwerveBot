@@ -40,21 +40,15 @@ class MotorControllerUsage
         enum MOTOR_CONTROLLER_USAGE
         {
             UNKNOWN_MOTOR_CONTROLLER_USAGE = -1,
-            LEFT_DRIVE_MASTER,
-            LEFT_DRIVE_FOLLOWER,
-            RIGHT_DRIVE_MASTER,
-            RIGHT_DRIVE_FOLLOWER,
-            INTAKE,
-            IMPELLER,
+            DRIVE,
+            TURN,
+            INTAKE1,
+            INTAKE2,
             BALL_TRANSFER,
             TURRET,
             SHOOTER_1,            
             SHOOTER_2,
             SHOOTER_HOOD,
-            CONTROL_TABLE_MANIPULATOR,
-            CLIMBER,
-            CRAWLER,
-            HOOK_DELIVERY,
             MAX_MOTOR_CONTROLLER_USAGES
         };
 

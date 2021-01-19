@@ -1,6 +1,7 @@
 
+
 //====================================================================================================================================================
-// Copyright 2020 Lake Orion Robotics FIRST Team 302
+// Copyright 2020 Lake Orion Robotics FIRST Team 302 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
 // to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
@@ -14,54 +15,46 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-// C++ Includes
-#include <map>
-#include <memory>
-#include <string>
+/// --------------------------------------------------------------------------------------------
+/// @class CameraDefn
+/// @brief 
+///        Create a camera for streaming from an XML definition
+/// --------------------------------------------------------------------------------------------
+#pragma once
 
-// FRC includes
-
-// Team 302 includes
-#include <hw/usages/MotorControllerUsage.h>
-
+#include <cscore_oo.h>
 // Third Party Includes
+#include <pugixml/pugixml.hpp>
 
-using namespace std;
 
-MotorControllerUsage* MotorControllerUsage::m_instance = nullptr;
-MotorControllerUsage* MotorControllerUsage::GetInstance()
+class CameraDefn
 {
-    if ( m_instance == nullptr )
-    {
-        m_instance = new MotorControllerUsage();
-    }
-    return m_instance;
-}
+    public:
 
-MotorControllerUsage::MotorControllerUsage()
-{
-    m_usageMap["DRIVE"]  = MOTOR_CONTROLLER_USAGE::DRIVE;
-    m_usageMap["TURN"]   = MOTOR_CONTROLLER_USAGE::TURN;
+        // todo: eliminate this enum
+        enum PIXEL_FORMAT
+        {
+                UNKNOWN_PIXEL_FORMAT = -1,
+                KMJPEG,
+                KYUYV,
+                KRGB565,
+                KBGR,
+                KGRAY
+        };
 
-    m_usageMap["INTAKE"] = MOTOR_CONTROLLER_USAGE::INTAKE1;
-    m_usageMap["INTAKE"] = MOTOR_CONTROLLER_USAGE::INTAKE2;
-    m_usageMap["BALL_TRANSFER"] = MOTOR_CONTROLLER_USAGE::BALL_TRANSFER;
-    m_usageMap["TURRET"] = MOTOR_CONTROLLER_USAGE::TURRET;
-    m_usageMap["SHOOTER_1"] = MOTOR_CONTROLLER_USAGE::SHOOTER_1;
-    m_usageMap["SHOOTER_2"] = MOTOR_CONTROLLER_USAGE::SHOOTER_2;
-    m_usageMap["SHOOTER_HOOD"] = MOTOR_CONTROLLER_USAGE::SHOOTER_HOOD;
-}
+        CameraDefn() = default;
+        virtual ~CameraDefn() = default;
 
-MotorControllerUsage::~MotorControllerUsage()
-{
-    m_usageMap.clear();
-}
+        ///-----------------------------------------------------------------------
+        /// Method:      ParseXML
+        /// @brief       Parse a Camera XML element....
+        /// @param		 pugi::xml_node cameraNode   XML <camera node
+        /// @return     
+        ///				 cs::UsbCamera USB camera reference
+        ///-----------------------------------------------------------------------
+        cs::UsbCamera ParseXML( pugi::xml_node	cameraNode  );
 
-MotorControllerUsage::MOTOR_CONTROLLER_USAGE MotorControllerUsage::GetUsage
-(
-    string              usageString
-)
-{
-    return m_usageMap.find(usageString)->second;
-}
+    private:
+
+};
 

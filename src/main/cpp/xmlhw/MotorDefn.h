@@ -1,6 +1,6 @@
 
 //====================================================================================================================================================
-// Copyright 2020 Lake Orion Robotics FIRST Team 302
+// Copyright 2020 Lake Orion Robotics FIRST Team 302 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
 // to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
@@ -14,54 +14,51 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
+//========================================================================================================
+/// MotorDefn.h
+//========================================================================================================
+///
+/// File Description:
+///     This will parse the motor (controller) definition XML and create a motor controller object.
+//========================================================================================================
+
+#pragma once
+
+
 // C++ Includes
-#include <map>
 #include <memory>
-#include <string>
 
 // FRC includes
 
 // Team 302 includes
-#include <hw/usages/MotorControllerUsage.h>
+#include <hw/interfaces/IDragonMotorController.h>
 
 // Third Party Includes
+#include <pugixml/pugixml.hpp>
 
-using namespace std;
 
-MotorControllerUsage* MotorControllerUsage::m_instance = nullptr;
-MotorControllerUsage* MotorControllerUsage::GetInstance()
+
+class MotorDefn
 {
-    if ( m_instance == nullptr )
-    {
-        m_instance = new MotorControllerUsage();
-    }
-    return m_instance;
-}
+    public:
 
-MotorControllerUsage::MotorControllerUsage()
-{
-    m_usageMap["DRIVE"]  = MOTOR_CONTROLLER_USAGE::DRIVE;
-    m_usageMap["TURN"]   = MOTOR_CONTROLLER_USAGE::TURN;
+        MotorDefn() = default;
+        virtual ~MotorDefn() = default;
 
-    m_usageMap["INTAKE"] = MOTOR_CONTROLLER_USAGE::INTAKE1;
-    m_usageMap["INTAKE"] = MOTOR_CONTROLLER_USAGE::INTAKE2;
-    m_usageMap["BALL_TRANSFER"] = MOTOR_CONTROLLER_USAGE::BALL_TRANSFER;
-    m_usageMap["TURRET"] = MOTOR_CONTROLLER_USAGE::TURRET;
-    m_usageMap["SHOOTER_1"] = MOTOR_CONTROLLER_USAGE::SHOOTER_1;
-    m_usageMap["SHOOTER_2"] = MOTOR_CONTROLLER_USAGE::SHOOTER_2;
-    m_usageMap["SHOOTER_HOOD"] = MOTOR_CONTROLLER_USAGE::SHOOTER_HOOD;
-}
 
-MotorControllerUsage::~MotorControllerUsage()
-{
-    m_usageMap.clear();
-}
+        ///-----------------------------------------------------------------------
+        /// Method:      ParseXML
+        /// Description: Parse a motor XML element and create a DragonTalon from
+        ///              its definition.
+        /// Returns:     DragonTalon*        motor controller (or nullptr if XML
+        ///                                  is ill-formed)
+        ///-----------------------------------------------------------------------
+        std::shared_ptr<IDragonMotorController> ParseXML
+        (
+            pugi::xml_node      motorNode   /// <I> - xml motor node
+        );
 
-MotorControllerUsage::MOTOR_CONTROLLER_USAGE MotorControllerUsage::GetUsage
-(
-    string              usageString
-)
-{
-    return m_usageMap.find(usageString)->second;
-}
+    private:
+};
+
 
