@@ -41,10 +41,10 @@
 #include <subsys/MechanismTypes.h>
 #include <utils/Logger.h>
 #include <subsys/Intake.h>
+#include <subsys/ShooterHood.h>
 #include <subsys/Turret.h>
 /**
 #include <subsys/Shooter.h>
-#include <subsys/ShooterHood.h>
 **/
 
 // Third Party Includes
