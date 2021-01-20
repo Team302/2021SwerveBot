@@ -32,7 +32,7 @@ ShooterHoodManual::ShooterHoodManual
 (
     ControlData* control,
     double target
- ) : Mech1MotorState( MechanismFactory::GetMechanismFactory()->GetShooterHood().get(), control, target )   //geo3 class MechanismFactory' has no member named GetShooterHood Fixed???
+ ) : Mech1MotorState( MechanismFactory::GetMechanismFactory()->GetShooterHood().get(), control, target )   
 {
 }
 
@@ -49,12 +49,12 @@ void ShooterHoodManual::Init()
 void ShooterHoodManual::Run()
 {  
 
-  // geo3 No Hook???  What to do??  
-  //  auto mech = MechanismFactory::GetMechanismFactory()->GetHookDelivery();
+  // geo3  change GetHookDelivery to GetShooterHood  1/19/21
+    auto mech = MechanismFactory::GetMechanismFactory()->GetShooterHood();
     auto gamepad = TeleopControl::GetInstance();
-  //  if (mech.get() != nullptr && gamepad != nullptr )  
-  //  {
-  //      mech.get()->UpdateTarget(gamepad->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS ));
-  //      mech.get()->Update();
-  //  }
+    if (mech.get() != nullptr && gamepad != nullptr )  
+    {
+        mech.get()->UpdateTarget(gamepad->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS ));
+        mech.get()->Update();
+    }
 }
