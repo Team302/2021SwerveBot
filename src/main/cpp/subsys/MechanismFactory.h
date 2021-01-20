@@ -32,11 +32,9 @@
 #include <subsys/BallTransfer.h>
 #include <subsys/interfaces/IMech.h>
 #include <subsys/Intake.h>
+#include <subsys/Shooter.h>
 #include <subsys/ShooterHood.h>
 #include <subsys/Turret.h>
-/**
-#include <subsys/Shooter.h>
-**/
 
 
 // Third Party Includes
@@ -85,9 +83,7 @@ class MechanismFactory
 		inline std::shared_ptr<Intake> GetIntake2() const { return m_intake2;};
 		inline std::shared_ptr<ShooterHood> GetShooterHood() const { return m_shooterhood;};
 		inline std::shared_ptr<Turret> GetTurret() const { return m_turret;};
-		/**
-		inline std::shared_ptr<Shooter> GetShooter() const { return m_shooter;};
-		**/
+	
 
 	private:
 		std::shared_ptr<IDragonMotorController> GetMotorController
@@ -114,9 +110,8 @@ class MechanismFactory
 		std::shared_ptr<BallTransfer> 	m_balltransfer;
 		std::shared_ptr<Intake> 		m_intake1;
 		std::shared_ptr<Intake> 		m_intake2;
-		std::shared_ptr<Turret>			m_turret;
 		std::shared_ptr<ShooterHood>	m_shooterhood;
-		/**
 		std::shared_ptr<Shooter>		m_shooter;
-		**/
+		std::shared_ptr<Turret>			m_turret;
+
 };
