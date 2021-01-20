@@ -13,54 +13,48 @@
 /// OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-//========================================================================================================
-/// File name: IntakeOff
-//========================================================================================================
-///
-/// File Description:
-/// When intake is "off", sets motors to off and brings solenoid/intake into the robot.
-///
-//========================================================================================================
 
 // C++ Includes
+#include <memory>
 
 // FRC includes
 
 // Team 302 includes
 #include <controllers/ControlData.h>
-#include <controllers/MechanismTargetData.h>
-#include <states/intake/IntakeState.h>
-#include <states/IState.h>
+#include <gamepad/TeleopControl.h>
+#include <states/shooterHood/ShooterHoodManual.h>
 #include <states/Mech1MotorState.h>
 #include <subsys/MechanismFactory.h>
 
-// Third Party Includes
-
 using namespace std;
 
-
-IntakeState::IntakeState
+ShooterHoodManual::ShooterHoodManual
 (
     ControlData* control,
     double target
-) : IState()
-    //m_motorState( make_unique<Mech1MotorState>(MechanismFactory::GetMechanismFactory()->GetIntake().get(), control, target)),
-    //TODO Hook up MechanismFactory
+ ) : Mech1MotorState( MechanismFactory::GetMechanismFactory()->GetShooterHood().get(), control, target )   //geo3 class MechanismFactory' has no member named GetShooterHood Fixed???
 {
 }
 
-void IntakeState::Init()
+void ShooterHoodManual::Init()
 {
-    m_motorState.get()->Init();
+    auto gamepad = TeleopControl::GetInstance();
+    if ( gamepad != nullptr )
+    {
+        gamepad ->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS, IDragonGamePad::AXIS_PROFILE::CUBED );
+        gamepad ->SetAxisScaleFactor( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS, 0.75 );
+    }
 }
 
+void ShooterHoodManual::Run()
+{  
 
-void IntakeState::Run()           
-{
-    m_motorState.get()->Run();
-}
-
-bool IntakeState::AtTarget() const
-{
-    return ( m_motorState.get()->AtTarget());
+  // geo3 No Hook???  What to do??  
+  //  auto mech = MechanismFactory::GetMechanismFactory()->GetHookDelivery();
+    auto gamepad = TeleopControl::GetInstance();
+  //  if (mech.get() != nullptr && gamepad != nullptr )  
+  //  {
+  //      mech.get()->UpdateTarget(gamepad->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS ));
+  //      mech.get()->Update();
+  //  }
 }

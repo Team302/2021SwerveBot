@@ -28,6 +28,7 @@
 #include <utils/Logger.h>
 #include <gamepad/TeleopControl.h>
 #include <states/intake/IntakeState.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 #include <subsys/MechanismFactory.h>
 #include <subsys/MechanismTypes.h>
 
@@ -76,14 +77,14 @@ IntakeStateMgr::IntakeStateMgr() : m_stateVector(),
                 {
                     case INTAKE_STATE::ON:
                     {   
-                        auto thisState = new IntakeState( controlData, target );
+                        auto thisState = new IntakeState( controlData, target);
                         m_stateVector[stateEnum] = thisState;
                     }
                     break;
 
                     case INTAKE_STATE::OFF:
                     {   
-                        auto thisState = new IntakeState( controlData, target );
+                        auto thisState = new IntakeState( controlData, target);
                         m_stateVector[stateEnum] = thisState;
                         m_currentState = thisState;
                         m_currentStateEnum = stateEnum;
@@ -129,6 +130,8 @@ void IntakeStateMgr::RunCurrentState()
                 SetCurrentState( INTAKE_STATE::OFF, false );
             }
         }
+
+        Logger::GetLogger()->OnDash(string("Intake State"), to_string(m_currentStateEnum));
 
         // run the current state
         if ( m_currentState != nullptr )

@@ -13,54 +13,63 @@
 /// OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-//========================================================================================================
-/// File name: IntakeOff
-//========================================================================================================
-///
-/// File Description:
-/// When intake is "off", sets motors to off and brings solenoid/intake into the robot.
-///
-//========================================================================================================
+#pragma once
 
 // C++ Includes
-
+#include <map>
+#include <vector>
 // FRC includes
 
 // Team 302 includes
-#include <controllers/ControlData.h>
-#include <controllers/MechanismTargetData.h>
-#include <states/intake/IntakeState.h>
 #include <states/IState.h>
-#include <states/Mech1MotorState.h>
-#include <subsys/MechanismFactory.h>
 
 // Third Party Includes
 
-using namespace std;
-
-
-IntakeState::IntakeState
-(
-    ControlData* control,
-    double target
-) : IState()
-    //m_motorState( make_unique<Mech1MotorState>(MechanismFactory::GetMechanismFactory()->GetIntake().get(), control, target)),
-    //TODO Hook up MechanismFactory
+class ShooterHoodStateMgr 
 {
-}
+    public:
+        /// @enum the various states of the shooter hood
+        enum SHOOTER_HOOD_STATE
+        {
+            MOVE_UP,
+            MOVE_DOWN,
+            HOLD_POSITION,
+            MANUAL,
+            MAX_SHOOTER_HOOD_STATES
+        };
+        
+		/// @brief  Find or create the state manmanager
+		/// @return ShooterHoodStateMgr* pointer to the state manager
+		static ShooterHoodStateMgr* GetInstance();
 
-void IntakeState::Init()
-{
-    m_motorState.get()->Init();
-}
 
 
-void IntakeState::Run()           
-{
-    m_motorState.get()->Run();
-}
+        /// @brief  run the current state
+        /// @return void
+        void RunCurrentState();
 
-bool IntakeState::AtTarget() const
-{
-    return ( m_motorState.get()->AtTarget());
-}
+        /// @brief  set the current state, initialize it and run it
+        /// @param [in]     SHOOTER_HOOD_STATE - state to set
+        /// @param [in]     run - true means run, false just initialize it
+        /// @return void
+        void SetCurrentState
+        (
+            SHOOTER_HOOD_STATE  state,
+            bool            run
+        );
+
+        /// @brief  return the current state
+        /// @return SHOOTER_HOOD_STATE - the current state
+        inline SHOOTER_HOOD_STATE GetCurrentState() const { return m_currentStateEnum; };
+
+    private:
+        std::vector<IState*> m_stateVector;
+        IState* m_currentState;
+        SHOOTER_HOOD_STATE m_currentStateEnum;
+
+        ShooterHoodStateMgr();
+        ~ShooterHoodStateMgr() = default;
+
+		static ShooterHoodStateMgr*	m_instance;
+
+};
