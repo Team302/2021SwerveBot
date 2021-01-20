@@ -169,6 +169,23 @@ void  MechanismFactory::CreateIMechanism
 		break;		
 		**/
 		
+		case MechanismTypes::MECHANISM_TYPE::SHOOTER_HOOD:
+		{
+			if ( m_shooterhood.get() == nullptr )
+			{
+				auto motor = GetMotorController(motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::SHOOTER_HOOD);
+				if(motor.get() != nullptr)
+				{
+					m_shooterhood = make_shared<ShooterHood>(motor, canCoder);
+				}
+			}
+			else
+			{
+				found = true;
+			}
+		}
+		break;		
+
 		case MechanismTypes::MECHANISM_TYPE::TURRET:
 		{
 			if ( m_turret.get() == nullptr )
