@@ -13,11 +13,11 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-
-#include "subsys/Shooter.h"
-#include "hw/interfaces/IDragonMotorController.h"
-#include "subsys/MechanismTypes.h"
-#include "controllers/ControlModes.h"
+#include <memory>
+#include <subsys/Shooter.h>
+#include <hw/interfaces/IDragonMotorController.h>
+#include <subsys/MechanismTypes.h>
+#include <controllers/ControlModes.h>
 
 using namespace std;
 
@@ -25,80 +25,8 @@ Shooter::Shooter
 (
     std::shared_ptr<IDragonMotorController> motor1,
     std::shared_ptr<IDragonMotorController> motor2
-) : Mech2IndMotors( MechanismTypes::MECHANISM_TYPE::SHOOTER, string( "shooter.xml") , string("BallTransferNT"), motor1, motor2 )
+) : Mech2IndMotors( MechanismTypes::MECHANISM_TYPE::SHOOTER, string( "shooter.xml") , string("ShooterNT"), motor1, motor2 )
 {
 
 }
 
-/**
-MechanismTypes::MECHANISM_TYPE Shooter::GetType() const
-{
-    return MechanismTypes::MECHANISM_TYPE::SHOOTER;
-}
-
-void Shooter::SetOutput(ControlModes::CONTROL_TYPE controlType, double value)
-{
-    switch(controlType)
-    {
-        case ControlModes::CONTROL_TYPE::PERCENT_OUTPUT:
-            m_targetSpeed = value;
-            break;
-        case ControlModes::CONTROL_TYPE::VELOCITY_DEGREES:
-            m_targetSpeed = value;
-            break;
-        default:
-            break;
-        
-    }
-    m_topMotor.get()->SetControlMode(controlType);
-    m_bottomMotor.get()->SetControlMode(controlType);
-    m_topMotor.get()->Set(value);
-    m_bottomMotor.get()->Set(value);
-}
-
-void Shooter::SetOutput(ControlModes::CONTROL_TYPE controlType, double upperValue, double lowerValue)
-{
-    switch(controlType)
-    {
-        case ControlModes::CONTROL_TYPE::PERCENT_OUTPUT:
-            m_targetSpeed1 = upperValue;
-            m_targetSpeed2 = lowerValue;
-            break;
-        case ControlModes::CONTROL_TYPE::VELOCITY_DEGREES:
-            m_targetSpeed1 = upperValue;
-            m_targetSpeed2 = lowerValue;
-            break;
-        default:
-            break;
-    }
-    m_topMotor.get()->SetControlMode(controlType);
-    m_bottomMotor.get()->SetControlMode(controlType);
-    m_topMotor.get()->Set(upperValue);
-    m_bottomMotor.get()->Set(lowerValue);
-}
-
-void Shooter::ActivateSolenoid(bool activate)
-{}
-
-bool Shooter::IsSolenoidActivated()
-{
-    return false;
-}
-
-double Shooter::GetCurrentPosition() const
-{
-    return m_topMotor.get()->GetRotations() * 360.0;
-}
-
-double Shooter::GetCurrentSpeed() const 
-{
-    return m_topMotor.get()->GetRPS();
-}
-
-
-void Shooter::SetControlConstants(ControlData* pid)
-{
-    m_topMotor.get()->SetControlConstants(pid);
-    m_bottomMotor.get()->SetControlConstants(pid);
-}
-**/

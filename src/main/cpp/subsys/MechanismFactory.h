@@ -81,8 +81,11 @@ class MechanismFactory
 		inline std::shared_ptr<BallTransfer> GetBallTransfer() const { return m_balltransfer;};
 		inline std::shared_ptr<Intake> GetIntake() const { return m_intake1;};
 		inline std::shared_ptr<Intake> GetIntake2() const { return m_intake2;};
+		inline std::shared_ptr<Shooter> GetShooter() const { return m_shooter;};
 		inline std::shared_ptr<ShooterHood> GetShooterHood() const { return m_shooterhood;};
+		
 		inline std::shared_ptr<Turret> GetTurret() const { return m_turret;};
+
 	
 
 	private:
