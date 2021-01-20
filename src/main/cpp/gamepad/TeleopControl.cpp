@@ -101,6 +101,13 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		m_controllerIndex[ ARCADE_DRIVE_STEER ] 		= ctrlNo;
 		m_axisIDs[ ARCADE_DRIVE_STEER ]         		= IDragonGamePad::RIGHT_JOYSTICK_X;
 
+		m_controllerIndex[ SWERVE_DRIVE_DRIVE]			= ctrlNo;
+		m_axisIDs[ SWERVE_DRIVE_DRIVE]					= IDragonGamePad::LEFT_JOYSTICK_Y;
+		m_controllerIndex[ SWERVE_DRIVE_STEER]			= ctrlNo;
+		m_axisIDs[ SWERVE_DRIVE_STEER]					= IDragonGamePad::LEFT_JOYSTICK_X;
+		m_controllerIndex[ SWERVE_DRIVE_ROTATE]			= ctrlNo;
+		m_axisIDs[ SWERVE_DRIVE_ROTATE]					= IDragonGamePad::RIGHT_JOYSTICK_X;
+
 		m_controllerIndex[ GTA_DRIVE_FORWARD ] 		    = ctrlNo;
 		m_axisIDs[ GTA_DRIVE_FORWARD ]      		    = IDragonGamePad::RIGHT_TRIGGER;
 		m_controllerIndex[ GTA_DRIVE_BACKWARD ] 		= ctrlNo;
