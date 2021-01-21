@@ -31,17 +31,11 @@ class MechanismTypes
         enum MECHANISM_TYPE
         {
             UNKNOWN_MECHANISM = -1,
-            DRIVETRAIN_SIDE,
             INTAKE,
-            IMPELLER,
             BALL_TRANSFER,
             TURRET,
             SHOOTER,
             SHOOTER_HOOD,
-            CONTROL_TABLE_MANIPULATOR,
-            CLIMBER,
-            CRAWLER,
-            HOOK_DELIVERY,
             MAX_MECHANISM_TYPES
         };
 };

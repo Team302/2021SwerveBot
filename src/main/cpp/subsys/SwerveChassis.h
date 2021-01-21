@@ -3,20 +3,30 @@
 #include <frc/AnalogGyro.h>
 #include <frc/estimator/SwerveDrivePoseEstimator.h>
 #include <frc/geometry/Translation2d.h>
+<<<<<<< HEAD
 #include <frc/geometry/Rotation2d.h>
 #include <frc/kinematics/SwerveDriveKinematics.h>
 #include <frc/kinematics/SwerveDriveOdometry.h>
 #include <wpi/math>
 #include <hw/factories/PigeonFactory.h>
 #include <hw/DragonPigeon.h>
+=======
+#include <frc/kinematics/SwerveDriveKinematics.h>
+#include <frc/kinematics/SwerveDriveOdometry.h>
+#include <wpi/math>
+>>>>>>> SWERVE-2.0
 
 #include "DragonSwerveModule.h"
 
 class SwerveChassis
 {
     public:
+<<<<<<< HEAD
         SwerveChassis(DragonSwerveModule* frontleft, DragonSwerveModule* frontright, DragonSwerveModule* backleft, DragonSwerveModule* backright, units::velocity::meters_per_second_t maxSpeed); 
         
+=======
+        SwerveChassis() {m_gyro.Reset();}
+>>>>>>> SWERVE-2.0
 
         void Drive(units::velocity::meters_per_second_t xSpeed, units::velocity::meters_per_second_t ySpeed, units::angular_velocity::radians_per_second_t rot, bool fieldRelative);
 
@@ -26,6 +36,7 @@ class SwerveChassis
         static constexpr units::angular_velocity::radians_per_second_t MaxAngularSpeed{wpi::math::pi};
 
     private:
+<<<<<<< HEAD
         frc::Translation2d m_frontLeftLocation{+0.381_m, +0.381_m};
         frc::Translation2d m_frontRightLocation{+0.381_m, -0.381_m};
         frc::Translation2d m_backLeftLocation{-0.381_m, +0.381_m};
@@ -50,4 +61,7 @@ class SwerveChassis
         frc::SwerveDrivePoseEstimator<4> m_poseEstimator{
         frc::Rotation2d(), frc::Pose2d(), m_kinematics,
         {0.1, 0.1, 0.1},   {0.05},        {0.1, 0.1, 0.1}};
+=======
+        frc::Translation2d::Translation2d m_frontLeftLocation{+0.381_m, +0.381_m};
+>>>>>>> SWERVE-2.0
 };

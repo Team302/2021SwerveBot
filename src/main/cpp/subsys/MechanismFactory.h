@@ -26,28 +26,22 @@
 // Team 302 includes
 #include <subsys/MechanismTypes.h>
 #include <hw/usages/IDragonMotorControllerMap.h>
-#include <hw/usages/AnalogInputMap.h>
 #include <hw/usages/DigitalInputMap.h>
-#include <hw/usages/DragonSolenoidMap.h>
 #include <hw/usages/ServoMap.h>
 
 #include <subsys/BallTransfer.h>
 #include <subsys/interfaces/IMech.h>
 #include <subsys/Intake.h>
-#include <subsys/Turret.h>
-/**
-#include <subsys/Impeller.h>
 #include <subsys/Shooter.h>
-**/
+#include <subsys/ShooterHood.h>
+#include <subsys/Turret.h>
 
 
 // Third Party Includes
 
 // forward declares
-class DragonAnalogInput;
 class DragonDigitalInput;
 class DragonServo;
-class DragonSolenoid;
 class IDragonMotorController;
 class IMechanism;
 
@@ -79,30 +73,26 @@ class MechanismFactory
 		(
 			MechanismTypes::MECHANISM_TYPE							type,
 			const IDragonMotorControllerMap&        				motorControllers,   // <I> - Motor Controllers
-			const DragonSolenoidMap&                				solenoids,
 			const ServoMap&						    				servos,
 			const DigitalInputMap&									digitalInputs,
-			const AnalogInputMap&                   				analogInputs,
 			std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder
 		);
 
 		inline std::shared_ptr<BallTransfer> GetBallTransfer() const { return m_balltransfer;};
-		inline std::shared_ptr<Intake> GetIntake() const { return m_intake;};
-		inline std::shared_ptr<Turret> GetTurret() const { return m_turret;};
-		/**
+		inline std::shared_ptr<Intake> GetIntake() const { return m_intake1;};
+		inline std::shared_ptr<Intake> GetIntake2() const { return m_intake2;};
 		inline std::shared_ptr<Shooter> GetShooter() const { return m_shooter;};
-		**/
+		inline std::shared_ptr<ShooterHood> GetShooterHood() const { return m_shooterhood;};
+		
+		inline std::shared_ptr<Turret> GetTurret() const { return m_turret;};
+
+	
 
 	private:
 		std::shared_ptr<IDragonMotorController> GetMotorController
 		(
 			const IDragonMotorControllerMap&				motorControllers,
 			MotorControllerUsage::MOTOR_CONTROLLER_USAGE	usage
-		);
-		std::shared_ptr<DragonSolenoid> GetSolenoid
-		(
-			const DragonSolenoidMap&						solenoids,
-			SolenoidUsage::SOLENOID_USAGE					usage
 		);
 		std::shared_ptr<DragonServo> GetServo
 		(
@@ -114,11 +104,6 @@ class MechanismFactory
 			const DigitalInputMap&							digitaInputs,
 			DigitalInputUsage::DIGITAL_SENSOR_USAGE			usage
 		);
-		std::shared_ptr<DragonAnalogInput> GetAnalogInput
-		(
-			const AnalogInputMap&							analogInputs,
-			AnalogInputUsage::ANALOG_SENSOR_USAGE			usage
-		);
 
 		MechanismFactory();
 		virtual ~MechanismFactory() = default;
@@ -126,9 +111,10 @@ class MechanismFactory
 		static MechanismFactory*	m_mechanismFactory;
 
 		std::shared_ptr<BallTransfer> 	m_balltransfer;
-		std::shared_ptr<Intake> 		m_intake;
-		std::shared_ptr<Turret>			m_turret;
-		/**
+		std::shared_ptr<Intake> 		m_intake1;
+		std::shared_ptr<Intake> 		m_intake2;
+		std::shared_ptr<ShooterHood>	m_shooterhood;
 		std::shared_ptr<Shooter>		m_shooter;
-		**/
+		std::shared_ptr<Turret>			m_turret;
+
 };
