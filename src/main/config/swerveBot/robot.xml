@@ -30,14 +30,14 @@
      Chassis
      ====================================================  -->
     <swervechassis   type="SWERVE"
-			wheelDiameter="6.0"
                      wheelBase="14.0"  
                      track="14.0"
                      maxVelocity="168.0"
                      maxAcceleration="24.0">
 			 
         <swervemodule type="LEFT_FRONT"
-                      turnoffset="0.0">
+                      turnoffset="0.0"
+			 wheelDiameter="4.0">
             <motor  usage="DRIVE_MOTOR"
                     canId="12"
                     pdpID="12"
@@ -80,7 +80,8 @@
         </swervemodule>
 
         <swervemodule type="RIGHT_FRONT"
-                      turnoffset="0.0">
+                      turnoffset="0.0"
+			 wheelDiameter="4.0">
             <motor  usage="DRIVE_MOTOR"
                     canId="1"
                     pdpID="1"
@@ -123,7 +124,8 @@
         </swervemodule>
 
         <swervemodule type="LEFT_BACK"
-                      turnoffset="0.0">
+                      turnoffset="0.0"
+			 wheelDiameter="4.0">
             <motor  usage="DRIVE_MOTOR"
                     canId="14"
                     pdpID="14"
@@ -166,7 +168,8 @@
         </swervemodule>
 
         <swervemodule type="RIGHT_BACK"
-                      turnoffset="0.0">
+                      turnoffset="0.0"
+			 wheelDiameter="4.0">
             <motor  usage="DRIVE_MOTOR"
                     canId="15"
                     pdpID="15"

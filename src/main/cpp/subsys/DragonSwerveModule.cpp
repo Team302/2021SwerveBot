@@ -9,15 +9,27 @@ using namespace ctre::phoenix::sensors;
 
 DragonSwerveModule::DragonSwerveModule
 (
-    ModuleID type, 
-    shared_ptr<IDragonMotorController> driveMotor, 
-    shared_ptr<IDragonMotorController> turnMotor, 
+    ModuleID                                                type, 
+    shared_ptr<IDragonMotorController>                      driveMotor, 
+    shared_ptr<IDragonMotorController>                      turnMotor, 
     std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder,
-    units::degree_t turnOffset ) : m_type(type), m_driveMotor(driveMotor), m_turnMotor(turnMotor), m_turnSensor(canCoder), m_turnOffset(turnOffset)
-{
-    m_driveEncoder.SetDistancePerPulse(2 * wpi::math::pi * WheelRadius.to<double>() / EncoderResolution);
+    units::degree_t                                         turnOffset,
+    units::length::inch_t                                   wheelDiameter
+) : m_type(type), 
+    m_driveMotor(driveMotor), 
+    m_turnMotor(turnMotor), 
+    m_turnSensor(canCoder), 
+    m_turnOffset(turnOffset),
+    m_wheelDiameter(wheelDiameter),
+    m_driveFeedforward(1_V, 3_V / 1_mps),
+    m_turnFeedforward(1_V, 0.5_V / 1_rad_per_s)
 
-    m_turnEncoder.SetDistancePerPulse(2 * wpi::math::pi /EncoderResolution);
+{
+    auto driveCountsPerRev = driveMotor.get()->GetCountsPerRev();
+    m_driveEncoder.SetDistancePerPulse(wpi::math::pi * m_wheelDiameter.to<double>() / driveCountsPerRev);
+
+    auto turnCountsPerRev = turnMotor.get()->GetCountsPerRev();  // todo need to make this utilize the cancoder
+    m_turnEncoder.SetDistancePerPulse(2 * wpi::math::pi /turnCountsPerRev);
 
     m_turningPIDController.EnableContinuousInput(-units::angle::radian_t(wpi::math::pi), units::angle::radian_t(wpi::math::pi));
 }

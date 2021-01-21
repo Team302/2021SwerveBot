@@ -59,8 +59,6 @@ shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
 {
     shared_ptr<SwerveChassis> chassis;
     // initialize the attributes to the default values
-    //ChassisFactory::CHASSIS_TYPE type = ChassisFactory::CHASSIS_TYPE::SWERVE
-    units::length::inch_t wheelDiameter(0.0);
     units::length::inch_t wheelBase(0.0);
     units::length::inch_t track(0.0);
     units::velocity::meters_per_second_t maxVelocity(0.0);
@@ -80,10 +78,6 @@ shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
                 msg += attr.value();
                 Logger::GetLogger()->LogError( string( "SwerveChassisDefn::ParseXML" ), msg );
             }
-        }
-        else if (  attrName.compare("wheelDiameter") == 0 )
-        {
-        	wheelDiameter = units::length::inch_t(attr.as_double());
         }
         else if (  attrName.compare("wheelBase") == 0 )
         {
@@ -161,7 +155,7 @@ shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
     // create chassis instance
     if ( !hasError )
     {
-        chassis = SwerveChassisFactory::GetSwerveChassisFactory()->CreateSwerveChassis( lfront, rfront, lback, rback, wheelDiameter, wheelBase, track, maxVelocity, maxAcceleration  );
+        chassis = SwerveChassisFactory::GetSwerveChassisFactory()->CreateSwerveChassis( lfront, rfront, lback, rback, wheelBase, track, maxVelocity, maxAcceleration  );
     }
     return chassis;
 }

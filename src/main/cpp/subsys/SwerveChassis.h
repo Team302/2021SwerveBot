@@ -36,7 +36,6 @@ class SwerveChassis
                        std::shared_ptr<DragonSwerveModule> frontright, 
                        std::shared_ptr<DragonSwerveModule> backleft, 
                        std::shared_ptr<DragonSwerveModule> backright, 
-                       units::length::inch_t wheelDiameter,
                        units::length::inch_t wheelBase,
                        units::length::inch_t track,
                        units::velocity::meters_per_second_t maxSpeed,
@@ -49,7 +48,6 @@ class SwerveChassis
         static constexpr auto MaxSpeed = 3.0_mps; 
         static constexpr units::angular_velocity::radians_per_second_t MaxAngularSpeed{wpi::math::pi};
 
-        units::length::inch_t GetWheelDiameter() const {return m_wheelDiameter;}
         units::length::inch_t GetWheelBase() const {return m_wheelBase; }  
         units::length::inch_t GetTrack() const {return m_track;}
         units::velocity::meters_per_second_t GetMaxSpeed() const {return m_maxSpeed;}
@@ -67,7 +65,6 @@ class SwerveChassis
         std::shared_ptr<DragonSwerveModule> m_backLeft;
         std::shared_ptr<DragonSwerveModule> m_backRight;
 
-        units::length::inch_t                m_wheelDiameter;
         units::length::inch_t                m_wheelBase;       
         units::length::inch_t                m_track;
         units::velocity::meters_per_second_t m_maxSpeed;

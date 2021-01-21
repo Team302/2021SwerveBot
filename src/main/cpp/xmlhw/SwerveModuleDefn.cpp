@@ -66,6 +66,7 @@ std::shared_ptr<DragonSwerveModule> SwerveModuleDefn::ParseXML
     // initialize the attributes to the default values
     DragonSwerveModule::ModuleID position = DragonSwerveModule::ModuleID::LEFT_FRONT;
     units::angle::degree_t turnOffset(0.0);
+    units::length::inch_t wheelDiameter(0.0);
 
     // process attributes
     for (xml_attribute attr = SwerveModuleNode.first_attribute(); attr && !hasError; attr = attr.next_attribute())
@@ -101,6 +102,10 @@ std::shared_ptr<DragonSwerveModule> SwerveModuleDefn::ParseXML
         else if ( attrName.compare("turnoffset") == 0 )
         {
             turnOffset = units::degree_t(attr.as_double());
+        }
+        else if (  attrName.compare("wheelDiameter") == 0 )
+        {
+        	wheelDiameter = units::length::inch_t(attr.as_double());
         }
         else   // log errors
         {
@@ -147,7 +152,7 @@ std::shared_ptr<DragonSwerveModule> SwerveModuleDefn::ParseXML
     // create chassis instance
     if ( !hasError )
     {
-        module = SwerveChassisFactory::GetSwerveChassisFactory()->CreateSwerveModule(position, motors, turnsensor, turnOffset );
+        module = SwerveChassisFactory::GetSwerveChassisFactory()->CreateSwerveModule(position, motors, turnsensor, turnOffset, wheelDiameter );
     }
     return module;
 }

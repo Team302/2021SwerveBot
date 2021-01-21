@@ -28,26 +28,31 @@ class DragonSwerveModule
             RIGHT_BACK
         };
 
-        DragonSwerveModule( ModuleID type, std::shared_ptr<IDragonMotorController> driveMotor, std::shared_ptr<IDragonMotorController> turningMotor,
-                            std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder, units::degree_t turnOffset);
+        DragonSwerveModule( ModuleID type, 
+                            std::shared_ptr<IDragonMotorController>                 driveMotor, 
+                            std::shared_ptr<IDragonMotorController>                 turningMotor,
+                            std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder, 
+                            units::degree_t                                         turnOffset,
+                            units::length::inch_t                                   wheelDiameter
+                          );
 
         frc::SwerveModuleState GetState() const;
         void SetDesiredState(const frc::SwerveModuleState& state);
         ModuleID GetType() {return m_type; }
 
+        units::length::inch_t GetWheelDiameter() const {return m_wheelDiameter;}
+
         
     private:
-        static constexpr auto WheelRadius = 0.0508_m; //TODO #1 Put values in from XML
-        static constexpr int EncoderResolution = 4096;
-
         static constexpr auto ModuleMaxAngularVelocity = wpi::math::pi * 1_rad_per_s; //Radians per second
         static constexpr auto ModuleMaxAngularAcceleration = wpi::math::pi * 2_rad_per_s / 1_s; //Radians per second ^2
 
         ModuleID m_type;
-        std::shared_ptr<IDragonMotorController> m_driveMotor;
-        std::shared_ptr<IDragonMotorController> m_turnMotor;
-        std::shared_ptr<ctre::phoenix::sensors::CANCoder> m_turnSensor;
-        units::degree_t m_turnOffset;
+        std::shared_ptr<IDragonMotorController>             m_driveMotor;
+        std::shared_ptr<IDragonMotorController>             m_turnMotor;
+        std::shared_ptr<ctre::phoenix::sensors::CANCoder>   m_turnSensor;
+        units::degree_t                                     m_turnOffset;
+        units::length::inch_t                               m_wheelDiameter;
 
         //TODO #2 Encoder from falcons
         frc::Encoder m_driveEncoder{0, 1};
@@ -60,7 +65,6 @@ class DragonSwerveModule
         0.0,
         {ModuleMaxAngularVelocity, ModuleMaxAngularAcceleration}};
 
-        frc::SimpleMotorFeedforward<units::meters> m_driveFeedforward{1_V, 3_V / 1_mps};
-        frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward{
-        1_V, 0.5_V / 1_rad_per_s};
+        frc::SimpleMotorFeedforward<units::meters> m_driveFeedforward;
+        frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward;
 };

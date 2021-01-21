@@ -85,6 +85,8 @@ class IDragonMotorController
             ctre::phoenix::motorcontrol::RemoteSensorSource deviceType
         ) = 0;
 
+        virtual double GetCountsPerRev() const = 0;
+        
         IDragonMotorController() = default;
         virtual ~IDragonMotorController() = default;
 

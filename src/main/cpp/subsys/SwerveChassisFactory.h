@@ -61,7 +61,8 @@ class SwerveChassisFactory
             DragonSwerveModule::ModuleID                            type,
 			const IDragonMotorControllerMap&        				motorControllers,   // <I> - Motor Controllers
 			std::shared_ptr<ctre::phoenix::sensors::CANCoder>		turnSensor,
-			units::degree_t											turnOffset
+			units::degree_t											turnOffset,
+			units::length::inch_t 									wheelDiameter
 		);
 
 		//=====================================================================================
@@ -76,7 +77,6 @@ class SwerveChassisFactory
             std::shared_ptr<DragonSwerveModule> frontright,
             std::shared_ptr<DragonSwerveModule> backleft, 
             std::shared_ptr<DragonSwerveModule> backright,
-			units::length::inch_t wheelDiameter,
 			units::length::inch_t wheelBase,
 			units::length::inch_t track,
             units::velocity::meters_per_second_t maxSpeed,

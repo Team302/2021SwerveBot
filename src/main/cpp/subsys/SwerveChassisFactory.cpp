@@ -56,7 +56,8 @@ std::shared_ptr<DragonSwerveModule> SwerveChassisFactory::CreateSwerveModule
     DragonSwerveModule::ModuleID                            type, 
     const IDragonMotorControllerMap&        				motorControllers,   // <I> - Motor Controllers
     std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder,
-    units::degree_t                                         turnOffset
+    units::degree_t                                         turnOffset,
+    units::length::inch_t                                   wheelDiameter
 )
 {
     std::shared_ptr<DragonSwerveModule> swerve = nullptr;
@@ -68,7 +69,7 @@ std::shared_ptr<DragonSwerveModule> SwerveChassisFactory::CreateSwerveModule
         case DragonSwerveModule::ModuleID::LEFT_FRONT:
             if ( m_leftFront.get() == nullptr )
             {
-                m_leftFront = make_shared<DragonSwerveModule>(type, driveMotor, turnMotor, canCoder, turnOffset );
+                m_leftFront = make_shared<DragonSwerveModule>(type, driveMotor, turnMotor, canCoder, turnOffset, wheelDiameter );
             }
             swerve = m_leftFront;
             break;
@@ -76,7 +77,7 @@ std::shared_ptr<DragonSwerveModule> SwerveChassisFactory::CreateSwerveModule
         case DragonSwerveModule::ModuleID::LEFT_BACK:
             if ( m_leftBack.get() == nullptr )
             {
-                m_leftBack = make_shared<DragonSwerveModule>(type, driveMotor, turnMotor, canCoder, turnOffset );
+                m_leftBack = make_shared<DragonSwerveModule>(type, driveMotor, turnMotor, canCoder, turnOffset, wheelDiameter );
             }
             swerve = m_leftBack;
 
@@ -85,7 +86,7 @@ std::shared_ptr<DragonSwerveModule> SwerveChassisFactory::CreateSwerveModule
         case DragonSwerveModule::ModuleID::RIGHT_FRONT:
             if ( m_rightFront.get() == nullptr )
             {
-                m_rightFront = make_shared<DragonSwerveModule>(type, driveMotor, turnMotor, canCoder, turnOffset );
+                m_rightFront = make_shared<DragonSwerveModule>(type, driveMotor, turnMotor, canCoder, turnOffset, wheelDiameter );
             }
             swerve = m_rightFront;
             break;
@@ -93,7 +94,7 @@ std::shared_ptr<DragonSwerveModule> SwerveChassisFactory::CreateSwerveModule
         case DragonSwerveModule::ModuleID::RIGHT_BACK:
             if ( m_rightBack.get() == nullptr )
             {
-                m_rightBack = make_shared<DragonSwerveModule>(type, driveMotor, turnMotor, canCoder, turnOffset );
+                m_rightBack = make_shared<DragonSwerveModule>(type, driveMotor, turnMotor, canCoder, turnOffset, wheelDiameter );
             }            
             swerve = m_rightBack;
             break;
@@ -117,7 +118,6 @@ shared_ptr<SwerveChassis> SwerveChassisFactory::CreateSwerveChassis
     std::shared_ptr<DragonSwerveModule> frontRight,
     std::shared_ptr<DragonSwerveModule> backLeft, 
     std::shared_ptr<DragonSwerveModule> backRight, 
-    units::length::inch_t wheelDiameter,
     units::length::inch_t wheelBase,
     units::length::inch_t track,
     units::velocity::meters_per_second_t maxSpeed,
@@ -126,7 +126,7 @@ shared_ptr<SwerveChassis> SwerveChassisFactory::CreateSwerveChassis
 {
     if ( m_chassis.get() == nullptr )
     {
-        m_chassis = make_shared<SwerveChassis>(frontLeft, frontRight, backLeft, backRight, wheelDiameter, wheelBase, track, maxSpeed, maxAcceleration );
+        m_chassis = make_shared<SwerveChassis>(frontLeft, frontRight, backLeft, backRight, wheelBase, track, maxSpeed, maxAcceleration );
     }
 
     return m_chassis;

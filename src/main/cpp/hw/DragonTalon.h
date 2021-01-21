@@ -102,6 +102,8 @@ class DragonTalon : public IDragonMotorController
 
         void SetDiameter( double diameter ) override;
 
+        double GetCountsPerRev() const override {return m_countsPerRev;}
+
 
     private:
         std::shared_ptr<ctre::phoenix::motorcontrol::can::WPI_TalonSRX>  m_talon;

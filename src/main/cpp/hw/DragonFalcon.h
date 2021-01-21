@@ -121,6 +121,9 @@ class DragonFalcon : public IDragonMotorController
         void SetDiameter( double diameter ) override;
 
         void SetVoltage(units::volt_t output);
+
+        double GetCountsPerRev() const override {return m_countsPerRev;}
+
     private:
         std::shared_ptr<ctre::phoenix::motorcontrol::can::WPI_TalonFX>  m_talon;
         ControlModes::CONTROL_TYPE m_controlMode;
