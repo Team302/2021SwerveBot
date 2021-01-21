@@ -331,6 +331,23 @@ void TeleopControl::SetAxisScaleFactor
     }
 }
 
+void TeleopControl::SetSlewRateLimiter
+(
+	TeleopControl::FUNCTION_IDENTIFIER		function,
+	float 									slewRateFactor
+)
+{
+	int ctlIndex = m_controllerIndex[ function ];
+	IDragonGamePad::AXIS_IDENTIFIER axis = m_axisIDs [ function ];
+	if ( ctlIndex > -1 && axis != IDragonGamePad::AXIS_IDENTIFIER::UNDEFINED_AXIS )
+		{
+			if ( m_controllers [ ctlIndex ] != nullptr )
+				{
+					m_controllers[ ctlIndex ]->SetSlewLimit( axis, slewRateFactor);
+				}
+		}
+}
+
 //------------------------------------------------------------------
 // Method:      SetAxisProfile
 // Description: Sets the axis profile for the specifed axis

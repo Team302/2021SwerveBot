@@ -27,6 +27,7 @@
 #include <gamepad/axis/IProfile.h>
 #include <gamepad/axis/IDeadband.h>
 #include <gamepad/axis/ScaledAxis.h>
+#include <gamepad/axis/SlewedAxis.h>
 
 // Third Party Includes
 
@@ -80,6 +81,8 @@ class AnalogAxis
             IDragonGamePad::AXIS_PROFILE    profile         
         );
 
+        
+
 
         //================================================================================================
         /// @brief  Set the axis scale factor (default is 1.0) 
@@ -89,6 +92,11 @@ class AnalogAxis
         void SetAxisScaleFactor
         (
            double scale                     /// <I> - sacle factor
+        );
+
+        void SetSlewRateLimiter
+        (
+            double slewRateFactor
         );
 
 
@@ -108,4 +116,5 @@ class AnalogAxis
         IProfile*                           m_profile;
         IDeadband*                          m_deadband;
         ScaledAxis*                         m_scale;
+        SlewedAxis*                         m_slewRate;
 };

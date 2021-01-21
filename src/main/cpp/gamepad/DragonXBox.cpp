@@ -209,6 +209,18 @@ void DragonXBox::SetAxisScale
         m_axis[axis]->SetAxisScaleFactor( scaleFactor );
     }        
 } 
+
+void DragonXBox::SetSlewLimit
+(
+    AXIS_IDENTIFIER                     axis,
+    float                               slewRateFactor
+)
+{
+    if ( m_axis[axis] != nullptr )
+    {
+        m_axis[axis]->SetSlewRateLimiter( slewRateFactor );
+    }
+}
  
 //==================================================================================
 /// <summary>

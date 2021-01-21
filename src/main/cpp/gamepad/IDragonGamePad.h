@@ -236,6 +236,13 @@ class IDragonGamePad
             float                               scaleFactor // <I> - value  (0 < scale <= 1.0) to scale the axis value
         ) = 0;
 
+
+        virtual void SetSlewLimit
+        (
+            AXIS_IDENTIFIER                     axis,
+            float                               scaleFactor
+        ) = 0;
+
         //==================================================================================
         /// <summary>
         /// Method:         SetButtonMode

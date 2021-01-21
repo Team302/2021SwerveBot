@@ -169,6 +169,8 @@ void AnalogAxis::SetAxisScaleFactor
 {
     m_scale->SetScaleFactor( scale );
 }
+
+
        
 //==================================================================================
 /// @brief  Returns the analog input's raw value. If there is a connection problem, 

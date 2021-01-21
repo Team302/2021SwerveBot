@@ -128,6 +128,14 @@ class TeleopControl
             float                               scaleFactor    // <I> - scale factor used to limit the range
         );
 
+        
+
+        void SetSlewRateLimiter
+        (
+            TeleopControl::FUNCTION_IDENTIFIER  axis,
+            float                               slewRateLimiter
+        );
+
         //------------------------------------------------------------------
         // Method:      SetAxisProfile
         // Description: Sets the axis profile for the specifed axis
