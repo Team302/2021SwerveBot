@@ -33,9 +33,7 @@
 #include <subsys/interfaces/IMech.h>
 
 #include <hw/usages/IDragonMotorControllerMap.h>
-#include <hw/usages/AnalogInputMap.h>
 #include <hw/usages/DigitalInputMap.h>
-#include <hw/usages/DragonSolenoidMap.h>
 #include <hw/usages/ServoMap.h>
 
 #include <xmlhw/CanCoderDefn.h>
@@ -126,8 +124,6 @@ void MechanismDefn::ParseXML
 
     IDragonMotorControllerMap motors;
     ServoMap servos;
-    DragonSolenoidMap solenoids;
-    AnalogInputMap analogInputs;
     DigitalInputMap digitalInputs;
     shared_ptr<ctre::phoenix::sensors::CANCoder> canCoder = nullptr;
 

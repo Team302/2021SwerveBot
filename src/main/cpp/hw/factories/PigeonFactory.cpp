@@ -31,7 +31,6 @@
 // Team 302 includes
 #include <hw/factories/PigeonFactory.h>
 #include <hw/DragonPigeon.h>
-#include <hw/usages/AnalogInputUsage.h>
 #include <utils/Logger.h>
 
 

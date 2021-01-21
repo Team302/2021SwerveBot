@@ -21,7 +21,6 @@
 
 // Team 302 includes
 #include <subsys/Intake.h>
-#include <hw/DragonSolenoid.h>
 #include <hw/interfaces/IDragonMotorController.h>
 
 // Third Party Includes
