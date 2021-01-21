@@ -74,4 +74,3 @@ double DragonPigeon::GetRawYaw()
     }
     return yaw;  
 }
-
