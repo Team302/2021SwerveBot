@@ -31,7 +31,8 @@
 // Team302 includes
 #include <hw/interfaces/IDragonMotorController.h>
 #include <hw/usages/IDragonMotorControllerMap.h>
-#include <subsys/interfaces/IChassis.h>
+#include <subsys/DragonSwerveModule.h>
+#include <subsys/SwerveChassisFactory.h>
 
 #include <xmlhw/SwerveModuleDefn.h>
 #include <xmlhw/CanCoderDefn.h>
@@ -54,14 +55,17 @@ using namespace std;
 /// @return void
 
 // shared_ptr<IChassis> 
-void SwerveModuleDefn::ParseXML
+std::shared_ptr<DragonSwerveModule> SwerveModuleDefn::ParseXML
 (
 	xml_node      SwerveModuleNode
 )
 {
    auto hasError = false;
+   std::shared_ptr<DragonSwerveModule> module;
+
     // initialize the attributes to the default values
-    string position;
+    DragonSwerveModule::ModuleID position = DragonSwerveModule::ModuleID::LEFT_FRONT;
+    units::angle::degree_t turnOffset(0.0);
 
     // process attributes
     for (xml_attribute attr = SwerveModuleNode.first_attribute(); attr && !hasError; attr = attr.next_attribute())
@@ -69,7 +73,34 @@ void SwerveModuleDefn::ParseXML
         string attrName (attr.name());
         if ( attrName.compare("type") == 0 )
         {
-            position = string( attr.value() );
+            auto thisPosition = string( attr.value() );
+            if ( thisPosition.compare("LEFT_FRONT") == 0 )
+            {
+                position = DragonSwerveModule::ModuleID::LEFT_FRONT;
+            }
+            else if ( thisPosition.compare("RIGHT_FRONT") == 0  )
+            {
+                position = DragonSwerveModule::ModuleID::RIGHT_FRONT;
+            }
+            else if ( thisPosition.compare("LEFT_BACK") == 0  )
+            {
+                position = DragonSwerveModule::ModuleID::LEFT_BACK;
+            }
+            else if ( thisPosition.compare("RIGHT_BACK") == 0  )
+            {
+                position = DragonSwerveModule::ModuleID::RIGHT_BACK;
+            }
+            else 
+            {
+                string msg = "unknown position ";
+                msg += attr.name();
+                Logger::GetLogger()->LogError( string("SwerveChassisDefn::ParseXML"), msg );
+                hasError = true;
+            }
+        }
+        else if ( attrName.compare("turnoffset") == 0 )
+        {
+            turnOffset = units::degree_t(attr.as_double());
         }
         else   // log errors
         {
@@ -116,6 +147,8 @@ void SwerveModuleDefn::ParseXML
     // create chassis instance
     if ( !hasError )
     {
+        module = SwerveChassisFactory::GetSwerveChassisFactory()->CreateSwerveModule(position, motors, turnsensor, turnOffset );
     }
+    return module;
 }
 

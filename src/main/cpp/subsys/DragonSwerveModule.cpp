@@ -1,10 +1,19 @@
+#include <memory>
 #include <subsys/DragonSwerveModule.h>
 #include <units/angle.h>
 #include <frc/geometry/Rotation2d.h>
 #include <wpi/math>
 
-DragonSwerveModule::DragonSwerveModule(DragonFalcon* driveMotor, DragonFalcon* turnMotor) : 
-m_driveMotor(driveMotor), m_turnMotor(turnMotor)
+using namespace std;
+using namespace ctre::phoenix::sensors;
+
+DragonSwerveModule::DragonSwerveModule
+(
+    ModuleID type, 
+    shared_ptr<IDragonMotorController> driveMotor, 
+    shared_ptr<IDragonMotorController> turnMotor, 
+    std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder,
+    units::degree_t turnOffset ) : m_type(type), m_driveMotor(driveMotor), m_turnMotor(turnMotor), m_turnSensor(canCoder), m_turnOffset(turnOffset)
 {
     m_driveEncoder.SetDistancePerPulse(2 * wpi::math::pi * WheelRadius.to<double>() / EncoderResolution);
 
@@ -35,6 +44,9 @@ void DragonSwerveModule::SetDesiredState
 
     const auto turnFeedforward = m_turnFeedforward.Calculate(m_turningPIDController.GetSetpoint().velocity);
 
-    m_driveMotor -> SetVoltage(units::volt_t{driveOutput} + driveFeedforward);
-    m_turnMotor -> SetVoltage(units::volt_t{turnOutput} + turnFeedforward);
+    auto drive = dynamic_cast<DragonFalcon*>(m_driveMotor.get());
+    auto turn = dynamic_cast<DragonFalcon*>(m_turnMotor.get());
+
+    drive -> SetVoltage(units::volt_t{driveOutput} + driveFeedforward);
+    turn -> SetVoltage(units::volt_t{turnOutput} + turnFeedforward);
 }

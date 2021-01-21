@@ -22,6 +22,7 @@
 
 // Team 302 Includes
 #include <Robot.h>
+#include <xmlhw/RobotDefn.h>
 
 
 using namespace std;
@@ -37,8 +38,8 @@ void Robot::RobotInit()
     // Read the robot definition from the xml configuration files and
     // create the hardware (chassis + mechanisms along with their talons,
     // solenoids, digital inputs, analog inputs, etc.
-   //unique_ptr<RobotDefn>  robotXml = make_unique<RobotDefn>();
-   // robotXml->ParseXML();
+    unique_ptr<RobotDefn>  robotXml = make_unique<RobotDefn>();
+    robotXml->ParseXML();
 
 
 }

@@ -31,10 +31,11 @@
 // Team302 includes
 #include <hw/interfaces/IDragonMotorController.h>
 #include <hw/usages/IDragonMotorControllerMap.h>
-#include <subsys/interfaces/IChassis.h>
+#include <subsys/SwerveChassis.h>
+#include <subsys/SwerveChassisFactory.h>
 
 #include <xmlhw/SwerveChassisDefn.h>
-#include <xmlhw/MotorDefn.h>
+#include <xmlhw/SwerveModuleDefn.h>
 #include <utils/Logger.h>
 
 // Third Party includes
@@ -46,23 +47,24 @@ using namespace pugi;
 using namespace std;
 
 
-
 /// @brief  Parse the chassie element (and it children).  When this is done a IChassis object exists.
 ///		   It can be retrieved from the factory.
 /// @param [in]  pugi::xml_node the chassis element in the XML document
 /// @return void
 
-shared_ptr<IChassis> SwerveChassisDefn::ParseXML
+shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
 (
 	xml_node      chassisNode
 )
 {
-    shared_ptr<IChassis> chassis;
+    shared_ptr<SwerveChassis> chassis;
     // initialize the attributes to the default values
     //ChassisFactory::CHASSIS_TYPE type = ChassisFactory::CHASSIS_TYPE::SWERVE
-    double wheelDiameter	= 0.0;
-    double wheelBase 	    = 0.0;
-    double track 		    = 0.0;
+    units::length::inch_t wheelDiameter(0.0);
+    units::length::inch_t wheelBase(0.0);
+    units::length::inch_t track(0.0);
+    units::velocity::meters_per_second_t maxVelocity(0.0);
+    double maxAcceleration  = 0.0;
     bool hasError 		    = false;
 
     // process attributes
@@ -81,15 +83,24 @@ shared_ptr<IChassis> SwerveChassisDefn::ParseXML
         }
         else if (  attrName.compare("wheelDiameter") == 0 )
         {
-        	wheelDiameter = attr.as_double();
+        	wheelDiameter = units::length::inch_t(attr.as_double());
         }
         else if (  attrName.compare("wheelBase") == 0 )
         {
-        	wheelBase = attr.as_double();
+        	wheelBase = units::length::inch_t(attr.as_double());
         }
         else if (  attrName.compare("track") == 0 )
         {
-        	track = attr.as_double();
+        	track = units::length::inch_t(attr.as_double());
+        }
+        else if (  attrName.compare("maxVelocity") == 0 )
+        {
+            units::velocity::feet_per_second_t fps(attr.as_double()/12.0);
+        	maxVelocity = units::velocity::meters_per_second_t(fps);
+        }
+        else if (  attrName.compare("maxAcceleration") == 0 )
+        {
+        	maxAcceleration = attr.as_double();
         }
         else   // log errors
         {
@@ -102,18 +113,40 @@ shared_ptr<IChassis> SwerveChassisDefn::ParseXML
 
 
     // Process child element nodes
-    IDragonMotorControllerMap motors;
-    unique_ptr<MotorDefn> motorXML = make_unique<MotorDefn>();
+    IDragonMotorControllerMap modules;
+    shared_ptr<DragonSwerveModule> lfront;
+    shared_ptr<DragonSwerveModule> rfront;
+    shared_ptr<DragonSwerveModule> lback;
+    shared_ptr<DragonSwerveModule> rback;
+    
+    unique_ptr<SwerveModuleDefn> moduleXML = make_unique<SwerveModuleDefn>();
 
     for (xml_node child = chassisNode.first_child(); child; child = child.next_sibling())
     {
         string childName (child.name());
     	if ( childName.compare("swervemodule") == 0 )
     	{
-            auto motor = motorXML.get()->ParseXML(child);
-            if ( motor.get() != nullptr )
+            shared_ptr<DragonSwerveModule> module = moduleXML.get()->ParseXML(child);
+            switch ( module.get()->GetType() )
             {
-                motors[ motor.get()->GetType() ] =  motor ;
+                case DragonSwerveModule::ModuleID::LEFT_FRONT:
+                    lfront = module;
+                    break;
+
+                case DragonSwerveModule::ModuleID::LEFT_BACK:
+                    lback = module;
+                    break;
+
+                case DragonSwerveModule::ModuleID::RIGHT_FRONT:
+                    rfront = module;
+                    break;
+                
+                case DragonSwerveModule::ModuleID::RIGHT_BACK:
+                    rback = module;
+                    break;
+
+                default:
+                    break;
             }
     	}
     	else  // log errors
@@ -128,8 +161,7 @@ shared_ptr<IChassis> SwerveChassisDefn::ParseXML
     // create chassis instance
     if ( !hasError )
     {
-        // TODO:   create swerve chassis
+        chassis = SwerveChassisFactory::GetSwerveChassisFactory()->CreateSwerveChassis( lfront, rfront, lback, rback, wheelDiameter, wheelBase, track, maxVelocity, maxAcceleration  );
     }
     return chassis;
 }
-

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include <frc/Encoder.h>
 #include <frc/controller/PIDController.h>
 #include <frc/controller/ProfiledPIDController.h>
@@ -11,13 +13,27 @@
 #include <units/voltage.h>
 #include <wpi/math>
 #include <hw/DragonFalcon.h>
+#include <hw/interfaces/IDragonMotorController.h>
+#include <ctre/phoenix/sensors/CANCoder.h>
 
 
-class DragonSwerveModule {
+class DragonSwerveModule 
+{
     public:
-        DragonSwerveModule(DragonFalcon* driveMotor, DragonFalcon* turningMotor);
+        enum ModuleID
+        {
+            LEFT_FRONT,
+            RIGHT_FRONT,
+            LEFT_BACK,
+            RIGHT_BACK
+        };
+
+        DragonSwerveModule( ModuleID type, std::shared_ptr<IDragonMotorController> driveMotor, std::shared_ptr<IDragonMotorController> turningMotor,
+                            std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder, units::degree_t turnOffset);
+
         frc::SwerveModuleState GetState() const;
         void SetDesiredState(const frc::SwerveModuleState& state);
+        ModuleID GetType() {return m_type; }
 
         
     private:
@@ -27,8 +43,11 @@ class DragonSwerveModule {
         static constexpr auto ModuleMaxAngularVelocity = wpi::math::pi * 1_rad_per_s; //Radians per second
         static constexpr auto ModuleMaxAngularAcceleration = wpi::math::pi * 2_rad_per_s / 1_s; //Radians per second ^2
 
-        DragonFalcon* m_driveMotor;
-        DragonFalcon* m_turnMotor;
+        ModuleID m_type;
+        std::shared_ptr<IDragonMotorController> m_driveMotor;
+        std::shared_ptr<IDragonMotorController> m_turnMotor;
+        std::shared_ptr<ctre::phoenix::sensors::CANCoder> m_turnSensor;
+        units::degree_t m_turnOffset;
 
         //TODO #2 Encoder from falcons
         frc::Encoder m_driveEncoder{0, 1};

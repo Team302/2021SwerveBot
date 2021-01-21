@@ -1,4 +1,4 @@
-<!ELEMENT robot (pdp?, pigeon?, limelight?, camera*, blinkin*, chassis?, mechanism* )>
+<!ELEMENT robot (pdp?, pigeon?, limelight?, camera*, blinkin*, swervechassis?, mechanism* )>
 
 <!ELEMENT pdp EMPTY>
 <!ATTLIST pdp 
@@ -65,20 +65,23 @@
 
 
 <!-- ========================================================================================================================================== -->
-<!--	chassis  																																-->
+<!--	swerve chassis  																																-->
 <!--    Wheel Base is front-back distance between wheel centers  Track is the distance between wheels on an "axle"     							-->   
 <!-- ========================================================================================================================================== -->
-<!ELEMENT chassis (swervemodule*) >
-<!ATTLIST chassis 
+<!ELEMENT servechassis (swervemodule*) >
+<!ATTLIST servechassis 
           type              ( SWERVE ) "SWERVE"
           wheelDiameter     CDATA #REQUIRED
           wheelBase         CDATA #REQUIRED
           track             CDATA #REQUIRED
+          maxVelocity       CDATA #REQUIRED
+          maxAcceleration   CDATA #REQUIRED
 >
 
 <!ELEMENT swervemodule (motor*, cancoder? ) >
 <!ATTLIST swervemodule 
           type              ( LEFT_FRONT | RIGHT_FRONT | LEFT_BACK | RIGHT_BACK ) "LEFT_FRONT"
+          turnoffset CDATA "0.0"
 >
 
 

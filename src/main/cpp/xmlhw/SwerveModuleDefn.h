@@ -22,6 +22,7 @@
 // FRC includes
 
 // Team 302 includes
+#include <subsys/DragonSwerveModule.h>
 
 // Third Party includes
 #include <pugixml/pugixml.hpp>
@@ -44,7 +45,7 @@ class SwerveModuleDefn
 		/// @param [in]  pugi::xml_node the chassis element in the XML document
     	/// @return std::shared_ptr<IChassis> 
 		// std::shared_ptr<IChassis> needs to be a swerve module
-		void  ParseXML
+		std::shared_ptr<DragonSwerveModule>  ParseXML
 		(
 			pugi::xml_node      SwerveModuleNode
 		);

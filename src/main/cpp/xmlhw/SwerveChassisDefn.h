@@ -22,7 +22,7 @@
 // FRC includes
 
 // Team 302 includes
-#include <subsys/interfaces/IChassis.h>
+#include <subsys/SwerveChassis.h>
 
 // Third Party includes
 #include <pugixml/pugixml.hpp>
@@ -44,7 +44,7 @@ class SwerveChassisDefn
 		///		   It can be retrieved from the factory.
 		/// @param [in]  pugi::xml_node the chassis element in the XML document
     	/// @return std::shared_ptr<IChassis> 
-		std::shared_ptr<IChassis>  ParseXML
+		std::shared_ptr<SwerveChassis>  ParseXML
 		(
 			pugi::xml_node      chassisNode
 		);
