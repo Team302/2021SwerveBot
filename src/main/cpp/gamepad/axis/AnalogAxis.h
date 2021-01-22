@@ -116,5 +116,5 @@ class AnalogAxis
         IProfile*                           m_profile;
         IDeadband*                          m_deadband;
         ScaledAxis*                         m_scale;
-        SlewedAxis*                         m_slewRate;
+        SlewedAxis*                         m_slewRateFactor;
 };

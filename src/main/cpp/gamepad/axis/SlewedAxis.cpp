@@ -21,28 +21,30 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-#include <gamepad/axis/SlewedAxis.h>
-
+//C++ Includes
 #include <cmath>
 #include <iostream>
+#include <units/dimensionless.h>
 
-SlewedAxis::SlewedAxis() : m_slewRate( 3.0 )
-{
-}
+//Team 302 Includes
+#include <gamepad/axis/SlewedAxis.h>
+
+//FRC Includes
+#include <frc/SlewRateLimiter.h>
+   
 
 void SlewedAxis::SetSlewRateLimiter
 (
     double slewRateFactor
 )
-{
-    //May include if statement that checks if m_slewRate is above 0
-    m_slewRate = slewRateFactor;
+{   
+    m_limiter.Reset(slewRateFactor / 1_s);
 }
 
 double SlewedAxis::SlewRate
 (
     double slewVal
-) const
+)
 {
-    return (slewVal * m_slewRate );
+    return (m_limiter.Calculate(slewVal) );
 }

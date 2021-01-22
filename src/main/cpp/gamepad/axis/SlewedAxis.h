@@ -1,8 +1,8 @@
 /*========================================================================================================
- * ScaledAxis.h
+ * SlewedAxis.h
  *========================================================================================================
  *
- * File Description:  This handles scaling an axis.
+ * File Description:  This handles slewratelimiting an axis.
  *
  *========================================================================================================*/
 
@@ -23,26 +23,31 @@
 
 #pragma once
 
+//C++ Includes
+#include <units/dimensionless.h>
+
+//FRC Inlcudes
+#include <frc/SlewRateLimiter.h>
+
 class SlewedAxis
 {
     public:
 
-        SlewedAxis();
+        SlewedAxis() = default;
         ~SlewedAxis() = default;
 
         virtual void SetSlewRateLimiter
         (
-            double slewRateLimiter
+            double slewRateFactor
         );
 
         
         double SlewRate
         (
-            double slewVal //Value to slewlimit
-        ) const;
+            double inputVal //Value to slewlimit
+        );
 
     private:
-
-        double m_slewRate;
+        frc::SlewRateLimiter<units::scalar> m_limiter{1 / 1_s};
 
 };

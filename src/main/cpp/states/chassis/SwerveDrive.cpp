@@ -22,14 +22,14 @@
 #include <subsys/interfaces/IChassis.h>
 #include <gamepad/TeleopControl.h>
 #include <states/IState.h>
-#include <subsys/ChassisFactory.h>
+#include <subsys/SwerveChassisFactory.h>
 #include <utils/Logger.h>
 
 using namespace std;
 
 /// @brief initialize the object and validate the necessary items are not nullptrs
 SwerveDrive::SwerveDrive() : IState(),
-                             m_chassis( ChassisFactory::GetChassisFactory()->GetIChassis() ),
+                             m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetIChassis() ),
                              m_controller( TeleopControl::GetInstance() ),
 {
     if ( m_controller == nullptr )
@@ -67,17 +67,7 @@ void SwerveDrive::Run( )
     auto steer = GetSteer();
     auto rotate = GetRotate();
 
-    //m_chassis needs to be a DriveTrain, referred to as m_swerve in wpilib docs
-    
-    //Will need to be re-visted, slewlimiters might be moved to controller
-
-    const auto xSpeed = m_xspeedlimiter.Calculate(drive) * m_chassis::kMaxSpeed;
-    
-    const auto ySpeed = m_yspeedlimiter.Calculate(steer) * m_chassis::kMaxSpeed;
-
-    const auto rot = m_yspeedlimiter.Calculate(rotate) * m_chassis::kMaxSpeed;
-
-    m_chassis.Drive(xSpeed, ySpeed, rot, fieldRelative);
+    m_chassis.Drive(drive, steer, rotate, fieldRelative);
 
 }
 
