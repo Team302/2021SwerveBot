@@ -34,6 +34,7 @@ DragonTalon::DragonTalon
 	m_gearRatio(gearRatio),
 	m_diameter( 1.0 )
 {
+	m_talon->ConfigFactoryDefault();
 	//m_tickOffset = m_talon.get()->GetSelectedSensorPosition();
 }
 
