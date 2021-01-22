@@ -29,7 +29,7 @@ using namespace std;
 
 /// @brief initialize the object and validate the necessary items are not nullptrs
 SwerveDrive::SwerveDrive() : IState(),
-                             m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetIChassis() ),
+                             m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis() ),
                              m_controller( TeleopControl::GetInstance() ),
 {
     if ( m_controller == nullptr )
@@ -67,7 +67,9 @@ void SwerveDrive::Run( )
     auto steer = GetSteer();
     auto rotate = GetRotate();
 
-    m_chassis.Drive(drive, steer, rotate, fieldRelative);
+
+    //Need to change how this line is done
+    m_chassis.get()->Drive(drive, steer, rotate, fieldRelative);
 
 }
 

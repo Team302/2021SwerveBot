@@ -36,8 +36,23 @@ class SwerveDrive : public IState
 
         bool AtTarget() const override;
 
+    protected:
+
+        virtual double GetDrive();
+
+        virtual double GetSteer();
+
+        virtual double GetRotate();
+
+        inline TeleopControl* GetController() const { return m_controller; }
+      /*  void Drive
+        (
+            double drive,
+            double steer,
+            double rotate
+        );*/
+
     private:
-    frc::SlewRateLimiter<units::scalar> m_xspeedlimiter{3 / 1_s}
-    frc::SlewRateLimiter<units::scalar> m_yspeedlimiter{3 / 1_s}
-    frc::SlewRateLimiter<units::scalar> m_rotlimiter{3 / 1_s}
+        std::shared_ptr<SwerveChassis> m_chassis;
+        TeleopControl* m_controller;
 };
