@@ -32,6 +32,16 @@
 class SwerveChassis
 {
     public:
+        /// @brief Construct a swerve chassis
+        /// @param [in] std::shared_ptr<DragonSwerveModule>     frontleft:          front left swerve module
+        /// @param [in] std::shared_ptr<DragonSwerveModule>     frontright:         front right swerve module
+        /// @param [in] std::shared_ptr<DragonSwerveModule>     backleft:           back left swerve module
+        /// @param [in] std::shared_ptr<DragonSwerveModule>     backright:          back right swerve module
+        /// @param [in] units::length::inch_t                   wheelBase:          distance between the front and rear wheels
+        /// @param [in] units::length::inch_t                   track:              distance between the left and right wheels
+        /// @param [in] units::velocity::meters_per_second_t    maxSpeed:           maximum linear speed of the chassis 
+        /// @param [in] units::radians_per_second_t             maxAngularSpeed:    maximum rotation speed of the chassis 
+        /// @param [in] double                                  maxAcceleration:    maximum acceleration in meters_per_second_squared
         SwerveChassis( std::shared_ptr<DragonSwerveModule>  frontleft, 
                        std::shared_ptr<DragonSwerveModule>  frontright, 
                        std::shared_ptr<DragonSwerveModule>  backleft, 
@@ -41,13 +51,23 @@ class SwerveChassis
                        units::velocity::meters_per_second_t maxSpeed,
                        units::radians_per_second_t          maxAngularSpeed,
                        double                               maxAcceleration ); 
-        
+
+        /// @brief Align all of the swerve modules to point forward
+        void ZeroAlignSwerveModules();
+
+        /// @brief Drive the chassis
+        /// @param [in] units::velocity::meters_per_second_t            xSpeed:         forward/reverse speed (positive is forward)
+        /// @param [in] units::velocity::meters_per_second_t            ySpeed:         left/right speed (positive is left)
+        /// @param [in] units::angular_velocity::radians_per_second_t   rot:            Rotation speed around the vertical (Z) axis; (positive is counter clockwise)
+        /// @param [in] bool                                            fieldRelative:  true: movement is based on the field (e.g., push it goes away from the driver regardless of the robot orientation),
+        ///                                                                             false: direction is based on robot front/back
+        /// @param [in] units::length::inch_t                   wheelBase:          distance between the front and rear wheels
         void Drive(units::velocity::meters_per_second_t xSpeed, units::velocity::meters_per_second_t ySpeed, units::angular_velocity::radians_per_second_t rot, bool fieldRelative);
 
         void UpdateOdometry();
 
-        static constexpr auto MaxSpeed = 3.0_mps; 
-        static constexpr units::angular_velocity::radians_per_second_t MaxAngularSpeed{wpi::math::pi};
+        //static constexpr auto MaxSpeed = 3.0_mps; 
+        //static constexpr units::angular_velocity::radians_per_second_t MaxAngularSpeed{wpi::math::pi};
 
         units::length::inch_t GetWheelBase() const {return m_wheelBase; }  
         units::length::inch_t GetTrack() const {return m_track;}
@@ -57,10 +77,6 @@ class SwerveChassis
 
 
     private:
-        frc::Translation2d m_frontLeftLocation{+0.381_m, +0.381_m};
-        frc::Translation2d m_frontRightLocation{+0.381_m, -0.381_m};
-        frc::Translation2d m_backLeftLocation{-0.381_m, +0.381_m};
-        frc::Translation2d m_backRightLocation{-0.381_m, -0.381_m};
 
         std::shared_ptr<DragonSwerveModule> m_frontLeft;
         std::shared_ptr<DragonSwerveModule> m_frontRight;
@@ -73,22 +89,20 @@ class SwerveChassis
         units::radians_per_second_t          m_maxAngularSpeed;
         double                               m_maxAcceleration;
 
-        DragonPigeon* m_pigeon = PigeonFactory::GetFactory()->GetPigeon();
-        //frc::AnalogGyro m_gyro{0};
+        DragonPigeon*                        m_pigeon;
+        
+        //TODO:  these need to be calculated from the track and wheelbase, gains should probably be passed in
+        frc::Translation2d m_frontLeftLocation{+0.381_m, +0.381_m};
+        frc::Translation2d m_frontRightLocation{+0.381_m, -0.381_m};
+        frc::Translation2d m_backLeftLocation{-0.381_m, +0.381_m};
+        frc::Translation2d m_backRightLocation{-0.381_m, -0.381_m};
+        frc::SwerveDriveKinematics<4> m_kinematics{m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation};
 
-        frc::SwerveDriveKinematics<4> m_kinematics{
-        m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation,
-        m_backRightLocation};
-
-        // Gains are for example purposes only - must be determined for your own
-        // robot!
+        // Gains are for example purposes only - must be determined for your own robot!
         frc::SwerveDrivePoseEstimator<4> m_poseEstimator{  frc::Rotation2d(), 
                                                            frc::Pose2d(), 
                                                            m_kinematics,
                                                            {0.1, 0.1, 0.1},   
                                                            {0.05},        
                                                            {0.1, 0.1, 0.1} };
-
-        //frc::Translation2d::Translation2d m_frontLeftLocation{+0.381_m, +0.381_m};
-        //frc::Translation2d m_frontLeftLocation{+0.381_m, +0.381_m};
 };

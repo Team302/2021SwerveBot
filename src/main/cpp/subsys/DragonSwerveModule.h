@@ -36,6 +36,7 @@ class DragonSwerveModule
                             units::length::inch_t                                   wheelDiameter
                           );
 
+        void ZeroAlignModule();
         frc::SwerveModuleState GetState() const;
         void SetDesiredState(const frc::SwerveModuleState& state);
 

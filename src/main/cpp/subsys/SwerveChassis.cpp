@@ -34,7 +34,16 @@
 //#include "ExampleGlobalMeasurementSensor.h"
 
 using namespace std;
-
+/// @brief Construct a swerve chassis
+/// @param [in] std::shared_ptr<DragonSwerveModule>     frontleft:          front left swerve module
+/// @param [in] std::shared_ptr<DragonSwerveModule>     frontright:         front right swerve module
+/// @param [in] std::shared_ptr<DragonSwerveModule>     backleft:           back left swerve module
+/// @param [in] std::shared_ptr<DragonSwerveModule>     backright:          back right swerve module
+/// @param [in] units::length::inch_t                   wheelBase:          distance between the front and rear wheels
+/// @param [in] units::length::inch_t                   track:              distance between the left and right wheels
+/// @param [in] units::velocity::meters_per_second_t    maxSpeed:           maximum linear speed of the chassis 
+/// @param [in] units::radians_per_second_t             maxAngularSpeed:    maximum rotation speed of the chassis 
+/// @param [in] double                                  maxAcceleration:    maximum acceleration in meters_per_second_squared
 SwerveChassis::SwerveChassis( shared_ptr<DragonSwerveModule>          frontleft, 
                               shared_ptr<DragonSwerveModule>          frontright, 
                               shared_ptr<DragonSwerveModule>          backleft, 
@@ -51,39 +60,53 @@ SwerveChassis::SwerveChassis( shared_ptr<DragonSwerveModule>          frontleft,
                                                                                           m_track(track),
                                                                                           m_maxSpeed(maxSpeed),
                                                                                           m_maxAngularSpeed(maxAngularSpeed),
-                                                                                          m_maxAcceleration(maxAcceleration)
+                                                                                          m_maxAcceleration(maxAcceleration),
+                                                                                          m_pigeon(PigeonFactory::GetFactory()->GetPigeon())
 {
-  
+}
+/// @brief Align all of the swerve modules to point forward
+void SwerveChassis::ZeroAlignSwerveModules()
+{
+    m_frontLeft.get()->ZeroAlignModule();
+    m_frontRight.get()->ZeroAlignModule();
+    m_backLeft.get()->ZeroAlignModule();
+    m_backRight.get()->ZeroAlignModule();
 }
 
 
-
+/// @brief Drive the chassis
+/// @param [in] units::velocity::meters_per_second_t            xSpeed:         forward/reverse speed (positive is forward)
+/// @param [in] units::velocity::meters_per_second_t            ySpeed:         left/right speed (positive is left)
+/// @param [in] units::angular_velocity::radians_per_second_t   rot:            Rotation speed around the vertical (Z) axis; (positive is counter clockwise)
+/// @param [in] bool                                            fieldRelative:  true: movement is based on the field (e.g., push it goes away from the driver regardless of the robot orientation),
+///                                                                             false: direction is based on robot front/back
+/// @param [in] units::length::inch_t                   wheelBase:          distance between the front and rear wheels
 void SwerveChassis::Drive(units::meters_per_second_t xSpeed,
                        units::meters_per_second_t ySpeed,
                        units::radians_per_second_t rot, bool fieldRelative) 
 {
-  units::degree_t yaw{m_pigeon->GetYaw()};
-  Rotation2d r2d {yaw};
-  auto states = m_kinematics.ToSwerveModuleStates(
-                              fieldRelative ? frc::ChassisSpeeds::FromFieldRelativeSpeeds(
-                              xSpeed, ySpeed, rot, r2d) : frc::ChassisSpeeds{xSpeed, ySpeed, rot} );
+    units::degree_t yaw{m_pigeon->GetYaw()};
+    Rotation2d r2d {yaw};
+    auto states = m_kinematics.ToSwerveModuleStates(
+                                fieldRelative ? frc::ChassisSpeeds::FromFieldRelativeSpeeds(
+                                xSpeed, ySpeed, rot, r2d) : frc::ChassisSpeeds{xSpeed, ySpeed, rot} );
 
-  m_kinematics.NormalizeWheelSpeeds(&states, m_maxSpeed);
+    m_kinematics.NormalizeWheelSpeeds(&states, m_maxSpeed);
 
-  auto [fl, fr, bl, br] = states;
+    auto [fl, fr, bl, br] = states;
 
-  m_frontLeft.get()->SetDesiredState(fl);
-  m_frontRight.get()->SetDesiredState(fr);
-  m_backLeft.get()->SetDesiredState(bl);
-  m_backRight.get()->SetDesiredState(br);
+    m_frontLeft.get()->SetDesiredState(fl);
+    m_frontRight.get()->SetDesiredState(fr);
+    m_backLeft.get()->SetDesiredState(bl);
+    m_backRight.get()->SetDesiredState(br);
 }
 
 void SwerveChassis::UpdateOdometry() 
 {
-  units::degree_t yaw{m_pigeon->GetYaw()};
-  Rotation2d r2d {yaw};
-  m_poseEstimator.Update(r2d, m_frontLeft.get()->GetState(),
-                              m_frontRight.get()->GetState(), 
-                              m_backLeft.get()->GetState(),
-                              m_backRight.get()->GetState());
+    units::degree_t yaw{m_pigeon->GetYaw()};
+    Rotation2d r2d {yaw};
+    m_poseEstimator.Update(r2d, m_frontLeft.get()->GetState(),
+                                m_frontRight.get()->GetState(), 
+                                m_backLeft.get()->GetState(),
+                                m_backRight.get()->GetState());
 }
