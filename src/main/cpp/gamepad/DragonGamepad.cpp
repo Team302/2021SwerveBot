@@ -219,6 +219,24 @@ void DragonGamepad::SetAxisScale
     }
 }
 
+
+void DragonGamepad::SetSlewLimit
+(
+    AXIS_IDENTIFIER axis,
+    float slewRateFactor
+)
+{
+    if ( m_axis[axis] != nullptr )
+    {
+        m_axis[axis]->SetSlewRateLimiter( slewRateFactor );
+    }
+    else
+    {
+        Logger::GetLogger()->LogError( string("DragonGamepad::SetSlewLimit no axis"), to_string(axis) );   
+    }
+    
+}
+
 void DragonGamepad::SetButtonMode
 (
     BUTTON_IDENTIFIER button,

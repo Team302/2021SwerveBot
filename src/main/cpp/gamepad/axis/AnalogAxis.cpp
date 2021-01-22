@@ -21,10 +21,11 @@
 // C++ Includes
 #include <cmath>
 #include <string>
-
+#include <units/dimensionless.h>
 
 // FRC includes
 #include <frc/GenericHID.h>
+#include <frc/SlewRateLimiter.h>
 
 // Team 302 includes
 
@@ -62,7 +63,8 @@ AnalogAxis::AnalogAxis
     m_axis( axisID ),
     m_profile( LinearProfile::GetInstance() ),  
     m_deadband( NoDeadbandValue::GetInstance() ), 
-    m_scale( new ScaledAxis()  )
+    m_scale( new ScaledAxis()  ),
+    m_slewRateFactor ( new SlewedAxis() )
 {
     if ( flipAxis )
     {
@@ -74,6 +76,7 @@ AnalogAxis::AnalogAxis
 /// @brief  Read the analog (axis) value and return it.  If the gamepad has an issue, return 0.0.
 /// @return double axis value after applying the deadband, profile and scaling operations
 //================================================================================================
+
 double AnalogAxis::GetAxisValue()
 {
     double value = 0.0;
@@ -84,6 +87,7 @@ double AnalogAxis::GetAxisValue()
         value = m_deadband->ApplyDeadband( value );
         value = m_profile->ApplyProfile( value );
         value = m_scale->Scale( value );
+        value = m_slewRateFactor->SlewRate( value );
     }
     else
     {
@@ -168,6 +172,16 @@ void AnalogAxis::SetAxisScaleFactor
 )
 {
     m_scale->SetScaleFactor( scale );
+}
+
+
+
+void AnalogAxis::SetSlewRateLimiter
+(
+    double slewRateFactor
+)
+{
+    m_slewRateFactor->SetSlewRateLimiter( slewRateFactor );
 }
        
 //==================================================================================

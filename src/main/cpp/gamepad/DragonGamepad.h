@@ -68,6 +68,12 @@ class DragonGamepad : public IDragonGamePad
             float scaleFactor
         ) override;
 
+        void SetSlewLimit
+        (
+            AXIS_IDENTIFIER axis,
+            float slewRateFactor
+        ) override;
+
         void SetButtonMode
         (
             BUTTON_IDENTIFIER button,

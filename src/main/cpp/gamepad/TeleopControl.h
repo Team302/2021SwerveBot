@@ -40,6 +40,9 @@ class TeleopControl
             UNKNOWN_FUNCTION,
             TANK_DRIVE_LEFT_CONTROL,
             TANK_DRIVE_RIGHT_CONTROL,
+            SWERVE_DRIVE_DRIVE,
+            SWERVE_DRIVE_ROTATE,
+            SWERVE_DRIVE_STEER,
             ARCADE_DRIVE_THROTTLE,
             ARCADE_DRIVE_STEER,
             GTA_DRIVE_FORWARD,
@@ -123,6 +126,14 @@ class TeleopControl
         (
             TeleopControl::FUNCTION_IDENTIFIER  axis,          // <I> - axis number to update
             float                               scaleFactor    // <I> - scale factor used to limit the range
+        );
+
+        
+
+        void SetSlewRateLimiter
+        (
+            TeleopControl::FUNCTION_IDENTIFIER  axis,
+            float                               slewRateLimiter
         );
 
         //------------------------------------------------------------------
