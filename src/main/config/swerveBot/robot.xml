@@ -33,6 +33,7 @@
                      wheelBase="14.0"  
                      track="14.0"
                      maxVelocity="168.0"
+                     maxAngularVelocity="180.0"
                      maxAcceleration="24.0">
 			 
         <swervemodule type="LEFT_FRONT"

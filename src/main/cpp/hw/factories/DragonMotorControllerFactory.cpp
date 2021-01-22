@@ -54,7 +54,7 @@ shared_ptr<IDragonMotorController> DragonMotorControllerFactory::CreateMotorCont
     int 											countsPerRev,
     float 											gearRatio,
     bool 											brakeMode,
-    int 											slaveTo,
+    int 											followMotor,
     int 											peakCurrentDuration,
     int 											continuousCurrentLimit,
     int 											peakCurrentLimit,
@@ -92,9 +92,9 @@ shared_ptr<IDragonMotorController> DragonMotorControllerFactory::CreateMotorCont
             talon->SetForwardLimitSwitch(reverseLimitSwitchNormallyOpen);
         }
 
-        if ( slaveTo > -1 )
+        if ( followMotor > -1 )
         {
-            talon->SetAsSlave( slaveTo );
+            talon->SetAsSlave( followMotor );
         }
         controller.reset( talon );
     }
@@ -116,9 +116,9 @@ shared_ptr<IDragonMotorController> DragonMotorControllerFactory::CreateMotorCont
             talon->SetForwardLimitSwitch(reverseLimitSwitchNormallyOpen);
         }
         
-        if ( slaveTo > -1 )
+        if ( followMotor > -1 )
         {
-            talon->SetAsSlave( slaveTo );
+            talon->SetAsSlave( followMotor );
         }
         controller.reset( talon );
     }

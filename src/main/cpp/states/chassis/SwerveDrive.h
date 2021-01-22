@@ -19,7 +19,7 @@
 #include <memory>
 
 //Team 302 includes
-#include <subsys/interfaces/IChassis.h>
+#include <subsys/SwerveChassis.h>
 #include <gamepad/TeleopControl.h>
 #include <states/IState.h>
 

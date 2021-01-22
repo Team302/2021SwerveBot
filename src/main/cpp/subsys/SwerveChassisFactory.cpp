@@ -114,19 +114,20 @@ std::shared_ptr<DragonSwerveModule> SwerveChassisFactory::CreateSwerveModule
 //=====================================================================================
 shared_ptr<SwerveChassis> SwerveChassisFactory::CreateSwerveChassis
 (
-    std::shared_ptr<DragonSwerveModule> frontLeft, 
-    std::shared_ptr<DragonSwerveModule> frontRight,
-    std::shared_ptr<DragonSwerveModule> backLeft, 
-    std::shared_ptr<DragonSwerveModule> backRight, 
-    units::length::inch_t wheelBase,
-    units::length::inch_t track,
-    units::velocity::meters_per_second_t maxSpeed,
-    double maxAcceleration
+    std::shared_ptr<DragonSwerveModule>     frontLeft, 
+    std::shared_ptr<DragonSwerveModule>     frontRight,
+    std::shared_ptr<DragonSwerveModule>     backLeft, 
+    std::shared_ptr<DragonSwerveModule>     backRight, 
+    units::length::inch_t                   wheelBase,
+    units::length::inch_t                   track,
+    units::velocity::meters_per_second_t    maxSpeed,
+    units::radians_per_second_t             maxAngularSpeed,
+    double                                  maxAcceleration
 )
 {
     if ( m_chassis.get() == nullptr )
     {
-        m_chassis = make_shared<SwerveChassis>(frontLeft, frontRight, backLeft, backRight, wheelBase, track, maxSpeed, maxAcceleration );
+        m_chassis = make_shared<SwerveChassis>(frontLeft, frontRight, backLeft, backRight, wheelBase, track, maxSpeed, maxAngularSpeed, maxAcceleration );
     }
 
     return m_chassis;

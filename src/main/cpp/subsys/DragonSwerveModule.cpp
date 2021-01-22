@@ -2,6 +2,8 @@
 #include <subsys/DragonSwerveModule.h>
 #include <units/angle.h>
 #include <frc/geometry/Rotation2d.h>
+#include <frc/trajectory/TrapezoidProfile.h>
+#include <frc/controller/PIDController.h>
 #include <wpi/math>
 
 using namespace std;
@@ -27,11 +29,17 @@ DragonSwerveModule::DragonSwerveModule
 {
     auto driveCountsPerRev = driveMotor.get()->GetCountsPerRev();
     m_driveEncoder.SetDistancePerPulse(wpi::math::pi * m_wheelDiameter.to<double>() / driveCountsPerRev);
+    m_drivePIDController = make_shared<frc2::PIDController>(1.0, 0.0, 0.0);
+    m_turnPIDController = make_shared<frc2::PIDController>(1.0, 0.0, 0.0);
+    //frc::TrapezoidProfile<units::meters>::Constraints constraints{wpi::math::pi * 1_rad_per_s, wpi::math::pi * 2_rad_per_s / 1_s};
+    //m_turningPIDController = make_shared<frc::ProfiledPIDController<units::radians>>(1.0, 0.0, 0.0, constraints);
+
 
     auto turnCountsPerRev = turnMotor.get()->GetCountsPerRev();  // todo need to make this utilize the cancoder
     m_turnEncoder.SetDistancePerPulse(2 * wpi::math::pi /turnCountsPerRev);
 
-    m_turningPIDController.EnableContinuousInput(-units::angle::radian_t(wpi::math::pi), units::angle::radian_t(wpi::math::pi));
+   // m_turnPIDController.get()->EnableContinuousInput(-1.0*units::angle::radian_t(wpi::math::pi), units::angle::radian_t(wpi::math::pi));
+    m_turnPIDController.get()->EnableContinuousInput(-1.0*wpi::math::pi, wpi::math::pi);
 }
 
 frc::SwerveModuleState DragonSwerveModule::GetState() const 
@@ -46,15 +54,16 @@ void DragonSwerveModule::SetDesiredState
     const frc::SwerveModuleState& referenceState
 )
 {
-    //const auto state = frc::SwerveModuleState::Optimize(referenceState, units::angle::radian_t(m_turnEncoder.Get()));
+    const auto state = frc::SwerveModuleState::Optimize(referenceState, units::angle::radian_t(m_turnEncoder.Get()));
 
-    const auto driveOutput = m_drivePIDController.Calculate(m_driveEncoder.GetRate(), referenceState.speed.to<double>());
-
+    const auto driveOutput = m_drivePIDController.get()->Calculate(m_driveEncoder.GetRate(), referenceState.speed.to<double>());
     const auto driveFeedforward = m_driveFeedforward.Calculate(referenceState.speed);
 
-    const auto turnOutput = m_turnFeedforward.Calculate(m_turningPIDController.GetSetpoint().velocity);
-
-    const auto turnFeedforward = m_turnFeedforward.Calculate(m_turningPIDController.GetSetpoint().velocity);
+    //const auto turnOutput = m_turnFeedforward.Calculate(m_turnPIDController.get()->GetSetpoint().velocity);
+    //const auto turnFeedforward = m_turnFeedforward.Calculate(m_turnPIDController.get()->GetSetpoint().velocity);
+    // TODO this is all wrong as it is velocity based instead of position based
+    const auto turnOutput = m_drivePIDController.get()->Calculate(m_turnEncoder.GetRate(), referenceState.speed.to<double>());
+    const auto turnFeedforward = m_driveFeedforward.Calculate(referenceState.speed);
 
     auto drive = dynamic_cast<DragonFalcon*>(m_driveMotor.get());
     auto turn = dynamic_cast<DragonFalcon*>(m_turnMotor.get());

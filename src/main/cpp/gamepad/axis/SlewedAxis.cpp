@@ -38,7 +38,9 @@ void SlewedAxis::SetSlewRateLimiter
     double slewRateFactor
 )
 {   
-    m_limiter.Reset(slewRateFactor / 1_s);
+    //units::scalar_t limit = slewRateFactor / 1_s;
+    units::scalar_t limit = slewRateFactor;
+    m_limiter.Reset(limit);
 }
 
 double SlewedAxis::SlewRate

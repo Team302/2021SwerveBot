@@ -32,14 +32,15 @@
 class SwerveChassis
 {
     public:
-        SwerveChassis( std::shared_ptr<DragonSwerveModule> frontleft, 
-                       std::shared_ptr<DragonSwerveModule> frontright, 
-                       std::shared_ptr<DragonSwerveModule> backleft, 
-                       std::shared_ptr<DragonSwerveModule> backright, 
-                       units::length::inch_t wheelBase,
-                       units::length::inch_t track,
+        SwerveChassis( std::shared_ptr<DragonSwerveModule>  frontleft, 
+                       std::shared_ptr<DragonSwerveModule>  frontright, 
+                       std::shared_ptr<DragonSwerveModule>  backleft, 
+                       std::shared_ptr<DragonSwerveModule>  backright, 
+                       units::length::inch_t                wheelBase,
+                       units::length::inch_t                track,
                        units::velocity::meters_per_second_t maxSpeed,
-                       double maxAcceleration ); 
+                       units::radians_per_second_t          maxAngularSpeed,
+                       double                               maxAcceleration ); 
         
         void Drive(units::velocity::meters_per_second_t xSpeed, units::velocity::meters_per_second_t ySpeed, units::angular_velocity::radians_per_second_t rot, bool fieldRelative);
 
@@ -51,6 +52,7 @@ class SwerveChassis
         units::length::inch_t GetWheelBase() const {return m_wheelBase; }  
         units::length::inch_t GetTrack() const {return m_track;}
         units::velocity::meters_per_second_t GetMaxSpeed() const {return m_maxSpeed;}
+        units::radians_per_second_t GetMaxAngularSpeed() const {return m_maxAngularSpeed;}
         double GetMaxAcceration() const { return m_maxAcceleration; }
 
 
@@ -68,6 +70,7 @@ class SwerveChassis
         units::length::inch_t                m_wheelBase;       
         units::length::inch_t                m_track;
         units::velocity::meters_per_second_t m_maxSpeed;
+        units::radians_per_second_t          m_maxAngularSpeed;
         double                               m_maxAcceleration;
 
         DragonPigeon* m_pigeon = PigeonFactory::GetFactory()->GetPigeon();

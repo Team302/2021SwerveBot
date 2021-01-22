@@ -62,6 +62,7 @@ shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
     units::length::inch_t wheelBase(0.0);
     units::length::inch_t track(0.0);
     units::velocity::meters_per_second_t maxVelocity(0.0);
+    units::radians_per_second_t maxAngularSpeed(0.0);
     double maxAcceleration  = 0.0;
     bool hasError 		    = false;
 
@@ -91,6 +92,11 @@ shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
         {
             units::velocity::feet_per_second_t fps(attr.as_double()/12.0);
         	maxVelocity = units::velocity::meters_per_second_t(fps);
+        }
+        else if (  attrName.compare("maxAngularVelocity") == 0 )
+        {
+            units::degrees_per_second_t degreesPerSec(attr.as_double());
+        	maxAngularSpeed = units::radians_per_second_t(degreesPerSec);
         }
         else if (  attrName.compare("maxAcceleration") == 0 )
         {
@@ -155,7 +161,15 @@ shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
     // create chassis instance
     if ( !hasError )
     {
-        chassis = SwerveChassisFactory::GetSwerveChassisFactory()->CreateSwerveChassis( lfront, rfront, lback, rback, wheelBase, track, maxVelocity, maxAcceleration  );
+        chassis = SwerveChassisFactory::GetSwerveChassisFactory()->CreateSwerveChassis( lfront, 
+                                                                                        rfront, 
+                                                                                        lback, 
+                                                                                        rback, 
+                                                                                        wheelBase, 
+                                                                                        track, 
+                                                                                        maxVelocity, 
+                                                                                        maxAngularSpeed, 
+                                                                                        maxAcceleration  );
     }
     return chassis;
 }

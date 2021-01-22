@@ -18,7 +18,7 @@
 #include <memory>
 
 // FRC includes
-#include <frc2/Timer.h>
+//#include <frc2/Timer.h>
 
 // Team 302 includes
 #include <subsys/SwerveChassis.h>
@@ -35,21 +35,23 @@
 
 using namespace std;
 
-SwerveChassis::SwerveChassis( shared_ptr<DragonSwerveModule> frontleft, 
-                              shared_ptr<DragonSwerveModule> frontright, 
-                              shared_ptr<DragonSwerveModule> backleft, 
-                              shared_ptr<DragonSwerveModule> backright, 
-                              units::length::inch_t wheelBase,
-                              units::length::inch_t track,
-                              units::velocity::meters_per_second_t maxSpeed,
-                              double maxAcceleration ) :  m_frontLeft(frontleft), 
-                                                          m_frontRight(frontright), 
-                                                          m_backLeft(backleft), 
-                                                          m_backRight(backright), 
-                                                          m_wheelBase(wheelBase),
-                                                          m_track(track),
-                                                          m_maxSpeed(maxSpeed),
-                                                          m_maxAcceleration(maxAcceleration)
+SwerveChassis::SwerveChassis( shared_ptr<DragonSwerveModule>          frontleft, 
+                              shared_ptr<DragonSwerveModule>          frontright, 
+                              shared_ptr<DragonSwerveModule>          backleft, 
+                              shared_ptr<DragonSwerveModule>          backright, 
+                              units::length::inch_t                   wheelBase,
+                              units::length::inch_t                   track,
+                              units::velocity::meters_per_second_t    maxSpeed,
+                              units::radians_per_second_t             maxAngularSpeed,
+                              double                                  maxAcceleration ) : m_frontLeft(frontleft), 
+                                                                                          m_frontRight(frontright), 
+                                                                                          m_backLeft(backleft), 
+                                                                                          m_backRight(backright), 
+                                                                                          m_wheelBase(wheelBase),
+                                                                                          m_track(track),
+                                                                                          m_maxSpeed(maxSpeed),
+                                                                                          m_maxAngularSpeed(maxAngularSpeed),
+                                                                                          m_maxAcceleration(maxAcceleration)
 {
   
 }

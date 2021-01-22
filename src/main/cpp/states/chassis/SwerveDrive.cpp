@@ -19,7 +19,6 @@
 //Team 302 Includes
 #include <states/chassis/SwerveDrive.h>
 #include <gamepad/IDragonGamePad.h>
-#include <subsys/interfaces/IChassis.h>
 #include <gamepad/TeleopControl.h>
 #include <states/IState.h>
 #include <subsys/SwerveChassisFactory.h>
@@ -30,7 +29,7 @@ using namespace std;
 /// @brief initialize the object and validate the necessary items are not nullptrs
 SwerveDrive::SwerveDrive() : IState(),
                              m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis() ),
-                             m_controller( TeleopControl::GetInstance() ),
+                             m_controller( TeleopControl::GetInstance() )
 {
     if ( m_controller == nullptr )
     {
@@ -67,9 +66,17 @@ void SwerveDrive::Run( )
     auto steer = GetSteer();
     auto rotate = GetRotate();
 
+    auto maxSpeed = m_chassis.get()->GetMaxSpeed();
+    auto driveSpeed = maxSpeed * drive;
+    auto turnSpeed = maxSpeed * steer;
+
+    auto maxRotateSpeed = m_chassis.get()->GetMaxAngularSpeed();
+    auto rotateSpeed = maxRotateSpeed * rotate;
+    
+
 
     //Need to change how this line is done
-    m_chassis.get()->Drive(drive, steer, rotate, fieldRelative);
+    m_chassis.get()->Drive(driveSpeed, turnSpeed, rotateSpeed, true);
 
 }
 

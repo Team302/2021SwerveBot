@@ -38,14 +38,14 @@ class DragonSwerveModule
 
         frc::SwerveModuleState GetState() const;
         void SetDesiredState(const frc::SwerveModuleState& state);
-        ModuleID GetType() {return m_type; }
 
+        ModuleID GetType() {return m_type; }
         units::length::inch_t GetWheelDiameter() const {return m_wheelDiameter;}
 
         
     private:
-        static constexpr auto ModuleMaxAngularVelocity = wpi::math::pi * 1_rad_per_s; //Radians per second
-        static constexpr auto ModuleMaxAngularAcceleration = wpi::math::pi * 2_rad_per_s / 1_s; //Radians per second ^2
+       // static constexpr auto ModuleMaxAngularVelocity = wpi::math::pi * 1_rad_per_s; //Radians per second
+       // static constexpr auto ModuleMaxAngularAcceleration = wpi::math::pi * 2_rad_per_s / 1_s; //Radians per second ^2
 
         ModuleID m_type;
         std::shared_ptr<IDragonMotorController>             m_driveMotor;
@@ -58,12 +58,13 @@ class DragonSwerveModule
         frc::Encoder m_driveEncoder{0, 1};
         frc::Encoder m_turnEncoder{2, 3};
 
-        frc2::PIDController m_drivePIDController{1.0, 0, 0};
-        frc::ProfiledPIDController<units::radians> m_turningPIDController{
-        1.0,
-        0.0,
-        0.0,
-        {ModuleMaxAngularVelocity, ModuleMaxAngularAcceleration}};
+        //frc2::PIDController m_drivePIDController{1.0, 0, 0};
+        std::shared_ptr<frc2::PIDController> m_drivePIDController;
+
+        //frc::ProfiledPIDController<units::radians> m_turnPIDController{1.0, 0.0, 0.0, {ModuleMaxAngularVelocity, ModuleMaxAngularAcceleration}};
+        std::shared_ptr<frc2::PIDController> m_turnPIDController;
+        //std::shared_ptr<frc::ProfiledPIDController<units::radians>> m_turnPIDController;
+        
 
         frc::SimpleMotorFeedforward<units::meters> m_driveFeedforward;
         frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward;

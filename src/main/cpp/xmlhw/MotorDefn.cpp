@@ -63,7 +63,7 @@ shared_ptr<IDragonMotorController> MotorDefn::ParseXML
     int countsPerRev = 0;
     float gearRatio = 1;
     bool brakeMode = false;
-    int slaveTo = -1;
+    int followMotor = -1;
     int peakCurrentDuration = 0;
     int continuousCurrentLimit = 0;
     int peakCurrentLimit = 0;
@@ -190,10 +190,10 @@ shared_ptr<IDragonMotorController> MotorDefn::ParseXML
         {
             brakeMode = attr.as_bool();
         }
-		// slaveto (existing CAN id of the master motor)
-        else if ( strcmp( attr.name(), "slaveTo") == 0 )
+		// followMotor (existing CAN id of the master motor)
+        else if ( strcmp( attr.name(), "follow") == 0 )
         {
-            slaveTo = attr.as_int();
+            followMotor = attr.as_int();
         }
 		// peak current duration (cantalon)
         else if ( strcmp( attr.name(), "peakCurrentDuration") == 0 )
@@ -251,9 +251,9 @@ shared_ptr<IDragonMotorController> MotorDefn::ParseXML
                                                                                          countsPerRev,
                                                                                          gearRatio,
                                                                                          brakeMode,
-                                                                                         slaveTo,
-                                                                                         peakCurrentLimit,
+                                                                                         followMotor,
                                                                                          peakCurrentDuration,
+                                                                                         continuousCurrentLimit,
                                                                                          peakCurrentLimit,
                                                                                          enableCurrentLimit,
                                                                                          forwardLimitSwitch,
