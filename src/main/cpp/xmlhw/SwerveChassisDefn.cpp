@@ -114,10 +114,10 @@ shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
 
     // Process child element nodes
     IDragonMotorControllerMap modules;
-    shared_ptr<DragonSwerveModule> lfront;
-    shared_ptr<DragonSwerveModule> rfront;
-    shared_ptr<DragonSwerveModule> lback;
-    shared_ptr<DragonSwerveModule> rback;
+    shared_ptr<SwerveModule> lfront;
+    shared_ptr<SwerveModule> rfront;
+    shared_ptr<SwerveModule> lback;
+    shared_ptr<SwerveModule> rback;
     
     unique_ptr<SwerveModuleDefn> moduleXML = make_unique<SwerveModuleDefn>();
 
@@ -126,22 +126,22 @@ shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
         string childName (child.name());
     	if ( childName.compare("swervemodule") == 0 )
     	{
-            shared_ptr<DragonSwerveModule> module = moduleXML.get()->ParseXML(child);
+            shared_ptr<SwerveModule> module = moduleXML.get()->ParseXML(child);
             switch ( module.get()->GetType() )
             {
-                case DragonSwerveModule::ModuleID::LEFT_FRONT:
+                case SwerveModule::ModuleID::LEFT_FRONT:
                     lfront = module;
                     break;
 
-                case DragonSwerveModule::ModuleID::LEFT_BACK:
+                case SwerveModule::ModuleID::LEFT_BACK:
                     lback = module;
                     break;
 
-                case DragonSwerveModule::ModuleID::RIGHT_FRONT:
+                case SwerveModule::ModuleID::RIGHT_FRONT:
                     rfront = module;
                     break;
                 
-                case DragonSwerveModule::ModuleID::RIGHT_BACK:
+                case SwerveModule::ModuleID::RIGHT_BACK:
                     rback = module;
                     break;
 

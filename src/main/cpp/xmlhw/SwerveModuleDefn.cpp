@@ -31,7 +31,7 @@
 // Team302 includes
 #include <hw/interfaces/IDragonMotorController.h>
 #include <hw/usages/IDragonMotorControllerMap.h>
-#include <subsys/DragonSwerveModule.h>
+#include <subsys/SwerveModule.h>
 #include <subsys/SwerveChassisFactory.h>
 
 #include <xmlhw/SwerveModuleDefn.h>
@@ -55,16 +55,16 @@ using namespace std;
 /// @return void
 
 // shared_ptr<IChassis> 
-std::shared_ptr<DragonSwerveModule> SwerveModuleDefn::ParseXML
+std::shared_ptr<SwerveModule> SwerveModuleDefn::ParseXML
 (
 	xml_node      SwerveModuleNode
 )
 {
    auto hasError = false;
-   std::shared_ptr<DragonSwerveModule> module;
+   std::shared_ptr<SwerveModule> module;
 
     // initialize the attributes to the default values
-    DragonSwerveModule::ModuleID position = DragonSwerveModule::ModuleID::LEFT_FRONT;
+    SwerveModule::ModuleID position = SwerveModule::ModuleID::LEFT_FRONT;
     units::angle::degree_t turnOffset(0.0);
     units::length::inch_t wheelDiameter(0.0);
 
@@ -77,19 +77,19 @@ std::shared_ptr<DragonSwerveModule> SwerveModuleDefn::ParseXML
             auto thisPosition = string( attr.value() );
             if ( thisPosition.compare("LEFT_FRONT") == 0 )
             {
-                position = DragonSwerveModule::ModuleID::LEFT_FRONT;
+                position = SwerveModule::ModuleID::LEFT_FRONT;
             }
             else if ( thisPosition.compare("RIGHT_FRONT") == 0  )
             {
-                position = DragonSwerveModule::ModuleID::RIGHT_FRONT;
+                position = SwerveModule::ModuleID::RIGHT_FRONT;
             }
             else if ( thisPosition.compare("LEFT_BACK") == 0  )
             {
-                position = DragonSwerveModule::ModuleID::LEFT_BACK;
+                position = SwerveModule::ModuleID::LEFT_BACK;
             }
             else if ( thisPosition.compare("RIGHT_BACK") == 0  )
             {
-                position = DragonSwerveModule::ModuleID::RIGHT_BACK;
+                position = SwerveModule::ModuleID::RIGHT_BACK;
             }
             else 
             {

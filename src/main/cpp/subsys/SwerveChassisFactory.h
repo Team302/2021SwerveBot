@@ -23,7 +23,7 @@
 
 // Team 302 includes
 #include <hw/usages/IDragonMotorControllerMap.h>
-#include <subsys/DragonSwerveModule.h>
+#include <subsys/SwerveModule.h>
 #include <subsys/SwerveChassis.h>
 
 
@@ -53,12 +53,12 @@ class SwerveChassisFactory
 		//=====================================================================================
 		/// Method:         CreateSwerveModule
 		/// Description:    Find or create the swerve module
-		/// Returns:        DragonSwerveModule *    pointer to the swerve module or nullptr if it 
+		/// Returns:        SwerveModule *    pointer to the swerve module or nullptr if it 
 		///                                         doesn't exist and cannot be created.
 		//=====================================================================================
-		std::shared_ptr<DragonSwerveModule> CreateSwerveModule
+		std::shared_ptr<SwerveModule> CreateSwerveModule
 		(
-            DragonSwerveModule::ModuleID                            type,
+            SwerveModule::ModuleID                            type,
 			const IDragonMotorControllerMap&        				motorControllers,   // <I> - Motor Controllers
 			std::shared_ptr<ctre::phoenix::sensors::CANCoder>		turnSensor,
 			units::degree_t											turnOffset,
@@ -73,10 +73,10 @@ class SwerveChassisFactory
 		//=====================================================================================
 		std::shared_ptr<SwerveChassis> CreateSwerveChassis
 		(
-            std::shared_ptr<DragonSwerveModule> 	frontleft, 
-            std::shared_ptr<DragonSwerveModule> 	frontright,
-            std::shared_ptr<DragonSwerveModule> 	backleft, 
-            std::shared_ptr<DragonSwerveModule> 	backright,
+            std::shared_ptr<SwerveModule> 	frontleft, 
+            std::shared_ptr<SwerveModule> 	frontright,
+            std::shared_ptr<SwerveModule> 	backleft, 
+            std::shared_ptr<SwerveModule> 	backright,
 			units::length::inch_t 					wheelBase,
 			units::length::inch_t 					track,
             units::velocity::meters_per_second_t 	maxSpeed,
@@ -85,10 +85,10 @@ class SwerveChassisFactory
 		);
 
         std::shared_ptr<SwerveChassis> GetSwerveChassis() { return m_chassis; }
-        std::shared_ptr<DragonSwerveModule>	GetLeftFrontSwerveModule() { return m_leftFront; }
-        std::shared_ptr<DragonSwerveModule> GetLeftBackSwerveModule() { return m_leftBack; }
-        std::shared_ptr<DragonSwerveModule>	GetRightFrontSwerveModule() { return m_rightFront; }
-        std::shared_ptr<DragonSwerveModule>	GetRightBackSwerveModule() { return m_rightBack; }
+        std::shared_ptr<SwerveModule>	GetLeftFrontSwerveModule() { return m_leftFront; }
+        std::shared_ptr<SwerveModule> GetLeftBackSwerveModule() { return m_leftBack; }
+        std::shared_ptr<SwerveModule>	GetRightFrontSwerveModule() { return m_rightFront; }
+        std::shared_ptr<SwerveModule>	GetRightBackSwerveModule() { return m_rightBack; }
 
 	private:
 		std::shared_ptr<IDragonMotorController> GetMotorController
@@ -104,10 +104,10 @@ class SwerveChassisFactory
 		static SwerveChassisFactory*	        m_swerveChassisFactory;
 
         std::shared_ptr<SwerveChassis>			m_chassis;
-        std::shared_ptr<DragonSwerveModule>	    m_leftFront;
-        std::shared_ptr<DragonSwerveModule>	    m_leftBack;
-        std::shared_ptr<DragonSwerveModule>	    m_rightFront;
-        std::shared_ptr<DragonSwerveModule>	    m_rightBack;
+        std::shared_ptr<SwerveModule>	    m_leftFront;
+        std::shared_ptr<SwerveModule>	    m_leftBack;
+        std::shared_ptr<SwerveModule>	    m_rightFront;
+        std::shared_ptr<SwerveModule>	    m_rightBack;
 
 
 

@@ -17,7 +17,7 @@
 #include <ctre/phoenix/sensors/CANCoder.h>
 
 
-class DragonSwerveModule 
+class SwerveModule 
 {
     public:
         enum ModuleID
@@ -28,7 +28,7 @@ class DragonSwerveModule
             RIGHT_BACK
         };
 
-        DragonSwerveModule( ModuleID type, 
+        SwerveModule( ModuleID type, 
                             std::shared_ptr<IDragonMotorController>                 driveMotor, 
                             std::shared_ptr<IDragonMotorController>                 turningMotor,
                             std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder, 

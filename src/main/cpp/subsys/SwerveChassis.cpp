@@ -35,19 +35,19 @@
 
 using namespace std;
 /// @brief Construct a swerve chassis
-/// @param [in] std::shared_ptr<DragonSwerveModule>     frontleft:          front left swerve module
-/// @param [in] std::shared_ptr<DragonSwerveModule>     frontright:         front right swerve module
-/// @param [in] std::shared_ptr<DragonSwerveModule>     backleft:           back left swerve module
-/// @param [in] std::shared_ptr<DragonSwerveModule>     backright:          back right swerve module
+/// @param [in] std::shared_ptr<SwerveModule>     frontleft:          front left swerve module
+/// @param [in] std::shared_ptr<SwerveModule>     frontright:         front right swerve module
+/// @param [in] std::shared_ptr<SwerveModule>     backleft:           back left swerve module
+/// @param [in] std::shared_ptr<SwerveModule>     backright:          back right swerve module
 /// @param [in] units::length::inch_t                   wheelBase:          distance between the front and rear wheels
 /// @param [in] units::length::inch_t                   track:              distance between the left and right wheels
 /// @param [in] units::velocity::meters_per_second_t    maxSpeed:           maximum linear speed of the chassis 
 /// @param [in] units::radians_per_second_t             maxAngularSpeed:    maximum rotation speed of the chassis 
 /// @param [in] double                                  maxAcceleration:    maximum acceleration in meters_per_second_squared
-SwerveChassis::SwerveChassis( shared_ptr<DragonSwerveModule>          frontleft, 
-                              shared_ptr<DragonSwerveModule>          frontright, 
-                              shared_ptr<DragonSwerveModule>          backleft, 
-                              shared_ptr<DragonSwerveModule>          backright, 
+SwerveChassis::SwerveChassis( shared_ptr<SwerveModule>          frontleft, 
+                              shared_ptr<SwerveModule>          frontright, 
+                              shared_ptr<SwerveModule>          backleft, 
+                              shared_ptr<SwerveModule>          backright, 
                               units::length::inch_t                   wheelBase,
                               units::length::inch_t                   track,
                               units::velocity::meters_per_second_t    maxSpeed,

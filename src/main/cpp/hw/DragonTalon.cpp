@@ -292,7 +292,7 @@ int DragonTalon::ConfigContinuousCurrentLimit
 	return error;
 }
 
-void DragonTalon::SetAsSlave
+void DragonTalon::SetAsFollowerMotor
 (
     int         masterCANID         // <I> - master motor
 )

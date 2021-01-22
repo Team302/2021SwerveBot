@@ -94,7 +94,7 @@ shared_ptr<IDragonMotorController> DragonMotorControllerFactory::CreateMotorCont
 
         if ( followMotor > -1 )
         {
-            talon->SetAsSlave( followMotor );
+            talon->SetAsFollowerMotor( followMotor );
         }
         controller.reset( talon );
     }
@@ -118,7 +118,7 @@ shared_ptr<IDragonMotorController> DragonMotorControllerFactory::CreateMotorCont
         
         if ( followMotor > -1 )
         {
-            talon->SetAsSlave( followMotor );
+            talon->SetAsFollowerMotor( followMotor );
         }
         controller.reset( talon );
     }

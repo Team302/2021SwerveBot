@@ -328,7 +328,7 @@ int DragonFalcon::ConfigContinuousCurrentLimit
 	return error;
 }
 
-void DragonFalcon::SetAsSlave
+void DragonFalcon::SetAsFollowerMotor
 (
     int         masterCANID         // <I> - master motor
 )

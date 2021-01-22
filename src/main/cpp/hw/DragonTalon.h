@@ -82,7 +82,7 @@ class DragonTalon : public IDragonMotorController
         int ConfigPeakCurrentDuration(int milliseconds, int timeoutMs); 
         int ConfigContinuousCurrentLimit(int amps, int timeoutMs); 
 
-        void SetAsSlave(int masterCANID); 
+        void SetAsFollowerMotor(int masterCANID); 
 
         void SetForwardLimitSwitch
         ( 

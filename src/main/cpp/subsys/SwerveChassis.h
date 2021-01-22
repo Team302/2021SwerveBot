@@ -27,25 +27,25 @@
 
 #include <hw/factories/PigeonFactory.h>
 #include <hw/DragonPigeon.h>
-#include <subsys/DragonSwerveModule.h>
+#include <subsys/SwerveModule.h>
 
 class SwerveChassis
 {
     public:
         /// @brief Construct a swerve chassis
-        /// @param [in] std::shared_ptr<DragonSwerveModule>     frontleft:          front left swerve module
-        /// @param [in] std::shared_ptr<DragonSwerveModule>     frontright:         front right swerve module
-        /// @param [in] std::shared_ptr<DragonSwerveModule>     backleft:           back left swerve module
-        /// @param [in] std::shared_ptr<DragonSwerveModule>     backright:          back right swerve module
+        /// @param [in] std::shared_ptr<SwerveModule>     frontleft:          front left swerve module
+        /// @param [in] std::shared_ptr<SwerveModule>     frontright:         front right swerve module
+        /// @param [in] std::shared_ptr<SwerveModule>     backleft:           back left swerve module
+        /// @param [in] std::shared_ptr<SwerveModule>     backright:          back right swerve module
         /// @param [in] units::length::inch_t                   wheelBase:          distance between the front and rear wheels
         /// @param [in] units::length::inch_t                   track:              distance between the left and right wheels
         /// @param [in] units::velocity::meters_per_second_t    maxSpeed:           maximum linear speed of the chassis 
         /// @param [in] units::radians_per_second_t             maxAngularSpeed:    maximum rotation speed of the chassis 
         /// @param [in] double                                  maxAcceleration:    maximum acceleration in meters_per_second_squared
-        SwerveChassis( std::shared_ptr<DragonSwerveModule>  frontleft, 
-                       std::shared_ptr<DragonSwerveModule>  frontright, 
-                       std::shared_ptr<DragonSwerveModule>  backleft, 
-                       std::shared_ptr<DragonSwerveModule>  backright, 
+        SwerveChassis( std::shared_ptr<SwerveModule>  frontleft, 
+                       std::shared_ptr<SwerveModule>  frontright, 
+                       std::shared_ptr<SwerveModule>  backleft, 
+                       std::shared_ptr<SwerveModule>  backright, 
                        units::length::inch_t                wheelBase,
                        units::length::inch_t                track,
                        units::velocity::meters_per_second_t maxSpeed,
@@ -78,10 +78,10 @@ class SwerveChassis
 
     private:
 
-        std::shared_ptr<DragonSwerveModule> m_frontLeft;
-        std::shared_ptr<DragonSwerveModule> m_frontRight;
-        std::shared_ptr<DragonSwerveModule> m_backLeft;
-        std::shared_ptr<DragonSwerveModule> m_backRight;
+        std::shared_ptr<SwerveModule> m_frontLeft;
+        std::shared_ptr<SwerveModule> m_frontRight;
+        std::shared_ptr<SwerveModule> m_backLeft;
+        std::shared_ptr<SwerveModule> m_backRight;
 
         units::length::inch_t                m_wheelBase;       
         units::length::inch_t                m_track;

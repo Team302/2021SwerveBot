@@ -1,5 +1,5 @@
 #include <memory>
-#include <subsys/DragonSwerveModule.h>
+#include <subsys/SwerveModule.h>
 #include <units/angle.h>
 #include <frc/geometry/Rotation2d.h>
 #include <frc/trajectory/TrapezoidProfile.h>
@@ -10,7 +10,7 @@ using namespace std;
 using namespace frc;
 using namespace ctre::phoenix::sensors;
 
-DragonSwerveModule::DragonSwerveModule
+SwerveModule::SwerveModule
 (
     ModuleID                                                type, 
     shared_ptr<IDragonMotorController>                      driveMotor, 
@@ -43,7 +43,7 @@ DragonSwerveModule::DragonSwerveModule
     m_turnPIDController.get()->EnableContinuousInput(-1.0*wpi::math::pi, wpi::math::pi);
 }
 
-void DragonSwerveModule::ZeroAlignModule()
+void SwerveModule::ZeroAlignModule()
 {
      SwerveModuleState state;
      state.angle = m_turnOffset;
@@ -53,14 +53,14 @@ void DragonSwerveModule::ZeroAlignModule()
 }
 
 
-SwerveModuleState DragonSwerveModule::GetState() const 
+SwerveModuleState SwerveModule::GetState() const 
 {
     return {units::meters_per_second_t{m_driveEncoder.GetRate()}, Rotation2d(units::radian_t(m_turnEncoder.Get()))};
 }
 
 
 
-void DragonSwerveModule::SetDesiredState
+void SwerveModule::SetDesiredState
 (
     const SwerveModuleState& referenceState
 )

@@ -110,7 +110,7 @@ class DragonFalcon : public IDragonMotorController
         (
             bool normallyOpen
         );
-        void SetAsSlave(int masterCANID); 
+        void SetAsFollowerMotor(int masterCANID); 
 
         void SetRemoteSensor
         (
