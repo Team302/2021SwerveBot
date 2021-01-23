@@ -106,14 +106,19 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a459f72005c272fc0e2932d13fa3160c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a459f72005c272fc0e2932d13fa3160c3">SwerveModule</a> (<a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">ModuleID</a> type, std::shared_ptr&lt; <a class="el" href="class_i_dragon_motor_controller.html">IDragonMotorController</a> &gt; driveMotor, std::shared_ptr&lt; <a class="el" href="class_i_dragon_motor_controller.html">IDragonMotorController</a> &gt; turningMotor, std::shared_ptr&lt; ctre::phoenix::sensors::CANCoder &gt; canCoder, units::degree_t turnOffset, units::length::inch_t wheelDiameter)</td></tr>
+<tr class="memdesc:a459f72005c272fc0e2932d13fa3160c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a Swerve Module. This is assuming 2 TalonFX (Falcons) with a CanCoder for the turn angle.  <a href="class_swerve_module.html#a459f72005c272fc0e2932d13fa3160c3">More...</a><br /></td></tr>
 <tr class="separator:a459f72005c272fc0e2932d13fa3160c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83b4f8530f6bcbbc262fd65df43add9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a83b4f8530f6bcbbc262fd65df43add9f">ZeroAlignModule</a> ()</td></tr>
+<tr class="memdesc:a83b4f8530f6bcbbc262fd65df43add9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn all of the wheel to zero degrees yaw according to the pigeon.  <a href="class_swerve_module.html#a83b4f8530f6bcbbc262fd65df43add9f">More...</a><br /></td></tr>
 <tr class="separator:a83b4f8530f6bcbbc262fd65df43add9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a573bd5c53def321adc412e020d5e673d"><td class="memItemLeft" align="right" valign="top">frc::SwerveModuleState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a573bd5c53def321adc412e020d5e673d">GetState</a> () const</td></tr>
+<tr class="memdesc:a573bd5c53def321adc412e020d5e673d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current state of the module (speed of the wheel and angle of the wheel)  <a href="class_swerve_module.html#a573bd5c53def321adc412e020d5e673d">More...</a><br /></td></tr>
 <tr class="separator:a573bd5c53def321adc412e020d5e673d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4872ebaaa09fb0b1727b574b3b96934a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a4872ebaaa09fb0b1727b574b3b96934a">SetDesiredState</a> (const frc::SwerveModuleState &amp;state)</td></tr>
+<tr class="memdesc:a4872ebaaa09fb0b1727b574b3b96934a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current state of the module (speed of the wheel and angle of the wheel)  <a href="class_swerve_module.html#a4872ebaaa09fb0b1727b574b3b96934a">More...</a><br /></td></tr>
 <tr class="separator:a4872ebaaa09fb0b1727b574b3b96934a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4aa933adb396e8913e8e26dfc1e5ea01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">ModuleID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a4aa933adb396e8913e8e26dfc1e5ea01">GetType</a> ()</td></tr>
+<tr class="memdesc:a4aa933adb396e8913e8e26dfc1e5ea01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return which module this is.  <a href="class_swerve_module.html#a4aa933adb396e8913e8e26dfc1e5ea01">More...</a><br /></td></tr>
 <tr class="separator:a4aa933adb396e8913e8e26dfc1e5ea01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff3fd7a6da70381d6d281cc4d154b7db"><td class="memItemLeft" align="right" valign="top">units::length::inch_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#aff3fd7a6da70381d6d281cc4d154b7db">GetWheelDiameter</a> () const</td></tr>
 <tr class="separator:aff3fd7a6da70381d6d281cc4d154b7db"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -194,6 +199,20 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Constructs a Swerve Module. This is assuming 2 TalonFX (Falcons) with a CanCoder for the turn angle. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ModuleID</td><td>type: Which Swerve Module is it </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">shared_ptr&lt;IDragonMotorController&gt;</td><td>driveMotor: Motor that makes the robot move <br  />
+ </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">shared_ptr&lt;IDragonMotorController&gt;</td><td>turnMotor: Motor that turns the swerve module </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">std::shared_ptr&lt;ctre::phoenix::sensors::CANCoder&gt;</td><td>canCoder: Sensor for detecting the angle of the wheel </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">units::degree_t</td><td>turnOffset: Initial angle used to zero the wheel to face forward </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">units::length::inch_t</td><td>wheelDiameter Diameter of the wheel </td></tr>
+  </table>
+  </dd>
+</dl>
 <pre class="fragment">auto driveCountsPerRev = driveMotor.get()-&gt;GetCountsPerRev();
 m_driveEncoder.SetDistancePerPulse(wpi::math::pi * m_wheelDiameter.to&lt;double&gt;() / driveCountsPerRev);
 m_drivePIDController = make_shared&lt;frc2::PIDController&gt;(1.0, 0.0, 0.0);
@@ -203,7 +222,7 @@ m_turnPIDController = make_shared&lt;frc2::PIDController&gt;(1.0, 0.0, 0.0);
 m_turnEncoder.SetDistancePerPulse(2 * wpi::math::pi /turnCountsPerRev);
 </pre><p>m_turnPIDController.get()-&gt;EnableContinuousInput(-1.0*units::angle::radian_t(wpi::math::pi), units::angle::radian_t(wpi::math::pi)); m_turnPIDController.get()-&gt;EnableContinuousInput(-1.0*wpi::math::pi, wpi::math::pi);</p>
 
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00044">44</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00052">52</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -223,7 +242,10 @@ m_turnEncoder.SetDistancePerPulse(2 * wpi::math::pi /turnCountsPerRev);
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00130">130</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
+<p>Get the current state of the module (speed of the wheel and angle of the wheel) </p>
+<dl class="section return"><dt>Returns</dt><dd>SwerveModuleState </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00142">142</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -250,7 +272,10 @@ m_turnEncoder.SetDistancePerPulse(2 * wpi::math::pi /turnCountsPerRev);
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8h_source.html#l00043">43</a> of file <a class="el" href="_swerve_module_8h_source.html">SwerveModule.h</a>.</p>
+<p>Return which module this is. </p>
+<dl class="section return"><dt>Returns</dt><dd>ModuleID </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8h_source.html#l00061">61</a> of file <a class="el" href="_swerve_module_8h_source.html">SwerveModule.h</a>.</p>
 
 </div>
 </div>
@@ -277,7 +302,7 @@ m_turnEncoder.SetDistancePerPulse(2 * wpi::math::pi /turnCountsPerRev);
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8h_source.html#l00044">44</a> of file <a class="el" href="_swerve_module_8h_source.html">SwerveModule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8h_source.html#l00062">62</a> of file <a class="el" href="_swerve_module_8h_source.html">SwerveModule.h</a>.</p>
 
 </div>
 </div>
@@ -296,12 +321,21 @@ m_turnEncoder.SetDistancePerPulse(2 * wpi::math::pi /turnCountsPerRev);
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the current state of the module (speed of the wheel and angle of the wheel) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">const</td><td>SwerveModuleState&amp; referenceState: state to set the module to </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 <p>const auto driveOutput = m_drivePIDController.get()-&gt;Calculate(m_driveEncoder.GetRate(), referenceState.speed.to&lt;double&gt;()); const auto driveFeedforward = m_driveFeedforward.Calculate(state.speed);</p>
 <p>const auto turnOutput = m_drivePIDController.get()-&gt;Calculate(m_turnEncoder.GetRate(), referenceState.speed.to&lt;double&gt;()); const auto turnFeedforward = m_driveFeedforward.Calculate(state.speed);</p>
 <p>auto drive = dynamic_cast&lt;DragonFalcon*&gt;(m_driveMotor.get()); auto turn = dynamic_cast&lt;DragonFalcon*&gt;(m_turnMotor.get());</p>
 <p>drive -&gt; SetVoltage(units::volt_t{driveOutput} + driveFeedforward); turn -&gt; SetVoltage(units::volt_t{turnOutput} + turnFeedforward);</p>
 
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00137">137</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00161">161</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -320,7 +354,10 @@ m_turnEncoder.SetDistancePerPulse(2 * wpi::math::pi /turnCountsPerRev);
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00120">120</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
+<p>Turn all of the wheel to zero degrees yaw according to the pigeon. </p>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00130">130</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
 
 </div>
 </div>

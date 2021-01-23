@@ -40,7 +40,15 @@ using namespace std;
 using namespace frc;
 using namespace ctre::phoenix::motorcontrol::can;
 using namespace ctre::phoenix::sensors;
+using namespace wpi::math;
 
+/// @brief Constructs a Swerve Module.  This is assuming 2 TalonFX (Falcons) with a CanCoder for the turn angle
+/// @param [in] ModuleID                                                type:           Which Swerve Module is it
+/// @param [in] shared_ptr<IDragonMotorController>                      driveMotor:     Motor that makes the robot move  
+/// @param [in] shared_ptr<IDragonMotorController>                      turnMotor:      Motor that turns the swerve module 
+/// @param [in] std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder:       Sensor for detecting the angle of the wheel
+/// @param [in] units::degree_t                                         turnOffset:     Initial angle used to zero the wheel to face forward
+/// @param [in] units::length::inch_t                                   wheelDiameter   Diameter of the wheel
 SwerveModule::SwerveModule
 (
     ModuleID                                                type, 
@@ -86,7 +94,7 @@ SwerveModule::SwerveModule
     fx->ConfigRemoteFeedbackFilter(m_turnSensor.get()->GetDeviceNumber(), ctre::phoenix::motorcontrol::RemoteSensorSource::RemoteSensorSource_CANCoder, 0, 10 );
     fx->ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::RemoteFeedbackDevice::RemoteSensor0, 0, 10 );
     auto maxAng = chassis->GetMaxAngularSpeed();
-    auto turnCTL  = make_unique<ControlData>( ControlModes::CONTROL_TYPE::TRAPEZOID,
+    auto turnCTL  = make_unique<ControlData>( ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE,
                                               ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
                                               string("TrunProfile"),
                                               0.1,
@@ -117,6 +125,8 @@ SwerveModule::SwerveModule
     **/
 }
 
+/// @brief Turn all of the wheel to zero degrees yaw according to the pigeon
+/// @returns void
 void SwerveModule::ZeroAlignModule()
 {
      SwerveModuleState state;
@@ -127,13 +137,27 @@ void SwerveModule::ZeroAlignModule()
 }
 
 
+/// @brief Get the current state of the module (speed of the wheel and angle of the wheel)
+/// @returns SwerveModuleState
 SwerveModuleState SwerveModule::GetState() const 
 {
-    return {units::meters_per_second_t{m_driveEncoder.GetRate()}, Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()))};
+    // Get the Current Chassis Velocity
+    auto chassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
+    units::velocity::meters_per_second_t mps = units::length::meter_t(GetWheelDiameter() * pi ) / units::angle::radian_t(1.0) * units::angular_velocity::radians_per_second_t(m_driveMotor->GetRPS()*2.0*pi);
+
+    // Get the Current Chassis Rotation
+    // TODO:  need to check to see whether we need to add the offset into the turn values
+    Rotation2d angle {units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition())};
+
+    // Create the state and return it
+    SwerveModuleState state{mps,angle};
+    return state;
 }
 
 
-
+/// @brief Set the current state of the module (speed of the wheel and angle of the wheel)
+/// @param [in] const SwerveModuleState& referenceState:   state to set the module to
+/// @returns void
 void SwerveModule::SetDesiredState
 (
     const SwerveModuleState& referenceState
@@ -143,10 +167,16 @@ void SwerveModule::SetDesiredState
     // If the desired angle is less than 90 degrees from the target angle (e.g., -90 to 90 is the amount of turn), just use the angle and speed values
     // if it is more than 90 degrees (90 to 270), the can turn the opposite direction -- increase the angle by 180 degrees -- and negate the wheel speed
     // finally, get the value between -90 and 90
+    // TODO:  need to check to see whether we need to add the offset into the turn values
     const auto state = SwerveModuleState::Optimize(referenceState, units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
-    auto driveTarget = state.speed.to<double>();
-    auto turnTarget = state.angle.Radians().to<double>();  // TODO:  need to set in terms of CTRE units
 
+    // Set Drive Target
+    auto driveTarget = state.speed.to<double>();
+
+    // Set Turn Target
+    auto turnTarget = state.angle.Degrees().to<double>();  
+
+    // Run the motors
     m_driveMotor.get()->Set(driveTarget);
     m_turnMotor.get()->Set(turnTarget);
 

@@ -16,9 +16,10 @@ var searchData=
   ['arcade_5fdrive_5fthrottle_13',['ARCADE_DRIVE_THROTTLE',['../class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15a9917aed04a2cb8d60c6f1afca9dff6b5',1,'TeleopControl']]],
   ['attarget_14',['AtTarget',['../class_swerve_drive.html#ae9a616d967f2010edf87a0a368a7e4b3',1,'SwerveDrive::AtTarget()'],['../class_intake_state.html#afcb60e8f69e3b42e7ee2417f010c445c',1,'IntakeState::AtTarget()'],['../class_i_state.html#a15624686c47f28cf90f76bb28e938937',1,'IState::AtTarget()'],['../class_mech1_motor_state.html#a2afad3f2ca75fc545da82d843fbfcefc',1,'Mech1MotorState::AtTarget()'],['../class_mech2_motor_state.html#a6cda4b518f7af0761cf119fbe3b4459d',1,'Mech2MotorState::AtTarget()'],['../class_limelight_aim.html#accee6775e1b1f3702ab5d9ba64bcafbf',1,'LimelightAim::AtTarget()'],['../class_manual_aim.html#acdc15b4f410ef0f64776d6cabc1604ce',1,'ManualAim::AtTarget()'],['../class_shooter_save_state.html#abb8e2f927b0b0acedcc1af6367e5ef40',1,'ShooterSaveState::AtTarget()']]],
   ['auto_5faim_15',['AUTO_AIM',['../class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4af7b56d9746ada4045682e10f28673676',1,'BallManipulator']]],
-  ['autonomousinit_16',['AutonomousInit',['../class_robot.html#a2136cfc015936285218c8a8db984d6bc',1,'Robot']]],
-  ['autonomousperiodic_17',['AutonomousPeriodic',['../class_robot.html#ac11143dd674e0e02fef5329e2df24830',1,'Robot']]],
-  ['axis_5fdeadband_18',['AXIS_DEADBAND',['../class_i_dragon_game_pad.html#afde07811ccdd7565bc40c381adecee4d',1,'IDragonGamePad']]],
-  ['axis_5fidentifier_19',['AXIS_IDENTIFIER',['../class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972b',1,'IDragonGamePad']]],
-  ['axis_5fprofile_20',['AXIS_PROFILE',['../class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676',1,'IDragonGamePad']]]
+  ['auto_5fshoot_16',['AUTO_SHOOT',['../_primitive_enums_8h.html#a35fa04dbcd6e8ebd76550c9b14ade0dcab125963850fa5d66063b8dff563f62a0',1,'PrimitiveEnums.h']]],
+  ['autonomousinit_17',['AutonomousInit',['../class_robot.html#a2136cfc015936285218c8a8db984d6bc',1,'Robot']]],
+  ['autonomousperiodic_18',['AutonomousPeriodic',['../class_robot.html#ac11143dd674e0e02fef5329e2df24830',1,'Robot']]],
+  ['axis_5fdeadband_19',['AXIS_DEADBAND',['../class_i_dragon_game_pad.html#afde07811ccdd7565bc40c381adecee4d',1,'IDragonGamePad']]],
+  ['axis_5fidentifier_20',['AXIS_IDENTIFIER',['../class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972b',1,'IDragonGamePad']]],
+  ['axis_5fprofile_21',['AXIS_PROFILE',['../class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676',1,'IDragonGamePad']]]
 ];

@@ -71,6 +71,7 @@ var hierarchy =
       [ "Mech1Servo", "class_mech1_servo.html", null ]
     ] ],
     [ "IntakeStateMgr", "class_intake_state_mgr.html", null ],
+    [ "IPrimitive", "class_i_primitive.html", null ],
     [ "IProfile", "class_i_profile.html", [
       [ "CubedProfile", "class_cubed_profile.html", null ],
       [ "LinearProfile", "class_linear_profile.html", null ],
@@ -107,6 +108,7 @@ var hierarchy =
     [ "PDPDefn", "class_p_d_p_defn.html", null ],
     [ "PigeonDefn", "class_pigeon_defn.html", null ],
     [ "PigeonFactory", "class_pigeon_factory.html", null ],
+    [ "PrimitiveParams", "class_primitive_params.html", null ],
     [ "RobotDefn", "class_robot_defn.html", null ],
     [ "ScaledAxis", "class_scaled_axis.html", [
       [ "FlippedAxis", "class_flipped_axis.html", null ]

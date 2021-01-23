@@ -9,6 +9,7 @@ var class_control_modes =
       [ "PERCENT_OUTPUT", "class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736afde847a5129bd0258b65c4fafeca8b78", null ],
       [ "POSITION_INCH", "class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a555fe06aa1988792fc521be3bbfadc5d", null ],
       [ "POSITION_DEGREES", "class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a09ec699b550b9080106ed296ed8dc55d", null ],
+      [ "POSITION_DEGREES_ABSOLUTE", "class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736aced734f880586e157ece3a7819fa56cb", null ],
       [ "VELOCITY_INCH", "class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a0e742a9c9bc5bf2e5c35baf3c8b1e815", null ],
       [ "VELOCITY_DEGREES", "class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a0a4f52b48448a86178597e491191a181", null ],
       [ "VELOCITY_RPS", "class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a8adae67c668917142711f50ef33db0ed", null ],

@@ -28,6 +28,13 @@ class SwerveModule
             RIGHT_BACK
         };
 
+        /// @brief Constructs a Swerve Module.  This is assuming 2 TalonFX (Falcons) with a CanCoder for the turn angle
+        /// @param [in] ModuleID                                                type:           Which Swerve Module is it
+        /// @param [in] shared_ptr<IDragonMotorController>                      driveMotor:     Motor that makes the robot move  
+        /// @param [in] shared_ptr<IDragonMotorController>                      turnMotor:      Motor that turns the swerve module 
+        /// @param [in] std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder:       Sensor for detecting the angle of the wheel
+        /// @param [in] units::degree_t                                         turnOffset:     Initial angle used to zero the wheel to face forward
+        /// @param [in] units::length::inch_t                                   wheelDiameter   Diameter of the wheel
         SwerveModule( ModuleID type, 
                             std::shared_ptr<IDragonMotorController>                 driveMotor, 
                             std::shared_ptr<IDragonMotorController>                 turningMotor,
@@ -36,10 +43,21 @@ class SwerveModule
                             units::length::inch_t                                   wheelDiameter
                           );
 
+        /// @brief Turn all of the wheel to zero degrees yaw according to the pigeon
+        /// @returns void
         void ZeroAlignModule();
+
+        /// @brief Get the current state of the module (speed of the wheel and angle of the wheel)
+        /// @returns SwerveModuleState
         frc::SwerveModuleState GetState() const;
+
+        /// @brief Set the current state of the module (speed of the wheel and angle of the wheel)
+        /// @param [in] const SwerveModuleState& referenceState:   state to set the module to
+        /// @returns void
         void SetDesiredState(const frc::SwerveModuleState& state);
 
+        /// @brief Return which module this is
+        /// @returns ModuleID
         ModuleID GetType() {return m_type; }
         units::length::inch_t GetWheelDiameter() const {return m_wheelDiameter;}
 

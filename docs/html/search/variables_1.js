@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['m_5fdeadband_5fvalue_1531',['M_DEADBAND_VALUE',['../class_i_deadband.html#a45b3ece586ef6217fe85721c3265056a',1,'IDeadband']]]
+  ['loop_5flength_1586',['LOOP_LENGTH',['../class_i_primitive.html#a88768b84214b844cb3c347c061bbadea',1,'IPrimitive']]]
 ];

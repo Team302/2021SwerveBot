@@ -45,7 +45,9 @@ var NAVTREE =
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
-        [ "Typedefs", "globals_type.html", null ]
+        [ "Typedefs", "globals_type.html", null ],
+        [ "Enumerations", "globals_enum.html", null ],
+        [ "Enumerator", "globals_eval.html", null ]
       ] ]
     ] ]
   ] ]
@@ -54,11 +56,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_analog_axis_8cpp.html",
-"_mechanism_target_defn_8cpp.html",
-"class_control_data_defn.html#a4fd8477eeee936e2d3e8294c90e8e17d",
-"class_i_button.html#a393bd71900c7cb4df69e371bcc7ca123",
-"class_mech.html#a920a923776b0a1b827e5ad689bc6ecf8",
-"class_swerve_chassis_factory.html#abb6bbfe2472f62d9b208c5b32647acf4"
+"_mechanism_target_data_8h.html",
+"class_can_coder_defn.html",
+"class_dragon_x_box.html#ad921a60514fd12babc7f7b699bdc1ef4",
+"class_linear_profile.html",
+"class_shooter_state.html#a083ce3135c990443a3319af663c83caf",
+"functions_func_t.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

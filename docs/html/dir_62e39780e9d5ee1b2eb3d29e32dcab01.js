@@ -1,5 +1,6 @@
 var dir_62e39780e9d5ee1b2eb3d29e32dcab01 =
 [
+    [ "auton", "dir_3a0cb2a33dadc2d9a9aca573ea9319fa.html", "dir_3a0cb2a33dadc2d9a9aca573ea9319fa" ],
     [ "controllers", "dir_f9efbb274af3acce537f9b4eef1b7166.html", "dir_f9efbb274af3acce537f9b4eef1b7166" ],
     [ "gamepad", "dir_38de4f3031ddefd59e70b43c2ccb87ab.html", "dir_38de4f3031ddefd59e70b43c2ccb87ab" ],
     [ "hw", "dir_6ebbf13149fb5ffa8d20b77e90f2a159.html", "dir_6ebbf13149fb5ffa8d20b77e90f2a159" ],

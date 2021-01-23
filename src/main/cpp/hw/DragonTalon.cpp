@@ -85,8 +85,13 @@ void DragonTalon::Set(double value)
         case ControlModes::CONTROL_TYPE::POSITION_DEGREES:
 			ctreMode = ctre::phoenix::motorcontrol::ControlMode::Position;
 			output = (ConversionUtils::DegreesToCounts(value,m_countsPerRev) / m_gearRatio);
-			frc::SmartDashboard::PutNumber("Target counts", output);
 			break;
+
+		case ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE:
+			ctreMode = ctre::phoenix::motorcontrol::ControlMode::MotionMagic;
+			output = value;
+			break;
+
         case ControlModes::CONTROL_TYPE::POSITION_INCH:
             ctreMode = ctre::phoenix::motorcontrol::ControlMode::Position;
 			output = (ConversionUtils::ConversionUtils::InchesToCounts(value, m_countsPerRev, m_diameter) / m_gearRatio);
@@ -105,7 +110,6 @@ void DragonTalon::Set(double value)
 		case ControlModes::CONTROL_TYPE::VELOCITY_RPS:
             ctreMode = ctre::phoenix::motorcontrol::ControlMode::Velocity;
 			output = (ConversionUtils::RPSToCounts100ms( value, m_countsPerRev ) / m_gearRatio);
-			frc::SmartDashboard::PutNumber("output val", output);
         	break;
 
 		case ControlModes::CONTROL_TYPE::CURRENT:
@@ -327,6 +331,17 @@ void DragonTalon::SetControlConstants(ControlData* controlInfo)
 			m_talon.get()->Config_kI(0, controlInfo->GetI());
 			m_talon.get()->Config_kD(0, controlInfo->GetD());
 			m_talon.get()->Config_kF(0, controlInfo->GetF());
+		}
+		break;
+
+		case ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE:
+		{
+			m_talon.get()->Config_kP(0, controlInfo->GetP());
+			m_talon.get()->Config_kI(0, controlInfo->GetI());
+			m_talon.get()->Config_kD(0, controlInfo->GetD());
+			m_talon.get()->Config_kF(0, controlInfo->GetF());
+			m_talon.get()->ConfigMotionAcceleration( controlInfo->GetMaxAcceleration() );
+			m_talon.get()->ConfigMotionCruiseVelocity( controlInfo->GetCruiseVelocity(), 0);
 		}
 		break;
 
