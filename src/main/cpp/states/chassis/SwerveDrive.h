@@ -22,7 +22,6 @@
 #include <subsys/SwerveChassis.h>
 #include <gamepad/TeleopControl.h>
 #include <states/IState.h>
-#include <subsys/SwerveChassis.h>
 
 class SwerveDrive : public IState
 {
