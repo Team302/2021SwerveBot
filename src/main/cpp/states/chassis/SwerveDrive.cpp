@@ -15,6 +15,8 @@
 
 //C++ Inlcudes
 #include <memory>
+#include <units/velocity.h>
+#include <units/angular_velocity.h>
 
 //Team 302 Includes
 #include <states/chassis/SwerveDrive.h>
@@ -23,6 +25,7 @@
 #include <states/IState.h>
 #include <subsys/SwerveChassisFactory.h>
 #include <utils/Logger.h>
+
 
 using namespace std;
 
@@ -62,22 +65,14 @@ void SwerveDrive::Init()
 void SwerveDrive::Run( )
 {
     //Get drive, steer, and rotate values
-    auto drive = GetDrive();
-    auto steer = GetSteer();
-    auto rotate = GetRotate();
+    units::velocity::meters_per_second_t maxSpeed = m_chassis.get()->GetMaxSpeed();
+    units::velocity::meters_per_second_t driveSpeed = maxSpeed * GetDrive();
+    units::velocity::meters_per_second_t turnSpeed = maxSpeed * GetSteer();
 
-    auto maxSpeed = m_chassis.get()->GetMaxSpeed();
-    auto driveSpeed = maxSpeed * drive;
-    auto turnSpeed = maxSpeed * steer;
+    units::radians_per_second_t maxRotateSpeed = m_chassis.get()->GetMaxAngularSpeed();
+    units::radians_per_second_t rotateSpeed = maxRotateSpeed * GetRotate(); 
 
-    auto maxRotateSpeed = m_chassis.get()->GetMaxAngularSpeed();
-    auto rotateSpeed = maxRotateSpeed * rotate;
-    
-
-
-    //Need to change how this line is done
     m_chassis.get()->Drive(driveSpeed, turnSpeed, rotateSpeed, true);
-
 }
 
 /// @brief indicates that we are not at our target
