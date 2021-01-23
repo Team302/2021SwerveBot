@@ -1,4 +1,5 @@
 #pragma once
+#include <frc/geometry/Pose2d.h>
 
 class PrimitiveParams;
 class driveForward
@@ -6,7 +7,7 @@ class driveForward
     public:
         bool IsDone();
         void Init(PrimitiveParams* params);
-        void run();
+        void Run();
         driveForward();
         virtual ~driveForward() = default;
 
@@ -16,6 +17,7 @@ class driveForward
     private:
         void CalculateSlowDownDistance();
         PrimitiveParams* m_params;
+        Pose2d* m_pose;
 
         float m_targetDistance;
         float m_initialDistance;
@@ -33,4 +35,4 @@ class driveForward
         const int UNDER_SPEED_COUNT_THRESHOLD = 4;
         const double DECEL_TIME_MULTIPLIER = 0.85; //0.75
 
-}
+};
