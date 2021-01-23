@@ -15,7 +15,7 @@
 
 //C++ Inlcudes
 #include <memory>
-#include <units/acceleration.h>
+#include <units/velocity.h>
 #include <units/angular_velocity.h>
 
 //Team 302 Includes
@@ -65,22 +65,14 @@ void SwerveDrive::Init()
 void SwerveDrive::Run( )
 {
     //Get drive, steer, and rotate values
-    units::velocity::meters_per_second_t drive = units::velocity::meters_per_second_t(GetDrive());
-    units::velocity::meters_per_second_t steer = units::velocity::meters_per_second_t(GetSteer());
-    units::velocity::meters_per_second_t rotate = units::angular_velocity::radians_per_second_t(GetRotate());
+    units::velocity::meters_per_second_t maxSpeed = m_chassis.get()->GetMaxSpeed();
+    units::velocity::meters_per_second_t driveSpeed = maxSpeed * GetDrive();
+    units::velocity::meters_per_second_t turnSpeed = maxSpeed * GetSteer();
 
-    auto maxSpeed = m_chassis.get()->GetMaxSpeed();
-    auto driveSpeed = maxSpeed * drive;
-    auto turnSpeed = maxSpeed * steer;
+    units::radians_per_second_t maxRotateSpeed = m_chassis.get()->GetMaxAngularSpeed();
+    units::radians_per_second_t rotateSpeed = maxRotateSpeed * GetRotate(); 
 
-    auto maxRotateSpeed = m_chassis.get()->GetMaxAngularSpeed();
-    auto rotateSpeed = maxRotateSpeed * rotate;
-    
-
-
-    //Need to change how this line is done
     m_chassis.get()->Drive(driveSpeed, turnSpeed, rotateSpeed, true);
-
 }
 
 /// @brief indicates that we are not at our target
