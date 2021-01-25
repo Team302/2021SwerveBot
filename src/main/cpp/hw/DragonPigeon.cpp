@@ -19,6 +19,8 @@ DragonPigeon::DragonPigeon
 )
 {
     m_pigeon = make_unique<PigeonIMU>( canID );
+    m_pigeon.get()->ConfigFactoryDefault();
+
     m_initialRoll  = GetRawRoll( );
     m_initialPitch = GetRawPitch( );
     m_initialYaw   = GetRawYaw( );

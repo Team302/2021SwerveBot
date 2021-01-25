@@ -44,7 +44,11 @@ void Robot::RobotInit()
     unique_ptr<RobotDefn>  robotXml = make_unique<RobotDefn>();
     robotXml->ParseXML();
 
-
+    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
+    if ( swerveChassis.get() != nullptr )
+    {
+        swerveChassis.get()->ZeroAlignSwerveModules();
+    }
 
 }
 
@@ -67,6 +71,7 @@ void Robot::RobotPeriodic()
 /// @return void
 void Robot::AutonomousInit() 
 {
+
 }
 
 
