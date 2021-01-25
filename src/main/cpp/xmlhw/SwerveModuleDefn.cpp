@@ -65,7 +65,6 @@ std::shared_ptr<SwerveModule> SwerveModuleDefn::ParseXML
 
     // initialize the attributes to the default values
     SwerveModule::ModuleID position = SwerveModule::ModuleID::LEFT_FRONT;
-    units::angle::degree_t turnOffset(0.0);
     units::length::inch_t wheelDiameter(0.0);
 
     // process attributes
@@ -98,10 +97,6 @@ std::shared_ptr<SwerveModule> SwerveModuleDefn::ParseXML
                 Logger::GetLogger()->LogError( string("SwerveChassisDefn::ParseXML"), msg );
                 hasError = true;
             }
-        }
-        else if ( attrName.compare("turnoffset") == 0 )
-        {
-            turnOffset = units::degree_t(attr.as_double());
         }
         else if (  attrName.compare("wheelDiameter") == 0 )
         {
@@ -152,7 +147,7 @@ std::shared_ptr<SwerveModule> SwerveModuleDefn::ParseXML
     // create chassis instance
     if ( !hasError )
     {
-        module = SwerveChassisFactory::GetSwerveChassisFactory()->CreateSwerveModule(position, motors, turnsensor, turnOffset, wheelDiameter );
+        module = SwerveChassisFactory::GetSwerveChassisFactory()->CreateSwerveModule(position, motors, turnsensor, wheelDiameter );
     }
     return module;
 }

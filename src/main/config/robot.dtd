@@ -81,7 +81,6 @@
 <!ELEMENT swervemodule (motor*, cancoder? ) >
 <!ATTLIST swervemodule 
           type              ( LEFT_FRONT | RIGHT_FRONT | LEFT_BACK | RIGHT_BACK ) "LEFT_FRONT"
-          turnoffset CDATA "0.0"
           wheelDiameter     CDATA #REQUIRED
 >
 

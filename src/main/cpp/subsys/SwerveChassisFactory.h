@@ -61,7 +61,6 @@ class SwerveChassisFactory
             SwerveModule::ModuleID                            type,
 			const IDragonMotorControllerMap&        				motorControllers,   // <I> - Motor Controllers
 			std::shared_ptr<ctre::phoenix::sensors::CANCoder>		turnSensor,
-			units::degree_t											turnOffset,
 			units::length::inch_t 									wheelDiameter
 		);
 

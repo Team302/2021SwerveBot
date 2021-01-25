@@ -47,7 +47,6 @@ using namespace wpi::math;
 /// @param [in] shared_ptr<IDragonMotorController>                      driveMotor:     Motor that makes the robot move  
 /// @param [in] shared_ptr<IDragonMotorController>                      turnMotor:      Motor that turns the swerve module 
 /// @param [in] std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder:       Sensor for detecting the angle of the wheel
-/// @param [in] units::degree_t                                         turnOffset:     Initial angle used to zero the wheel to face forward
 /// @param [in] units::length::inch_t                                   wheelDiameter   Diameter of the wheel
 SwerveModule::SwerveModule
 (
@@ -55,13 +54,11 @@ SwerveModule::SwerveModule
     shared_ptr<IDragonMotorController>                      driveMotor, 
     shared_ptr<IDragonMotorController>                      turnMotor, 
     std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder,
-    units::degree_t                                         turnOffset,
     units::length::inch_t                                   wheelDiameter
 ) : m_type(type), 
     m_driveMotor(driveMotor), 
     m_turnMotor(turnMotor), 
     m_turnSensor(canCoder), 
-    m_turnOffset(turnOffset),
     m_wheelDiameter(wheelDiameter),
     m_driveFeedforward(1_V, 3_V / 1_mps),
     m_turnFeedforward(1_V, 0.5_V / 1_rad_per_s)
@@ -125,12 +122,13 @@ SwerveModule::SwerveModule
     **/
 }
 
+
 /// @brief Turn all of the wheel to zero degrees yaw according to the pigeon
 /// @returns void
 void SwerveModule::ZeroAlignModule()
 {
      SwerveModuleState state;
-     state.angle = m_turnOffset;
+     state.angle = Rotation2d(units::angle::degree_t(0.0));
      state.speed = 0.0_mps; 
 
      SetDesiredState( state );
@@ -146,7 +144,6 @@ SwerveModuleState SwerveModule::GetState() const
     units::velocity::meters_per_second_t mps = units::length::meter_t(GetWheelDiameter() * pi ) / units::angle::radian_t(1.0) * units::angular_velocity::radians_per_second_t(m_driveMotor->GetRPS()*2.0*pi);
 
     // Get the Current Chassis Rotation
-    // TODO:  need to check to see whether we need to add the offset into the turn values
     Rotation2d angle {units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition())};
 
     // Create the state and return it
@@ -167,7 +164,6 @@ void SwerveModule::SetDesiredState
     // If the desired angle is less than 90 degrees from the target angle (e.g., -90 to 90 is the amount of turn), just use the angle and speed values
     // if it is more than 90 degrees (90 to 270), the can turn the opposite direction -- increase the angle by 180 degrees -- and negate the wheel speed
     // finally, get the value between -90 and 90
-    // TODO:  need to check to see whether we need to add the offset into the turn values
     const auto state = SwerveModuleState::Optimize(referenceState, units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
 
     // Set Drive Target

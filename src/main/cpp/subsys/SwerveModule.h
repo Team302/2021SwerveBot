@@ -33,15 +33,13 @@ class SwerveModule
         /// @param [in] shared_ptr<IDragonMotorController>                      driveMotor:     Motor that makes the robot move  
         /// @param [in] shared_ptr<IDragonMotorController>                      turnMotor:      Motor that turns the swerve module 
         /// @param [in] std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder:       Sensor for detecting the angle of the wheel
-        /// @param [in] units::degree_t                                         turnOffset:     Initial angle used to zero the wheel to face forward
         /// @param [in] units::length::inch_t                                   wheelDiameter   Diameter of the wheel
-        SwerveModule( ModuleID type, 
-                            std::shared_ptr<IDragonMotorController>                 driveMotor, 
-                            std::shared_ptr<IDragonMotorController>                 turningMotor,
-                            std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder, 
-                            units::degree_t                                         turnOffset,
-                            units::length::inch_t                                   wheelDiameter
-                          );
+        SwerveModule( ModuleID                                                  type, 
+                      std::shared_ptr<IDragonMotorController>                   driveMotor, 
+                      std::shared_ptr<IDragonMotorController>                   turningMotor,
+                      std::shared_ptr<ctre::phoenix::sensors::CANCoder>		    canCoder, 
+                      units::length::inch_t                                     wheelDiameter
+                    );
 
         /// @brief Turn all of the wheel to zero degrees yaw according to the pigeon
         /// @returns void
@@ -70,7 +68,6 @@ class SwerveModule
         std::shared_ptr<IDragonMotorController>             m_driveMotor;
         std::shared_ptr<IDragonMotorController>             m_turnMotor;
         std::shared_ptr<ctre::phoenix::sensors::CANCoder>   m_turnSensor;
-        units::degree_t                                     m_turnOffset;
         units::length::inch_t                               m_wheelDiameter;
 
         //TODO #2 Encoder from falcons

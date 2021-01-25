@@ -29,11 +29,13 @@
 #pragma once
 
 // c++ includes
+#include <memory>
 
 // wpilib includes
 #include <frc/TimedRobot.h>
 
 // team 302 includes
+#include <states/chassis/SwerveDrive.h>
 
 
 // third party includes
@@ -58,6 +60,7 @@ class Robot : public frc::TimedRobot
 
   private:
  
+    std::shared_ptr<SwerveDrive> m_drive;
 
 
 };

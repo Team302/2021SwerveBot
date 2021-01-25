@@ -22,6 +22,9 @@
 
 // Team 302 Includes
 #include <Robot.h>
+#include <states/chassis/SwerveDrive.h>
+#include <subsys/SwerveChassisFactory.h>
+#include <subsys/SwerveChassis.h>
 #include <xmlhw/RobotDefn.h>
 
 
@@ -42,6 +45,7 @@ void Robot::RobotInit()
     robotXml->ParseXML();
 
 
+
 }
 
 /// @brief This function is called every robot packet, no matter the  mode. This is used for items like diagnostics that run 
@@ -50,6 +54,11 @@ void Robot::RobotInit()
 /// @return void
 void Robot::RobotPeriodic() 
 {
+    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
+    if ( swerveChassis.get() != nullptr )
+    {
+        swerveChassis.get()->UpdateOdometry();
+    }
 
 }
 
@@ -73,6 +82,8 @@ void Robot::AutonomousPeriodic()
 /// @return void
 void Robot::TeleopInit() 
 {
+    m_drive = make_shared<SwerveDrive>();
+    m_drive.get()->Init();
 }
 
 
@@ -80,7 +91,7 @@ void Robot::TeleopInit()
 /// @return void
 void Robot::TeleopPeriodic() 
 {
-    
+    m_drive.get()->Run();
 }
 
 

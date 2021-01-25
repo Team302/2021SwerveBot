@@ -56,7 +56,6 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
     SwerveModule::ModuleID                            type, 
     const IDragonMotorControllerMap&        				motorControllers,   // <I> - Motor Controllers
     std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder,
-    units::degree_t                                         turnOffset,
     units::length::inch_t                                   wheelDiameter
 )
 {
@@ -69,7 +68,7 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
         case SwerveModule::ModuleID::LEFT_FRONT:
             if ( m_leftFront.get() == nullptr )
             {
-                m_leftFront = make_shared<SwerveModule>(type, driveMotor, turnMotor, canCoder, turnOffset, wheelDiameter );
+                m_leftFront = make_shared<SwerveModule>(type, driveMotor, turnMotor, canCoder, wheelDiameter );
             }
             swerve = m_leftFront;
             break;
@@ -77,7 +76,7 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
         case SwerveModule::ModuleID::LEFT_BACK:
             if ( m_leftBack.get() == nullptr )
             {
-                m_leftBack = make_shared<SwerveModule>(type, driveMotor, turnMotor, canCoder, turnOffset, wheelDiameter );
+                m_leftBack = make_shared<SwerveModule>(type, driveMotor, turnMotor, canCoder, wheelDiameter );
             }
             swerve = m_leftBack;
 
@@ -86,7 +85,7 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
         case SwerveModule::ModuleID::RIGHT_FRONT:
             if ( m_rightFront.get() == nullptr )
             {
-                m_rightFront = make_shared<SwerveModule>(type, driveMotor, turnMotor, canCoder, turnOffset, wheelDiameter );
+                m_rightFront = make_shared<SwerveModule>(type, driveMotor, turnMotor, canCoder, wheelDiameter );
             }
             swerve = m_rightFront;
             break;
@@ -94,7 +93,7 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
         case SwerveModule::ModuleID::RIGHT_BACK:
             if ( m_rightBack.get() == nullptr )
             {
-                m_rightBack = make_shared<SwerveModule>(type, driveMotor, turnMotor, canCoder, turnOffset, wheelDiameter );
+                m_rightBack = make_shared<SwerveModule>(type, driveMotor, turnMotor, canCoder, wheelDiameter );
             }            
             swerve = m_rightBack;
             break;
