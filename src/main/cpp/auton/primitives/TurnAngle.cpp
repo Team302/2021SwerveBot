@@ -17,6 +17,7 @@
 #include <algorithm>
 #include <memory>
 #include <string>
+#include <units/angular_velocity.h>
 
 //FRC Includes
 #include <frc/Timer.h>
@@ -39,136 +40,66 @@ using namespace frc;
 
 using namespace wpi::math;
 
-TurnAngle::TurnAngle() : m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
+TurnAngle::TurnAngle
+(   PRIMITIVE_IDENTIFIER        mode,
+    units::radians_per_second_t targetAngle
+) : m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
                          m_timer( make_unique<Timer>() ),
-                         m_targetAngle(0.0),
                          m_maxTime(0.0),
-                         m_backLeftPos(0.0),
-                         m_backRightPos(0.0),
-                         m_frontLeftPos(0.0),
-                         m_frontRightPos(0.0),
                          m_isDone(false),
-                         m_control(nullptr),
-                        m_turnRight(true)
+                         m_turnRight(true)
 {
-        m_control = new ControlData
-        ( ControlModes::CONTROL_TYPE::POSITION_INCH,
-           ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
-           string("TurnAngle"),
-           3.0,
-           0.0,
-		   0.0,
-		   0.0,
-		   0.0,
-		   0.0,
-		   0.0,
-		   1.0,
-		   0.0   );
 }
 
+/*
 TurnAngle::TurnAngle
 (
-    ControlData* control
+    PRIMITIVE_IDENTIFIER        mode,
+    units::radians_per_second_t targetAngle
 ) : m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
 						 m_timer( make_unique<Timer>() ),
-						 m_targetAngle(0.0),
 						 m_maxTime(0.0),
-						 m_backLeftPos(0.0),
-                         m_backRightPos(0.0),
-                         m_frontLeftPos(0.0),
-                         m_frontRightPos(0.0),
 						 m_isDone(false),
-						 m_control(nullptr),
 						 m_turnRight(true)
 {
 }
+*/  //Don't know why this was declared twice in original turn angle code
 
+
+
+/*
 void TurnAngle::Init
 (
     PrimitiveParams* params
 )
 {
-    /*
-    m_isDone = false;
-
-    //get the current angle/heading of the robot
     auto pigeon = PigeonFactory::GetFactory()->GetPigeon();
     auto startHeading = pigeon != nullptr ? pigeon->GetYaw() : 0.0;
     auto angle = params->GetHeading();
-
-    auto isRelative = params->GetID() == TURN_ANGLE_REL;
-    m_targetAngle = isRelative ? (startHeading + angle) : angle;
-    auto delta = isRelative ? angle : (startHeading - m_targetAngle);
-    m_turnRight = delta > 0.0;
-
-    // figure out how far each side of the robot needs to move to turn in place (circle/arc) in order to reach
-	// the angle.   So, 2 * PI * radius is the distance a wheel would travel to turn 360 degrees.  
-	// Thus, to travel 90 degrees, the wheel would need to move a quarter of this distance (90/360).
-	// This won't be entirely accurate because of scrub and slippage, the encoder may show a slightly different distance
-	// but we'll use this to get approximately there and then use the gyro and a slow speed to finish it up. 
-    auto turningRadius = m_chassis->GetTrack() / 2.0;
-    auto arcLen = ((2.0 * pi * turningRadius) * delta ) / 360.0;
-
-    //dummy pose estimator and translation2d for right now, will be changed later
-    //Original code:
-    
-        m_leftPos = m_chassis->GetCurrentLeftPosition() + arcLen;
-	    m_rightPos = m_chassis->GetCurrentRightPosition() - arcLen;
-    
-    
-    //{
-    frc::Translation2d m_frontLeftLocation{+0.381_m, +0.381_m};
-        frc::Translation2d m_frontRightLocation{+0.381_m, -0.381_m};
-        frc::Translation2d m_backLeftLocation{-0.381_m, +0.381_m};
-        frc::Translation2d m_backRightLocation{-0.381_m, -0.381_m};
-        frc::SwerveDriveKinematics<4> m_kinematics{m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation};
-    frc::SwerveDrivePoseEstimator<4> m_poseEstimatorDummy{  frc::Rotation2d(), 
-                                                           frc::Pose2d(), 
-                                                           m_kinematics,
-                                                           {0.1, 0.1, 0.1},   
-                                                           {0.05},        
-                                                           {0.1, 0.1, 0.1} };
-
-    m_frontLeftPos = m_poseEstimatorDummy + arcLen;
-    m_frontRightPos = m_poseEstimatorDummy - arcLen;
-    m_backLeftPos = m_poseEstimatorDummy + arcLen;
-    m_backRightPos = m_poseEstimatorDummy - arcLen;
-    //}
-
-    //Original code from 2021InfiniteRecharge2
-    // Set the output to the wheels
-	//m_chassis->SetControlConstants( m_control );
-	//m_chassis->SetOutput( m_control->GetMode(), m_leftPos, m_rightPos );
-
-    m_maxTime = params->GetTime();
-    m_timer->Reset();
-    m_timer->Start();
-    */
 }
-
+*/
 
 
 void TurnAngle::Run()
-{
-       /* //Check the pigeon to see if we've reached that target, if we have set m_isDone to true and the speeds to 0.0
-        auto pigeon = PigeonFactory::GetFactory()->GetPigeon();
-        auto heading = ( pigeon != nullptr ) ? pigeon->GetYaw() : 0.0;
+{      
 
-        auto delta = heading - m_targetAngle;
-        m_isDone = ( abs(delta) < ANGLE_THRESH);
-        if ( !m_isDone )
-        {
-            auto currFrontLeftPos =
-            auto currFrontRightPos =
-            auto currBackLeftPos =
-            auto currBackRightPos =
-        }
-        */
+    auto pigeon = PigeonFactory::GetFactory()->GetPigeon();
+    auto heading = ( pigeon != nullptr ) ? pigeon->GetYaw() : 0.0;
 
+    units::meters_per_second_t xSpeed(0);
+    units::meters_per_second_t ySpeed(0);
+    units::radians_per_second_t relativeAngle(0);
+    units::radians_per_second_t radianHeading(heading);
+
+    if( m_mode == TURN_ANGLE_ABS)
+    {
+       m_chassis->Drive(xSpeed, ySpeed, m_targetAngle, true);
+    } else if ( m_mode == TURN_ANGLE_REL)
+    {
+        relativeAngle = m_targetAngle - radianHeading;
+
+        m_chassis->Drive( xSpeed, ySpeed, relativeAngle, true);
+    }
        
-       units::radians_per_second_t fullCircle(360);
-       units::meters_per_second_t xSpeed(0);
-       units::meters_per_second_t ySpeed(0);
 
-       m_chassis->Drive(xSpeed, ySpeed, fullCircle, true);
 }

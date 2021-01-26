@@ -19,7 +19,7 @@
 
 //Team302 Includes
 #include <auton/primitives/IPrimitive.h>
-#include <controllers/ControlData.h>
+#include <units/angular_velocity.h>
 
 class SwerveChassis;
 
@@ -32,31 +32,26 @@ namespace frc
 class TurnAngle : public IPrimitive
 {
     public:
-        TurnAngle();
         TurnAngle
         (
-            ControlData* controlData
+            PRIMITIVE_IDENTIFIER        mode,
+            units::radians_per_second_t targetAngle
         );
         virtual ~TurnAngle() = default;
 
-        void Init(PrimitiveParams* params) override;
+        //void Init(PrimitiveParams* params) override;
         void Run() override;
         //bool IsDone() override;
 
         private:
             std::shared_ptr<SwerveChassis> m_chassis;
-                std::unique_ptr<frc::Timer> m_timer;
+            std::unique_ptr<frc::Timer> m_timer;
 
-            double          m_targetAngle;
             double          m_maxTime;
-            double          m_backLeftPos;
-            double          m_backRightPos;
-            double          m_frontLeftPos;
-            double          m_frontRightPos;
             bool            m_isDone;
-            ControlData*    m_control;
             bool            m_turnRight;
-
+            PRIMITIVE_IDENTIFIER    m_mode;
+            units::radians_per_second_t     m_targetAngle;
             const double SLOW_PERCENT = 0.2;
             const double ANGLE_THRESH = 2; // +/- threshold for being at angle
 };
