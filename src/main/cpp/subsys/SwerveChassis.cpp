@@ -105,6 +105,8 @@ void SwerveChassis::UpdateOdometry()
 {
     units::degree_t yaw{m_pigeon->GetYaw()};
     Rotation2d r2d {yaw};
+
+    //TODO Update m_kinematics
     m_poseEstimator.Update(r2d, m_frontLeft.get()->GetState(),
                                 m_frontRight.get()->GetState(), 
                                 m_backLeft.get()->GetState(),

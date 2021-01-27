@@ -22,6 +22,7 @@
 //FRC Includes
 #include <frc/Timer.h>
 #include <wpi/math>
+#include <frc/geometry/Translation2d.h>
 
 //Team 302 Includes
 #include <auton/PrimitiveParams.h>
@@ -42,13 +43,16 @@ using namespace wpi::math;
 
 TurnAngle::TurnAngle
 (   PRIMITIVE_IDENTIFIER        mode,
-    units::radians_per_second_t targetAngle
+    units::degree_t targetAngle
 ) : m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
                          m_timer( make_unique<Timer>() ),
                          m_maxTime(0.0),
                          m_isDone(false),
-                         m_turnRight(true)
+                         m_turnRight(true),
+                         m_currentChassisPosition(units::meter_t(0), units::meter_t(0), units::radian_t(0))
 {
+
+    //How to get targetAngle into rest of program
 }
 
 /*
@@ -67,39 +71,98 @@ TurnAngle::TurnAngle
 
 
 
-/*
+
 void TurnAngle::Init
 (
     PrimitiveParams* params
 )
 {
+   m_maxTime = params->GetTime();
+   m_timer->Reset();
+   m_timer->Start(); 
+
     auto pigeon = PigeonFactory::GetFactory()->GetPigeon();
-    auto startHeading = pigeon != nullptr ? pigeon->GetYaw() : 0.0;
-    auto angle = params->GetHeading();
+    units::degree_t heading(( pigeon != nullptr ) ? pigeon->GetYaw() : 0.0);
+
+   if(m_mode == TURN_ANGLE_ABS)
+   {
+       m_targetAngle = targetAngle;
+   } else if( m_mode == TURN_ANGLE_REL)
+   {
+       m_targetAngle = targetAngle + heading;
+   }
+
+    //integrate pid loop based on singular wheel pos
+
+    //move position check out of timer expiration
+
+    //check to see if the chassis is at the estimated angle
+
+
 }
-*/
+
 
 
 void TurnAngle::Run()
 {      
+    frc::SwerveDrivePoseEstimator<4> chassisPoseEstimator = m_chassis.get()->GetPoseEstimator();
 
-    auto pigeon = PigeonFactory::GetFactory()->GetPigeon();
-    auto heading = ( pigeon != nullptr ) ? pigeon->GetYaw() : 0.0;
+    m_currentChassisPosition = chassisPoseEstimator.GetEstimatedPosition();
 
     units::meters_per_second_t xSpeed(0);
     units::meters_per_second_t ySpeed(0);
-    units::radians_per_second_t relativeAngle(0);
-    units::radians_per_second_t radianHeading(heading);
+    units::radians_per_second_t maxAccelerationRadian(m_chassis.get()->GetMaxAcceleration());
 
     if( m_mode == TURN_ANGLE_ABS)
     {
-       m_chassis->Drive(xSpeed, ySpeed, m_targetAngle, true);
+        if(m_turnRight)
+        {
+            m_chassis->Drive(xSpeed, ySpeed, -1 * (maxAccelerationRadian / 2), true);
+        } else if (!m_turnRight)
+        {
+            m_chassis->Drive(xSpeed, ySpeed, maxAccelerationRadian / 2, true);
+        }
     } else if ( m_mode == TURN_ANGLE_REL)
     {
-        relativeAngle = m_targetAngle - radianHeading;
+        m_relativeAngle = m_targetAngle + heading;
 
-        m_chassis->Drive( xSpeed, ySpeed, relativeAngle, true);
+        if(m_turnRight)
+        {
+            m_chassis->Drive( xSpeed, ySpeed, -1 * (maxAccelerationRadian / 2), true);
+        } else if (!m_turnRight)
+        {
+            m_chassis->Drive( xSpeed, ySpeed, maxAccelerationRadian / 2, true);
+        }
+    } else 
+    {
+        Logger::GetLogger()->LogError( string("TurnAngle::Run"), string("turning type not absolute or relative"));
     }
-       
+}
 
+bool TurnAngle::IsDone()
+{
+
+    frc::SwerveDrivePoseEstimator<4> chassisPoseEstimatorDone = m_chassis.get()->GetPoseEstimator();
+
+    Pose2d currentChassisPos = chassisPoseEstimatorDone.GetEstimatedPosition();
+
+    units::degree_t angleDifference = m_targetAngle - currentChassisPos.Rotation().Degrees();
+
+    if()
+    {
+        m_isDone = true;
+    } else 
+    {
+    }
+
+    if(m_timer->HasPeriodPassed( m_maxTime ))
+    {
+        m_isDone = true;
+    }else 
+    {
+        m_isDone = true;
+    }
+    
+
+    return m_isDone;
 }

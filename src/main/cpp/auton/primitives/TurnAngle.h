@@ -20,6 +20,7 @@
 //Team302 Includes
 #include <auton/primitives/IPrimitive.h>
 #include <units/angular_velocity.h>
+#include <frc/geometry/Pose2d.h>
 
 class SwerveChassis;
 
@@ -35,23 +36,26 @@ class TurnAngle : public IPrimitive
         TurnAngle
         (
             PRIMITIVE_IDENTIFIER        mode,
-            units::radians_per_second_t targetAngle
+            units::degree_t targetAngle
         );
         virtual ~TurnAngle() = default;
 
-        //void Init(PrimitiveParams* params) override;
+        void Init(PrimitiveParams* params) override;
         void Run() override;
-        //bool IsDone() override;
+        bool IsDone() override;
 
         private:
             std::shared_ptr<SwerveChassis> m_chassis;
             std::unique_ptr<frc::Timer> m_timer;
 
-            double          m_maxTime;
-            bool            m_isDone;
-            bool            m_turnRight;
+            double               m_maxTime;
+            frc::Pose2d          m_currentChassisPosition;
+            bool                 m_turnRight = false;
+            bool                 m_isDone = false;
             PRIMITIVE_IDENTIFIER    m_mode;
-            units::radians_per_second_t     m_targetAngle;
+            units::degree_t     m_targetAngle;
+            units::degree_t     m_relativeAngle;
+
             const double SLOW_PERCENT = 0.2;
             const double ANGLE_THRESH = 2; // +/- threshold for being at angle
 };
