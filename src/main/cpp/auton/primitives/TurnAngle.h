@@ -33,15 +33,11 @@ namespace frc
 class TurnAngle : public IPrimitive
 {
     public:
-        TurnAngle
-        (
-            PRIMITIVE_IDENTIFIER        mode,
-            units::degree_t targetAngle
-        );
+        TurnAngle();
         virtual ~TurnAngle() = default;
 
         void Init(PrimitiveParams* params) override;
-        void Run() override;
+        void Run( const units::radians_per_second_t  speedFactor) override;
         bool IsDone() override;
 
         private:

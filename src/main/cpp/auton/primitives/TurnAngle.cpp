@@ -18,6 +18,7 @@
 #include <memory>
 #include <string>
 #include <units/angular_velocity.h>
+#include <units/math.h>
 
 //FRC Includes
 #include <frc/Timer.h>
@@ -41,10 +42,7 @@ using namespace frc;
 
 using namespace wpi::math;
 
-TurnAngle::TurnAngle
-(   PRIMITIVE_IDENTIFIER        mode,
-    units::degree_t targetAngle
-) : m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
+TurnAngle::TurnAngle() : m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
                          m_timer( make_unique<Timer>() ),
                          m_maxTime(0.0),
                          m_isDone(false),
@@ -84,59 +82,70 @@ void TurnAngle::Init
     auto pigeon = PigeonFactory::GetFactory()->GetPigeon();
     units::degree_t heading(( pigeon != nullptr ) ? pigeon->GetYaw() : 0.0);
 
-   if(m_mode == TURN_ANGLE_ABS)
+    units::degree_t targetAngle(params->GetHeading());
+
+   if( params->GetID() == TURN_ANGLE_ABS)
    {
        m_targetAngle = targetAngle;
-   } else if( m_mode == TURN_ANGLE_REL)
+   } else if( params->GetID() == TURN_ANGLE_REL)
    {
        m_targetAngle = targetAngle + heading;
+   } else
+   {
+        Logger::GetLogger()->LogError( string("TurnAngle::Run"), string("turning type not absolute or relative"));
    }
 
-    //integrate pid loop based on singular wheel pos
+    frc::SwerveDrivePoseEstimator<4> chassisPoseEstimator = m_chassis.get()->GetPoseEstimator();
 
-    //move position check out of timer expiration
+    Pose2d currentChassisPos = chassisPoseEstimator.GetEstimatedPosition();
 
-    //check to see if the chassis is at the estimated angle
+    double maxAccel = m_chassis.get()->GetMaxAcceleration();
+    units::meters_per_second_t maxSpeed(m_chassis.get()->GetMaxSpeed());
 
+    if ()
 
 }
 
 
 
-void TurnAngle::Run()
+void TurnAngle::Run( const units::radians_per_second_t  speedFactor)
 {      
-    frc::SwerveDrivePoseEstimator<4> chassisPoseEstimator = m_chassis.get()->GetPoseEstimator();
+    //units::degree_t angleDifference = m_targetAngle - currentChassisPos.Rotation().Degrees();
 
-    m_currentChassisPosition = chassisPoseEstimator.GetEstimatedPosition();
+    units::meters_per_second_t      xSpeed(0);
+    units::meters_per_second_t      ySpeed(0);
+    units::radians_per_second_t     maxSpeedRadian(m_chassis.get()->GetMaxAngularSpeed());
 
-    units::meters_per_second_t xSpeed(0);
-    units::meters_per_second_t ySpeed(0);
-    units::radians_per_second_t maxAccelerationRadian(m_chassis.get()->GetMaxAcceleration());
+    units::radians_per_second_t     moddedSpeedFactor = speedFactor;
 
-    if( m_mode == TURN_ANGLE_ABS)
+    //use https://github.com/wpilibsuite/allwpilib/tree/master/wpilibcExamples/src/main/cpp/examples/ElevatorProfiledPID
+    //as an example for Trapezoid Profile
+    //will not be using m_motor.SetSetPoint since not interacting directly with motors
+    //may want to add a check to see if the trapezoid profile didn't quite make it to desired angle
+    //if we dont make it to desired angle, add a little bit to desired goal for trapezoid profile 
+
+    /*
+    if (currentChassisPos.Rotation().Degrees() < startRampDownAngle)
     {
-        if(m_turnRight)
+        if (( angleDifference / 10.0 ) > speedFactor )
         {
-            m_chassis->Drive(xSpeed, ySpeed, -1 * (maxAccelerationRadian / 2), true);
-        } else if (!m_turnRight)
+            moddedSpeedFactor = speedFactor;
+
+        } else if (( angleDifference / 10.0 ) < speedFactor)
         {
-            m_chassis->Drive(xSpeed, ySpeed, maxAccelerationRadian / 2, true);
+            moddedSpeedFactor = (angleDifference / 10.0 );
         }
-    } else if ( m_mode == TURN_ANGLE_REL)
-    {
-        m_relativeAngle = m_targetAngle + heading;
-
-        if(m_turnRight)
-        {
-            m_chassis->Drive( xSpeed, ySpeed, -1 * (maxAccelerationRadian / 2), true);
-        } else if (!m_turnRight)
-        {
-            m_chassis->Drive( xSpeed, ySpeed, maxAccelerationRadian / 2, true);
-        }
-    } else 
-    {
-        Logger::GetLogger()->LogError( string("TurnAngle::Run"), string("turning type not absolute or relative"));
     }
+    */
+
+    //Angular speed calculation
+    if (m_turnRight)
+    {
+        m_chassis->Drive(xSpeed, ySpeed, -1 * (maxSpeedRadian * moddedSpeedFactor), true);
+    } else if (!m_turnRight)
+    {
+        m_chassis->Drive(xSpeed, ySpeed, (maxSpeedRadian * moddedSpeedFactor), true);
+    }        
 }
 
 bool TurnAngle::IsDone()
@@ -146,13 +155,16 @@ bool TurnAngle::IsDone()
 
     Pose2d currentChassisPos = chassisPoseEstimatorDone.GetEstimatedPosition();
 
-    units::degree_t angleDifference = m_targetAngle - currentChassisPos.Rotation().Degrees();
+    //Will be used for "PID" loop
 
-    if()
+    units::degree_t tolerance(2);
+
+    if( units::math::abs(currentChassisPos.Rotation().Degrees() - m_targetAngle) <= tolerance)
     {
         m_isDone = true;
     } else 
     {
+        m_isDone = false;
     }
 
     if(m_timer->HasPeriodPassed( m_maxTime ))
@@ -160,7 +172,7 @@ bool TurnAngle::IsDone()
         m_isDone = true;
     }else 
     {
-        m_isDone = true;
+        m_isDone = false;
     }
     
 
