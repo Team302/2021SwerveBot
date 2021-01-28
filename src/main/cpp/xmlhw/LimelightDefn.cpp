@@ -24,7 +24,6 @@ DragonLimelight* LimelightDefn::ParseXML(pugi::xml_node    limelightNode)
     bool hasError = false;
 
     // initialize attributes to default values
-    IDragonSensor::SENSOR_USAGE usage = IDragonSensor::SENSOR_USAGE::UNKNOWN_SENSOR;
     std::string tableName = "";
     double mountingHeight = 0.0;
     double horizontalOffset = 0.0;
@@ -45,15 +44,7 @@ DragonLimelight* LimelightDefn::ParseXML(pugi::xml_node    limelightNode)
     for (pugi::xml_attribute attr = limelightNode.first_attribute(); attr && !hasError; attr = attr.next_attribute())
     {
         // validate/set the usage
-        if ( strcmp( attr.name(), "usage" ) == 0 )
-        {
-            usage = UsageValidation::ValidateSensorUsage( attr.value(), "LimelightDefn::ParseXML");
-            if ( usage == IDragonSensor::SENSOR_USAGE::UNKNOWN_SENSOR)
-            {
-                hasError = true;
-            }
-        }
-        else if ( strcmp( attr.name(), "tablename" ) == 0 )
+        if ( strcmp( attr.name(), "tablename" ) == 0 )
         {
             tableName = attr.value();
         }
@@ -157,7 +148,6 @@ DragonLimelight* LimelightDefn::ParseXML(pugi::xml_node    limelightNode)
         {
             limelight = LimelightFactory::GetLimelightFactory()->CreateLimelight
             (
-                usage,
                 tableName,
                 mountingHeight,
                 horizontalOffset,

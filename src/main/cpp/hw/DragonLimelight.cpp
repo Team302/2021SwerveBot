@@ -40,7 +40,6 @@ using namespace std;
 ///-----------------------------------------------------------------------------------
 DragonLimelight::DragonLimelight
 (
-    IDragonSensor::SENSOR_USAGE usage,
     string                      tableName,                  /// <I> - network table name
     double                      mountingHeight,             /// <I> - mounting height of the limelight
     double                      mountingHorizontalOffset,   /// <I> - mounting horizontal offset from the middle of the robot,
@@ -48,9 +47,8 @@ DragonLimelight::DragonLimelight
     double                      mountingAngle,              /// <I> - mounting angle of the camera
     double                      targetHeight,               /// <I> - height the target
     double                      targetHeight2               /// <I> - height of second target
-) : IDragonSensor(),
-    IDragonDistanceSensor(),
-    m_usage( usage ),
+) : //IDragonSensor(),
+    //IDragonDistanceSensor(),
     m_networktable( NetworkTableInstance::GetDefault().GetTable( tableName.c_str()) ),
     m_mountHeight( mountingHeight ),
     m_mountingHorizontalOffset( mountingHorizontalOffset ),
@@ -180,10 +178,12 @@ double DragonLimelight::GetPipelineLatency() const
 /// Description: Indicate what the sensor is used for
 /// Returns:     SENSOR_USAGE    sensor usage 
 ///-----------------------------------------------------------------------
+/**
 IDragonSensor::SENSOR_USAGE DragonLimelight::GetUsage() const
 {
     return m_usage;
 }
+**/
 
 void DragonLimelight::SetTargetHeight
 (

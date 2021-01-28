@@ -39,7 +39,7 @@ LimelightAim::LimelightAim
 ) : IState(),
     m_motorState( make_unique<Mech1MotorState>(MechanismFactory::GetMechanismFactory()->GetIntake().get(), control, target)),
     m_turret(MechanismFactory::GetMechanismFactory()->GetTurret()),
-    m_limelight(new DragonLimelight(IDragonSensor::MAIN_LIMELIGHT, "limelight", 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)),
+    m_limelight(new DragonLimelight("limelight", 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)),  // TODO:  use the one created using the factory
     m_atTarget(false),
     m_target(target),
     m_targetPosition(0.0),

@@ -41,6 +41,13 @@ class SwerveModule
                       units::length::inch_t                                     wheelDiameter
                     );
 
+        void Init
+        (
+            units::velocity::meters_per_second_t                maxVelocity,
+            units::angular_velocity::radians_per_second_t       maxAngularVelocity,
+            double                                              maxAccMperSecSq
+        );
+        
         /// @brief Turn all of the wheel to zero degrees yaw according to the pigeon
         /// @returns void
         void ZeroAlignModule();
