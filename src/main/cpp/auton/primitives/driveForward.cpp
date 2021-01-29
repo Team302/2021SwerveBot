@@ -18,7 +18,7 @@ using namespace frc;
 driveForward::driveForward() :
 m_params(nullptr),
 m_targetDistance(0),
-m_initialDistance(0),
+m_initialDistance(),
 m_timeRemaining(0),
 m_minSpeedCountTime(0),
 m_underSpeedCounts(0),
@@ -41,8 +41,8 @@ void driveForward::Init(PrimitiveParams* params)
 
     m_targetDistance = params->GetDistance();
     //Fix this
-    m_initialDistance = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()->UpdateOdometry();
-    frc::SmartDashboard::PutNumber("Initial Distance", m_initialDistance);
+    m_initialDistance = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()->GetPose().GetEstimatedPosition();
+    //frc::SmartDashboard::PutNumber("Initial Distance", m_initialDistance);
 }
 
 void driveForward::Run()
@@ -54,7 +54,7 @@ void driveForward::Run()
     //Fix this
     if (m_minSpeedCountTime <= 0)
     {
-        if (abs(SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()->Get))
+        //if (abs(SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()->Get))
     }
 
     //Fix this error
@@ -64,12 +64,20 @@ void driveForward::Run()
 bool driveForward::IsDone()
 {
     //Fix getCurrentPosition
-    float progress = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()->GetCurrentPosition() - m_initialDistance;
-    bool reachedTarget = abs(progress) > abs(m_targetDistance);
-    frc::SmartDashboard::PutNumber("Current Chassis Distance", progress);
+    Pose2d progress = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()->GetPose().GetEstimatedPosition();
+    //bool reachedTarget = (progress) > (m_targetDistance);
+    //frc::SmartDashboard::PutNumber("Current Chassis Distance", progress);
     frc::SmartDashboard::PutNumber("Target Chassis Distance", m_targetDistance);
     //Fix IPrimitive::Loop_LENGTH
     m_timeRemaining -= IPrimitive::LOOP_LENGTH;
+
+    auto initialTrans = m_initialDistance.Translation();
+    auto currentTrans = progress.Translation();
+
+    
+    units::length::inch_t dist = currentTrans.Distance(initialTrans);
+
+    bool reachedTarget = std::abs (targetDistance - distance.length.to<double>()) < 0.2;
 
     bool done = reachedTarget;
     if (done)

@@ -21,7 +21,7 @@ class driveForward
         Pose2d* m_pose;
 
         float m_targetDistance;
-        float m_initialDistance;
+        Pose2d m_initialDistance;
 	    float m_timeRemaining;
 
         float m_minSpeedCountTime;

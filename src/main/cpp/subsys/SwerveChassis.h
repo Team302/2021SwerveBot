@@ -54,7 +54,11 @@ class SwerveChassis
         double GetMaxAcceration() const { return m_maxAcceleration; }
 
 
+        frc::SwerveDrivePoseEstimator<4> GetPose() {return m_poseEstimator;}
+
     private:
+        
+
         frc::Translation2d m_frontLeftLocation{+0.381_m, +0.381_m};
         frc::Translation2d m_frontRightLocation{+0.381_m, -0.381_m};
         frc::Translation2d m_backLeftLocation{-0.381_m, +0.381_m};

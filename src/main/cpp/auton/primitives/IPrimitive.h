@@ -5,7 +5,7 @@ class PrimitiveParams;
 class IPrimitive
 {
     public:
-         const double LOOP_LENGTH = 0.020; //Program loop duration in seconds
+         static const  double LOOP_LENGTH = 0.020; //Program loop duration in seconds
 
         IPrimitive() = default;
         virtual ~IPrimitive() = default;
