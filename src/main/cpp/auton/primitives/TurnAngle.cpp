@@ -95,20 +95,26 @@ void TurnAngle::Init
         Logger::GetLogger()->LogError( string("TurnAngle::Run"), string("turning type not absolute or relative"));
    }
 
-    frc::SwerveDrivePoseEstimator<4> chassisPoseEstimator = m_chassis.get()->GetPoseEstimator();
+   m_maxSpeed = params->GetDriveSpeed();
 
-    Pose2d currentChassisPos = chassisPoseEstimator.GetEstimatedPosition();
+   //Calculate diameter of robot to find arc length
+   double trackSquared = m_chassis.get()->GetTrack().to<double>() * m_chassis.get()->GetTrack().to<double>();
+   double wheelbaseSquared = m_chassis.get()->GetWheelBase().to<double>() * m_chassis.get()->GetWheelBase().to<double>();
 
-    double maxAccel = m_chassis.get()->GetMaxAcceleration();
-    units::meters_per_second_t maxSpeed(m_chassis.get()->GetMaxSpeed());
+   units::length::inch_t hypBeforeSqrt(trackSquared * wheelbaseSquared);
+   units::length::inch_t hypAfterSqrt = units::math::sqrt(hypBeforeSqrt);
+   
+   units::length::inch_t m_circumference = pi * hypAfterSqrt;
 
-    if ()
+   units::degree_t arcAngle = heading - m_targetAngle;
+
+   units::length::inch_t m_goalDistance = (arcAngle / units::degree_t(360)) * m_circumference;
 
 }
 
 
 
-void TurnAngle::Run( const units::radians_per_second_t  speedFactor)
+void TurnAngle::Run()
 {      
     //units::degree_t angleDifference = m_targetAngle - currentChassisPos.Rotation().Degrees();
 
@@ -116,35 +122,50 @@ void TurnAngle::Run( const units::radians_per_second_t  speedFactor)
     units::meters_per_second_t      ySpeed(0);
     units::radians_per_second_t     maxSpeedRadian(m_chassis.get()->GetMaxAngularSpeed());
 
-    units::radians_per_second_t     moddedSpeedFactor = speedFactor;
+    //units::radians_per_second_t     moddedSpeedFactor = speedFactor;
 
-    //use https://github.com/wpilibsuite/allwpilib/tree/master/wpilibcExamples/src/main/cpp/examples/ElevatorProfiledPID
+    //use https://github.com/wpilibsuite/allwpilib/tree/master/wpilibcExamples/src/main/cpp/examples/ElevatorTrapezoidProfile
     //as an example for Trapezoid Profile
     //will not be using m_motor.SetSetPoint since not interacting directly with motors
     //may want to add a check to see if the trapezoid profile didn't quite make it to desired angle
     //if we dont make it to desired angle, add a little bit to desired goal for trapezoid profile 
 
-    /*
-    if (currentChassisPos.Rotation().Degrees() < startRampDownAngle)
-    {
-        if (( angleDifference / 10.0 ) > speedFactor )
-        {
-            moddedSpeedFactor = speedFactor;
+    frc::SwerveDrivePoseEstimator<4> chassisPoseEstimator = m_chassis.get()->GetPoseEstimator();
 
-        } else if (( angleDifference / 10.0 ) < speedFactor)
-        {
-            moddedSpeedFactor = (angleDifference / 10.0 );
-        }
-    }
-    */
+    Pose2d currentChassisPos = chassisPoseEstimator.GetEstimatedPosition();
+
+    units::meters_per_second_t maxAccel(m_chassis.get()->GetMaxAcceleration());
+    units::meters_per_second_t maxSpeed(m_chassis.get()->GetMaxSpeed());
+
+    static constexpr units::second_t kDt = 20_ms;
+
+    frc::TrapezoidProfile<units::meters>::State m_goal;
+    frc::TrapezoidProfile<units::meters>::State m_setpoint;
+
+    m_goal = {m_goalDistance, units::velocity::meters_per_second_t( m_maxSpeed) };
+
+    frc::TrapezoidProfile<units::meters>::Constraints m_constraints{ maxSpeed, maxAccel};
+
+    frc::TrapezoidProfile<units::meters> profile{m_constraints, m_goal, m_setpoint};
+
+    m_setpoint = profile.Calculate(kDt);
+
+    //speed calculation to get from meters per second to radians per second
+
+    units::length::meter_t circumferenceMeter(m_circumference);
+
+    double distanceToAngleConversion = (2 * pi ) / circumferenceMeter.to<double>();
+
+    units::angular_velocity::radians_per_second_t radianTrapezoidSpeed(m_setpoint.velocity.to<double>() * distanceToAngleConversion);
+
 
     //Angular speed calculation
     if (m_turnRight)
     {
-        m_chassis->Drive(xSpeed, ySpeed, -1 * (maxSpeedRadian * moddedSpeedFactor), true);
+        m_chassis->Drive(xSpeed, ySpeed, radianTrapezoidSpeed, true);
     } else if (!m_turnRight)
     {
-        m_chassis->Drive(xSpeed, ySpeed, (maxSpeedRadian * moddedSpeedFactor), true);
+        m_chassis->Drive(xSpeed, ySpeed, radianTrapezoidSpeed, true);
     }        
 }
 

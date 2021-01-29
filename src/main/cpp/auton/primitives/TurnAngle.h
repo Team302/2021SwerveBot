@@ -37,7 +37,7 @@ class TurnAngle : public IPrimitive
         virtual ~TurnAngle() = default;
 
         void Init(PrimitiveParams* params) override;
-        void Run( const units::radians_per_second_t  speedFactor) override;
+        void Run() override;
         bool IsDone() override;
 
         private:
@@ -46,8 +46,11 @@ class TurnAngle : public IPrimitive
 
             double               m_maxTime;
             frc::Pose2d          m_currentChassisPosition;
-            bool                 m_turnRight = false;
-            bool                 m_isDone = false;
+            bool                 m_turnRight;
+            bool                 m_isDone;
+            float                m_maxSpeed;
+            units::length::inch_t m_goalDistance;
+            units::length::inch_t m_circumference;
             PRIMITIVE_IDENTIFIER    m_mode;
             units::degree_t     m_targetAngle;
             units::degree_t     m_relativeAngle;

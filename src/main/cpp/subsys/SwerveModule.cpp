@@ -77,7 +77,7 @@ SwerveModule::SwerveModule
                                               0.0,
                                               0.3,
                                               0.0,
-                                              chassis.get()->GetMaxAcceration(),
+                                              chassis.get()->GetMaxAcceleration(),
                                               maxSp.to<double>(),
                                               maxSp.to<double>(),
                                               0.0 );
@@ -99,7 +99,7 @@ SwerveModule::SwerveModule
                                               0.0,
                                               0.3,
                                               0.0,
-                                              chassis.get()->GetMaxAcceration(),
+                                              chassis.get()->GetMaxAcceleration(),
                                               maxAng.to<double>(),
                                               maxAng.to<double>(),
                                               0.0 );

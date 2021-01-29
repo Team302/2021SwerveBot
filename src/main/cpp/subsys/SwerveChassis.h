@@ -74,7 +74,7 @@ class SwerveChassis
         units::velocity::meters_per_second_t GetMaxSpeed() const {return m_maxSpeed;}
         units::radians_per_second_t GetMaxAngularSpeed() const {return m_maxAngularSpeed;}
         double GetMaxAcceleration() const { return m_maxAcceleration; }
-        //Get angularaccleration
+        //Get angularacceleration
         frc::SwerveDrivePoseEstimator<4> GetPoseEstimator() {return m_poseEstimator; }
 
 
