@@ -73,6 +73,22 @@ void Robot::RobotPeriodic()
 /// @return void
 void Robot::DisabledInit()
 {
+    RamScan::m_RunMode = RamScan::DISABLED;
+}
+
+
+/// @brief Called every 20 milliseconds when the robot is disabled.
+/// @return void
+void Robot::DisabledPeriodic()
+{
+    // Its awfully lonely in here. Could someone write some code for me?
+}
+
+
+/// @brief  Called whenever the robot gets disabled (once when it gets disabled).
+/// @return void
+void Robot::DisabledInit()
+{
     m_RunMode = DISABLED;
 }
 
@@ -101,7 +117,6 @@ void Robot::AutonomousInit()
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("AutonomousInit"), string("no swerve chassis"));
     }
 }
-
 
 /// @brief Runs every 20 milliseconds when the autonomous state is active.
 /// @return void

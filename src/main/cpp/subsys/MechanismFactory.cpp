@@ -132,77 +132,39 @@ void  MechanismFactory::CreateIMechanism
         }
         break;
 
-		case MechanismTypes::MECHANISM_TYPE::BALL_TRANSFER:
-		{
-			if ( m_balltransfer.get() != nullptr )
-			{
-				auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::BALL_TRANSFER );
-				if ( motor.get() != nullptr )
-				{
-					m_balltransfer = make_shared<BallTransfer>( motor );
-				}
-			}
-			else
-			{
-				found = true;
-			}
-		}
-		break;
 
-		case MechanismTypes::MECHANISM_TYPE::BALL_HOPPER:
-		{
-			if(m_ballhopper.get() != nullptr )
-			{
-				auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::BALL_HOPPER );
-				auto bannerSensor = GetDigitalInput( digitalInputs, DigitalInputUsage::DIGITAL_SENSOR_USAGE::HOPPER_BANNER_SENSOR );
-				if( motor.get() != nullptr && bannerSensor.get() != nullptr)
-				{
-					m_ballhopper = make_shared<BallHopper>(motor, bannerSensor);
-				}
-			}
-			else
-			{
-				found = true;
-			}
-			
-		}
-		break;			
-	
-		case MechanismTypes::MECHANISM_TYPE::SHOOTER:
-		{
-			if ( m_shooter.get() != nullptr )
-			{
-				auto motor1 = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::SHOOTER_1 );
-				auto motor2 = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::SHOOTER_2 );
-				if ( motor1.get() != nullptr && motor2.get() != nullptr )
-				{
-					m_shooter = make_shared<Shooter>(motor1, motor2);
-				}
-			}
-			else
-			{
-				found = true;
-			}
-
-		}
-		break;		
-		
-		case MechanismTypes::MECHANISM_TYPE::SHOOTER_HOOD:
-		{
-			if ( m_shooterhood.get() == nullptr )
-			{
-				auto motor = GetMotorController(motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::SHOOTER_HOOD);
-				if(motor.get() != nullptr)
-				{
-					m_shooterhood = make_shared<ShooterHood>(motor, canCoder);
-				}
-			}
-			else
-			{
-				found = true;
-			}
-		}
-		break;		
+        case MechanismTypes::MECHANISM_TYPE::BALL_TRANSFER:
+        {
+            if ( m_balltransfer.get() != nullptr )
+            {
+                auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::BALL_TRANSFER );
+                if ( motor.get() != nullptr )
+                {
+                    m_balltransfer = make_shared<BallTransfer>( motor );
+                }
+            }
+            else
+            {
+                found = true;
+            }
+        }
+        break;
+    /**
+        case MechanismTypes::MECHANISM_TYPE::SHOOTER:
+        {
+            if ( m_shooter.get() != nullptr )
+            {
+                auto motor1 = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::SHOOTER_1 );
+                auto motor2 = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::SHOOTER_2 );
+                if ( motor1.get() != nullptr && motor2.get() != nullptr )
+                {
+                    m_shooter = make_shared<Shooter>(motor1, motor2);
+                }
+            }
+            else
+            {
+                found = true;
+            }
 
         }
         break;
