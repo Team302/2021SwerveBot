@@ -5,6 +5,9 @@
 #include <subsys/SwerveChassisFactory.h>
 #include <utils/Logger.h>
 
+#include <units/acceleration.h>
+#include <units/math.h>
+
 #include <cmath>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <auton/primitives/driveForward.h>
@@ -31,7 +34,6 @@ m_arcing(false)
 
 void driveForward::Init(PrimitiveParams* params)
 {
-    //Fix this
     m_arcing = abs(params->GetHeading()) > 0.1;
     m_endHeading = m_startHeading + params->GetHeading();
 
@@ -40,9 +42,11 @@ void driveForward::Init(PrimitiveParams* params)
     m_params = params;
 
     m_targetDistance = params->GetDistance();
-    //Fix this
     m_initialDistance = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()->GetPose().GetEstimatedPosition();
     //frc::SmartDashboard::PutNumber("Initial Distance", m_initialDistance);
+
+
+    units::acceleration::meters_per_second_squared_t maxAccel()
 }
 
 void driveForward::Run()
@@ -77,28 +81,28 @@ bool driveForward::IsDone()
     
     units::length::inch_t dist = currentTrans.Distance(initialTrans);
 
-    bool reachedTarget = std::abs (targetDistance - distance.length.to<double>()) < 0.2;
+    /*bool reachedTarget = std::abs (targetDistance - distance.length.to<double>()) < 0.2;
 
     bool done = reachedTarget;
     if (done)
     {
         SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()->SetTargetHeading(m_endHeading);
         return done;
-    }
+    }*/
 }
 
 void driveForward::CalculateSlowDownDistance()
 {
-    float currentVel = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()->GetCurrentSpeed();
-    float decelTime = currentVel / SuperDrive::INCHES_PER_SECOND_SECOND;
+    float currentVel = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()->
+    float decelTime = currentVel / 120;
     float decelDist = abs(((currentVel - m_minSpeed)) * decelTime * DECEL_TIME_MULTIPLIER);
     float currentDistance = abs(SwerveChassisFactory::GetSwerveChassisFactory() -> GetSwerveChassis()->GetCurrentPosition() - m_initialDistance);
     float distanceRemaining = abs(m_targetDistance =- currentDistance);
 
-    if (distanceRemaining <= decelDist)
+    /*if (distanceRemaining <= decelDist)
     {
         SuperDrive::SlowDown();
-    }
+    }*/
 }
 
 void driveForward::SetDistance(double distance)
