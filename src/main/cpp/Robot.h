@@ -21,7 +21,7 @@
 //========================================================================================================
 ///
 /// File Description:
-///     Top-level robot code that controls the various states of the robot.  It is our specific 
+///     Top-level robot code that controls the various states of the robot.  It is our specific
 ///     implementation of the frc::TimedRobot.
 ///
 //========================================================================================================
@@ -35,15 +35,16 @@
 #include <frc/TimedRobot.h>
 
 // team 302 includes
+#include <RamScan/RamScan.h>
 #include <states/chassis/SwerveDrive.h>
 
 
 // third party includes
 
 /// @class Robot
-/// @brief Top-level robot code that controls the various states of the robot.  It is our specific 
+/// @brief Top-level robot code that controls the various states of the robot.  It is our specific
 ///        implementation of the frc::TimedRobot.
-class Robot : public frc::TimedRobot 
+class Robot : public frc::TimedRobot
 {
   public:
       Robot() = default;
@@ -55,12 +56,15 @@ class Robot : public frc::TimedRobot
       void AutonomousPeriodic() override;
       void TeleopInit() override;
       void TeleopPeriodic() override;
+      void DisabledInit() override;
+      void DisabledPeriodic() override;
       void TestInit() override;
       void TestPeriodic() override;
 
   private:
- 
-    std::shared_ptr<SwerveDrive> m_drive;
+    friend class      RamScan;
+    RamScan*          m_RamScan;
 
+    std::shared_ptr<SwerveDrive> m_drive;
 
 };

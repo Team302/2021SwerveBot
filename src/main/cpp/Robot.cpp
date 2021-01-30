@@ -1,6 +1,6 @@
 
 //====================================================================================================================================================
-// Copyright 2020 Lake Orion Robotics FIRST Team 302
+// Copyright 2021 Lake Orion Robotics FIRST Team 302
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
 // to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
@@ -21,6 +21,7 @@
 
 
 // Team 302 Includes
+#include <RamScan/RamScan.h>
 #include <Robot.h>
 #include <states/chassis/SwerveDrive.h>
 #include <subsys/SwerveChassisFactory.h>
@@ -31,25 +32,40 @@
 using namespace std;
 using namespace frc;
 
-/// @brief  The main robot code.  The Init methods get called when that state gets entered and then the 
+/// @brief  The main robot code.  The Init methods get called when that state gets entered and then the
 ///     Periodic methods get called every 20 milliseconds.
 
 /// @brief When the robot gets created this gets called.  It initializes the robot subsystems (hardware).
 /// @return void
-void Robot::RobotInit() 
+void Robot::RobotInit()
 {
+    RamScan::m_RunMode = RamScan::INIT;     // ?? unnecessary?
+
     // Read the robot definition from the xml configuration files and
     // create the hardware (chassis + mechanisms along with their talons,
     // solenoids, digital inputs, analog inputs, etc.
     unique_ptr<RobotDefn>  robotXml = make_unique<RobotDefn>();
     robotXml->ParseXML();
+
+    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
+    if ( swerveChassis.get() != nullptr )
+    {
+        swerveChassis.get()->ZeroAlignSwerveModules();
+    }
+
+    // RAM SCAN etc.
+    m_RamScan       = new RamScan();
+
+    // this should be called at the end of RobotInit() so all the target objects are already created.
+    m_RamScan->Init();
 }
 
-/// @brief This function is called every robot packet, no matter the  mode. This is used for items like diagnostics that run 
-///        during disabled, autonomous, teleoperated and test modes (states).  THis runs after the specific state periodic 
+
+/// @brief This function is called every robot packet, no matter the  mode. This is used for items like diagnostics that run
+///        during disabled, autonomous, teleoperated and test modes (states).  THis runs after the specific state periodic
 ///        methods and before the LiveWindow and SmartDashboard updating.
 /// @return void
-void Robot::RobotPeriodic() 
+void Robot::RobotPeriodic()
 {
     auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
     if ( swerveChassis.get() != nullptr )
@@ -57,19 +73,38 @@ void Robot::RobotPeriodic()
         swerveChassis.get()->UpdateOdometry();
     }
 
+    m_RamScan->ScanVariables();     // do this here after other things are done
+}
+
+
+/// @brief  Called whenever the robot gets disabled (once when it gets disabled).
+/// @return void
+void Robot::DisabledInit()
+{
+    RamScan::m_RunMode = RamScan::DISABLED;
+}
+
+
+/// @brief Called every 20 milliseconds when the robot is disabled.
+/// @return void
+void Robot::DisabledPeriodic()
+{
+    // Its awfully lonely in here. Could someone write some code for me?
 }
 
 
 /// @brief This initializes the autonomous state
 /// @return void
-void Robot::AutonomousInit() 
+void Robot::AutonomousInit()
 {
+    RamScan::m_RunMode = RamScan::AUTON;
+
     auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
     if ( swerveChassis.get() != nullptr )
     {
         swerveChassis.get()->ZeroAlignSwerveModules();
     }
-    else 
+    else
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("AutonomousInit"), string("no swerve chassis"));
     }
@@ -78,7 +113,7 @@ void Robot::AutonomousInit()
 
 /// @brief Runs every 20 milliseconds when the autonomous state is active.
 /// @return void
-void Robot::AutonomousPeriodic() 
+void Robot::AutonomousPeriodic()
 {
     //Real auton magic right here:
     auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
@@ -86,7 +121,7 @@ void Robot::AutonomousPeriodic()
     {
         swerveChassis.get()->Drive(1.0, 0.0, 0.0, false);
     }
-    else 
+    else
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("AutonomousPeriodic"), string("no swerve chassis"));
     }
@@ -96,15 +131,16 @@ void Robot::AutonomousPeriodic()
 
 /// @brief This initializes the teleoperated state
 /// @return void
-void Robot::TeleopInit() 
+void Robot::TeleopInit()
 {
+    RamScan::m_RunMode = RamScan::TELEOP;
 
     auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
     if ( swerveChassis.get() != nullptr )
     {
         swerveChassis.get()->ZeroAlignSwerveModules();
     }
-    else 
+    else
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("TeleopPeriodic"), string("no swerve chassis"));
     }
@@ -116,31 +152,30 @@ void Robot::TeleopInit()
 
 /// @brief Runs every 20 milliseconds when the teleoperated state is active.
 /// @return void
-void Robot::TeleopPeriodic() 
+void Robot::TeleopPeriodic()
 {
     m_drive.get()->Run();
 }
 
 
-
 /// @brief This initializes the test state
 /// @return void
-void Robot::TestInit() 
+void Robot::TestInit()
 {
-
+    RamScan::m_RunMode = RamScan::TEST;
 }
 
 
 /// @brief Runs every 20 milliseconds when the test state is active.
 /// @return void
-void Robot::TestPeriodic() 
+void Robot::TestPeriodic()
 {
 
 }
 
 #ifndef RUNNING_FRC_TESTS
-int main() 
+int main()
 {
-    return StartRobot<Robot>(); 
+    return StartRobot<Robot>();
 }
 #endif
