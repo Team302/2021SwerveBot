@@ -1,6 +1,6 @@
 
 //====================================================================================================================================================
-// Copyright 2020 Lake Orion Robotics FIRST Team 302
+// Copyright 2021 Lake Orion Robotics FIRST Team 302
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
 // to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
@@ -22,6 +22,7 @@
 // Team 302 includes
 #include <hw/usages/IDragonMotorControllerMap.h>
 #include <hw/interfaces/IDragonMotorController.h>
+#include <RamScan/RamScan.h>
 #include <subsys/SwerveModule.h>
 #include <subsys/SwerveChassis.h>
 #include <subsys/SwerveChassisFactory.h>
@@ -38,37 +39,39 @@ using namespace ctre::phoenix::sensors;
 SwerveChassisFactory* SwerveChassisFactory::m_swerveChassisFactory = nullptr;
 SwerveChassisFactory* SwerveChassisFactory::GetSwerveChassisFactory()
 {
-	if ( SwerveChassisFactory::m_swerveChassisFactory == nullptr )
-	{
-		SwerveChassisFactory::m_swerveChassisFactory = new SwerveChassisFactory();
-	}
-	return SwerveChassisFactory::m_swerveChassisFactory;
+    if ( SwerveChassisFactory::m_swerveChassisFactory == nullptr )
+    {
+        SwerveChassisFactory::m_swerveChassisFactory = new SwerveChassisFactory();
+    }
+    return SwerveChassisFactory::m_swerveChassisFactory;
 }
 
 //=====================================================================================
 /// Method:         CreateSwerveModule
 /// Description:    Find or create the swerve module
-/// Returns:        SwerveModule *    pointer to the swerve module or nullptr if it 
+/// Returns:        SwerveModule *    pointer to the swerve module or nullptr if it
 ///                                         doesn't exist and cannot be created.
 //=====================================================================================
 std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
 (
-    SwerveModule::ModuleID                            type, 
-    const IDragonMotorControllerMap&        				motorControllers,   // <I> - Motor Controllers
-    std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder,
+    SwerveModule::ModuleID                                  position,           // which corner of the robot?
+    const IDragonMotorControllerMap&                        motorControllers,   // <I> - Motor Controllers
+    std::shared_ptr<ctre::phoenix::sensors::CANCoder>       canCoder,
     units::length::inch_t                                   wheelDiameter
 )
 {
     std::shared_ptr<SwerveModule> swerve = nullptr;
-	auto driveMotor = GetMotorController(motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::DRIVE);
-	auto turnMotor  = GetMotorController(motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::TURN);
+    auto driveMotor = GetMotorController(motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::DRIVE);
+    auto turnMotor  = GetMotorController(motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::TURN);
 
-    switch (type)
+    RamScan::SaveSwerveMotorUsage(driveMotor, turnMotor, position);     // RamScan makes its own list of motors
+
+    switch (position)
     {
         case SwerveModule::ModuleID::LEFT_FRONT:
             if ( m_leftFront.get() == nullptr )
             {
-                m_leftFront = make_shared<SwerveModule>(type, driveMotor, turnMotor, canCoder, wheelDiameter );
+                m_leftFront = make_shared<SwerveModule>(position, driveMotor, turnMotor, canCoder, wheelDiameter );
             }
             swerve = m_leftFront;
             break;
@@ -76,7 +79,7 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
         case SwerveModule::ModuleID::LEFT_BACK:
             if ( m_leftBack.get() == nullptr )
             {
-                m_leftBack = make_shared<SwerveModule>(type, driveMotor, turnMotor, canCoder, wheelDiameter );
+                m_leftBack = make_shared<SwerveModule>(position, driveMotor, turnMotor, canCoder, wheelDiameter );
             }
             swerve = m_leftBack;
 
@@ -85,7 +88,7 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
         case SwerveModule::ModuleID::RIGHT_FRONT:
             if ( m_rightFront.get() == nullptr )
             {
-                m_rightFront = make_shared<SwerveModule>(type, driveMotor, turnMotor, canCoder, wheelDiameter );
+                m_rightFront = make_shared<SwerveModule>(position, driveMotor, turnMotor, canCoder, wheelDiameter );
             }
             swerve = m_rightFront;
             break;
@@ -93,8 +96,8 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
         case SwerveModule::ModuleID::RIGHT_BACK:
             if ( m_rightBack.get() == nullptr )
             {
-                m_rightBack = make_shared<SwerveModule>(type, driveMotor, turnMotor, canCoder, wheelDiameter );
-            }            
+                m_rightBack = make_shared<SwerveModule>(position, driveMotor, turnMotor, canCoder, wheelDiameter );
+            }
             swerve = m_rightBack;
             break;
 
@@ -108,15 +111,15 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
 //=====================================================================================
 /// Method:         CreateSwerveChassis
 /// Description:    Find or create the swerve chassis
-/// Returns:        SwerveChassis*      pointer to the swerve chassis or nullptr if it 
+/// Returns:        SwerveChassis*      pointer to the swerve chassis or nullptr if it
 ///                                     doesn't exist and cannot be created.
 //=====================================================================================
 shared_ptr<SwerveChassis> SwerveChassisFactory::CreateSwerveChassis
 (
-    std::shared_ptr<SwerveModule>     frontLeft, 
+    std::shared_ptr<SwerveModule>     frontLeft,
     std::shared_ptr<SwerveModule>     frontRight,
-    std::shared_ptr<SwerveModule>     backLeft, 
-    std::shared_ptr<SwerveModule>     backRight, 
+    std::shared_ptr<SwerveModule>     backLeft,
+    std::shared_ptr<SwerveModule>     backRight,
     units::length::inch_t                   wheelBase,
     units::length::inch_t                   track,
     units::velocity::meters_per_second_t    maxSpeed,
@@ -135,28 +138,28 @@ shared_ptr<SwerveChassis> SwerveChassisFactory::CreateSwerveChassis
 
 shared_ptr<IDragonMotorController> SwerveChassisFactory::GetMotorController
 (
-	const IDragonMotorControllerMap&				motorControllers,
-	MotorControllerUsage::MOTOR_CONTROLLER_USAGE	usage
+    const IDragonMotorControllerMap&                motorControllers,
+    MotorControllerUsage::MOTOR_CONTROLLER_USAGE    usage
 )
 {
-	shared_ptr<IDragonMotorController> motor;
-	auto it = motorControllers.find( usage );
-	if ( it != motorControllers.end() )  // found it
-	{
-		motor = it->second;
-	}
-	else
-	{
-		string msg = "motor not found; usage = ";
-		msg += to_string( usage );
-		Logger::GetLogger()->LogError( string( "SwerveChassisFactory::GetMotorController" ), msg );
-	}
-	
-	if ( motor.get() == nullptr )
-	{
-		string msg = "motor is nullptr; usage = ";
-		msg += to_string( usage );
-		Logger::GetLogger()->LogError( string( "SwerveChassisFactory::GetMotorController" ), msg );
-	}
-	return motor;
+    shared_ptr<IDragonMotorController> motor;
+    auto it = motorControllers.find( usage );
+    if ( it != motorControllers.end() )  // found it
+    {
+        motor = it->second;
+    }
+    else
+    {
+        string msg = "motor not found; usage = ";
+        msg += to_string( usage );
+        Logger::GetLogger()->LogError( string( "SwerveChassisFactory::GetMotorController" ), msg );
+    }
+
+    if ( motor.get() == nullptr )
+    {
+        string msg = "motor is nullptr; usage = ";
+        msg += to_string( usage );
+        Logger::GetLogger()->LogError( string( "SwerveChassisFactory::GetMotorController" ), msg );
+    }
+    return motor;
 }
