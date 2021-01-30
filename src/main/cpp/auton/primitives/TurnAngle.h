@@ -20,7 +20,10 @@
 //Team302 Includes
 #include <auton/primitives/IPrimitive.h>
 #include <units/angular_velocity.h>
+
+//FRC Includes
 #include <frc/geometry/Pose2d.h>
+#include <frc/trajectory/TrapezoidProfile.h>
 
 class SwerveChassis;
 
@@ -39,22 +42,33 @@ class TurnAngle : public IPrimitive
         void Init(PrimitiveParams* params) override;
         void Run() override;
         bool IsDone() override;
+        void IsGreaterThan( double& angle, float& speed);
+        void IsLessThan( double& angle, float& speed);
+        void ReduceCases( double& angle, float& speed);
 
         private:
             std::shared_ptr<SwerveChassis> m_chassis;
             std::unique_ptr<frc::Timer> m_timer;
 
-            double               m_maxTime;
-            frc::Pose2d          m_currentChassisPosition;
-            bool                 m_turnRight = true;
-            bool                 m_isDone = false;
-            float                m_maxSpeed;
-            units::length::inch_t m_goalDistance;
-            units::length::inch_t m_circumference;
-            PRIMITIVE_IDENTIFIER    m_mode;
-            units::degree_t     m_targetAngle;
-            units::degree_t     m_relativeAngle;
+            double                   m_maxTime;
+            double                   m_newTargetAngle;
+            double                   m_distanceToAngleConversion;
 
-            const double SLOW_PERCENT = 0.2;
-            const double ANGLE_THRESH = 2; // +/- threshold for being at angle
+            frc::Pose2d              m_currentChassisPosition;
+
+            bool                     m_reverse = false;
+            bool                     m_isDone = false;
+
+            float                    m_driveSpeed;
+            units::length::inch_t    m_goalDistance;
+            units::length::inch_t    m_circumference;
+
+            PRIMITIVE_IDENTIFIER     m_mode;
+            
+            units::degree_t          m_targetAngle;
+            units::degree_t          m_relativeAngle;
+
+            frc::TrapezoidProfile<units::meters>::State m_goal;
+            frc::TrapezoidProfile<units::meters>::State m_setpoint;
+            frc::TrapezoidProfile<units::meters>::Constraints m_constraints;
 };
