@@ -46,8 +46,8 @@ class TurnAngle : public IPrimitive
 
             double               m_maxTime;
             frc::Pose2d          m_currentChassisPosition;
-            bool                 m_turnRight;
-            bool                 m_isDone;
+            bool                 m_turnRight = true;
+            bool                 m_isDone = false;
             float                m_maxSpeed;
             units::length::inch_t m_goalDistance;
             units::length::inch_t m_circumference;

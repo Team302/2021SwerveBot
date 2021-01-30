@@ -19,6 +19,7 @@
 #include <string>
 #include <units/angular_velocity.h>
 #include <units/math.h>
+#include <units/acceleration.h>
 
 //FRC Includes
 #include <frc/Timer.h>
@@ -101,8 +102,8 @@ void TurnAngle::Init
    double trackSquared = m_chassis.get()->GetTrack().to<double>() * m_chassis.get()->GetTrack().to<double>();
    double wheelbaseSquared = m_chassis.get()->GetWheelBase().to<double>() * m_chassis.get()->GetWheelBase().to<double>();
 
-   units::length::inch_t hypBeforeSqrt(trackSquared * wheelbaseSquared);
-   units::length::inch_t hypAfterSqrt = units::math::sqrt(hypBeforeSqrt);
+   double hypBeforeSqrt(trackSquared * wheelbaseSquared);
+   units::length::inch_t hypAfterSqrt(sqrt(hypBeforeSqrt));
    
    units::length::inch_t m_circumference = pi * hypAfterSqrt;
 
@@ -122,20 +123,13 @@ void TurnAngle::Run()
     units::meters_per_second_t      ySpeed(0);
     units::radians_per_second_t     maxSpeedRadian(m_chassis.get()->GetMaxAngularSpeed());
 
-    //units::radians_per_second_t     moddedSpeedFactor = speedFactor;
-
-    //use https://github.com/wpilibsuite/allwpilib/tree/master/wpilibcExamples/src/main/cpp/examples/ElevatorTrapezoidProfile
-    //as an example for Trapezoid Profile
-    //will not be using m_motor.SetSetPoint since not interacting directly with motors
-    //may want to add a check to see if the trapezoid profile didn't quite make it to desired angle
-    //if we dont make it to desired angle, add a little bit to desired goal for trapezoid profile 
-
     frc::SwerveDrivePoseEstimator<4> chassisPoseEstimator = m_chassis.get()->GetPoseEstimator();
 
     Pose2d currentChassisPos = chassisPoseEstimator.GetEstimatedPosition();
 
-    units::meters_per_second_t maxAccel(m_chassis.get()->GetMaxAcceleration());
-    units::meters_per_second_t maxSpeed(m_chassis.get()->GetMaxSpeed());
+    //change from meters_per_second_squared_t to inches_per_second_t
+    units::acceleration::meters_per_second_squared_t maxAccel(m_chassis.get()->GetMaxAcceleration());
+    units::meters_per_second_t                       maxSpeed = m_chassis.get()->GetMaxSpeed();
 
     static constexpr units::second_t kDt = 20_ms;
 
@@ -144,6 +138,8 @@ void TurnAngle::Run()
 
     m_goal = {m_goalDistance, units::velocity::meters_per_second_t( m_maxSpeed) };
 
+
+    //possibly multiply by 1_s to fix velocity
     frc::TrapezoidProfile<units::meters>::Constraints m_constraints{ maxSpeed, maxAccel};
 
     frc::TrapezoidProfile<units::meters> profile{m_constraints, m_goal, m_setpoint};
@@ -160,9 +156,10 @@ void TurnAngle::Run()
 
 
     //Angular speed calculation
+    //remove turnright from 
     if (m_turnRight)
     {
-        m_chassis->Drive(xSpeed, ySpeed, radianTrapezoidSpeed, true);
+        m_chassis->Drive(xSpeed, ySpeed, -1 * radianTrapezoidSpeed, true);
     } else if (!m_turnRight)
     {
         m_chassis->Drive(xSpeed, ySpeed, radianTrapezoidSpeed, true);
@@ -175,8 +172,6 @@ bool TurnAngle::IsDone()
     frc::SwerveDrivePoseEstimator<4> chassisPoseEstimatorDone = m_chassis.get()->GetPoseEstimator();
 
     Pose2d currentChassisPos = chassisPoseEstimatorDone.GetEstimatedPosition();
-
-    //Will be used for "PID" loop
 
     units::degree_t tolerance(2);
 
