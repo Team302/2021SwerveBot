@@ -121,6 +121,9 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		m_controllerIndex[ SWITCH_DRIVE_MODE ]          = ctrlNo;
 		m_buttonIDs[ SWITCH_DRIVE_MODE ]                = IDragonGamePad::A_BUTTON;
 
+		m_controllerIndex[ REZERO_PIGEON ]				= ctrlNo;
+		m_buttonIDs[ REZERO_PIGEON ]					= IDragonGamePad::X_BUTTON;
+
 		/*m_controllerIndex[ CLIMBER_EXTEND ] = ctrlNo;
 		m_buttonIDs[ CLIMBER_EXTEND ] = IDragonGamePad::A_BUTTON;*/
 

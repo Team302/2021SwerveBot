@@ -22,6 +22,7 @@
 #include <subsys/SwerveChassis.h>
 #include <gamepad/TeleopControl.h>
 #include <states/IState.h>
+#include <hw/DragonPigeon.h>
 
 class SwerveDrive : public IState
 {
@@ -35,6 +36,8 @@ class SwerveDrive : public IState
         void Run() override;
 
         bool AtTarget() const override;
+
+        void RunCurrentState();
 
     protected:
 

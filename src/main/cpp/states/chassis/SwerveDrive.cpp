@@ -20,10 +20,12 @@
 
 //Team 302 Includes
 #include <states/chassis/SwerveDrive.h>
+#include <hw/DragonPigeon.h>
 #include <gamepad/IDragonGamePad.h>
 #include <gamepad/TeleopControl.h>
 #include <states/IState.h>
 #include <subsys/SwerveChassisFactory.h>
+#include <hw/factories/PigeonFactory.h>
 #include <utils/Logger.h>
 
 
@@ -80,6 +82,23 @@ void SwerveDrive::Run( )
 bool SwerveDrive::AtTarget() const
 {
     return false;
+}
+
+void SwerveDrive::RunCurrentState()
+{
+    auto controller = TeleopControl::GetInstance();
+
+    auto factory = PigeonFactory::GetFactory();
+
+    auto m_pigeon = factory->GetPigeon();
+
+    if ( controller != nullptr)
+    {
+        if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::REZERO_PIGEON))
+        {
+            m_pigeon->ReZeroPigeon( 0, 0);
+        }
+    }
 }
 
 /// @brief get the drive component from the game controller
