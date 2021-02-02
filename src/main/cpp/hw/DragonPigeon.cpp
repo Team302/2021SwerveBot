@@ -42,7 +42,7 @@ double DragonPigeon::GetYaw()
     return GetRawYaw() - m_initialYaw;
 }
 
-void DragonPigeon::ReZeroPigeon( double angleDeg, int timeoutMs = 0)
+void DragonPigeon::ReZeroPigeon( double angleDeg, int timeoutMs)
 {
     m_pigeon.get()->SetFusedHeading( angleDeg, timeoutMs);
 }
