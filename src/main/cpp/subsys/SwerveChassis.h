@@ -73,7 +73,9 @@ class SwerveChassis
         units::length::inch_t GetTrack() const {return m_track;}
         units::velocity::meters_per_second_t GetMaxSpeed() const {return m_maxSpeed;}
         units::radians_per_second_t GetMaxAngularSpeed() const {return m_maxAngularSpeed;}
-        double GetMaxAcceration() const { return m_maxAcceleration; }
+        double GetMaxAcceleration() const { return m_maxAcceleration; }
+        //Get angularacceleration
+        frc::SwerveDrivePoseEstimator<4> GetPoseEstimator() {return m_poseEstimator; }
 
 
     private:
@@ -99,6 +101,7 @@ class SwerveChassis
         frc::SwerveDriveKinematics<4> m_kinematics{m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation};
 
         // Gains are for example purposes only - must be determined for your own robot!
+        //Clean up to get clearer information
         frc::SwerveDrivePoseEstimator<4> m_poseEstimator{  frc::Rotation2d(), 
                                                            frc::Pose2d(), 
                                                            m_kinematics,
