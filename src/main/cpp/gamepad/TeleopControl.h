@@ -82,6 +82,7 @@ class TeleopControl
             TURRET_MANUAL_AXIS,
             TURRET_MANUAL_BUTTON,
             TURRET_LIMELIGHT_AIM,
+            REZERO_PIGEON,
             OFF,
             INTAKE,
             INTAKE_HUMAN_PLAYER,
