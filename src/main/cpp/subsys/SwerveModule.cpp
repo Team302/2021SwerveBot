@@ -16,11 +16,13 @@
 
 // C++ Includes
 #include <memory>
+#include <string>
 
 // FRC includes
 #include <frc/geometry/Rotation2d.h>
 #include <frc/trajectory/TrapezoidProfile.h>
 #include <frc/controller/PIDController.h>
+#include <units/angle.h>
 #include <wpi/math>
 
 // Team 302 includes
@@ -29,11 +31,11 @@
 #include <subsys/SwerveChassis.h>
 #include <subsys/SwerveChassisFactory.h>
 #include <subsys/SwerveModule.h>
-#include <units/angle.h>
-
+#include <utils/Logger.h>
 
 // Third Party Includes
 #include <ctre/phoenix/motorcontrol/can/WPI_TalonFX.h>
+#include <ctre/phoenix/sensors/CANCoder.h>
 
 
 using namespace std;
@@ -85,12 +87,17 @@ SwerveModule::SwerveModule
 
 
 
+
     m_turnSensor.get()->ConfigAbsoluteSensorRange(AbsoluteSensorRange::Signed_PlusMinus180, 0);
     motor = m_turnMotor.get()->GetSpeedController();
     fx = dynamic_cast<WPI_TalonFX*>(motor.get());
+//    fx->ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor, 0, 10 );
+//    fx->ConfigIntegratedSensorAbsoluteRange(ctre::phoenix::sensors::AbsoluteSensorRange::Signed_PlusMinus180 );
+    
     fx->ConfigRemoteFeedbackFilter(m_turnSensor.get()->GetDeviceNumber(), ctre::phoenix::motorcontrol::RemoteSensorSource::RemoteSensorSource_CANCoder, 0, 10 );
     fx->ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::RemoteFeedbackDevice::RemoteSensor0, 0, 10 );
-    auto maxAng = chassis->GetMaxAngularSpeed();
+
+      auto maxAng = chassis->GetMaxAngularSpeed();
     auto turnCTL  = make_unique<ControlData>( ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE,
                                               ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
                                               string("TrunProfile"),
@@ -122,12 +129,53 @@ SwerveModule::SwerveModule
     **/
 }
 
+void SwerveModule::Init
+(
+    units::velocity::meters_per_second_t                maxVelocity,
+    units::angular_velocity::radians_per_second_t       maxAngularVelocity,
+    double                                              maxAccMperSecSq
+)
+{
+//return;
+    auto driveCTL = make_unique<ControlData>( ControlModes::CONTROL_TYPE::VELOCITY_RPS,
+                                              ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
+                                              string("DriveSpeed"),
+                                              0.1,
+                                              0.0,
+                                              0.0,
+                                              0.3,
+                                              0.0,
+                                              maxAccMperSecSq,
+                                              maxVelocity.to<double>(),
+                                              maxVelocity.to<double>(),
+                                              0.0 );
+    m_driveMotor.get()->SetControlConstants( driveCTL.get() );
+
+
+    auto turnCTL  = make_unique<ControlData>( ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE,
+                                              ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
+                                              string("TurnProfile"),
+                                              0.1,
+                                              0.0,
+                                              0.0,
+                                              0.3,
+                                              0.0,
+                                              maxAccMperSecSq,
+                                              maxAngularVelocity.to<double>(),
+                                              maxAngularVelocity.to<double>(),
+                                              0.0 );
+    m_turnMotor.get()->SetControlConstants( turnCTL.get() );
+}
 
 /// @brief Turn all of the wheel to zero degrees yaw according to the pigeon
 /// @returns void
 void SwerveModule::ZeroAlignModule()
 {
-     SwerveModuleState state;
+     //SwerveModuleState state;
+     auto state = GetState();
+     Logger::GetLogger()->LogError( string("angle"), to_string(state.angle.Degrees().to<double>()) );
+     Logger::GetLogger()->LogError( string("speed"), to_string(state.speed.to<double>()) );
+
      state.angle = Rotation2d(units::angle::degree_t(0.0));
      state.speed = 0.0_mps; 
 

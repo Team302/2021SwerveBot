@@ -63,6 +63,10 @@ SwerveChassis::SwerveChassis( shared_ptr<SwerveModule>          frontleft,
                                                                                           m_maxAcceleration(maxAcceleration),
                                                                                           m_pigeon(PigeonFactory::GetFactory()->GetPigeon())
 {
+    frontleft.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration );
+    frontright.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration );
+    backleft.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration );
+    backright.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration );
 }
 /// @brief Align all of the swerve modules to point forward
 void SwerveChassis::ZeroAlignSwerveModules()

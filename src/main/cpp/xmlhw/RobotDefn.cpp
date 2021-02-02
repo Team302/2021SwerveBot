@@ -87,7 +87,7 @@ void RobotDefn::ParseXML()
             // loop through the direct children of <robot> and call the appropriate parser
             for (xml_node child = node.first_child(); child; child = child.next_sibling())
             {
-                if (strcmp(child.name(), "chassis") == 0)
+                if (strcmp(child.name(), "swervechassis") == 0)
                 {
                     chassisXML.get()->ParseXML(child);
                 }

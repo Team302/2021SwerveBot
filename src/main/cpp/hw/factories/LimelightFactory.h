@@ -26,7 +26,6 @@ class LimelightFactory
 
     DragonLimelight* CreateLimelight
     (
-      IDragonSensor::SENSOR_USAGE     usage,
       std::string                     tableName,                  /// <I> - network table name
       double                          mountingHeight,             /// <I> - mounting height of the limelight
       double                          mountingHorizontalOffset,   /// <I> - mounting horizontal offset from the middle of the robot

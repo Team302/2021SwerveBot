@@ -30,7 +30,6 @@ LimelightFactory::LimelightFactory() : m_limelight( nullptr )
 }
 DragonLimelight* LimelightFactory::CreateLimelight
 (
-    IDragonSensor::SENSOR_USAGE     usage, 
     string                          tableName, 
     double                          mountingHeight, 
     double                          mountingHorizontalOffset, 
@@ -50,7 +49,7 @@ DragonLimelight* LimelightFactory::CreateLimelight
 {
     if ( m_limelight == nullptr )
     {
-        m_limelight = new DragonLimelight(usage, tableName, mountingHeight, mountingHorizontalOffset, rotation, mountingAngle, targetHeight, targetHeight2);
+        m_limelight = new DragonLimelight(tableName, mountingHeight, mountingHorizontalOffset, rotation, mountingAngle, targetHeight, targetHeight2);
         m_limelight->SetLEDMode( ledMode );
         m_limelight->SetCamMode( camMode );
         m_limelight->SetStreamMode( streamMode );

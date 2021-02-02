@@ -153,7 +153,7 @@ void MechanismDefn::ParseXML
                 servos[servo.get()->GetUsage()] = servo;
             }
         }
-        else if ( strcmp( child.name(), "canCoder" ) == 0)
+        else if ( strcmp( child.name(), "cancoder" ) == 0)
         {
             canCoder = cancoderXML.get()->ParseXML(child);
         }

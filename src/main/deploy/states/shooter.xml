@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE statedata SYSTEM "stateData.dtd">
+<statedata>
+	<controlData identifier="openloop" 
+	             mode="PERCENT_OUTPUT"/>
+	<controlData identifier="closedloop"
+				 mode="VELOCITY_RPS"
+				 proportional="0.03"
+				 feedforward="0.75"/>
+	<mechanismTarget stateIdentifier="SHOOTEROFF"
+	                 controlDataIdentifier="openloop"
+					 value="0.0"/>
+	<mechanismTarget stateIdentifier="SHOOTERGETREADY"
+	                 controlDataIdentifier="openloop"
+					 value="0.5"
+					 secondValue="0.5"/>
+	<mechanismTarget stateIdentifier="SHOOTERSHOOT"
+	                 controlDataIdentifier="closedloop"
+					 value="36.50"
+					 secondValue="36.50"/>
+
+</statedata>
