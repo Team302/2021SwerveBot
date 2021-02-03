@@ -63,6 +63,7 @@ class SwerveChassis
         ///                                                                             false: direction is based on robot front/back
         /// @param [in] units::length::inch_t                   wheelBase:          distance between the front and rear wheels
         void Drive(units::velocity::meters_per_second_t xSpeed, units::velocity::meters_per_second_t ySpeed, units::angular_velocity::radians_per_second_t rot, bool fieldRelative);
+        void Drive( double drivePercent, double steerPercent, double rotatePercent, bool fieldRelative );
 
         void UpdateOdometry();
 
@@ -77,6 +78,13 @@ class SwerveChassis
         //Get angularacceleration
         frc::SwerveDrivePoseEstimator<4> GetPoseEstimator() {return m_poseEstimator; }
 
+        frc::SwerveDrivePoseEstimator<4> GetPose() { return m_poseEstimator; }
+
+        std::shared_ptr<SwerveModule> GetFrontLeftModule() { return m_frontLeft; }
+        std::shared_ptr<SwerveModule> GetFrontRightModule() { return m_frontRight; }
+        std::shared_ptr<SwerveModule> GetBackLeftModule() { return m_backLeft; }
+        std::shared_ptr<SwerveModule> GetBackRightModule() { return m_backRight; }
+        
 
     private:
 

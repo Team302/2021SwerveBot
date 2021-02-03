@@ -33,7 +33,11 @@
 
 //#include "ExampleGlobalMeasurementSensor.h"
 
+
+
 using namespace std;
+using namespace frc;
+
 /// @brief Construct a swerve chassis
 /// @param [in] std::shared_ptr<SwerveModule>     frontleft:          front left swerve module
 /// @param [in] std::shared_ptr<SwerveModule>     frontright:         front right swerve module
@@ -84,16 +88,16 @@ void SwerveChassis::ZeroAlignSwerveModules()
 /// @param [in] units::angular_velocity::radians_per_second_t   rot:            Rotation speed around the vertical (Z) axis; (positive is counter clockwise)
 /// @param [in] bool                                            fieldRelative:  true: movement is based on the field (e.g., push it goes away from the driver regardless of the robot orientation),
 ///                                                                             false: direction is based on robot front/back
-/// @param [in] units::length::inch_t                   wheelBase:          distance between the front and rear wheels
-void SwerveChassis::Drive(units::meters_per_second_t xSpeed,
-                       units::meters_per_second_t ySpeed,
-                       units::radians_per_second_t rot, bool fieldRelative) 
+void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
+                           units::meters_per_second_t ySpeed,
+                           units::radians_per_second_t rot, 
+                           bool fieldRelative) 
 {
     units::degree_t yaw{m_pigeon->GetYaw()};
-    Rotation2d r2d {yaw};
+    Rotation2d currentOrientation {yaw};
     auto states = m_kinematics.ToSwerveModuleStates(
                                 fieldRelative ? frc::ChassisSpeeds::FromFieldRelativeSpeeds(
-                                xSpeed, ySpeed, rot, r2d) : frc::ChassisSpeeds{xSpeed, ySpeed, rot} );
+                                xSpeed, ySpeed, rot, currentOrientation) : frc::ChassisSpeeds{xSpeed, ySpeed, rot} );
 
     m_kinematics.NormalizeWheelSpeeds(&states, m_maxSpeed);
 
@@ -103,6 +107,19 @@ void SwerveChassis::Drive(units::meters_per_second_t xSpeed,
     m_frontRight.get()->SetDesiredState(fr);
     m_backLeft.get()->SetDesiredState(bl);
     m_backRight.get()->SetDesiredState(br);
+}
+
+void SwerveChassis::Drive( double drive, double steer, double rotate, bool fieldRelative )
+{
+    // scale joystick values to velocities using max chassis values
+    auto maxSpeed = GetMaxSpeed();
+    auto maxRotation = GetMaxAngularSpeed();
+
+    units::velocity::meters_per_second_t driveSpeed = drive * maxSpeed;
+    units::velocity::meters_per_second_t steerSpeed = steer * maxSpeed;
+    units::angular_velocity::radians_per_second_t rotateSpeed = rotate * maxRotation;
+
+    Drive( driveSpeed, steerSpeed, rotateSpeed, fieldRelative );
 }
 
 void SwerveChassis::UpdateOdometry() 

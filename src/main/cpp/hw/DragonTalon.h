@@ -50,6 +50,7 @@ class DragonTalon : public IDragonMotorController
         // Setters (override)
         void SetControlMode(ControlModes::CONTROL_TYPE mode) override; //:D
         void Set(double value) override;
+        void Set(std::shared_ptr<nt::NetworkTable> nt, double value) override;
         void SetRotationOffset(double rotations) override;
         void SetVoltageRamping(double ramping, double rampingClosedLoop = -1) override; // seconds 0 to full, set to 0 to disable
         void EnableCurrentLimiting(bool enabled) override; 

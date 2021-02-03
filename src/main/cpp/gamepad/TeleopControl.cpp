@@ -91,56 +91,14 @@ TeleopControl::TeleopControl() : m_axisIDs(),
     auto ctrlNo = 0;
     if ( m_controllers[ctrlNo] != nullptr && ds->GetJoystickIsXbox(ctrlNo) )
     {
-		m_controllerIndex[ TANK_DRIVE_LEFT_CONTROL ] 	= ctrlNo;
-		m_axisIDs[ TANK_DRIVE_LEFT_CONTROL ]    		= IDragonGamePad::LEFT_JOYSTICK_Y;
-		m_controllerIndex[ TANK_DRIVE_RIGHT_CONTROL ] 	= ctrlNo;
-		m_axisIDs[ TANK_DRIVE_RIGHT_CONTROL ]   		= IDragonGamePad::RIGHT_JOYSTICK_Y;
-
-		m_controllerIndex[ ARCADE_DRIVE_THROTTLE ] 		= ctrlNo;
-		m_axisIDs[ ARCADE_DRIVE_THROTTLE ]      		= IDragonGamePad::LEFT_JOYSTICK_Y;
-		m_controllerIndex[ ARCADE_DRIVE_STEER ] 		= ctrlNo;
-		m_axisIDs[ ARCADE_DRIVE_STEER ]         		= IDragonGamePad::RIGHT_JOYSTICK_X;
-
 		m_controllerIndex[ SWERVE_DRIVE_DRIVE]			= ctrlNo;
 		m_axisIDs[ SWERVE_DRIVE_DRIVE]					= IDragonGamePad::LEFT_JOYSTICK_Y;
 		m_controllerIndex[ SWERVE_DRIVE_STEER]			= ctrlNo;
 		m_axisIDs[ SWERVE_DRIVE_STEER]					= IDragonGamePad::LEFT_JOYSTICK_X;
 		m_controllerIndex[ SWERVE_DRIVE_ROTATE]			= ctrlNo;
 		m_axisIDs[ SWERVE_DRIVE_ROTATE]					= IDragonGamePad::RIGHT_JOYSTICK_X;
-
-		m_controllerIndex[ GTA_DRIVE_FORWARD ] 		    = ctrlNo;
-		m_axisIDs[ GTA_DRIVE_FORWARD ]      		    = IDragonGamePad::RIGHT_TRIGGER;
-		m_controllerIndex[ GTA_DRIVE_BACKWARD ] 		= ctrlNo;
-		m_axisIDs[ GTA_DRIVE_BACKWARD ]         		= IDragonGamePad::LEFT_TRIGGER;
-		m_controllerIndex[ GTA_DRIVE_STEER ] 		    = ctrlNo;
-		m_axisIDs[ GTA_DRIVE_STEER ]         		    = IDragonGamePad::LEFT_JOYSTICK_X;
-
-		m_controllerIndex[ CURVATURE_DRIVE_QUICK_TURN ]	= ctrlNo;
-		m_buttonIDs[ CURVATURE_DRIVE_QUICK_TURN ]		= IDragonGamePad::RIGHT_BUMPER;
-
-		m_controllerIndex[ SWITCH_DRIVE_MODE ]          = ctrlNo;
-		m_buttonIDs[ SWITCH_DRIVE_MODE ]                = IDragonGamePad::A_BUTTON;
-
-		m_controllerIndex[ REZERO_PIGEON ]				= ctrlNo;
 		m_buttonIDs[ REZERO_PIGEON ]					= IDragonGamePad::X_BUTTON;
-
-		/*m_controllerIndex[ CLIMBER_EXTEND ] = ctrlNo;
-		m_buttonIDs[ CLIMBER_EXTEND ] = IDragonGamePad::A_BUTTON;*/
-
-		m_controllerIndex[ CLIMBER_WINCH_UP ] = ctrlNo;
-		m_buttonIDs[ CLIMBER_WINCH_UP ] = IDragonGamePad::X_BUTTON;
-
-		m_controllerIndex[ HOOK_DELIVERY_UP] 	= ctrlNo;
-		m_axisIDs[ HOOK_DELIVERY_UP]				= IDragonGamePad::RIGHT_TRIGGER;
-		m_controllerIndex[ HOOK_DELIVERY_DOWN ] 	= ctrlNo;
-		m_axisIDs[ HOOK_DELIVERY_DOWN ]         	= IDragonGamePad::LEFT_TRIGGER;
-
-		/*m_controllerIndex[ CONTROL_PANEL_RAISE ] = ctrlNo;
-		m_buttonIDs[ CONTROL_PANEL_RAISE] = IDragonGamePad::Y_BUTTON;
-
-		m_controllerIndex[ CONTROL_PANEL_SPIN_WHEEL] = ctrlNo;
-		m_buttonIDs[ CONTROL_PANEL_SPIN_WHEEL] = IDragonGamePad::B_BUTTON;*/
-
+		m_controllerIndex[ REZERO_PIGEON ]				= ctrlNo;
     }
     else
     {
