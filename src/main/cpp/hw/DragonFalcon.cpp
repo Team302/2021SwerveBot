@@ -63,31 +63,74 @@ DragonFalcon::DragonFalcon
 {
 	m_talon.get()->ConfigFactoryDefault();
 
+	m_talon.get()->ConfigNeutralDeadband(0.01, 0);
+	m_talon.get()->SetNeutralMode(NeutralMode::Brake);
 	m_talon.get()->ConfigNominalOutputForward(0.0, 10);
 	m_talon.get()->ConfigNominalOutputReverse(0.0, 10);
+	m_talon.get()->ConfigOpenloopRamp(1.0);
 	m_talon.get()->ConfigPeakOutputForward(1.0, 10);
 	m_talon.get()->ConfigPeakOutputReverse(-1.0, 10);
+
+	SupplyCurrentLimitConfiguration climit;
+	climit.enable = false;
+	climit.currentLimit = 1.0;
+	climit.triggerThresholdCurrent = 1.0;
+	climit.triggerThresholdTime = 0.001;
+	m_talon.get()->ConfigSupplyCurrentLimit(climit, 50);
+
+	StatorCurrentLimitConfiguration climit2;
+	climit2.enable = false;
+	climit2.currentLimit = 1.0;
+	climit2.triggerThresholdCurrent = 1.0;
+	climit2.triggerThresholdTime = 0.001;
+	m_talon.get()->ConfigStatorCurrentLimit( climit2, 50);
+
+	m_talon.get()->ConfigVoltageCompSaturation(12.0, 0);
+
+	m_talon.get()->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_Deactivated, LimitSwitchNormal::LimitSwitchNormal_Disabled, 0);
+	m_talon.get()->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_Deactivated, LimitSwitchNormal::LimitSwitchNormal_Disabled, 0);
+
+	m_talon.get()->ConfigForwardSoftLimitEnable(false, 0);
+	m_talon.get()->ConfigForwardSoftLimitThreshold(0.0, 0);
+
+	m_talon.get()->ConfigReverseSoftLimitEnable(false, 0);
+	m_talon.get()->ConfigReverseSoftLimitThreshold(0.0, 0);
+	
+	
 	m_talon.get()->ConfigMotionAcceleration(1500.0, 10);
 	m_talon.get()->ConfigMotionCruiseVelocity(1500.0, 10);
+	m_talon.get()->ConfigMotionSCurveStrength(0, 0);
 
-	m_talon.get()->ConfigClosedLoopPeakOutput(0, 1.0, 10);
-	m_talon.get()->ConfigClosedLoopPeriod(0, 1, 10 );
+	m_talon.get()->ConfigMotionProfileTrajectoryPeriod(0, 0);
+	m_talon.get()->ConfigMotionProfileTrajectoryInterpolationEnable(true, 0);
+
+	m_talon.get()->ConfigAllowableClosedloopError(0.0, 0);
+
+	for ( auto inx=0; inx<4; ++inx )
+	{
+		m_talon.get()->ConfigClosedLoopPeakOutput(0, 1.0, 10);
+		m_talon.get()->ConfigClosedLoopPeriod(0, 1, 10 );
+		m_talon.get()->Config_kP(0, 0.01, 0);
+		m_talon.get()->Config_kI(0, 0.0, 0);
+		m_talon.get()->Config_kD(0, 0.0, 0);
+		m_talon.get()->Config_kF(0, 1.0, 0);
+		m_talon.get()->Config_IntegralZone(0, 0.0, 0);
+	}
+
+	m_talon.get()->ConfigRemoteFeedbackFilter(60, RemoteSensorSource::RemoteSensorSource_Off, 0, 0 );
+	m_talon.get()->ConfigRemoteFeedbackFilter(60, RemoteSensorSource::RemoteSensorSource_Off, 1, 0 );
 
 	m_talon.get()->ConfigVoltageCompSaturation(12.0, 0);
 
 	m_talon.get()->ConfigForwardSoftLimitEnable(false, 0);
 	m_talon.get()->ConfigReverseSoftLimitEnable(false, 0);
 
-	m_talon.get()->ConfigRemoteFeedbackFilter(60, RemoteSensorSource::RemoteSensorSource_Off, 0, 0 );
-	
+	/**
 	TalonFXConfiguration configs;
 	m_talon.get()->GetAllConfigs(configs, 50);
 	string key = string("talonFx") + to_string(deviceID);
 	Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT_ONCE, key, configs.toString());
-
-  	//auto limit = SupplyCurrentLimitConfiguration( true, 25.0, 35.0, 0.0 );
- 	// m_talon.get()->ConfigSupplyCurrentLimit( limit, 50 );
-	//m_tickOffset = m_talon.get()->GetSelectedSensorPosition();
+	**/
 }
 
 double DragonFalcon::GetRotations() const
