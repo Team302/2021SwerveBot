@@ -50,22 +50,6 @@ TurnAngle::TurnAngle() : m_chassis( SwerveChassisFactory::GetSwerveChassisFactor
 {
 }
 
-/*
-TurnAngle::TurnAngle
-(
-    PRIMITIVE_IDENTIFIER        mode,
-    units::radians_per_second_t targetAngle
-) : m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
-						 m_timer( make_unique<Timer>() ),
-						 m_maxTime(0.0),
-						 m_isDone(false),
-						 m_reverse(true)
-{
-}
-*/  //Don't know why this was declared twice in original turn angle code
-
-
-
 
 void TurnAngle::Init
 (
@@ -160,7 +144,7 @@ void TurnAngle::Run()
 bool TurnAngle::IsDone()
 {
 
-    frc::SwerveDrivePoseEstimator<4> chassisPoseEstimatorDone = m_chassis.get()->GetPoseEstimator();
+    frc::SwerveDrivePoseEstimator<4> chassisPoseEstimatorDone = m_chassis.get()->GetPose();
 
     Pose2d currentChassisPos = chassisPoseEstimatorDone.GetEstimatedPosition();
 
