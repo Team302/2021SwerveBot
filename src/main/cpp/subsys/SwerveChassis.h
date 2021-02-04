@@ -73,6 +73,10 @@ class SwerveChassis
         units::length::inch_t GetTrack() const {return m_track;}
         units::velocity::meters_per_second_t GetMaxSpeed() const {return m_maxSpeed;}
         units::radians_per_second_t GetMaxAngularSpeed() const {return m_maxAngularSpeed;}
+        std::shared_ptr<SwerveModule> GetFrontLeft() const { return m_frontLeft;}
+        std::shared_ptr<SwerveModule> GetFrontRight() const { return m_frontRight;}
+        std::shared_ptr<SwerveModule> GetBackLeft() const { return m_backLeft;}
+        std::shared_ptr<SwerveModule> GetBackRight() const { return m_backRight;}
         double GetMaxAcceration() const { return m_maxAcceleration; }
 
 
