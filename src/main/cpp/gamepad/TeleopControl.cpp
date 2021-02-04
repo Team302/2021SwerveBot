@@ -177,15 +177,15 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		m_controllerIndex[INTAKE_OFF] = ctrlNo;
 		m_buttonIDs[INTAKE_OFF] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_2;
 
-		m_controllerIndex[IMPELLER_OFF] = ctrlNo;
-		m_buttonIDs[IMPELLER_OFF] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_3;
-		m_controllerIndex[IMPELLER_HOLD] = ctrlNo;
-		m_buttonIDs[IMPELLER_HOLD] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_4;
+		//m_controllerIndex[IMPELLER_OFF] = ctrlNo;
+		//m_buttonIDs[IMPELLER_OFF] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_3;
+		//m_controllerIndex[IMPELLER_HOLD] = ctrlNo;
+		//m_buttonIDs[IMPELLER_HOLD] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_4;
 		/*m_controllerIndex[IMPELLER_AGITATE] = ctrlNo;
 		m_buttonIDs[IMPELLER_AGITATE] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_5;
 		*/
-		m_controllerIndex[IMPELLER_TO_SHOOTER] = ctrlNo;
-		m_buttonIDs[IMPELLER_TO_SHOOTER] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_5;
+		//m_controllerIndex[IMPELLER_TO_SHOOTER] = ctrlNo;
+		//m_buttonIDs[IMPELLER_TO_SHOOTER] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_5;
 		
 
 		//m_controllerIndex[CLIMBER_EXTEND] = ctrlNo;
@@ -197,8 +197,8 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 
 		m_controllerIndex[BALL_TRANSFER_OFF] = ctrlNo;
 		m_buttonIDs[BALL_TRANSFER_OFF] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_6;
-		m_controllerIndex[BALL_TRANSFER_TO_IMPELLER] = ctrlNo;
-		m_buttonIDs[BALL_TRANSFER_TO_IMPELLER] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_7;
+		//m_controllerIndex[BALL_TRANSFER_TO_IMPELLER] = ctrlNo;
+		//m_buttonIDs[BALL_TRANSFER_TO_IMPELLER] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_7;
 		m_controllerIndex[BALL_TRANSFER_TO_SHOOTER] = ctrlNo;
 		m_buttonIDs[BALL_TRANSFER_TO_SHOOTER] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_8;
 		
