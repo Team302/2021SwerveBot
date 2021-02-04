@@ -20,10 +20,12 @@
 
 //Team 302 Includes
 #include <states/chassis/SwerveDrive.h>
+#include <hw/DragonPigeon.h>
 #include <gamepad/IDragonGamePad.h>
 #include <gamepad/TeleopControl.h>
 #include <states/IState.h>
 #include <subsys/SwerveChassisFactory.h>
+#include <hw/factories/PigeonFactory.h>
 #include <utils/Logger.h>
 
 
@@ -64,13 +66,27 @@ void SwerveDrive::Init()
 /// @return void
 void SwerveDrive::Run( )
 {
+    double drive = 0.0;
+    double steer = 0.0;
+    double rotate = 0.0;
+    auto controller = GetController();
+    if ( controller != nullptr )
+    {
+        drive  = controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE) ;
+        steer  = controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER);
+        rotate =  controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
+    }
+
+    m_chassis.get()->Drive(drive, steer, rotate, true);
+    return;
+
     //Get drive, steer, and rotate values
     units::velocity::meters_per_second_t maxSpeed = m_chassis.get()->GetMaxSpeed();
-    units::velocity::meters_per_second_t driveSpeed = maxSpeed * GetDrive();
-    units::velocity::meters_per_second_t turnSpeed = maxSpeed * GetSteer();
+    units::velocity::meters_per_second_t driveSpeed = maxSpeed * drive;
+    units::velocity::meters_per_second_t turnSpeed = maxSpeed * steer;
 
     units::radians_per_second_t maxRotateSpeed = m_chassis.get()->GetMaxAngularSpeed();
-    units::radians_per_second_t rotateSpeed = maxRotateSpeed * GetRotate(); 
+    units::radians_per_second_t rotateSpeed = maxRotateSpeed * rotate; 
 
     m_chassis.get()->Drive(driveSpeed, turnSpeed, rotateSpeed, true);
 }
@@ -82,26 +98,20 @@ bool SwerveDrive::AtTarget() const
     return false;
 }
 
-/// @brief get the drive component from the game controller
-/// @return double - drive value between -1.0 and 1.0
-double SwerveDrive::GetDrive()
+void SwerveDrive::RunCurrentState()
 {
-    auto controller = GetController();
-    return ( ( controller != nullptr ) ? controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE) : 0.0);
+    auto controller = TeleopControl::GetInstance();
+
+    auto factory = PigeonFactory::GetFactory();
+
+    auto m_pigeon = factory->GetPigeon();
+
+    if ( controller != nullptr)
+    {
+        if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::REZERO_PIGEON))
+        {
+            m_pigeon->ReZeroPigeon( 0, 0);
+        }
+    }
 }
 
-/// @brief get the steer component from the game controller
-/// @return double - steer value between -1.0 and 1.0
-double SwerveDrive::GetSteer()
-{
-    auto controller = GetController();
-    return ( ( controller != nullptr ) ? controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER) : 0.0);
-}
-
-/// @brief get the rotate component from the game controller
-/// @return double - rotate value between -1.0 and 1.0
-double SwerveDrive::GetRotate()
-{
-    auto controller = GetController();
-    return ( ( controller != nullptr ) ? controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE) : 0.0);
-}

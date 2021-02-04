@@ -20,6 +20,9 @@
 #include <vector>
 
 // FRC includes
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
 #include <frc/PowerDistributionPanel.h>
 #include <frc/SpeedController.h>
 
@@ -59,9 +62,75 @@ DragonFalcon::DragonFalcon
 	m_diameter( 1.0 )
 {
 	m_talon.get()->ConfigFactoryDefault();
-  	auto limit = SupplyCurrentLimitConfiguration( true, 25.0, 35.0, 0.0 );
- 	 m_talon.get()->ConfigSupplyCurrentLimit( limit, 50 );
-	//m_tickOffset = m_talon.get()->GetSelectedSensorPosition();
+
+	m_talon.get()->ConfigNeutralDeadband(0.01, 0);
+	m_talon.get()->SetNeutralMode(NeutralMode::Brake);
+	m_talon.get()->ConfigNominalOutputForward(0.0, 10);
+	m_talon.get()->ConfigNominalOutputReverse(0.0, 10);
+	m_talon.get()->ConfigOpenloopRamp(1.0);
+	m_talon.get()->ConfigPeakOutputForward(1.0, 10);
+	m_talon.get()->ConfigPeakOutputReverse(-1.0, 10);
+
+	SupplyCurrentLimitConfiguration climit;
+	climit.enable = false;
+	climit.currentLimit = 1.0;
+	climit.triggerThresholdCurrent = 1.0;
+	climit.triggerThresholdTime = 0.001;
+	m_talon.get()->ConfigSupplyCurrentLimit(climit, 50);
+
+	StatorCurrentLimitConfiguration climit2;
+	climit2.enable = false;
+	climit2.currentLimit = 1.0;
+	climit2.triggerThresholdCurrent = 1.0;
+	climit2.triggerThresholdTime = 0.001;
+	m_talon.get()->ConfigStatorCurrentLimit( climit2, 50);
+
+	m_talon.get()->ConfigVoltageCompSaturation(12.0, 0);
+
+	m_talon.get()->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_Deactivated, LimitSwitchNormal::LimitSwitchNormal_Disabled, 0);
+	m_talon.get()->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_Deactivated, LimitSwitchNormal::LimitSwitchNormal_Disabled, 0);
+
+	m_talon.get()->ConfigForwardSoftLimitEnable(false, 0);
+	m_talon.get()->ConfigForwardSoftLimitThreshold(0.0, 0);
+
+	m_talon.get()->ConfigReverseSoftLimitEnable(false, 0);
+	m_talon.get()->ConfigReverseSoftLimitThreshold(0.0, 0);
+	
+	
+	m_talon.get()->ConfigMotionAcceleration(1500.0, 10);
+	m_talon.get()->ConfigMotionCruiseVelocity(1500.0, 10);
+	m_talon.get()->ConfigMotionSCurveStrength(0, 0);
+
+	m_talon.get()->ConfigMotionProfileTrajectoryPeriod(0, 0);
+	m_talon.get()->ConfigMotionProfileTrajectoryInterpolationEnable(true, 0);
+
+	m_talon.get()->ConfigAllowableClosedloopError(0.0, 0);
+
+	for ( auto inx=0; inx<4; ++inx )
+	{
+		m_talon.get()->ConfigClosedLoopPeakOutput(0, 1.0, 10);
+		m_talon.get()->ConfigClosedLoopPeriod(0, 1, 10 );
+		m_talon.get()->Config_kP(0, 0.01, 0);
+		m_talon.get()->Config_kI(0, 0.0, 0);
+		m_talon.get()->Config_kD(0, 0.0, 0);
+		m_talon.get()->Config_kF(0, 1.0, 0);
+		m_talon.get()->Config_IntegralZone(0, 0.0, 0);
+	}
+
+	m_talon.get()->ConfigRemoteFeedbackFilter(60, RemoteSensorSource::RemoteSensorSource_Off, 0, 0 );
+	m_talon.get()->ConfigRemoteFeedbackFilter(60, RemoteSensorSource::RemoteSensorSource_Off, 1, 0 );
+
+	m_talon.get()->ConfigVoltageCompSaturation(12.0, 0);
+
+	m_talon.get()->ConfigForwardSoftLimitEnable(false, 0);
+	m_talon.get()->ConfigReverseSoftLimitEnable(false, 0);
+
+	/**
+	TalonFXConfiguration configs;
+	m_talon.get()->GetAllConfigs(configs, 50);
+	string key = string("talonFx") + to_string(deviceID);
+	Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT_ONCE, key, configs.toString());
+	**/
 }
 
 double DragonFalcon::GetRotations() const
@@ -91,7 +160,7 @@ double DragonFalcon::GetCurrent() const
 }
 
 
-void DragonFalcon::Set(double value)
+void DragonFalcon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)
 {
 	auto output = value;
 	ctre::phoenix::motorcontrol::ControlMode ctreMode = ctre::phoenix::motorcontrol::ControlMode::PercentOutput;
@@ -101,7 +170,6 @@ void DragonFalcon::Set(double value)
 			ctreMode = ctre::phoenix::motorcontrol::ControlMode::PercentOutput;
 			output = value;
 			break;
-			
 			
 		case ControlModes::CONTROL_TYPE::VOLTAGE:
 			ctreMode = ctre::phoenix::motorcontrol::ControlMode::PercentOutput;
@@ -135,7 +203,8 @@ void DragonFalcon::Set(double value)
 
 		case ControlModes::CONTROL_TYPE::VELOCITY_RPS:
             ctreMode = ctre::phoenix::motorcontrol::ControlMode::Velocity;
-			output = (ConversionUtils::RPSToCounts100ms( value, m_countsPerRev ) / m_gearRatio);
+			output = value / m_gearRatio;
+			output = ConversionUtils::RPSToCounts100ms( output, m_countsPerRev );
         	break;
 
 		case ControlModes::CONTROL_TYPE::CURRENT:
@@ -165,7 +234,21 @@ void DragonFalcon::Set(double value)
         	break;
     }	
 
-	m_talon.get()->Set( ctreMode, output );
+	if ( nt.get() != nullptr )
+	{
+		nt->PutString("motor id ", to_string(m_talon.get()->GetDeviceID()) );
+		nt->PutNumber("motor output ", output );
+	}
+
+	m_talon.get()->Set( ctreMode, output );}
+
+void DragonFalcon::Set(double value)
+{
+	auto id = m_talon.get()->GetDeviceID();
+	auto ntName = std::string("MotorOutput");
+	ntName += to_string(id);
+	auto nt = nt::NetworkTableInstance::GetDefault().GetTable(ntName);
+	Set(nt, value);
 }
 
 void DragonFalcon::SetRotationOffset(double rotations)
@@ -348,6 +431,8 @@ void DragonFalcon::SetAsFollowerMotor
 /// @return void
 void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 {
+	SetControlMode(controlInfo->GetMode());
+
 	auto peak = controlInfo->GetPeakValue();
 	m_talon.get()->ConfigPeakOutputForward(peak);
 	m_talon.get()->ConfigPeakOutputReverse(-1.0*peak);
@@ -369,6 +454,7 @@ void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 			m_talon.get()->Config_kI(0, controlInfo->GetI());
 			m_talon.get()->Config_kD(0, controlInfo->GetD());
 			m_talon.get()->Config_kF(0, controlInfo->GetF());
+			m_talon.get()->SelectProfileSlot(0, 0);
 		}
 		break;
 
@@ -380,6 +466,7 @@ void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 			m_talon.get()->Config_kF(0, controlInfo->GetF());
 			m_talon.get()->ConfigMotionAcceleration( controlInfo->GetMaxAcceleration() );
 			m_talon.get()->ConfigMotionCruiseVelocity( controlInfo->GetCruiseVelocity(), 0);
+			m_talon.get()->SelectProfileSlot(0, 0);
 		}
 		break;
 
@@ -389,6 +476,7 @@ void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 			m_talon.get()->Config_kI(0, controlInfo->GetI());
 			m_talon.get()->Config_kD(0, controlInfo->GetD());
 			m_talon.get()->Config_kF(0, controlInfo->GetF());
+			m_talon.get()->SelectProfileSlot(0, 0);
 		}
 		break;
 
@@ -398,6 +486,7 @@ void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 			m_talon.get()->Config_kI(0, controlInfo->GetI());
 			m_talon.get()->Config_kD(0, controlInfo->GetD());
 			m_talon.get()->Config_kF(0, controlInfo->GetF());
+			m_talon.get()->SelectProfileSlot(0, 0);
 		}
 		break;
 
@@ -407,6 +496,7 @@ void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 			m_talon.get()->Config_kI(0, controlInfo->GetI());
 			m_talon.get()->Config_kD(0, controlInfo->GetD());
 			m_talon.get()->Config_kF(0, controlInfo->GetF());
+			m_talon.get()->SelectProfileSlot(0, 0);
 		}
 		break;
 
@@ -416,6 +506,7 @@ void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 			m_talon.get()->Config_kI(0, controlInfo->GetI());
 			m_talon.get()->Config_kD(0, controlInfo->GetD());
 			m_talon.get()->Config_kF(0, controlInfo->GetF());
+			m_talon.get()->SelectProfileSlot(0, 0);
 		}
 		break;
 
@@ -425,6 +516,7 @@ void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 			m_talon.get()->Config_kI(0, controlInfo->GetI());
 			m_talon.get()->Config_kD(0, controlInfo->GetD());
 			m_talon.get()->Config_kF(0, controlInfo->GetF());
+			m_talon.get()->SelectProfileSlot(0, 0);
 		}
 		break;
 
@@ -434,6 +526,7 @@ void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 			m_talon.get()->Config_kI(0, controlInfo->GetI());
 			m_talon.get()->Config_kD(0, controlInfo->GetD());
 			m_talon.get()->Config_kF(0, controlInfo->GetF());
+			m_talon.get()->SelectProfileSlot(0, 0);
 		}
 		break;
 
@@ -449,6 +542,7 @@ void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 
 			auto vel = controlInfo->GetCruiseVelocity() / m_gearRatio;
 			m_talon.get()->ConfigMotionCruiseVelocity( vel, 0);
+			m_talon.get()->SelectProfileSlot(0, 0);
 		}
 		break;
 
@@ -470,6 +564,13 @@ void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 		}
 		break;
 	}
+	/**
+	TalonFXPIDSetConfiguration  configs;
+	m_talon.get()->GetPIDConfigs(configs, 50);
+	string key = string("talonFx") + to_string(GetID()) + string(" - PIDS ");
+	Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT_ONCE, key, configs.toString());
+	**/
+
 }
 
 void DragonFalcon::SetForwardLimitSwitch

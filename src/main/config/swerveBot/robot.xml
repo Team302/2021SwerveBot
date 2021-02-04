@@ -33,13 +33,32 @@
     <swervechassis   type="SWERVE"
                      wheelBase="14.0"  
                      track="14.0"
-                     maxVelocity="168.0"
-                     maxAngularVelocity="180.0"
+                     maxVelocity="194.4"
+                     maxAngularVelocity="1591.2"
                      maxAcceleration="24.0">
 			 
         <swervemodule type="LEFT_FRONT"
 			 wheelDiameter="4.0">
             <motor  usage="DRIVE"
+                    canId="3"
+                    pdpID="3"
+                    type="FALCON"
+                    inverted="true"
+                    sensorInverted="false"
+                    feedbackDevice="INTERNAL"
+                    countsPerRev="2048"
+                    gearRatio="6.86"
+                    brakeMode="true"
+                    follow="-1"
+                    peakCurrentDuration="15.0"
+                    continuousCurrentLimit="40.0"
+                    peakCurrentLimit="50.0"
+                    currentLimiting="true" 
+                    forwardlimitswitch="false"
+                    forwardlimitswitchopen="true"
+                    reverselimitswitch="false"
+                    reverselimitswitchopen="true"/>                  
+             <motor  usage="TURN"
                     canId="2"
                     pdpID="2"
                     type="FALCON"
@@ -57,27 +76,8 @@
                     forwardlimitswitch="false"
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
-                    reverselimitswitchopen="true"/>                  
-             <motor  usage="TURN"
-                    canId="3"
-                    pdpID="3"
-                    type="FALCON"
-                    inverted="true"
-                    sensorInverted="false"
-                    feedbackDevice="INTERNAL"
-                    countsPerRev="2048"
-                    gearRatio="8.4"
-                    brakeMode="true"
-                    follow="-1"
-                    peakCurrentDuration="15.0"
-                    continuousCurrentLimit="40.0"
-                    peakCurrentLimit="50.0"
-                    currentLimiting="true" 
-                    forwardlimitswitch="false"
-                    forwardlimitswitchopen="true"
-                    reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
-		    <cancoder canId="31"/>
+		    <cancoder canId="11"/>
         </swervemodule>
 
         <swervemodule type="RIGHT_FRONT"
@@ -90,7 +90,7 @@
                     sensorInverted="false"
                     feedbackDevice="INTERNAL"
                     countsPerRev="2048"
-                    gearRatio="8.4"
+                    gearRatio="6.86"
                     brakeMode="true"
                     follow="-1"
                     peakCurrentDuration="15.0"
@@ -120,12 +120,31 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
-		    <cancoder canId="30"/>
+		    <cancoder canId="10"/>
         </swervemodule>
 
         <swervemodule type="LEFT_BACK"
 			 wheelDiameter="4.0">
             <motor  usage="DRIVE"
+                    canId="13"
+                    pdpID="13"
+                    type="FALCON"
+                    inverted="true"
+                    sensorInverted="false"
+                    feedbackDevice="INTERNAL"
+                    countsPerRev="2048"
+                    gearRatio="6.86"
+                    brakeMode="true"
+                    follow="-1"
+                    peakCurrentDuration="15.0"
+                    continuousCurrentLimit="40.0"
+                    peakCurrentLimit="50.0"
+                    currentLimiting="true" 
+                    forwardlimitswitch="false"
+                    forwardlimitswitchopen="true"
+                    reverselimitswitch="false"
+                    reverselimitswitchopen="true"/>                  
+             <motor  usage="TURN"
                     canId="12"
                     pdpID="12"
                     type="FALCON"
@@ -143,27 +162,8 @@
                     forwardlimitswitch="false"
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
-                    reverselimitswitchopen="true"/>                  
-             <motor  usage="TURN"
-                    canId="13"
-                    pdpID="13"
-                    type="FALCON"
-                    inverted="true"
-                    sensorInverted="false"
-                    feedbackDevice="INTERNAL"
-                    countsPerRev="2048"
-                    gearRatio="8.4"
-                    brakeMode="true"
-                    follow="-1"
-                    peakCurrentDuration="15.0"
-                    continuousCurrentLimit="40.0"
-                    peakCurrentLimit="50.0"
-                    currentLimiting="true" 
-                    forwardlimitswitch="false"
-                    forwardlimitswitchopen="true"
-                    reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
-		    <cancoder canId="32"/>
+		    <cancoder canId="12"/>
         </swervemodule>
 
         <swervemodule type="RIGHT_BACK"
@@ -176,7 +176,7 @@
                     sensorInverted="false"
                     feedbackDevice="INTERNAL"
                     countsPerRev="2048"
-                    gearRatio="8.4"
+                    gearRatio="6.86"
                     brakeMode="true"
                     follow="-1"
                     peakCurrentDuration="15.0"
@@ -206,7 +206,7 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
-		    <cancoder canId="33"/>
+		    <cancoder canId="13"/>
         </swervemodule>
 
     </swervechassis>  

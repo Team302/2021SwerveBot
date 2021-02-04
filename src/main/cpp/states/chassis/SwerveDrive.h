@@ -22,6 +22,7 @@
 #include <subsys/SwerveChassis.h>
 #include <gamepad/TeleopControl.h>
 #include <states/IState.h>
+#include <hw/DragonPigeon.h>
 
 class SwerveDrive : public IState
 {
@@ -36,23 +37,10 @@ class SwerveDrive : public IState
 
         bool AtTarget() const override;
 
-    protected:
-
-        virtual double GetDrive();
-
-        virtual double GetSteer();
-
-        virtual double GetRotate();
-
-        inline TeleopControl* GetController() const { return m_controller; }
-      /*  void Drive
-        (
-            double drive,
-            double steer,
-            double rotate
-        );*/
+        void RunCurrentState();
 
     private:
+        inline TeleopControl* GetController() const { return m_controller; }
         std::shared_ptr<SwerveChassis> m_chassis;
         TeleopControl* m_controller;
 };

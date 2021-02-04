@@ -78,17 +78,17 @@ class SwerveModule
         units::length::inch_t                               m_wheelDiameter;
 
         //TODO #2 Encoder from falcons
-        frc::Encoder m_driveEncoder{0, 1};
-        frc::Encoder m_turnEncoder{2, 3};
+        //frc::Encoder m_driveEncoder{0, 1};
+        //frc::Encoder m_turnEncoder{2, 3};
 
         //frc2::PIDController m_drivePIDController{1.0, 0, 0};
-        std::shared_ptr<frc2::PIDController> m_drivePIDController;
+        //std::shared_ptr<frc2::PIDController> m_drivePIDController;
 
         //frc::ProfiledPIDController<units::radians> m_turnPIDController{1.0, 0.0, 0.0, {ModuleMaxAngularVelocity, ModuleMaxAngularAcceleration}};
-        std::shared_ptr<frc2::PIDController> m_turnPIDController;
+        //std::shared_ptr<frc2::PIDController> m_turnPIDController;
         //std::shared_ptr<frc::ProfiledPIDController<units::radians>> m_turnPIDController;
         
 
-        frc::SimpleMotorFeedforward<units::meters> m_driveFeedforward;
-        frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward;
+        //frc::SimpleMotorFeedforward<units::meters> m_driveFeedforward;
+        //frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward;
 };

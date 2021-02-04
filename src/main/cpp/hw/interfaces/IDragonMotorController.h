@@ -22,6 +22,7 @@
 
 // FRC includes
 #include <frc/SpeedController.h>
+#include <networktables/NetworkTable.h>
 
 // Team 302 includes
 #include <hw/usages/MotorControllerUsage.h>
@@ -65,6 +66,7 @@ class IDragonMotorController
         // Setters
         virtual void SetControlMode(ControlModes::CONTROL_TYPE mode) = 0;
         virtual void Set(double value) = 0;
+        virtual void Set(std::shared_ptr<nt::NetworkTable> nt, double value) = 0;
         virtual void SetRotationOffset(double rotations) = 0;
         virtual void SetVoltageRamping(double ramping, double closedLoopRamping = -1) = 0;
         virtual void EnableCurrentLimiting(bool enabled) = 0;

@@ -103,6 +103,7 @@ shared_ptr<IDragonMotorController> DragonMotorControllerFactory::CreateMotorCont
         auto talon = new DragonFalcon( MotorControllerUsage::GetInstance()->GetUsage(usage), canID, pdpID, countsPerRev, gearRatio );
         talon->EnableBrakeMode( brakeMode );
         talon->Invert( inverted );
+        /**
         talon->SetSensorInverted( sensorInverted );
         talon->ConfigSelectedFeedbackSensor( feedbackDevice, 0, 50 );
         talon->ConfigSelectedFeedbackSensor( feedbackDevice, 1, 50 );
@@ -120,6 +121,7 @@ shared_ptr<IDragonMotorController> DragonMotorControllerFactory::CreateMotorCont
         {
             talon->SetAsFollowerMotor( followMotor );
         }
+        **/
         controller.reset( talon );
     }
     else

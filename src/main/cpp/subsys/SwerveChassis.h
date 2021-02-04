@@ -63,6 +63,7 @@ class SwerveChassis
         ///                                                                             false: direction is based on robot front/back
         /// @param [in] units::length::inch_t                   wheelBase:          distance between the front and rear wheels
         void Drive(units::velocity::meters_per_second_t xSpeed, units::velocity::meters_per_second_t ySpeed, units::angular_velocity::radians_per_second_t rot, bool fieldRelative);
+        void Drive( double drivePercent, double steerPercent, double rotatePercent, bool fieldRelative );
 
         void UpdateOdometry();
 
@@ -78,7 +79,7 @@ class SwerveChassis
         std::shared_ptr<SwerveModule> GetBackLeft() const { return m_backLeft;}
         std::shared_ptr<SwerveModule> GetBackRight() const { return m_backRight;}
         double GetMaxAcceration() const { return m_maxAcceleration; }
-
+        frc::SwerveDrivePoseEstimator<4> GetPose() { return m_poseEstimator; }       
 
     private:
 
@@ -103,6 +104,7 @@ class SwerveChassis
         frc::SwerveDriveKinematics<4> m_kinematics{m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation};
 
         // Gains are for example purposes only - must be determined for your own robot!
+        //Clean up to get clearer information
         frc::SwerveDrivePoseEstimator<4> m_poseEstimator{  frc::Rotation2d(), 
                                                            frc::Pose2d(), 
                                                            m_kinematics,

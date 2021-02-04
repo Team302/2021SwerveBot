@@ -17,7 +17,7 @@
              HOLD_POSITION,
              DRIVE_DISTANCE,
              DRIVE_TIME,
-			 DRIVE_TO_WALL,
+			       DRIVE_TO_WALL,
              TURN_ANGLE_ABS,
              TURN_ANGLE_REL,
              AUTO_SHOOT,

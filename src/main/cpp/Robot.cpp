@@ -43,13 +43,6 @@ void Robot::RobotInit()
     // solenoids, digital inputs, analog inputs, etc.
     unique_ptr<RobotDefn>  robotXml = make_unique<RobotDefn>();
     robotXml->ParseXML();
-
-    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
-    if ( swerveChassis.get() != nullptr )
-    {
-        swerveChassis.get()->ZeroAlignSwerveModules();
-    }
-
 }
 
 /// @brief This function is called every robot packet, no matter the  mode. This is used for items like diagnostics that run 
@@ -71,7 +64,11 @@ void Robot::RobotPeriodic()
 /// @return void
 void Robot::AutonomousInit() 
 {
-
+    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
+    if ( swerveChassis.get() != nullptr )
+    {
+        swerveChassis.get()->ZeroAlignSwerveModules();
+    }
 }
 
 
@@ -80,6 +77,12 @@ void Robot::AutonomousInit()
 void Robot::AutonomousPeriodic() 
 {
     //Real auton magic right here:
+    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
+    if ( swerveChassis.get() != nullptr )
+    {
+        swerveChassis.get()->Drive(1.0, 0.0, 0.0, false);
+    }
+
 }
 
 
@@ -87,6 +90,13 @@ void Robot::AutonomousPeriodic()
 /// @return void
 void Robot::TeleopInit() 
 {
+
+    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
+    if ( swerveChassis.get() != nullptr )
+    {
+        swerveChassis.get()->ZeroAlignSwerveModules();
+    }
+
     m_drive = make_shared<SwerveDrive>();
     m_drive.get()->Init();
 }

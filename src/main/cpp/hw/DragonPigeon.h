@@ -24,6 +24,7 @@ class DragonPigeon
         double GetPitch();
         double GetRoll();
         double GetYaw();
+        void ReZeroPigeon( double angleDeg, int timeoutMs = 0);
 
     private:
 
