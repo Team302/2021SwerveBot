@@ -28,17 +28,10 @@
 // Team 302 includes
 #include <subsys/SwerveChassis.h>
 
-
-
 // Third Party Includes
 #include <ctre/phoenix/sensors/CANCoder.h>
 
-
-
-
 //#include "ExampleGlobalMeasurementSensor.h"
-
-
 
 using namespace std;
 using namespace frc;
@@ -123,6 +116,21 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
     m_backRight.get()->SetDesiredState(br);
 }
 
+/// @brief Drive the chassis
+/// @param [in] frc::ChassisSpeeds  speeds:         kinematics for how to move the chassis
+/// @param [in] bool                fieldRelative:  true: movement is based on the field (e.g., push it goes away from the driver regardless of the robot orientation),
+///                                                 false: direction is based on robot front/back
+void SwerveChassis::Drive( ChassisSpeeds speeds, bool fieldRelative) 
+{
+    Drive( speeds.vx, speeds.vy, speeds.omega, fieldRelative);
+}
+
+/// @brief Drive the chassis
+/// @param [in] double  drivePercent:   forward/reverse percent output (positive is forward)
+/// @param [in] double  steerPercent:   left/right percent output (positive is left)
+/// @param [in] double  rotatePercent:  Rotation percent output around the vertical (Z) axis; (positive is counter clockwise)
+/// @param [in] bool    fieldRelative:  true: movement is based on the field (e.g., push it goes away from the driver regardless of the robot orientation),
+///                                     false: direction is based on robot front/back
 void SwerveChassis::Drive( double drive, double steer, double rotate, bool fieldRelative )
 {
     // scale joystick values to velocities using max chassis values
@@ -136,18 +144,30 @@ void SwerveChassis::Drive( double drive, double steer, double rotate, bool field
     Drive( driveSpeed, steerSpeed, rotateSpeed, fieldRelative );
 }
 
+/// @brief update the chassis odometry based on current states of the swerve modules and the pigeon
 void SwerveChassis::UpdateOdometry() 
 {
     units::degree_t yaw{m_pigeon->GetYaw()};
     Rotation2d r2d {yaw};
 
-    //TODO Update m_kinematics
     m_poseEstimator.Update(r2d, m_frontLeft.get()->GetState(),
                                 m_frontRight.get()->GetState(), 
                                 m_backLeft.get()->GetState(),
                                 m_backRight.get()->GetState());
 }
 
+/// @brief Provide the current chassis speed information
+ChassisSpeeds SwerveChassis::GetChassisSpeeds() const
+{
+    return m_kinematics.ToChassisSpeeds({ m_frontLeft.get()->GetState(), 
+                                          m_frontRight.get()->GetState(),
+                                          m_backLeft.get()->GetState(),
+                                          m_backRight.get()->GetState() });
+}
+
+/// @brief Reset the current chassis pose based on the provided pose and rotation
+/// @param [in] const Pose2d&       pose        Current XY position
+/// @param [in] const Rotation2d&   angle       Current rotation angle
 void SwerveChassis::ResetPosition
 ( 
     const Pose2d&       pose,
