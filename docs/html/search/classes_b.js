@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['robot_975',['Robot',['../class_robot.html',1,'']]],
-  ['robotdefn_976',['RobotDefn',['../class_robot_defn.html',1,'']]]
+  ['odometrydefn_1493',['OdometryDefn',['../class_odometry_defn.html',1,'']]],
+  ['openloopcontroller_1494',['OpenLoopController',['../class_open_loop_controller.html',1,'']]]
 ];

@@ -4,9 +4,6 @@ var class_teleop_control =
       [ "UNKNOWN_FUNCTION", "class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15a6f54ea506603240492346116d310c09e", null ],
       [ "TANK_DRIVE_LEFT_CONTROL", "class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15ae61617712eb2f2daa93ef0766e679195", null ],
       [ "TANK_DRIVE_RIGHT_CONTROL", "class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15a57127209ca90268d9ec1e585f31fe590", null ],
-      [ "SWERVE_DRIVE_DRIVE", "class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15af66acd1d66c2da4497bc34d168db24be", null ],
-      [ "SWERVE_DRIVE_ROTATE", "class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15afc93193a8d23b2cb0caddcc3fa72e78c", null ],
-      [ "SWERVE_DRIVE_STEER", "class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15ae3cf2cbd708c2dde0185d42426c4097e", null ],
       [ "ARCADE_DRIVE_THROTTLE", "class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15a9917aed04a2cb8d60c6f1afca9dff6b5", null ],
       [ "ARCADE_DRIVE_STEER", "class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15a166918f317ab71bbd6065046c084c7bc", null ],
       [ "GTA_DRIVE_FORWARD", "class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15aa2d5c3e1099c0ae99b24adca75d6e35b", null ],
@@ -68,6 +65,5 @@ var class_teleop_control =
     [ "GetAxisValue", "class_teleop_control.html#a9c6affa7d87ae898c531e567fce73b15", null ],
     [ "IsButtonPressed", "class_teleop_control.html#a9cb86c552535e9f0c7dc1bd1cea9dca0", null ],
     [ "SetAxisProfile", "class_teleop_control.html#a31176133035fb6d4acc3b10e22246077", null ],
-    [ "SetAxisScaleFactor", "class_teleop_control.html#a3c42f54355038ff584b9991d29762f55", null ],
-    [ "SetSlewRateLimiter", "class_teleop_control.html#a5720699168ae5fe9c434e8bda1c39501", null ]
+    [ "SetAxisScaleFactor", "class_teleop_control.html#a3c42f54355038ff584b9991d29762f55", null ]
 ];

@@ -93,7 +93,6 @@ var class_i_dragon_game_pad =
     [ "SetAxisProfile", "class_i_dragon_game_pad.html#ac0f51e1292e7a3b17962642e2a5a0445", null ],
     [ "SetAxisScale", "class_i_dragon_game_pad.html#a471db7f67ec6604d042195ab65231116", null ],
     [ "SetButtonMode", "class_i_dragon_game_pad.html#a0fc4a2d497a912d10ab2755018b43445", null ],
-    [ "SetSlewLimit", "class_i_dragon_game_pad.html#a03b3f6d85337b2857586b69c9d590686", null ],
     [ "WasButtonPressed", "class_i_dragon_game_pad.html#aff0121c0eee282fa27d0849795fcce91", null ],
     [ "WasButtonReleased", "class_i_dragon_game_pad.html#a8b62f3bcf3a8fbfcdbd18cac65519720", null ]
 ];

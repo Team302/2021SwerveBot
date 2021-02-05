@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['digitalinputmap_1588',['DigitalInputMap',['../_digital_input_map_8h.html#ae1558090bfb60f7bb516b6c7ff3cd307',1,'DigitalInputMap.h']]],
-  ['dragontalonvector_1589',['DragonTalonVector',['../_dragon_talon_8h.html#a07a92cd60d4dcaf17daa1b532980d3c4',1,'DragonTalon.h']]]
+  ['analoginputmap_2483',['AnalogInputMap',['../_analog_input_map_8h.html#a6d630a90bf2ab66cf4930d907b3924ab',1,'AnalogInputMap.h']]]
 ];

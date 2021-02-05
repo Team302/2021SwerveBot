@@ -4,7 +4,6 @@ var class_i_dragon_motor_controller =
     [ "~IDragonMotorController", "class_i_dragon_motor_controller.html#a93f40b43658f5744e50292dbf6fc470b", null ],
     [ "EnableBrakeMode", "class_i_dragon_motor_controller.html#a35b6fe6bc4b6a582d99ec223206e4add", null ],
     [ "EnableCurrentLimiting", "class_i_dragon_motor_controller.html#aabc3307852ea64aebdf940f37cade673", null ],
-    [ "GetCountsPerRev", "class_i_dragon_motor_controller.html#adad0d5e0e39fddd18961e8c880ede086", null ],
     [ "GetCurrent", "class_i_dragon_motor_controller.html#a95921146f1d1157bfcbaa568216f94a9", null ],
     [ "GetID", "class_i_dragon_motor_controller.html#ad70e1b0a007c03cc07a6ee531d6701d6", null ],
     [ "GetRotations", "class_i_dragon_motor_controller.html#aaebed7f496f5e56709a5dda5d7749782", null ],

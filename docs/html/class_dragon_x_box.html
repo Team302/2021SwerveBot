@@ -24,11 +24,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="roboticslogo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Team 302 Robot
    </div>
-   <div id="projectbrief">Swerve Bot APIs</div>
   </td>
  </tr>
  </tbody>
@@ -126,8 +124,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a82af2dd78979078b136da5d07a4182c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05f594a2bdc751aef180e34637116e61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_x_box.html#a05f594a2bdc751aef180e34637116e61">SetAxisScale</a> (<a class="el" href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972b">AXIS_IDENTIFIER</a> axis, float scaleFactor) override</td></tr>
 <tr class="separator:a05f594a2bdc751aef180e34637116e61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad921a60514fd12babc7f7b699bdc1ef4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_x_box.html#ad921a60514fd12babc7f7b699bdc1ef4">SetSlewLimit</a> (<a class="el" href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972b">AXIS_IDENTIFIER</a> axis, float slewRateFactor) override</td></tr>
-<tr class="separator:ad921a60514fd12babc7f7b699bdc1ef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40119662c127dd11a27fb2085d4719f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_x_box.html#a40119662c127dd11a27fb2085d4719f0">SetButtonMode</a> (<a class="el" href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29">BUTTON_IDENTIFIER</a> button, <a class="el" href="class_i_dragon_game_pad.html#af3915fb49841ce1fc53b35c9e24d3417">BUTTON_MODE</a> mode) override</td></tr>
 <tr class="memdesc:a40119662c127dd11a27fb2085d4719f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method: SetButtonMode Description: Specify how the button should behave. Examples include (but not limited to):  <a href="class_dragon_x_box.html#a40119662c127dd11a27fb2085d4719f0">More...</a><br /></td></tr>
 <tr class="separator:a40119662c127dd11a27fb2085d4719f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -411,7 +407,7 @@ false - button is not pressed</h2>
 
 <p>Implements <a class="el" href="class_i_dragon_game_pad.html#a487befc3794be0ee1729fc2a6833f2bd">IDragonGamePad</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_x_box_8cpp_source.html#l00233">233</a> of file <a class="el" href="_dragon_x_box_8cpp_source.html">DragonXBox.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_x_box_8cpp_source.html#l00221">221</a> of file <a class="el" href="_dragon_x_box_8cpp_source.html">DragonXBox.cpp</a>.</p>
 
 </div>
 </div>
@@ -563,47 +559,7 @@ Returns:     void</h2>
 
 <p>Implements <a class="el" href="class_i_dragon_game_pad.html#a0fc4a2d497a912d10ab2755018b43445">IDragonGamePad</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_x_box_8cpp_source.html#l00257">257</a> of file <a class="el" href="_dragon_x_box_8cpp_source.html">DragonXBox.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ad921a60514fd12babc7f7b699bdc1ef4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad921a60514fd12babc7f7b699bdc1ef4">&#9670;&nbsp;</a></span>SetSlewLimit()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void DragonXBox::SetSlewLimit </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972b">AXIS_IDENTIFIER</a>&#160;</td>
-          <td class="paramname"><em>axis</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>slewRateFactor</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="class_i_dragon_game_pad.html#a03b3f6d85337b2857586b69c9d590686">IDragonGamePad</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="_dragon_x_box_8cpp_source.html#l00213">213</a> of file <a class="el" href="_dragon_x_box_8cpp_source.html">DragonXBox.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_x_box_8cpp_source.html#l00245">245</a> of file <a class="el" href="_dragon_x_box_8cpp_source.html">DragonXBox.cpp</a>.</p>
 
 </div>
 </div>
@@ -672,8 +628,8 @@ Returns:     void</h2>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/GitRepos/2021SwerveBot/src/main/cpp/gamepad/<a class="el" href="_dragon_x_box_8h_source.html">DragonXBox.h</a></li>
-<li>C:/GitRepos/2021SwerveBot/src/main/cpp/gamepad/<a class="el" href="_dragon_x_box_8cpp_source.html">DragonXBox.cpp</a></li>
+<li>C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/gamepad/<a class="el" href="_dragon_x_box_8h_source.html">DragonXBox.h</a></li>
+<li>C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/gamepad/<a class="el" href="_dragon_x_box_8cpp_source.html">DragonXBox.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

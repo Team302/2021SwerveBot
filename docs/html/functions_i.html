@@ -24,11 +24,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="roboticslogo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Team 302 Robot
    </div>
-   <div id="projectbrief">Swerve Bot APIs</div>
   </td>
  </tr>
  </tbody>
@@ -92,6 +90,12 @@ $(document).ready(function(){initNavTree('functions_i.html',''); initResizable()
 <li>IChassis()
 : <a class="el" href="class_i_chassis.html#af4d7d56ee1cd2e0a249402941e3c8f48">IChassis</a>
 </li>
+<li>IDragonAnglePositionSensor()
+: <a class="el" href="class_i_dragon_angle_position_sensor.html#a810d0103e3a97a455d02eae479aa1ad8">IDragonAnglePositionSensor</a>
+</li>
+<li>IDragonController()
+: <a class="el" href="class_i_dragon_controller.html#a705aa4f1f3f60b4494c1f37c9319e224">IDragonController</a>
+</li>
 <li>IDragonDistanceSensor()
 : <a class="el" href="class_i_dragon_distance_sensor.html#ab192c7707e597027b8ddef0183d0e0e2">IDragonDistanceSensor</a>
 </li>
@@ -113,8 +117,24 @@ $(document).ready(function(){initNavTree('functions_i.html',''); initResizable()
 <li>IMech1Servo()
 : <a class="el" href="class_i_mech1_servo.html#a2a091e5fed010f533b08ecc6816771bd">IMech1Servo</a>
 </li>
+<li>IMech1Solenoid()
+: <a class="el" href="class_i_mech1_solenoid.html#a8054abbf1019f9580114d2b96eb8a6bf">IMech1Solenoid</a>
+</li>
 <li>IMech2IndMotors()
 : <a class="el" href="class_i_mech2_ind_motors.html#aae994a9575acd84fe641a8566d53a698">IMech2IndMotors</a>
+</li>
+<li>IMechanism()
+: <a class="el" href="class_i_mechanism.html#a22f98b8310ad97e65dd710f3ae4ebcbf">IMechanism</a>
+</li>
+<li>IMechController()
+: <a class="el" href="class_i_mech_controller.html#ab64c0d95b0a45649dd07664b4307f2dc">IMechController</a>
+</li>
+<li>Impeller()
+: <a class="el" href="class_impeller.html#a33b858e848272f5e03f0ede9c4cfac4a">Impeller</a>
+</li>
+<li>IMPELLER
+: <a class="el" href="class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284ba5a51c1e4ac283d458ddbd5c4cf9e011d">MechanismTypes</a>
+, <a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aa54f2288e0d271704eb0571144aeab035">MotorControllerUsage</a>
 </li>
 <li>IMPELLER_AGITATE
 : <a class="el" href="class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15afbf864cd90eeab272729dffbb26dc27c">TeleopControl</a>
@@ -125,8 +145,20 @@ $(document).ready(function(){initNavTree('functions_i.html',''); initResizable()
 <li>IMPELLER_OFF
 : <a class="el" href="class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15a554663d63f2c91d5a3d48ecd0e24002b">TeleopControl</a>
 </li>
+<li>IMPELLER_STATE
+: <a class="el" href="class_impeller_state_mgr.html#ac7900fc564754454bb9309032667c8b9">ImpellerStateMgr</a>
+</li>
 <li>IMPELLER_TO_SHOOTER
 : <a class="el" href="class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15a78656a40b5017b43fcc4742e6aafc5f9">TeleopControl</a>
+</li>
+<li>ImpellerState()
+: <a class="el" href="class_impeller_state.html#adc55ac737f5b51c3356830142931fa5e">ImpellerState</a>
+</li>
+<li>ImpellerStateMgrTest()
+: <a class="el" href="class_impeller_state_mgr_test.html#a693227e9ba27c292443f6dc2ea695204">ImpellerStateMgrTest</a>
+</li>
+<li>INCHES_PER_SECOND_SECOND
+: <a class="el" href="class_super_drive.html#aa7ab753722262aae87138667bb0bac2f">SuperDrive</a>
 </li>
 <li>InchesPerSecondToCounts100ms()
 : <a class="el" href="class_conversion_utils.html#af70fc7530f004e338db5f9035bdc63b8">ConversionUtils</a>
@@ -141,33 +173,61 @@ $(document).ready(function(){initNavTree('functions_i.html',''); initResizable()
 : <a class="el" href="class_conversion_utils.html#a7d464ea695ee8b8db8050c9d6c62b8e5">ConversionUtils</a>
 </li>
 <li>Init()
-: <a class="el" href="class_hold_turret_position.html#a0ad48ec9fb424d6bc86471f097125f0a">HoldTurretPosition</a>
+: <a class="el" href="class_angular_velocity_controller.html#ac05e95fa01f5575376c75b5b179016e0">AngularVelocityController</a>
+, <a class="el" href="class_arcade_drive.html#ad498acb6a567ee09fe1976bc09cbae6e">ArcadeDrive</a>
+, <a class="el" href="class_auto_shoot.html#a9e48ceffaed7f5e04b04cf1ce73417f6">AutoShoot</a>
+, <a class="el" href="class_ball_transfer_state_mgr_test.html#ac214f8fa30ecd791d4b873b5ebc92b62">BallTransferStateMgrTest</a>
+, <a class="el" href="class_chassis_state_mgr.html#ac5c821136e187f2057a9c4b956975df8">ChassisStateMgr</a>
+, <a class="el" href="class_control_panel_color_turn.html#aad7bdf43ec5b4d8da2c4552aa5b46eda">ControlPanelColorTurn</a>
+, <a class="el" href="class_control_panel_manual.html#a98716b103b2aa09edef5485f26715202">ControlPanelManual</a>
+, <a class="el" href="class_control_panel_raise.html#af8847f86f0a335629e651d7137ff7cbc">ControlPanelRaise</a>
+, <a class="el" href="class_control_panel_state.html#a97bce1883fd03ba934fb0fb04cf72f6b">ControlPanelState</a>
+, <a class="el" href="class_control_panel_stow.html#ab3d9ab6458cea4d98240113efea0b54a">ControlPanelStow</a>
+, <a class="el" href="class_control_panel_turn.html#af714f7681a11dfcd55bf774fd90f005b">ControlPanelTurn</a>
+, <a class="el" href="class_cycle_primitives.html#a65cc624864058fc7e5baac5eaba5bb43">CyclePrimitives</a>
+, <a class="el" href="class_do_nothing.html#aa05ad0a633ed8380cc8725b9b7747660">DoNothing</a>
+, <a class="el" href="class_drive_distance.html#a7a4a90ed63d01052a9bfb8b13b402fc7">DriveDistance</a>
+, <a class="el" href="class_drive_time.html#a88957150638e73a701191d9caa7515f6">DriveTime</a>
+, <a class="el" href="class_drive_to_target.html#a6ec218d441ef1c263d8c417ca5933af8">DriveToTarget</a>
+, <a class="el" href="class_drive_to_wall.html#adbc157105a2be56d57e4ab92269aa472">DriveToWall</a>
+, <a class="el" href="class_g_t_a_drive.html#a413998dcf52c14974b530d729ad779cb">GTADrive</a>
+, <a class="el" href="class_hold_position.html#a6059d2b98170913f3051b9a24de13cce">HoldPosition</a>
+, <a class="el" href="class_hold_turret_position.html#a0ad48ec9fb424d6bc86471f097125f0a">HoldTurretPosition</a>
+, <a class="el" href="class_hook_delivery_manual_state.html#a6f9b8ea4a79cfc4533951253c0e53153">HookDeliveryManualState</a>
+, <a class="el" href="class_i_dragon_controller.html#a89d292cf9fe37860e6735a0a119cf3a1">IDragonController</a>
+, <a class="el" href="class_i_mech_controller.html#a43c564581e046a9483e469c6da589db9">IMechController</a>
+, <a class="el" href="class_impeller_state_mgr_test.html#abb0630f575b1b15832975ef8fd4e1234">ImpellerStateMgrTest</a>
 , <a class="el" href="class_intake_state.html#a9f4c251ac74c1cc9e08e089fdf621a38">IntakeState</a>
+, <a class="el" href="class_intake_state_mgr_test.html#a95ec4b80a7a21f9b115277ad8e9ec9ba">IntakeStateMgrTest</a>
 , <a class="el" href="class_i_primitive.html#abe9e4c3b5a5b806d2c551c0f56a075d2">IPrimitive</a>
 , <a class="el" href="class_i_state.html#ac1400e68fde2f088873f5ec283309977">IState</a>
+, <a class="el" href="class_i_state_test.html#a6926767a434eddbcb9f696b966b45723">IStateTest</a>
 , <a class="el" href="class_limelight_aim.html#a2247a913c594a63077af4d65fe98a80d">LimelightAim</a>
 , <a class="el" href="class_manual_aim.html#afaa246359e73c502e37bb5ce5128fa50">ManualAim</a>
 , <a class="el" href="class_mech1_motor_state.html#afe74c8988e329bd3ecbc7ac7c87ee5df">Mech1MotorState</a>
 , <a class="el" href="class_mech2_motor_state.html#a430785c96c31d43bd1479497a32dc6d5">Mech2MotorState</a>
+, <a class="el" href="class_mech_solenoid_state.html#ac455a7af2d5d34d8e88b9d3e6a1d1c0e">MechSolenoidState</a>
+, <a class="el" href="class_open_loop_controller.html#a7ec0df76ffd1b81032b8c627eea08881">OpenLoopController</a>
 , <a class="el" href="class_shooter_hood_manual.html#a9ba03aabad3263cd283777165009bbb3">ShooterHoodManual</a>
 , <a class="el" href="class_shooter_save_state.html#a7b06af7fb1e6a69be0b45376343a7a7b">ShooterSaveState</a>
-, <a class="el" href="class_swerve_drive.html#aa4d7dd862100800547789e7948fba29a">SwerveDrive</a>
+, <a class="el" href="class_shooter_state_mgr_test.html#a85016fe388c963ed93f8b1dbb018c809">ShooterStateMgrTest</a>
+, <a class="el" href="class_super_drive.html#a8141ce7485eae0c7dd5f1a4bb67f9e9c">SuperDrive</a>
+, <a class="el" href="class_tank_drive.html#aa718326cc925af2a786c1ee1f8bd4125">TankDrive</a>
+, <a class="el" href="class_trapezoid_controller.html#affb3abaeb599bc0500f1851feff7157b">TrapezoidController</a>
+, <a class="el" href="class_turn_angle.html#a80a892d30883e9b570227eece66bf36c">TurnAngle</a>
+, <a class="el" href="class_velocity_controller.html#afe11f0564aea740b84fdec61d1828aa8">VelocityController</a>
 </li>
 <li>INTAKE
 : <a class="el" href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4ae6cb18d77fbcf82d85b25eaaa5d25b24">BallManipulator</a>
 </li>
 <li>Intake()
-: <a class="el" href="class_intake.html#ae1aee2c821aad67fee455c0810a5e6b2">Intake</a>
+: <a class="el" href="class_intake.html#afc5a65a98967287818a803e07c6b9fbe">Intake</a>
 </li>
 <li>INTAKE
 : <a class="el" href="class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284ba956f40423d599edebdd62f4d1fa9f0b5">MechanismTypes</a>
+, <a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aa01aee16a773c1cd4513779950e8fb351">MotorControllerUsage</a>
+, <a class="el" href="class_solenoid_usage.html#adb45b3112fbc67f57d39931571b60ef7a3c87e7c36c81c5605d4e9a136ff3b610">SolenoidUsage</a>
 , <a class="el" href="class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15add4fb549449cd6d2f521934d79e791f9">TeleopControl</a>
-</li>
-<li>INTAKE1
-: <a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aaaca175dfb5825b9dab772038fa689eb3">MotorControllerUsage</a>
-</li>
-<li>INTAKE2
-: <a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aa50720fa2de631df1251c19551aafaef2">MotorControllerUsage</a>
 </li>
 <li>INTAKE_HUMAN_PLAYER
 : <a class="el" href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4a4fe671d573281a8407473c5b13187199">BallManipulator</a>
@@ -185,13 +245,20 @@ $(document).ready(function(){initNavTree('functions_i.html',''); initResizable()
 <li>IntakeState()
 : <a class="el" href="class_intake_state.html#ae1195d76d579acabdc080b078ad2f2e1">IntakeState</a>
 </li>
+<li>IntakeStateMgrTest()
+: <a class="el" href="class_intake_state_mgr_test.html#a503bf1b638b23c0f92ccc5af73dcffb0">IntakeStateMgrTest</a>
+</li>
 <li>Invert()
 : <a class="el" href="class_dragon_falcon.html#a01a9cbfe59d25b805ec376d94af0cfdd">DragonFalcon</a>
+, <a class="el" href="class_dragon_spark_max.html#ac6b2718e28d1b81f040ee8efb9786750">DragonSparkMax</a>
 , <a class="el" href="class_dragon_talon.html#a916e6d3fa7d6e134e60ee8ad868391b4">DragonTalon</a>
 , <a class="el" href="class_i_dragon_motor_controller.html#aae1077a659ed6c8f89d565f6411e56a3">IDragonMotorController</a>
 </li>
 <li>IPrimitive()
 : <a class="el" href="class_i_primitive.html#aa67f91faaa42e0a8b1b80b905dd42cad">IPrimitive</a>
+</li>
+<li>IsBlackListed()
+: <a class="el" href="class_dragon_solenoid.html#a8e3de21db1e6f8ffd09b1b80447ec192">DragonSolenoid</a>
 </li>
 <li>IsButtonPressed()
 : <a class="el" href="class_analog_button.html#a530a96e393a6267bf84beaf9392390c7">AnalogButton</a>
@@ -206,10 +273,32 @@ $(document).ready(function(){initNavTree('functions_i.html',''); initResizable()
 , <a class="el" href="class_toggle_button.html#a0c511c3d7701fa2efb72ad3373583d60">ToggleButton</a>
 </li>
 <li>IsDone()
-: <a class="el" href="class_i_primitive.html#a5b62801261f9bd974be04217bd86f668">IPrimitive</a>
+: <a class="el" href="class_auto_shoot.html#a30f8488b0503c60a2d72a164d779bc78">AutoShoot</a>
+, <a class="el" href="class_ball_transfer_state_mgr_test.html#a8012de21e229fc147eca366cea16f2fc">BallTransferStateMgrTest</a>
+, <a class="el" href="class_do_nothing.html#a921cf984d26cf9991de393a609719188">DoNothing</a>
+, <a class="el" href="class_drive_distance.html#acbd6bfcdbecd3b81ddb9201d8025f0d6">DriveDistance</a>
+, <a class="el" href="class_drive_time.html#a2cb7c304e83f109a7f35f719a5b95495">DriveTime</a>
+, <a class="el" href="class_drive_to_target.html#a5620ac5a9477525bee0b2b38563c3801">DriveToTarget</a>
+, <a class="el" href="class_drive_to_wall.html#adfb42e55ae1c6ca096422d020df0154b">DriveToWall</a>
+, <a class="el" href="class_hold_position.html#a33c4a23d63999bc25845e7dd0ef2fdab">HoldPosition</a>
+, <a class="el" href="class_impeller_state_mgr_test.html#ad42b950039f00ae7c1efd145eb2eaf78">ImpellerStateMgrTest</a>
+, <a class="el" href="class_intake_state_mgr_test.html#a9593179e60ea43bfa2ca0a8bda144e47">IntakeStateMgrTest</a>
+, <a class="el" href="class_i_primitive.html#a5b62801261f9bd974be04217bd86f668">IPrimitive</a>
+, <a class="el" href="class_i_state_test.html#a5dd3562131388a25108609fe82831921">IStateTest</a>
+, <a class="el" href="class_shooter_state_mgr_test.html#a82f2f680e75b5f6fc42937a470cc8b8c">ShooterStateMgrTest</a>
+, <a class="el" href="class_super_drive.html#a3f2c91eb6f751219b900eaa022907b0e">SuperDrive</a>
+, <a class="el" href="class_turn_angle.html#ad423fdd2e504132a5eda6edd997b3859">TurnAngle</a>
+</li>
+<li>IsSolenoidActivated()
+: <a class="el" href="class_i_mech1_solenoid.html#a2c9e18c4dfebef5b253bb84d6556fe4a">IMech1Solenoid</a>
+, <a class="el" href="class_i_mechanism.html#a4c0bedb71316054749a276a67d278558">IMechanism</a>
+, <a class="el" href="class_mech1_solenoid.html#ab50959e3e879323fa1928c839842cdc7">Mech1Solenoid</a>
 </li>
 <li>IState()
 : <a class="el" href="class_i_state.html#ae6590bd1d41bcb788780f9f0f4767f66">IState</a>
+</li>
+<li>IStateTest()
+: <a class="el" href="class_i_state_test.html#a4fb09ce5ce8021e0fda8a0d67cdde394">IStateTest</a>
 </li>
 </ul>
 </div><!-- contents -->

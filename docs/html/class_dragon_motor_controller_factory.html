@@ -24,11 +24,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="roboticslogo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Team 302 Robot
    </div>
-   <div id="projectbrief">Swerve Bot APIs</div>
   </td>
  </tr>
  </tbody>
@@ -101,14 +99,16 @@ $(document).ready(function(){initNavTree('class_dragon_motor_controller_factory.
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:ab2cbc7da55b546e4da9e5d16a9965195"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_motor_controller_factory.html#ab2cbc7da55b546e4da9e5d16a9965195">MOTOR_TYPE</a> { <a class="el" href="class_dragon_motor_controller_factory.html#ab2cbc7da55b546e4da9e5d16a9965195ac3b16a0ce502ed1851bb15296f013b9a">TALONSRX</a>, 
-<a class="el" href="class_dragon_motor_controller_factory.html#ab2cbc7da55b546e4da9e5d16a9965195aa932dec5749ba1c56bd606056aa9c2b1">FALCON</a>
+<a class="el" href="class_dragon_motor_controller_factory.html#ab2cbc7da55b546e4da9e5d16a9965195aa932dec5749ba1c56bd606056aa9c2b1">FALCON</a>, 
+<a class="el" href="class_dragon_motor_controller_factory.html#ab2cbc7da55b546e4da9e5d16a9965195a5e39a0b48f33f3151dc5087b76e09623">BRUSHLESS_SPARK_MAX</a>, 
+<a class="el" href="class_dragon_motor_controller_factory.html#ab2cbc7da55b546e4da9e5d16a9965195aa88b65f8db4e7396269b43e2f129ae0a">BRUSHED_SPARK_MAX</a>
  }</td></tr>
 <tr class="separator:ab2cbc7da55b546e4da9e5d16a9965195"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aba43997b8d8cfd7b1c594602b9c13159"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_i_dragon_motor_controller.html">IDragonMotorController</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_motor_controller_factory.html#aba43997b8d8cfd7b1c594602b9c13159">CreateMotorController</a> (std::string mtype, int canID, int pdpID, std::string usage, bool inverted, bool sensorInverted, ctre::phoenix::motorcontrol::FeedbackDevice feedbackDevice, int countsPerRev, float gearRatio, bool brakeMode, int followMotor, int peakCurrentDuration, int continuousCurrentLimit, int peakCurrentLimit, bool enableCurrentLimit, bool forwardLimitSwitch, bool forwardLimitSwitchNormallyOpen, bool reverseLimitSwitch, bool reverseLimitSwitchNormallyOpen)</td></tr>
-<tr class="separator:aba43997b8d8cfd7b1c594602b9c13159"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c39fef079a101d48a518a577ff72b70"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_i_dragon_motor_controller.html">IDragonMotorController</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_motor_controller_factory.html#a9c39fef079a101d48a518a577ff72b70">CreateMotorController</a> (std::string mtype, int canID, int pdpID, std::string usage, bool inverted, bool sensorInverted, ctre::phoenix::motorcontrol::FeedbackDevice feedbackDevice, int countsPerRev, float gearRatio, bool brakeMode, int slaveTo, int peakCurrentDuration, int continuousCurrentLimit, int peakCurrentLimit, bool enableCurrentLimit, bool forwardLimitSwitch, bool forwardLimitSwitchNormallyOpen, bool reverseLimitSwitch, bool reverseLimitSwitchNormallyOpen)</td></tr>
+<tr class="separator:a9c39fef079a101d48a518a577ff72b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -122,7 +122,7 @@ Static Public Member Functions</h2></td></tr>
 <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
 <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. File Description: This is the factory for creating Motor Controllers Class: <a class="el" href="class_dragon_motor_controller_factory.html" title="DragonMotorControllerFactory.h.">DragonMotorControllerFactory</a> Description: This is a singleton that creates motor controllers (<a class="el" href="class_i_dragon_motor_controller.html" title="The general interface to motor controllers so that the specific mechanisms that use motors,...">IDragonMotorController</a>). This allows us to interact with motor controllers such as TalonSRX, Rev Spark Max without actually knowing what type is actually being used. </p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_motor_controller_factory_8h_source.html#l00052">52</a> of file <a class="el" href="_dragon_motor_controller_factory_8h_source.html">DragonMotorControllerFactory.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_motor_controller_factory_8h_source.html#l00053">53</a> of file <a class="el" href="_dragon_motor_controller_factory_8h_source.html">DragonMotorControllerFactory.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="ab2cbc7da55b546e4da9e5d16a9965195"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab2cbc7da55b546e4da9e5d16a9965195">&#9670;&nbsp;</a></span>MOTOR_TYPE</h2>
@@ -137,21 +137,25 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <hr  />
 <p> enum: MOTOR_TYPE description: This indicates the type of motor controller. Most of our code doesn't need/care about this, however since this is the </p>
-<h2><a class="anchor" id="autotoc_md21"></a>
+<h2><a class="anchor" id="autotoc_md49"></a>
 factory, it is needed when constructing the object.</h2>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab2cbc7da55b546e4da9e5d16a9965195ac3b16a0ce502ed1851bb15296f013b9a"></a>TALONSRX&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ab2cbc7da55b546e4da9e5d16a9965195aa932dec5749ba1c56bd606056aa9c2b1"></a>FALCON&#160;</td><td class="fielddoc"><p>Controller is a Cross the Road Electronics (CTRE) Talon SRX on the CAN network. </p>
 </td></tr>
+<tr><td class="fieldname"><a id="ab2cbc7da55b546e4da9e5d16a9965195a5e39a0b48f33f3151dc5087b76e09623"></a>BRUSHLESS_SPARK_MAX&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab2cbc7da55b546e4da9e5d16a9965195aa88b65f8db4e7396269b43e2f129ae0a"></a>BRUSHED_SPARK_MAX&#160;</td><td class="fielddoc"><p>Controller is a Rev Robotics Spark Max controlling a brushless motor. </p>
+<p>Controller is a Rev Robotics Spark Max conrolling a brushed motor </p>
+</td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_motor_controller_factory_8h_source.html#l00061">61</a> of file <a class="el" href="_dragon_motor_controller_factory_8h_source.html">DragonMotorControllerFactory.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_motor_controller_factory_8h_source.html#l00062">62</a> of file <a class="el" href="_dragon_motor_controller_factory_8h_source.html">DragonMotorControllerFactory.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aba43997b8d8cfd7b1c594602b9c13159"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba43997b8d8cfd7b1c594602b9c13159">&#9670;&nbsp;</a></span>CreateMotorController()</h2>
+<a id="a9c39fef079a101d48a518a577ff72b70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c39fef079a101d48a518a577ff72b70">&#9670;&nbsp;</a></span>CreateMotorController()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -220,7 +224,7 @@ factory, it is needed when constructing the object.</h2>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>followMotor</em>, </td>
+          <td class="paramname"><em>slaveTo</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -289,7 +293,7 @@ factory, it is needed when constructing the object.</h2>
     <tr><td class="paramname">countsPerRev</td><td>Sensor type </td></tr>
     <tr><td class="paramname">gearRatio</td><td>Number of pulses per revolution for the sensor </td></tr>
     <tr><td class="paramname">brakeMode</td><td>Gear ratio (output to input ... see <a href="https://www.wikihow.com/Determine-Gear-Ratio">https://www.wikihow.com/Determine-Gear-Ratio</a>) </td></tr>
-    <tr><td class="paramname">followMotor</td><td>brake mode using back emf to resist motion when power is not applied </td></tr>
+    <tr><td class="paramname">slaveTo</td><td>brake mode using back emf to resist motion when power is not applied </td></tr>
     <tr><td class="paramname">peakCurrentDuration</td><td>CAN ID of the "master" motor controller if this is a follower motor controller (-1 indicates it is a master) </td></tr>
     <tr><td class="paramname">continuousCurrentLimit</td><td>peak current limit </td></tr>
     <tr><td class="paramname">peakCurrentLimit</td><td>continuous current limit </td></tr>
@@ -299,7 +303,7 @@ factory, it is needed when constructing the object.</h2>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_motor_controller_factory_8cpp_source.html#l00045">45</a> of file <a class="el" href="_dragon_motor_controller_factory_8cpp_source.html">DragonMotorControllerFactory.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_motor_controller_factory_8cpp_source.html#l00047">47</a> of file <a class="el" href="_dragon_motor_controller_factory_8cpp_source.html">DragonMotorControllerFactory.cpp</a>.</p>
 
 </div>
 </div>
@@ -326,13 +330,13 @@ factory, it is needed when constructing the object.</h2>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_dragon_motor_controller_factory_8cpp_source.html#l00021">21</a> of file <a class="el" href="_dragon_motor_controller_factory_8cpp_source.html">DragonMotorControllerFactory.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_motor_controller_factory_8cpp_source.html#l00023">23</a> of file <a class="el" href="_dragon_motor_controller_factory_8cpp_source.html">DragonMotorControllerFactory.cpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/GitRepos/2021SwerveBot/src/main/cpp/hw/factories/<a class="el" href="_dragon_motor_controller_factory_8h_source.html">DragonMotorControllerFactory.h</a></li>
-<li>C:/GitRepos/2021SwerveBot/src/main/cpp/hw/factories/<a class="el" href="_dragon_motor_controller_factory_8cpp_source.html">DragonMotorControllerFactory.cpp</a></li>
+<li>C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/hw/factories/<a class="el" href="_dragon_motor_controller_factory_8h_source.html">DragonMotorControllerFactory.h</a></li>
+<li>C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/hw/factories/<a class="el" href="_dragon_motor_controller_factory_8cpp_source.html">DragonMotorControllerFactory.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

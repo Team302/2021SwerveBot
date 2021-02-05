@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['off_536',['OFF',['../class_mechanism_target_data.html#a1bd7dca52842f28088b36d001b0ac125af78943e500adad9b931d611143c55d6d',1,'MechanismTargetData::OFF()'],['../class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15a7aa28c48e6874211c440a0bc5330d3f7',1,'TeleopControl::OFF()'],['../class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4ae9ace1e42c309a9b41cd54a33eac40f3',1,'BallManipulator::OFF()'],['../class_ball_transfer_state_mgr.html#a60f3deceead6d874baae678a4fc7acb2a93d64f24d9b112ca41ec976620f89f37',1,'BallTransferStateMgr::OFF()'],['../class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56ca8ebaf448652ce307bb0332e236495a99',1,'IntakeStateMgr::OFF()'],['../class_shooter_state_mgr.html#aaf1212bf0ab2ee8a79e315bd1401b670a7b11253c228d45fe55fb99f8945f7a2f',1,'ShooterStateMgr::OFF()']]],
-  ['on_537',['ON',['../class_mechanism_target_data.html#a1bd7dca52842f28088b36d001b0ac125ac066f6d0380783e253cd23ea531027e2',1,'MechanismTargetData::ON()'],['../class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56caf6d21481875c74e75a8d895516b88649',1,'IntakeStateMgr::ON()']]],
-  ['ondash_538',['OnDash',['../class_logger.html#a258aeb4010abaae86c40b35d6cceed5e',1,'Logger::OnDash(const std::string &amp;locationIdentifier, const std::string &amp;message)'],['../class_logger.html#aca97721e0531390ab459dafe49697cee',1,'Logger::OnDash(const std::string &amp;locationIdentifier, bool value)']]],
-  ['operator_3d_539',['operator=',['../class_i_button.html#ae75920901f8c37dc7290f27e709035dd',1,'IButton']]]
+  ['nodeadbandvalue_840',['NoDeadbandValue',['../class_no_deadband_value.html',1,'']]],
+  ['nodeadbandvalue_2ecpp_841',['NoDeadbandValue.cpp',['../_no_deadband_value_8cpp.html',1,'']]],
+  ['nodeadbandvalue_2eh_842',['NoDeadbandValue.h',['../_no_deadband_value_8h.html',1,'']]],
+  ['none_843',['NONE',['../class_mechanism_target_data.html#a1bd7dca52842f28088b36d001b0ac125a232b6268676cc583dd75174d1fa8b6af',1,'MechanismTargetData::NONE()'],['../class_i_dragon_game_pad.html#afde07811ccdd7565bc40c381adecee4da91e446db67ef7981f8f84bc6d78d51db',1,'IDragonGamePad::NONE()']]],
+  ['normaldrive_844',['NormalDrive',['../class_arcade_drive.html#a780d74c9d07285eab84982e60053bcab',1,'ArcadeDrive']]]
 ];

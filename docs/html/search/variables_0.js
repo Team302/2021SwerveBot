@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['degreestoturn_1585',['degreesToTurn',['../class_shooter_save_state.html#aacf2be539ffd3d9422d8c2288c0a6378',1,'ShooterSaveState']]]
+  ['colorunits_2473',['colorUnits',['../class_control_panel_color_turn.html#a74eb6c727dd582e1e67ffff0336a23e8',1,'ControlPanelColorTurn']]]
 ];

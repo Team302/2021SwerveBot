@@ -1,0 +1,104 @@
+\hypertarget{class_impeller}{}\doxysection{Impeller Class Reference}
+\label{class_impeller}\index{Impeller@{Impeller}}
+
+
+{\ttfamily \#include $<$Impeller.\+h$>$}
+
+Inheritance diagram for Impeller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_impeller}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_impeller_a33b858e848272f5e03f0ede9c4cfac4a}{Impeller}} ()=delete
+\item 
+\mbox{\hyperlink{class_impeller_ab3ede00649278c3789a389d909904d30}{Impeller}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_dragon_motor_controller}{I\+Dragon\+Motor\+Controller}} $>$ motor, std\+::shared\+\_\+ptr$<$ ctre\+::phoenix\+::sensors\+::\+C\+A\+N\+Coder $>$ encoder)
+\item 
+double \mbox{\hyperlink{class_impeller_ad88ff94a768d7584cb45207a71d2ade9}{Get\+Position}} () const override
+\begin{DoxyCompactList}\small\item\em Return the current position of the impeller in degrees (positive is cw, negative is ccw) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_impeller_a6fe9c758b4b59f43ae31595fd5fd8c9b}{Get\+Speed}} () const override
+\begin{DoxyCompactList}\small\item\em Return the current position of the impeller in degrees per second (positive is cw, negative is ccw) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 32 of file Impeller.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_impeller_a33b858e848272f5e03f0ede9c4cfac4a}\label{class_impeller_a33b858e848272f5e03f0ede9c4cfac4a}} 
+\index{Impeller@{Impeller}!Impeller@{Impeller}}
+\index{Impeller@{Impeller}!Impeller@{Impeller}}
+\doxysubsubsection{\texorpdfstring{Impeller()}{Impeller()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Impeller\+::\+Impeller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{class_impeller_ab3ede00649278c3789a389d909904d30}\label{class_impeller_ab3ede00649278c3789a389d909904d30}} 
+\index{Impeller@{Impeller}!Impeller@{Impeller}}
+\index{Impeller@{Impeller}!Impeller@{Impeller}}
+\doxysubsubsection{\texorpdfstring{Impeller()}{Impeller()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Impeller\+::\+Impeller (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_dragon_motor_controller}{I\+Dragon\+Motor\+Controller}} $>$}]{motor,  }\item[{std\+::shared\+\_\+ptr$<$ ctre\+::phoenix\+::sensors\+::\+C\+A\+N\+Coder $>$}]{encoder }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_impeller_ad88ff94a768d7584cb45207a71d2ade9}\label{class_impeller_ad88ff94a768d7584cb45207a71d2ade9}} 
+\index{Impeller@{Impeller}!GetPosition@{GetPosition}}
+\index{GetPosition@{GetPosition}!Impeller@{Impeller}}
+\doxysubsubsection{\texorpdfstring{GetPosition()}{GetPosition()}}
+{\footnotesize\ttfamily double Impeller\+::\+Get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Return the current position of the impeller in degrees (positive is cw, negative is ccw) 
+
+Return the current position of the mechanism. The value is in inches or degrees.
+
+\begin{DoxyReturn}{Returns}
+double position in degrees
+
+double position in inches (translating mechanisms) or degrees (rotating mechanisms) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_i_mech1_ind_motor_af2ef42ade0b09e684d99cf7d5cd6e154}{I\+Mech1\+Ind\+Motor}}.
+
+
+
+Definition at line 66 of file Impeller.\+cpp.
+
+\mbox{\Hypertarget{class_impeller_a6fe9c758b4b59f43ae31595fd5fd8c9b}\label{class_impeller_a6fe9c758b4b59f43ae31595fd5fd8c9b}} 
+\index{Impeller@{Impeller}!GetSpeed@{GetSpeed}}
+\index{GetSpeed@{GetSpeed}!Impeller@{Impeller}}
+\doxysubsubsection{\texorpdfstring{GetSpeed()}{GetSpeed()}}
+{\footnotesize\ttfamily double Impeller\+::\+Get\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Return the current position of the impeller in degrees per second (positive is cw, negative is ccw) 
+
+Get the current speed of the mechanism. The value is in degrees per second.
+
+\begin{DoxyReturn}{Returns}
+double speed in degrees per second
+
+double speed in degrees/second (rotating mechanisms) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_i_mech1_ind_motor_a6ae1e4e4f8c13903cc690bafed7e8a01}{I\+Mech1\+Ind\+Motor}}.
+
+
+
+Definition at line 74 of file Impeller.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Git\+Repos/2021\+Infinite\+Recharge2/src/main/cpp/subsys/\mbox{\hyperlink{_impeller_8h}{Impeller.\+h}}\item 
+C\+:/\+Git\+Repos/2021\+Infinite\+Recharge2/src/main/cpp/subsys/\mbox{\hyperlink{_impeller_8cpp}{Impeller.\+cpp}}\end{DoxyCompactItemize}

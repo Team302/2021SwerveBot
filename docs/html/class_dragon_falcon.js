@@ -10,7 +10,6 @@ var class_dragon_falcon =
     [ "ConfigSelectedFeedbackSensor", "class_dragon_falcon.html#ae6f8ebfb39421d66eb5916a134da6b54", null ],
     [ "EnableBrakeMode", "class_dragon_falcon.html#af93549d1e2ea03255c46e8aaf6ad6d43", null ],
     [ "EnableCurrentLimiting", "class_dragon_falcon.html#a8a76c720cf50e2bc79fb7c9f1a1cd771", null ],
-    [ "GetCountsPerRev", "class_dragon_falcon.html#ae894f55f2c1a4ffb5da2a8055d62fc9b", null ],
     [ "GetCurrent", "class_dragon_falcon.html#aef9e7316a70af58f1dc02a9fae5cfd8a", null ],
     [ "GetID", "class_dragon_falcon.html#a09c99e5934e299873e65068b1c74fd2b", null ],
     [ "GetRotations", "class_dragon_falcon.html#aee9013f3c3bf7f48d891d650b919253e", null ],
@@ -20,7 +19,7 @@ var class_dragon_falcon =
     [ "Invert", "class_dragon_falcon.html#a01a9cbfe59d25b805ec376d94af0cfdd", null ],
     [ "SelectClosedLoopProfile", "class_dragon_falcon.html#a801071a9180910e6d5d2cdf120b54bbf", null ],
     [ "Set", "class_dragon_falcon.html#acf967485e409c54f5932732f276cb44d", null ],
-    [ "SetAsFollowerMotor", "class_dragon_falcon.html#aa158b4baf0b216d99fb44457d432477c", null ],
+    [ "SetAsSlave", "class_dragon_falcon.html#a54d569a45a527b83505b8e646d99a95b", null ],
     [ "SetControlConstants", "class_dragon_falcon.html#a1504585d6a7671449c274adb254d6aa6", null ],
     [ "SetControlMode", "class_dragon_falcon.html#a4a582d3070a1623396dbf5120bb4f390", null ],
     [ "SetDiameter", "class_dragon_falcon.html#a58a336a886347ec83d2b393569fc9d19", null ],
@@ -29,6 +28,5 @@ var class_dragon_falcon =
     [ "SetReverseLimitSwitch", "class_dragon_falcon.html#af55d7051e52f7b65dedbff53d9e81c0f", null ],
     [ "SetRotationOffset", "class_dragon_falcon.html#ab9080ba4bfbada1afa05f9c532564251", null ],
     [ "SetSensorInverted", "class_dragon_falcon.html#a4efe5d7355a1d82577a8232fdbc9fe7d", null ],
-    [ "SetVoltage", "class_dragon_falcon.html#a16d9bde1c10c8146a62cb86b3ce8331a", null ],
     [ "SetVoltageRamping", "class_dragon_falcon.html#a596613a088e7d87182377b04ced5b16a", null ]
 ];

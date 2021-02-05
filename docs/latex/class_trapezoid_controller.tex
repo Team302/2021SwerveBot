@@ -1,0 +1,125 @@
+\hypertarget{class_trapezoid_controller}{}\doxysection{Trapezoid\+Controller Class Reference}
+\label{class_trapezoid_controller}\index{TrapezoidController@{TrapezoidController}}
+
+
+{\ttfamily \#include $<$Trapezoid\+Controller.\+h$>$}
+
+Inheritance diagram for Trapezoid\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_trapezoid_controller}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_trapezoid_controller_a21acf2c2206ca411a9398a4164e49809}{Trapezoid\+Controller}} ()=delete
+\item 
+\mbox{\hyperlink{class_trapezoid_controller_af593f91397c977ba593310bef5c43503}{Trapezoid\+Controller}} (shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_dragon_motor_controller}{I\+Dragon\+Motor\+Controller}} $>$ motor, double target, shared\+\_\+ptr$<$ \mbox{\hyperlink{class_control_data}{Control\+Data}} $>$ \mbox{\hyperlink{class_control_data}{Control\+Data}})
+\item 
+\mbox{\hyperlink{class_trapezoid_controller_a1e695d7703aa906e4fb837762ca2ac55}{$\sim$\+Trapezoid\+Controller}} ()=default
+\item 
+void \mbox{\hyperlink{class_trapezoid_controller_affb3abaeb599bc0500f1851feff7157b}{Init}} () override
+\item 
+void \mbox{\hyperlink{class_trapezoid_controller_a1bc46ecbdd3c411465b3cc48f1469af8}{Update\+Target}} (double target) override
+\item 
+void \mbox{\hyperlink{class_trapezoid_controller_a24f62b927cf45f99d7db2e33502dc211}{Run}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_trapezoid_controller_a9065ae28a2c174b4a6c71c26b6e5968e}{Get\+Target}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 25 of file Trapezoid\+Controller.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_trapezoid_controller_a21acf2c2206ca411a9398a4164e49809}\label{class_trapezoid_controller_a21acf2c2206ca411a9398a4164e49809}} 
+\index{TrapezoidController@{TrapezoidController}!TrapezoidController@{TrapezoidController}}
+\index{TrapezoidController@{TrapezoidController}!TrapezoidController@{TrapezoidController}}
+\doxysubsubsection{\texorpdfstring{TrapezoidController()}{TrapezoidController()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Trapezoid\+Controller\+::\+Trapezoid\+Controller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{class_trapezoid_controller_af593f91397c977ba593310bef5c43503}\label{class_trapezoid_controller_af593f91397c977ba593310bef5c43503}} 
+\index{TrapezoidController@{TrapezoidController}!TrapezoidController@{TrapezoidController}}
+\index{TrapezoidController@{TrapezoidController}!TrapezoidController@{TrapezoidController}}
+\doxysubsubsection{\texorpdfstring{TrapezoidController()}{TrapezoidController()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Trapezoid\+Controller\+::\+Trapezoid\+Controller (\begin{DoxyParamCaption}\item[{shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_dragon_motor_controller}{I\+Dragon\+Motor\+Controller}} $>$}]{motor,  }\item[{double}]{target,  }\item[{shared\+\_\+ptr$<$ \mbox{\hyperlink{class_control_data}{Control\+Data}} $>$}]{Control\+Data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 28 of file Trapezoid\+Controller.\+cpp.
+
+\mbox{\Hypertarget{class_trapezoid_controller_a1e695d7703aa906e4fb837762ca2ac55}\label{class_trapezoid_controller_a1e695d7703aa906e4fb837762ca2ac55}} 
+\index{TrapezoidController@{TrapezoidController}!````~TrapezoidController@{$\sim$TrapezoidController}}
+\index{````~TrapezoidController@{$\sim$TrapezoidController}!TrapezoidController@{TrapezoidController}}
+\doxysubsubsection{\texorpdfstring{$\sim$TrapezoidController()}{~TrapezoidController()}}
+{\footnotesize\ttfamily Trapezoid\+Controller\+::$\sim$\+Trapezoid\+Controller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_trapezoid_controller_a9065ae28a2c174b4a6c71c26b6e5968e}\label{class_trapezoid_controller_a9065ae28a2c174b4a6c71c26b6e5968e}} 
+\index{TrapezoidController@{TrapezoidController}!GetTarget@{GetTarget}}
+\index{GetTarget@{GetTarget}!TrapezoidController@{TrapezoidController}}
+\doxysubsubsection{\texorpdfstring{GetTarget()}{GetTarget()}}
+{\footnotesize\ttfamily double Trapezoid\+Controller\+::\+Get\+Target (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 47 of file Trapezoid\+Controller.\+h.
+
+\mbox{\Hypertarget{class_trapezoid_controller_affb3abaeb599bc0500f1851feff7157b}\label{class_trapezoid_controller_affb3abaeb599bc0500f1851feff7157b}} 
+\index{TrapezoidController@{TrapezoidController}!Init@{Init}}
+\index{Init@{Init}!TrapezoidController@{TrapezoidController}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void Trapezoid\+Controller\+::\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_mech_controller_a43c564581e046a9483e469c6da589db9}{I\+Mech\+Controller}}.
+
+
+
+Definition at line 48 of file Trapezoid\+Controller.\+cpp.
+
+\mbox{\Hypertarget{class_trapezoid_controller_a24f62b927cf45f99d7db2e33502dc211}\label{class_trapezoid_controller_a24f62b927cf45f99d7db2e33502dc211}} 
+\index{TrapezoidController@{TrapezoidController}!Run@{Run}}
+\index{Run@{Run}!TrapezoidController@{TrapezoidController}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily void Trapezoid\+Controller\+::\+Run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_mech_controller_a26c63d8b4ab0539d0f0902b2077356f4}{I\+Mech\+Controller}}.
+
+
+
+Definition at line 67 of file Trapezoid\+Controller.\+cpp.
+
+\mbox{\Hypertarget{class_trapezoid_controller_a1bc46ecbdd3c411465b3cc48f1469af8}\label{class_trapezoid_controller_a1bc46ecbdd3c411465b3cc48f1469af8}} 
+\index{TrapezoidController@{TrapezoidController}!UpdateTarget@{UpdateTarget}}
+\index{UpdateTarget@{UpdateTarget}!TrapezoidController@{TrapezoidController}}
+\doxysubsubsection{\texorpdfstring{UpdateTarget()}{UpdateTarget()}}
+{\footnotesize\ttfamily void Trapezoid\+Controller\+::\+Update\+Target (\begin{DoxyParamCaption}\item[{double}]{target }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_mech_controller_a4eb9b1a0f7eed26a4f6c7ca12b6aa442}{I\+Mech\+Controller}}.
+
+
+
+Definition at line 59 of file Trapezoid\+Controller.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Git\+Repos/2021\+Infinite\+Recharge2/src/main/cpp/controllers/mechanisms/\mbox{\hyperlink{_trapezoid_controller_8h}{Trapezoid\+Controller.\+h}}\item 
+C\+:/\+Git\+Repos/2021\+Infinite\+Recharge2/src/main/cpp/controllers/mechanisms/\mbox{\hyperlink{_trapezoid_controller_8cpp}{Trapezoid\+Controller.\+cpp}}\end{DoxyCompactItemize}

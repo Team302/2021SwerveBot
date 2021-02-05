@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/gamepad/axis/AnalogAxis.cpp Source File</title>
+<title>Team 302 Robot: C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/gamepad/axis/AnalogAxis.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,11 +24,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="roboticslogo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Team 302 Robot
    </div>
-   <div id="projectbrief">Swerve Bot APIs</div>
   </td>
  </tr>
  </tbody>
@@ -108,170 +106,156 @@ $(document).ready(function(){initNavTree('_analog_axis_8cpp_source.html',''); in
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// C++ Includes</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;units/dimensionless.h&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// FRC includes</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;frc/GenericHID.h&gt;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;frc/SlewRateLimiter.h&gt;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// Team 302 includes</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_analog_axis_8h.html">gamepad/axis/AnalogAxis.h</a>&gt;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_linear_profile_8h.html">gamepad/axis/LinearProfile.h</a>&gt;</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_cubed_profile_8h.html">gamepad/axis/CubedProfile.h</a>&gt;</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_deadband_value_8h.html">gamepad/axis/DeadbandValue.h</a>&gt;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_flipped_axis_8h.html">gamepad/axis/FlippedAxis.h</a>&gt;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_no_deadband_value_8h.html">gamepad/axis/NoDeadbandValue.h</a>&gt;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_scaled_deadband_value_8h.html">gamepad/axis/ScaledDeadbandValue.h</a>&gt;</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_squared_profile_8h.html">gamepad/axis/SquaredProfile.h</a>&gt;</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_logger_8h.html">utils/Logger.h</a>&gt;</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// Third Party Includes</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// Team 302 includes</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_analog_axis_8h.html">gamepad/axis/AnalogAxis.h</a>&gt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_linear_profile_8h.html">gamepad/axis/LinearProfile.h</a>&gt;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_cubed_profile_8h.html">gamepad/axis/CubedProfile.h</a>&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_deadband_value_8h.html">gamepad/axis/DeadbandValue.h</a>&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_flipped_axis_8h.html">gamepad/axis/FlippedAxis.h</a>&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_no_deadband_value_8h.html">gamepad/axis/NoDeadbandValue.h</a>&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_scaled_deadband_value_8h.html">gamepad/axis/ScaledDeadbandValue.h</a>&gt;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_squared_profile_8h.html">gamepad/axis/SquaredProfile.h</a>&gt;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_logger_8h.html">utils/Logger.h</a>&gt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">// Third Party Includes</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">using namespace </span>frc;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">//=========================================================================================</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span><span class="comment">//=========================================================================================</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="class_analog_axis.html#a4ae0bfa8f8c22746f32a1899f745661e">   57</a></span>&#160;<a class="code" href="class_analog_axis.html#a4ae0bfa8f8c22746f32a1899f745661e">AnalogAxis::AnalogAxis</a></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;(</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    GenericHID*                         gamepad,            </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">int</span>                                 axisID,             </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">bool</span>                                flipAxis            </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;) : m_gamepad( gamepad ),                                   </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    m_axis( axisID ),</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    m_profile( <a class="code" href="class_linear_profile.html">LinearProfile</a>::GetInstance() ),  </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    m_deadband( <a class="code" href="class_no_deadband_value.html">NoDeadbandValue</a>::GetInstance() ), </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    m_scale( new <a class="code" href="class_scaled_axis.html">ScaledAxis</a>()  ),</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    m_slewRateFactor ( new <a class="code" href="class_slewed_axis.html">SlewedAxis</a>() )</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span> ( flipAxis )</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        m_scale-&gt;<a class="code" href="class_scaled_axis.html#a2e7040f69798f0af5c409a34aeeb4208">SetScaleFactor</a>( -1.0 );</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">//================================================================================================</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"></span><span class="comment">//================================================================================================</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="class_analog_axis.html#a4e01b8b9de9b8af178c2bdbd63359ea2">   80</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="class_analog_axis.html#a4e01b8b9de9b8af178c2bdbd63359ea2">AnalogAxis::GetAxisValue</a>()</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;{</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">double</span> value = 0.0;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">if</span> ( m_gamepad != <span class="keyword">nullptr</span> )</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        value = <a class="code" href="class_analog_axis.html#a16dc4ab6eb26221fc1f43c4f9cb67fa2">GetRawValue</a>();</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        value = m_deadband-&gt;<a class="code" href="class_i_deadband.html#a35862406c6b6f467a33a82ce1b87eed3">ApplyDeadband</a>( value );</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        value = m_profile-&gt;<a class="code" href="class_i_profile.html#a38ecdbbe722fafa0079af4b1179e83eb">ApplyProfile</a>( value );</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        value = m_scale-&gt;<a class="code" href="class_scaled_axis.html#ab14e83592c21e05ab7ecda01a75d5319">Scale</a>( value );</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        value = m_slewRateFactor-&gt;<a class="code" href="class_slewed_axis.html#ac01cf9e81127c89cdcdfb6016a7ad007">SlewRate</a>( value );</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keywordtype">string</span> msg = <span class="stringliteral">&quot;missing gamepad &quot;</span>;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="stringliteral">&quot;AnalogAxis::GetAxisValue&quot;</span>, msg );</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">return</span> value;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">//================================================================================================</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"></span><span class="comment">//================================================================================================</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="class_analog_axis.html#affc8b08e1a2bb32adcb971f644d2458d">  105</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_analog_axis.html#affc8b08e1a2bb32adcb971f644d2458d">AnalogAxis::SetDeadBand</a></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;(</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <a class="code" href="class_i_dragon_game_pad.html#afde07811ccdd7565bc40c381adecee4d">IDragonGamePad::AXIS_DEADBAND</a>   type            </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;)</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;{</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">switch</span> ( type )</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    {</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">case</span> IDragonGamePad::AXIS_DEADBAND::NONE:</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            m_deadband = <a class="code" href="class_no_deadband_value.html#a39464b27dcf0d97929893ee507b11838">NoDeadbandValue::GetInstance</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacefrc.html">frc</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">//=========================================================================================</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span><span class="comment">//=========================================================================================</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_analog_axis.html#a4ae0bfa8f8c22746f32a1899f745661e">   56</a></span>&#160;<a class="code" href="class_analog_axis.html#a4ae0bfa8f8c22746f32a1899f745661e">AnalogAxis::AnalogAxis</a></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;(</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    GenericHID*                         gamepad,            </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">int</span>                                 axisID,             </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">bool</span>                                flipAxis            </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;) : m_gamepad( gamepad ),                                   </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    m_axis( axisID ),</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    m_profile( <a class="code" href="class_linear_profile.html">LinearProfile</a>::GetInstance() ),  </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    m_deadband( <a class="code" href="class_no_deadband_value.html">NoDeadbandValue</a>::GetInstance() ), </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    m_scale( new <a class="code" href="class_scaled_axis.html">ScaledAxis</a>()  )</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> ( flipAxis )</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        m_scale-&gt;<a class="code" href="class_scaled_axis.html#a2e7040f69798f0af5c409a34aeeb4208">SetScaleFactor</a>( -1.0 );</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">//================================================================================================</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"></span><span class="comment">//================================================================================================</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="class_analog_axis.html#a4e01b8b9de9b8af178c2bdbd63359ea2">   77</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="class_analog_axis.html#a4e01b8b9de9b8af178c2bdbd63359ea2">AnalogAxis::GetAxisValue</a>()</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">double</span> value = 0.0;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">if</span> ( m_gamepad != <span class="keyword">nullptr</span> )</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        value = <a class="code" href="class_analog_axis.html#a16dc4ab6eb26221fc1f43c4f9cb67fa2">GetRawValue</a>();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        value = m_deadband-&gt;<a class="code" href="class_i_deadband.html#a35862406c6b6f467a33a82ce1b87eed3">ApplyDeadband</a>( value );</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        value = m_profile-&gt;<a class="code" href="class_i_profile.html#a38ecdbbe722fafa0079af4b1179e83eb">ApplyProfile</a>( value );</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        value = m_scale-&gt;<a class="code" href="class_scaled_axis.html#ab14e83592c21e05ab7ecda01a75d5319">Scale</a>( value );</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keywordtype">string</span> msg = <span class="stringliteral">&quot;missing gamepad &quot;</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="stringliteral">&quot;AnalogAxis::GetAxisValue&quot;</span>, msg );</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">return</span> value;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">//================================================================================================</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment"></span><span class="comment">//================================================================================================</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="class_analog_axis.html#affc8b08e1a2bb32adcb971f644d2458d">  101</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_analog_axis.html#affc8b08e1a2bb32adcb971f644d2458d">AnalogAxis::SetDeadBand</a></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;(</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <a class="code" href="class_i_dragon_game_pad.html#afde07811ccdd7565bc40c381adecee4d">IDragonGamePad::AXIS_DEADBAND</a>   type            </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;{</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">switch</span> ( type )</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordflow">case</span> IDragonGamePad::AXIS_DEADBAND::NONE:</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            m_deadband = <a class="code" href="class_no_deadband_value.html#a39464b27dcf0d97929893ee507b11838">NoDeadbandValue::GetInstance</a>();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">case</span> IDragonGamePad::AXIS_DEADBAND::APPLY_STANDARD_DEADBAND:</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            m_deadband = <a class="code" href="class_deadband_value.html#aeacc198fd0880958590fc4bab4ff001c">DeadbandValue::GetInstance</a>();</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordflow">case</span> IDragonGamePad::AXIS_DEADBAND::APPLY_STANDARD_DEADBAND:</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            m_deadband = <a class="code" href="class_deadband_value.html#aeacc198fd0880958590fc4bab4ff001c">DeadbandValue::GetInstance</a>();</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordflow">case</span> IDragonGamePad::AXIS_DEADBAND::APPLY_SCALED_DEADBAND:</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            m_deadband = <a class="code" href="class_scaled_deadband_value.html#a58f87c90567fd6e1de11d395166c1602">ScaledDeadbandValue::GetInstance</a>();</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">case</span> IDragonGamePad::AXIS_DEADBAND::APPLY_SCALED_DEADBAND:</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            m_deadband = <a class="code" href="class_scaled_deadband_value.html#a58f87c90567fd6e1de11d395166c1602">ScaledDeadbandValue::GetInstance</a>();</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            <span class="keywordtype">string</span> msg = <span class="stringliteral">&quot;invalid deadband specified &quot;</span>;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="stringliteral">&quot;AnalogAxis::SetDeadBand&quot;</span>, msg );</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    }</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">//================================================================================================</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment"></span><span class="comment">//================================================================================================</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="class_analog_axis.html#ad3a96408976c543981e74f241ed34b93">  138</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_analog_axis.html#ad3a96408976c543981e74f241ed34b93">AnalogAxis::SetAxisProfile</a></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;(</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;     <a class="code" href="class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676">IDragonGamePad::AXIS_PROFILE</a>    profile         </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;)</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;{</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keywordflow">switch</span> ( profile )</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    {</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="keywordflow">case</span> IDragonGamePad::AXIS_PROFILE::CUBED:</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            m_profile = <a class="code" href="class_cubed_profile.html#a38ad01df0a8c1f442d8f17a49c241e41">CubedProfile::GetInstance</a>();</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            <span class="keywordtype">string</span> msg = <span class="stringliteral">&quot;invalid deadband specified &quot;</span>;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="stringliteral">&quot;AnalogAxis::SetDeadBand&quot;</span>, msg );</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    }</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">//================================================================================================</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment"></span><span class="comment">//================================================================================================</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="class_analog_axis.html#ad3a96408976c543981e74f241ed34b93">  134</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_analog_axis.html#ad3a96408976c543981e74f241ed34b93">AnalogAxis::SetAxisProfile</a></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;(</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;     <a class="code" href="class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676">IDragonGamePad::AXIS_PROFILE</a>    profile         </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;)</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;{</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordflow">switch</span> ( profile )</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    {</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordflow">case</span> IDragonGamePad::AXIS_PROFILE::CUBED:</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            m_profile = <a class="code" href="class_cubed_profile.html#a38ad01df0a8c1f442d8f17a49c241e41">CubedProfile::GetInstance</a>();</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="keywordflow">case</span> IDragonGamePad::AXIS_PROFILE::SQUARED:</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            m_profile = <a class="code" href="class_squared_profile.html#a98f6844c1269689cf93800eb1b1a1e33">SquaredProfile::GetInstance</a>();</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keywordflow">case</span> IDragonGamePad::AXIS_PROFILE::SQUARED:</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            m_profile = <a class="code" href="class_squared_profile.html#a98f6844c1269689cf93800eb1b1a1e33">SquaredProfile::GetInstance</a>();</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keywordflow">case</span> IDragonGamePad::AXIS_PROFILE::LINEAR:</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            m_profile = <a class="code" href="class_linear_profile.html#a339bc2999890e50a1068f8f51bfe2f60">LinearProfile::GetInstance</a>();</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">case</span> IDragonGamePad::AXIS_PROFILE::LINEAR:</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            m_profile = <a class="code" href="class_linear_profile.html#a339bc2999890e50a1068f8f51bfe2f60">LinearProfile::GetInstance</a>();</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <span class="keywordtype">string</span> msg = <span class="stringliteral">&quot;invalid profile specified &quot;</span>;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="stringliteral">&quot;AnalogAxis::SetAxisProfile&quot;</span>, msg );</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    }</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;}</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">//================================================================================================</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment"></span><span class="comment">//================================================================================================        </span></div>
-<div class="line"><a name="l00169"></a><span class="lineno"><a class="line" href="class_analog_axis.html#ab4f474d286f5f650c617264616154cf9">  169</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_analog_axis.html#ab4f474d286f5f650c617264616154cf9">AnalogAxis::SetAxisScaleFactor</a></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;(</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keywordtype">double</span> scale                     </div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;)</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;{</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    m_scale-&gt;<a class="code" href="class_scaled_axis.html#a2e7040f69798f0af5c409a34aeeb4208">SetScaleFactor</a>( scale );</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;}</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="class_analog_axis.html#aa053478eb2985dbf45301d9ec8e944a5">  179</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_analog_axis.html#aa053478eb2985dbf45301d9ec8e944a5">AnalogAxis::SetSlewRateLimiter</a></div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;(</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordtype">double</span> slewRateFactor</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;)</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;{</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    m_slewRateFactor-&gt;<a class="code" href="class_slewed_axis.html#aa4996dc14ab12777e442af05dfdf5345">SetSlewRateLimiter</a>( slewRateFactor );</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;}</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;       </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">//==================================================================================</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment"></span><span class="comment">//==================================================================================</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno"><a class="line" href="class_analog_axis.html#a16dc4ab6eb26221fc1f43c4f9cb67fa2">  192</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="class_analog_axis.html#a16dc4ab6eb26221fc1f43c4f9cb67fa2">AnalogAxis::GetRawValue</a>()</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;{</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keywordtype">double</span> value = 0.0;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordflow">if</span> ( m_gamepad != <span class="keyword">nullptr</span> )</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    {</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        value = m_gamepad-&gt;GetRawAxis( m_axis );</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    }</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    {</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordtype">string</span> msg = <span class="stringliteral">&quot;gamepad missing &quot;</span>;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="stringliteral">&quot;AnalogAxis::GetRawValue&quot;</span>, msg );</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    }</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">return</span> value;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;}</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <span class="keywordtype">string</span> msg = <span class="stringliteral">&quot;invalid profile specified &quot;</span>;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="stringliteral">&quot;AnalogAxis::SetAxisProfile&quot;</span>, msg );</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    }</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">//================================================================================================</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment"></span><span class="comment">//================================================================================================        </span></div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="class_analog_axis.html#ab4f474d286f5f650c617264616154cf9">  165</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_analog_axis.html#ab4f474d286f5f650c617264616154cf9">AnalogAxis::SetAxisScaleFactor</a></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;(</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordtype">double</span> scale                     </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;)</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;{</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    m_scale-&gt;<a class="code" href="class_scaled_axis.html#a2e7040f69798f0af5c409a34aeeb4208">SetScaleFactor</a>( scale );</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;}</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;       </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">//==================================================================================</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment"></span><span class="comment">//==================================================================================</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno"><a class="line" href="class_analog_axis.html#a16dc4ab6eb26221fc1f43c4f9cb67fa2">  178</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="class_analog_axis.html#a16dc4ab6eb26221fc1f43c4f9cb67fa2">AnalogAxis::GetRawValue</a>()</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;{</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordtype">double</span> value = 0.0;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordflow">if</span> ( m_gamepad != <span class="keyword">nullptr</span> )</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    {</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        value = m_gamepad-&gt;GetRawAxis( m_axis );</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    }</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    {</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordtype">string</span> msg = <span class="stringliteral">&quot;gamepad missing &quot;</span>;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="stringliteral">&quot;AnalogAxis::GetRawValue&quot;</span>, msg );</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    }</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keywordflow">return</span> value;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;}</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="a_scaled_deadband_value_8h_html"><div class="ttname"><a href="_scaled_deadband_value_8h.html">ScaledDeadbandValue.h</a></div></div>
@@ -282,9 +266,8 @@ $(document).ready(function(){initNavTree('_analog_axis_8cpp_source.html',''); in
 <div class="ttc" id="aclass_scaled_axis_html"><div class="ttname"><a href="class_scaled_axis.html">ScaledAxis</a></div><div class="ttdoc">Class: ScaledAxis Description: This provides scaling for an axis.</div><div class="ttdef"><b>Definition:</b> <a href="_scaled_axis_8h_source.html#l00043">ScaledAxis.h:44</a></div></div>
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a3b3c3165d9fc69500bd69ba575216676"><div class="ttname"><a href="class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676">IDragonGamePad::AXIS_PROFILE</a></div><div class="ttdeci">AXIS_PROFILE</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00132">IDragonGamePad.h:133</a></div></div>
 <div class="ttc" id="aclass_linear_profile_html"><div class="ttname"><a href="class_linear_profile.html">LinearProfile</a></div><div class="ttdoc">Class: LinearProfile Description: This provides profile to be applied to input values.</div><div class="ttdef"><b>Definition:</b> <a href="_linear_profile_8h_source.html#l00045">LinearProfile.h:46</a></div></div>
-<div class="ttc" id="aclass_analog_axis_html_a4e01b8b9de9b8af178c2bdbd63359ea2"><div class="ttname"><a href="class_analog_axis.html#a4e01b8b9de9b8af178c2bdbd63359ea2">AnalogAxis::GetAxisValue</a></div><div class="ttdeci">double GetAxisValue()</div><div class="ttdoc">Read the analog (axis) value and return it. If the gamepad has an issue, return 0....</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8cpp_source.html#l00080">AnalogAxis.cpp:80</a></div></div>
+<div class="ttc" id="aclass_analog_axis_html_a4e01b8b9de9b8af178c2bdbd63359ea2"><div class="ttname"><a href="class_analog_axis.html#a4e01b8b9de9b8af178c2bdbd63359ea2">AnalogAxis::GetAxisValue</a></div><div class="ttdeci">double GetAxisValue()</div><div class="ttdoc">Read the analog (axis) value and return it. If the gamepad has an issue, return 0....</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8cpp_source.html#l00077">AnalogAxis.cpp:77</a></div></div>
 <div class="ttc" id="a_logger_8h_html"><div class="ttname"><a href="_logger_8h.html">Logger.h</a></div></div>
-<div class="ttc" id="aclass_slewed_axis_html"><div class="ttname"><a href="class_slewed_axis.html">SlewedAxis</a></div><div class="ttdef"><b>Definition:</b> <a href="_slewed_axis_8h_source.html#l00032">SlewedAxis.h:33</a></div></div>
 <div class="ttc" id="a_deadband_value_8h_html"><div class="ttname"><a href="_deadband_value_8h.html">DeadbandValue.h</a></div></div>
 <div class="ttc" id="aclass_linear_profile_html_a339bc2999890e50a1068f8f51bfe2f60"><div class="ttname"><a href="class_linear_profile.html#a339bc2999890e50a1068f8f51bfe2f60">LinearProfile::GetInstance</a></div><div class="ttdeci">static LinearProfile * GetInstance()</div><div class="ttdoc">Method: GetInstance Description: Static singleton method to create the object Returns: LinearProfile*...</div><div class="ttdef"><b>Definition:</b> <a href="_linear_profile_8cpp_source.html#l00028">LinearProfile.cpp:28</a></div></div>
 <div class="ttc" id="a_analog_axis_8h_html"><div class="ttname"><a href="_analog_axis_8h.html">AnalogAxis.h</a></div></div>
@@ -295,25 +278,23 @@ $(document).ready(function(){initNavTree('_analog_axis_8cpp_source.html',''); in
 <div class="ttc" id="aclass_logger_html_a98d7aec19dcdfb9d8faa46d83d927883"><div class="ttname"><a href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">Logger::LogError</a></div><div class="ttdeci">void LogError(const std::string &amp;locationIdentifier, const std::string &amp;message)</div><div class="ttdoc">log a message</div></div>
 <div class="ttc" id="aclass_logger_html_ae85cfbef8b7e6940475a5012fa1935c6"><div class="ttname"><a href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a></div><div class="ttdeci">static Logger * GetLogger()</div><div class="ttdoc">Find or create the singleton logger.</div><div class="ttdef"><b>Definition:</b> <a href="_logger_8cpp_source.html#l00049">Logger.cpp:49</a></div></div>
 <div class="ttc" id="aclass_i_profile_html_a38ecdbbe722fafa0079af4b1179e83eb"><div class="ttname"><a href="class_i_profile.html#a38ecdbbe722fafa0079af4b1179e83eb">IProfile::ApplyProfile</a></div><div class="ttdeci">virtual double ApplyProfile(double inputVal) const =0</div><div class="ttdoc">Method: ApplyProfile Description: Apply the profile</div></div>
-<div class="ttc" id="aclass_slewed_axis_html_aa4996dc14ab12777e442af05dfdf5345"><div class="ttname"><a href="class_slewed_axis.html#aa4996dc14ab12777e442af05dfdf5345">SlewedAxis::SetSlewRateLimiter</a></div><div class="ttdeci">virtual void SetSlewRateLimiter(double slewRateFactor)</div><div class="ttdef"><b>Definition:</b> <a href="_slewed_axis_8cpp_source.html#l00036">SlewedAxis.cpp:37</a></div></div>
-<div class="ttc" id="aclass_analog_axis_html_aa053478eb2985dbf45301d9ec8e944a5"><div class="ttname"><a href="class_analog_axis.html#aa053478eb2985dbf45301d9ec8e944a5">AnalogAxis::SetSlewRateLimiter</a></div><div class="ttdeci">void SetSlewRateLimiter(double slewRateFactor)</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8cpp_source.html#l00179">AnalogAxis.cpp:180</a></div></div>
-<div class="ttc" id="aclass_analog_axis_html_ad3a96408976c543981e74f241ed34b93"><div class="ttname"><a href="class_analog_axis.html#ad3a96408976c543981e74f241ed34b93">AnalogAxis::SetAxisProfile</a></div><div class="ttdeci">void SetAxisProfile(IDragonGamePad::AXIS_PROFILE profile)</div><div class="ttdoc">Set the axis profile (cubed, linear, etc.)</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8cpp_source.html#l00138">AnalogAxis.cpp:139</a></div></div>
-<div class="ttc" id="aclass_analog_axis_html_a4ae0bfa8f8c22746f32a1899f745661e"><div class="ttname"><a href="class_analog_axis.html#a4ae0bfa8f8c22746f32a1899f745661e">AnalogAxis::AnalogAxis</a></div><div class="ttdeci">AnalogAxis(frc::GenericHID *gamepad, int axisID, bool flipped)</div><div class="ttdoc">construct the AnalogAxis object</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8cpp_source.html#l00057">AnalogAxis.cpp:58</a></div></div>
+<div class="ttc" id="aclass_analog_axis_html_ad3a96408976c543981e74f241ed34b93"><div class="ttname"><a href="class_analog_axis.html#ad3a96408976c543981e74f241ed34b93">AnalogAxis::SetAxisProfile</a></div><div class="ttdeci">void SetAxisProfile(IDragonGamePad::AXIS_PROFILE profile)</div><div class="ttdoc">Set the axis profile (cubed, linear, etc.)</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8cpp_source.html#l00134">AnalogAxis.cpp:135</a></div></div>
+<div class="ttc" id="anamespacefrc_html"><div class="ttname"><a href="namespacefrc.html">frc</a></div><div class="ttdef"><b>Definition:</b> <a href="_do_nothing_8h_source.html#l00034">DoNothing.h:35</a></div></div>
+<div class="ttc" id="aclass_analog_axis_html_a4ae0bfa8f8c22746f32a1899f745661e"><div class="ttname"><a href="class_analog_axis.html#a4ae0bfa8f8c22746f32a1899f745661e">AnalogAxis::AnalogAxis</a></div><div class="ttdeci">AnalogAxis(frc::GenericHID *gamepad, int axisID, bool flipped)</div><div class="ttdoc">construct the AnalogAxis object</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8cpp_source.html#l00056">AnalogAxis.cpp:57</a></div></div>
 <div class="ttc" id="aclass_i_dragon_game_pad_html_afde07811ccdd7565bc40c381adecee4d"><div class="ttname"><a href="class_i_dragon_game_pad.html#afde07811ccdd7565bc40c381adecee4d">IDragonGamePad::AXIS_DEADBAND</a></div><div class="ttdeci">AXIS_DEADBAND</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00124">IDragonGamePad.h:125</a></div></div>
 <div class="ttc" id="a_cubed_profile_8h_html"><div class="ttname"><a href="_cubed_profile_8h.html">CubedProfile.h</a></div></div>
-<div class="ttc" id="aclass_analog_axis_html_a16dc4ab6eb26221fc1f43c4f9cb67fa2"><div class="ttname"><a href="class_analog_axis.html#a16dc4ab6eb26221fc1f43c4f9cb67fa2">AnalogAxis::GetRawValue</a></div><div class="ttdeci">virtual double GetRawValue()</div><div class="ttdoc">Returns the analog input's raw value. If there is a connection problem, 0.0 will be returned and a de...</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8cpp_source.html#l00192">AnalogAxis.cpp:192</a></div></div>
+<div class="ttc" id="aclass_analog_axis_html_a16dc4ab6eb26221fc1f43c4f9cb67fa2"><div class="ttname"><a href="class_analog_axis.html#a16dc4ab6eb26221fc1f43c4f9cb67fa2">AnalogAxis::GetRawValue</a></div><div class="ttdeci">virtual double GetRawValue()</div><div class="ttdoc">Returns the analog input's raw value. If there is a connection problem, 0.0 will be returned and a de...</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8cpp_source.html#l00178">AnalogAxis.cpp:178</a></div></div>
 <div class="ttc" id="a_squared_profile_8h_html"><div class="ttname"><a href="_squared_profile_8h.html">SquaredProfile.h</a></div></div>
 <div class="ttc" id="aclass_squared_profile_html_a98f6844c1269689cf93800eb1b1a1e33"><div class="ttname"><a href="class_squared_profile.html#a98f6844c1269689cf93800eb1b1a1e33">SquaredProfile::GetInstance</a></div><div class="ttdeci">static SquaredProfile * GetInstance()</div><div class="ttdoc">Method: GetInstance Description: Static singleton method to create the object Returns: SquaredProfile...</div><div class="ttdef"><b>Definition:</b> <a href="_squared_profile_8cpp_source.html#l00037">SquaredProfile.cpp:37</a></div></div>
 <div class="ttc" id="aclass_no_deadband_value_html_a39464b27dcf0d97929893ee507b11838"><div class="ttname"><a href="class_no_deadband_value.html#a39464b27dcf0d97929893ee507b11838">NoDeadbandValue::GetInstance</a></div><div class="ttdeci">static NoDeadbandValue * GetInstance()</div><div class="ttdoc">Method: GetInstance Description: Static singleton method to create the object Returns: DeadbandValue*...</div><div class="ttdef"><b>Definition:</b> <a href="_no_deadband_value_8cpp_source.html#l00029">NoDeadbandValue.cpp:29</a></div></div>
-<div class="ttc" id="aclass_analog_axis_html_ab4f474d286f5f650c617264616154cf9"><div class="ttname"><a href="class_analog_axis.html#ab4f474d286f5f650c617264616154cf9">AnalogAxis::SetAxisScaleFactor</a></div><div class="ttdeci">void SetAxisScaleFactor(double scale)</div><div class="ttdoc">Set the axis scale factor (default is 1.0)</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8cpp_source.html#l00169">AnalogAxis.cpp:170</a></div></div>
-<div class="ttc" id="aclass_analog_axis_html_affc8b08e1a2bb32adcb971f644d2458d"><div class="ttname"><a href="class_analog_axis.html#affc8b08e1a2bb32adcb971f644d2458d">AnalogAxis::SetDeadBand</a></div><div class="ttdeci">void SetDeadBand(IDragonGamePad::AXIS_DEADBAND type)</div><div class="ttdoc">Set the deadband type.</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8cpp_source.html#l00105">AnalogAxis.cpp:106</a></div></div>
+<div class="ttc" id="aclass_analog_axis_html_ab4f474d286f5f650c617264616154cf9"><div class="ttname"><a href="class_analog_axis.html#ab4f474d286f5f650c617264616154cf9">AnalogAxis::SetAxisScaleFactor</a></div><div class="ttdeci">void SetAxisScaleFactor(double scale)</div><div class="ttdoc">Set the axis scale factor (default is 1.0)</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8cpp_source.html#l00165">AnalogAxis.cpp:166</a></div></div>
+<div class="ttc" id="aclass_analog_axis_html_affc8b08e1a2bb32adcb971f644d2458d"><div class="ttname"><a href="class_analog_axis.html#affc8b08e1a2bb32adcb971f644d2458d">AnalogAxis::SetDeadBand</a></div><div class="ttdeci">void SetDeadBand(IDragonGamePad::AXIS_DEADBAND type)</div><div class="ttdoc">Set the deadband type.</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8cpp_source.html#l00101">AnalogAxis.cpp:102</a></div></div>
 <div class="ttc" id="aclass_i_deadband_html_a35862406c6b6f467a33a82ce1b87eed3"><div class="ttname"><a href="class_i_deadband.html#a35862406c6b6f467a33a82ce1b87eed3">IDeadband::ApplyDeadband</a></div><div class="ttdeci">virtual double ApplyDeadband(double inputVal) const =0</div><div class="ttdoc">Method: ApplyDeadband Description: Apply the standard deadband</div></div>
-<div class="ttc" id="aclass_slewed_axis_html_ac01cf9e81127c89cdcdfb6016a7ad007"><div class="ttname"><a href="class_slewed_axis.html#ac01cf9e81127c89cdcdfb6016a7ad007">SlewedAxis::SlewRate</a></div><div class="ttdeci">double SlewRate(double inputVal)</div><div class="ttdef"><b>Definition:</b> <a href="_slewed_axis_8cpp_source.html#l00046">SlewedAxis.cpp:47</a></div></div>
 <div class="ttc" id="aclass_deadband_value_html_aeacc198fd0880958590fc4bab4ff001c"><div class="ttname"><a href="class_deadband_value.html#aeacc198fd0880958590fc4bab4ff001c">DeadbandValue::GetInstance</a></div><div class="ttdeci">static DeadbandValue * GetInstance()</div><div class="ttdoc">Method: GetInstance Description: Static singleton method to create the object Returns: DeadbandValue*...</div><div class="ttdef"><b>Definition:</b> <a href="_deadband_value_8cpp_source.html#l00029">DeadbandValue.cpp:29</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_4a8796b0ba1d3dc122873832137fbe4e.html">GitRepos</a></li><li class="navelem"><a class="el" href="dir_1c47665bf58b31faa465c1927c1a00b8.html">2021SwerveBot</a></li><li class="navelem"><a class="el" href="dir_4c5ca149a7966e928c927d1b502f4c6f.html">src</a></li><li class="navelem"><a class="el" href="dir_6d6810671ff2e85cbf46bcf7f794863c.html">main</a></li><li class="navelem"><a class="el" href="dir_62e39780e9d5ee1b2eb3d29e32dcab01.html">cpp</a></li><li class="navelem"><a class="el" href="dir_38de4f3031ddefd59e70b43c2ccb87ab.html">gamepad</a></li><li class="navelem"><a class="el" href="dir_24eb7d13a7403f35102eb8af8e6575d2.html">axis</a></li><li class="navelem"><a class="el" href="_analog_axis_8cpp.html">AnalogAxis.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_8fef5d376b0779c2816c3097574ff109.html">2021InfiniteRecharge2</a></li><li class="navelem"><a class="el" href="dir_045978cf369576974f858349869f4b54.html">src</a></li><li class="navelem"><a class="el" href="dir_5373632e2b2aeb4f2d30f845a64ddfb5.html">main</a></li><li class="navelem"><a class="el" href="dir_fa31d939b58ad1500bb0a08d226a2ad4.html">cpp</a></li><li class="navelem"><a class="el" href="dir_56030db34b3ff6df1b275b94ad0b35a8.html">gamepad</a></li><li class="navelem"><a class="el" href="dir_a327c72863448aff6c28e353a280f1c7.html">axis</a></li><li class="navelem"><a class="el" href="_analog_axis_8cpp.html">AnalogAxis.cpp</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/states/BallManipulator.h Source File</title>
+<title>Team 302 Robot: C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/states/BallManipulator.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,11 +24,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="roboticslogo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Team 302 Robot
    </div>
-   <div id="projectbrief">Swerve Bot APIs</div>
   </td>
  </tr>
  </tbody>
@@ -111,7 +109,7 @@ $(document).ready(function(){initNavTree('_ball_manipulator_8h_source.html','');
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// Team 302 includes</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// forward declares</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">class </span><a class="code" href="class_ball_transfer_state_mgr.html">BallTransferStateMgr</a>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">class </span>ImpellerStateMgr;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">class </span><a class="code" href="class_impeller_state_mgr.html">ImpellerStateMgr</a>;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">class </span><a class="code" href="class_intake_state_mgr.html">IntakeStateMgr</a>;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">class </span><a class="code" href="class_shooter_state_mgr.html">ShooterStateMgr</a>;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">class </span><a class="code" href="class_shooter_hood_state_mgr.html">ShooterHoodStateMgr</a>;</div>
@@ -164,7 +162,7 @@ $(document).ready(function(){initNavTree('_ball_manipulator_8h_source.html','');
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <a class="code" href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4">BALL_MANIPULATOR_STATE</a>      m_currentState;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="class_intake_state_mgr.html">IntakeStateMgr</a>*             m_intake;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="comment">//ImpellerStateMgr*           m_impeller;  Geo Removed for swervebot</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <a class="code" href="class_impeller_state_mgr.html">ImpellerStateMgr</a>*           m_impeller;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <a class="code" href="class_ball_transfer_state_mgr.html">BallTransferStateMgr</a>*       m_transfer;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <a class="code" href="class_turret_state_mgr.html">TurretStateMgr</a>*             m_turret;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <a class="code" href="class_shooter_state_mgr.html">ShooterStateMgr</a>*            m_shooter;</div>
@@ -183,6 +181,7 @@ $(document).ready(function(){initNavTree('_ball_manipulator_8h_source.html','');
 <div class="ttc" id="aclass_ball_manipulator_html_ae27d8d4f4b313b376bea3854c2f90da7"><div class="ttname"><a href="class_ball_manipulator.html#ae27d8d4f4b313b376bea3854c2f90da7">BallManipulator::SetCurrentState</a></div><div class="ttdeci">void SetCurrentState(BALL_MANIPULATOR_STATE state, double turretAngle)</div><div class="ttdoc">set the current state, initialize it and run it</div><div class="ttdef"><b>Definition:</b> <a href="_ball_manipulator_8cpp_source.html#l00127">BallManipulator.cpp:128</a></div></div>
 <div class="ttc" id="aclass_ball_manipulator_html_a91bf71119c5fecb46b41a90485f7a9a4a4fe671d573281a8407473c5b13187199"><div class="ttname"><a href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4a4fe671d573281a8407473c5b13187199">BallManipulator::INTAKE_HUMAN_PLAYER</a></div><div class="ttdeci">@ INTAKE_HUMAN_PLAYER</div><div class="ttdef"><b>Definition:</b> <a href="_ball_manipulator_8h_source.html#l00041">BallManipulator.h:41</a></div></div>
 <div class="ttc" id="aclass_ball_manipulator_html_a91bf71119c5fecb46b41a90485f7a9a4ab71df697d611ab99469889666c8175dc"><div class="ttname"><a href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4ab71df697d611ab99469889666c8175dc">BallManipulator::UNJAM_CLOCKWISE</a></div><div class="ttdeci">@ UNJAM_CLOCKWISE</div><div class="ttdef"><b>Definition:</b> <a href="_ball_manipulator_8h_source.html#l00047">BallManipulator.h:47</a></div></div>
+<div class="ttc" id="aclass_impeller_state_mgr_html"><div class="ttname"><a href="class_impeller_state_mgr.html">ImpellerStateMgr</a></div><div class="ttdef"><b>Definition:</b> <a href="_impeller_state_mgr_8h_source.html#l00029">ImpellerStateMgr.h:30</a></div></div>
 <div class="ttc" id="aclass_ball_manipulator_html_a91bf71119c5fecb46b41a90485f7a9a4a7f6b7e8dfed0b9ca0cf7ad84663c4d60"><div class="ttname"><a href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4a7f6b7e8dfed0b9ca0cf7ad84663c4d60">BallManipulator::UNJAM_COUNTERCLOCKWISE</a></div><div class="ttdeci">@ UNJAM_COUNTERCLOCKWISE</div><div class="ttdef"><b>Definition:</b> <a href="_ball_manipulator_8h_source.html#l00048">BallManipulator.h:48</a></div></div>
 <div class="ttc" id="aclass_ball_manipulator_html_a91bf71119c5fecb46b41a90485f7a9a4ae6cb18d77fbcf82d85b25eaaa5d25b24"><div class="ttname"><a href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4ae6cb18d77fbcf82d85b25eaaa5d25b24">BallManipulator::INTAKE</a></div><div class="ttdeci">@ INTAKE</div><div class="ttdef"><b>Definition:</b> <a href="_ball_manipulator_8h_source.html#l00040">BallManipulator.h:40</a></div></div>
 <div class="ttc" id="aclass_shooter_state_mgr_html"><div class="ttname"><a href="class_shooter_state_mgr.html">ShooterStateMgr</a></div><div class="ttdef"><b>Definition:</b> <a href="_shooter_state_mgr_8h_source.html#l00029">ShooterStateMgr.h:30</a></div></div>
@@ -194,7 +193,7 @@ $(document).ready(function(){initNavTree('_ball_manipulator_8h_source.html','');
 <div class="ttc" id="aclass_ball_manipulator_html_a91bf71119c5fecb46b41a90485f7a9a4a01c99115b3dc9fabf0d04543463096d1"><div class="ttname"><a href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4a01c99115b3dc9fabf0d04543463096d1">BallManipulator::HOLD</a></div><div class="ttdeci">@ HOLD</div><div class="ttdef"><b>Definition:</b> <a href="_ball_manipulator_8h_source.html#l00042">BallManipulator.h:42</a></div></div>
 <div class="ttc" id="aclass_ball_manipulator_html_a91bf71119c5fecb46b41a90485f7a9a4"><div class="ttname"><a href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4">BallManipulator::BALL_MANIPULATOR_STATE</a></div><div class="ttdeci">BALL_MANIPULATOR_STATE</div><div class="ttdef"><b>Definition:</b> <a href="_ball_manipulator_8h_source.html#l00037">BallManipulator.h:38</a></div></div>
 <div class="ttc" id="aclass_ball_manipulator_html_a91bf71119c5fecb46b41a90485f7a9a4ae9ace1e42c309a9b41cd54a33eac40f3"><div class="ttname"><a href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4ae9ace1e42c309a9b41cd54a33eac40f3">BallManipulator::OFF</a></div><div class="ttdeci">@ OFF</div><div class="ttdef"><b>Definition:</b> <a href="_ball_manipulator_8h_source.html#l00039">BallManipulator.h:39</a></div></div>
-<div class="ttc" id="aclass_ball_manipulator_html_a9ba3e69926ef2b3a46793b49adf4003a"><div class="ttname"><a href="class_ball_manipulator.html#a9ba3e69926ef2b3a46793b49adf4003a">BallManipulator::SetApproxAngle</a></div><div class="ttdeci">void SetApproxAngle(double angle)</div><div class="ttdef"><b>Definition:</b> <a href="_ball_manipulator_8cpp_source.html#l00237">BallManipulator.cpp:238</a></div></div>
+<div class="ttc" id="aclass_ball_manipulator_html_a9ba3e69926ef2b3a46793b49adf4003a"><div class="ttname"><a href="class_ball_manipulator.html#a9ba3e69926ef2b3a46793b49adf4003a">BallManipulator::SetApproxAngle</a></div><div class="ttdeci">void SetApproxAngle(double angle)</div><div class="ttdef"><b>Definition:</b> <a href="_ball_manipulator_8cpp_source.html#l00240">BallManipulator.cpp:241</a></div></div>
 <div class="ttc" id="aclass_ball_manipulator_html_a91bf71119c5fecb46b41a90485f7a9a4a6dacee08643ab129f905b69e611531f2"><div class="ttname"><a href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4a6dacee08643ab129f905b69e611531f2">BallManipulator::TRANSFER_UP</a></div><div class="ttdeci">@ TRANSFER_UP</div><div class="ttdef"><b>Definition:</b> <a href="_ball_manipulator_8h_source.html#l00049">BallManipulator.h:49</a></div></div>
 <div class="ttc" id="aclass_ball_manipulator_html_a91bf71119c5fecb46b41a90485f7a9a4ad9c30dc49f618d7d4e44f902f9829ddb"><div class="ttname"><a href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4ad9c30dc49f618d7d4e44f902f9829ddb">BallManipulator::SHOOT</a></div><div class="ttdeci">@ SHOOT</div><div class="ttdef"><b>Definition:</b> <a href="_ball_manipulator_8h_source.html#l00044">BallManipulator.h:44</a></div></div>
 <div class="ttc" id="aclass_ball_manipulator_html_a91bf71119c5fecb46b41a90485f7a9a4aca697a78927960dde01fc439350ae747"><div class="ttname"><a href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4aca697a78927960dde01fc439350ae747">BallManipulator::SHOOT_AUTON</a></div><div class="ttdeci">@ SHOOT_AUTON</div><div class="ttdef"><b>Definition:</b> <a href="_ball_manipulator_8h_source.html#l00045">BallManipulator.h:45</a></div></div>
@@ -203,7 +202,7 @@ $(document).ready(function(){initNavTree('_ball_manipulator_8h_source.html','');
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_4a8796b0ba1d3dc122873832137fbe4e.html">GitRepos</a></li><li class="navelem"><a class="el" href="dir_1c47665bf58b31faa465c1927c1a00b8.html">2021SwerveBot</a></li><li class="navelem"><a class="el" href="dir_4c5ca149a7966e928c927d1b502f4c6f.html">src</a></li><li class="navelem"><a class="el" href="dir_6d6810671ff2e85cbf46bcf7f794863c.html">main</a></li><li class="navelem"><a class="el" href="dir_62e39780e9d5ee1b2eb3d29e32dcab01.html">cpp</a></li><li class="navelem"><a class="el" href="dir_6690ad191a400a686898d515d289d6e4.html">states</a></li><li class="navelem"><a class="el" href="_ball_manipulator_8h.html">BallManipulator.h</a></li>
+    <li class="navelem"><a class="el" href="dir_8fef5d376b0779c2816c3097574ff109.html">2021InfiniteRecharge2</a></li><li class="navelem"><a class="el" href="dir_045978cf369576974f858349869f4b54.html">src</a></li><li class="navelem"><a class="el" href="dir_5373632e2b2aeb4f2d30f845a64ddfb5.html">main</a></li><li class="navelem"><a class="el" href="dir_fa31d939b58ad1500bb0a08d226a2ad4.html">cpp</a></li><li class="navelem"><a class="el" href="dir_04aaf1a84337f17ca65df12df1130e28.html">states</a></li><li class="navelem"><a class="el" href="_ball_manipulator_8h.html">BallManipulator.h</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

@@ -24,11 +24,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="roboticslogo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Team 302 Robot
    </div>
-   <div id="projectbrief">Swerve Bot APIs</div>
   </td>
  </tr>
  </tbody>
@@ -103,6 +101,8 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 : <a class="el" href="class_dragon_blinkin.html#a1a09263f208ac77acf143a643b5b8b7c">DragonBlinkin</a>
 , <a class="el" href="class_dragon_falcon.html#acf967485e409c54f5932732f276cb44d">DragonFalcon</a>
 , <a class="el" href="class_dragon_servo.html#a0edace387d66129bceed4397276d2d25">DragonServo</a>
+, <a class="el" href="class_dragon_solenoid.html#a9a1baa91b95f47c1f42f58e59a82c570">DragonSolenoid</a>
+, <a class="el" href="class_dragon_spark_max.html#a38eb54d110601f8fb7bb2e324f549016">DragonSparkMax</a>
 , <a class="el" href="class_dragon_talon.html#a32074257a1082666c5c25fbb9cb90d33">DragonTalon</a>
 , <a class="el" href="class_i_dragon_motor_controller.html#adacee402a923d6a10d50abd1c850138e">IDragonMotorController</a>
 </li>
@@ -117,9 +117,9 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 <li>SetApproxTargetAngle()
 : <a class="el" href="class_turret_state_mgr.html#a79a43204337f787919606f0480a62087">TurretStateMgr</a>
 </li>
-<li>SetAsFollowerMotor()
-: <a class="el" href="class_dragon_falcon.html#aa158b4baf0b216d99fb44457d432477c">DragonFalcon</a>
-, <a class="el" href="class_dragon_talon.html#a964c602e7737daf03ffb60f01c145c96">DragonTalon</a>
+<li>SetAsSlave()
+: <a class="el" href="class_dragon_falcon.html#a54d569a45a527b83505b8e646d99a95b">DragonFalcon</a>
+, <a class="el" href="class_dragon_talon.html#ad17df52ab49a083f925d20bd9802cf6c">DragonTalon</a>
 </li>
 <li>SetAxisDeadband()
 : <a class="el" href="class_dragon_gamepad.html#af03d2edf95e4fd043059134e05ae807c">DragonGamepad</a>
@@ -150,42 +150,56 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 <li>SetCamMode()
 : <a class="el" href="class_dragon_limelight.html#ac6e89317d90de2e9c7c90eaa9293cab4">DragonLimelight</a>
 </li>
+<li>SetColor()
+: <a class="el" href="class_l_e_d.html#a1da88337ece4a68e3e21cf8791c28948">LED</a>
+</li>
 <li>SetControlConstants()
-: <a class="el" href="class_dragon_falcon.html#a1504585d6a7671449c274adb254d6aa6">DragonFalcon</a>
+: <a class="el" href="class_dragon_chassis.html#a0db28ff16679b084010cb4cd706c598e">DragonChassis</a>
+, <a class="el" href="class_dragon_falcon.html#a1504585d6a7671449c274adb254d6aa6">DragonFalcon</a>
+, <a class="el" href="class_dragon_spark_max.html#a3d5608ab963c80b01dcfbeba3ad71f49">DragonSparkMax</a>
 , <a class="el" href="class_dragon_talon.html#a051e7d9a21b9caf9db65bcb2c613808e">DragonTalon</a>
+, <a class="el" href="class_drive_train_side.html#a5a706257d98af9460c245b7f34b61423">DriveTrainSide</a>
 , <a class="el" href="class_i_chassis.html#a64b0c5e1c4aa54ecfac53c7677b184e7">IChassis</a>
 , <a class="el" href="class_i_dragon_motor_controller.html#abdca297c707d0c1f5e36bc0be37396d5">IDragonMotorController</a>
 , <a class="el" href="class_i_mech1_ind_motor.html#adff264c6bb32f6f1d5447844e635373c">IMech1IndMotor</a>
 , <a class="el" href="class_i_mech2_ind_motors.html#a9de8f3c889207a96895ff6d6f005bd95">IMech2IndMotors</a>
+, <a class="el" href="class_i_mechanism.html#acd973ca93855c485ed42d405f2fcba11">IMechanism</a>
 , <a class="el" href="class_mech1_ind_motor.html#a8278edecfa6865dad58493ce6f4012e2">Mech1IndMotor</a>
 , <a class="el" href="class_mech2_ind_motors.html#a8b4280e243380336ef54fd26027b5dd9">Mech2IndMotors</a>
 </li>
 <li>SetControlMode()
 : <a class="el" href="class_dragon_falcon.html#a4a582d3070a1623396dbf5120bb4f390">DragonFalcon</a>
+, <a class="el" href="class_dragon_spark_max.html#a47cda85cdba80165e485bb5bf5c41726">DragonSparkMax</a>
 , <a class="el" href="class_dragon_talon.html#a51ae73cebf47695a4c37cc874d7dd0b3">DragonTalon</a>
 , <a class="el" href="class_i_dragon_motor_controller.html#ac1436f0089d933ba4310abca76059e63">IDragonMotorController</a>
 </li>
 <li>SetCurrentState()
 : <a class="el" href="class_ball_manipulator.html#ae27d8d4f4b313b376bea3854c2f90da7">BallManipulator</a>
 , <a class="el" href="class_ball_transfer_state_mgr.html#a4ad4576d1df79e2e9749be0a6ec0daa6">BallTransferStateMgr</a>
+, <a class="el" href="class_climber_state_mgr.html#afd67f6cf449a5bb2ac0284167868731d">ClimberStateMgr</a>
+, <a class="el" href="class_control_panel_state_mgr.html#a31133fcec10aec96a451555e40e41658">ControlPanelStateMgr</a>
+, <a class="el" href="class_hook_delivery_state_mgr.html#af6247c117f8cfa564020c0b4c16eee32">HookDeliveryStateMgr</a>
+, <a class="el" href="class_impeller_state_mgr.html#afd05b5a5b87575f74f8f82eae0f915ce">ImpellerStateMgr</a>
 , <a class="el" href="class_intake_state_mgr.html#a1e25c496c344124e7a52b7bbdfa09f87">IntakeStateMgr</a>
 , <a class="el" href="class_shooter_hood_state_mgr.html#a2d6262e573c83bb178742eb36588c7f4">ShooterHoodStateMgr</a>
 , <a class="el" href="class_shooter_state_mgr.html#a523f0b84850fbc069340877decdae99d">ShooterStateMgr</a>
 , <a class="el" href="class_turret_state_mgr.html#a0d02699d1deedcf645dfe3e71278e32c">TurretStateMgr</a>
 </li>
+<li>SetCurvatureBased()
+: <a class="el" href="class_arcade_drive.html#ae7f039013a505a09abc8f7203f6fd063">ArcadeDrive</a>
+</li>
 <li>SetDeadBand()
 : <a class="el" href="class_analog_axis.html#affc8b08e1a2bb32adcb971f644d2458d">AnalogAxis</a>
 </li>
-<li>SetDesiredState()
-: <a class="el" href="class_swerve_module.html#a4872ebaaa09fb0b1727b574b3b96934a">SwerveModule</a>
-</li>
 <li>SetDiameter()
 : <a class="el" href="class_dragon_falcon.html#a58a336a886347ec83d2b393569fc9d19">DragonFalcon</a>
+, <a class="el" href="class_dragon_spark_max.html#a8db88ceea2f749de7f6ca866f1a8e764">DragonSparkMax</a>
 , <a class="el" href="class_dragon_talon.html#a741ea243997b62373ef198f75846704d">DragonTalon</a>
 , <a class="el" href="class_i_dragon_motor_controller.html#ae94b716ecf9b1bb64c7184d904ef9e6d">IDragonMotorController</a>
 </li>
 <li>SetDistance()
-: <a class="el" href="class_primitive_params.html#a9338f36c76fd412ec8d05dcfc300b18d">PrimitiveParams</a>
+: <a class="el" href="class_drive_distance.html#a8a39fae7fc4f3991163613994447e84e">DriveDistance</a>
+, <a class="el" href="class_primitive_params.html#a9338f36c76fd412ec8d05dcfc300b18d">PrimitiveParams</a>
 </li>
 <li>SetForwardLimitSwitch()
 : <a class="el" href="class_dragon_falcon.html#ac27bea9fdfe7ba6134244d51f5369fa4">DragonFalcon</a>
@@ -204,13 +218,19 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 : <a class="el" href="class_dragon_servo.html#acbd6da9b714f3c5696e23822ed7c39c9">DragonServo</a>
 </li>
 <li>SetOutput()
-: <a class="el" href="class_i_chassis.html#a98a230f90ea350636f7b720efba18d8a">IChassis</a>
+: <a class="el" href="class_dragon_chassis.html#a39dce0dd0a51b21be140226cc1e9931a">DragonChassis</a>
+, <a class="el" href="class_i_chassis.html#a98a230f90ea350636f7b720efba18d8a">IChassis</a>
+, <a class="el" href="class_i_mechanism.html#abc72a6d0306a828de6f43418e75c04c0">IMechanism</a>
 </li>
 <li>SetPipeline()
 : <a class="el" href="class_dragon_limelight.html#a9008ec8358c4f2836b8aa4829e731104">DragonLimelight</a>
 </li>
+<li>SetPulseDuration()
+: <a class="el" href="class_dragon_solenoid.html#a3b7b19681de1f63075e9f4c1e83e6ccd">DragonSolenoid</a>
+</li>
 <li>SetRemoteSensor()
 : <a class="el" href="class_dragon_falcon.html#ac2802287e9336cb907c5e0ce77e03d26">DragonFalcon</a>
+, <a class="el" href="class_dragon_spark_max.html#a1efdeaf37e0d6296a155db0a0d5b0239">DragonSparkMax</a>
 , <a class="el" href="class_dragon_talon.html#abfd29c75d1892ea7607114a337fe232b">DragonTalon</a>
 , <a class="el" href="class_i_dragon_motor_controller.html#a5f5568cf4e1c64b327795135753678a1">IDragonMotorController</a>
 </li>
@@ -218,8 +238,12 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 : <a class="el" href="class_dragon_falcon.html#af55d7051e52f7b65dedbff53d9e81c0f">DragonFalcon</a>
 , <a class="el" href="class_dragon_talon.html#ada032141404f5abda96dcb08ea6d7eba">DragonTalon</a>
 </li>
+<li>SetRGB()
+: <a class="el" href="class_l_e_d.html#aba5f4ce9477715652eb93913bcbcad7e">LED</a>
+</li>
 <li>SetRotationOffset()
 : <a class="el" href="class_dragon_falcon.html#ab9080ba4bfbada1afa05f9c532564251">DragonFalcon</a>
+, <a class="el" href="class_dragon_spark_max.html#a30be4189ed4796945e3de09a5e9131e8">DragonSparkMax</a>
 , <a class="el" href="class_dragon_talon.html#a50cab200ce935067feed69d862f48156">DragonTalon</a>
 , <a class="el" href="class_i_dragon_motor_controller.html#ab8ceadc2e3c436b6c5b281e526d4007d">IDragonMotorController</a>
 </li>
@@ -228,18 +252,15 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 </li>
 <li>SetSensorInverted()
 : <a class="el" href="class_dragon_falcon.html#a4efe5d7355a1d82577a8232fdbc9fe7d">DragonFalcon</a>
+, <a class="el" href="class_dragon_spark_max.html#a67be736e73bf22920239944c5a9ebc5d">DragonSparkMax</a>
 , <a class="el" href="class_dragon_talon.html#a87d056ac6683ceec4a985dff184b42e5">DragonTalon</a>
 , <a class="el" href="class_i_dragon_motor_controller.html#a108645163a4c281f5c83b72136fe5cae">IDragonMotorController</a>
 </li>
-<li>SetSlewLimit()
-: <a class="el" href="class_dragon_gamepad.html#a0b927c32ab4853b53f234a356d1c6380">DragonGamepad</a>
-, <a class="el" href="class_dragon_x_box.html#ad921a60514fd12babc7f7b699bdc1ef4">DragonXBox</a>
-, <a class="el" href="class_i_dragon_game_pad.html#a03b3f6d85337b2857586b69c9d590686">IDragonGamePad</a>
+<li>SetSmartCurrentLimiting()
+: <a class="el" href="class_dragon_spark_max.html#af4d2ada3b631fae7e56521dc053f20a6">DragonSparkMax</a>
 </li>
-<li>SetSlewRateLimiter()
-: <a class="el" href="class_analog_axis.html#aa053478eb2985dbf45301d9ec8e944a5">AnalogAxis</a>
-, <a class="el" href="class_slewed_axis.html#aa4996dc14ab12777e442af05dfdf5345">SlewedAxis</a>
-, <a class="el" href="class_teleop_control.html#a5720699168ae5fe9c434e8bda1c39501">TeleopControl</a>
+<li>SetState()
+: <a class="el" href="class_chassis_state_mgr.html#aee10455f341306f03501a486e83a78cc">ChassisStateMgr</a>
 </li>
 <li>SetStreamMode()
 : <a class="el" href="class_dragon_limelight.html#aa90d53fedc3b0568a434c57b987b6d79">DragonLimelight</a>
@@ -247,11 +268,9 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 <li>SetTargetHeight()
 : <a class="el" href="class_dragon_limelight.html#abd7c06707d40db5e4ce34142339ed484">DragonLimelight</a>
 </li>
-<li>SetVoltage()
-: <a class="el" href="class_dragon_falcon.html#a16d9bde1c10c8146a62cb86b3ce8331a">DragonFalcon</a>
-</li>
 <li>SetVoltageRamping()
 : <a class="el" href="class_dragon_falcon.html#a596613a088e7d87182377b04ced5b16a">DragonFalcon</a>
+, <a class="el" href="class_dragon_spark_max.html#a1105074c2d2d7a2f719c8f5e41f02394">DragonSparkMax</a>
 , <a class="el" href="class_dragon_talon.html#a1e450e634cd6d34cd0ba8f9bb0aebea1">DragonTalon</a>
 , <a class="el" href="class_i_dragon_motor_controller.html#adf68e251d62ea48a3cf1ca4c395529a6">IDragonMotorController</a>
 </li>
@@ -259,19 +278,22 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 : <a class="el" href="class_shooter.html#ad334e2512e5524bc886236e96d75bef4">Shooter</a>
 </li>
 <li>ShooterHood()
-: <a class="el" href="class_shooter_hood.html#affc10d9efc941d67fea0e11764f6c537">ShooterHood</a>
+: <a class="el" href="class_shooter_hood.html#a7c1c4beb4c8f4fb1ae5e01d7236e63c4">ShooterHood</a>
 </li>
 <li>ShooterHoodManual()
-: <a class="el" href="class_shooter_hood_manual.html#a523e67f3894b568d253ddae465fe1ac0">ShooterHoodManual</a>
+: <a class="el" href="class_shooter_hood_manual.html#a81d68e67dcef1ad6d81dbce23807aa43">ShooterHoodManual</a>
 </li>
 <li>ShooterHoodState()
-: <a class="el" href="class_shooter_hood_state.html#aa3e67e85cfa2d44e8f803c474844c03b">ShooterHoodState</a>
+: <a class="el" href="class_shooter_hood_state.html#a2af60d6eb79e2d976a04c21e56c75e95">ShooterHoodState</a>
 </li>
 <li>ShooterSaveState()
-: <a class="el" href="class_shooter_save_state.html#aaf9dd2f9b05f38ab513bd05108d649da">ShooterSaveState</a>
+: <a class="el" href="class_shooter_save_state.html#af9c560a083cc3da208e4ce60a8750743">ShooterSaveState</a>
 </li>
 <li>ShooterState()
 : <a class="el" href="class_shooter_state.html#a083ce3135c990443a3319af663c83caf">ShooterState</a>
+</li>
+<li>ShooterStateMgrTest()
+: <a class="el" href="class_shooter_state_mgr_test.html#a6ab48705dfd4ba47a5c141a461ca0424">ShooterStateMgrTest</a>
 </li>
 <li>showCircle()
 : <a class="el" href="class_dragon_vision.html#af93520cfaefab3d570a56750e041e764">DragonVision</a>
@@ -279,29 +301,20 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 <li>showCross()
 : <a class="el" href="class_dragon_vision.html#af25b1d3c63f9ee206441e6d660a22fd2">DragonVision</a>
 </li>
-<li>SlewedAxis()
-: <a class="el" href="class_slewed_axis.html#afe47870d7785db698c96dd1ee8a8d3f7">SlewedAxis</a>
+<li>SlowDown()
+: <a class="el" href="class_super_drive.html#aa8baae85dbb3bcfb38f22c25b820562a">SuperDrive</a>
 </li>
-<li>SlewRate()
-: <a class="el" href="class_slewed_axis.html#ac01cf9e81127c89cdcdfb6016a7ad007">SlewedAxis</a>
+<li>SolenoidDefn()
+: <a class="el" href="class_solenoid_defn.html#a7a664d6600392001ab1a3037ac5bf959">SolenoidDefn</a>
+</li>
+<li>StartPulse()
+: <a class="el" href="class_dragon_solenoid.html#ac8a7ec83334086315c1ee77b18d77419">DragonSolenoid</a>
 </li>
 <li>StateDataDefn()
 : <a class="el" href="class_state_data_defn.html#af44ab953d7e93c28ad74c59476af8eb2">StateDataDefn</a>
 </li>
-<li>SwerveChassis()
-: <a class="el" href="class_swerve_chassis.html#acf75a483aac33e8c457660bab2d88d5e">SwerveChassis</a>
-</li>
-<li>SwerveChassisDefn()
-: <a class="el" href="class_swerve_chassis_defn.html#a5b4f62bb798167cd0e364371d46db856">SwerveChassisDefn</a>
-</li>
-<li>SwerveDrive()
-: <a class="el" href="class_swerve_drive.html#aacd77a27d9152ef64788ce19c7fd9209">SwerveDrive</a>
-</li>
-<li>SwerveModule()
-: <a class="el" href="class_swerve_module.html#a459f72005c272fc0e2932d13fa3160c3">SwerveModule</a>
-</li>
-<li>SwerveModuleDefn()
-: <a class="el" href="class_swerve_module_defn.html#ae5d5a9c48b91e8035abeedacc74a540a">SwerveModuleDefn</a>
+<li>SuperDrive()
+: <a class="el" href="class_super_drive.html#ab57095c722e3cd8396c04297b5463900">SuperDrive</a>
 </li>
 </ul>
 </div><!-- contents -->
