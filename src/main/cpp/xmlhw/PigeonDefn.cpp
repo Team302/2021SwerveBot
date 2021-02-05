@@ -52,6 +52,7 @@ DragonPigeon* PigeonDefn::ParseXML
 
     if ( !hasError )
     {
+        Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Create Pigeon"));
         pigeon = PigeonFactory::GetFactory()->CreatePigeon( canID );
     }
     return pigeon;

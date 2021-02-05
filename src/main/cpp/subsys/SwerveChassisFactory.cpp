@@ -18,6 +18,11 @@
 #include <memory>
 
 // FRC includes
+#include <units/acceleration.h>
+#include <units/angular_acceleration.h>
+#include <units/angular_velocity.h>
+#include <units/length.h>
+#include <units/velocity.h>
 
 // Team 302 includes
 #include <hw/usages/IDragonMotorControllerMap.h>
@@ -113,20 +118,21 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
 //=====================================================================================
 shared_ptr<SwerveChassis> SwerveChassisFactory::CreateSwerveChassis
 (
-    std::shared_ptr<SwerveModule>     frontLeft, 
-    std::shared_ptr<SwerveModule>     frontRight,
-    std::shared_ptr<SwerveModule>     backLeft, 
-    std::shared_ptr<SwerveModule>     backRight, 
-    units::length::inch_t                   wheelBase,
-    units::length::inch_t                   track,
-    units::velocity::meters_per_second_t    maxSpeed,
-    units::radians_per_second_t             maxAngularSpeed,
-    double                                  maxAcceleration
+    std::shared_ptr<SwerveModule>                               frontLeft, 
+    std::shared_ptr<SwerveModule>                               frontRight,
+    std::shared_ptr<SwerveModule>                               backLeft, 
+    std::shared_ptr<SwerveModule>                               backRight, 
+    units::length::inch_t                                       wheelBase,
+    units::length::inch_t                                       track,
+    units::velocity::meters_per_second_t                        maxSpeed,
+    units::radians_per_second_t                                 maxAngularSpeed,
+    units::acceleration::meters_per_second_squared_t            maxAcceleration,
+    units::angular_acceleration::radians_per_second_squared_t   maxAngularAcceleration
 )
 {
     if ( m_chassis.get() == nullptr )
     {
-        m_chassis = make_shared<SwerveChassis>(frontLeft, frontRight, backLeft, backRight, wheelBase, track, maxSpeed, maxAngularSpeed, maxAcceleration );
+        m_chassis = make_shared<SwerveChassis>(frontLeft, frontRight, backLeft, backRight, wheelBase, track, maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration );
     }
 
     return m_chassis;

@@ -19,6 +19,11 @@
 
 // FRC includes
 //#include <frc2/Timer.h>
+#include <units/acceleration.h>
+#include <units/angular_acceleration.h>
+#include <units/angular_velocity.h>
+#include <units/length.h>
+#include <units/velocity.h>
 
 // Team 302 includes
 #include <subsys/SwerveChassis.h>
@@ -48,29 +53,38 @@ using namespace frc;
 /// @param [in] units::velocity::meters_per_second_t    maxSpeed:           maximum linear speed of the chassis 
 /// @param [in] units::radians_per_second_t             maxAngularSpeed:    maximum rotation speed of the chassis 
 /// @param [in] double                                  maxAcceleration:    maximum acceleration in meters_per_second_squared
-SwerveChassis::SwerveChassis( shared_ptr<SwerveModule>          frontleft, 
-                              shared_ptr<SwerveModule>          frontright, 
-                              shared_ptr<SwerveModule>          backleft, 
-                              shared_ptr<SwerveModule>          backright, 
-                              units::length::inch_t                   wheelBase,
-                              units::length::inch_t                   track,
-                              units::velocity::meters_per_second_t    maxSpeed,
-                              units::radians_per_second_t             maxAngularSpeed,
-                              double                                  maxAcceleration ) : m_frontLeft(frontleft), 
-                                                                                          m_frontRight(frontright), 
-                                                                                          m_backLeft(backleft), 
-                                                                                          m_backRight(backright), 
-                                                                                          m_wheelBase(wheelBase),
-                                                                                          m_track(track),
-                                                                                          m_maxSpeed(maxSpeed),
-                                                                                          m_maxAngularSpeed(maxAngularSpeed),
-                                                                                          m_maxAcceleration(maxAcceleration),
-                                                                                          m_pigeon(PigeonFactory::GetFactory()->GetPigeon())
+SwerveChassis::SwerveChassis
+(
+    std::shared_ptr<SwerveModule>                               frontLeft, 
+    std::shared_ptr<SwerveModule>                               frontRight,
+    std::shared_ptr<SwerveModule>                               backLeft, 
+    std::shared_ptr<SwerveModule>                               backRight, 
+    units::length::inch_t                                       wheelBase,
+    units::length::inch_t                                       track,
+    units::velocity::meters_per_second_t                        maxSpeed,
+    units::radians_per_second_t                                 maxAngularSpeed,
+    units::acceleration::meters_per_second_squared_t            maxAcceleration,
+    units::angular_acceleration::radians_per_second_squared_t   maxAngularAcceleration
+) : m_frontLeft(frontLeft), 
+    m_frontRight(frontRight), 
+    m_backLeft(backLeft), 
+    m_backRight(backRight), 
+    m_wheelBase(wheelBase),
+    m_track(track),
+    m_maxSpeed(maxSpeed),
+    m_maxAngularSpeed(maxAngularSpeed),
+    m_maxAcceleration(maxAcceleration),
+    m_maxAngularAcceleration(maxAngularAcceleration),
+    m_pigeon(PigeonFactory::GetFactory()->GetPigeon()),
+    m_frontLeftLocation(wheelBase/2.0, track/2.0),
+    m_frontRightLocation(wheelBase/2.0, -1.0*track/2.0),
+    m_backLeftLocation(-1.0*wheelBase/2.0, track/2.0),
+    m_backRightLocation(-1.0*wheelBase/2.0, -1.0*track/2.0)
 {
-    frontleft.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration );
-    frontright.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration );
-    backleft.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration );
-    backright.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration );
+    frontLeft.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration );
+    frontRight.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration );
+    backLeft.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration );
+    backRight.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration );
 }
 /// @brief Align all of the swerve modules to point forward
 void SwerveChassis::ZeroAlignSwerveModules()
@@ -132,4 +146,13 @@ void SwerveChassis::UpdateOdometry()
                                 m_frontRight.get()->GetState(), 
                                 m_backLeft.get()->GetState(),
                                 m_backRight.get()->GetState());
+}
+
+void SwerveChassis::ResetPosition
+( 
+    const Pose2d&       pose,
+    const Rotation2d&   angle
+)
+{
+    m_poseEstimator.ResetPosition(pose, angle);
 }

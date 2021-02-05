@@ -7,6 +7,8 @@
 #include <frc/controller/ProfiledPIDController.h>
 #include <frc/controller/SimpleMotorFeedforward.h>
 #include <frc/kinematics/SwerveModuleState.h>
+#include <units/acceleration.h>
+#include <units/angular_acceleration.h>
 #include <units/angular_velocity.h>
 #include <units/time.h>
 #include <units/velocity.h>
@@ -43,9 +45,10 @@ class SwerveModule
 
         void Init
         (
-            units::velocity::meters_per_second_t                maxVelocity,
-            units::angular_velocity::radians_per_second_t       maxAngularVelocity,
-            double                                              maxAccMperSecSq
+            units::velocity::meters_per_second_t                        maxVelocity,
+            units::angular_velocity::radians_per_second_t               maxAngularVelocity,
+            units::acceleration::meters_per_second_squared_t            maxAcceleration,
+            units::angular_acceleration::radians_per_second_squared_t   maxAngularAcceleration
         );
         
         /// @brief Turn all of the wheel to zero degrees yaw according to the pigeon
@@ -76,19 +79,4 @@ class SwerveModule
         std::shared_ptr<IDragonMotorController>             m_turnMotor;
         std::shared_ptr<ctre::phoenix::sensors::CANCoder>   m_turnSensor;
         units::length::inch_t                               m_wheelDiameter;
-
-        //TODO #2 Encoder from falcons
-        //frc::Encoder m_driveEncoder{0, 1};
-        //frc::Encoder m_turnEncoder{2, 3};
-
-        //frc2::PIDController m_drivePIDController{1.0, 0, 0};
-        //std::shared_ptr<frc2::PIDController> m_drivePIDController;
-
-        //frc::ProfiledPIDController<units::radians> m_turnPIDController{1.0, 0.0, 0.0, {ModuleMaxAngularVelocity, ModuleMaxAngularAcceleration}};
-        //std::shared_ptr<frc2::PIDController> m_turnPIDController;
-        //std::shared_ptr<frc::ProfiledPIDController<units::radians>> m_turnPIDController;
-        
-
-        //frc::SimpleMotorFeedforward<units::meters> m_driveFeedforward;
-        //frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward;
 };

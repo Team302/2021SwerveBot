@@ -35,7 +35,8 @@
                      track="14.0"
                      maxVelocity="194.4"
                      maxAngularVelocity="1591.2"
-                     maxAcceleration="24.0">
+                     maxAcceleration="24.0"
+                     maxAngularAcceleration="24.0">
 			 
         <swervemodule type="LEFT_FRONT"
 			 wheelDiameter="4.0">

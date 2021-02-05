@@ -240,6 +240,7 @@ shared_ptr<IDragonMotorController> MotorDefn::ParseXML
 
     if ( !hasError )
     {
+        Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Create Motor"));
 		pdpID = ( pdpID < 0 ) ? canID : pdpID;
         controller = DragonMotorControllerFactory::GetInstance()->CreateMotorController( mtype,
                                                                                          canID,

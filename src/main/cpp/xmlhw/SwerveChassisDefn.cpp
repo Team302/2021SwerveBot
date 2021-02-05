@@ -27,6 +27,11 @@
 
 
 // FRC includes
+#include <units/acceleration.h>
+#include <units/angular_acceleration.h>
+#include <units/angular_velocity.h>
+#include <units/length.h>
+#include <units/velocity.h>
 
 // Team302 includes
 #include <hw/interfaces/IDragonMotorController.h>
@@ -63,8 +68,11 @@ shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
     units::length::inch_t track(0.0);
     units::velocity::meters_per_second_t maxVelocity(0.0);
     units::radians_per_second_t maxAngularSpeed(0.0);
-    double maxAcceleration  = 0.0;
+    units::acceleration::meters_per_second_squared_t maxAcceleration(0.0);
+    units::angular_acceleration::radians_per_second_squared_t maxAngularAcceleration(0.0);
     bool hasError 		    = false;
+
+    Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Swerve Chassis"));
 
     // process attributes
     for (xml_attribute attr = chassisNode.first_attribute(); attr && !hasError; attr = attr.next_attribute())
@@ -100,7 +108,11 @@ shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
         }
         else if (  attrName.compare("maxAcceleration") == 0 )
         {
-        	maxAcceleration = attr.as_double();
+            maxAcceleration = units::feet_per_second_t(attr.as_double()/12.0) / 1_s;
+        }
+        else if (  attrName.compare("maxAngularAcceleration") == 0 )
+        {
+            maxAcceleration = units::feet_per_second_t(attr.as_double()/12.0) / 1_s;
         }
         else   // log errors
         {
@@ -121,11 +133,13 @@ shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
     
     unique_ptr<SwerveModuleDefn> moduleXML = make_unique<SwerveModuleDefn>();
 
+
     for (xml_node child = chassisNode.first_child(); child; child = child.next_sibling())
     {
         string childName (child.name());
     	if ( childName.compare("swervemodule") == 0 )
     	{
+            Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Swerve Modules"));
             shared_ptr<SwerveModule> module = moduleXML.get()->ParseXML(child);
             switch ( module.get()->GetType() )
             {
@@ -161,6 +175,7 @@ shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
     // create chassis instance
     if ( !hasError )
     {
+        Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Create Swerve Chassis"));
         chassis = SwerveChassisFactory::GetSwerveChassisFactory()->CreateSwerveChassis( lfront, 
                                                                                         rfront, 
                                                                                         lback, 
@@ -169,7 +184,8 @@ shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
                                                                                         track, 
                                                                                         maxVelocity, 
                                                                                         maxAngularSpeed, 
-                                                                                        maxAcceleration  );
+                                                                                        maxAcceleration,
+                                                                                        maxAngularAcceleration  );
     }
     return chassis;
 }

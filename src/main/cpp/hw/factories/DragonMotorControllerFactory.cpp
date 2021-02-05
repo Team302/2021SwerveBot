@@ -68,7 +68,7 @@ shared_ptr<IDragonMotorController> DragonMotorControllerFactory::CreateMotorCont
     shared_ptr<IDragonMotorController> controller;
 
     auto hasError = false;
-
+    
     auto type = m_typeMap.find(mtype)->second;
     if ( type == MOTOR_TYPE::TALONSRX )
     {
@@ -105,6 +105,7 @@ shared_ptr<IDragonMotorController> DragonMotorControllerFactory::CreateMotorCont
         talon->Invert( inverted );
         /**
         talon->SetSensorInverted( sensorInverted );
+        **/
         talon->ConfigSelectedFeedbackSensor( feedbackDevice, 0, 50 );
         talon->ConfigSelectedFeedbackSensor( feedbackDevice, 1, 50 );
 
@@ -121,7 +122,7 @@ shared_ptr<IDragonMotorController> DragonMotorControllerFactory::CreateMotorCont
         {
             talon->SetAsFollowerMotor( followMotor );
         }
-        **/
+        /** **/
         controller.reset( talon );
     }
     else

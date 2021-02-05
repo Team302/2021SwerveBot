@@ -69,6 +69,8 @@ void RobotDefn::ParseXML()
     xml_document doc;
     xml_parse_result result = doc.load_file(filename);
 
+    Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Starting"));
+
     // if it is good
     if (result)
     {
@@ -89,30 +91,37 @@ void RobotDefn::ParseXML()
             {
                 if (strcmp(child.name(), "swervechassis") == 0)
                 {
+                    Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Chassis"));
                     chassisXML.get()->ParseXML(child);
                 }
                 else if (strcmp(child.name(), "mechanism") == 0)
                 {
+                    Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Mechanism"));
                     mechanismXML.get()->ParseXML(child);
                 }
                 else if (strcmp(child.name(), "blinkin") == 0)
                 {
+                    Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Blinkin"));
                     blinkinXML.get()->ParseXML(child);
                 }
                 else if (strcmp(child.name(), "camera") == 0)
                 {
+                    Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Camera"));
                     cameraXML.get()->ParseXML(child);
                 }
                 else if (strcmp(child.name(), "pdp") == 0)
                 {
+                    Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("PDP"));
                     pdpXML.get()->ParseXML(child);
                 }
                 else if ( strcmp(child.name(), "pigeon") == 0 )
                 {
+                    Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("pigeon"));
                     pigeonXML.get()->ParseXML( child);
                 }
                 else if ( strcmp(child.name(), "limelight") == 0 )
                 {
+                    Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Limelight"));
                     limelightXML.get()->ParseXML( child);
                 }
                 else
@@ -144,4 +153,5 @@ void RobotDefn::ParseXML()
         msg += result.offset;
         Logger::GetLogger()->LogError( "RobotDefn::ParseXML (3) ", msg );
     }
+    Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Success"));
 }

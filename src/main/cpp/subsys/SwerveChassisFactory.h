@@ -72,15 +72,16 @@ class SwerveChassisFactory
 		//=====================================================================================
 		std::shared_ptr<SwerveChassis> CreateSwerveChassis
 		(
-            std::shared_ptr<SwerveModule> 	frontleft, 
-            std::shared_ptr<SwerveModule> 	frontright,
-            std::shared_ptr<SwerveModule> 	backleft, 
-            std::shared_ptr<SwerveModule> 	backright,
-			units::length::inch_t 					wheelBase,
-			units::length::inch_t 					track,
-            units::velocity::meters_per_second_t 	maxSpeed,
-			units::radians_per_second_t          	maxAngularSpeed,
-			double 									maxAcceleration
+			std::shared_ptr<SwerveModule>                               frontLeft, 
+			std::shared_ptr<SwerveModule>                               frontRight,
+			std::shared_ptr<SwerveModule>                               backLeft, 
+			std::shared_ptr<SwerveModule>                               backRight, 
+			units::length::inch_t                                       wheelBase,
+			units::length::inch_t                                       track,
+			units::velocity::meters_per_second_t                        maxSpeed,
+			units::radians_per_second_t                                 maxAngularSpeed,
+			units::acceleration::meters_per_second_squared_t            maxAcceleration,
+			units::angular_acceleration::radians_per_second_squared_t   maxAngularAcceleration
 		);
 
         std::shared_ptr<SwerveChassis> GetSwerveChassis() { return m_chassis; }

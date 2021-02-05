@@ -70,11 +70,12 @@
 <!ELEMENT swervechassis (swervemodule*) >
 <!ATTLIST swervechassis 
           type              ( SWERVE ) "SWERVE"
-          wheelBase             CDATA #REQUIRED
-          track                 CDATA #REQUIRED
-          maxVelocity           CDATA #REQUIRED
-          maxAngularVelocity    CDATA #REQUIRED
-          maxAcceleration       CDATA #REQUIRED
+          wheelBase                 CDATA #REQUIRED
+          track                     CDATA #REQUIRED
+          maxVelocity               CDATA #REQUIRED
+          maxAngularVelocity        CDATA #REQUIRED
+          maxAcceleration           CDATA #REQUIRED
+          maxAngularAcceleration    CDATA #REQUIRED
 >
 
 <!ELEMENT swervemodule (motor*, cancoder? ) >

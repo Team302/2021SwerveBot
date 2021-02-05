@@ -70,23 +70,6 @@ SwerveModule::SwerveModule
     auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
     fx->ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor, 0, 10 );
 
-    auto chassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
-    auto maxSp = chassis.get()->GetMaxSpeed();
-    auto driveCTL = make_unique<ControlData>( ControlModes::CONTROL_TYPE::VELOCITY_RPS,
-                                              ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
-                                              string("DriveSpeed"),
-                                              0.01,
-                                              0.0,
-                                              0.0,
-                                              1.0,
-                                              0.0,
-                                              chassis.get()->GetMaxAcceleration(),
-                                              maxSp.to<double>(),
-                                              maxSp.to<double>(),
-                                              0.0 );
-    m_driveMotor.get()->SetControlConstants( driveCTL.get() );
-
-//    m_turnSensor.get()->ConfigFactoryDefault();
     m_turnSensor.get()->ConfigAbsoluteSensorRange(AbsoluteSensorRange::Signed_PlusMinus180, 0);
     motor = m_turnMotor.get()->GetSpeedController();
     fx = dynamic_cast<WPI_TalonFX*>(motor.get());
@@ -95,29 +78,14 @@ SwerveModule::SwerveModule
     
     fx->ConfigRemoteFeedbackFilter(m_turnSensor.get()->GetDeviceNumber(), ctre::phoenix::motorcontrol::RemoteSensorSource::RemoteSensorSource_CANCoder, 0, 10 );
     fx->ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::RemoteFeedbackDevice::RemoteSensor0, 0, 10 );
-
-      auto maxAng = chassis->GetMaxAngularSpeed();
-    auto turnCTL  = make_unique<ControlData>( ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE,
-                                              ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
-                                              string("TrunProfile"),
-                                              1.0,
-                                              0.0,
-                                              0.0,
-                                              0.5,
-                                              0.0,
-                                              chassis.get()->GetMaxAcceleration(),
-                                              maxAng.to<double>(),
-                                              maxAng.to<double>(),
-                                              0.0 );
-    m_turnMotor.get()->SetControlConstants( driveCTL.get() );
-
 }
 
 void SwerveModule::Init
 (
-    units::velocity::meters_per_second_t                maxVelocity,
-    units::angular_velocity::radians_per_second_t       maxAngularVelocity,
-    double                                              maxAccMperSecSq
+    units::velocity::meters_per_second_t                        maxVelocity,
+    units::angular_velocity::radians_per_second_t               maxAngularVelocity,
+    units::acceleration::meters_per_second_squared_t            maxAcceleration,
+    units::angular_acceleration::radians_per_second_squared_t   maxAngularAcceleration
 )
 {
     auto driveCTL = make_unique<ControlData>( ControlModes::CONTROL_TYPE::VELOCITY_RPS,
@@ -128,7 +96,7 @@ void SwerveModule::Init
                                               0.0,
                                               0.5,
                                               0.0,
-                                              maxAccMperSecSq,
+                                              maxAcceleration.to<double>(),
                                               maxVelocity.to<double>(),
                                               maxVelocity.to<double>(),
                                               0.0 );
@@ -142,7 +110,7 @@ void SwerveModule::Init
                                               0.0,
                                               0.5,
                                               0.0,
-                                              maxAccMperSecSq,
+                                              maxAngularAcceleration.to<double>(),
                                               maxAngularVelocity.to<double>(),
                                               maxAngularVelocity.to<double>(),
                                               0.0 );

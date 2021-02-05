@@ -69,6 +69,10 @@ void Robot::AutonomousInit()
     {
         swerveChassis.get()->ZeroAlignSwerveModules();
     }
+    else 
+    {
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("AutonomousInit"), string("no swerve chassis"));
+    }
 }
 
 
@@ -81,6 +85,10 @@ void Robot::AutonomousPeriodic()
     if ( swerveChassis.get() != nullptr )
     {
         swerveChassis.get()->Drive(1.0, 0.0, 0.0, false);
+    }
+    else 
+    {
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("AutonomousPeriodic"), string("no swerve chassis"));
     }
 
 }
@@ -95,6 +103,10 @@ void Robot::TeleopInit()
     if ( swerveChassis.get() != nullptr )
     {
         swerveChassis.get()->ZeroAlignSwerveModules();
+    }
+    else 
+    {
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("TeleopPeriodic"), string("no swerve chassis"));
     }
 
     m_drive = make_shared<SwerveDrive>();
