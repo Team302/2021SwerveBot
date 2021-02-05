@@ -72,11 +72,34 @@ class SwerveChassis
         /// @param [in] units::angular_velocity::radians_per_second_t   rot:            Rotation speed around the vertical (Z) axis; (positive is counter clockwise)
         /// @param [in] bool                                            fieldRelative:  true: movement is based on the field (e.g., push it goes away from the driver regardless of the robot orientation),
         ///                                                                             false: direction is based on robot front/back
-        /// @param [in] units::length::inch_t                   wheelBase:          distance between the front and rear wheels
-        void Drive(units::velocity::meters_per_second_t xSpeed, units::velocity::meters_per_second_t ySpeed, units::angular_velocity::radians_per_second_t rot, bool fieldRelative);
-        void Drive( double drivePercent, double steerPercent, double rotatePercent, bool fieldRelative );
+        void Drive(units::velocity::meters_per_second_t xSpeed, 
+                   units::velocity::meters_per_second_t ySpeed, 
+                   units::angular_velocity::radians_per_second_t rot, 
+                   bool fieldRelative);
 
+        /// @brief Drive the chassis
+        /// @param [in] double  drivePercent:   forward/reverse percent output (positive is forward)
+        /// @param [in] double  steerPercent:   left/right percent output (positive is left)
+        /// @param [in] double  rotatePercent:  Rotation percent output around the vertical (Z) axis; (positive is counter clockwise)
+        /// @param [in] bool    fieldRelative:  true: movement is based on the field (e.g., push it goes away from the driver regardless of the robot orientation),
+        ///                                     false: direction is based on robot front/back
+        void Drive(double drivePercent, double steerPercent, double rotatePercent, bool fieldRelative );
+
+        /// @brief Drive the chassis
+        /// @param [in] frc::ChassisSpeeds  speeds:         kinematics for how to move the chassis
+        /// @param [in] bool                fieldRelative:  true: movement is based on the field (e.g., push it goes away from the driver regardless of the robot orientation),
+        ///                                                 false: direction is based on robot front/back
+        void Drive(frc::ChassisSpeeds speeds, bool fieldRelative);
+
+        /// @brief update the chassis odometry based on current states of the swerve modules and the pigeon
         void UpdateOdometry();
+
+        /// @brief Provide the current chassis speed information
+        frc::ChassisSpeeds GetChassisSpeeds() const;
+
+        /// @brief Reset the current chassis pose based on the provided pose and rotation
+        /// @param [in] const Pose2d&       pose        Current XY position
+        /// @param [in] const Rotation2d&   angle       Current rotation angle
         void ResetPosition
         ( 
             const Pose2d&       pose,
@@ -96,7 +119,9 @@ class SwerveChassis
         std::shared_ptr<SwerveModule> GetFrontRight() const { return m_frontRight;}
         std::shared_ptr<SwerveModule> GetBackLeft() const { return m_backLeft;}
         std::shared_ptr<SwerveModule> GetBackRight() const { return m_backRight;}
-        frc::SwerveDrivePoseEstimator<4> GetPose() { return m_poseEstimator; }       
+
+        frc::SwerveDrivePoseEstimator<4> GetPose() { return m_poseEstimator; }  
+
 
     private:
 
