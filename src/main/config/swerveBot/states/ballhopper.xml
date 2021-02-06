@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE statedata SYSTEM "statedata.dtd">
+<statedata>
+    <controldata identifier="openloop"
+                 mode="PERCENT_OUTPUT"/>
+    <mechanismTarget stateIdentifier="BALLHOPPEROFF" 
+                     controlDataIdentifier="openloop"
+                     value="0.0"/>
+    <mechanismTarget stateIdentifier="BALLHOPPERHOLD" 
+                     controlDataIdentifier="openloop"
+                     value="-0.5"/>
+    <mechanismTarget stateIdentifier="BALLHOPPERSLOWRELEASE" 
+                     controlDataIdentifier="openloop"
+                     value="1.0"/>
+    <mechanismTarget stateIdentifier="BALLHOPPERRAPIDRELEASE" 
+                     controlDataIdentifier="openloop"
+                     value="1.0"/>
+
+</statedata>

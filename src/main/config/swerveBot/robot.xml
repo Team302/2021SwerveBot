@@ -35,7 +35,8 @@
                      track="14.0"
                      maxVelocity="194.4"
                      maxAngularVelocity="1591.2"
-                     maxAcceleration="24.0">
+                     maxAcceleration="24.0"
+                     maxAngularAcceleration="24.0">
 			 
         <swervemodule type="LEFT_FRONT"
 			 wheelDiameter="4.0">
@@ -77,7 +78,8 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
-		    <cancoder canId="11"/>
+		    <cancoder canId="11"
+                            offset="-107.753906"/>
         </swervemodule>
 
         <swervemodule type="RIGHT_FRONT"
@@ -120,7 +122,8 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
-		    <cancoder canId="10"/>
+		    <cancoder canId="10"
+                            offset="71.98242"/>
         </swervemodule>
 
         <swervemodule type="LEFT_BACK"
@@ -163,7 +166,8 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
-		    <cancoder canId="12"/>
+		    <cancoder canId="12"
+                            offset="66.35742"/>
         </swervemodule>
 
         <swervemodule type="RIGHT_BACK"
@@ -206,7 +210,8 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
-		    <cancoder canId="13"/>
+		    <cancoder canId="13"
+                            offset="133.242188"/>
         </swervemodule>
 
     </swervechassis>  
@@ -215,7 +220,6 @@
      Mechanisms
      ==================================================== -->    
     
-    <!--
 	<mechanism type="INTAKE">
 		<motor usage="INTAKE1"
                      canId="4"
@@ -259,6 +263,27 @@
                      reverselimitswitch="false"
                      reverselimitswitchopen="true"/>        
 	</mechanism>
+
+       <mechanism type="BALL_HOPPER">
+              <motor usage="BALL_HOPPER_1"
+                     canId="6"
+                     pdpID="6"
+                     type="TALONSRX"
+                     inverted="false"
+                     brakeMode="true"/>
+       </mechanism>
+
+       <mechanism type="BALL_HOPPER">
+              <motor usage="BALL_HOPPER_2"
+                     canId="7"
+                     pdpID="7"
+                     type="TALONSRX"
+                     inverted="false"
+                     brakeMode="true"/>
+       </mechanism>
+
+
+       <!--
   
 	<mechanism type="BALL_TRANSFER">
 		<motor usage="BALL_TRANSFER"

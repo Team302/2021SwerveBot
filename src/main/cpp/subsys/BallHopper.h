@@ -15,19 +15,19 @@
 
 #pragma once
 
-#include <subsys/Mech2IndMotors.h>
+//Team 302 Includes
+#include <subsys/Mech1IndMotor.h>
 
-#include <hw/interfaces/IDragonMotorController.h>
+class IDragonMotorController;
 
-class Shooter : public Mech2IndMotors
- {
+class BallHopper : public Mech1IndMotor
+{
     public:
-        Shooter
-        (
-            std::shared_ptr<IDragonMotorController> motor1,
-            std::shared_ptr<IDragonMotorController> motor2
-        );
+    BallHopper
+    (
+        std::shared_ptr<IDragonMotorController>     motorController
+    );
 
-        Shooter() = delete;
-        virtual ~Shooter() = default;
+    BallHopper() = delete;
+    ~BallHopper() override = default;
 };

@@ -13,21 +13,18 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-#pragma once
 
-#include <subsys/Mech2IndMotors.h>
+//Team 302 Includes
+#include <controllers/ControlData.h>
+#include <states/ballhopper/BallHopperState.h>
+#include <states/Mech1MotorState.h>
+#include <subsys/MechanismFactory.h>
 
-#include <hw/interfaces/IDragonMotorController.h>
+BallHopperState::BallHopperState
+(
+    ControlData*            control,
+    double                  target
+) : Mech1MotorState( MechanismFactory::GetMechanismFactory()->GetBallHopper().get(), control, target )
+{
 
-class Shooter : public Mech2IndMotors
- {
-    public:
-        Shooter
-        (
-            std::shared_ptr<IDragonMotorController> motor1,
-            std::shared_ptr<IDragonMotorController> motor2
-        );
-
-        Shooter() = delete;
-        virtual ~Shooter() = default;
-};
+}

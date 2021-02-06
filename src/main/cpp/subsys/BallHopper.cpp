@@ -13,21 +13,18 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-#pragma once
+//C++ Includes
+#include <memory>
 
-#include <subsys/Mech2IndMotors.h>
-
+//Team 302 Includes
+#include <subsys/BallHopper.h>
 #include <hw/interfaces/IDragonMotorController.h>
 
-class Shooter : public Mech2IndMotors
- {
-    public:
-        Shooter
-        (
-            std::shared_ptr<IDragonMotorController> motor1,
-            std::shared_ptr<IDragonMotorController> motor2
-        );
+using namespace std;
 
-        Shooter() = delete;
-        virtual ~Shooter() = default;
-};
+BallHopper::BallHopper
+(
+    shared_ptr<IDragonMotorController>  motorController
+) : Mech1IndMotor( MechanismTypes::MECHANISM_TYPE::BALL_HOPPER, string( "ballhopper.xml"), string("BallHopperNT"), motorController)
+{
+}
