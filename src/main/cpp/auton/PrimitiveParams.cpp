@@ -83,3 +83,7 @@ void PrimitiveParams::SetDistance(float distance)
 {
 	m_distance = distance;
 }
+std::string PrimitiveParams::GetPathName() const
+{
+	return m_pathName;
+}
