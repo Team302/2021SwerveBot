@@ -140,9 +140,7 @@ void BallHopperStateMgr::RunCurrentState( BALL_HOPPER_STATE hopperState)
         }
         else if ( hopperState == BALL_HOPPER_STATE::SLOW_RELEASE && m_currentStateEnum != BALL_HOPPER_STATE::SLOW_RELEASE)
         {
-
-            
-            //SetCurrentState( BALL_HOPPER_STATE::SLOW_RELEASE, false);
+            SetCurrentState( BALL_HOPPER_STATE::SLOW_RELEASE, false);
         }
         else if ( hopperState == BALL_HOPPER_STATE::RAPID_RELEASE && m_currentStateEnum != BALL_HOPPER_STATE::RAPID_RELEASE)
         {

@@ -31,9 +31,4 @@ class BallHopperState : public Mech1MotorState
             double                  target
         );
         ~BallHopperState() = default;
-
-        /* void Init() override;
-        void Run() override;
-        bool AtTarget() const override; */
-
 };

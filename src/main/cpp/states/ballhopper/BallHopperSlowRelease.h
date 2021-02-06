@@ -13,17 +13,38 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
+#pragma once
 
 //Team 302 Includes
-#include <controllers/ControlData.h>
-#include <states/ballhopper/BallHopperState.h>
 #include <states/Mech1MotorState.h>
-#include <subsys/MechanismFactory.h>
+#include <states/ballhopper/BallHopperStateMgr.h>
+#include <frc/Timer.h>
 
-BallHopperState::BallHopperState
-(
-    ControlData*            control,
-    double                  target
-) : Mech1MotorState( MechanismFactory::GetMechanismFactory()->GetBallHopper().get(), control, target )
+class ControlData;
+
+class BallHopperSlowRelease : public Mech1MotorState
 {
-}
+    public:
+
+        BallHopperSlowRelease() = delete;
+        BallHopperSlowRelease
+        (
+            ControlData*        control,
+            double              target
+        );
+        ~BallHopperSlowRelease() = default;
+
+        void Init();
+        void Run();
+        bool AtTarget();
+        void SetState
+        ( BallHopperStateMgr::BALL_HOPPER_STATE stateEnum );
+
+    private:
+
+        frc::Timer      m_timer;
+        BallHopperStateMgr::BALL_HOPPER_STATE m_stateEnum;
+        BallHopperStateMgr::BALL_HOPPER_STATE m_currentStateEnum;
+        IState* m_currentState;
+        std::vector<IState*> m_stateVector;
+};
