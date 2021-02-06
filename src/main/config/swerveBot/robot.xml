@@ -78,7 +78,8 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
-		    <cancoder canId="11"/>
+		    <cancoder canId="11"
+                            offset="-107.753906"/>
         </swervemodule>
 
         <swervemodule type="RIGHT_FRONT"
@@ -121,7 +122,8 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
-		    <cancoder canId="10"/>
+		    <cancoder canId="10"
+                            offset="71.98242"/>
         </swervemodule>
 
         <swervemodule type="LEFT_BACK"
@@ -164,7 +166,8 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
-		    <cancoder canId="12"/>
+		    <cancoder canId="12"
+                            offset="66.35742"/>
         </swervemodule>
 
         <swervemodule type="RIGHT_BACK"
@@ -207,7 +210,8 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
-		    <cancoder canId="13"/>
+		    <cancoder canId="13"
+                            offset="133.242188"/>
         </swervemodule>
 
     </swervechassis>  

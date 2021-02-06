@@ -28,9 +28,11 @@
 // third party includes
 #include <pugixml/pugixml.hpp>
 #include <ctre/phoenix/sensors/CANCoder.h>
+#include <ctre/phoenix/ErrorCode.h>
 
 using namespace std;
 using namespace pugi;
+using namespace ctre::phoenix;
 using namespace ctre::phoenix::sensors;
 
 /// @brief parses the cancoder node in the robot.xml file and creates a cancoder
@@ -45,6 +47,8 @@ shared_ptr<CANCoder> CanCoderDefn::ParseXML
 
     string usage;
     int canID = 0;
+    double offset = 0.0;
+    bool reverse = false;
     
     bool hasError = false;
 
@@ -59,6 +63,14 @@ shared_ptr<CANCoder> CanCoderDefn::ParseXML
             canID = attr.as_int();
             hasError = HardwareIDValidation::ValidateCANID( canID, string( "CanCoderDefn::ParseXML" ) );
         }        
+        else if ( strcmp( attr.name(), "offset" ) == 0 )
+        {
+            offset = attr.as_double();
+        }        
+        else if ( strcmp( attr.name(), "reverse" ) == 0 )
+        {
+            offset = attr.as_bool();
+        }        
         else
         {
             Logger::GetLogger()->LogError ( "CanCoderDefn", "invalid attribute");
@@ -69,6 +81,49 @@ shared_ptr<CANCoder> CanCoderDefn::ParseXML
     if(!hasError)
     {
         cancoder = make_shared<CANCoder>(canID); //need to add usage also can't use new CANCoder... because it hasn't been wrapped
+        auto error = cancoder.get()->ConfigFactoryDefault(50);
+        if ( error != ErrorCode::OKAY )
+        {
+            Logger::GetLogger()->LogError(string("CanCoderDefn"), string("ConfigFactoryDefault error"));
+        }
+        
+        error = cancoder.get()->ConfigAbsoluteSensorRange(AbsoluteSensorRange::Signed_PlusMinus180, 0);
+        if ( error != ErrorCode::OKAY )
+        {
+            Logger::GetLogger()->LogError(string("CanCoderDefn"), string("ConfigAbsoluteSensorRange error"));
+        }
+        /**
+        error = cancoder.get()->ConfigFeedbackCoefficient();
+        if ( error != ErrorCode::OKAY )
+        {
+            Logger::GetLogger()->LogError(string("CanCoderDefn"), string("ConfigAbsoluteSensorRange error"));
+        }
+        **/
+        error = cancoder.get()->ConfigMagnetOffset(offset, 0);
+        if ( error != ErrorCode::OKAY )
+        {
+            Logger::GetLogger()->LogError(string("CanCoderDefn"), string("ConfigMagnetOffset error"));
+        }
+        error = cancoder.get()->ConfigSensorDirection(reverse, 0);
+        if ( error != ErrorCode::OKAY )
+        {
+            Logger::GetLogger()->LogError(string("CanCoderDefn"), string("ConfigSensorDirection error"));
+        }
+        error = cancoder.get()->ConfigSensorInitializationStrategy(SensorInitializationStrategy::BootToAbsolutePosition, 0);
+        if ( error != ErrorCode::OKAY )
+        {
+            Logger::GetLogger()->LogError(string("CanCoderDefn"), string("ConfigSensorInitializationStrategy error"));
+        }
+        error = cancoder.get()->ConfigVelocityMeasurementPeriod(SensorVelocityMeasPeriod::Period_1Ms, 0);
+        if ( error != ErrorCode::OKAY )
+        {
+            Logger::GetLogger()->LogError(string("CanCoderDefn"), string("ConfigVelocityMeasurementPeriod error"));
+        }
+        error = cancoder.get()->ConfigVelocityMeasurementWindow(64, 0);
+        if ( error != ErrorCode::OKAY )
+        {
+            Logger::GetLogger()->LogError(string("CanCoderDefn"), string("ConfigVelocityMeasurementWindow error"));
+        }
     }
     return cancoder;
 }
