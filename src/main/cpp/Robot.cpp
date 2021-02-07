@@ -53,10 +53,8 @@ void Robot::RobotInit()
         swerveChassis.get()->ZeroAlignSwerveModules();
     }
 
-    // RAM SCAN etc.
+    // RAM SCAN: This is at the end of RobotInit() so all the target objects are already created.
     m_RamScan       = new RamScan();
-
-    // this should be called at the end of RobotInit() so all the target objects are already created.
     m_RamScan->Init();
 }
 
