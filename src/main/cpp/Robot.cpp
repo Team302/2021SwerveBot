@@ -118,6 +118,7 @@ void Robot::AutonomousInit()
     }
 }
 
+
 /// @brief Runs every 20 milliseconds when the autonomous state is active.
 /// @return void
 void Robot::AutonomousPeriodic()
