@@ -84,20 +84,6 @@ TurretStateMgr::TurretStateMgr() : m_stateVector(),
                     }
                     break;
 
-                    case TURRET_STATE::MANUAL_AIM:
-                    {
-                        auto thisState = new ManualAim(controlData);
-                        m_stateVector[stateEnum] = thisState;
-                    }
-                    break;
-
-                    case TURRET_STATE::TURN_ANGLE:
-                    {
-                        auto thisState = new TurretTurnAngle(controlData, td->GetTarget());
-                        m_stateVector[stateEnum] = thisState;
-                    }
-                    break;
-                    
                     default:
                     {
                         Logger::GetLogger()->LogError( string("TurretHoodStateMgr::TurretHoodStateMgr"), string("unknown state"));

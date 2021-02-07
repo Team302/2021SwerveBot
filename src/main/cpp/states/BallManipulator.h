@@ -48,7 +48,6 @@ class BallManipulator
             UNJAM_COUNTERCLOCKWISE,
             TRANSFER_UP,
             TRANSFER_DOWN,
-            TURRET_TURN_ANGLE,
             MAX_BALL_MANIPULATOR_STATES
         };
 

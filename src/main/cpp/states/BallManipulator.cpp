@@ -219,14 +219,6 @@ void BallManipulator::SetCurrentState
             m_hood->SetCurrentState( ShooterHoodStateMgr::SHOOTER_HOOD_STATE::HOLD_POSITION, false );
             break;
         
-        case BALL_MANIPULATOR_STATE::TURRET_TURN_ANGLE:
-            m_intake->SetCurrentState( IntakeStateMgr::INTAKE_STATE::ON, false );
-           // m_impeller->SetCurrentState( ImpellerStateMgr::IMPELLER_STATE::OFF, false );// Geo Remove for swervebot 
-            m_transfer->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::OFF, false );
-            m_turret->SetCurrentState( TurretStateMgr::TURRET_STATE::TURN_ANGLE, false , turretAngle);
-            m_shooter->SetCurrentState( ShooterStateMgr::SHOOTER_STATE::SHOOT, false );
-            m_hood->SetCurrentState( ShooterHoodStateMgr::SHOOTER_HOOD_STATE::HOLD_POSITION, false );
-            break;
         default:
             break;
     }
