@@ -24,11 +24,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="roboticslogo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Team 302 Robot
    </div>
-   <div id="projectbrief">Swerve Bot APIs</div>
   </td>
  </tr>
  </tbody>
@@ -128,7 +126,7 @@ $(document).ready(function(){initNavTree('_swerve_module_defn_8cpp_source.html',
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &lt;pugixml/pugixml.hpp&gt;</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">using namespace </span>frc;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacefrc.html">frc</a>;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">using namespace </span>pugi;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">using namespace </span>std;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
@@ -146,94 +144,94 @@ $(document).ready(function(){initNavTree('_swerve_module_defn_8cpp_source.html',
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// initialize the attributes to the default values</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">SwerveModule::ModuleID</a> position = SwerveModule::ModuleID::LEFT_FRONT;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    units::angle::degree_t turnOffset(0.0);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    units::length::inch_t wheelDiameter(0.0);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">// process attributes</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">for</span> (xml_attribute attr = SwerveModuleNode.first_attribute(); attr &amp;&amp; !hasError; attr = attr.next_attribute())</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">string</span> attrName (attr.name());</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">if</span> ( attrName.compare(<span class="stringliteral">&quot;type&quot;</span>) == 0 )</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keyword">auto</span> thisPosition = string( attr.value() );</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordflow">if</span> ( thisPosition.compare(<span class="stringliteral">&quot;LEFT_FRONT&quot;</span>) == 0 )</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                position = SwerveModule::ModuleID::LEFT_FRONT;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( thisPosition.compare(<span class="stringliteral">&quot;RIGHT_FRONT&quot;</span>) == 0  )</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                position = SwerveModule::ModuleID::RIGHT_FRONT;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( thisPosition.compare(<span class="stringliteral">&quot;LEFT_BACK&quot;</span>) == 0  )</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                position = SwerveModule::ModuleID::LEFT_BACK;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( thisPosition.compare(<span class="stringliteral">&quot;RIGHT_BACK&quot;</span>) == 0  )</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                position = SwerveModule::ModuleID::RIGHT_BACK;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            }</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keywordflow">else</span> </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            {</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <span class="keywordtype">string</span> msg = <span class="stringliteral">&quot;unknown position &quot;</span>;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                msg += attr.name();</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="keywordtype">string</span>(<span class="stringliteral">&quot;SwerveChassisDefn::ParseXML&quot;</span>), msg );</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                hasError = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        }</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( attrName.compare(<span class="stringliteral">&quot;turnoffset&quot;</span>) == 0 )</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            turnOffset = units::degree_t(attr.as_double());</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        }</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (  attrName.compare(<span class="stringliteral">&quot;wheelDiameter&quot;</span>) == 0 )</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            wheelDiameter = units::length::inch_t(attr.as_double());</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordflow">else</span>   <span class="comment">// log errors</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        {</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keywordtype">string</span> msg = <span class="stringliteral">&quot;unknown attribute &quot;</span>;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            msg += attr.name();</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="keywordtype">string</span>(<span class="stringliteral">&quot;SwerveChassisDefn::ParseXML&quot;</span>), msg );</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            hasError = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        }</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    }</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="comment">// Process child element nodes</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    shared_ptr&lt;ctre::phoenix::sensors::CANCoder&gt; turnsensor = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <a class="code" href="_i_dragon_motor_controller_map_8h.html#a36a6214ec089416c4f6b97db3690d9b5">IDragonMotorControllerMap</a> motors;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    units::length::inch_t wheelDiameter(0.0);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a258aeb4010abaae86c40b35d6cceed5e">OnDash</a>(<span class="keywordtype">string</span>(<span class="stringliteral">&quot;RobotXML Parsing&quot;</span>), <span class="keywordtype">string</span>(<span class="stringliteral">&quot;Swerve Modules&quot;</span>));</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="comment">// process attributes</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">for</span> (xml_attribute attr = SwerveModuleNode.first_attribute(); attr &amp;&amp; !hasError; attr = attr.next_attribute())</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordtype">string</span> attrName (attr.name());</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">if</span> ( attrName.compare(<span class="stringliteral">&quot;type&quot;</span>) == 0 )</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keyword">auto</span> thisPosition = string( attr.value() );</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keywordflow">if</span> ( thisPosition.compare(<span class="stringliteral">&quot;LEFT_FRONT&quot;</span>) == 0 )</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                position = SwerveModule::ModuleID::LEFT_FRONT;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( thisPosition.compare(<span class="stringliteral">&quot;RIGHT_FRONT&quot;</span>) == 0  )</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                position = SwerveModule::ModuleID::RIGHT_FRONT;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( thisPosition.compare(<span class="stringliteral">&quot;LEFT_BACK&quot;</span>) == 0  )</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                position = SwerveModule::ModuleID::LEFT_BACK;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( thisPosition.compare(<span class="stringliteral">&quot;RIGHT_BACK&quot;</span>) == 0  )</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                position = SwerveModule::ModuleID::RIGHT_BACK;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordflow">else</span> </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="keywordtype">string</span> msg = <span class="stringliteral">&quot;unknown position &quot;</span>;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                msg += attr.name();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="keywordtype">string</span>(<span class="stringliteral">&quot;SwerveChassisDefn::ParseXML&quot;</span>), msg );</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                hasError = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (  attrName.compare(<span class="stringliteral">&quot;wheelDiameter&quot;</span>) == 0 )</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            wheelDiameter = units::length::inch_t(attr.as_double());</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">else</span>   <span class="comment">// log errors</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keywordtype">string</span> msg = <span class="stringliteral">&quot;unknown attribute &quot;</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            msg += attr.name();</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="keywordtype">string</span>(<span class="stringliteral">&quot;SwerveChassisDefn::ParseXML&quot;</span>), msg );</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            hasError = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="comment">// Process child element nodes</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    shared_ptr&lt;ctre::phoenix::sensors::CANCoder&gt; turnsensor = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <a class="code" href="_i_dragon_motor_controller_map_8h.html#a36a6214ec089416c4f6b97db3690d9b5">IDragonMotorControllerMap</a> motors;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    unique_ptr&lt;MotorDefn&gt; motorXML = make_unique&lt;MotorDefn&gt;();</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    unique_ptr&lt;CanCoderDefn&gt; cancoderXML = make_unique&lt;CanCoderDefn&gt;();</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    unique_ptr&lt;MotorDefn&gt; motorXML = make_unique&lt;MotorDefn&gt;();</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    unique_ptr&lt;CanCoderDefn&gt; cancoderXML = make_unique&lt;CanCoderDefn&gt;();</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">for</span> (xml_node child = SwerveModuleNode.first_child(); child; child = child.next_sibling())</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    {</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordtype">string</span> childName (child.name());</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordflow">if</span> ( childName.compare(<span class="stringliteral">&quot;motor&quot;</span>) == 0 )</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        {</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <span class="keyword">auto</span> motor = motorXML.get()-&gt;ParseXML(child);</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <span class="keywordflow">if</span> ( motor.get() != <span class="keyword">nullptr</span> )</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            {</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                motors[ motor.get()-&gt;GetType() ] =  motor ;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            }</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( childName.compare(<span class="stringliteral">&quot;cancoder&quot;</span>) == 0 )</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        {</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            turnsensor = cancoderXML.get()-&gt;ParseXML(child);</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        }</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        <span class="keywordflow">else</span>  <span class="comment">// log errors</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        {</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            <span class="keywordtype">string</span> msg = <span class="stringliteral">&quot;unknown child &quot;</span>;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            msg += child.name();</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="keywordtype">string</span>(<span class="stringliteral">&quot;SwerveModuleDefn::ParseXML&quot;</span>), msg );</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            hasError = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        }</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordflow">for</span> (xml_node child = SwerveModuleNode.first_child(); child; child = child.next_sibling())</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    {</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordtype">string</span> childName (child.name());</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keywordflow">if</span> ( childName.compare(<span class="stringliteral">&quot;motor&quot;</span>) == 0 )</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a258aeb4010abaae86c40b35d6cceed5e">OnDash</a>(<span class="keywordtype">string</span>(<span class="stringliteral">&quot;RobotXML Parsing&quot;</span>), <span class="keywordtype">string</span>(<span class="stringliteral">&quot;Swerve Motors&quot;</span>));</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            <span class="keyword">auto</span> motor = motorXML.get()-&gt;ParseXML(child);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            <span class="keywordflow">if</span> ( motor.get() != <span class="keyword">nullptr</span> )</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                motors[ motor.get()-&gt;GetType() ] =  motor ;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        }</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( childName.compare(<span class="stringliteral">&quot;cancoder&quot;</span>) == 0 )</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        {</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a258aeb4010abaae86c40b35d6cceed5e">OnDash</a>(<span class="keywordtype">string</span>(<span class="stringliteral">&quot;RobotXML Parsing&quot;</span>), <span class="keywordtype">string</span>(<span class="stringliteral">&quot;Swerve CANCoder&quot;</span>));</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            turnsensor = cancoderXML.get()-&gt;ParseXML(child);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        }</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordflow">else</span>  <span class="comment">// log errors</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keywordtype">string</span> msg = <span class="stringliteral">&quot;unknown child &quot;</span>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            msg += child.name();</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="keywordtype">string</span>(<span class="stringliteral">&quot;SwerveModuleDefn::ParseXML&quot;</span>), msg );</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            hasError = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        }</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    }</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="comment">// create chassis instance</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">if</span> ( !hasError )</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    {</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        module = <a class="code" href="class_swerve_chassis_factory.html#ada029d75d8c93f13db42d44b5910c813">SwerveChassisFactory::GetSwerveChassisFactory</a>()-&gt;<a class="code" href="class_swerve_chassis_factory.html#aa0590c6d9560d79fd0393ed7819f44ad">CreateSwerveModule</a>(position, motors, turnsensor, turnOffset, wheelDiameter );</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="comment">// create chassis instance</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">if</span> ( !hasError )</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    {</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a258aeb4010abaae86c40b35d6cceed5e">OnDash</a>(<span class="keywordtype">string</span>(<span class="stringliteral">&quot;RobotXML Parsing&quot;</span>), <span class="keywordtype">string</span>(<span class="stringliteral">&quot;Create Swerve Module&quot;</span>));</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        module = <a class="code" href="class_swerve_chassis_factory.html#ada029d75d8c93f13db42d44b5910c813">SwerveChassisFactory::GetSwerveChassisFactory</a>()-&gt;<a class="code" href="class_swerve_chassis_factory.html#addff5f93957eb8c947d3af91fc203132">CreateSwerveModule</a>(position, motors, turnsensor, wheelDiameter );</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    }</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordflow">return</span> module;</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}</div>
@@ -241,24 +239,26 @@ $(document).ready(function(){initNavTree('_swerve_module_defn_8cpp_source.html',
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="a_swerve_module_8h_html"><div class="ttname"><a href="_swerve_module_8h.html">SwerveModule.h</a></div></div>
-<div class="ttc" id="aclass_swerve_chassis_factory_html_aa0590c6d9560d79fd0393ed7819f44ad"><div class="ttname"><a href="class_swerve_chassis_factory.html#aa0590c6d9560d79fd0393ed7819f44ad">SwerveChassisFactory::CreateSwerveModule</a></div><div class="ttdeci">std::shared_ptr&lt; SwerveModule &gt; CreateSwerveModule(SwerveModule::ModuleID type, const IDragonMotorControllerMap &amp;motorControllers, std::shared_ptr&lt; ctre::phoenix::sensors::CANCoder &gt; turnSensor, units::degree_t turnOffset, units::length::inch_t wheelDiameter)</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_chassis_factory_8cpp_source.html#l00054">SwerveChassisFactory.cpp:55</a></div></div>
 <div class="ttc" id="a_logger_8h_html"><div class="ttname"><a href="_logger_8h.html">Logger.h</a></div></div>
 <div class="ttc" id="a_swerve_chassis_factory_8h_html"><div class="ttname"><a href="_swerve_chassis_factory_8h.html">SwerveChassisFactory.h</a></div></div>
 <div class="ttc" id="a_i_dragon_motor_controller_map_8h_html"><div class="ttname"><a href="_i_dragon_motor_controller_map_8h.html">IDragonMotorControllerMap.h</a></div></div>
-<div class="ttc" id="aclass_swerve_chassis_factory_html_ada029d75d8c93f13db42d44b5910c813"><div class="ttname"><a href="class_swerve_chassis_factory.html#ada029d75d8c93f13db42d44b5910c813">SwerveChassisFactory::GetSwerveChassisFactory</a></div><div class="ttdeci">static SwerveChassisFactory * GetSwerveChassisFactory()</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_chassis_factory_8cpp_source.html#l00039">SwerveChassisFactory.cpp:39</a></div></div>
+<div class="ttc" id="aclass_swerve_chassis_factory_html_ada029d75d8c93f13db42d44b5910c813"><div class="ttname"><a href="class_swerve_chassis_factory.html#ada029d75d8c93f13db42d44b5910c813">SwerveChassisFactory::GetSwerveChassisFactory</a></div><div class="ttdeci">static SwerveChassisFactory * GetSwerveChassisFactory()</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_chassis_factory_8cpp_source.html#l00044">SwerveChassisFactory.cpp:44</a></div></div>
+<div class="ttc" id="aclass_logger_html_a258aeb4010abaae86c40b35d6cceed5e"><div class="ttname"><a href="class_logger.html#a258aeb4010abaae86c40b35d6cceed5e">Logger::OnDash</a></div><div class="ttdeci">void OnDash(const std::string &amp;locationIdentifier, const std::string &amp;message)</div><div class="ttdoc">Write a message to the dashboard.</div></div>
 <div class="ttc" id="aclass_logger_html_a98d7aec19dcdfb9d8faa46d83d927883"><div class="ttname"><a href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">Logger::LogError</a></div><div class="ttdeci">void LogError(const std::string &amp;locationIdentifier, const std::string &amp;message)</div><div class="ttdoc">log a message</div></div>
 <div class="ttc" id="a_can_coder_defn_8h_html"><div class="ttname"><a href="_can_coder_defn_8h.html">CanCoderDefn.h</a></div></div>
-<div class="ttc" id="aclass_swerve_module_html_a63f05945d3858366ee0382523df173f3"><div class="ttname"><a href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">SwerveModule::ModuleID</a></div><div class="ttdeci">ModuleID</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8h_source.html#l00023">SwerveModule.h:24</a></div></div>
+<div class="ttc" id="aclass_swerve_module_html_a63f05945d3858366ee0382523df173f3"><div class="ttname"><a href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">SwerveModule::ModuleID</a></div><div class="ttdeci">ModuleID</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8h_source.html#l00025">SwerveModule.h:26</a></div></div>
 <div class="ttc" id="aclass_swerve_module_defn_html_a7cb91ac98da5870ad65770e75a56d8b6"><div class="ttname"><a href="class_swerve_module_defn.html#a7cb91ac98da5870ad65770e75a56d8b6">SwerveModuleDefn::ParseXML</a></div><div class="ttdeci">std::shared_ptr&lt; SwerveModule &gt; ParseXML(pugi::xml_node SwerveModuleNode)</div><div class="ttdoc">Parse the chassie element (and it children). When this is done a IChassis object exists....</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_defn_8cpp_source.html#l00058">SwerveModuleDefn.cpp:59</a></div></div>
 <div class="ttc" id="aclass_logger_html_ae85cfbef8b7e6940475a5012fa1935c6"><div class="ttname"><a href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a></div><div class="ttdeci">static Logger * GetLogger()</div><div class="ttdoc">Find or create the singleton logger.</div><div class="ttdef"><b>Definition:</b> <a href="_logger_8cpp_source.html#l00049">Logger.cpp:49</a></div></div>
 <div class="ttc" id="a_i_dragon_motor_controller_map_8h_html_a36a6214ec089416c4f6b97db3690d9b5"><div class="ttname"><a href="_i_dragon_motor_controller_map_8h.html#a36a6214ec089416c4f6b97db3690d9b5">IDragonMotorControllerMap</a></div><div class="ttdeci">std::map&lt; MotorControllerUsage::MOTOR_CONTROLLER_USAGE, std::shared_ptr&lt; IDragonMotorController &gt; &gt; IDragonMotorControllerMap</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_motor_controller_map_8h_source.html#l00010">IDragonMotorControllerMap.h:10</a></div></div>
 <div class="ttc" id="a_swerve_module_defn_8h_html"><div class="ttname"><a href="_swerve_module_defn_8h.html">SwerveModuleDefn.h</a></div></div>
+<div class="ttc" id="anamespacefrc_html"><div class="ttname"><a href="namespacefrc.html">frc</a></div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8h_source.html#l00038">DrivePath.h:39</a></div></div>
 <div class="ttc" id="a_i_dragon_motor_controller_8h_html"><div class="ttname"><a href="_i_dragon_motor_controller_8h.html">IDragonMotorController.h</a></div></div>
 <div class="ttc" id="a_motor_defn_8h_html"><div class="ttname"><a href="_motor_defn_8h.html">MotorDefn.h</a></div></div>
+<div class="ttc" id="aclass_swerve_chassis_factory_html_addff5f93957eb8c947d3af91fc203132"><div class="ttname"><a href="class_swerve_chassis_factory.html#addff5f93957eb8c947d3af91fc203132">SwerveChassisFactory::CreateSwerveModule</a></div><div class="ttdeci">std::shared_ptr&lt; SwerveModule &gt; CreateSwerveModule(SwerveModule::ModuleID type, const IDragonMotorControllerMap &amp;motorControllers, std::shared_ptr&lt; ctre::phoenix::sensors::CANCoder &gt; turnSensor, units::length::inch_t wheelDiameter)</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_chassis_factory_8cpp_source.html#l00059">SwerveChassisFactory.cpp:60</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_4a8796b0ba1d3dc122873832137fbe4e.html">GitRepos</a></li><li class="navelem"><a class="el" href="dir_1c47665bf58b31faa465c1927c1a00b8.html">2021SwerveBot</a></li><li class="navelem"><a class="el" href="dir_4c5ca149a7966e928c927d1b502f4c6f.html">src</a></li><li class="navelem"><a class="el" href="dir_6d6810671ff2e85cbf46bcf7f794863c.html">main</a></li><li class="navelem"><a class="el" href="dir_62e39780e9d5ee1b2eb3d29e32dcab01.html">cpp</a></li><li class="navelem"><a class="el" href="dir_167c1e43f1f9771af5b54a083de58093.html">xmlhw</a></li><li class="navelem"><a class="el" href="_swerve_module_defn_8cpp.html">SwerveModuleDefn.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_7fed649183d8c3e8edc844602b95f8e9.html">xmlhw</a></li><li class="navelem"><a class="el" href="_swerve_module_defn_8cpp.html">SwerveModuleDefn.cpp</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

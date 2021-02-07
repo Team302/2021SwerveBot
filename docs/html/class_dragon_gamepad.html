@@ -115,6 +115,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa206d96358046a54318db0ff82db648d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c621d8b78609c4b52cefbc09b881975"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_gamepad.html#a4c621d8b78609c4b52cefbc09b881975">SetAxisScale</a> (<a class="el" href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972b">AXIS_IDENTIFIER</a> axis, float scaleFactor) override</td></tr>
 <tr class="separator:a4c621d8b78609c4b52cefbc09b881975"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b927c32ab4853b53f234a356d1c6380"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_gamepad.html#a0b927c32ab4853b53f234a356d1c6380">SetSlewLimit</a> (<a class="el" href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972b">AXIS_IDENTIFIER</a> axis, float slewRateFactor) override</td></tr>
+<tr class="separator:a0b927c32ab4853b53f234a356d1c6380"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedddee103b3f859b9d94944eb89c9011"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_gamepad.html#aedddee103b3f859b9d94944eb89c9011">SetButtonMode</a> (<a class="el" href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29">BUTTON_IDENTIFIER</a> button, <a class="el" href="class_i_dragon_game_pad.html#af3915fb49841ce1fc53b35c9e24d3417">BUTTON_MODE</a> mode) override</td></tr>
 <tr class="memdesc:aedddee103b3f859b9d94944eb89c9011"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method: SetButtonMode Description: Specify how the button should behave. Examples include (but not limited to):  <a href="class_dragon_gamepad.html#aedddee103b3f859b9d94944eb89c9011">More...</a><br /></td></tr>
 <tr class="separator:aedddee103b3f859b9d94944eb89c9011"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -539,7 +541,47 @@ Returns:     void</h2>
 
 <p>Implements <a class="el" href="class_i_dragon_game_pad.html#a0fc4a2d497a912d10ab2755018b43445">IDragonGamePad</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_gamepad_8cpp_source.html#l00222">222</a> of file <a class="el" href="_dragon_gamepad_8cpp_source.html">DragonGamepad.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_gamepad_8cpp_source.html#l00240">240</a> of file <a class="el" href="_dragon_gamepad_8cpp_source.html">DragonGamepad.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0b927c32ab4853b53f234a356d1c6380"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b927c32ab4853b53f234a356d1c6380">&#9670;&nbsp;</a></span>SetSlewLimit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DragonGamepad::SetSlewLimit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972b">AXIS_IDENTIFIER</a>&#160;</td>
+          <td class="paramname"><em>axis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>slewRateFactor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_i_dragon_game_pad.html#a03b3f6d85337b2857586b69c9d590686">IDragonGamePad</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_dragon_gamepad_8cpp_source.html#l00223">223</a> of file <a class="el" href="_dragon_gamepad_8cpp_source.html">DragonGamepad.cpp</a>.</p>
 
 </div>
 </div>
@@ -571,7 +613,7 @@ Returns:     void</h2>
 
 <p>Implements <a class="el" href="class_i_dragon_game_pad.html#aff0121c0eee282fa27d0849795fcce91">IDragonGamePad</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_gamepad_8cpp_source.html#l00245">245</a> of file <a class="el" href="_dragon_gamepad_8cpp_source.html">DragonGamepad.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_gamepad_8cpp_source.html#l00263">263</a> of file <a class="el" href="_dragon_gamepad_8cpp_source.html">DragonGamepad.cpp</a>.</p>
 
 </div>
 </div>
@@ -603,13 +645,13 @@ Returns:     void</h2>
 
 <p>Implements <a class="el" href="class_i_dragon_game_pad.html#a8b62f3bcf3a8fbfcdbd18cac65519720">IDragonGamePad</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_gamepad_8cpp_source.html#l00262">262</a> of file <a class="el" href="_dragon_gamepad_8cpp_source.html">DragonGamepad.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_gamepad_8cpp_source.html#l00280">280</a> of file <a class="el" href="_dragon_gamepad_8cpp_source.html">DragonGamepad.cpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/gamepad/<a class="el" href="_dragon_gamepad_8h_source.html">DragonGamepad.h</a></li>
-<li>C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/gamepad/<a class="el" href="_dragon_gamepad_8cpp_source.html">DragonGamepad.cpp</a></li>
+<li>C:/GitRepos/2021SwerveBot/src/main/cpp/gamepad/<a class="el" href="_dragon_gamepad_8h_source.html">DragonGamepad.h</a></li>
+<li>C:/GitRepos/2021SwerveBot/src/main/cpp/gamepad/<a class="el" href="_dragon_gamepad_8cpp_source.html">DragonGamepad.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

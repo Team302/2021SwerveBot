@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/states/shooterHood/ShooterHoodManual.cpp Source File</title>
+<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/states/shooterHood/ShooterHoodManual.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('_shooter_hood_manual_8cpp_source.html'
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;(</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_control_data.html">ControlData</a>* control,</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">double</span> target</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; ) : <a class="code" href="class_mech1_motor_state.html">Mech1MotorState</a>( <a class="code" href="class_mechanism_factory.html">MechanismFactory</a>::GetMechanismFactory()-&gt;GetShooterHood().get(), control, target )</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; ) : <a class="code" href="class_mech1_motor_state.html">Mech1MotorState</a>( <a class="code" href="class_mechanism_factory.html">MechanismFactory</a>::GetMechanismFactory()-&gt;GetShooterHood().get(), control, target )   </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
@@ -122,15 +122,17 @@ $(document).ready(function(){initNavTree('_shooter_hood_manual_8cpp_source.html'
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_shooter_hood_manual.html#a9fb9dba6f3dca6691557ec19f3555305">   49</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_shooter_hood_manual.html#a9fb9dba6f3dca6691557ec19f3555305">ShooterHoodManual::Run</a>()</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;{</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">auto</span> mech = <a class="code" href="class_mechanism_factory.html#a11b20a573ca93c56cb5da66ac5cbd2c0">MechanismFactory::GetMechanismFactory</a>()-&gt;<a class="code" href="class_mechanism_factory.html#aa3cf1d3ba9bc8f92025e46391044789a">GetHookDelivery</a>();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">auto</span> gamepad = <a class="code" href="class_teleop_control.html#abcca1fa489e538a5f42c920747a4f598">TeleopControl::GetInstance</a>();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">if</span> ( mech.get() != <span class="keyword">nullptr</span> &amp;&amp; gamepad != <span class="keyword">nullptr</span> )</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        mech.get()-&gt;UpdateTarget(gamepad-&gt;GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS ));</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        mech.get()-&gt;Update();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;{  </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="comment">// geo3  change GetHookDelivery to GetShooterHood  1/19/21</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">auto</span> mech = <a class="code" href="class_mechanism_factory.html#a11b20a573ca93c56cb5da66ac5cbd2c0">MechanismFactory::GetMechanismFactory</a>()-&gt;<a class="code" href="class_mechanism_factory.html#a30bf637747d63f5f3bf86da1462ab3dd">GetShooterHood</a>();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">auto</span> gamepad = <a class="code" href="class_teleop_control.html#abcca1fa489e538a5f42c920747a4f598">TeleopControl::GetInstance</a>();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">if</span> (mech.get() != <span class="keyword">nullptr</span> &amp;&amp; gamepad != <span class="keyword">nullptr</span> )  </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        mech.get()-&gt;UpdateTarget(gamepad-&gt;GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS ));</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        mech.get()-&gt;Update();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="a_teleop_control_8h_html"><div class="ttname"><a href="_teleop_control_8h.html">TeleopControl.h</a></div></div>
@@ -139,18 +141,18 @@ $(document).ready(function(){initNavTree('_shooter_hood_manual_8cpp_source.html'
 <div class="ttc" id="a_mech1_motor_state_8h_html"><div class="ttname"><a href="_mech1_motor_state_8h.html">Mech1MotorState.h</a></div></div>
 <div class="ttc" id="a_control_data_8h_html"><div class="ttname"><a href="_control_data_8h.html">ControlData.h</a></div></div>
 <div class="ttc" id="aclass_shooter_hood_manual_html_a523e67f3894b568d253ddae465fe1ac0"><div class="ttname"><a href="class_shooter_hood_manual.html#a523e67f3894b568d253ddae465fe1ac0">ShooterHoodManual::ShooterHoodManual</a></div><div class="ttdeci">ShooterHoodManual()=delete</div></div>
-<div class="ttc" id="aclass_mechanism_factory_html"><div class="ttname"><a href="class_mechanism_factory.html">MechanismFactory</a></div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8h_source.html#l00073">MechanismFactory.h:74</a></div></div>
+<div class="ttc" id="aclass_mechanism_factory_html_a30bf637747d63f5f3bf86da1462ab3dd"><div class="ttname"><a href="class_mechanism_factory.html#a30bf637747d63f5f3bf86da1462ab3dd">MechanismFactory::GetShooterHood</a></div><div class="ttdeci">std::shared_ptr&lt; ShooterHood &gt; GetShooterHood() const</div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8h_source.html#l00085">MechanismFactory.h:85</a></div></div>
+<div class="ttc" id="aclass_mechanism_factory_html"><div class="ttname"><a href="class_mechanism_factory.html">MechanismFactory</a></div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8h_source.html#l00059">MechanismFactory.h:60</a></div></div>
 <div class="ttc" id="aclass_mech1_motor_state_html"><div class="ttname"><a href="class_mech1_motor_state.html">Mech1MotorState</a></div><div class="ttdoc">information about the control (open loop, closed loop position, closed loop velocity,...</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_motor_state_8h_source.html#l00024">Mech1MotorState.h:25</a></div></div>
-<div class="ttc" id="aclass_mechanism_factory_html_aa3cf1d3ba9bc8f92025e46391044789a"><div class="ttname"><a href="class_mechanism_factory.html#aa3cf1d3ba9bc8f92025e46391044789a">MechanismFactory::GetHookDelivery</a></div><div class="ttdeci">std::shared_ptr&lt; HookDelivery &gt; GetHookDelivery() const</div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8h_source.html#l00102">MechanismFactory.h:102</a></div></div>
 <div class="ttc" id="aclass_control_data_html"><div class="ttname"><a href="class_control_data.html">ControlData</a></div><div class="ttdef"><b>Definition:</b> <a href="_control_data_8h_source.html#l00022">ControlData.h:23</a></div></div>
 <div class="ttc" id="aclass_shooter_hood_manual_html_a9ba03aabad3263cd283777165009bbb3"><div class="ttname"><a href="class_shooter_hood_manual.html#a9ba03aabad3263cd283777165009bbb3">ShooterHoodManual::Init</a></div><div class="ttdeci">void Init() override</div><div class="ttdef"><b>Definition:</b> <a href="_shooter_hood_manual_8cpp_source.html#l00039">ShooterHoodManual.cpp:39</a></div></div>
 <div class="ttc" id="aclass_teleop_control_html_abcca1fa489e538a5f42c920747a4f598"><div class="ttname"><a href="class_teleop_control.html#abcca1fa489e538a5f42c920747a4f598">TeleopControl::GetInstance</a></div><div class="ttdeci">static TeleopControl * GetInstance()</div><div class="ttdef"><b>Definition:</b> <a href="_teleop_control_8cpp_source.html#l00044">TeleopControl.cpp:44</a></div></div>
-<div class="ttc" id="aclass_mechanism_factory_html_a11b20a573ca93c56cb5da66ac5cbd2c0"><div class="ttname"><a href="class_mechanism_factory.html#a11b20a573ca93c56cb5da66ac5cbd2c0">MechanismFactory::GetMechanismFactory</a></div><div class="ttdeci">static MechanismFactory * GetMechanismFactory()</div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8cpp_source.html#l00071">MechanismFactory.cpp:71</a></div></div>
+<div class="ttc" id="aclass_mechanism_factory_html_a11b20a573ca93c56cb5da66ac5cbd2c0"><div class="ttname"><a href="class_mechanism_factory.html#a11b20a573ca93c56cb5da66ac5cbd2c0">MechanismFactory::GetMechanismFactory</a></div><div class="ttdeci">static MechanismFactory * GetMechanismFactory()</div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8cpp_source.html#l00064">MechanismFactory.cpp:64</a></div></div>
 <div class="ttc" id="aclass_shooter_hood_manual_html_a9fb9dba6f3dca6691557ec19f3555305"><div class="ttname"><a href="class_shooter_hood_manual.html#a9fb9dba6f3dca6691557ec19f3555305">ShooterHoodManual::Run</a></div><div class="ttdeci">void Run() override</div><div class="ttdef"><b>Definition:</b> <a href="_shooter_hood_manual_8cpp_source.html#l00049">ShooterHoodManual.cpp:49</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_8fef5d376b0779c2816c3097574ff109.html">2021InfiniteRecharge2</a></li><li class="navelem"><a class="el" href="dir_045978cf369576974f858349869f4b54.html">src</a></li><li class="navelem"><a class="el" href="dir_5373632e2b2aeb4f2d30f845a64ddfb5.html">main</a></li><li class="navelem"><a class="el" href="dir_fa31d939b58ad1500bb0a08d226a2ad4.html">cpp</a></li><li class="navelem"><a class="el" href="dir_04aaf1a84337f17ca65df12df1130e28.html">states</a></li><li class="navelem"><a class="el" href="dir_10c361afae996b9b5577aa1da7b030a6.html">shooterHood</a></li><li class="navelem"><a class="el" href="_shooter_hood_manual_8cpp.html">ShooterHoodManual.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_41c41181ce15b7c19c61d1bd081a9910.html">states</a></li><li class="navelem"><a class="el" href="dir_4bed40d45f91ac17d4b8a251588d2f08.html">shooterHood</a></li><li class="navelem"><a class="el" href="_shooter_hood_manual_8cpp.html">ShooterHoodManual.cpp</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

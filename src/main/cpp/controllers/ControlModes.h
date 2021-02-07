@@ -25,6 +25,7 @@ class ControlModes
         {
             PERCENT_OUTPUT,             /// Open Loop Control - values are between -1.0 and 1.0
             POSITION_INCH,              /// Closed Loop Control - values are displacements measured in inches
+            POSITION_ABSOLUTE,          /// Closed Loop Control - values are measured in ticks
             POSITION_DEGREES,           /// Closed Loop Control - values are angles measured in degrees
             POSITION_DEGREES_ABSOLUTE,  /// Closed Loop Control - values are angles measured in degrees that don't need to be converted
             VELOCITY_INCH,              /// Closed Loop Control - values are linear velocity measured in inches per second

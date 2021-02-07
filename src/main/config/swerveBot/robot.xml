@@ -2,7 +2,8 @@
 <!DOCTYPE robot SYSTEM "robot.dtd">
 <robot>
 	<pdp canId="0" />
-	<pigeon canId="50" />
+	<pigeon canId="50"
+               rotation="0.0" />
 
        <!--
 

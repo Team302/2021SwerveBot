@@ -1,0 +1,139 @@
+\hypertarget{class_swerve_drive}{}\doxysection{Swerve\+Drive Class Reference}
+\label{class_swerve_drive}\index{SwerveDrive@{SwerveDrive}}
+
+
+{\ttfamily \#include $<$Swerve\+Drive.\+h$>$}
+
+Inheritance diagram for Swerve\+Drive\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_swerve_drive}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_swerve_drive_aacd77a27d9152ef64788ce19c7fd9209}{Swerve\+Drive}} ()
+\begin{DoxyCompactList}\small\item\em initialize the object and validate the necessary items are not nullptrs \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_swerve_drive_a62dd433144b73a5bc003d88d2d2dd399}{$\sim$\+Swerve\+Drive}} ()=default
+\item 
+void \mbox{\hyperlink{class_swerve_drive_aa4d7dd862100800547789e7948fba29a}{Init}} () override
+\begin{DoxyCompactList}\small\item\em initialize the profiles for the various gamepad inputs \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_swerve_drive_a86051579f0bd35e9ab865b40192d3046}{Run}} () override
+\begin{DoxyCompactList}\small\item\em calculate the output for the wheels on the chassis from the throttle and steer components \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_swerve_drive_ae9a616d967f2010edf87a0a368a7e4b3}{At\+Target}} () const override
+\begin{DoxyCompactList}\small\item\em indicates that we are not at our target \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_swerve_drive_a33d0af68416c036b4f594b78630f59f8}{Run\+Current\+State}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 27 of file Swerve\+Drive.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_swerve_drive_aacd77a27d9152ef64788ce19c7fd9209}\label{class_swerve_drive_aacd77a27d9152ef64788ce19c7fd9209}} 
+\index{SwerveDrive@{SwerveDrive}!SwerveDrive@{SwerveDrive}}
+\index{SwerveDrive@{SwerveDrive}!SwerveDrive@{SwerveDrive}}
+\doxysubsubsection{\texorpdfstring{SwerveDrive()}{SwerveDrive()}}
+{\footnotesize\ttfamily Swerve\+Drive\+::\+Swerve\+Drive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+initialize the object and validate the necessary items are not nullptrs 
+
+
+
+Definition at line 35 of file Swerve\+Drive.\+cpp.
+
+\mbox{\Hypertarget{class_swerve_drive_a62dd433144b73a5bc003d88d2d2dd399}\label{class_swerve_drive_a62dd433144b73a5bc003d88d2d2dd399}} 
+\index{SwerveDrive@{SwerveDrive}!````~SwerveDrive@{$\sim$SwerveDrive}}
+\index{````~SwerveDrive@{$\sim$SwerveDrive}!SwerveDrive@{SwerveDrive}}
+\doxysubsubsection{\texorpdfstring{$\sim$SwerveDrive()}{~SwerveDrive()}}
+{\footnotesize\ttfamily Swerve\+Drive\+::$\sim$\+Swerve\+Drive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_swerve_drive_ae9a616d967f2010edf87a0a368a7e4b3}\label{class_swerve_drive_ae9a616d967f2010edf87a0a368a7e4b3}} 
+\index{SwerveDrive@{SwerveDrive}!AtTarget@{AtTarget}}
+\index{AtTarget@{AtTarget}!SwerveDrive@{SwerveDrive}}
+\doxysubsubsection{\texorpdfstring{AtTarget()}{AtTarget()}}
+{\footnotesize\ttfamily bool Swerve\+Drive\+::\+At\+Target (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+indicates that we are not at our target 
+
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_i_state_a15624686c47f28cf90f76bb28e938937}{I\+State}}.
+
+
+
+Definition at line 96 of file Swerve\+Drive.\+cpp.
+
+\mbox{\Hypertarget{class_swerve_drive_aa4d7dd862100800547789e7948fba29a}\label{class_swerve_drive_aa4d7dd862100800547789e7948fba29a}} 
+\index{SwerveDrive@{SwerveDrive}!Init@{Init}}
+\index{Init@{Init}!SwerveDrive@{SwerveDrive}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void Swerve\+Drive\+::\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+initialize the profiles for the various gamepad inputs 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_i_state_ac1400e68fde2f088873f5ec283309977}{I\+State}}.
+
+
+
+Definition at line 52 of file Swerve\+Drive.\+cpp.
+
+\mbox{\Hypertarget{class_swerve_drive_a86051579f0bd35e9ab865b40192d3046}\label{class_swerve_drive_a86051579f0bd35e9ab865b40192d3046}} 
+\index{SwerveDrive@{SwerveDrive}!Run@{Run}}
+\index{Run@{Run}!SwerveDrive@{SwerveDrive}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily void Swerve\+Drive\+::\+Run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+calculate the output for the wheels on the chassis from the throttle and steer components 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_i_state_a1dc31736da7d9e9322c1cc417672ea0f}{I\+State}}.
+
+
+
+Definition at line 67 of file Swerve\+Drive.\+cpp.
+
+\mbox{\Hypertarget{class_swerve_drive_a33d0af68416c036b4f594b78630f59f8}\label{class_swerve_drive_a33d0af68416c036b4f594b78630f59f8}} 
+\index{SwerveDrive@{SwerveDrive}!RunCurrentState@{RunCurrentState}}
+\index{RunCurrentState@{RunCurrentState}!SwerveDrive@{SwerveDrive}}
+\doxysubsubsection{\texorpdfstring{RunCurrentState()}{RunCurrentState()}}
+{\footnotesize\ttfamily void Swerve\+Drive\+::\+Run\+Current\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 101 of file Swerve\+Drive.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/states/chassis/\mbox{\hyperlink{_swerve_drive_8h}{Swerve\+Drive.\+h}}\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/states/chassis/\mbox{\hyperlink{_swerve_drive_8cpp}{Swerve\+Drive.\+cpp}}\end{DoxyCompactItemize}

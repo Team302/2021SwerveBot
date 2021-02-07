@@ -13,7 +13,9 @@ PrimitiveParams::PrimitiveParams
     float                       						startDriveSpeed,
     float                       						endDriveSpeed,
 	BallManipulator::BALL_MANIPULATOR_STATE				ballState,
-	float												turretAngle
+	float												turretAngle,
+    std::string                                         pathName
+
 ):	//Pass over parameters to class variables
 		m_id(id), //Primitive ID
 		m_time(time),
@@ -24,7 +26,8 @@ PrimitiveParams::PrimitiveParams
 		m_startDriveSpeed( startDriveSpeed ),
 		m_endDriveSpeed( endDriveSpeed ),
 		m_ballState( ballState ),
-		m_turretAngle( turretAngle )
+		m_turretAngle( turretAngle ),
+		m_pathName(pathName)
 {
 }
 

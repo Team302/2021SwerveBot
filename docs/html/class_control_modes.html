@@ -99,17 +99,20 @@ Public Types</h2></td></tr>
 <tr class="memitem:a46c77e409ac22b3b3269f7fee2d3f736"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736">CONTROL_TYPE</a> { <br />
 &#160;&#160;<a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736afde847a5129bd0258b65c4fafeca8b78">PERCENT_OUTPUT</a>, 
 <a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a555fe06aa1988792fc521be3bbfadc5d">POSITION_INCH</a>, 
+<a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a0bb2eb6cc277c3d3896ad8d5c7f46839">POSITION_ABSOLUTE</a>, 
 <a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a09ec699b550b9080106ed296ed8dc55d">POSITION_DEGREES</a>, 
+<br />
+&#160;&#160;<a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736aced734f880586e157ece3a7819fa56cb">POSITION_DEGREES_ABSOLUTE</a>, 
 <a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a0e742a9c9bc5bf2e5c35baf3c8b1e815">VELOCITY_INCH</a>, 
-<br />
-&#160;&#160;<a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a0a4f52b48448a86178597e491191a181">VELOCITY_DEGREES</a>, 
+<a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a0a4f52b48448a86178597e491191a181">VELOCITY_DEGREES</a>, 
 <a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a8adae67c668917142711f50ef33db0ed">VELOCITY_RPS</a>, 
-<a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736ad63dbf6883501118f0d4f9123432f653">VOLTAGE</a>, 
-<a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a79380ba0bcd66b4d3dac683800ef179e">CURRENT</a>, 
 <br />
-&#160;&#160;<a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736acc0186939a6dba01d0e91c0b0f4570d8">TRAPEZOID</a>, 
+&#160;&#160;<a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736ad63dbf6883501118f0d4f9123432f653">VOLTAGE</a>, 
+<a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a79380ba0bcd66b4d3dac683800ef179e">CURRENT</a>, 
+<a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736acc0186939a6dba01d0e91c0b0f4570d8">TRAPEZOID</a>, 
 <a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736acf79ffbdec1a042c6d46bddcf5ee3e6f">MOTION_PROFILE</a>, 
-<a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a02eddd467e92bd76ea9157f8fb754668">MOTION_PROFILE_ARC</a>, 
+<br />
+&#160;&#160;<a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a02eddd467e92bd76ea9157f8fb754668">MOTION_PROFILE_ARC</a>, 
 <a class="el" href="class_control_modes.html#a46c77e409ac22b3b3269f7fee2d3f736a16d5f1ee332a4304731b7ab15d7a6566">MAX_CONTROL_TYPES</a>
 <br />
  }</td></tr>
@@ -142,7 +145,7 @@ Public Types</h2></td></tr>
 <tr><td class="fieldname"><a id="a6d6123ab559a2a754b1a8d46fc078487ad6cd4cf3830ce3399e7cfd5dccb3af89"></a>MAX_CONTROL_RUN_LOCS&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_control_modes_8h_source.html#l00040">40</a> of file <a class="el" href="_control_modes_8h_source.html">ControlModes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_modes_8h_source.html#l00042">42</a> of file <a class="el" href="_control_modes_8h_source.html">ControlModes.h</a>.</p>
 
 </div>
 </div>
@@ -161,9 +164,13 @@ Public Types</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a46c77e409ac22b3b3269f7fee2d3f736afde847a5129bd0258b65c4fafeca8b78"></a>PERCENT_OUTPUT&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a46c77e409ac22b3b3269f7fee2d3f736a555fe06aa1988792fc521be3bbfadc5d"></a>POSITION_INCH&#160;</td><td class="fielddoc"><p>Open Loop Control - values are between -1.0 and 1.0. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a46c77e409ac22b3b3269f7fee2d3f736a09ec699b550b9080106ed296ed8dc55d"></a>POSITION_DEGREES&#160;</td><td class="fielddoc"><p>Closed Loop Control - values are displacements measured in inches. </p>
+<tr><td class="fieldname"><a id="a46c77e409ac22b3b3269f7fee2d3f736a0bb2eb6cc277c3d3896ad8d5c7f46839"></a>POSITION_ABSOLUTE&#160;</td><td class="fielddoc"><p>Closed Loop Control - values are displacements measured in inches. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a46c77e409ac22b3b3269f7fee2d3f736a0e742a9c9bc5bf2e5c35baf3c8b1e815"></a>VELOCITY_INCH&#160;</td><td class="fielddoc"><p>Closed Loop Control - values are angles measured in degrees. </p>
+<tr><td class="fieldname"><a id="a46c77e409ac22b3b3269f7fee2d3f736a09ec699b550b9080106ed296ed8dc55d"></a>POSITION_DEGREES&#160;</td><td class="fielddoc"><p>Closed Loop Control - values are measured in ticks. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a46c77e409ac22b3b3269f7fee2d3f736aced734f880586e157ece3a7819fa56cb"></a>POSITION_DEGREES_ABSOLUTE&#160;</td><td class="fielddoc"><p>Closed Loop Control - values are angles measured in degrees. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a46c77e409ac22b3b3269f7fee2d3f736a0e742a9c9bc5bf2e5c35baf3c8b1e815"></a>VELOCITY_INCH&#160;</td><td class="fielddoc"><p>Closed Loop Control - values are angles measured in degrees that don't need to be converted. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a46c77e409ac22b3b3269f7fee2d3f736a0a4f52b48448a86178597e491191a181"></a>VELOCITY_DEGREES&#160;</td><td class="fielddoc"><p>Closed Loop Control - values are linear velocity measured in inches per second. </p>
 </td></tr>
@@ -188,7 +195,7 @@ Public Types</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/controllers/<a class="el" href="_control_modes_8h_source.html">ControlModes.h</a></li>
+<li>C:/GitRepos/2021SwerveBot/src/main/cpp/controllers/<a class="el" href="_control_modes_8h_source.html">ControlModes.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -176,3 +176,14 @@ void SwerveChassis::ResetPosition
 {
     m_poseEstimator.ResetPosition(pose, angle);
 }
+
+
+void SwerveChassis::ResetPosition
+( 
+    const Pose2d&       pose
+)
+{
+    units::degree_t yaw{m_pigeon->GetYaw()};
+    Rotation2d angle {yaw};
+    ResetPosition(pose, angle);
+}

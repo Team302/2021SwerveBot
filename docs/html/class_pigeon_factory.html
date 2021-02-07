@@ -99,9 +99,9 @@ $(document).ready(function(){initNavTree('class_pigeon_factory.html',''); initRe
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6ee5db14924132c7cbfb26ce72262cdf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_dragon_pigeon.html">DragonPigeon</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pigeon_factory.html#a6ee5db14924132c7cbfb26ce72262cdf">GetPigeon</a> () const</td></tr>
 <tr class="separator:a6ee5db14924132c7cbfb26ce72262cdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ffcabd54ad444b8ab7addac9c5f36d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_dragon_pigeon.html">DragonPigeon</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pigeon_factory.html#a3ffcabd54ad444b8ab7addac9c5f36d4">CreatePigeon</a> (int canID)</td></tr>
-<tr class="memdesc:a3ffcabd54ad444b8ab7addac9c5f36d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the requested analog input.  <a href="class_pigeon_factory.html#a3ffcabd54ad444b8ab7addac9c5f36d4">More...</a><br /></td></tr>
-<tr class="separator:a3ffcabd54ad444b8ab7addac9c5f36d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad984ed1f873b20d6300eec76f5de1f89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_dragon_pigeon.html">DragonPigeon</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pigeon_factory.html#ad984ed1f873b20d6300eec76f5de1f89">CreatePigeon</a> (int canID, double rotation)</td></tr>
+<tr class="memdesc:ad984ed1f873b20d6300eec76f5de1f89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the requested analog input.  <a href="class_pigeon_factory.html#ad984ed1f873b20d6300eec76f5de1f89">More...</a><br /></td></tr>
+<tr class="separator:ad984ed1f873b20d6300eec76f5de1f89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -115,8 +115,8 @@ Static Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_pigeon_factory_8h_source.html#l00031">31</a> of file <a class="el" href="_pigeon_factory_8h_source.html">PigeonFactory.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3ffcabd54ad444b8ab7addac9c5f36d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ffcabd54ad444b8ab7addac9c5f36d4">&#9670;&nbsp;</a></span>CreatePigeon()</h2>
+<a id="ad984ed1f873b20d6300eec76f5de1f89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad984ed1f873b20d6300eec76f5de1f89">&#9670;&nbsp;</a></span>CreatePigeon()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -125,8 +125,18 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname"><a class="el" href="class_dragon_pigeon.html">DragonPigeon</a> * PigeonFactory::CreatePigeon </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>canID</em></td><td>)</td>
+          <td class="paramname"><em>canID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>rotation</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -134,7 +144,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Create the requested analog input. </p>
 <dl class="section return"><dt>Returns</dt><dd>shared_ptr&lt;DragonPigeon&gt; the mechanism or nullptr if mechanism doesn't exist and cannot be created. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_pigeon_factory_8cpp_source.html#l00064">64</a> of file <a class="el" href="_pigeon_factory_8cpp_source.html">PigeonFactory.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_pigeon_factory_8cpp_source.html#l00063">63</a> of file <a class="el" href="_pigeon_factory_8cpp_source.html">PigeonFactory.cpp</a>.</p>
 
 </div>
 </div>
@@ -164,7 +174,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Find or create the analog input factory. </p>
 <dl class="section return"><dt>Returns</dt><dd>PigeonFactory* pointer to the factory </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_pigeon_factory_8cpp_source.html#l00046">46</a> of file <a class="el" href="_pigeon_factory_8cpp_source.html">PigeonFactory.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_pigeon_factory_8cpp_source.html#l00045">45</a> of file <a class="el" href="_pigeon_factory_8cpp_source.html">PigeonFactory.cpp</a>.</p>
 
 </div>
 </div>
@@ -188,8 +198,8 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/hw/factories/<a class="el" href="_pigeon_factory_8h_source.html">PigeonFactory.h</a></li>
-<li>C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/hw/factories/<a class="el" href="_pigeon_factory_8cpp_source.html">PigeonFactory.cpp</a></li>
+<li>C:/GitRepos/2021SwerveBot/src/main/cpp/hw/factories/<a class="el" href="_pigeon_factory_8h_source.html">PigeonFactory.h</a></li>
+<li>C:/GitRepos/2021SwerveBot/src/main/cpp/hw/factories/<a class="el" href="_pigeon_factory_8cpp_source.html">PigeonFactory.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

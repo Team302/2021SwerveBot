@@ -1,0 +1,358 @@
+\hypertarget{class_swerve_chassis}{}\doxysection{Swerve\+Chassis Class Reference}
+\label{class_swerve_chassis}\index{SwerveChassis@{SwerveChassis}}
+
+
+{\ttfamily \#include $<$Swerve\+Chassis.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_swerve_chassis_a5fe84a5eaaf15c3646ac06c220dce049}{Swerve\+Chassis}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ front\+Left, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ front\+Right, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ back\+Left, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ back\+Right, units\+::length\+::inch\+\_\+t wheel\+Base, units\+::length\+::inch\+\_\+t track, units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t max\+Speed, units\+::radians\+\_\+per\+\_\+second\+\_\+t max\+Angular\+Speed, units\+::acceleration\+::meters\+\_\+per\+\_\+second\+\_\+squared\+\_\+t max\+Acceleration, units\+::angular\+\_\+acceleration\+::radians\+\_\+per\+\_\+second\+\_\+squared\+\_\+t max\+Angular\+Acceleration)
+\begin{DoxyCompactList}\small\item\em Construct a swerve chassis. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_swerve_chassis_a679821259ecceb0f70b92a22ae37ab40}{Zero\+Align\+Swerve\+Modules}} ()
+\begin{DoxyCompactList}\small\item\em Align all of the swerve modules to point forward. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_swerve_chassis_a0aa8a2388dcbd02fd7eeb4b49b79bd75}{Drive}} (units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t x\+Speed, units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t y\+Speed, units\+::angular\+\_\+velocity\+::radians\+\_\+per\+\_\+second\+\_\+t rot, bool field\+Relative)
+\begin{DoxyCompactList}\small\item\em Drive the chassis. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_swerve_chassis_a953e2d2b3776c36c61582c0608a434e2}{Drive}} (double drive\+Percent, double steer\+Percent, double rotate\+Percent, bool field\+Relative)
+\begin{DoxyCompactList}\small\item\em Drive the chassis. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_swerve_chassis_a9f2a266ee4e4fae549331bdc44647c5b}{Drive}} (frc\+::\+Chassis\+Speeds speeds, bool field\+Relative)
+\begin{DoxyCompactList}\small\item\em Drive the chassis. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_swerve_chassis_a121b750bfd33965fd2108fb1cfb21d8e}{Update\+Odometry}} ()
+\begin{DoxyCompactList}\small\item\em update the chassis odometry based on current states of the swerve modules and the pigeon \end{DoxyCompactList}\item 
+frc\+::\+Chassis\+Speeds \mbox{\hyperlink{class_swerve_chassis_a7c195e4469e4077b69f6f81d13f20b54}{Get\+Chassis\+Speeds}} () const
+\begin{DoxyCompactList}\small\item\em Provide the current chassis speed information. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_swerve_chassis_a8b9d9e7ce8dbfef6c87267fcf02f267e}{Reset\+Position}} (const Pose2d \&pose, const Rotation2d \&angle)
+\begin{DoxyCompactList}\small\item\em Reset the current chassis pose based on the provided pose and rotation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_swerve_chassis_aca7b78a5e974c17e2488075b75260562}{Reset\+Position}} (const Pose2d \&pose)
+\begin{DoxyCompactList}\small\item\em Reset the current chassis pose based on the provided pose (the rotation comes from the Pigeon) \end{DoxyCompactList}\item 
+units\+::length\+::inch\+\_\+t \mbox{\hyperlink{class_swerve_chassis_af138e532b360fa54739306e6777952f6}{Get\+Wheel\+Base}} () const
+\item 
+units\+::length\+::inch\+\_\+t \mbox{\hyperlink{class_swerve_chassis_abf3b50c698b8398f99ddef8298853687}{Get\+Track}} () const
+\item 
+units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t \mbox{\hyperlink{class_swerve_chassis_a45e73a7673c628897e07b503814599ea}{Get\+Max\+Speed}} () const
+\item 
+units\+::radians\+\_\+per\+\_\+second\+\_\+t \mbox{\hyperlink{class_swerve_chassis_a9c0781ca8a785f2d2458b5c722ad4118}{Get\+Max\+Angular\+Speed}} () const
+\item 
+units\+::acceleration\+::meters\+\_\+per\+\_\+second\+\_\+squared\+\_\+t \mbox{\hyperlink{class_swerve_chassis_a29f4f3ebc7d643f9e31626a285ca0209}{Get\+Max\+Acceleration}} () const
+\item 
+units\+::angular\+\_\+acceleration\+::radians\+\_\+per\+\_\+second\+\_\+squared\+\_\+t \mbox{\hyperlink{class_swerve_chassis_aedfb2aee4653bcaaae123bcc2b60ebfa}{Get\+Max\+Angular\+Acceleration}} () const
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ \mbox{\hyperlink{class_swerve_chassis_a5d97164802dee0c7e402db6059964329}{Get\+Front\+Left}} () const
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ \mbox{\hyperlink{class_swerve_chassis_a37f1c95ba7bb36f6d29cea4674649a8a}{Get\+Front\+Right}} () const
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ \mbox{\hyperlink{class_swerve_chassis_ab1781608f00c7b0da3420db4a9ef721a}{Get\+Back\+Left}} () const
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ \mbox{\hyperlink{class_swerve_chassis_a0f94195c19f0e3283e3d8332a02a330d}{Get\+Back\+Right}} () const
+\item 
+frc\+::\+Swerve\+Drive\+Pose\+Estimator$<$ 4 $>$ \mbox{\hyperlink{class_swerve_chassis_a2be9bf346116beec4524ca48b0ed914f}{Get\+Pose}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 39 of file Swerve\+Chassis.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_swerve_chassis_a5fe84a5eaaf15c3646ac06c220dce049}\label{class_swerve_chassis_a5fe84a5eaaf15c3646ac06c220dce049}} 
+\index{SwerveChassis@{SwerveChassis}!SwerveChassis@{SwerveChassis}}
+\index{SwerveChassis@{SwerveChassis}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{SwerveChassis()}{SwerveChassis()}}
+{\footnotesize\ttfamily Swerve\+Chassis\+::\+Swerve\+Chassis (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$}]{front\+Left,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$}]{front\+Right,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$}]{back\+Left,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$}]{back\+Right,  }\item[{units\+::length\+::inch\+\_\+t}]{wheel\+Base,  }\item[{units\+::length\+::inch\+\_\+t}]{track,  }\item[{units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t}]{max\+Speed,  }\item[{units\+::radians\+\_\+per\+\_\+second\+\_\+t}]{max\+Angular\+Speed,  }\item[{units\+::acceleration\+::meters\+\_\+per\+\_\+second\+\_\+squared\+\_\+t}]{max\+Acceleration,  }\item[{units\+::angular\+\_\+acceleration\+::radians\+\_\+per\+\_\+second\+\_\+squared\+\_\+t}]{max\+Angular\+Acceleration }\end{DoxyParamCaption})}
+
+
+
+Construct a swerve chassis. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em std\+::shared\+\_\+ptr$<$\+Swerve\+Module$>$} & frontleft\+: front left swerve module \\
+\hline
+\mbox{\texttt{ in}}  & {\em std\+::shared\+\_\+ptr$<$\+Swerve\+Module$>$} & frontright\+: front right swerve module \\
+\hline
+\mbox{\texttt{ in}}  & {\em std\+::shared\+\_\+ptr$<$\+Swerve\+Module$>$} & backleft\+: back left swerve module \\
+\hline
+\mbox{\texttt{ in}}  & {\em std\+::shared\+\_\+ptr$<$\+Swerve\+Module$>$} & backright\+: back right swerve module \\
+\hline
+\mbox{\texttt{ in}}  & {\em units\+::length\+::inch\+\_\+t} & wheel\+Base\+: distance between the front and rear wheels \\
+\hline
+\mbox{\texttt{ in}}  & {\em units\+::length\+::inch\+\_\+t} & track\+: distance between the left and right wheels \\
+\hline
+\mbox{\texttt{ in}}  & {\em units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t} & max\+Speed\+: maximum linear speed of the chassis \\
+\hline
+\mbox{\texttt{ in}}  & {\em units\+::radians\+\_\+per\+\_\+second\+\_\+t} & max\+Angular\+Speed\+: maximum rotation speed of the chassis \\
+\hline
+\mbox{\texttt{ in}}  & {\em double} & max\+Acceleration\+: maximum acceleration in meters\+\_\+per\+\_\+second\+\_\+squared \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 49 of file Swerve\+Chassis.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_swerve_chassis_a953e2d2b3776c36c61582c0608a434e2}\label{class_swerve_chassis_a953e2d2b3776c36c61582c0608a434e2}} 
+\index{SwerveChassis@{SwerveChassis}!Drive@{Drive}}
+\index{Drive@{Drive}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{Drive()}{Drive()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void Swerve\+Chassis\+::\+Drive (\begin{DoxyParamCaption}\item[{double}]{drive,  }\item[{double}]{steer,  }\item[{double}]{rotate,  }\item[{bool}]{field\+Relative }\end{DoxyParamCaption})}
+
+
+
+Drive the chassis. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em double} & drive\+Percent\+: forward/reverse percent output (positive is forward) \\
+\hline
+\mbox{\texttt{ in}}  & {\em double} & steer\+Percent\+: left/right percent output (positive is left) \\
+\hline
+\mbox{\texttt{ in}}  & {\em double} & rotate\+Percent\+: Rotation percent output around the vertical (Z) axis; (positive is counter clockwise) \\
+\hline
+\mbox{\texttt{ in}}  & {\em bool} & field\+Relative\+: true\+: movement is based on the field (e.\+g., push it goes away from the driver regardless of the robot orientation), false\+: direction is based on robot front/back \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 134 of file Swerve\+Chassis.\+cpp.
+
+\mbox{\Hypertarget{class_swerve_chassis_a9f2a266ee4e4fae549331bdc44647c5b}\label{class_swerve_chassis_a9f2a266ee4e4fae549331bdc44647c5b}} 
+\index{SwerveChassis@{SwerveChassis}!Drive@{Drive}}
+\index{Drive@{Drive}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{Drive()}{Drive()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void Swerve\+Chassis\+::\+Drive (\begin{DoxyParamCaption}\item[{frc\+::\+Chassis\+Speeds}]{speeds,  }\item[{bool}]{field\+Relative }\end{DoxyParamCaption})}
+
+
+
+Drive the chassis. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em frc\+::\+Chassis\+Speeds} & speeds\+: kinematics for how to move the chassis \\
+\hline
+\mbox{\texttt{ in}}  & {\em bool} & field\+Relative\+: true\+: movement is based on the field (e.\+g., push it goes away from the driver regardless of the robot orientation), false\+: direction is based on robot front/back \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_swerve_chassis_a0aa8a2388dcbd02fd7eeb4b49b79bd75}\label{class_swerve_chassis_a0aa8a2388dcbd02fd7eeb4b49b79bd75}} 
+\index{SwerveChassis@{SwerveChassis}!Drive@{Drive}}
+\index{Drive@{Drive}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{Drive()}{Drive()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void Swerve\+Chassis\+::\+Drive (\begin{DoxyParamCaption}\item[{units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t}]{x\+Speed,  }\item[{units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t}]{y\+Speed,  }\item[{units\+::angular\+\_\+velocity\+::radians\+\_\+per\+\_\+second\+\_\+t}]{rot,  }\item[{bool}]{field\+Relative }\end{DoxyParamCaption})}
+
+
+
+Drive the chassis. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t} & x\+Speed\+: forward/reverse speed (positive is forward) \\
+\hline
+\mbox{\texttt{ in}}  & {\em units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t} & y\+Speed\+: left/right speed (positive is left) \\
+\hline
+\mbox{\texttt{ in}}  & {\em units\+::angular\+\_\+velocity\+::radians\+\_\+per\+\_\+second\+\_\+t} & rot\+: Rotation speed around the vertical (Z) axis; (positive is counter clockwise) \\
+\hline
+\mbox{\texttt{ in}}  & {\em bool} & field\+Relative\+: true\+: movement is based on the field (e.\+g., push it goes away from the driver regardless of the robot orientation), false\+: direction is based on robot front/back \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_swerve_chassis_ab1781608f00c7b0da3420db4a9ef721a}\label{class_swerve_chassis_ab1781608f00c7b0da3420db4a9ef721a}} 
+\index{SwerveChassis@{SwerveChassis}!GetBackLeft@{GetBackLeft}}
+\index{GetBackLeft@{GetBackLeft}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{GetBackLeft()}{GetBackLeft()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_swerve_module}{Swerve\+Module}}$>$ Swerve\+Chassis\+::\+Get\+Back\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 127 of file Swerve\+Chassis.\+h.
+
+\mbox{\Hypertarget{class_swerve_chassis_a0f94195c19f0e3283e3d8332a02a330d}\label{class_swerve_chassis_a0f94195c19f0e3283e3d8332a02a330d}} 
+\index{SwerveChassis@{SwerveChassis}!GetBackRight@{GetBackRight}}
+\index{GetBackRight@{GetBackRight}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{GetBackRight()}{GetBackRight()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_swerve_module}{Swerve\+Module}}$>$ Swerve\+Chassis\+::\+Get\+Back\+Right (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 128 of file Swerve\+Chassis.\+h.
+
+\mbox{\Hypertarget{class_swerve_chassis_a7c195e4469e4077b69f6f81d13f20b54}\label{class_swerve_chassis_a7c195e4469e4077b69f6f81d13f20b54}} 
+\index{SwerveChassis@{SwerveChassis}!GetChassisSpeeds@{GetChassisSpeeds}}
+\index{GetChassisSpeeds@{GetChassisSpeeds}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{GetChassisSpeeds()}{GetChassisSpeeds()}}
+{\footnotesize\ttfamily Chassis\+Speeds Swerve\+Chassis\+::\+Get\+Chassis\+Speeds (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Provide the current chassis speed information. 
+
+
+
+Definition at line 160 of file Swerve\+Chassis.\+cpp.
+
+\mbox{\Hypertarget{class_swerve_chassis_a5d97164802dee0c7e402db6059964329}\label{class_swerve_chassis_a5d97164802dee0c7e402db6059964329}} 
+\index{SwerveChassis@{SwerveChassis}!GetFrontLeft@{GetFrontLeft}}
+\index{GetFrontLeft@{GetFrontLeft}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{GetFrontLeft()}{GetFrontLeft()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_swerve_module}{Swerve\+Module}}$>$ Swerve\+Chassis\+::\+Get\+Front\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 125 of file Swerve\+Chassis.\+h.
+
+\mbox{\Hypertarget{class_swerve_chassis_a37f1c95ba7bb36f6d29cea4674649a8a}\label{class_swerve_chassis_a37f1c95ba7bb36f6d29cea4674649a8a}} 
+\index{SwerveChassis@{SwerveChassis}!GetFrontRight@{GetFrontRight}}
+\index{GetFrontRight@{GetFrontRight}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{GetFrontRight()}{GetFrontRight()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_swerve_module}{Swerve\+Module}}$>$ Swerve\+Chassis\+::\+Get\+Front\+Right (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 126 of file Swerve\+Chassis.\+h.
+
+\mbox{\Hypertarget{class_swerve_chassis_a29f4f3ebc7d643f9e31626a285ca0209}\label{class_swerve_chassis_a29f4f3ebc7d643f9e31626a285ca0209}} 
+\index{SwerveChassis@{SwerveChassis}!GetMaxAcceleration@{GetMaxAcceleration}}
+\index{GetMaxAcceleration@{GetMaxAcceleration}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{GetMaxAcceleration()}{GetMaxAcceleration()}}
+{\footnotesize\ttfamily units\+::acceleration\+::meters\+\_\+per\+\_\+second\+\_\+squared\+\_\+t Swerve\+Chassis\+::\+Get\+Max\+Acceleration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 123 of file Swerve\+Chassis.\+h.
+
+\mbox{\Hypertarget{class_swerve_chassis_aedfb2aee4653bcaaae123bcc2b60ebfa}\label{class_swerve_chassis_aedfb2aee4653bcaaae123bcc2b60ebfa}} 
+\index{SwerveChassis@{SwerveChassis}!GetMaxAngularAcceleration@{GetMaxAngularAcceleration}}
+\index{GetMaxAngularAcceleration@{GetMaxAngularAcceleration}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{GetMaxAngularAcceleration()}{GetMaxAngularAcceleration()}}
+{\footnotesize\ttfamily units\+::angular\+\_\+acceleration\+::radians\+\_\+per\+\_\+second\+\_\+squared\+\_\+t Swerve\+Chassis\+::\+Get\+Max\+Angular\+Acceleration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 124 of file Swerve\+Chassis.\+h.
+
+\mbox{\Hypertarget{class_swerve_chassis_a9c0781ca8a785f2d2458b5c722ad4118}\label{class_swerve_chassis_a9c0781ca8a785f2d2458b5c722ad4118}} 
+\index{SwerveChassis@{SwerveChassis}!GetMaxAngularSpeed@{GetMaxAngularSpeed}}
+\index{GetMaxAngularSpeed@{GetMaxAngularSpeed}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{GetMaxAngularSpeed()}{GetMaxAngularSpeed()}}
+{\footnotesize\ttfamily units\+::radians\+\_\+per\+\_\+second\+\_\+t Swerve\+Chassis\+::\+Get\+Max\+Angular\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 122 of file Swerve\+Chassis.\+h.
+
+\mbox{\Hypertarget{class_swerve_chassis_a45e73a7673c628897e07b503814599ea}\label{class_swerve_chassis_a45e73a7673c628897e07b503814599ea}} 
+\index{SwerveChassis@{SwerveChassis}!GetMaxSpeed@{GetMaxSpeed}}
+\index{GetMaxSpeed@{GetMaxSpeed}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{GetMaxSpeed()}{GetMaxSpeed()}}
+{\footnotesize\ttfamily units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t Swerve\+Chassis\+::\+Get\+Max\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 121 of file Swerve\+Chassis.\+h.
+
+\mbox{\Hypertarget{class_swerve_chassis_a2be9bf346116beec4524ca48b0ed914f}\label{class_swerve_chassis_a2be9bf346116beec4524ca48b0ed914f}} 
+\index{SwerveChassis@{SwerveChassis}!GetPose@{GetPose}}
+\index{GetPose@{GetPose}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{GetPose()}{GetPose()}}
+{\footnotesize\ttfamily frc\+::\+Swerve\+Drive\+Pose\+Estimator$<$4$>$ Swerve\+Chassis\+::\+Get\+Pose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 130 of file Swerve\+Chassis.\+h.
+
+\mbox{\Hypertarget{class_swerve_chassis_abf3b50c698b8398f99ddef8298853687}\label{class_swerve_chassis_abf3b50c698b8398f99ddef8298853687}} 
+\index{SwerveChassis@{SwerveChassis}!GetTrack@{GetTrack}}
+\index{GetTrack@{GetTrack}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{GetTrack()}{GetTrack()}}
+{\footnotesize\ttfamily units\+::length\+::inch\+\_\+t Swerve\+Chassis\+::\+Get\+Track (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 120 of file Swerve\+Chassis.\+h.
+
+\mbox{\Hypertarget{class_swerve_chassis_af138e532b360fa54739306e6777952f6}\label{class_swerve_chassis_af138e532b360fa54739306e6777952f6}} 
+\index{SwerveChassis@{SwerveChassis}!GetWheelBase@{GetWheelBase}}
+\index{GetWheelBase@{GetWheelBase}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{GetWheelBase()}{GetWheelBase()}}
+{\footnotesize\ttfamily units\+::length\+::inch\+\_\+t Swerve\+Chassis\+::\+Get\+Wheel\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 119 of file Swerve\+Chassis.\+h.
+
+\mbox{\Hypertarget{class_swerve_chassis_aca7b78a5e974c17e2488075b75260562}\label{class_swerve_chassis_aca7b78a5e974c17e2488075b75260562}} 
+\index{SwerveChassis@{SwerveChassis}!ResetPosition@{ResetPosition}}
+\index{ResetPosition@{ResetPosition}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{ResetPosition()}{ResetPosition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Swerve\+Chassis\+::\+Reset\+Position (\begin{DoxyParamCaption}\item[{const Pose2d \&}]{pose }\end{DoxyParamCaption})}
+
+
+
+Reset the current chassis pose based on the provided pose (the rotation comes from the Pigeon) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em const} & Pose2d\& pose Current XY position \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 181 of file Swerve\+Chassis.\+cpp.
+
+\mbox{\Hypertarget{class_swerve_chassis_a8b9d9e7ce8dbfef6c87267fcf02f267e}\label{class_swerve_chassis_a8b9d9e7ce8dbfef6c87267fcf02f267e}} 
+\index{SwerveChassis@{SwerveChassis}!ResetPosition@{ResetPosition}}
+\index{ResetPosition@{ResetPosition}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{ResetPosition()}{ResetPosition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Swerve\+Chassis\+::\+Reset\+Position (\begin{DoxyParamCaption}\item[{const Pose2d \&}]{pose,  }\item[{const Rotation2d \&}]{angle }\end{DoxyParamCaption})}
+
+
+
+Reset the current chassis pose based on the provided pose and rotation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em const} & Pose2d\& pose Current XY position \\
+\hline
+\mbox{\texttt{ in}}  & {\em const} & Rotation2d\& angle Current rotation angle \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 171 of file Swerve\+Chassis.\+cpp.
+
+\mbox{\Hypertarget{class_swerve_chassis_a121b750bfd33965fd2108fb1cfb21d8e}\label{class_swerve_chassis_a121b750bfd33965fd2108fb1cfb21d8e}} 
+\index{SwerveChassis@{SwerveChassis}!UpdateOdometry@{UpdateOdometry}}
+\index{UpdateOdometry@{UpdateOdometry}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{UpdateOdometry()}{UpdateOdometry()}}
+{\footnotesize\ttfamily void Swerve\+Chassis\+::\+Update\+Odometry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+update the chassis odometry based on current states of the swerve modules and the pigeon 
+
+
+
+Definition at line 148 of file Swerve\+Chassis.\+cpp.
+
+\mbox{\Hypertarget{class_swerve_chassis_a679821259ecceb0f70b92a22ae37ab40}\label{class_swerve_chassis_a679821259ecceb0f70b92a22ae37ab40}} 
+\index{SwerveChassis@{SwerveChassis}!ZeroAlignSwerveModules@{ZeroAlignSwerveModules}}
+\index{ZeroAlignSwerveModules@{ZeroAlignSwerveModules}!SwerveChassis@{SwerveChassis}}
+\doxysubsubsection{\texorpdfstring{ZeroAlignSwerveModules()}{ZeroAlignSwerveModules()}}
+{\footnotesize\ttfamily void Swerve\+Chassis\+::\+Zero\+Align\+Swerve\+Modules (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Align all of the swerve modules to point forward. 
+
+
+
+Definition at line 83 of file Swerve\+Chassis.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/subsys/\mbox{\hyperlink{_swerve_chassis_8h}{Swerve\+Chassis.\+h}}\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/subsys/\mbox{\hyperlink{_swerve_chassis_8cpp}{Swerve\+Chassis.\+cpp}}\end{DoxyCompactItemize}

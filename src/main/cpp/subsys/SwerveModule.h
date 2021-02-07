@@ -73,10 +73,19 @@ class SwerveModule
     private:
        // static constexpr auto ModuleMaxAngularVelocity = wpi::math::pi * 1_rad_per_s; //Radians per second
        // static constexpr auto ModuleMaxAngularAcceleration = wpi::math::pi * 2_rad_per_s / 1_s; //Radians per second ^2
+        double ConvertTargetAngleToCounts
+        (
+            double targetAngle
+        );
 
         ModuleID m_type;
         std::shared_ptr<IDragonMotorController>             m_driveMotor;
         std::shared_ptr<IDragonMotorController>             m_turnMotor;
         std::shared_ptr<ctre::phoenix::sensors::CANCoder>   m_turnSensor;
         units::length::inch_t                               m_wheelDiameter;
+
+        double                                              m_initialAngle;
+        int                                                 m_initialCounts;
+        std::shared_ptr<nt::NetworkTable>                   m_nt;
+
 };

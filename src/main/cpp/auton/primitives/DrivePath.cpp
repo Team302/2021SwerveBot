@@ -81,7 +81,7 @@ void DrivePath::Run()
 {
     // Update odometry.
     //m_chassis->UpdateOdometry();  done in robot.cpp 
-    auto desiredPose = m_trajectory.Sample(units::second_t(m_timer.get()->Get());
+    auto desiredPose = m_trajectory.Sample(units::second_t(m_timer.get()->Get()));
 
       // Get the reference chassis speeds from the Ramsete Controller.
     
@@ -91,9 +91,6 @@ void DrivePath::Run()
     units::angular_velocity::radians_per_second_t radianTrapezoidSpeed(m_setpoint.velocity.to<double>() * m_distanceToAngleConversion);
                             
     m_chassis->Drive(refChassisSpeeds,false);
- 
-    }
-     
 }
 
 bool DrivePath::IsDone()

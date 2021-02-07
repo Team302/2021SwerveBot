@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/hw/factories/PigeonFactory.cpp Source File</title>
+<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/hw/factories/PigeonFactory.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -116,39 +116,39 @@ $(document).ready(function(){initNavTree('_pigeon_factory_8cpp_source.html','');
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// Team 302 includes</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_pigeon_factory_8h.html">hw/factories/PigeonFactory.h</a>&gt;</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_dragon_pigeon_8h.html">hw/DragonPigeon.h</a>&gt;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_analog_input_usage_8h.html">hw/usages/AnalogInputUsage.h</a>&gt;</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_logger_8h.html">utils/Logger.h</a>&gt;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_logger_8h.html">utils/Logger.h</a>&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">// Third Party Includes</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// Third Party Includes</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<a class="code" href="class_pigeon_factory.html">PigeonFactory</a>* PigeonFactory::m_factory = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_pigeon_factory.html#ac70f2642bb631a0d6b0957f4e8d14dca">   46</a></span>&#160;<a class="code" href="class_pigeon_factory.html">PigeonFactory</a>* <a class="code" href="class_pigeon_factory.html#ac70f2642bb631a0d6b0957f4e8d14dca">PigeonFactory::GetFactory</a>()</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> ( PigeonFactory::m_factory == <span class="keyword">nullptr</span> )</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        PigeonFactory::m_factory = <span class="keyword">new</span> <a class="code" href="class_pigeon_factory.html">PigeonFactory</a>();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">return</span> PigeonFactory::m_factory;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;PigeonFactory::PigeonFactory()</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    m_pigeon = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<a class="code" href="class_pigeon_factory.html">PigeonFactory</a>* PigeonFactory::m_factory = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_pigeon_factory.html#ac70f2642bb631a0d6b0957f4e8d14dca">   45</a></span>&#160;<a class="code" href="class_pigeon_factory.html">PigeonFactory</a>* <a class="code" href="class_pigeon_factory.html#ac70f2642bb631a0d6b0957f4e8d14dca">PigeonFactory::GetFactory</a>()</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span> ( PigeonFactory::m_factory == <span class="keyword">nullptr</span> )</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        PigeonFactory::m_factory = <span class="keyword">new</span> <a class="code" href="class_pigeon_factory.html">PigeonFactory</a>();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">return</span> PigeonFactory::m_factory;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;PigeonFactory::PigeonFactory()</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    m_pigeon = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="class_pigeon_factory.html#a3ffcabd54ad444b8ab7addac9c5f36d4">   64</a></span>&#160;<a class="code" href="class_dragon_pigeon.html">DragonPigeon</a>* <a class="code" href="class_pigeon_factory.html#a3ffcabd54ad444b8ab7addac9c5f36d4">PigeonFactory::CreatePigeon</a></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;(</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">int</span>     canID</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class_pigeon_factory.html#ad984ed1f873b20d6300eec76f5de1f89">   63</a></span>&#160;<a class="code" href="class_dragon_pigeon.html">DragonPigeon</a>* <a class="code" href="class_pigeon_factory.html#ad984ed1f873b20d6300eec76f5de1f89">PigeonFactory::CreatePigeon</a></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;(</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">int</span>     canID,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">double</span>  rotation</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;)</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span> ( m_pigeon == <span class="keyword">nullptr</span> )</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        m_pigeon = <span class="keyword">new</span> <a class="code" href="class_dragon_pigeon.html">DragonPigeon</a>( canID );</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        m_pigeon = <span class="keyword">new</span> <a class="code" href="class_dragon_pigeon.html">DragonPigeon</a>( canID, rotation );</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> m_pigeon;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
@@ -162,16 +162,15 @@ $(document).ready(function(){initNavTree('_pigeon_factory_8cpp_source.html','');
 <div class="ttc" id="a_dragon_pigeon_8h_html"><div class="ttname"><a href="_dragon_pigeon_8h.html">DragonPigeon.h</a></div></div>
 <div class="ttc" id="aclass_pigeon_factory_html_a6ee5db14924132c7cbfb26ce72262cdf"><div class="ttname"><a href="class_pigeon_factory.html#a6ee5db14924132c7cbfb26ce72262cdf">PigeonFactory::GetPigeon</a></div><div class="ttdeci">DragonPigeon * GetPigeon() const</div><div class="ttdef"><b>Definition:</b> <a href="_pigeon_factory_8cpp_source.html#l00076">PigeonFactory.cpp:76</a></div></div>
 <div class="ttc" id="a_logger_8h_html"><div class="ttname"><a href="_logger_8h.html">Logger.h</a></div></div>
-<div class="ttc" id="aclass_pigeon_factory_html_ac70f2642bb631a0d6b0957f4e8d14dca"><div class="ttname"><a href="class_pigeon_factory.html#ac70f2642bb631a0d6b0957f4e8d14dca">PigeonFactory::GetFactory</a></div><div class="ttdeci">static PigeonFactory * GetFactory()</div><div class="ttdoc">Find or create the analog input factory.</div><div class="ttdef"><b>Definition:</b> <a href="_pigeon_factory_8cpp_source.html#l00046">PigeonFactory.cpp:46</a></div></div>
+<div class="ttc" id="aclass_pigeon_factory_html_ac70f2642bb631a0d6b0957f4e8d14dca"><div class="ttname"><a href="class_pigeon_factory.html#ac70f2642bb631a0d6b0957f4e8d14dca">PigeonFactory::GetFactory</a></div><div class="ttdeci">static PigeonFactory * GetFactory()</div><div class="ttdoc">Find or create the analog input factory.</div><div class="ttdef"><b>Definition:</b> <a href="_pigeon_factory_8cpp_source.html#l00045">PigeonFactory.cpp:45</a></div></div>
 <div class="ttc" id="aclass_pigeon_factory_html"><div class="ttname"><a href="class_pigeon_factory.html">PigeonFactory</a></div><div class="ttdoc">This creates the pigeon.</div><div class="ttdef"><b>Definition:</b> <a href="_pigeon_factory_8h_source.html#l00031">PigeonFactory.h:32</a></div></div>
-<div class="ttc" id="a_analog_input_usage_8h_html"><div class="ttname"><a href="_analog_input_usage_8h.html">AnalogInputUsage.h</a></div></div>
-<div class="ttc" id="aclass_pigeon_factory_html_a3ffcabd54ad444b8ab7addac9c5f36d4"><div class="ttname"><a href="class_pigeon_factory.html#a3ffcabd54ad444b8ab7addac9c5f36d4">PigeonFactory::CreatePigeon</a></div><div class="ttdeci">DragonPigeon * CreatePigeon(int canID)</div><div class="ttdoc">Create the requested analog input.</div><div class="ttdef"><b>Definition:</b> <a href="_pigeon_factory_8cpp_source.html#l00064">PigeonFactory.cpp:65</a></div></div>
+<div class="ttc" id="aclass_pigeon_factory_html_ad984ed1f873b20d6300eec76f5de1f89"><div class="ttname"><a href="class_pigeon_factory.html#ad984ed1f873b20d6300eec76f5de1f89">PigeonFactory::CreatePigeon</a></div><div class="ttdeci">DragonPigeon * CreatePigeon(int canID, double rotation)</div><div class="ttdoc">Create the requested analog input.</div><div class="ttdef"><b>Definition:</b> <a href="_pigeon_factory_8cpp_source.html#l00063">PigeonFactory.cpp:64</a></div></div>
 <div class="ttc" id="a_pigeon_factory_8h_html"><div class="ttname"><a href="_pigeon_factory_8h.html">PigeonFactory.h</a></div></div>
 <div class="ttc" id="aclass_dragon_pigeon_html"><div class="ttname"><a href="class_dragon_pigeon.html">DragonPigeon</a></div><div class="ttdef"><b>Definition:</b> <a href="_dragon_pigeon_8h_source.html#l00014">DragonPigeon.h:15</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_8fef5d376b0779c2816c3097574ff109.html">2021InfiniteRecharge2</a></li><li class="navelem"><a class="el" href="dir_045978cf369576974f858349869f4b54.html">src</a></li><li class="navelem"><a class="el" href="dir_5373632e2b2aeb4f2d30f845a64ddfb5.html">main</a></li><li class="navelem"><a class="el" href="dir_fa31d939b58ad1500bb0a08d226a2ad4.html">cpp</a></li><li class="navelem"><a class="el" href="dir_87b72330f660fe33f2a7f3c44e8c0bf7.html">hw</a></li><li class="navelem"><a class="el" href="dir_a42b7e08c873e7c2dc8575166ba2e693.html">factories</a></li><li class="navelem"><a class="el" href="_pigeon_factory_8cpp.html">PigeonFactory.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_96f9779f2b66475115f8895d899bf361.html">hw</a></li><li class="navelem"><a class="el" href="dir_236e341dc77640fc860e3413badf27d2.html">factories</a></li><li class="navelem"><a class="el" href="_pigeon_factory_8cpp.html">PigeonFactory.cpp</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

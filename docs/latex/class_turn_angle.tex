@@ -1,0 +1,139 @@
+\hypertarget{class_turn_angle}{}\doxysection{Turn\+Angle Class Reference}
+\label{class_turn_angle}\index{TurnAngle@{TurnAngle}}
+
+
+{\ttfamily \#include $<$Turn\+Angle.\+h$>$}
+
+Inheritance diagram for Turn\+Angle\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_turn_angle}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_turn_angle_a8cff17364be35148e04ac801c091b31b}{Turn\+Angle}} ()
+\item 
+virtual \mbox{\hyperlink{class_turn_angle_ae4ce91356672270c9ee1c2f17bc8ef93}{$\sim$\+Turn\+Angle}} ()=default
+\item 
+void \mbox{\hyperlink{class_turn_angle_a80a892d30883e9b570227eece66bf36c}{Init}} (\mbox{\hyperlink{class_primitive_params}{Primitive\+Params}} $\ast$params) override
+\item 
+void \mbox{\hyperlink{class_turn_angle_a8f9d1e8c5ac87f444cbe0972a62f527b}{Run}} () override
+\item 
+bool \mbox{\hyperlink{class_turn_angle_ad423fdd2e504132a5eda6edd997b3859}{Is\+Done}} () override
+\item 
+void \mbox{\hyperlink{class_turn_angle_a78bb53adbfe948fa91fbf3a63614edc9}{Is\+Greater\+Than}} (double \&angle, float \&speed)
+\item 
+void \mbox{\hyperlink{class_turn_angle_a8322b7690bd4f282a99e76a363335e29}{Is\+Less\+Than}} (double \&angle, float \&speed)
+\item 
+void \mbox{\hyperlink{class_turn_angle_a402289f1249641921492221157520387}{Reduce\+Cases}} (double \&angle, float \&speed)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 36 of file Turn\+Angle.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_turn_angle_a8cff17364be35148e04ac801c091b31b}\label{class_turn_angle_a8cff17364be35148e04ac801c091b31b}} 
+\index{TurnAngle@{TurnAngle}!TurnAngle@{TurnAngle}}
+\index{TurnAngle@{TurnAngle}!TurnAngle@{TurnAngle}}
+\doxysubsubsection{\texorpdfstring{TurnAngle()}{TurnAngle()}}
+{\footnotesize\ttfamily Turn\+Angle\+::\+Turn\+Angle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 46 of file Turn\+Angle.\+cpp.
+
+\mbox{\Hypertarget{class_turn_angle_ae4ce91356672270c9ee1c2f17bc8ef93}\label{class_turn_angle_ae4ce91356672270c9ee1c2f17bc8ef93}} 
+\index{TurnAngle@{TurnAngle}!````~TurnAngle@{$\sim$TurnAngle}}
+\index{````~TurnAngle@{$\sim$TurnAngle}!TurnAngle@{TurnAngle}}
+\doxysubsubsection{\texorpdfstring{$\sim$TurnAngle()}{~TurnAngle()}}
+{\footnotesize\ttfamily virtual Turn\+Angle\+::$\sim$\+Turn\+Angle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_turn_angle_a80a892d30883e9b570227eece66bf36c}\label{class_turn_angle_a80a892d30883e9b570227eece66bf36c}} 
+\index{TurnAngle@{TurnAngle}!Init@{Init}}
+\index{Init@{Init}!TurnAngle@{TurnAngle}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void Turn\+Angle\+::\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_primitive_params}{Primitive\+Params}} $\ast$}]{params }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_primitive_abe9e4c3b5a5b806d2c551c0f56a075d2}{I\+Primitive}}.
+
+
+
+Definition at line 54 of file Turn\+Angle.\+cpp.
+
+\mbox{\Hypertarget{class_turn_angle_ad423fdd2e504132a5eda6edd997b3859}\label{class_turn_angle_ad423fdd2e504132a5eda6edd997b3859}} 
+\index{TurnAngle@{TurnAngle}!IsDone@{IsDone}}
+\index{IsDone@{IsDone}!TurnAngle@{TurnAngle}}
+\doxysubsubsection{\texorpdfstring{IsDone()}{IsDone()}}
+{\footnotesize\ttfamily bool Turn\+Angle\+::\+Is\+Done (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_primitive_a5b62801261f9bd974be04217bd86f668}{I\+Primitive}}.
+
+
+
+Definition at line 144 of file Turn\+Angle.\+cpp.
+
+\mbox{\Hypertarget{class_turn_angle_a78bb53adbfe948fa91fbf3a63614edc9}\label{class_turn_angle_a78bb53adbfe948fa91fbf3a63614edc9}} 
+\index{TurnAngle@{TurnAngle}!IsGreaterThan@{IsGreaterThan}}
+\index{IsGreaterThan@{IsGreaterThan}!TurnAngle@{TurnAngle}}
+\doxysubsubsection{\texorpdfstring{IsGreaterThan()}{IsGreaterThan()}}
+{\footnotesize\ttfamily void Turn\+Angle\+::\+Is\+Greater\+Than (\begin{DoxyParamCaption}\item[{double \&}]{angle,  }\item[{float \&}]{speed }\end{DoxyParamCaption})}
+
+
+
+Definition at line 173 of file Turn\+Angle.\+cpp.
+
+\mbox{\Hypertarget{class_turn_angle_a8322b7690bd4f282a99e76a363335e29}\label{class_turn_angle_a8322b7690bd4f282a99e76a363335e29}} 
+\index{TurnAngle@{TurnAngle}!IsLessThan@{IsLessThan}}
+\index{IsLessThan@{IsLessThan}!TurnAngle@{TurnAngle}}
+\doxysubsubsection{\texorpdfstring{IsLessThan()}{IsLessThan()}}
+{\footnotesize\ttfamily void Turn\+Angle\+::\+Is\+Less\+Than (\begin{DoxyParamCaption}\item[{double \&}]{angle,  }\item[{float \&}]{speed }\end{DoxyParamCaption})}
+
+
+
+Definition at line 182 of file Turn\+Angle.\+cpp.
+
+\mbox{\Hypertarget{class_turn_angle_a402289f1249641921492221157520387}\label{class_turn_angle_a402289f1249641921492221157520387}} 
+\index{TurnAngle@{TurnAngle}!ReduceCases@{ReduceCases}}
+\index{ReduceCases@{ReduceCases}!TurnAngle@{TurnAngle}}
+\doxysubsubsection{\texorpdfstring{ReduceCases()}{ReduceCases()}}
+{\footnotesize\ttfamily void Turn\+Angle\+::\+Reduce\+Cases (\begin{DoxyParamCaption}\item[{double \&}]{angle,  }\item[{float \&}]{speed }\end{DoxyParamCaption})}
+
+
+
+Definition at line 191 of file Turn\+Angle.\+cpp.
+
+\mbox{\Hypertarget{class_turn_angle_a8f9d1e8c5ac87f444cbe0972a62f527b}\label{class_turn_angle_a8f9d1e8c5ac87f444cbe0972a62f527b}} 
+\index{TurnAngle@{TurnAngle}!Run@{Run}}
+\index{Run@{Run}!TurnAngle@{TurnAngle}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily void Turn\+Angle\+::\+Run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_primitive_a3c34bd0f5ddbfe150ecade13303b6cd6}{I\+Primitive}}.
+
+
+
+Definition at line 121 of file Turn\+Angle.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/auton/primitives/\mbox{\hyperlink{_turn_angle_8h}{Turn\+Angle.\+h}}\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/auton/primitives/\mbox{\hyperlink{_turn_angle_8cpp}{Turn\+Angle.\+cpp}}\end{DoxyCompactItemize}

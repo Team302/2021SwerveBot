@@ -34,7 +34,7 @@ class PrimitiveParams
                 float                                               endDriveSpeed,
                 BallManipulator::BALL_MANIPULATOR_STATE             ballState,
                 float                                               turretAngle,
-                std::string                                         PathName
+                std::string                                         pathName
         );//Constructor. Takes in all parameters
 
         PrimitiveParams() = delete;
