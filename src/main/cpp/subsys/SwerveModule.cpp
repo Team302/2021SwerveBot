@@ -43,6 +43,7 @@
 
 using namespace std;
 using namespace frc;
+using namespace ctre::phoenix;
 using namespace ctre::phoenix::motorcontrol::can;
 using namespace ctre::phoenix::sensors;
 using namespace wpi::math;
@@ -168,6 +169,19 @@ void SwerveModule::Init
                                               maxAngularVelocity.to<double>(),
                                               0.0 );
     m_turnMotor.get()->SetControlConstants( turnCTL.get() );
+    auto motor = m_turnMotor.get()->GetSpeedController();
+    auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
+    auto error = fx->GetSensorCollection().SetIntegratedSensorPosition(0.0, 0);
+	if ( error != ErrorCode::OKAY )
+	{
+		Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR, ("SwerveModule"), string("SetIntegratedSensorPosition error"));
+		error = ErrorCode::OKAY;
+	}
+    else
+    {
+        m_initialCounts = 0;
+    }
+    
 }
 
 /// @brief Turn all of the wheel to zero degrees yaw according to the pigeon
@@ -236,7 +250,8 @@ double SwerveModule::ConvertTargetAngleToCounts
 
     auto deltaDegs = m_initialAngle - targetAngle;
     //auto deltaCounts = deltaDegs * 8.5333 * 2048 / 360.0; 
-    auto deltaCounts = (deltaDegs / 360.0) * 2048; 
+    //auto deltaCounts = (deltaDegs / 360.0) * 2048; 
+    auto deltaCounts = deltaDegs * 72.4694; 
     auto targetCounts = m_initialCounts + deltaCounts;
 
     m_nt.get()->PutNumber( "initial angle", m_initialAngle );
