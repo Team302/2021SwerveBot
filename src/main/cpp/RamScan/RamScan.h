@@ -26,14 +26,11 @@
 using namespace std;
 
 // include files for data to scan
-// ?? //#include <auton/CyclePrimitives.h>
 #include <gamepad/TeleopControl.h>
 #include <hw/DragonPigeon.h>
 #include <hw/DragonTalon.h>
 #include <hw/interfaces/IDragonMotorController.h>
 #include <hw/usages/MotorControllerUsage.h>
-// ?? //#include <subsys/DragonChassis.h>
-// ?? //#include <subsys/IMechanism.h>
 #include <subsys/SwerveChassis.h>
 
 

@@ -28,20 +28,13 @@ using namespace std;
 
 // team 302 includes
 #include <Robot.h>
-// ?? //#include <auton/AutonSelector.h>
-// ?? //#include <auton/CyclePrimitives.h>
-// ?? //#include <auton/primitives/DriveDistance.h>
-// ?? //#include <auton/primitives/SuperDrive.h>
 #include <hw/factories/PigeonFactory.h>
 #include <hw/interfaces/IDragonMotorController.h>
-#include <hw/usages/IDragonMotorControllerMap.h>
 #include <hw/usages/MotorControllerUsage.h>
 #include <RamScan/RamScan.h>
 #include <states/chassis/SwerveDrive.h>
 #include <subsys/SwerveChassisFactory.h>
 #include <subsys/SwerveModule.h>
-// ?? //#include <subsys/interfaces/IChassis.h>
-// ?? //#include <subsys/IMechanism.h>
 #include <subsys/MechanismFactory.h>
 #include <utils/Logger.h>
 
