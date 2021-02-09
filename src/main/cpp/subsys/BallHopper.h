@@ -17,17 +17,25 @@
 
 //Team 302 Includes
 #include <subsys/Mech1IndMotor.h>
+#include <hw/DragonDigitalInput.h>
 
 class IDragonMotorController;
+class DragonDigitalInput;
 
 class BallHopper : public Mech1IndMotor
 {
     public:
     BallHopper
     (
-        std::shared_ptr<IDragonMotorController>     motorController
+        std::shared_ptr<IDragonMotorController>     motorController,
+        std::shared_ptr<DragonDigitalInput>         ballDetection
     );
 
     BallHopper() = delete;
     ~BallHopper() override = default;
+
+    bool isBallDetected();
+
+    private:
+        shared_ptr<DragonDigitalInput>      m_bannerSensor;
 };

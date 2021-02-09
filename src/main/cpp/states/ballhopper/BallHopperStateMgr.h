@@ -42,7 +42,7 @@ class BallHopperStateMgr
         /// @brief run the current state
         /// @param [in] BALL_HOPPER_STATE - state to run
         /// @return void
-        void RunCurrentState( BALL_HOPPER_STATE hopperState);
+        void RunCurrentState();
 
         /// @brief set the current state, initialize it and run it
         /// @param [in]     BALL_HOPPER_STATE - state to set
@@ -57,6 +57,8 @@ class BallHopperStateMgr
         /// @brief return the current state
         /// @return BALL_HOPPER_STATE - the current state
         inline BALL_HOPPER_STATE GetCurrentState() const { return m_currentStateEnum; };
+
+        inline IState* GetState( BALL_HOPPER_STATE state ) { return m_stateVector[state];}
 
     private:
 

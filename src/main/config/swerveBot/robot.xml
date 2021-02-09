@@ -26,6 +26,10 @@
 		  pwmId = "0"/>
        -->
 
+       <digitalInput usage="HOPPER_BANNER_SENSOR"
+                     digitalID="1"
+                     reversed="false" />
+
 
 <!-- ====================================================
      Chassis

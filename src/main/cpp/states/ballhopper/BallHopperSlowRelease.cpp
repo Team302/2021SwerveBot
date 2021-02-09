@@ -15,6 +15,7 @@
 
 //C++ Includes
 #include <memory>
+#include <units/time.h>
 
 //Team 302 Includes
 #include <states/IState.h>
@@ -23,6 +24,10 @@
 #include <states/ballhopper/BallHopperState.h>
 #include <states/Mech1MotorState.h>
 #include <subsys/MechanismFactory.h>
+#include <controllers/MechanismTargetData.h>
+#include <xmlmechdata/StateDataDefn.h>
+#include <hw/usages/DigitalInputUsage.h>
+#include <hw/DragonDigitalInput.h>
 
 using namespace std;
 
@@ -32,40 +37,45 @@ BallHopperSlowRelease::BallHopperSlowRelease
     double              target
 ) : Mech1MotorState ( MechanismFactory::GetMechanismFactory()->GetBallHopper().get(), control, target )
 {
+   m_ballHopper = MechanismFactory::GetMechanismFactory()->GetBallHopper();
 }
 
 void BallHopperSlowRelease::Init()
 {
     BallHopperStateMgr::BALL_HOPPER_STATE m_stateEnum = BallHopperStateMgr::BALL_HOPPER_STATE::RAPID_RELEASE;
-
-    BallHopperSlowRelease::SetState( m_stateEnum);
 }
 
 void BallHopperSlowRelease::Run()
 {
-    m_currentState->Run();
+    m_stateVector[m_stateEnum]->Run();
 
-    /* check if banner sensor sees ball
-    if (seen) 
+    // check if banner sensor sees ball
+
+
+    // add hold and release state to constructor using ballhopperstatemgr::GetState(BallHopperStateMgr::BALL_HOPPER_STATE)
+    //change how states are ran to include new holdState and releaseState variables
+    //holdState and releaseState are IState*
+    //incorporate this class into the existing ballhopperstatemgr case block for slowreleasestate
+
+
+
+    if (m_ballHopper.get()->isBallDetected()) 
     { 
-        SetState( BallHopperStateMgr::BALL_HOPPER_STATE::Hold)
+        m_stateEnum = BallHopperStateMgr::BALL_HOPPER_STATE::HOLD;
         m_timer.Start();
     }
-    */
-
-   //Remove initialization from here, don't need it, only have to run
 
    if ( m_timer.HasPeriodPassed(units::second_t(3)))
    {
-       BallHopperSlowRelease::SetState( BallHopperStateMgr::BALL_HOPPER_STATE::RAPID_RELEASE);
+       m_stateEnum = BallHopperStateMgr::BALL_HOPPER_STATE::RAPID_RELEASE;
    }
 
 }
-
+/*
 void SetState( BallHopperStateMgr::BALL_HOPPER_STATE stateEnum)
 {
-    auto state = m_stateVector[m_stateEnum];
+    auto state = m_stateVector[stateEnum];
     m_currentState = state;
     m_currentStateEnum = stateEnum;
-    m_currentState->Init();
 }
+*/

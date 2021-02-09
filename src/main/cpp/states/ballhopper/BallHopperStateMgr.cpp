@@ -126,23 +126,23 @@ BallHopperStateMgr::BallHopperStateMgr() : m_currentState(),
 
 /// @brief run the current state 
 /// @return void
-void BallHopperStateMgr::RunCurrentState( BALL_HOPPER_STATE hopperState)
+void BallHopperStateMgr::RunCurrentState()
 {
     if( MechanismFactory::GetMechanismFactory()->GetBallHopper().get() != nullptr)
     {
-        if ( hopperState == BALL_HOPPER_STATE::OFF && m_currentStateEnum != BALL_HOPPER_STATE::OFF)
+        if ( m_currentStateEnum == BALL_HOPPER_STATE::OFF && m_currentStateEnum != BALL_HOPPER_STATE::OFF)
         {
             SetCurrentState( BALL_HOPPER_STATE::OFF, false);
         }
-        else if ( hopperState == BALL_HOPPER_STATE::HOLD && m_currentStateEnum != BALL_HOPPER_STATE::HOLD)
+        else if ( m_currentStateEnum == BALL_HOPPER_STATE::HOLD && m_currentStateEnum != BALL_HOPPER_STATE::HOLD)
         {
             SetCurrentState( BALL_HOPPER_STATE::HOLD, false);
         }
-        else if ( hopperState == BALL_HOPPER_STATE::SLOW_RELEASE && m_currentStateEnum != BALL_HOPPER_STATE::SLOW_RELEASE)
+        else if ( m_currentStateEnum == BALL_HOPPER_STATE::SLOW_RELEASE && m_currentStateEnum != BALL_HOPPER_STATE::SLOW_RELEASE)
         {
             SetCurrentState( BALL_HOPPER_STATE::SLOW_RELEASE, false);
         }
-        else if ( hopperState == BALL_HOPPER_STATE::RAPID_RELEASE && m_currentStateEnum != BALL_HOPPER_STATE::RAPID_RELEASE)
+        else if ( m_currentStateEnum == BALL_HOPPER_STATE::RAPID_RELEASE && m_currentStateEnum != BALL_HOPPER_STATE::RAPID_RELEASE)
         {
             SetCurrentState( BALL_HOPPER_STATE::RAPID_RELEASE, false);
         }

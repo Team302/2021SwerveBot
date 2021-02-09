@@ -15,10 +15,14 @@
 
 #pragma once
 
+//FRC Includes
+#include <frc2/Timer.h>
+
 //Team 302 Includes
 #include <states/Mech1MotorState.h>
 #include <states/ballhopper/BallHopperStateMgr.h>
-#include <frc/Timer.h>
+#include <hw/DragonDigitalInput.h>
+
 
 class ControlData;
 
@@ -37,14 +41,16 @@ class BallHopperSlowRelease : public Mech1MotorState
         void Init();
         void Run();
         bool AtTarget();
-        void SetState
-        ( BallHopperStateMgr::BALL_HOPPER_STATE stateEnum );
+       // void SetState
+        //( BallHopperStateMgr::BALL_HOPPER_STATE stateEnum );
 
     private:
 
-        frc::Timer      m_timer;
+        frc2::Timer      m_timer;
         BallHopperStateMgr::BALL_HOPPER_STATE m_stateEnum;
         BallHopperStateMgr::BALL_HOPPER_STATE m_currentStateEnum;
         IState* m_currentState;
         std::vector<IState*> m_stateVector;
+        DragonDigitalInput* m_bannerSensor;
+        std::shared_ptr<BallHopper> m_ballHopper;
 };

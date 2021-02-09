@@ -19,12 +19,20 @@
 //Team 302 Includes
 #include <subsys/BallHopper.h>
 #include <hw/interfaces/IDragonMotorController.h>
+#include <hw/DragonDigitalInput.h>
 
 using namespace std;
 
 BallHopper::BallHopper
 (
-    shared_ptr<IDragonMotorController>  motorController
+    shared_ptr<IDragonMotorController>  motorController,
+    shared_ptr<DragonDigitalInput>      ballDetection
 ) : Mech1IndMotor( MechanismTypes::MECHANISM_TYPE::BALL_HOPPER, string( "ballhopper.xml"), string("BallHopperNT"), motorController)
 {
+    m_bannerSensor = ballDetection;
+}
+
+bool BallHopper::isBallDetected()
+{
+    return m_bannerSensor.get()->Get();
 }
