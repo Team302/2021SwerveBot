@@ -47,12 +47,6 @@ void Robot::RobotInit()
     unique_ptr<RobotDefn>  robotXml = make_unique<RobotDefn>();
     robotXml->ParseXML();
 
-    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
-    if ( swerveChassis.get() != nullptr )
-    {
-        swerveChassis.get()->ZeroAlignSwerveModules();
-    }
-
     // RAM SCAN: This is at the end of RobotInit() so all the target objects are already created.
     m_RamScan       = new RamScan();
     m_RamScan->Init();
