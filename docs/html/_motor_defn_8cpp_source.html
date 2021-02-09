@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/xmlhw/MotorDefn.cpp Source File</title>
+<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/xmlhw/MotorDefn.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -113,17 +113,17 @@ $(document).ready(function(){initNavTree('_motor_defn_8cpp_source.html',''); ini
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// Team 302 includes</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_dragon_talon_8h.html">hw/DragonTalon.h</a>&gt;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_dragon_spark_max_8h.html">hw/DragonSparkMax.h</a>&gt;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_dragon_motor_controller_factory_8h.html">hw/factories/DragonMotorControllerFactory.h</a>&gt;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_hardware_i_d_validation_8h.html">utils/HardwareIDValidation.h</a>&gt;</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_logger_8h.html">utils/Logger.h</a>&gt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_dragon_motor_controller_factory_8h.html">hw/factories/DragonMotorControllerFactory.h</a>&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_hardware_i_d_validation_8h.html">utils/HardwareIDValidation.h</a>&gt;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_logger_8h.html">utils/Logger.h</a>&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_motor_defn_8h.html">xmlhw/MotorDefn.h</a>&gt;</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">// Third Party Includes</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;pugixml/pugixml.hpp&gt;</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacefrc.html">frc</a>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacepugi.html">pugi</a>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">using namespace </span>pugi;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">using namespace </span>std;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_motor_defn.html#a41d1bdea7f06ba470b4330278b1ad1ce">   48</a></span>&#160;shared_ptr&lt;IDragonMotorController&gt; <a class="code" href="class_motor_defn.html#a41d1bdea7f06ba470b4330278b1ad1ce">MotorDefn::ParseXML</a></div>
@@ -144,7 +144,7 @@ $(document).ready(function(){initNavTree('_motor_defn_8cpp_source.html',''); ini
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">int</span> countsPerRev = 0;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">float</span> gearRatio = 1;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">bool</span> brakeMode = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">int</span> slaveTo = -1;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">int</span> followMotor = -1;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">int</span> peakCurrentDuration = 0;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">int</span> continuousCurrentLimit = 0;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">int</span> peakCurrentLimit = 0;</div>
@@ -271,10 +271,10 @@ $(document).ready(function(){initNavTree('_motor_defn_8cpp_source.html',''); ini
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        {</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            brakeMode = attr.as_bool();</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        }</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="comment">// slaveto (existing CAN id of the master motor)</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( strcmp( attr.name(), <span class="stringliteral">&quot;slaveTo&quot;</span>) == 0 )</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="comment">// followMotor (existing CAN id of the master motor)</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( strcmp( attr.name(), <span class="stringliteral">&quot;follow&quot;</span>) == 0 )</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        {</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            slaveTo = attr.as_int();</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            followMotor = attr.as_int();</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        }</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        <span class="comment">// peak current duration (cantalon)</span></div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( strcmp( attr.name(), <span class="stringliteral">&quot;peakCurrentDuration&quot;</span>) == 0 )</div>
@@ -321,51 +321,52 @@ $(document).ready(function(){initNavTree('_motor_defn_8cpp_source.html',''); ini
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keywordflow">if</span> ( !hasError )</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    {</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        pdpID = ( pdpID &lt; 0 ) ? canID : pdpID;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        controller = <a class="code" href="class_dragon_motor_controller_factory.html#a97f61b0d11774471af02aff3ef5ccbc7">DragonMotorControllerFactory::GetInstance</a>()-&gt;<a class="code" href="class_dragon_motor_controller_factory.html#a9c39fef079a101d48a518a577ff72b70">CreateMotorController</a>( mtype,</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                                                                                         canID,</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                                                                                         pdpID,</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                                                                                         usage,</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                                                                                         inverted,</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                                                                                         sensorInverted,</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                                                                                         feedbackDevice,</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                                                                                         countsPerRev,</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                                                                                         gearRatio,</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                                                                                         brakeMode,</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                                                                                         slaveTo,</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                                                                                         peakCurrentLimit,</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a258aeb4010abaae86c40b35d6cceed5e">OnDash</a>(<span class="keywordtype">string</span>(<span class="stringliteral">&quot;RobotXML Parsing&quot;</span>), <span class="keywordtype">string</span>(<span class="stringliteral">&quot;Create Motor&quot;</span>));</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        pdpID = ( pdpID &lt; 0 ) ? canID : pdpID;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        controller = <a class="code" href="class_dragon_motor_controller_factory.html#a97f61b0d11774471af02aff3ef5ccbc7">DragonMotorControllerFactory::GetInstance</a>()-&gt;<a class="code" href="class_dragon_motor_controller_factory.html#aba43997b8d8cfd7b1c594602b9c13159">CreateMotorController</a>( mtype,</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                                                                                         canID,</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                                                                                         pdpID,</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                                                                                         usage,</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                                                                                         inverted,</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                                                                                         sensorInverted,</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                                                                                         feedbackDevice,</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                                                                                         countsPerRev,</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                                                                                         gearRatio,</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                                                                                         brakeMode,</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                                                                                         followMotor,</div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                                                                                         peakCurrentDuration,</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                                                                                         peakCurrentLimit,</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                                                                                         enableCurrentLimit,</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                                                                                         forwardLimitSwitch,</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                                                                                         forwardLimitSwitchNormallyOpen,</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                                                                                         reverseLimitSwitch,</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                                                                                         reverseLimitSwitchNormallyOpen );</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    }</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordflow">return</span> controller;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;}</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                                                                                         continuousCurrentLimit,</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                                                                                         peakCurrentLimit,</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                                                                                         enableCurrentLimit,</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                                                                                         forwardLimitSwitch,</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                                                                                         forwardLimitSwitchNormallyOpen,</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                                                                                         reverseLimitSwitch,</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                                                                                         reverseLimitSwitchNormallyOpen );</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    }</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keywordflow">return</span> controller;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;}</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="a_dragon_motor_controller_factory_8h_html"><div class="ttname"><a href="_dragon_motor_controller_factory_8h.html">DragonMotorControllerFactory.h</a></div></div>
-<div class="ttc" id="aclass_dragon_motor_controller_factory_html_a97f61b0d11774471af02aff3ef5ccbc7"><div class="ttname"><a href="class_dragon_motor_controller_factory.html#a97f61b0d11774471af02aff3ef5ccbc7">DragonMotorControllerFactory::GetInstance</a></div><div class="ttdeci">static DragonMotorControllerFactory * GetInstance()</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_motor_controller_factory_8cpp_source.html#l00023">DragonMotorControllerFactory.cpp:23</a></div></div>
+<div class="ttc" id="aclass_dragon_motor_controller_factory_html_a97f61b0d11774471af02aff3ef5ccbc7"><div class="ttname"><a href="class_dragon_motor_controller_factory.html#a97f61b0d11774471af02aff3ef5ccbc7">DragonMotorControllerFactory::GetInstance</a></div><div class="ttdeci">static DragonMotorControllerFactory * GetInstance()</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_motor_controller_factory_8cpp_source.html#l00021">DragonMotorControllerFactory.cpp:21</a></div></div>
 <div class="ttc" id="aclass_hardware_i_d_validation_html_ab6c13f88201571587dc8de99b4937e65"><div class="ttname"><a href="class_hardware_i_d_validation.html#ab6c13f88201571587dc8de99b4937e65">HardwareIDValidation::ValidateCANID</a></div><div class="ttdeci">static bool ValidateCANID(int canID, std::string methodID)</div><div class="ttdef"><b>Definition:</b> <a href="_hardware_i_d_validation_8cpp_source.html#l00046">HardwareIDValidation.cpp:47</a></div></div>
 <div class="ttc" id="a_hardware_i_d_validation_8h_html"><div class="ttname"><a href="_hardware_i_d_validation_8h.html">HardwareIDValidation.h</a></div></div>
 <div class="ttc" id="a_logger_8h_html"><div class="ttname"><a href="_logger_8h.html">Logger.h</a></div></div>
 <div class="ttc" id="aclass_motor_defn_html_a41d1bdea7f06ba470b4330278b1ad1ce"><div class="ttname"><a href="class_motor_defn.html#a41d1bdea7f06ba470b4330278b1ad1ce">MotorDefn::ParseXML</a></div><div class="ttdeci">std::shared_ptr&lt; IDragonMotorController &gt; ParseXML(pugi::xml_node motorNode)</div><div class="ttdoc">: Parse a motor XML element and create a motor controller from its definition.</div><div class="ttdef"><b>Definition:</b> <a href="_motor_defn_8cpp_source.html#l00048">MotorDefn.cpp:49</a></div></div>
-<div class="ttc" id="aclass_dragon_motor_controller_factory_html_a9c39fef079a101d48a518a577ff72b70"><div class="ttname"><a href="class_dragon_motor_controller_factory.html#a9c39fef079a101d48a518a577ff72b70">DragonMotorControllerFactory::CreateMotorController</a></div><div class="ttdeci">std::shared_ptr&lt; IDragonMotorController &gt; CreateMotorController(std::string mtype, int canID, int pdpID, std::string usage, bool inverted, bool sensorInverted, ctre::phoenix::motorcontrol::FeedbackDevice feedbackDevice, int countsPerRev, float gearRatio, bool brakeMode, int slaveTo, int peakCurrentDuration, int continuousCurrentLimit, int peakCurrentLimit, bool enableCurrentLimit, bool forwardLimitSwitch, bool forwardLimitSwitchNormallyOpen, bool reverseLimitSwitch, bool reverseLimitSwitchNormallyOpen)</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_motor_controller_factory_8cpp_source.html#l00047">DragonMotorControllerFactory.cpp:48</a></div></div>
+<div class="ttc" id="aclass_logger_html_a258aeb4010abaae86c40b35d6cceed5e"><div class="ttname"><a href="class_logger.html#a258aeb4010abaae86c40b35d6cceed5e">Logger::OnDash</a></div><div class="ttdeci">void OnDash(const std::string &amp;locationIdentifier, const std::string &amp;message)</div><div class="ttdoc">Write a message to the dashboard.</div></div>
 <div class="ttc" id="aclass_logger_html_a98d7aec19dcdfb9d8faa46d83d927883"><div class="ttname"><a href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">Logger::LogError</a></div><div class="ttdeci">void LogError(const std::string &amp;locationIdentifier, const std::string &amp;message)</div><div class="ttdoc">log a message</div></div>
 <div class="ttc" id="aclass_logger_html_ae85cfbef8b7e6940475a5012fa1935c6"><div class="ttname"><a href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a></div><div class="ttdeci">static Logger * GetLogger()</div><div class="ttdoc">Find or create the singleton logger.</div><div class="ttdef"><b>Definition:</b> <a href="_logger_8cpp_source.html#l00049">Logger.cpp:49</a></div></div>
-<div class="ttc" id="anamespacefrc_html"><div class="ttname"><a href="namespacefrc.html">frc</a></div><div class="ttdef"><b>Definition:</b> <a href="_do_nothing_8h_source.html#l00034">DoNothing.h:35</a></div></div>
-<div class="ttc" id="anamespacepugi_html"><div class="ttname"><a href="namespacepugi.html">pugi</a></div><div class="ttdef"><b>Definition:</b> <a href="_color_sensor_defn_8h_source.html#l00008">ColorSensorDefn.h:9</a></div></div>
-<div class="ttc" id="a_dragon_spark_max_8h_html"><div class="ttname"><a href="_dragon_spark_max_8h.html">DragonSparkMax.h</a></div></div>
+<div class="ttc" id="anamespacefrc_html"><div class="ttname"><a href="namespacefrc.html">frc</a></div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8h_source.html#l00038">DrivePath.h:39</a></div></div>
+<div class="ttc" id="a_motor_defn_8h_html"><div class="ttname"><a href="_motor_defn_8h.html">MotorDefn.h</a></div></div>
 <div class="ttc" id="aclass_hardware_i_d_validation_html_a0aadb44d067609e1df994e06145f5f9f"><div class="ttname"><a href="class_hardware_i_d_validation.html#a0aadb44d067609e1df994e06145f5f9f">HardwareIDValidation::ValidatePDPID</a></div><div class="ttdeci">static bool ValidatePDPID(int pdpID, std::string methodID)</div><div class="ttdef"><b>Definition:</b> <a href="_hardware_i_d_validation_8cpp_source.html#l00064">HardwareIDValidation.cpp:65</a></div></div>
+<div class="ttc" id="aclass_dragon_motor_controller_factory_html_aba43997b8d8cfd7b1c594602b9c13159"><div class="ttname"><a href="class_dragon_motor_controller_factory.html#aba43997b8d8cfd7b1c594602b9c13159">DragonMotorControllerFactory::CreateMotorController</a></div><div class="ttdeci">std::shared_ptr&lt; IDragonMotorController &gt; CreateMotorController(std::string mtype, int canID, int pdpID, std::string usage, bool inverted, bool sensorInverted, ctre::phoenix::motorcontrol::FeedbackDevice feedbackDevice, int countsPerRev, float gearRatio, bool brakeMode, int followMotor, int peakCurrentDuration, int continuousCurrentLimit, int peakCurrentLimit, bool enableCurrentLimit, bool forwardLimitSwitch, bool forwardLimitSwitchNormallyOpen, bool reverseLimitSwitch, bool reverseLimitSwitchNormallyOpen)</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_motor_controller_factory_8cpp_source.html#l00045">DragonMotorControllerFactory.cpp:46</a></div></div>
 <div class="ttc" id="a_dragon_talon_8h_html"><div class="ttname"><a href="_dragon_talon_8h.html">DragonTalon.h</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_8fef5d376b0779c2816c3097574ff109.html">2021InfiniteRecharge2</a></li><li class="navelem"><a class="el" href="dir_045978cf369576974f858349869f4b54.html">src</a></li><li class="navelem"><a class="el" href="dir_5373632e2b2aeb4f2d30f845a64ddfb5.html">main</a></li><li class="navelem"><a class="el" href="dir_fa31d939b58ad1500bb0a08d226a2ad4.html">cpp</a></li><li class="navelem"><a class="el" href="dir_9d590aadd88bf284f56a70a43cc44234.html">xmlhw</a></li><li class="navelem"><a class="el" href="_motor_defn_8cpp.html">MotorDefn.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_7fed649183d8c3e8edc844602b95f8e9.html">xmlhw</a></li><li class="navelem"><a class="el" href="_motor_defn_8cpp.html">MotorDefn.cpp</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

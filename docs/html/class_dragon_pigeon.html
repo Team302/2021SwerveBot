@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('class_dragon_pigeon.html',''); initRes
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a05a336e9318cbe447d7e9dd83b998057"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_pigeon.html#a05a336e9318cbe447d7e9dd83b998057">DragonPigeon</a> (int canID)</td></tr>
-<tr class="separator:a05a336e9318cbe447d7e9dd83b998057"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70ea465a4657a781e7502fe7232f0697"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_pigeon.html#a70ea465a4657a781e7502fe7232f0697">DragonPigeon</a> (int canID, double rotation)</td></tr>
+<tr class="separator:a70ea465a4657a781e7502fe7232f0697"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada197ad628667904b0d3968d303aaa1c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_pigeon.html#ada197ad628667904b0d3968d303aaa1c">DragonPigeon</a> ()=delete</td></tr>
 <tr class="separator:ada197ad628667904b0d3968d303aaa1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a358a40e44dc60abf6b5478dd41ddfd3c"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_pigeon.html#a358a40e44dc60abf6b5478dd41ddfd3c">~DragonPigeon</a> ()=default</td></tr>
@@ -105,13 +105,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a21279deb66d0ca5b329c26f393bedb21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1c8742bde5893d9b653bd26f083baaa"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_pigeon.html#aa1c8742bde5893d9b653bd26f083baaa">GetYaw</a> ()</td></tr>
 <tr class="separator:aa1c8742bde5893d9b653bd26f083baaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade07c01f3c66b08613c3ffd762553b38"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_pigeon.html#ade07c01f3c66b08613c3ffd762553b38">ReZeroPigeon</a> (double angleDeg, int timeoutMs=0)</td></tr>
+<tr class="separator:ade07c01f3c66b08613c3ffd762553b38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="_dragon_pigeon_8h_source.html#l00014">14</a> of file <a class="el" href="_dragon_pigeon_8h_source.html">DragonPigeon.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a05a336e9318cbe447d7e9dd83b998057"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05a336e9318cbe447d7e9dd83b998057">&#9670;&nbsp;</a></span>DragonPigeon() <span class="overload">[1/2]</span></h2>
+<a id="a70ea465a4657a781e7502fe7232f0697"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70ea465a4657a781e7502fe7232f0697">&#9670;&nbsp;</a></span>DragonPigeon() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -120,8 +122,18 @@ Public Member Functions</h2></td></tr>
           <td class="memname">DragonPigeon::DragonPigeon </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>canID</em></td><td>)</td>
+          <td class="paramname"><em>canID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>rotation</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -196,7 +208,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_dragon_pigeon_8cpp_source.html#l00028">28</a> of file <a class="el" href="_dragon_pigeon_8cpp_source.html">DragonPigeon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_pigeon_8cpp_source.html#l00039">39</a> of file <a class="el" href="_dragon_pigeon_8cpp_source.html">DragonPigeon.cpp</a>.</p>
 
 </div>
 </div>
@@ -215,7 +227,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_dragon_pigeon_8cpp_source.html#l00033">33</a> of file <a class="el" href="_dragon_pigeon_8cpp_source.html">DragonPigeon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_pigeon_8cpp_source.html#l00044">44</a> of file <a class="el" href="_dragon_pigeon_8cpp_source.html">DragonPigeon.cpp</a>.</p>
 
 </div>
 </div>
@@ -234,13 +246,43 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_dragon_pigeon_8cpp_source.html#l00038">38</a> of file <a class="el" href="_dragon_pigeon_8cpp_source.html">DragonPigeon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_pigeon_8cpp_source.html#l00049">49</a> of file <a class="el" href="_dragon_pigeon_8cpp_source.html">DragonPigeon.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ade07c01f3c66b08613c3ffd762553b38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade07c01f3c66b08613c3ffd762553b38">&#9670;&nbsp;</a></span>ReZeroPigeon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DragonPigeon::ReZeroPigeon </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>angleDeg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>timeoutMs</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_dragon_pigeon_8cpp_source.html#l00054">54</a> of file <a class="el" href="_dragon_pigeon_8cpp_source.html">DragonPigeon.cpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/hw/<a class="el" href="_dragon_pigeon_8h_source.html">DragonPigeon.h</a></li>
-<li>C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/hw/<a class="el" href="_dragon_pigeon_8cpp_source.html">DragonPigeon.cpp</a></li>
+<li>C:/GitRepos/2021SwerveBot/src/main/cpp/hw/<a class="el" href="_dragon_pigeon_8h_source.html">DragonPigeon.h</a></li>
+<li>C:/GitRepos/2021SwerveBot/src/main/cpp/hw/<a class="el" href="_dragon_pigeon_8cpp_source.html">DragonPigeon.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

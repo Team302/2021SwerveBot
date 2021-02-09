@@ -40,20 +40,36 @@ DragonPigeon* PigeonDefn::ParseXML
 
     // initialize attributes to default values
     int canID = 0;
+    double rotation = 0.0;
 
     bool hasError = false;
 
     // parse/validate xml
     for (xml_attribute attr = pigeonNode.first_attribute(); attr; attr = attr.next_attribute())
     {
-        canID = attr.as_int();
-        hasError = HardwareIDValidation::ValidateCANID( canID, string( "Pigeon::ParseXML" ) );
+        if ( strcmp( attr.name(), "canId" ) == 0 )
+        {
+            canID = attr.as_int();
+            hasError = HardwareIDValidation::ValidateCANID( canID, string( "Pigeon::ParseXML" ) );
+        }
+        else if ( strcmp( attr.name(), "rotation") == 0 )
+        {
+            rotation = attr.as_double();
+        }
+        else
+        {
+            string msg("Invalid attribute ");
+            msg += attr.name();
+            Logger::GetLogger()->LogError( Logger::LOGGER_LEVEL::ERROR, string("PigeonDefn::ParseXML"), msg );
+            hasError = true;
+        }
+
     }
 
     if ( !hasError )
     {
         Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Create Pigeon"));
-        pigeon = PigeonFactory::GetFactory()->CreatePigeon( canID );
+        pigeon = PigeonFactory::GetFactory()->CreatePigeon( canID, rotation );
     }
     return pigeon;
 }

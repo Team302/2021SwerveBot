@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['gtadrive_1426',['GTADrive',['../class_g_t_a_drive.html',1,'']]]
+  ['hardwareidvalidation_936',['HardwareIDValidation',['../class_hardware_i_d_validation.html',1,'']]],
+  ['holdturretposition_937',['HoldTurretPosition',['../class_hold_turret_position.html',1,'']]]
 ];

@@ -15,15 +15,24 @@ using namespace ctre::phoenix::sensors;
 
 DragonPigeon::DragonPigeon
 (
-    int  canID
-)
+    int    canID,
+    double rotation
+) : m_pigeon(make_unique<PigeonIMU>(canID)),
+    m_initialYaw(0.0),
+    m_initialPitch(0.0),
+    m_initialRoll(0.0)
 {
     m_pigeon = make_unique<PigeonIMU>( canID );
     m_pigeon.get()->ConfigFactoryDefault();
+    m_pigeon.get()->SetYaw(0.0, 0);
+    m_pigeon.get()->SetFusedHeading( 0.0, 0);
 
-    m_initialRoll  = GetRawRoll( );
-    m_initialPitch = GetRawPitch( );
-    m_initialYaw   = GetRawYaw( );
+    double ypr[3];
+    m_pigeon.get()->GetYawPitchRoll(ypr);
+
+    m_initialYaw   = ypr[0];
+    m_initialPitch = ypr[1];
+    m_initialRoll  = ypr[2];
 }
 
 

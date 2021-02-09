@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021InfiniteRecharge2/src/main/cpp/gamepad/DragonGamepad.cpp Source File</title>
+<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/gamepad/DragonGamepad.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -298,62 +298,80 @@ $(document).ready(function(){initNavTree('_dragon_gamepad_8cpp_source.html','');
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    }</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;}</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
-<div class="line"><a name="l00222"></a><span class="lineno"><a class="line" href="class_dragon_gamepad.html#aedddee103b3f859b9d94944eb89c9011">  222</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_dragon_gamepad.html#aedddee103b3f859b9d94944eb89c9011">DragonGamepad::SetButtonMode</a></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;(</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <a class="code" href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29">BUTTON_IDENTIFIER</a> button,</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <a class="code" href="class_i_dragon_game_pad.html#af3915fb49841ce1fc53b35c9e24d3417">BUTTON_MODE</a> mode</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;) </div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;{</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <span class="keywordflow">if</span> ( m_button[button] != <span class="keyword">nullptr</span> )</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    {</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="keywordflow">if</span> ( mode == BUTTON_MODE::TOGGLE)</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        {</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            <span class="keyword">auto</span> btn = <span class="keyword">new</span> <a class="code" href="class_toggle_button.html">ToggleButton</a>( m_button[button] );</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            m_button[button] = btn;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        }</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        <span class="comment">// TODO: should have else to re-create the button or remove the toggle decorator</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
+<div class="line"><a name="l00223"></a><span class="lineno"><a class="line" href="class_dragon_gamepad.html#a0b927c32ab4853b53f234a356d1c6380">  223</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_dragon_gamepad.html#a0b927c32ab4853b53f234a356d1c6380">DragonGamepad::SetSlewLimit</a></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;(</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <a class="code" href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972b">AXIS_IDENTIFIER</a> axis,</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keywordtype">float</span> slewRateFactor</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;)</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;{</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keywordflow">if</span> ( m_axis[axis] != <span class="keyword">nullptr</span> )</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        m_axis[axis]-&gt;SetSlewRateLimiter( slewRateFactor );</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    }</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    {</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="keywordtype">string</span>(<span class="stringliteral">&quot;DragonGamepad::SetSlewLimit no axis&quot;</span>), to_string(axis) );   </div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    }</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    {</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="keywordtype">string</span>(<span class="stringliteral">&quot;DragonGamepad::SetButtonMode no button&quot;</span>), to_string(button) );</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    }</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;}</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
-<div class="line"><a name="l00245"></a><span class="lineno"><a class="line" href="class_dragon_gamepad.html#a954798e159dab694fbd6c48a96c36657">  245</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_dragon_gamepad.html#a954798e159dab694fbd6c48a96c36657">DragonGamepad::WasButtonPressed</a></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;(</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <a class="code" href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29">BUTTON_IDENTIFIER</a> button</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordtype">bool</span> isPressed = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keywordflow">if</span> ( m_button[button] != <span class="keyword">nullptr</span> )</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    {</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        isPressed = m_button[button]-&gt;WasButtonPressed();</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;}</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
+<div class="line"><a name="l00240"></a><span class="lineno"><a class="line" href="class_dragon_gamepad.html#aedddee103b3f859b9d94944eb89c9011">  240</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_dragon_gamepad.html#aedddee103b3f859b9d94944eb89c9011">DragonGamepad::SetButtonMode</a></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;(</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <a class="code" href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29">BUTTON_IDENTIFIER</a> button,</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <a class="code" href="class_i_dragon_game_pad.html#af3915fb49841ce1fc53b35c9e24d3417">BUTTON_MODE</a> mode</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;) </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;{</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keywordflow">if</span> ( m_button[button] != <span class="keyword">nullptr</span> )</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    {</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        <span class="keywordflow">if</span> ( mode == BUTTON_MODE::TOGGLE)</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        {</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            <span class="keyword">auto</span> btn = <span class="keyword">new</span> <a class="code" href="class_toggle_button.html">ToggleButton</a>( m_button[button] );</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            m_button[button] = btn;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        }</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        <span class="comment">// TODO: should have else to re-create the button or remove the toggle decorator</span></div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    }</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    {</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="keywordtype">string</span>(<span class="stringliteral">&quot;DragonGamepad::WasButtonPressed no button&quot;</span>), to_string(button) );</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="keywordtype">string</span>(<span class="stringliteral">&quot;DragonGamepad::SetButtonMode no button&quot;</span>), to_string(button) );</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    }</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordflow">return</span> isPressed;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;}</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
-<div class="line"><a name="l00262"></a><span class="lineno"><a class="line" href="class_dragon_gamepad.html#afb3895ef1ce1f46c7fd9b1070ca30e64">  262</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_dragon_gamepad.html#afb3895ef1ce1f46c7fd9b1070ca30e64">DragonGamepad::WasButtonReleased</a></div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;(</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <a class="code" href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29">BUTTON_IDENTIFIER</a> button</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keywordtype">bool</span> isPressed = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordflow">if</span> ( m_button[button] != <span class="keyword">nullptr</span> )</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    {</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        isPressed = m_button[button]-&gt;WasButtonReleased();</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    }</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    {</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="keywordtype">string</span>(<span class="stringliteral">&quot;DragonGamepad::WasButtonReleased no button&quot;</span>), to_string(button) );</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    }</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keywordflow">return</span> isPressed;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;}</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
+<div class="line"><a name="l00263"></a><span class="lineno"><a class="line" href="class_dragon_gamepad.html#a954798e159dab694fbd6c48a96c36657">  263</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_dragon_gamepad.html#a954798e159dab694fbd6c48a96c36657">DragonGamepad::WasButtonPressed</a></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;(</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <a class="code" href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29">BUTTON_IDENTIFIER</a> button</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordtype">bool</span> isPressed = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="keywordflow">if</span> ( m_button[button] != <span class="keyword">nullptr</span> )</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    {</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        isPressed = m_button[button]-&gt;WasButtonPressed();</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    }</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    {</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="keywordtype">string</span>(<span class="stringliteral">&quot;DragonGamepad::WasButtonPressed no button&quot;</span>), to_string(button) );</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    }</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keywordflow">return</span> isPressed;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;}</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno"><a class="line" href="class_dragon_gamepad.html#afb3895ef1ce1f46c7fd9b1070ca30e64">  280</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_dragon_gamepad.html#afb3895ef1ce1f46c7fd9b1070ca30e64">DragonGamepad::WasButtonReleased</a></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;(</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <a class="code" href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29">BUTTON_IDENTIFIER</a> button</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="keywordtype">bool</span> isPressed = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordflow">if</span> ( m_button[button] != <span class="keyword">nullptr</span> )</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    {</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        isPressed = m_button[button]-&gt;WasButtonReleased();</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    }</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    {</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( <span class="keywordtype">string</span>(<span class="stringliteral">&quot;DragonGamepad::WasButtonReleased no button&quot;</span>), to_string(button) );</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    }</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keywordflow">return</span> isPressed;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a07a7fc32b5cb69f2019006c0eb0f7d29aa71c9e42d1b8a13b8d2b0511098c0efe"><div class="ttname"><a href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29aa71c9e42d1b8a13b8d2b0511098c0efe">IDragonGamePad::GAMEPAD_SWITCH_21</a></div><div class="ttdeci">@ GAMEPAD_SWITCH_21</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00066">IDragonGamePad.h:66</a></div></div>
@@ -362,14 +380,15 @@ $(document).ready(function(){initNavTree('_dragon_gamepad_8cpp_source.html','');
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a07a7fc32b5cb69f2019006c0eb0f7d29a22701277a551ff711aa386103807e9a3"><div class="ttname"><a href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29a22701277a551ff711aa386103807e9a3">IDragonGamePad::GAMEPAD_BUTTON_10</a></div><div class="ttdeci">@ GAMEPAD_BUTTON_10</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00080">IDragonGamePad.h:80</a></div></div>
 <div class="ttc" id="aclass_dragon_gamepad_html_a484749bfa72081dfcf87fd4c5ec61212"><div class="ttname"><a href="class_dragon_gamepad.html#a484749bfa72081dfcf87fd4c5ec61212">DragonGamepad::~DragonGamepad</a></div><div class="ttdeci">~DragonGamepad()</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_gamepad_8cpp_source.html#l00130">DragonGamepad.cpp:130</a></div></div>
 <div class="ttc" id="aclass_dragon_gamepad_html_af03d2edf95e4fd043059134e05ae807c"><div class="ttname"><a href="class_dragon_gamepad.html#af03d2edf95e4fd043059134e05ae807c">DragonGamepad::SetAxisDeadband</a></div><div class="ttdeci">void SetAxisDeadband(AXIS_IDENTIFIER axis, AXIS_DEADBAND type) override</div><div class="ttdoc">Method: SetAxisDeadband Description: Specify what deadband behavior is desired such as none,...</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_gamepad_8cpp_source.html#l00174">DragonGamepad.cpp:175</a></div></div>
-<div class="ttc" id="aclass_dragon_gamepad_html_aedddee103b3f859b9d94944eb89c9011"><div class="ttname"><a href="class_dragon_gamepad.html#aedddee103b3f859b9d94944eb89c9011">DragonGamepad::SetButtonMode</a></div><div class="ttdeci">void SetButtonMode(BUTTON_IDENTIFIER button, BUTTON_MODE mode) override</div><div class="ttdoc">Method: SetButtonMode Description: Specify how the button should behave. Examples include (but not li...</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_gamepad_8cpp_source.html#l00222">DragonGamepad.cpp:223</a></div></div>
+<div class="ttc" id="aclass_dragon_gamepad_html_aedddee103b3f859b9d94944eb89c9011"><div class="ttname"><a href="class_dragon_gamepad.html#aedddee103b3f859b9d94944eb89c9011">DragonGamepad::SetButtonMode</a></div><div class="ttdeci">void SetButtonMode(BUTTON_IDENTIFIER button, BUTTON_MODE mode) override</div><div class="ttdoc">Method: SetButtonMode Description: Specify how the button should behave. Examples include (but not li...</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_gamepad_8cpp_source.html#l00240">DragonGamepad.cpp:241</a></div></div>
 <div class="ttc" id="aclass_digital_button_html"><div class="ttname"><a href="class_digital_button.html">DigitalButton</a></div><div class="ttdoc">Class: DigitalButton Description: This is the standard button on a gamepad.</div><div class="ttdef"><b>Definition:</b> <a href="_digital_button_8h_source.html#l00038">DigitalButton.h:39</a></div></div>
+<div class="ttc" id="aclass_dragon_gamepad_html_a0b927c32ab4853b53f234a356d1c6380"><div class="ttname"><a href="class_dragon_gamepad.html#a0b927c32ab4853b53f234a356d1c6380">DragonGamepad::SetSlewLimit</a></div><div class="ttdeci">void SetSlewLimit(AXIS_IDENTIFIER axis, float slewRateFactor) override</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_gamepad_8cpp_source.html#l00223">DragonGamepad.cpp:224</a></div></div>
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a07a7fc32b5cb69f2019006c0eb0f7d29ae4f26dd3f6ef04fb1de86244f3f7bd1d"><div class="ttname"><a href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29ae4f26dd3f6ef04fb1de86244f3f7bd1d">IDragonGamePad::GAMEPAD_SWITCH_20</a></div><div class="ttdeci">@ GAMEPAD_SWITCH_20</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00065">IDragonGamePad.h:65</a></div></div>
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a07a7fc32b5cb69f2019006c0eb0f7d29a44cf8456f7b9ba857469e7b8ea80a7de"><div class="ttname"><a href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29a44cf8456f7b9ba857469e7b8ea80a7de">IDragonGamePad::GAMEPAD_BUTTON_9</a></div><div class="ttdeci">@ GAMEPAD_BUTTON_9</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00079">IDragonGamePad.h:79</a></div></div>
 <div class="ttc" id="a_analog_button_8h_html"><div class="ttname"><a href="_analog_button_8h.html">AnalogButton.h</a></div></div>
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a07a7fc32b5cb69f2019006c0eb0f7d29"><div class="ttname"><a href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29">IDragonGamePad::BUTTON_IDENTIFIER</a></div><div class="ttdeci">BUTTON_IDENTIFIER</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00039">IDragonGamePad.h:40</a></div></div>
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a07a7fc32b5cb69f2019006c0eb0f7d29a429f99880d35846f9ff968f5cee315a5"><div class="ttname"><a href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29a429f99880d35846f9ff968f5cee315a5">IDragonGamePad::GAMEPAD_BUTTON_13</a></div><div class="ttdeci">@ GAMEPAD_BUTTON_13</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00083">IDragonGamePad.h:83</a></div></div>
-<div class="ttc" id="aclass_dragon_gamepad_html_afb3895ef1ce1f46c7fd9b1070ca30e64"><div class="ttname"><a href="class_dragon_gamepad.html#afb3895ef1ce1f46c7fd9b1070ca30e64">DragonGamepad::WasButtonReleased</a></div><div class="ttdeci">bool WasButtonReleased(BUTTON_IDENTIFIER button) const override</div><div class="ttdoc">Method: WasButtonReleased Description: Read whether the button was released since the last query....</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_gamepad_8cpp_source.html#l00262">DragonGamepad.cpp:263</a></div></div>
+<div class="ttc" id="aclass_dragon_gamepad_html_afb3895ef1ce1f46c7fd9b1070ca30e64"><div class="ttname"><a href="class_dragon_gamepad.html#afb3895ef1ce1f46c7fd9b1070ca30e64">DragonGamepad::WasButtonReleased</a></div><div class="ttdeci">bool WasButtonReleased(BUTTON_IDENTIFIER button) const override</div><div class="ttdoc">Method: WasButtonReleased Description: Read whether the button was released since the last query....</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_gamepad_8cpp_source.html#l00280">DragonGamepad.cpp:281</a></div></div>
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a07a7fc32b5cb69f2019006c0eb0f7d29a4cb565fec44dca432d70b12b366e616c"><div class="ttname"><a href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29a4cb565fec44dca432d70b12b366e616c">IDragonGamePad::GAMEPAD_DIAL_27</a></div><div class="ttdeci">@ GAMEPAD_DIAL_27</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00089">IDragonGamePad.h:89</a></div></div>
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a07a7fc32b5cb69f2019006c0eb0f7d29a17ae1e0e7692ef9d89d33921e99a59a8"><div class="ttname"><a href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29a17ae1e0e7692ef9d89d33921e99a59a8">IDragonGamePad::GAMEPAD_SWITCH_19</a></div><div class="ttdeci">@ GAMEPAD_SWITCH_19</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00064">IDragonGamePad.h:64</a></div></div>
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a3b3c3165d9fc69500bd69ba575216676"><div class="ttname"><a href="class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676">IDragonGamePad::AXIS_PROFILE</a></div><div class="ttdeci">AXIS_PROFILE</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00132">IDragonGamePad.h:133</a></div></div>
@@ -387,7 +406,7 @@ $(document).ready(function(){initNavTree('_dragon_gamepad_8cpp_source.html','');
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a6ba0408b15301dd149474ebad9b4972ba4ee872f30dd02e43ae2b63502b224f23"><div class="ttname"><a href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972ba4ee872f30dd02e43ae2b63502b224f23">IDragonGamePad::GAMEPAD_AXIS_17</a></div><div class="ttdeci">@ GAMEPAD_AXIS_17</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00113">IDragonGamePad.h:113</a></div></div>
 <div class="ttc" id="aclass_toggle_button_html"><div class="ttname"><a href="class_toggle_button.html">ToggleButton</a></div><div class="ttdoc">Class: ButtonDecorator Description: This is a decorator for modifying button behavior.</div><div class="ttdef"><b>Definition:</b> <a href="_toggle_button_8h_source.html#l00036">ToggleButton.h:37</a></div></div>
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a07a7fc32b5cb69f2019006c0eb0f7d29a488bb7a560ce337df5d688d5cd86327c"><div class="ttname"><a href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29a488bb7a560ce337df5d688d5cd86327c">IDragonGamePad::GAMEPAD_BUTTON_12</a></div><div class="ttdeci">@ GAMEPAD_BUTTON_12</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00082">IDragonGamePad.h:82</a></div></div>
-<div class="ttc" id="aclass_analog_axis_html"><div class="ttname"><a href="class_analog_axis.html">AnalogAxis</a></div><div class="ttdoc">This class handles the analog inputs on a gamepad.</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8h_source.html#l00039">AnalogAxis.h:40</a></div></div>
+<div class="ttc" id="aclass_analog_axis_html"><div class="ttname"><a href="class_analog_axis.html">AnalogAxis</a></div><div class="ttdoc">This class handles the analog inputs on a gamepad.</div><div class="ttdef"><b>Definition:</b> <a href="_analog_axis_8h_source.html#l00040">AnalogAxis.h:41</a></div></div>
 <div class="ttc" id="aclass_analog_button_html"><div class="ttname"><a href="class_analog_button.html">AnalogButton</a></div><div class="ttdoc">Class: AnalogButton Description: This is treats an analog axis as a button.</div><div class="ttdef"><b>Definition:</b> <a href="_analog_button_8h_source.html#l00038">AnalogButton.h:39</a></div></div>
 <div class="ttc" id="aclass_logger_html_a98d7aec19dcdfb9d8faa46d83d927883"><div class="ttname"><a href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">Logger::LogError</a></div><div class="ttdeci">void LogError(const std::string &amp;locationIdentifier, const std::string &amp;message)</div><div class="ttdoc">log a message</div></div>
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a6ba0408b15301dd149474ebad9b4972baadd9f0dba0b34861f8d781f932484ad3"><div class="ttname"><a href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972baadd9f0dba0b34861f8d781f932484ad3">IDragonGamePad::GAMEPAD_AXIS_16</a></div><div class="ttdeci">@ GAMEPAD_AXIS_16</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00112">IDragonGamePad.h:112</a></div></div>
@@ -403,8 +422,8 @@ $(document).ready(function(){initNavTree('_dragon_gamepad_8cpp_source.html','');
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a07a7fc32b5cb69f2019006c0eb0f7d29a77ae654fca5be4404110f52d440c10d4"><div class="ttname"><a href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29a77ae654fca5be4404110f52d440c10d4">IDragonGamePad::GAMEPAD_DIAL_22</a></div><div class="ttdeci">@ GAMEPAD_DIAL_22</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00084">IDragonGamePad.h:84</a></div></div>
 <div class="ttc" id="a_dragon_gamepad_8h_html"><div class="ttname"><a href="_dragon_gamepad_8h.html">DragonGamepad.h</a></div></div>
 <div class="ttc" id="aclass_dragon_gamepad_html_aa206d96358046a54318db0ff82db648d"><div class="ttname"><a href="class_dragon_gamepad.html#aa206d96358046a54318db0ff82db648d">DragonGamepad::SetAxisProfile</a></div><div class="ttdeci">void SetAxisProfile(AXIS_IDENTIFIER axis, AXIS_PROFILE curve) override</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_gamepad_8cpp_source.html#l00190">DragonGamepad.cpp:191</a></div></div>
-<div class="ttc" id="aclass_dragon_gamepad_html_a954798e159dab694fbd6c48a96c36657"><div class="ttname"><a href="class_dragon_gamepad.html#a954798e159dab694fbd6c48a96c36657">DragonGamepad::WasButtonPressed</a></div><div class="ttdeci">bool WasButtonPressed(BUTTON_IDENTIFIER button) const override</div><div class="ttdoc">Method: WasButtonPressed Description: Read whether the button was pressed since the last query....</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_gamepad_8cpp_source.html#l00245">DragonGamepad.cpp:246</a></div></div>
-<div class="ttc" id="anamespacefrc_html"><div class="ttname"><a href="namespacefrc.html">frc</a></div><div class="ttdef"><b>Definition:</b> <a href="_do_nothing_8h_source.html#l00034">DoNothing.h:35</a></div></div>
+<div class="ttc" id="aclass_dragon_gamepad_html_a954798e159dab694fbd6c48a96c36657"><div class="ttname"><a href="class_dragon_gamepad.html#a954798e159dab694fbd6c48a96c36657">DragonGamepad::WasButtonPressed</a></div><div class="ttdeci">bool WasButtonPressed(BUTTON_IDENTIFIER button) const override</div><div class="ttdoc">Method: WasButtonPressed Description: Read whether the button was pressed since the last query....</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_gamepad_8cpp_source.html#l00263">DragonGamepad.cpp:264</a></div></div>
+<div class="ttc" id="anamespacefrc_html"><div class="ttname"><a href="namespacefrc.html">frc</a></div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8h_source.html#l00038">DrivePath.h:39</a></div></div>
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a6ba0408b15301dd149474ebad9b4972babc5ab0261bc4571189b827fe59c7eef2"><div class="ttname"><a href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972babc5ab0261bc4571189b827fe59c7eef2">IDragonGamePad::DIAL_ANALOG_BUTTON_AXIS</a></div><div class="ttdeci">@ DIAL_ANALOG_BUTTON_AXIS</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00116">IDragonGamePad.h:116</a></div></div>
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a07a7fc32b5cb69f2019006c0eb0f7d29a2a476080d622fba7e2f1ee2ce8dfbfec"><div class="ttname"><a href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29a2a476080d622fba7e2f1ee2ce8dfbfec">IDragonGamePad::GAMEPAD_DIAL_25</a></div><div class="ttdeci">@ GAMEPAD_DIAL_25</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00087">IDragonGamePad.h:87</a></div></div>
 <div class="ttc" id="aclass_i_dragon_game_pad_html_a6ba0408b15301dd149474ebad9b4972ba239d67826c1cb9ad49920f81f2a9cc93"><div class="ttname"><a href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972ba239d67826c1cb9ad49920f81f2a9cc93">IDragonGamePad::LEFT_ANALOG_BUTTON_AXIS</a></div><div class="ttdeci">@ LEFT_ANALOG_BUTTON_AXIS</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_game_pad_8h_source.html#l00114">IDragonGamePad.h:114</a></div></div>
@@ -422,7 +441,7 @@ $(document).ready(function(){initNavTree('_dragon_gamepad_8cpp_source.html','');
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_8fef5d376b0779c2816c3097574ff109.html">2021InfiniteRecharge2</a></li><li class="navelem"><a class="el" href="dir_045978cf369576974f858349869f4b54.html">src</a></li><li class="navelem"><a class="el" href="dir_5373632e2b2aeb4f2d30f845a64ddfb5.html">main</a></li><li class="navelem"><a class="el" href="dir_fa31d939b58ad1500bb0a08d226a2ad4.html">cpp</a></li><li class="navelem"><a class="el" href="dir_56030db34b3ff6df1b275b94ad0b35a8.html">gamepad</a></li><li class="navelem"><a class="el" href="_dragon_gamepad_8cpp.html">DragonGamepad.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_d0337549fdacd966205f8990d73b010f.html">gamepad</a></li><li class="navelem"><a class="el" href="_dragon_gamepad_8cpp.html">DragonGamepad.cpp</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

@@ -1,0 +1,203 @@
+\hypertarget{class_swerve_module}{}\doxysection{Swerve\+Module Class Reference}
+\label{class_swerve_module}\index{SwerveModule@{SwerveModule}}
+
+
+{\ttfamily \#include $<$Swerve\+Module.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_swerve_module_a63f05945d3858366ee0382523df173f3}{Module\+ID}} \{ \mbox{\hyperlink{class_swerve_module_a63f05945d3858366ee0382523df173f3a252e2d193669402dbbfc75f1a6e0c6a1}{L\+E\+F\+T\+\_\+\+F\+R\+O\+NT}}, 
+\mbox{\hyperlink{class_swerve_module_a63f05945d3858366ee0382523df173f3a08c37ed1fc4e25d32a48b65847a8889b}{R\+I\+G\+H\+T\+\_\+\+F\+R\+O\+NT}}, 
+\mbox{\hyperlink{class_swerve_module_a63f05945d3858366ee0382523df173f3a50d0c3ea7689c12efd3ee2d521fff9c8}{L\+E\+F\+T\+\_\+\+B\+A\+CK}}, 
+\mbox{\hyperlink{class_swerve_module_a63f05945d3858366ee0382523df173f3a5eb4c5f751d7e777fec191d0ce41681f}{R\+I\+G\+H\+T\+\_\+\+B\+A\+CK}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_swerve_module_a2c519cdb2558ed28a5e38bb6a57d2515}{Swerve\+Module}} (\mbox{\hyperlink{class_swerve_module_a63f05945d3858366ee0382523df173f3}{Module\+ID}} type, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_dragon_motor_controller}{I\+Dragon\+Motor\+Controller}} $>$ drive\+Motor, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_dragon_motor_controller}{I\+Dragon\+Motor\+Controller}} $>$ turning\+Motor, std\+::shared\+\_\+ptr$<$ ctre\+::phoenix\+::sensors\+::\+C\+A\+N\+Coder $>$ can\+Coder, units\+::length\+::inch\+\_\+t wheel\+Diameter)
+\begin{DoxyCompactList}\small\item\em Constructs a Swerve Module. This is assuming 2 Talon\+FX (Falcons) with a Can\+Coder for the turn angle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_swerve_module_a352021a91784a69e20b68b68b4977fc2}{Init}} (units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t max\+Velocity, units\+::angular\+\_\+velocity\+::radians\+\_\+per\+\_\+second\+\_\+t max\+Angular\+Velocity, units\+::acceleration\+::meters\+\_\+per\+\_\+second\+\_\+squared\+\_\+t max\+Acceleration, units\+::angular\+\_\+acceleration\+::radians\+\_\+per\+\_\+second\+\_\+squared\+\_\+t max\+Angular\+Acceleration)
+\item 
+void \mbox{\hyperlink{class_swerve_module_a83b4f8530f6bcbbc262fd65df43add9f}{Zero\+Align\+Module}} ()
+\begin{DoxyCompactList}\small\item\em Turn all of the wheel to zero degrees yaw according to the pigeon. \end{DoxyCompactList}\item 
+frc\+::\+Swerve\+Module\+State \mbox{\hyperlink{class_swerve_module_a573bd5c53def321adc412e020d5e673d}{Get\+State}} () const
+\begin{DoxyCompactList}\small\item\em Get the current state of the module (speed of the wheel and angle of the wheel) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_swerve_module_a4872ebaaa09fb0b1727b574b3b96934a}{Set\+Desired\+State}} (const frc\+::\+Swerve\+Module\+State \&state)
+\begin{DoxyCompactList}\small\item\em Set the current state of the module (speed of the wheel and angle of the wheel) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_swerve_module_a63f05945d3858366ee0382523df173f3}{Module\+ID}} \mbox{\hyperlink{class_swerve_module_a4aa933adb396e8913e8e26dfc1e5ea01}{Get\+Type}} ()
+\begin{DoxyCompactList}\small\item\em Return which module this is. \end{DoxyCompactList}\item 
+units\+::length\+::inch\+\_\+t \mbox{\hyperlink{class_swerve_module_aff3fd7a6da70381d6d281cc4d154b7db}{Get\+Wheel\+Diameter}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 22 of file Swerve\+Module.\+h.
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_swerve_module_a63f05945d3858366ee0382523df173f3}\label{class_swerve_module_a63f05945d3858366ee0382523df173f3}} 
+\index{SwerveModule@{SwerveModule}!ModuleID@{ModuleID}}
+\index{ModuleID@{ModuleID}!SwerveModule@{SwerveModule}}
+\doxysubsubsection{\texorpdfstring{ModuleID}{ModuleID}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_swerve_module_a63f05945d3858366ee0382523df173f3}{Swerve\+Module\+::\+Module\+ID}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LEFT\_FRONT@{LEFT\_FRONT}!SwerveModule@{SwerveModule}}\index{SwerveModule@{SwerveModule}!LEFT\_FRONT@{LEFT\_FRONT}}}\mbox{\Hypertarget{class_swerve_module_a63f05945d3858366ee0382523df173f3a252e2d193669402dbbfc75f1a6e0c6a1}\label{class_swerve_module_a63f05945d3858366ee0382523df173f3a252e2d193669402dbbfc75f1a6e0c6a1}} 
+L\+E\+F\+T\+\_\+\+F\+R\+O\+NT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RIGHT\_FRONT@{RIGHT\_FRONT}!SwerveModule@{SwerveModule}}\index{SwerveModule@{SwerveModule}!RIGHT\_FRONT@{RIGHT\_FRONT}}}\mbox{\Hypertarget{class_swerve_module_a63f05945d3858366ee0382523df173f3a08c37ed1fc4e25d32a48b65847a8889b}\label{class_swerve_module_a63f05945d3858366ee0382523df173f3a08c37ed1fc4e25d32a48b65847a8889b}} 
+R\+I\+G\+H\+T\+\_\+\+F\+R\+O\+NT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LEFT\_BACK@{LEFT\_BACK}!SwerveModule@{SwerveModule}}\index{SwerveModule@{SwerveModule}!LEFT\_BACK@{LEFT\_BACK}}}\mbox{\Hypertarget{class_swerve_module_a63f05945d3858366ee0382523df173f3a50d0c3ea7689c12efd3ee2d521fff9c8}\label{class_swerve_module_a63f05945d3858366ee0382523df173f3a50d0c3ea7689c12efd3ee2d521fff9c8}} 
+L\+E\+F\+T\+\_\+\+B\+A\+CK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RIGHT\_BACK@{RIGHT\_BACK}!SwerveModule@{SwerveModule}}\index{SwerveModule@{SwerveModule}!RIGHT\_BACK@{RIGHT\_BACK}}}\mbox{\Hypertarget{class_swerve_module_a63f05945d3858366ee0382523df173f3a5eb4c5f751d7e777fec191d0ce41681f}\label{class_swerve_module_a63f05945d3858366ee0382523df173f3a5eb4c5f751d7e777fec191d0ce41681f}} 
+R\+I\+G\+H\+T\+\_\+\+B\+A\+CK&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 25 of file Swerve\+Module.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_swerve_module_a2c519cdb2558ed28a5e38bb6a57d2515}\label{class_swerve_module_a2c519cdb2558ed28a5e38bb6a57d2515}} 
+\index{SwerveModule@{SwerveModule}!SwerveModule@{SwerveModule}}
+\index{SwerveModule@{SwerveModule}!SwerveModule@{SwerveModule}}
+\doxysubsubsection{\texorpdfstring{SwerveModule()}{SwerveModule()}}
+{\footnotesize\ttfamily Swerve\+Module\+::\+Swerve\+Module (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_swerve_module_a63f05945d3858366ee0382523df173f3}{Module\+ID}}}]{type,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_dragon_motor_controller}{I\+Dragon\+Motor\+Controller}} $>$}]{drive\+Motor,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_dragon_motor_controller}{I\+Dragon\+Motor\+Controller}} $>$}]{turning\+Motor,  }\item[{std\+::shared\+\_\+ptr$<$ ctre\+::phoenix\+::sensors\+::\+C\+A\+N\+Coder $>$}]{can\+Coder,  }\item[{units\+::length\+::inch\+\_\+t}]{wheel\+Diameter }\end{DoxyParamCaption})}
+
+
+
+Constructs a Swerve Module. This is assuming 2 Talon\+FX (Falcons) with a Can\+Coder for the turn angle. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Module\+ID} & type\+: Which Swerve Module is it \\
+\hline
+\mbox{\texttt{ in}}  & {\em shared\+\_\+ptr$<$\+I\+Dragon\+Motor\+Controller$>$} & drive\+Motor\+: Motor that makes the robot move ~\newline
+ \\
+\hline
+\mbox{\texttt{ in}}  & {\em shared\+\_\+ptr$<$\+I\+Dragon\+Motor\+Controller$>$} & turn\+Motor\+: Motor that turns the swerve module \\
+\hline
+\mbox{\texttt{ in}}  & {\em std\+::shared\+\_\+ptr$<$ctre\+::phoenix\+::sensors\+::\+C\+A\+N\+Coder$>$} & can\+Coder\+: Sensor for detecting the angle of the wheel \\
+\hline
+\mbox{\texttt{ in}}  & {\em units\+::length\+::inch\+\_\+t} & wheel\+Diameter Diameter of the wheel \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 56 of file Swerve\+Module.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_swerve_module_a573bd5c53def321adc412e020d5e673d}\label{class_swerve_module_a573bd5c53def321adc412e020d5e673d}} 
+\index{SwerveModule@{SwerveModule}!GetState@{GetState}}
+\index{GetState@{GetState}!SwerveModule@{SwerveModule}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily Swerve\+Module\+State Swerve\+Module\+::\+Get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the current state of the module (speed of the wheel and angle of the wheel) 
+
+\begin{DoxyReturn}{Returns}
+Swerve\+Module\+State 
+\end{DoxyReturn}
+
+
+Definition at line 183 of file Swerve\+Module.\+cpp.
+
+\mbox{\Hypertarget{class_swerve_module_a4aa933adb396e8913e8e26dfc1e5ea01}\label{class_swerve_module_a4aa933adb396e8913e8e26dfc1e5ea01}} 
+\index{SwerveModule@{SwerveModule}!GetType@{GetType}}
+\index{GetType@{GetType}!SwerveModule@{SwerveModule}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_swerve_module_a63f05945d3858366ee0382523df173f3}{Module\+ID}} Swerve\+Module\+::\+Get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return which module this is. 
+
+\begin{DoxyReturn}{Returns}
+Module\+ID 
+\end{DoxyReturn}
+
+
+Definition at line 69 of file Swerve\+Module.\+h.
+
+\mbox{\Hypertarget{class_swerve_module_aff3fd7a6da70381d6d281cc4d154b7db}\label{class_swerve_module_aff3fd7a6da70381d6d281cc4d154b7db}} 
+\index{SwerveModule@{SwerveModule}!GetWheelDiameter@{GetWheelDiameter}}
+\index{GetWheelDiameter@{GetWheelDiameter}!SwerveModule@{SwerveModule}}
+\doxysubsubsection{\texorpdfstring{GetWheelDiameter()}{GetWheelDiameter()}}
+{\footnotesize\ttfamily units\+::length\+::inch\+\_\+t Swerve\+Module\+::\+Get\+Wheel\+Diameter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 70 of file Swerve\+Module.\+h.
+
+\mbox{\Hypertarget{class_swerve_module_a352021a91784a69e20b68b68b4977fc2}\label{class_swerve_module_a352021a91784a69e20b68b68b4977fc2}} 
+\index{SwerveModule@{SwerveModule}!Init@{Init}}
+\index{Init@{Init}!SwerveModule@{SwerveModule}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void Swerve\+Module\+::\+Init (\begin{DoxyParamCaption}\item[{units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t}]{max\+Velocity,  }\item[{units\+::angular\+\_\+velocity\+::radians\+\_\+per\+\_\+second\+\_\+t}]{max\+Angular\+Velocity,  }\item[{units\+::acceleration\+::meters\+\_\+per\+\_\+second\+\_\+squared\+\_\+t}]{max\+Acceleration,  }\item[{units\+::angular\+\_\+acceleration\+::radians\+\_\+per\+\_\+second\+\_\+squared\+\_\+t}]{max\+Angular\+Acceleration }\end{DoxyParamCaption})}
+
+auto turn\+C\+TL = make\+\_\+unique$<$\+Control\+Data$>$( Control\+Modes\+::\+C\+O\+N\+T\+R\+O\+L\+\_\+\+T\+Y\+P\+E\+::\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+D\+E\+G\+R\+E\+E\+S\+\_\+\+A\+B\+S\+O\+L\+U\+TE, Control\+Modes\+::\+C\+O\+N\+T\+R\+O\+L\+\_\+\+R\+U\+N\+\_\+\+L\+O\+C\+S\+::\+M\+O\+T\+O\+R\+\_\+\+C\+O\+N\+T\+R\+O\+L\+L\+ER, string(\char`\"{}\+Turn\+Profile\char`\"{}), 1.\+0, 0.\+0, 0.\+0, 0.\+5, 0.\+0, max\+Angular\+Acceleration.\+to$<$double$>$(), max\+Angular\+Velocity.\+to$<$double$>$(), max\+Angular\+Velocity.\+to$<$double$>$(), 0.\+0 );
+
+Definition at line 122 of file Swerve\+Module.\+cpp.
+
+\mbox{\Hypertarget{class_swerve_module_a4872ebaaa09fb0b1727b574b3b96934a}\label{class_swerve_module_a4872ebaaa09fb0b1727b574b3b96934a}} 
+\index{SwerveModule@{SwerveModule}!SetDesiredState@{SetDesiredState}}
+\index{SetDesiredState@{SetDesiredState}!SwerveModule@{SwerveModule}}
+\doxysubsubsection{\texorpdfstring{SetDesiredState()}{SetDesiredState()}}
+{\footnotesize\ttfamily void Swerve\+Module\+::\+Set\+Desired\+State (\begin{DoxyParamCaption}\item[{const frc\+::\+Swerve\+Module\+State \&}]{state }\end{DoxyParamCaption})}
+
+
+
+Set the current state of the module (speed of the wheel and angle of the wheel) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em const} & Swerve\+Module\+State\& reference\+State\+: state to set the module to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 201 of file Swerve\+Module.\+cpp.
+
+\mbox{\Hypertarget{class_swerve_module_a83b4f8530f6bcbbc262fd65df43add9f}\label{class_swerve_module_a83b4f8530f6bcbbc262fd65df43add9f}} 
+\index{SwerveModule@{SwerveModule}!ZeroAlignModule@{ZeroAlignModule}}
+\index{ZeroAlignModule@{ZeroAlignModule}!SwerveModule@{SwerveModule}}
+\doxysubsubsection{\texorpdfstring{ZeroAlignModule()}{ZeroAlignModule()}}
+{\footnotesize\ttfamily void Swerve\+Module\+::\+Zero\+Align\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Turn all of the wheel to zero degrees yaw according to the pigeon. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 175 of file Swerve\+Module.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/subsys/\mbox{\hyperlink{_swerve_module_8h}{Swerve\+Module.\+h}}\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/subsys/\mbox{\hyperlink{_swerve_module_8cpp}{Swerve\+Module.\+cpp}}\end{DoxyCompactItemize}

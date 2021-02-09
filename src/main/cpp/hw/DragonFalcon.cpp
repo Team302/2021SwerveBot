@@ -315,16 +315,19 @@ void DragonFalcon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)
 {
 	auto output = value;
 	ctre::phoenix::motorcontrol::TalonFXControlMode ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput;
+
     switch (m_controlMode)
     {
         case ControlModes::CONTROL_TYPE::PERCENT_OUTPUT:
 			ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput;
-			output = value;
 			break;
 			
 		case ControlModes::CONTROL_TYPE::VOLTAGE:
 			ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput;
-			output = value;
+			break;
+
+        case ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE:
+			ctreMode =:: ctre::phoenix::motorcontrol::TalonFXControlMode::Position;
 			break;
 
         case ControlModes::CONTROL_TYPE::POSITION_DEGREES:
@@ -334,7 +337,6 @@ void DragonFalcon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)
 
         case ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE:
 			ctreMode =:: ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic;
-			output = value;
 			break;
 
         case ControlModes::CONTROL_TYPE::POSITION_INCH:
@@ -360,17 +362,14 @@ void DragonFalcon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)
 
 		case ControlModes::CONTROL_TYPE::CURRENT:
 			ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::Current;
-			output = value;
 			break;
 
 		case ControlModes::CONTROL_TYPE::MOTION_PROFILE:
 			ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::MotionProfile;
-			output = value;
 			break;
 
 		case ControlModes::CONTROL_TYPE::MOTION_PROFILE_ARC:
 			ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::MotionProfileArc;
-			output = value;
 			break;
 
 		case ControlModes::CONTROL_TYPE::TRAPEZOID:
@@ -381,7 +380,6 @@ void DragonFalcon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)
         default:
             Logger::GetLogger()->LogError( string("DragonFalcon::SetControlMode"), string("Invalid Control Mode"));
         	ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput;
-			output = value;
         	break;
     }	
 
@@ -391,7 +389,8 @@ void DragonFalcon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)
 		nt->PutNumber("motor output ", output );
 	}
 
-	m_talon.get()->Set( ctreMode, output );}
+	m_talon.get()->Set( ctreMode, output );
+}
 
 void DragonFalcon::Set(double value)
 {
@@ -651,328 +650,62 @@ void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 		Logger::GetLogger()->LogError(string("DragonFalcon"), string("ConfigNominalOutputReverse error"));
 	}
 
-	switch ( controlInfo->GetMode() )
+	if ( controlInfo->GetMode() == ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE ||
+		 controlInfo->GetMode() == ControlModes::CONTROL_TYPE::POSITION_DEGREES ||
+	     controlInfo->GetMode() == ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE ||
+		 controlInfo->GetMode() == ControlModes::CONTROL_TYPE::POSITION_INCH ||
+		 controlInfo->GetMode() == ControlModes::CONTROL_TYPE::VELOCITY_DEGREES ||
+		 controlInfo->GetMode() == ControlModes::CONTROL_TYPE::VELOCITY_INCH ||
+		 controlInfo->GetMode() == ControlModes::CONTROL_TYPE::VELOCITY_RPS  ||
+		 controlInfo->GetMode() == ControlModes::CONTROL_TYPE::VOLTAGE ||
+		 controlInfo->GetMode() == ControlModes::CONTROL_TYPE::CURRENT ||
+		 controlInfo->GetMode() == ControlModes::CONTROL_TYPE::TRAPEZOID )
 	{
-		case ControlModes::CONTROL_TYPE::PERCENT_OUTPUT:
+		error = m_talon.get()->Config_kP(0, controlInfo->GetP());
+		if ( error != ErrorCode::OKAY )
 		{
+			Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kP error"));
 		}
-		break;
-
-		case ControlModes::CONTROL_TYPE::POSITION_DEGREES:
+		error = m_talon.get()->Config_kI(0, controlInfo->GetI());
+		if ( error != ErrorCode::OKAY )
 		{
-			error = m_talon.get()->Config_kP(0, controlInfo->GetP());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kP error"));
-			}
-			error = m_talon.get()->Config_kI(0, controlInfo->GetI());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kI error"));
-			}
-			error = m_talon.get()->Config_kD(0, controlInfo->GetD());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kD error"));
-			}
-			error = m_talon.get()->Config_kF(0, controlInfo->GetF());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kF error"));
-			}
-			error = m_talon.get()->SelectProfileSlot(0, 0);
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("SelectProfileSlot error"));
-			}
+			Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kI error"));
 		}
-		break;
-
-		case ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE:
+		error = m_talon.get()->Config_kD(0, controlInfo->GetD());
+		if ( error != ErrorCode::OKAY )
 		{
-			error = m_talon.get()->ConfigMotionAcceleration( controlInfo->GetMaxAcceleration() );
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("ConfigMotionAcceleration error"));
-			}
-			error = m_talon.get()->ConfigMotionCruiseVelocity( controlInfo->GetCruiseVelocity(), 0);
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("ConfigMotionCruiseVelocity error"));
-			}
-
-			error = m_talon.get()->Config_kP(0, controlInfo->GetP());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kP error"));
-			}
-			error = m_talon.get()->Config_kI(0, controlInfo->GetI());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kI error"));
-			}
-			error = m_talon.get()->Config_kD(0, controlInfo->GetD());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kD error"));
-			}
-			error = m_talon.get()->Config_kF(0, controlInfo->GetF());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kF error"));
-			}
-			error = m_talon.get()->SelectProfileSlot(0, 0);
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("SelectProfileSlot error"));
-			}
+			Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kD error"));
 		}
-		break;
-
-		case ControlModes::CONTROL_TYPE::POSITION_INCH:
+		error = m_talon.get()->Config_kF(0, controlInfo->GetF());
+		if ( error != ErrorCode::OKAY )
 		{
-			error = m_talon.get()->Config_kP(0, controlInfo->GetP());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kP error"));
-			}
-			error = m_talon.get()->Config_kI(0, controlInfo->GetI());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kI error"));
-			}
-			error = m_talon.get()->Config_kD(0, controlInfo->GetD());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kD error"));
-			}
-			error = m_talon.get()->Config_kF(0, controlInfo->GetF());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kF error"));
-			}
-			error = m_talon.get()->SelectProfileSlot(0, 0);
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("SelectProfileSlot error"));
-			}
+			Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kF error"));
 		}
-		break;
-
-		case ControlModes::CONTROL_TYPE::VELOCITY_DEGREES:
+		error = m_talon.get()->SelectProfileSlot(0, 0);
+		if ( error != ErrorCode::OKAY )
 		{
-			error = m_talon.get()->Config_kP(0, controlInfo->GetP());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kP error"));
-			}
-			error = m_talon.get()->Config_kI(0, controlInfo->GetI());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kI error"));
-			}
-			error = m_talon.get()->Config_kD(0, controlInfo->GetD());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kD error"));
-			}
-			error = m_talon.get()->Config_kF(0, controlInfo->GetF());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kF error"));
-			}
-			error = m_talon.get()->SelectProfileSlot(0, 0);
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("SelectProfileSlot error"));
-			}
+			Logger::GetLogger()->LogError(string("DragonFalcon"), string("SelectProfileSlot error"));
 		}
-		break;
-
-		case ControlModes::CONTROL_TYPE::VELOCITY_INCH:
-		{
-			error = m_talon.get()->Config_kP(0, controlInfo->GetP());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kP error"));
-			}
-			error = m_talon.get()->Config_kI(0, controlInfo->GetI());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kI error"));
-			}
-			error = m_talon.get()->Config_kD(0, controlInfo->GetD());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kD error"));
-			}
-			error = m_talon.get()->Config_kF(0, controlInfo->GetF());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kF error"));
-			}
-			error = m_talon.get()->SelectProfileSlot(0, 0);
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("SelectProfileSlot error"));
-			}
-		}
-		break;
-
-		case ControlModes::CONTROL_TYPE::VELOCITY_RPS:
-		{
-			error = m_talon.get()->Config_kP(0, controlInfo->GetP());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kP error"));
-			}
-			error = m_talon.get()->Config_kI(0, controlInfo->GetI());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kI error"));
-			}
-			error = m_talon.get()->Config_kD(0, controlInfo->GetD());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kD error"));
-			}
-			error = m_talon.get()->Config_kF(0, controlInfo->GetF());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kF error"));
-			}
-			error = m_talon.get()->SelectProfileSlot(0, 0);
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("SelectProfileSlot error"));
-			}
-		}
-		break;
-
-		case ControlModes::CONTROL_TYPE::VOLTAGE:
-		{
-			error = m_talon.get()->Config_kP(0, controlInfo->GetP());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kP error"));
-			}
-			error = m_talon.get()->Config_kI(0, controlInfo->GetI());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kI error"));
-			}
-			error = m_talon.get()->Config_kD(0, controlInfo->GetD());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kD error"));
-			}
-			error = m_talon.get()->Config_kF(0, controlInfo->GetF());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kF error"));
-			}
-			error = m_talon.get()->SelectProfileSlot(0, 0);
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("SelectProfileSlot error"));
-			}
-		}
-		break;
-
-		case ControlModes::CONTROL_TYPE::CURRENT:
-		{
-			error = m_talon.get()->Config_kP(0, controlInfo->GetP());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kP error"));
-			}
-			error = m_talon.get()->Config_kI(0, controlInfo->GetI());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kI error"));
-			}
-			error = m_talon.get()->Config_kD(0, controlInfo->GetD());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kD error"));
-			}
-			error = m_talon.get()->Config_kF(0, controlInfo->GetF());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kF error"));
-			}
-			error = m_talon.get()->SelectProfileSlot(0, 0);
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("SelectProfileSlot error"));
-			}
-		}
-		break;
-
-		case ControlModes::CONTROL_TYPE::TRAPEZOID:
-		{
-			error = m_talon.get()->Config_kP(0, controlInfo->GetP());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kP error"));
-			}
-			error = m_talon.get()->Config_kI(0, controlInfo->GetI());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kI error"));
-			}
-			error = m_talon.get()->Config_kD(0, controlInfo->GetD());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kD error"));
-			}
-			error = m_talon.get()->Config_kF(0, controlInfo->GetF());
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kF error"));
-			}
-			error = m_talon.get()->SelectProfileSlot(0, 0);
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("SelectProfileSlot error"));
-			}
-
-			auto accel = controlInfo->GetMaxAcceleration() / m_gearRatio;
-			error = m_talon.get()->ConfigMotionAcceleration( accel );
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("ConfigMotionAcceleration error"));
-			}
-
-			auto vel = controlInfo->GetCruiseVelocity() / m_gearRatio;
-			error = m_talon.get()->ConfigMotionCruiseVelocity( vel, 0);
-			if ( error != ErrorCode::OKAY )
-			{
-				Logger::GetLogger()->LogError(string("DragonFalcon"), string("ConfigMotionCruiseVelocity error"));
-			}
-		}
-		break;
-
-		case ControlModes::CONTROL_TYPE::MOTION_PROFILE:
-		{
-
-		}
-		break;
-
-		case ControlModes::CONTROL_TYPE::MOTION_PROFILE_ARC:
-		{
-
-		}
-		break;
-
-		default:
-		{
-
-		}
-		break;
 	}
 
+	
+	if ( controlInfo->GetMode() == ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE ||
+	     controlInfo->GetMode() == ControlModes::CONTROL_TYPE::TRAPEZOID  )
+	{
+		error = m_talon.get()->ConfigMotionAcceleration( controlInfo->GetMaxAcceleration() );
+		if ( error != ErrorCode::OKAY )
+		{
+			Logger::GetLogger()->LogError(string("DragonFalcon"), string("ConfigMotionAcceleration error"));
+		}
+		error = m_talon.get()->ConfigMotionCruiseVelocity( controlInfo->GetCruiseVelocity(), 0);
+		if ( error != ErrorCode::OKAY )
+		{
+			Logger::GetLogger()->LogError(string("DragonFalcon"), string("ConfigMotionCruiseVelocity error"));
+		}
+
+	}
 }
+
 
 void DragonFalcon::SetForwardLimitSwitch
 ( 

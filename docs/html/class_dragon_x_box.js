@@ -8,6 +8,7 @@ var class_dragon_x_box =
     [ "SetAxisProfile", "class_dragon_x_box.html#a82af2dd78979078b136da5d07a4182c8", null ],
     [ "SetAxisScale", "class_dragon_x_box.html#a05f594a2bdc751aef180e34637116e61", null ],
     [ "SetButtonMode", "class_dragon_x_box.html#a40119662c127dd11a27fb2085d4719f0", null ],
+    [ "SetSlewLimit", "class_dragon_x_box.html#ad921a60514fd12babc7f7b699bdc1ef4", null ],
     [ "WasButtonPressed", "class_dragon_x_box.html#ae9bf51169ee1993f0dc6d10540b72bda", null ],
     [ "WasButtonReleased", "class_dragon_x_box.html#aac33e2bcc8b07104f7e0a0a178d47070", null ]
 ];

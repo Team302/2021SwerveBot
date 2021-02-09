@@ -36,7 +36,7 @@ class PigeonFactory
 		static PigeonFactory* GetFactory();
 
         DragonPigeon* GetPigeon() const;
-        DragonPigeon* CreatePigeon( int canID );
+        DragonPigeon* CreatePigeon( int canID, double rotation );
 
 	private:
 		PigeonFactory();

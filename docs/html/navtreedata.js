@@ -47,8 +47,7 @@ var NAVTREE =
         [ "Functions", "globals_func.html", null ],
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ],
-        [ "Macros", "globals_defs.html", null ]
+        [ "Enumerator", "globals_eval.html", null ]
       ] ]
     ] ]
   ] ]
@@ -57,15 +56,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_analog_axis_8cpp.html",
-"_dragon_pigeon_8cpp_source.html",
-"_manual_aim_8cpp.html",
-"_turret_state_mgr_8cpp.html",
-"class_control_modes.html#a6d6123ab559a2a754b1a8d46fc078487a4cd3e7a5d849f1dfc7453f4231f606d4",
-"class_dragon_pigeon.html#a358a40e44dc60abf6b5478dd41ddfd3c",
-"class_hook_delivery_state_mgr.html",
-"class_impeller.html#ab3ede00649278c3789a389d909904d30",
-"class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aa22689698f330a3976e4d5c98c166b7ad",
-"class_teleop_control.html#a7d4c2a365d8eaf21214611064c8a3a15a9b7150ec3d3dcc42432a77b3b9e062a8"
+"_mechanism_factory_8h.html",
+"class_button_decorator.html#ab45d2c847a52d4f083c58656b34aa864",
+"class_dragon_vision.html#a49052f9ed6b6b518a735efba95dadf3e",
+"class_intake_state.html#a9d3ced7fd3e2fef18c5ac9effaaf064f",
+"class_shooter_hood_manual.html#a81d68e67dcef1ad6d81dbce23807aa43",
+"functions_eval_m.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -62,12 +62,13 @@ PigeonFactory::PigeonFactory()
 ///         exist and cannot be created.
 DragonPigeon* PigeonFactory::CreatePigeon
 (
-    int 	canID
+    int 	canID,
+    double  rotation
 )
 {
     if ( m_pigeon == nullptr )
     {
-        m_pigeon = new DragonPigeon( canID );
+        m_pigeon = new DragonPigeon( canID, rotation );
     }
     return m_pigeon;
 }

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['x_5fbutton_1200',['X_BUTTON',['../class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29af58d60f9898f740cad672ce5eb91a12c',1,'IDragonGamePad']]],
-  ['xboxdisplay_1201',['XboxDisplay',['../class_xbox_display.html',1,'XboxDisplay'],['../class_xbox_display.html#a79045292a10e4ab81c486d47f7ba30c0',1,'XboxDisplay::XboxDisplay()']]],
-  ['xboxdisplay_2ecpp_1202',['XboxDisplay.cpp',['../_xbox_display_8cpp.html',1,'']]],
-  ['xboxdisplay_2eh_1203',['XboxDisplay.h',['../_xbox_display_8h.html',1,'']]]
+  ['y_5fbutton_825',['Y_BUTTON',['../class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29ab74a93048c6bbac440696a26eb242023',1,'IDragonGamePad']]],
+  ['yellow_826',['YELLOW',['../class_control_panel_colors.html#a4137011ea714732b2ba0c01b9c3f70eba28500a91aa4c95a6a55868017e346f67',1,'ControlPanelColors']]]
 ];

@@ -24,11 +24,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="roboticslogo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Team 302 Robot
    </div>
-   <div id="projectbrief">Swerve Bot APIs</div>
   </td>
  </tr>
  </tbody>
@@ -93,14 +91,15 @@ $(document).ready(function(){initNavTree('class_swerve_module.html',''); initRes
   <tr class="even"><td class="entry"><a class="el" href="class_swerve_module.html#a573bd5c53def321adc412e020d5e673d">GetState</a>() const</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_swerve_module.html#a4aa933adb396e8913e8e26dfc1e5ea01">GetType</a>()</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_swerve_module.html#aff3fd7a6da70381d6d281cc4d154b7db">GetWheelDiameter</a>() const</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3a50d0c3ea7689c12efd3ee2d521fff9c8">LEFT_BACK</a> enum value</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3a252e2d193669402dbbfc75f1a6e0c6a1">LEFT_FRONT</a> enum value</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">ModuleID</a> enum name</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3a5eb4c5f751d7e777fec191d0ce41681f">RIGHT_BACK</a> enum value</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3a08c37ed1fc4e25d32a48b65847a8889b">RIGHT_FRONT</a> enum value</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_swerve_module.html#a4872ebaaa09fb0b1727b574b3b96934a">SetDesiredState</a>(const frc::SwerveModuleState &amp;state)</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_swerve_module.html#a459f72005c272fc0e2932d13fa3160c3">SwerveModule</a>(ModuleID type, std::shared_ptr&lt; IDragonMotorController &gt; driveMotor, std::shared_ptr&lt; IDragonMotorController &gt; turningMotor, std::shared_ptr&lt; ctre::phoenix::sensors::CANCoder &gt; canCoder, units::degree_t turnOffset, units::length::inch_t wheelDiameter)</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_swerve_module.html#a83b4f8530f6bcbbc262fd65df43add9f">ZeroAlignModule</a>()</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_swerve_module.html#a352021a91784a69e20b68b68b4977fc2">Init</a>(units::velocity::meters_per_second_t maxVelocity, units::angular_velocity::radians_per_second_t maxAngularVelocity, units::acceleration::meters_per_second_squared_t maxAcceleration, units::angular_acceleration::radians_per_second_squared_t maxAngularAcceleration)</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3a50d0c3ea7689c12efd3ee2d521fff9c8">LEFT_BACK</a> enum value</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3a252e2d193669402dbbfc75f1a6e0c6a1">LEFT_FRONT</a> enum value</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">ModuleID</a> enum name</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3a5eb4c5f751d7e777fec191d0ce41681f">RIGHT_BACK</a> enum value</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3a08c37ed1fc4e25d32a48b65847a8889b">RIGHT_FRONT</a> enum value</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_swerve_module.html#a4872ebaaa09fb0b1727b574b3b96934a">SetDesiredState</a>(const frc::SwerveModuleState &amp;state)</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_swerve_module.html#a2c519cdb2558ed28a5e38bb6a57d2515">SwerveModule</a>(ModuleID type, std::shared_ptr&lt; IDragonMotorController &gt; driveMotor, std::shared_ptr&lt; IDragonMotorController &gt; turningMotor, std::shared_ptr&lt; ctre::phoenix::sensors::CANCoder &gt; canCoder, units::length::inch_t wheelDiameter)</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_swerve_module.html#a83b4f8530f6bcbbc262fd65df43add9f">ZeroAlignModule</a>()</td><td class="entry"><a class="el" href="class_swerve_module.html">SwerveModule</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -15,7 +15,6 @@ PrimitiveParams::PrimitiveParams
 	BallManipulator::BALL_MANIPULATOR_STATE				ballState,
 	float												turretAngle,
 	std::string                                         pathName
-	
 ):	//Pass over parameters to class variables
 		m_id(id), //Primitive ID
 		m_time(time),

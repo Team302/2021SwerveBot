@@ -106,6 +106,13 @@ class SwerveChassis
             const Rotation2d&   angle
         );
 
+        /// @brief Reset the current chassis pose based on the provided pose (the rotation comes from the Pigeon)
+        /// @param [in] const Pose2d&       pose        Current XY position
+        void ResetPosition
+        ( 
+            const Pose2d&       pose
+        );
+
         //static constexpr auto MaxSpeed = 3.0_mps; 
         //static constexpr units::angular_velocity::radians_per_second_t MaxAngularSpeed{wpi::math::pi};
 
