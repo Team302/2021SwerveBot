@@ -1,5 +1,5 @@
 //====================================================================================================================================================
-// Copyright 2020 Lake Orion Robotics FIRST Team 302 
+// Copyright 2020 Lake Orion Robotics FIRST Team 302
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
 // to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
@@ -27,8 +27,6 @@
 #include <frc/geometry/Translation2d.h>
 #include <frc/estimator/SwerveDrivePoseEstimator.h>
 
-
-
 //Team 302 Includes
 #include <auton/PrimitiveParams.h>
 #include <auton/primitives/IPrimitive.h>
@@ -41,64 +39,57 @@
 #include <subsys/SwerveChassis.h>
 #include <utils/Logger.h>
 
-
-
 using namespace std;
 using namespace frc;
 
 using namespace wpi::math;
 
-
-
-DrivePath::DrivePath() : m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
-                         m_timer( make_unique<Timer>() ),
+DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
+                         m_timer(make_unique<Timer>()),
                          m_maxTime(0.0),
                          m_currentChassisPosition(units::meter_t(0), units::meter_t(0), units::radian_t(0))
 {
 }
 
-
-void DrivePath::Init(  PrimitiveParams* params)
+void DrivePath::Init(PrimitiveParams *params)
 {
+
+  // Read path into trajectory for deploy directory.  JSON File ex. Bounce1.wpilid.json
+  // 
 
   wpi::SmallString<64> deployDir;
   frc::filesystem::GetDeployDirectory(deployDir);
   wpi::sys::path::append(deployDir, "paths");
-  wpi::sys::path::append(deployDir, params->GetPathName() );
+  wpi::sys::path::append(deployDir, params->GetPathName());
   frc::Trajectory Mytraj_1 = frc::TrajectoryUtil::FromPathweaverJson(deployDir);
 
+  m_timer->Reset();
 
-    m_timer->Reset();
-    // Reset the drivetrain's odometry to the starting pose of the trajectory.
-   //  m_chassis->ResetOdometry(m_trajectory.InitialPose());
-
-   
-//  if( params->GetID() == DRIVE_PATH){}
-
+  // set current position to initial position which should be first node in path.
+  m_currentChassisPosition = m_trajectory.InitialPose();
+  // assume start angel of zero at start of path
+  frc::Rotation2d StartAngle;
+  StartAngle.Degrees() = units::degree_t(0);  
+  m_chassis.get()->ResetPosition(m_currentChassisPosition, StartAngle);
 }
 
 void DrivePath::Run()
 {
     // Update odometry.
-    //m_chassis->UpdateOdometry();  done in robot.cpp 
+    //m_chassis->UpdateOdometry();  done in robot.cpp
     auto desiredPose = m_trajectory.Sample(units::second_t(m_timer.get()->Get()));
 
       // Get the reference chassis speeds from the Ramsete Controller.
     
-    auto refChassisSpeeds = 
-          m_ramseteController.Calculate(m_currentChassisPosition, desiredPose);
-                                        
-    units::angular_velocity::radians_per_second_t radianTrapezoidSpeed(m_setpoint.velocity.to<double>() * m_distanceToAngleConversion);
-                            
+    m_currentChassisPosition = m_chassis.get()->GetPose().GetEstimatedPosition();
+    auto refChassisSpeeds =  m_ramseteController.Calculate(m_currentChassisPosition, desiredPose);
+
     m_chassis->Drive(refChassisSpeeds,false);
 }
+
 
 bool DrivePath::IsDone()
 {
 
-    return units::second_t(m_timer.get()->Get()) >= m_trajectory.TotalTime();
-
+  return units::second_t(m_timer.get()->Get()) >= m_trajectory.TotalTime();
 }
-
-
-

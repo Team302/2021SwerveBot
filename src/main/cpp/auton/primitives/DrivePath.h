@@ -28,9 +28,7 @@
 #include <frc/Filesystem.h>
 #include <frc/trajectory/TrajectoryUtil.h>
 #include <wpi/Path.h>
-#include <subsys/SwerveChassis.h>//Geo3
 #include <frc/controller/RamseteController.h> //geo3
-
 
 
 class SwerveChassis;
@@ -52,40 +50,19 @@ class DrivePath : public IPrimitive
         void Run() override;
         bool IsDone() override;
       
-//Geo////////////////////////////////////////////////////////////////////
-        void UpdateOdometry();
-        void ResetOdometry(const frc::Pose2d& pose);
-        frc::Pose2d GetPose() const;
-
-        public: bool RobotStopped(frc::Pose2d CurPos,frc::Pose2d PrevPos);
-//////////////////////////////////////////////////////////////////////////
-
-
         private:
             std::shared_ptr<SwerveChassis> m_chassis;
             std::unique_ptr<frc::Timer> m_timer;
 
-
             double                   m_maxTime;
-            double                   m_newTargetAngle;
-            double                   m_distanceToAngleConversion;
 
             frc::Pose2d              m_currentChassisPosition;
-            frc::Trajectory          m_trajectory;  //geo3
+            frc::Trajectory          m_trajectory;  
             frc::RamseteController   m_ramseteController;
 
             bool                     m_reverse = false;
             bool                     m_isDone = false;
 
-            float                    m_driveSpeed;
-
-
             PRIMITIVE_IDENTIFIER     m_mode;
-            
-            units::degree_t          m_targetAngle;
-            units::degree_t          m_relativeAngle;
 
-            frc::TrapezoidProfile<units::meters>::State m_goal;
-            frc::TrapezoidProfile<units::meters>::State m_setpoint;
-            frc::TrapezoidProfile<units::meters>::Constraints m_constraints;
 };

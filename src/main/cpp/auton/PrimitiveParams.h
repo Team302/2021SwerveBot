@@ -3,7 +3,7 @@
 
 // C++ Includes
 #include <vector>
-#include <string> //path name
+#include <string>
 
 // FRC includes
 
@@ -73,3 +73,4 @@ class PrimitiveParams
 };
 
 typedef std::vector<PrimitiveParams*> PrimitiveParamsVector;
+
