@@ -269,23 +269,13 @@
 	</mechanism>
 
        <mechanism type="BALL_HOPPER">
-              <motor usage="BALL_HOPPER_1"
-                     canId="6"
-                     pdpID="6"
+              <motor usage="BALL_HOPPER"
+                     canId="20"
+                     pdpID="20"
                      type="TALONSRX"
                      inverted="false"
                      brakeMode="true"/>
        </mechanism>
-
-       <mechanism type="BALL_HOPPER">
-              <motor usage="BALL_HOPPER_2"
-                     canId="7"
-                     pdpID="7"
-                     type="TALONSRX"
-                     inverted="false"
-                     brakeMode="true"/>
-       </mechanism>
-
 
        <!--
   

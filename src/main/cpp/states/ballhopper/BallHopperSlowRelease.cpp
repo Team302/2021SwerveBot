@@ -47,6 +47,7 @@ BallHopperSlowRelease::BallHopperSlowRelease
 
 void BallHopperSlowRelease::Init()
 {
+    //Initialize default values
     m_isHolding = false;
     m_canDetect = true;
     m_timesSeen = 0;
@@ -54,6 +55,8 @@ void BallHopperSlowRelease::Init()
 
 void BallHopperSlowRelease::Run()
 {
+    //Check if we are sensing the ball and we have not already see the same ball 
+    //(canDetect allows us to not check if we have seen the ball but the holdBall timer hasn't ran out yet)
    if (m_ballHopper.get()->isBallDetected() && m_canDetect)
    {
        m_timer.Start();
@@ -70,6 +73,7 @@ void BallHopperSlowRelease::Run()
        holdState->Run();
    }
 
+    //this waits until our shooter cooldown has passed so the shooter motors can get back up to full speed
    if ( m_timer.HasPeriodPassed(units::second_t(m_waitTime)))
    {
        m_isHolding = false;
@@ -81,6 +85,7 @@ void BallHopperSlowRelease::Run()
 
 bool BallHopperSlowRelease::AtTarget()
 {
+    //check the timesSeen variable until we have seen 3 balls, after we have released 3 balls, we're done
     if ( m_timesSeen == 3)
     {
         return true;

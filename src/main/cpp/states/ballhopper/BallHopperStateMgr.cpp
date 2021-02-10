@@ -24,7 +24,6 @@
 #include <xmlmechdata/StateDataDefn.h>
 #include <controllers/MechanismTargetData.h>
 #include <utils/Logger.h>
-#include <gamepad/TeleopControl.h>
 #include <states/ballhopper/BallHopperState.h>
 #include <subsys/MechanismFactory.h>
 #include <subsys/MechanismTypes.h>
@@ -59,7 +58,7 @@ BallHopperStateMgr::BallHopperStateMgr() : m_currentState(),
     stateMap["BALLHOPPERRAPIDRELEASE"] = BALL_HOPPER_STATE::RAPID_RELEASE;
     stateMap["BALLHOPPERSLOWRELEASE"] = BALL_HOPPER_STATE::SLOW_RELEASE;
     m_stateVector.resize(5);
-    //create the states passign the configuration data
+    //create the states passing the configuration data
     for ( auto td: targetData )
     {
         auto stateString = td->GetStateString();
@@ -92,6 +91,10 @@ BallHopperStateMgr::BallHopperStateMgr() : m_currentState(),
 
                     case BALL_HOPPER_STATE::SLOW_RELEASE:
                     {
+                        //Possible solution to make sure hold and release states are created before running slow release state
+                        auto holdState = new BallHopperState( targetData.at(1)->GetController(), targetData.at(1)->GetTarget());
+                        auto releaseState = new BallHopperState( targetData.at(2)->GetController(), targetData.at(2)->GetTarget());
+
                         auto thisState = new BallHopperSlowRelease( controlData, target, GetState(BALL_HOPPER_STATE::HOLD), GetState(BALL_HOPPER_STATE::RAPID_RELEASE) );
                         m_stateVector[stateEnum] = thisState;
                     }
@@ -129,35 +132,16 @@ BallHopperStateMgr::BallHopperStateMgr() : m_currentState(),
 /// @return void
 void BallHopperStateMgr::RunCurrentState()
 {
-    if( MechanismFactory::GetMechanismFactory()->GetBallHopper().get() != nullptr)
-    {
-        if ( m_currentStateEnum == BALL_HOPPER_STATE::OFF && m_currentStateEnum != BALL_HOPPER_STATE::OFF)
-        {
-            SetCurrentState( BALL_HOPPER_STATE::OFF, false);
-        }
-        else if ( m_currentStateEnum == BALL_HOPPER_STATE::HOLD && m_currentStateEnum != BALL_HOPPER_STATE::HOLD)
-        {
-            SetCurrentState( BALL_HOPPER_STATE::HOLD, false);
-        }
-        else if ( m_currentStateEnum == BALL_HOPPER_STATE::SLOW_RELEASE && m_currentStateEnum != BALL_HOPPER_STATE::SLOW_RELEASE)
-        {
-            SetCurrentState( BALL_HOPPER_STATE::SLOW_RELEASE, false);
-        }
-        else if ( m_currentStateEnum == BALL_HOPPER_STATE::RAPID_RELEASE && m_currentStateEnum != BALL_HOPPER_STATE::RAPID_RELEASE)
-        {
-            SetCurrentState( BALL_HOPPER_STATE::RAPID_RELEASE, false);
-        }
-        else 
-        {
-            Logger::GetLogger()->LogError( Logger::LOGGER_LEVEL::ERROR_ONCE, string("BallHopperStateMgr::RunCurrentState"), string("state not found"));
-        }
-    }
-
     //run the current state
     if ( m_currentState != nullptr)
     {
         m_currentState->Run();        
     }
+    else
+    {
+        Logger::GetLogger()->LogError( Logger::LOGGER_LEVEL::ERROR_ONCE, string( "BallHopperStateMgr::RunCurrentState"), string("current state cannot be ran"));
+    }
+    
 }
 
 /// @brief set the current state, initialize it and run it

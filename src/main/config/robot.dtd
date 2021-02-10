@@ -130,7 +130,7 @@
 <!ATTLIST motor 
           usage             	    ( DRIVE  | TURN  |
                                       INTAKE1 | INTAKE2 | BALL_TRANSFER | TURRET | 
-                                      SHOOTER_1 | SHOOTER_2 | SHOOTER_HOOD | BALL_HOPPER_1 | BALL_HOPPER_2 ) "DRIVE_MOTOR"
+                                      SHOOTER_1 | SHOOTER_2 | SHOOTER_HOOD | BALL_HOPPER ) "DRIVE_MOTOR"
           canId             		(  0 |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 
                               		  10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 
                               		  20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 

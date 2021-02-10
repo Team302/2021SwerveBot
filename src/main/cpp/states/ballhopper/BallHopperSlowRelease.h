@@ -19,9 +19,6 @@
 #include <frc2/Timer.h>
 
 //Team 302 Includes
-#include <states/Mech1MotorState.h>
-#include <states/ballhopper/BallHopperStateMgr.h>
-#include <hw/DragonDigitalInput.h>
 #include <subsys/BallHopper.h>
 
 
@@ -47,16 +44,18 @@ class BallHopperSlowRelease : public Mech1MotorState
 
     private:
 
+        //Hold timer
         frc2::Timer      m_timer;
+        //BallHopper object to access sensor to detect balls
         std::shared_ptr<BallHopper> m_ballHopper;
-
+        //Time to wait until we release another ball
         const double m_waitTime = 1.5;
-
+        //These bools make sure we aren't detecting the same ball multiple times and we are running the right state
         bool m_isHolding;
         bool m_canDetect;
-
+        //used to know when we have hit our target of 3 balls
         int m_timesSeen;
-
+        //The pointers to run the holdState and releaseState without switching off of the slowReleaseState in the stateMgr
         IState*     holdState;
         IState*     releaseState;
 };
