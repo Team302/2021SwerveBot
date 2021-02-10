@@ -18,8 +18,6 @@ class TurretStateMgr {
       {
         HOLD,
         LIMELIGHT_AIM,
-        MANUAL_AIM,
-        TURN_ANGLE,
         MAX_TURRET_STATES
       };
 
