@@ -21,6 +21,7 @@
 
 //Team 302 Includes
 #include <states/IState.h>
+#include <states/ballhopper/BallHopperSlowRelease.h>
 
 class BallHopperStateMgr
 {
@@ -68,6 +69,8 @@ class BallHopperStateMgr
 
         BallHopperStateMgr();
         ~BallHopperStateMgr() = default;
+
+        bool m_isSlowRelease = false;
 
         static BallHopperStateMgr*  m_instance;
 };

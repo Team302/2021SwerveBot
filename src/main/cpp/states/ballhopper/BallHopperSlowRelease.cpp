@@ -34,48 +34,60 @@ using namespace std;
 BallHopperSlowRelease::BallHopperSlowRelease
 (
     ControlData*        control,
-    double              target
+    double              target,
+    IState*             hold,
+    IState*             release
 ) : Mech1MotorState ( MechanismFactory::GetMechanismFactory()->GetBallHopper().get(), control, target )
 {
    m_ballHopper = MechanismFactory::GetMechanismFactory()->GetBallHopper();
+
+   holdState = hold;
+   releaseState = release;
 }
 
 void BallHopperSlowRelease::Init()
 {
-    BallHopperStateMgr::BALL_HOPPER_STATE m_stateEnum = BallHopperStateMgr::BALL_HOPPER_STATE::RAPID_RELEASE;
+    m_isHolding = false;
+    m_canDetect = true;
+    m_timesSeen = 0;
 }
 
 void BallHopperSlowRelease::Run()
 {
-    m_stateVector[m_stateEnum]->Run();
-
-    // check if banner sensor sees ball
-
-
-    // add hold and release state to constructor using ballhopperstatemgr::GetState(BallHopperStateMgr::BALL_HOPPER_STATE)
-    //change how states are ran to include new holdState and releaseState variables
-    //holdState and releaseState are IState*
-    //incorporate this class into the existing ballhopperstatemgr case block for slowreleasestate
-
-
-
-    if (m_ballHopper.get()->isBallDetected()) 
-    { 
-        m_stateEnum = BallHopperStateMgr::BALL_HOPPER_STATE::HOLD;
-        m_timer.Start();
-    }
-
-   if ( m_timer.HasPeriodPassed(units::second_t(3)))
+   if (m_ballHopper.get()->isBallDetected() && m_canDetect)
    {
-       m_stateEnum = BallHopperStateMgr::BALL_HOPPER_STATE::RAPID_RELEASE;
+       m_timer.Start();
+       m_isHolding = true;
+       m_canDetect = false;
+       m_timesSeen++;
+   } 
+   else if ( !m_ballHopper.get()->isBallDetected() && !m_isHolding )
+   {
+       releaseState->Run();
+   } 
+   else if ( m_isHolding )
+   {
+       holdState->Run();
    }
 
+   if ( m_timer.HasPeriodPassed(units::second_t(m_waitTime)))
+   {
+       m_isHolding = false;
+       m_canDetect = true;
+       m_timer.Stop();
+       m_timer.Reset();
+   }
 }
-/*
-void SetState( BallHopperStateMgr::BALL_HOPPER_STATE stateEnum)
+
+bool BallHopperSlowRelease::AtTarget()
 {
-    auto state = m_stateVector[stateEnum];
-    m_currentState = state;
-    m_currentStateEnum = stateEnum;
+    if ( m_timesSeen == 3)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+    
 }
-*/

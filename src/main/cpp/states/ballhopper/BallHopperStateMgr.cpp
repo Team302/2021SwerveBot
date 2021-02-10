@@ -28,6 +28,7 @@
 #include <states/ballhopper/BallHopperState.h>
 #include <subsys/MechanismFactory.h>
 #include <subsys/MechanismTypes.h>
+#include <states/ballhopper/BallHopperSlowRelease.h>
 
 
 using namespace std;
@@ -91,7 +92,7 @@ BallHopperStateMgr::BallHopperStateMgr() : m_currentState(),
 
                     case BALL_HOPPER_STATE::SLOW_RELEASE:
                     {
-                        auto thisState = new BallHopperState( controlData, target );
+                        auto thisState = new BallHopperSlowRelease( controlData, target, GetState(BALL_HOPPER_STATE::HOLD), GetState(BALL_HOPPER_STATE::RAPID_RELEASE) );
                         m_stateVector[stateEnum] = thisState;
                     }
                     break;
@@ -155,7 +156,7 @@ void BallHopperStateMgr::RunCurrentState()
     //run the current state
     if ( m_currentState != nullptr)
     {
-        m_currentState->Run();
+        m_currentState->Run();        
     }
 }
 

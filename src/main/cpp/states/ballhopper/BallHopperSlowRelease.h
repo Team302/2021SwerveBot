@@ -22,6 +22,7 @@
 #include <states/Mech1MotorState.h>
 #include <states/ballhopper/BallHopperStateMgr.h>
 #include <hw/DragonDigitalInput.h>
+#include <subsys/BallHopper.h>
 
 
 class ControlData;
@@ -34,23 +35,28 @@ class BallHopperSlowRelease : public Mech1MotorState
         BallHopperSlowRelease
         (
             ControlData*        control,
-            double              target
+            double              target,
+            IState*             hold,
+            IState*             release
         );
         ~BallHopperSlowRelease() = default;
 
         void Init();
         void Run();
         bool AtTarget();
-       // void SetState
-        //( BallHopperStateMgr::BALL_HOPPER_STATE stateEnum );
 
     private:
 
         frc2::Timer      m_timer;
-        BallHopperStateMgr::BALL_HOPPER_STATE m_stateEnum;
-        BallHopperStateMgr::BALL_HOPPER_STATE m_currentStateEnum;
-        IState* m_currentState;
-        std::vector<IState*> m_stateVector;
-        DragonDigitalInput* m_bannerSensor;
         std::shared_ptr<BallHopper> m_ballHopper;
+
+        const double m_waitTime = 1.5;
+
+        bool m_isHolding;
+        bool m_canDetect;
+
+        int m_timesSeen;
+
+        IState*     holdState;
+        IState*     releaseState;
 };

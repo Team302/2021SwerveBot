@@ -37,5 +37,5 @@ class BallHopper : public Mech1IndMotor
     bool isBallDetected();
 
     private:
-        shared_ptr<DragonDigitalInput>      m_bannerSensor;
+        std::shared_ptr<DragonDigitalInput>      m_bannerSensor;
 };
