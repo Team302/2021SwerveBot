@@ -23,7 +23,6 @@
 // #include <states/impeller/ImpellerStateMgr.h>  Removed for swervebot
 #include <states/intake/IntakeStateMgr.h>
 #include <states/shooter/ShooterStateMgr.h>
-#include <states/shooterhood/ShooterHoodStateMgr.h>
 #include <states/turret/TurretStateMgr.h>
 #include <utils/Logger.h>
 #include <gamepad/TeleopControl.h>
@@ -52,14 +51,14 @@ BallManipulator::BallManipulator() : m_currentState( BALL_MANIPULATOR_STATE::OFF
                                      m_transfer( BallTransferStateMgr::GetInstance() ),
                                      m_turret ( TurretStateMgr::GetInstance() ),
                                      m_shooter( ShooterStateMgr::GetInstance() ), 
-                                     m_hood( ShooterHoodStateMgr::GetInstance() )
+                                     
 {
     m_intake->SetCurrentState( IntakeStateMgr::INTAKE_STATE::OFF, false );
    // m_impeller->SetCurrentState( ImpellerStateMgr::IMPELLER_STATE::OFF, false );  Geo Removed for swerveBot
     m_transfer->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::OFF, false );
     m_turret->SetCurrentState( TurretStateMgr::TURRET_STATE::HOLD, false, 0.0 );
     m_shooter->SetCurrentState( ShooterStateMgr::SHOOTER_STATE::OFF, false );
-    m_hood->SetCurrentState( ShooterHoodStateMgr::SHOOTER_HOOD_STATE::HOLD_POSITION, false );
+   
 }
 
 /// @brief  run the current state
@@ -139,8 +138,7 @@ void BallManipulator::SetCurrentState
             m_transfer->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::OFF, false );
             m_turret->SetCurrentState( TurretStateMgr::TURRET_STATE::HOLD, false , 0.0);
             //m_shooter->SetCurrentState( ShooterStateMgr::SHOOTER_STATE::OFF, false );
-            m_hood->SetCurrentState( ShooterHoodStateMgr::SHOOTER_HOOD_STATE::HOLD_POSITION, false );
-            break;
+           
 
         case BALL_MANIPULATOR_STATE::INTAKE:
             m_intake->SetCurrentState( IntakeStateMgr::INTAKE_STATE::ON, false );
@@ -156,8 +154,7 @@ void BallManipulator::SetCurrentState
             m_transfer->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_IMPELLER , false );
             m_turret->SetCurrentState( TurretStateMgr::TURRET_STATE::HOLD, false , 0.0);
             //m_shooter->SetCurrentState( ShooterStateMgr::SHOOTER_STATE::OFF, false );
-            m_hood->SetCurrentState( ShooterHoodStateMgr::SHOOTER_HOOD_STATE::HOLD_POSITION, false );  // todo auto aim is needed
-            break;
+            
 
         case BALL_MANIPULATOR_STATE::GET_READY_TO_SHOOT:
           //  m_impeller->SetCurrentState( ImpellerStateMgr::IMPELLER_STATE::OFF, false );Geo Removed for swervebot
@@ -165,16 +162,14 @@ void BallManipulator::SetCurrentState
             m_transfer->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::OFF, false );
             m_turret->SetCurrentState( TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false, 0.0 );
             m_shooter->SetCurrentState( ShooterStateMgr::SHOOTER_STATE::SHOOT, false );
-            m_hood->SetCurrentState( ShooterHoodStateMgr::SHOOTER_HOOD_STATE::HOLD_POSITION, false );  // todo auto aim is needed
-            break;
+        
 
         case BALL_MANIPULATOR_STATE::SHOOT:
           //  m_impeller->SetCurrentState( ImpellerStateMgr::IMPELLER_STATE::TO_SHOOTER, false ); // Geo Remove for swervebot 
             m_transfer->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
             m_turret->SetCurrentState( TurretStateMgr::TURRET_STATE::HOLD, false,0.0 );
             m_shooter->SetCurrentState( ShooterStateMgr::SHOOTER_STATE::SHOOT, false );
-            m_hood->SetCurrentState( ShooterHoodStateMgr::SHOOTER_HOOD_STATE::HOLD_POSITION, false );  // todo auto aim is needed
-            break;
+            
         
         case BALL_MANIPULATOR_STATE::UNJAM_CLOCKWISE:
             //m_intake->SetCurrentState( IntakeStateMgr::INTAKE_STATE::OFF, false );
@@ -182,8 +177,7 @@ void BallManipulator::SetCurrentState
             //m_transfer->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_IMPELLER, false );
             //m_turret->SetCurrentState( TurretStateMgr::TURRET_STATE::HOLD, false );
             //m_shooter->SetCurrentState( ShooterStateMgr::SHOOTER_STATE::OFF, false );
-            //m_hood->SetCurrentState( ShooterHoodStateMgr::SHOOTER_HOOD_STATE::HOLD_POSITION, false );
-            break;
+            
         
         case BALL_MANIPULATOR_STATE::UNJAM_COUNTERCLOCKWISE:
             //m_intake->SetCurrentState( IntakeStateMgr::INTAKE_STATE::OFF, false );
@@ -191,16 +185,14 @@ void BallManipulator::SetCurrentState
             //m_transfer->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_IMPELLER, false );
             //m_turret->SetCurrentState( TurretStateMgr::TURRET_STATE::HOLD, false );
             //m_shooter->SetCurrentState( ShooterStateMgr::SHOOTER_STATE::OFF, false );
-            //m_hood->SetCurrentState( ShooterHoodStateMgr::SHOOTER_HOOD_STATE::HOLD_POSITION, false );
-            break;
+            
 
         case BALL_MANIPULATOR_STATE::SHOOT_AUTON:
            // m_impeller->SetCurrentState( ImpellerStateMgr::IMPELLER_STATE::TO_SHOOTER, false );// Geo Remove for swervebot 
             m_transfer->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
             m_turret->SetCurrentState( TurretStateMgr::TURRET_STATE::HOLD, false,0.0 );
             m_shooter->SetCurrentState( ShooterStateMgr::SHOOTER_STATE::SHOOT, false );
-            m_hood->SetCurrentState( ShooterHoodStateMgr::SHOOTER_HOOD_STATE::HOLD_POSITION, false );  
-            break;// todo auto aim is needed
+            // todo auto aim is needed
         
         case BALL_MANIPULATOR_STATE::TRANSFER_UP:
             m_transfer->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false);
@@ -216,8 +208,7 @@ void BallManipulator::SetCurrentState
             m_transfer->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::OFF, false );
             m_turret->SetCurrentState( TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false ,0.0);
             m_shooter->SetCurrentState( ShooterStateMgr::SHOOTER_STATE::OFF, false );
-            m_hood->SetCurrentState( ShooterHoodStateMgr::SHOOTER_HOOD_STATE::HOLD_POSITION, false );
-            break;
+           
         
         case BALL_MANIPULATOR_STATE::TURRET_TURN_ANGLE:
             m_intake->SetCurrentState( IntakeStateMgr::INTAKE_STATE::ON, false );
@@ -225,8 +216,7 @@ void BallManipulator::SetCurrentState
             m_transfer->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::OFF, false );
             m_turret->SetCurrentState( TurretStateMgr::TURRET_STATE::TURN_ANGLE, false , turretAngle);
             m_shooter->SetCurrentState( ShooterStateMgr::SHOOTER_STATE::SHOOT, false );
-            m_hood->SetCurrentState( ShooterHoodStateMgr::SHOOTER_HOOD_STATE::HOLD_POSITION, false );
-            break;
+            
         default:
             break;
     }

@@ -85,10 +85,7 @@ vector<MechanismTargetData*> StateDataDefn::ParseXML
             filename += string( "shooter.xml");
             break;
 
-        case MechanismTypes::SHOOTER_HOOD:
-            filename += string( "shooterhood.xml");
-            break;
-
+        
         default:
             Logger::GetLogger()->LogError( "StateDataDefn::ParseXML", "invalid mechanism" );
             hasError = true;

@@ -33,7 +33,7 @@ class TurretStateMgr {
         void RunCurrentState();
 
         /// @brief  set the current state, initialize it and run it
-        /// @param [in]     SHOOTER_HOOD_STATE - state to set
+        
         /// @param [in]     run - true means run, false just initialize it
         /// @return void
         void SetCurrentState
@@ -44,7 +44,7 @@ class TurretStateMgr {
         );
 
         /// @brief  return the current state
-        /// @return SHOOTER_HOOD_STATE - the current state
+        
         inline TURRET_STATE GetCurrentState() const { return m_currentStateEnum; };
         
         inline void SetApproxTargetAngle( double angle ) { m_approxTargetAngle = angle; }

@@ -21,15 +21,3 @@
 class ControlData;
 
 
-class ShooterHoodState : public Mech1MotorState
-{
-    public:
-
-        ShooterHoodState() = delete;
-        ShooterHoodState
-        (
-            ControlData*                    control,
-            double                          target
-        );
-        ~ShooterHoodState() =default;
-};

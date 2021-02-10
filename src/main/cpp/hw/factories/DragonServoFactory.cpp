@@ -84,18 +84,7 @@ shared_ptr<DragonServo> DragonServoFactory::CreateDragonServo
         }
         else
         {       
-            switch ( deviceUsage )
-            {
-                case ServoUsage::SERVO_USAGE::SHOOTER_HOOD:
-                    servo = make_shared<DragonServo>( deviceUsage, deviceID, minAngle, maxAngle );
-                    m_servos[deviceUsage] = servo;
-                    break;
-
-                default:
-                    string msg = "Unknown Servo Usage " + to_string( deviceUsage );
-                    Logger::GetLogger()->LogError( "DragonServoFactory::CreateDragonServo", msg );
-                    break;
-            }
+           
         }
     }
     return servo;

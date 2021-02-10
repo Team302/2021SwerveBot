@@ -74,11 +74,7 @@ class TeleopControl
             CONTROL_PANEL_SPIN_WHEEL,
             CONTROL_PANEL_MANUAL,
             CONTROL_PANEL_TURN_TO_COLOR,
-            SHOOTER_HOOD_MOVE_UP,
-            SHOOTER_HOOD_MOVE_DOWN,
-            SHOOTER_HOOD_HOLD_POSITION,
-            SHOOTER_HOOD_MANUAL_BUTTON,
-            SHOOTER_HOOD_MANUAL_AXIS,
+           
             TURRET_MANUAL_AXIS,
             TURRET_MANUAL_BUTTON,
             TURRET_LIMELIGHT_AIM,

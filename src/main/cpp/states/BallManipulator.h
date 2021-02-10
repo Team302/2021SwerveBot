@@ -25,7 +25,6 @@ class BallTransferStateMgr;
 class ImpellerStateMgr;
 class IntakeStateMgr;
 class ShooterStateMgr;
-class ShooterHoodStateMgr;
 class TurretStateMgr;
 
 // Third Party Includes
@@ -89,7 +88,6 @@ class BallManipulator
         BallTransferStateMgr*       m_transfer;
         TurretStateMgr*             m_turret;
         ShooterStateMgr*            m_shooter;
-        ShooterHoodStateMgr*        m_hood;
 
 };
 

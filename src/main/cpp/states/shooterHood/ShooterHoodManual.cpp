@@ -22,39 +22,14 @@
 // Team 302 includes
 #include <controllers/ControlData.h>
 #include <gamepad/TeleopControl.h>
-#include <states/shooterHood/ShooterHoodManual.h>
 #include <states/Mech1MotorState.h>
 #include <subsys/MechanismFactory.h>
 
 using namespace std;
 
-ShooterHoodManual::ShooterHoodManual
-(
-    ControlData* control,
-    double target
- ) : Mech1MotorState( MechanismFactory::GetMechanismFactory()->GetShooterHood().get(), control, target )   
-{
-}
 
-void ShooterHoodManual::Init()
-{
-    auto gamepad = TeleopControl::GetInstance();
-    if ( gamepad != nullptr )
-    {
-        gamepad ->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS, IDragonGamePad::AXIS_PROFILE::CUBED );
-        gamepad ->SetAxisScaleFactor( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS, 0.75 );
-    }
-}
 
-void ShooterHoodManual::Run()
-{  
 
-  // geo3  change GetHookDelivery to GetShooterHood  1/19/21
-    auto mech = MechanismFactory::GetMechanismFactory()->GetShooterHood();
-    auto gamepad = TeleopControl::GetInstance();
-    if (mech.get() != nullptr && gamepad != nullptr )  
-    {
-        mech.get()->UpdateTarget(gamepad->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS ));
-        mech.get()->Update();
-    }
-}
+
+
+
