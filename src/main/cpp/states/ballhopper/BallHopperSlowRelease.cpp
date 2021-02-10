@@ -34,15 +34,10 @@ using namespace std;
 BallHopperSlowRelease::BallHopperSlowRelease
 (
     ControlData*        control,
-    double              target,
-    IState*             hold,
-    IState*             release
+    double              target
 ) : Mech1MotorState ( MechanismFactory::GetMechanismFactory()->GetBallHopper().get(), control, target )
 {
    m_ballHopper = MechanismFactory::GetMechanismFactory()->GetBallHopper();
-
-   holdState = hold;
-   releaseState = release;
 }
 
 void BallHopperSlowRelease::Init()
@@ -51,6 +46,11 @@ void BallHopperSlowRelease::Init()
     m_isHolding = false;
     m_canDetect = true;
     m_timesSeen = 0;
+
+    auto StateMgr = BallHopperStateMgr::GetInstance();
+
+    m_holdState = StateMgr->GetState(BallHopperStateMgr::BALL_HOPPER_STATE::HOLD);
+    m_releaseState = StateMgr->GetState(BallHopperStateMgr::BALL_HOPPER_STATE::RAPID_RELEASE);
 }
 
 void BallHopperSlowRelease::Run()
@@ -66,11 +66,11 @@ void BallHopperSlowRelease::Run()
    } 
    else if ( !m_ballHopper.get()->isBallDetected() && !m_isHolding )
    {
-       releaseState->Run();
+       m_releaseState->Run();
    } 
    else if ( m_isHolding )
    {
-       holdState->Run();
+       m_holdState->Run();
    }
 
     //this waits until our shooter cooldown has passed so the shooter motors can get back up to full speed

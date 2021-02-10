@@ -91,11 +91,7 @@ BallHopperStateMgr::BallHopperStateMgr() : m_currentState(),
 
                     case BALL_HOPPER_STATE::SLOW_RELEASE:
                     {
-                        //Possible solution to make sure hold and release states are created before running slow release state
-                        auto holdState = new BallHopperState( targetData.at(1)->GetController(), targetData.at(1)->GetTarget());
-                        auto releaseState = new BallHopperState( targetData.at(2)->GetController(), targetData.at(2)->GetTarget());
-
-                        auto thisState = new BallHopperSlowRelease( controlData, target, GetState(BALL_HOPPER_STATE::HOLD), GetState(BALL_HOPPER_STATE::RAPID_RELEASE) );
+                        auto thisState = new BallHopperSlowRelease( controlData, target);
                         m_stateVector[stateEnum] = thisState;
                     }
                     break;

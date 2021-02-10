@@ -59,10 +59,14 @@ class BallHopperStateMgr
         inline BALL_HOPPER_STATE GetCurrentState() const { return m_currentStateEnum; };
 
         inline IState* GetState( BALL_HOPPER_STATE state ) { return m_stateVector[state];}
+        
 
     private:
 
         IState* m_currentState;
+        IState* m_holdState;
+        IState* m_releaseState;
+
         std::vector<IState*> m_stateVector;
         BALL_HOPPER_STATE m_currentStateEnum;
 

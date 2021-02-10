@@ -32,9 +32,7 @@ class BallHopperSlowRelease : public Mech1MotorState
         BallHopperSlowRelease
         (
             ControlData*        control,
-            double              target,
-            IState*             hold,
-            IState*             release
+            double              target
         );
         ~BallHopperSlowRelease() = default;
 
@@ -56,6 +54,6 @@ class BallHopperSlowRelease : public Mech1MotorState
         //used to know when we have hit our target of 3 balls
         int m_timesSeen;
         //The pointers to run the holdState and releaseState without switching off of the slowReleaseState in the stateMgr
-        IState*     holdState;
-        IState*     releaseState;
+        IState*     m_holdState;
+        IState*     m_releaseState;
 };
