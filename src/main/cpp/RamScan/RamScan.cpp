@@ -24,10 +24,10 @@
 #include <stdio.h>
 #include <string>
 
-using namespace std;
-
 // team 302 includes
 #include <Robot.h>
+#include <gamepad/DragonGamePad.h>
+#include <gamepad/IDragonGamePad.h>
 #include <hw/factories/PigeonFactory.h>
 #include <hw/interfaces/IDragonMotorController.h>
 #include <hw/usages/MotorControllerUsage.h>
@@ -39,8 +39,13 @@ using namespace std;
 #include <utils/Logger.h>
 
 // frc/wpi includes
+#include <frc/DriverStation.h>
 #include <frc/Preferences.h>    // TODO: make a more user-friendly user input
 #include <frc/SmartDashboard/SmartDashboard.h>
+
+using namespace frc;
+using namespace std;
+
 
 // constructor
 RamScan::RamScan()
@@ -55,6 +60,7 @@ RamScan::RamScan()
     // pointers to objects containing variables that may be scanned
     //
     m_chassis       = nullptr;
+    m_DriverStation = nullptr;
     m_pigeon        = nullptr;
     m_teleopControl = nullptr;
 
@@ -100,6 +106,10 @@ void RamScan::Init()
     m_chassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
     if (m_chassis == nullptr)
     {   Logger::GetLogger()->LogError("RamScan::Init", "m_chassis = nullptr"); }
+
+    m_DriverStation = &DriverStation::GetInstance();
+    if (m_DriverStation == nullptr)
+    {   Logger::GetLogger()->LogError("RamScan::Init", "m_DriverStation = nullptr"); }
 
     m_pigeon = PigeonFactory::GetFactory()->GetPigeon();
     if (m_pigeon == nullptr)
@@ -297,6 +307,7 @@ void RamScan::SaveSwerveMotorUsage( shared_ptr<IDragonMotorController>  driveMot
     RamScan::RunModeType        RamScan::m_RunMode;
 
     shared_ptr<SwerveChassis>   RamScan::m_chassis;
+    DriverStation*              RamScan::m_DriverStation;
     DragonPigeon*               RamScan::m_pigeon;
     TeleopControl*              RamScan::m_teleopControl;
 
@@ -347,16 +358,16 @@ void RamScan::Get_PacketCntr20ms(void)      { result_INT = m_PacketCntr20ms;}
 //
 void RamScan::Get_Pigeon_Pitch(void)    {
     if (m_pigeon==nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_pigeon->GetPitch();} }
-
+    else {result_DOUBLE = m_pigeon->GetPitch();}
+}
 void RamScan::Get_Pigeon_Roll(void)     {
     if (m_pigeon==nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_pigeon->GetRoll();} }
-
+    else {result_DOUBLE = m_pigeon->GetRoll();}
+}
 void RamScan::Get_Pigeon_Yaw(void)      {
     if (m_pigeon==nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_pigeon->GetYaw();} }
-
+    else {result_DOUBLE = m_pigeon->GetYaw();}
+}
 //
 //  accessors for chassis variables
 //
@@ -374,305 +385,265 @@ void RamScan::Chassis_CurrentSpeed(void)
 void RamScan::Chassis_LF_Drive_Rotations(void) {
     auto controller = SwerveDriveMotorArray[SwerveModule::ModuleID::LEFT_FRONT];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRotations();} }
-
+    else {result_DOUBLE = controller->GetRotations();}
+}
 void RamScan::Chassis_LF_Drive_RPS(void) {
     auto controller = SwerveDriveMotorArray[SwerveModule::ModuleID::LEFT_FRONT];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRPS();} }
-
+    else {result_DOUBLE = controller->GetRPS();}
+}
 void RamScan::Chassis_LF_Drive_Current(void) {
     auto controller = SwerveDriveMotorArray[SwerveModule::ModuleID::LEFT_FRONT];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetCurrent();} }
-
+    else {result_DOUBLE = controller->GetCurrent();}
+}
 void RamScan::Chassis_LF_Turn_Rotations(void) {
     auto controller = SwerveTurnMotorArray[SwerveModule::ModuleID::LEFT_FRONT];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRotations();} }
-
+    else {result_DOUBLE = controller->GetRotations();}
+}
 void RamScan::Chassis_LF_Turn_RPS(void) {
     auto controller = SwerveTurnMotorArray[SwerveModule::ModuleID::LEFT_FRONT];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRPS();} }
-
+    else {result_DOUBLE = controller->GetRPS();}
+}
 void RamScan::Chassis_LF_Turn_Current(void) {
     auto controller = SwerveTurnMotorArray[SwerveModule::ModuleID::LEFT_FRONT];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetCurrent();} }
-
+    else {result_DOUBLE = controller->GetCurrent();}
+}
 // Right Front swerve module
 void RamScan::Chassis_RF_Drive_Rotations(void) {
     auto controller = SwerveDriveMotorArray[SwerveModule::ModuleID::RIGHT_FRONT];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRotations();} }
-
+    else {result_DOUBLE = controller->GetRotations();}
+}
 void RamScan::Chassis_RF_Drive_RPS(void) {
     auto controller = SwerveDriveMotorArray[SwerveModule::ModuleID::RIGHT_FRONT];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRPS();} }
-
+    else {result_DOUBLE = controller->GetRPS();}
+}
 void RamScan::Chassis_RF_Drive_Current(void) {
     auto controller = SwerveDriveMotorArray[SwerveModule::ModuleID::RIGHT_FRONT];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetCurrent();} }
-
+    else {result_DOUBLE = controller->GetCurrent();}
+}
 void RamScan::Chassis_RF_Turn_Rotations(void) {
     auto controller = SwerveTurnMotorArray[SwerveModule::ModuleID::RIGHT_FRONT];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRotations();} }
-
+    else {result_DOUBLE = controller->GetRotations();}
+}
 void RamScan::Chassis_RF_Turn_RPS(void) {
     auto controller = SwerveTurnMotorArray[SwerveModule::ModuleID::RIGHT_FRONT];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRPS();} }
-
+    else {result_DOUBLE = controller->GetRPS();}
+}
 void RamScan::Chassis_RF_Turn_Current(void) {
     auto controller = SwerveTurnMotorArray[SwerveModule::ModuleID::RIGHT_FRONT];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetCurrent();} }
-
+    else {result_DOUBLE = controller->GetCurrent();}
+}
 // Left Back swerve module
 void RamScan::Chassis_LB_Drive_Rotations(void) {
     auto controller = SwerveDriveMotorArray[SwerveModule::ModuleID::LEFT_BACK];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRotations();} }
-
+    else {result_DOUBLE = controller->GetRotations();}
+}
 void RamScan::Chassis_LB_Drive_RPS(void) {
     auto controller = SwerveDriveMotorArray[SwerveModule::ModuleID::LEFT_BACK];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRPS();} }
-
+    else {result_DOUBLE = controller->GetRPS();}
+}
 void RamScan::Chassis_LB_Drive_Current(void) {
     auto controller = SwerveDriveMotorArray[SwerveModule::ModuleID::LEFT_BACK];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetCurrent();} }
-
+    else {result_DOUBLE = controller->GetCurrent();}
+}
 void RamScan::Chassis_LB_Turn_Rotations(void) {
     auto controller = SwerveTurnMotorArray[SwerveModule::ModuleID::LEFT_BACK];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRotations();} }
-
+    else {result_DOUBLE = controller->GetRotations();}
+}
 void RamScan::Chassis_LB_Turn_RPS(void) {
     auto controller = SwerveTurnMotorArray[SwerveModule::ModuleID::LEFT_BACK];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRPS();} }
-
+    else {result_DOUBLE = controller->GetRPS();}
+}
 void RamScan::Chassis_LB_Turn_Current(void) {
     auto controller = SwerveTurnMotorArray[SwerveModule::ModuleID::LEFT_BACK];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetCurrent();} }
-
+    else {result_DOUBLE = controller->GetCurrent();}
+}
 // Right Back swerve module
 void RamScan::Chassis_RB_Drive_Rotations(void) {
     auto controller = SwerveDriveMotorArray[SwerveModule::ModuleID::RIGHT_BACK];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRotations();} }
-
+    else {result_DOUBLE = controller->GetRotations();}
+}
 void RamScan::Chassis_RB_Drive_RPS(void) {
     auto controller = SwerveDriveMotorArray[SwerveModule::ModuleID::RIGHT_BACK];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRPS();} }
-
+    else {result_DOUBLE = controller->GetRPS();}
+}
 void RamScan::Chassis_RB_Drive_Current(void) {
     auto controller = SwerveDriveMotorArray[SwerveModule::ModuleID::RIGHT_BACK];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetCurrent();} }
-
+    else {result_DOUBLE = controller->GetCurrent();}
+}
 void RamScan::Chassis_RB_Turn_Rotations(void) {
     auto controller = SwerveTurnMotorArray[SwerveModule::ModuleID::RIGHT_BACK];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRotations();} }
-
+    else {result_DOUBLE = controller->GetRotations();}
+}
 void RamScan::Chassis_RB_Turn_RPS(void) {
     auto controller = SwerveTurnMotorArray[SwerveModule::ModuleID::RIGHT_BACK];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetRPS();} }
-
+    else {result_DOUBLE = controller->GetRPS();}
+}
 void RamScan::Chassis_RB_Turn_Current(void) {
     auto controller = SwerveTurnMotorArray[SwerveModule::ModuleID::RIGHT_BACK];
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = controller->GetCurrent();} }
-
+    else {result_DOUBLE = controller->GetCurrent();}
+}
 //
 //  For the mechanism motors...
 //
 void RamScan::Motor_INTAKE1_GetRotations(void) {
     if (m_Motor_INTAKE1 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_INTAKE1->GetRotations();} }
-
+    else {result_DOUBLE = m_Motor_INTAKE1->GetRotations();}
+}
 void RamScan::Motor_INTAKE1_GetRPS(void) {
     if (m_Motor_INTAKE1 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_INTAKE1->GetRPS();} }
-
+    else {result_DOUBLE = m_Motor_INTAKE1->GetRPS();}
+}
 void RamScan::Motor_INTAKE1_GetCurrent(void) {
     if (m_Motor_INTAKE1 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_INTAKE1->GetCurrent();} }
-
+    else {result_DOUBLE = m_Motor_INTAKE1->GetCurrent();}
+}
 void RamScan::Motor_INTAKE2_GetRotations(void) {
     if (m_Motor_INTAKE2 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_INTAKE2->GetRotations();} }
-
+    else {result_DOUBLE = m_Motor_INTAKE2->GetRotations();}
+}
 void RamScan::Motor_INTAKE2_GetRPS(void) {
     if (m_Motor_INTAKE2 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_INTAKE2->GetRPS();} }
-
+    else {result_DOUBLE = m_Motor_INTAKE2->GetRPS();}
+}
 void RamScan::Motor_INTAKE2_GetCurrent(void) {
     if (m_Motor_INTAKE2 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_INTAKE2->GetCurrent();} }
-
+    else {result_DOUBLE = m_Motor_INTAKE2->GetCurrent();}
+}
 void RamScan::Motor_BALL_TRANSFER_GetRotations(void) {
     if (m_Motor_BALL_TRANSFER == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_BALL_TRANSFER->GetRotations();} }
-
+    else {result_DOUBLE = m_Motor_BALL_TRANSFER->GetRotations();}
+}
 void RamScan::Motor_BALL_TRANSFER_GetRPS(void) {
     if (m_Motor_BALL_TRANSFER == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_BALL_TRANSFER->GetRPS();} }
-
+    else {result_DOUBLE = m_Motor_BALL_TRANSFER->GetRPS();}
+}
 void RamScan::Motor_BALL_TRANSFER_GetCurrent(void) {
     if (m_Motor_BALL_TRANSFER == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_BALL_TRANSFER->GetCurrent();} }
-
+    else {result_DOUBLE = m_Motor_BALL_TRANSFER->GetCurrent();}
+}
 void RamScan::Motor_TURRET_GetRotations(void) {
     if (m_Motor_TURRET == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_TURRET->GetRotations();} }
-
+    else {result_DOUBLE = m_Motor_TURRET->GetRotations();}
+}
 void RamScan::Motor_TURRET_GetRPS(void) {
     if (m_Motor_TURRET == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_TURRET->GetRPS();} }
-
+    else {result_DOUBLE = m_Motor_TURRET->GetRPS();}
+}
 void RamScan::Motor_TURRET_GetCurrent(void) {
     if (m_Motor_TURRET == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_TURRET->GetCurrent();} }
-
+    else {result_DOUBLE = m_Motor_TURRET->GetCurrent();}
+}
 void RamScan::Motor_SHOOTER_1_GetRotations(void) {
     if (m_Motor_SHOOTER_1 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_SHOOTER_1->GetRotations();} }
-
+    else {result_DOUBLE = m_Motor_SHOOTER_1->GetRotations();}
+}
 void RamScan::Motor_SHOOTER_1_GetRPS(void) {
     if (m_Motor_SHOOTER_1 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_SHOOTER_1->GetRPS();} }
-
+    else {result_DOUBLE = m_Motor_SHOOTER_1->GetRPS();}
+}
 void RamScan::Motor_SHOOTER_1_GetCurrent(void) {
     if (m_Motor_SHOOTER_1 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_SHOOTER_1->GetCurrent();} }
-
+    else {result_DOUBLE = m_Motor_SHOOTER_1->GetCurrent();}
+}
 void RamScan::Motor_SHOOTER_2_GetRotations(void) {
     if (m_Motor_SHOOTER_2 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_SHOOTER_2->GetRotations();} }
-
+    else {result_DOUBLE = m_Motor_SHOOTER_2->GetRotations();}
+}
 void RamScan::Motor_SHOOTER_2_GetRPS(void) {
     if (m_Motor_SHOOTER_2 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_SHOOTER_2->GetRPS();} }
-
+    else {result_DOUBLE = m_Motor_SHOOTER_2->GetRPS();}
+}
 void RamScan::Motor_SHOOTER_2_GetCurrent(void) {
     if (m_Motor_SHOOTER_2 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_SHOOTER_2->GetCurrent();} }
-
+    else {result_DOUBLE = m_Motor_SHOOTER_2->GetCurrent();}
+}
 void RamScan::Motor_SHOOTER_HOOD_GetRotations(void) {
     if (m_Motor_SHOOTER_HOOD == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_SHOOTER_HOOD->GetRotations();} }
-
+    else {result_DOUBLE = m_Motor_SHOOTER_HOOD->GetRotations();}
+}
 void RamScan::Motor_SHOOTER_HOOD_GetRPS(void) {
     if (m_Motor_SHOOTER_HOOD == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_SHOOTER_HOOD->GetRPS();} }
-
+    else {result_DOUBLE = m_Motor_SHOOTER_HOOD->GetRPS();}
+}
 void RamScan::Motor_SHOOTER_HOOD_GetCurrent(void) {
     if (m_Motor_SHOOTER_HOOD == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_SHOOTER_HOOD->GetCurrent();} }
-
+    else {result_DOUBLE = m_Motor_SHOOTER_HOOD->GetCurrent();}
+}
 //
-//  For Teleop Axis inputs
+//  For DriverStation analog inputs
 //
 void RamScan::TeleopAxis_SWERVE_DRIVE_DRIVE(void)   {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SWERVE_DRIVE_DRIVE);} }
-
+    result_DOUBLE = m_DriverStation->GetStickAxis(0, IDragonGamePad::LEFT_JOYSTICK_Y);
+}
 void RamScan::TeleopAxis_SWERVE_DRIVE_ROTATE(void)  {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SWERVE_DRIVE_ROTATE);} }
-
+    result_DOUBLE = m_DriverStation->GetStickAxis(0, IDragonGamePad::RIGHT_JOYSTICK_X);
+}
 void RamScan::TeleopAxis_SWERVE_DRIVE_STEER(void)   {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SWERVE_DRIVE_STEER);} }
-
-void RamScan::TeleopAxis_SWITCH_DRIVE_MODE(void)    {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SWITCH_DRIVE_MODE);} }
-
-void RamScan::TeleopAxis_CURVATURE_DRIVE_QUICK_TURN(void) {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::CURVATURE_DRIVE_QUICK_TURN);} }
-
-void RamScan::TeleopAxis_INTAKE_ON(void)            {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::INTAKE_ON);} }
-
-void RamScan::TeleopAxis_INTAKE_OFF(void)           {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::INTAKE_OFF);} }
-
-void RamScan::TeleopAxis_BALL_TRANSFER_OFF(void)    {
-    if (m_teleopControl==nullptr) {result_FLOAT= 9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::BALL_TRANSFER_OFF);} }
-
-void RamScan::TeleopAxis_BALL_TRANSFER_TO_SHOOTER(void)
-    {if (m_teleopControl==nullptr) {result_FLOAT= 9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::BALL_TRANSFER_TO_SHOOTER);} }
-
+    result_DOUBLE = m_DriverStation->GetStickAxis(0, IDragonGamePad::LEFT_JOYSTICK_X);
+}
+void RamScan::TeleopAxis_TURRET_MANUAL_AXIS(void) {
+    result_DOUBLE = m_DriverStation->GetStickAxis(1, IDragonGamePad::LEFT_JOYSTICK_Y);
+}
+//
+//  For DriverStation button inputs
+//
+void RamScan::TeleopButton_INTAKE_ON(void) {
+    result_BOOL = m_DriverStation->GetStickButton(2, IDragonGamePad::GAMEPAD_BUTTON_1);
+}
+void RamScan::TeleopButton_INTAKE_OFF(void) {
+    result_BOOL = m_DriverStation->GetStickButton(2, IDragonGamePad::GAMEPAD_BUTTON_2);
+}
+void RamScan::TeleopButton_BALL_TRANSFER_OFF(void) {
+    result_BOOL = m_DriverStation->GetStickButton(2, IDragonGamePad::GAMEPAD_BUTTON_6);
+}
+void RamScan::TeleopButton_BALL_TRANSFER_TO_SHOOTER(void) {
+    result_BOOL = m_DriverStation->GetStickButton(2, IDragonGamePad::GAMEPAD_BUTTON_8);
+}
 void RamScan::TeleopAxis_SHOOTER_PREPARE_TO_SHOOT(void){
-    if (m_teleopControl==nullptr) {result_FLOAT= 9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SHOOTER_PREPARE_TO_SHOOT);} }
-
-void RamScan::TeleopAxis_SHOOTER_AUTO_SHOOT(void)   {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SHOOTER_AUTO_SHOOT);} }
-
-void RamScan::TeleopAxis_SHOOTER_MANUAL_AIM(void)   {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SHOOTER_MANUAL_AIM);} }
-
-void RamScan::TeleopAxis_SHOOTER_MANUAL_ADJUST_DISTANCE(void) {
-    if (m_teleopControl==nullptr) {result_FLOAT= 9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SHOOTER_MANUAL_ADJUST_DISTANCE);} }
-
-void RamScan::TeleopAxis_SHOOTER_MANUAL_SHOOT(void) {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SHOOTER_MANUAL_SHOOT);} }
-
-void RamScan::TeleopAxis_SHOOTER_OFF(void)          {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SHOOTER_OFF);} }
-
-void RamScan::TeleopAxis_SHOOTER_HOOD_MOVE_UP(void) {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SHOOTER_HOOD_MOVE_UP);} }
-
-void RamScan::TeleopAxis_SHOOTER_HOOD_MOVE_DOWN(void) {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SHOOTER_HOOD_MOVE_DOWN);} }
-
-void RamScan::TeleopAxis_SHOOTER_HOOD_HOLD_POSITION(void) {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SHOOTER_HOOD_HOLD_POSITION);} }
-
-void RamScan::TeleopAxis_SHOOTER_HOOD_MANUAL_BUTTON(void) {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SHOOTER_HOOD_MANUAL_BUTTON);} }
-
-void RamScan::TeleopAxis_SHOOTER_HOOD_MANUAL_AXIS(void) {
-if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SHOOTER_HOOD_MANUAL_AXIS);} }
-
-void RamScan::TeleopAxis_TURRET_MANUAL_AXIS(void)     {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::TURRET_MANUAL_AXIS);} }
-
-void RamScan::TeleopAxis_TURRET_MANUAL_BUTTON(void)   {
-    if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::TURRET_MANUAL_BUTTON);} }
-
-void RamScan::TeleopAxis_TURRET_LIMELIGHT_AIM(void) {
-if (m_teleopControl==nullptr) {result_FLOAT=9999.99;}
-    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::TURRET_LIMELIGHT_AIM);} }
-
+    /***if (m_teleopControl==nullptr)***/ {result_FLOAT= 9999.99;}
+    /***else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SHOOTER_PREPARE_TO_SHOOT);}***/
+}
+void RamScan::TeleopButton_SHOOTER_MANUAL_SHOOT(void) {
+    result_BOOL = m_DriverStation->GetStickButton(1, IDragonGamePad::POV_0);
+}
+void RamScan::TeleopButton_SHOOTER_OFF(void) {
+    result_BOOL = m_DriverStation->GetStickButton(1, IDragonGamePad::POV_180);
+}
+void RamScan::TeleopButton_TURRET_MANUAL_BUTTON(void)   {
+    result_BOOL = m_DriverStation->GetStickButton(0, IDragonGamePad::Y_BUTTON);
+}
+void RamScan::TeleopButton_TURRET_LIMELIGHT_AIM(void) {
+    result_BOOL = m_DriverStation->GetStickButton(1, IDragonGamePad::POV_270);
+}
+void RamScan::TeleopButton_REZERO_PIGEON(void) {
+    result_BOOL = m_DriverStation->GetStickButton(0, IDragonGamePad::X_BUTTON);
+}
+void RamScan::TeleopButton_OFF(void) {
+    result_BOOL = m_DriverStation->GetStickButton(1, IDragonGamePad::START_BUTTON);
+}
+void RamScan::TeleopButton_SHOOT(void) {
+    result_BOOL = m_DriverStation->GetStickButton(1, IDragonGamePad::X_BUTTON);
+}

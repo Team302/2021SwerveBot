@@ -20,10 +20,9 @@
 
 #pragma once
 
+#include <frc/DriverStation.h>
 #include <frc/Preferences.h>
 #include <string>
-
-using namespace std;
 
 // include files for data to scan
 #include <gamepad/TeleopControl.h>
@@ -32,6 +31,9 @@ using namespace std;
 #include <hw/interfaces/IDragonMotorController.h>
 #include <hw/usages/MotorControllerUsage.h>
 #include <subsys/SwerveChassis.h>
+
+using namespace frc;
+using namespace std;
 
 
 class RamScan {
@@ -108,6 +110,7 @@ private:
 
 // pointers to objects containing variables that may be scanned
     static std::shared_ptr<SwerveChassis>   m_chassis;
+    static DriverStation*                   m_DriverStation;
     static DragonPigeon*                    m_pigeon;
     static TeleopControl*                   m_teleopControl;
 
@@ -195,38 +198,30 @@ private:
     static void Motor_SHOOTER_2_GetRotations(void);
     static void Motor_SHOOTER_2_GetRPS(void);
     static void Motor_SHOOTER_2_GetCurrent(void);
+// SHOOTER_HOOD is going away, but keep these awhile to prove it doesn't crash the build.
     static void Motor_SHOOTER_HOOD_GetRotations(void);
     static void Motor_SHOOTER_HOOD_GetRPS(void);
     static void Motor_SHOOTER_HOOD_GetCurrent(void);
-
-//  teleop inputs
+//
+//  teleop axis inputs
     static void TeleopAxis_SWERVE_DRIVE_DRIVE(void);
     static void TeleopAxis_SWERVE_DRIVE_ROTATE(void);
     static void TeleopAxis_SWERVE_DRIVE_STEER(void);
-    static void TeleopAxis_SWITCH_DRIVE_MODE(void);
-    static void TeleopAxis_CURVATURE_DRIVE_QUICK_TURN(void);
-// ?? //    static void TeleopAxis_IMPELLER_OFF(void);
-// ?? //    static void TeleopAxis_IMPELLER_HOLD(void);
-// ?? //    static void TeleopAxis_IMPELLER_TO_SHOOTER(void);
-    static void TeleopAxis_INTAKE_ON(void);
-    static void TeleopAxis_INTAKE_OFF(void);
-    static void TeleopAxis_BALL_TRANSFER_OFF(void);
-    static void TeleopAxis_BALL_TRANSFER_TO_SHOOTER(void);
-// ?? //    static void TeleopAxis_BALL_TRANSFER_TO_IMPELLER(void);
-    static void TeleopAxis_SHOOTER_PREPARE_TO_SHOOT(void);
-    static void TeleopAxis_SHOOTER_AUTO_SHOOT(void);
-    static void TeleopAxis_SHOOTER_MANUAL_AIM(void);
-    static void TeleopAxis_SHOOTER_MANUAL_ADJUST_DISTANCE(void);
-    static void TeleopAxis_SHOOTER_MANUAL_SHOOT(void);
-    static void TeleopAxis_SHOOTER_OFF(void);
-    static void TeleopAxis_SHOOTER_HOOD_MOVE_UP(void);
-    static void TeleopAxis_SHOOTER_HOOD_MOVE_DOWN(void);
-    static void TeleopAxis_SHOOTER_HOOD_HOLD_POSITION(void);
-    static void TeleopAxis_SHOOTER_HOOD_MANUAL_BUTTON(void);
-    static void TeleopAxis_SHOOTER_HOOD_MANUAL_AXIS(void);
     static void TeleopAxis_TURRET_MANUAL_AXIS(void);
-    static void TeleopAxis_TURRET_MANUAL_BUTTON(void);
-    static void TeleopAxis_TURRET_LIMELIGHT_AIM(void);
+//
+//  teleop button inputs
+    static void TeleopButton_INTAKE_ON(void);
+    static void TeleopButton_INTAKE_OFF(void);
+    static void TeleopButton_BALL_TRANSFER_OFF(void);
+    static void TeleopButton_BALL_TRANSFER_TO_SHOOTER(void);
+    static void TeleopAxis_SHOOTER_PREPARE_TO_SHOOT(void);
+    static void TeleopButton_SHOOTER_MANUAL_SHOOT(void);
+    static void TeleopButton_SHOOTER_OFF(void);
+    static void TeleopButton_TURRET_MANUAL_BUTTON(void);
+    static void TeleopButton_TURRET_LIMELIGHT_AIM(void);
+    static void TeleopButton_REZERO_PIGEON(void);
+    static void TeleopButton_OFF(void);
+    static void TeleopButton_SHOOT(void);
 
 
 //==============================================================================//
@@ -285,47 +280,44 @@ private:
   };
 
   // not used yet - wait for multiple 32-bit arrays
-  const ScanElement ScanElementArray2[NUM_OF_SCAN_ELEMENTS+1] =       // Teleop inputs
+  const ScanElement ScanElementArray2[NUM_OF_SCAN_ELEMENTS+1] =       // Driver Station inputs
   {
-    {(char*)("B00 SWERVE_DRIVE_DRIVE"),     FLOAT,  (&TeleopAxis_SWERVE_DRIVE_DRIVE)},      // 0.0001
-    {(char*)("B01 SWERVE_DRIVE_ROTATE"),    FLOAT,  (&TeleopAxis_SWERVE_DRIVE_ROTATE)},     // 0.0002
-    {(char*)("B02 SWERVE_DRIVE_STEER"),     FLOAT,  (&TeleopAxis_SWERVE_DRIVE_STEER)},      // 0.0004
-    {(char*)("B03 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0008
-    {(char*)("B04 SWITCH_DRIVE_MODE"),      FLOAT,  (&TeleopAxis_SWITCH_DRIVE_MODE)},       // 0.0010
-    {(char*)("B05 CURV_DRIVE_QUICK_TURN"),  FLOAT,  (&TeleopAxis_CURVATURE_DRIVE_QUICK_TURN)},//0.0020
+    {(char*)("B00 SWERVE_DRIVE_DRIVE"),     DOUBLE, (&TeleopAxis_SWERVE_DRIVE_DRIVE)},      // 0.0001
+    {(char*)("B01 SWERVE_DRIVE_ROTATE"),    DOUBLE, (&TeleopAxis_SWERVE_DRIVE_ROTATE)},     // 0.0002
+    {(char*)("B02 SWERVE_DRIVE_STEER"),     DOUBLE, (&TeleopAxis_SWERVE_DRIVE_STEER)},      // 0.0004
+    {(char*)("B03 TURRET_MANUAL_AXIS"),     DOUBLE, (&TeleopAxis_TURRET_MANUAL_AXIS)},      // 0.0008
+    {(char*)("B04 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0010
+    {(char*)("B05 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0020
     {(char*)("B06 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0040
-//    {(char*)("B07 IMPELLER_OFF"),           FLOAT,  (&TeleopAxis_IMPELLER_OFF)},            // 0.0080
     {(char*)("B07 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0080
 
-//    {(char*)("B08 IMPELLER_HOLD"),          FLOAT,  (&TeleopAxis_IMPELLER_HOLD)},           // 0.0100
-    {(char*)("B08 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0100
-//    {(char*)("B09 IMPELLER_TO_SHOOTER"),    FLOAT,  (&TeleopAxis_IMPELLER_TO_SHOOTER)},     // 0.0200
-    {(char*)("B09 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0200
-    {(char*)("B10 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0400
-    {(char*)("B11 INTAKE_ON"),              FLOAT,  (&TeleopAxis_INTAKE_ON)},               // 0.0800
-    {(char*)("B12 INTAKE_OFF"),             FLOAT,  (&TeleopAxis_INTAKE_OFF)},              // 0.1000
-    {(char*)("B13 BALL_OFF"),               FLOAT,  (&TeleopAxis_BALL_TRANSFER_OFF)},       // 0.2000
-//    {(char*)("B14 BALL_TRANSFER_IMPELLER"), FLOAT,  (&TeleopAxis_BALL_TRANSFER_TO_IMPELLER)},//0.4000
-    {(char*)("B14 dummy:"),                 INT,    (&CrazyEights)},                        // 0.4000
-    {(char*)("B15 BALL_TRANSFER_SHOOTER"),  FLOAT,  (&TeleopAxis_BALL_TRANSFER_TO_SHOOTER)}, //0.8000
+    {(char*)("B08 INTAKE_ON"),              BOOL,   (&TeleopButton_INTAKE_ON)},             // 0.0100
+    {(char*)("B09 INTAKE_OFF"),             BOOL,   (&TeleopButton_INTAKE_OFF)},            // 0.0200
+    {(char*)("B10 BALL_OFF"),               BOOL,   (&TeleopButton_BALL_TRANSFER_OFF)},     // 0.0400
+    {(char*)("B11 BALL_TRANSFER_SHOOTER"),  BOOL,   (&TeleopButton_BALL_TRANSFER_TO_SHOOTER)},//0.0800
+    {(char*)("B12 SHOOTER_PREPARE_SHOOT"),  FLOAT,  (&TeleopAxis_SHOOTER_PREPARE_TO_SHOOT)},//0.1000
+    {(char*)("B13 SHOOTER_MANUAL_SHOOT"),   BOOL,   (&TeleopButton_SHOOTER_MANUAL_SHOOT)},  // 0.2000
+    {(char*)("B14 SHOOTER_OFF"),            BOOL,   (&TeleopButton_SHOOTER_OFF)},           // 0.4000
+    {(char*)("B15 TURRET_MANUAL_BUTTON"),   BOOL,   (&TeleopButton_TURRET_MANUAL_BUTTON)},  // 0.8000
 
-    {(char*)("B16 dummy:"),                 INT,    (&CrazyEights)},                        // 0001.0
-    {(char*)("B17 SHOOTER_PREPARE_SHOOT"),  FLOAT,  (&TeleopAxis_SHOOTER_PREPARE_TO_SHOOT)},// 0002.0
-    {(char*)("B18 SHOOTER_AUTO_SHOOT"),     FLOAT,  (&TeleopAxis_SHOOTER_AUTO_SHOOT)},      // 0004.0
-    {(char*)("B19 SHOOTER_MANUAL_AIM"),     FLOAT,  (&TeleopAxis_SHOOTER_MANUAL_AIM)},      // 0008.0
-    {(char*)("B20 SHOOTER_MANUAL_ADJ_DIST"),FLOAT,  (&TeleopAxis_SHOOTER_MANUAL_ADJUST_DISTANCE)},//0010.0
-    {(char*)("B21 SHOOTER_MANUAL_SHOOT"),   FLOAT,  (&TeleopAxis_SHOOTER_MANUAL_SHOOT)},    // 0020.0
-    {(char*)("B22 SHOOTER_OFF"),            FLOAT,  (&TeleopAxis_SHOOTER_OFF)},             // 0040.0
+    {(char*)("B16 REZERO_PIGEON"),          BOOL,   (&TeleopButton_REZERO_PIGEON)},         // 0001.0
+    {(char*)("B17 OFF"),                    BOOL,   (&TeleopButton_OFF)},                   // 0002.0
+    {(char*)("B18 SHOOT"),                  BOOL,   (&TeleopButton_SHOOT)},                 // 0004.0
+    {(char*)("B19 dummy:"),                 INT,    (&CrazyEights)},                        // 0008.0
+    {(char*)("B20 dummy:"),                 INT,    (&CrazyEights)},                        // 0010.0
+    {(char*)("B21 dummy:"),                 INT,    (&CrazyEights)},                        // 0020.0
+    {(char*)("B22 dummy:"),                 INT,    (&CrazyEights)},                        // 0040.0
     {(char*)("B23 dummy:"),                 INT,    (&CrazyEights)},                        // 0080.0
 
-    {(char*)("B24 SHOOTER_HOOD_MOVE_UP"),   FLOAT,  (&TeleopAxis_SHOOTER_HOOD_MOVE_UP)},    // 0100.0
-    {(char*)("B25 SHOOTER_HOOD_MOVE_DOWN"), FLOAT,  (&TeleopAxis_SHOOTER_HOOD_MOVE_DOWN)},  // 0200.0
-    {(char*)("B26 SHOOTER_HOOD_HOLD_POS"),  FLOAT,  (&TeleopAxis_SHOOTER_HOOD_HOLD_POSITION)},//0400.0
-    {(char*)("B27 SHOOTER_HOOD_MANUAL_BUT"),FLOAT,  (&TeleopAxis_SHOOTER_HOOD_MANUAL_BUTTON)},//0800.0
-    {(char*)("B28 SHOOTER_HOOD_MANUAL_AXS"),FLOAT,  (&TeleopAxis_SHOOTER_HOOD_MANUAL_AXIS)},// 1000.0
-    {(char*)("B29 TURRET_MANUAL_AXIS"),     FLOAT,  (&TeleopAxis_TURRET_MANUAL_AXIS)},      // 2000.0
-    {(char*)("B30 TURRET_MANUAL_BUTTON"),   FLOAT,  (&TeleopAxis_TURRET_MANUAL_BUTTON)},    // 4000.0
-    {(char*)("B31 TURRET_LIMELIGHT_AIM"),   FLOAT,  (&TeleopAxis_TURRET_LIMELIGHT_AIM)},    // 8000.0
+    {(char*)("B24 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0100
+    {(char*)("B25 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0200
+    {(char*)("B26 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0400
+    {(char*)("B27 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0800
+    {(char*)("B28 dummy:"),                 INT,    (&CrazyEights)},                        // 1000.0
+    {(char*)("B29 dummy:"),                 INT,    (&CrazyEights)},                        // 2000.0
+    {(char*)("B30 dummy:"),                 INT,    (&CrazyEights)},                        // 4000.0
+    {(char*)("B31 dummy:"),                 INT,    (&CrazyEights)},                        // 8000.0
+
     {(char*)("ANOTHER END"), INT, nullptr }
   };
 
