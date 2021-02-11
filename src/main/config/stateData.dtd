@@ -20,7 +20,7 @@
           stateIdentifier               ( INTAKEOFF | INTAKEON | 
                                           BALLTRANSFEROFF | BALLTRANSFERTOSHOOTER | BALLTRANSFEREJECT |
                                           SHOOTERHOODUP | SHOOTERHOODDOWN | 
-                                          TURRETHOLD | TURRETAUTOAIM | TURRETMANUALAIM | TURRETTURNANGLE |
+                                          TURRETHOLD | TURRETAUTOAIM |
                                           SHOOTEROFF | SHOOTERGETREADY | SHOOTERSHOOT |
                                           UNKNOWN ) "UNKNOWN"
           controlDataIdentifier         CDATA #REQUIRED
