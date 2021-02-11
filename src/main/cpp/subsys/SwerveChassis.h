@@ -126,9 +126,7 @@ class SwerveChassis
         std::shared_ptr<SwerveModule> GetFrontRight() const { return m_frontRight;}
         std::shared_ptr<SwerveModule> GetBackLeft() const { return m_backLeft;}
         std::shared_ptr<SwerveModule> GetBackRight() const { return m_backRight;}
-
-        frc::SwerveDrivePoseEstimator<4> GetPose() { return m_poseEstimator; }  
-
+        frc::SwerveDrivePoseEstimator<4> GetPose() const { return m_poseEstimator; }  
 
     private:
 

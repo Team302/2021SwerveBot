@@ -19,6 +19,9 @@
 
 // FRC includes
 //#include <frc2/Timer.h>
+
+#include <frc/trajectory/constraint/SwerveDriveKinematicsConstraint.h>
+
 #include <units/acceleration.h>
 #include <units/angular_acceleration.h>
 #include <units/angular_velocity.h>
@@ -89,6 +92,7 @@ void SwerveChassis::ZeroAlignSwerveModules()
 }
 
 
+
 /// @brief Drive the chassis
 /// @param [in] units::velocity::meters_per_second_t            xSpeed:         forward/reverse speed (positive is forward)
 /// @param [in] units::velocity::meters_per_second_t            ySpeed:         left/right speed (positive is left)
@@ -102,9 +106,10 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
 {
     units::degree_t yaw{m_pigeon->GetYaw()};
     Rotation2d currentOrientation {yaw};
-    auto states = m_kinematics.ToSwerveModuleStates(
-                                fieldRelative ? frc::ChassisSpeeds::FromFieldRelativeSpeeds(
-                                xSpeed, ySpeed, rot, currentOrientation) : frc::ChassisSpeeds{xSpeed, ySpeed, rot} );
+    //auto states = m_kinematics.ToSwerveModuleStates(
+    //                            fieldRelative ? frc::ChassisSpeeds::FromFieldRelativeSpeeds(
+    //                            xSpeed, ySpeed, rot, currentOrientation) : frc::ChassisSpeeds{xSpeed, ySpeed, rot} );
+    auto states = m_kinematics.ToSwerveModuleStates( frc::ChassisSpeeds{xSpeed, ySpeed, rot}  );
 
     m_kinematics.NormalizeWheelSpeeds(&states, m_maxSpeed);
 
@@ -187,3 +192,4 @@ void SwerveChassis::ResetPosition
     Rotation2d angle {yaw};
     ResetPosition(pose, angle);
 }
+
