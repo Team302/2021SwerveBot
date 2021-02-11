@@ -92,14 +92,7 @@ void BallManipulator::RunCurrentState()
             {
                 SetCurrentState(BALL_MANIPULATOR_STATE::SHOOT, 0.0); 
             }
-            if (controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::UNJAM_CLOCKWISE))
-            {
-                SetCurrentState(BALL_MANIPULATOR_STATE::UNJAM_CLOCKWISE, 0.0); 
-            }
-            if (controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::UNJAM_COUNTERCLOCKWISE))
-            {
-                SetCurrentState(BALL_MANIPULATOR_STATE::UNJAM_COUNTERCLOCKWISE, 0.0); 
-            }     
+           
             if (controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::TRANSFER_UP)) 
             {
                 SetCurrentState(BALL_MANIPULATOR_STATE::TRANSFER_UP, 0.0);
