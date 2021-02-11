@@ -108,8 +108,6 @@ TeleopControl::TeleopControl() : m_axisIDs(),
     ctrlNo = 1;
     if ( m_controllers[ctrlNo] != nullptr && ds->GetJoystickIsXbox(ctrlNo) )
     {
-		m_controllerIndex[ SHOOTER_HOOD_MANUAL_AXIS] = ctrlNo;
-		m_axisIDs[ SHOOTER_HOOD_MANUAL_AXIS ] = IDragonGamePad::RIGHT_JOYSTICK_Y;
 
 		m_controllerIndex[ TURRET_MANUAL_AXIS] = ctrlNo;
 		m_axisIDs[ TURRET_MANUAL_AXIS] = IDragonGamePad::LEFT_JOYSTICK_X;
@@ -129,9 +127,6 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		m_controllerIndex[ TURRET_MANUAL_BUTTON] = ctrlNo;
 		m_buttonIDs[ TURRET_MANUAL_BUTTON] = IDragonGamePad::Y_BUTTON;
 
-		m_controllerIndex[ SHOOTER_HOOD_MANUAL_BUTTON] = ctrlNo;
-		m_buttonIDs[ SHOOTER_HOOD_MANUAL_BUTTON] = IDragonGamePad::Y_BUTTON;
-
 		m_controllerIndex[SHOOTER_MANUAL_SHOOT] = ctrlNo;
 		m_buttonIDs[SHOOTER_MANUAL_SHOOT] = IDragonGamePad::POV_0;
 		
@@ -141,11 +136,6 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		m_controllerIndex[TURRET_LIMELIGHT_AIM] = ctrlNo;
 		m_buttonIDs[TURRET_LIMELIGHT_AIM] = IDragonGamePad::POV_270;
 
-		m_controllerIndex[ UNJAM_CLOCKWISE ] = ctrlNo;
-		m_buttonIDs[ UNJAM_CLOCKWISE ] = IDragonGamePad::RIGHT_BUMPER;
-		
-		m_controllerIndex[ UNJAM_COUNTERCLOCKWISE ] = ctrlNo;
-		m_buttonIDs[ UNJAM_COUNTERCLOCKWISE ] = IDragonGamePad::LEFT_BUMPER;
 
 		m_controllerIndex[ TRANSFER_UP ] = ctrlNo;
 		m_buttonIDs[ TRANSFER_UP ] = IDragonGamePad::LEFT_TRIGGER_PRESSED;
@@ -295,7 +285,7 @@ void TeleopControl::SetAxisProfile
     	}
     }
 }
-
+ 
 //------------------------------------------------------------------
 // Method:      GetAxisValue
 // Description: Reads the joystick axis, removes any deadband (small
