@@ -58,8 +58,11 @@ ShooterStateMgr::ShooterStateMgr() : m_stateVector(),
     map<string, SHOOTER_STATE> stateStringToEnumMap;
     stateStringToEnumMap["SHOOTEROFF"] = SHOOTER_STATE::OFF;
     stateStringToEnumMap["SHOOTERGETREADY"]  = SHOOTER_STATE::GET_READY;
-    stateStringToEnumMap["SHOOTERSHOOT"] = SHOOTER_STATE::SHOOT;
-    m_stateVector.resize(3);
+    stateStringToEnumMap["SHOOTERSHOOTGREEN"] = SHOOTER_STATE::SHOOTGREEN;
+    stateStringToEnumMap["SHOOTERSHOOTYELLOW"] = SHOOTER_STATE::SHOOTYELLOW;
+    stateStringToEnumMap["SHOOTERSHOOTBLUE"] = SHOOTER_STATE::SHOOTBLUE;
+    stateStringToEnumMap["SHOOTERSHOOTRED"] = SHOOTER_STATE::SHOOTRED;
+    m_stateVector.resize(6);
 
     // create the states passing the configuration data
     for ( auto td: targetData )
@@ -93,7 +96,28 @@ ShooterStateMgr::ShooterStateMgr() : m_stateVector(),
                     }
                     break;
 
-                    case SHOOTER_STATE::SHOOT:
+                    case SHOOTER_STATE::SHOOTGREEN:
+                    {   
+                        auto thisState = new ShooterState( controlData, target );
+                        m_stateVector[stateEnum] = thisState;
+                    }
+                    break;
+
+                    case SHOOTER_STATE::SHOOTYELLOW:
+                    {   
+                        auto thisState = new ShooterState( controlData, target );
+                        m_stateVector[stateEnum] = thisState;
+                    }
+                    break;
+
+                    case SHOOTER_STATE::SHOOTBLUE:
+                    {   
+                        auto thisState = new ShooterState( controlData, target );
+                        m_stateVector[stateEnum] = thisState;
+                    }
+                    break;
+                    
+                    case SHOOTER_STATE::SHOOTRED:
                     {   
                         auto thisState = new ShooterState( controlData, target );
                         m_stateVector[stateEnum] = thisState;
@@ -133,9 +157,21 @@ void ShooterStateMgr::RunCurrentState()
             {
                 SetCurrentState( SHOOTER_STATE::GET_READY, false );
             }
-            if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT ))
+            if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_GREEN ))
             {
-                SetCurrentState( SHOOTER_STATE::SHOOT, false );
+                SetCurrentState( SHOOTER_STATE::SHOOTGREEN, false );
+            }
+            if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_YELLOW ))
+            {
+                SetCurrentState( SHOOTER_STATE::SHOOTYELLOW, false );
+            }
+            if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_BLUE ))
+            {
+                SetCurrentState( SHOOTER_STATE::SHOOTBLUE, false );
+            }
+            if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_RED ))
+            {
+                SetCurrentState( SHOOTER_STATE::SHOOTRED, false );
             }
             if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_OFF ))
             {

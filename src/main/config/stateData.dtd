@@ -21,7 +21,7 @@
                                           BALLTRANSFEROFF | BALLTRANSFERTOSHOOTER | BALLTRANSFEREJECT |
                                           SHOOTERHOODUP | SHOOTERHOODDOWN | 
                                           TURRETHOLD | TURRETAUTOAIM |
-                                          SHOOTEROFF | SHOOTERGETREADY | SHOOTERSHOOT |
+                                          SHOOTEROFF | SHOOTERGETREADY | SHOOTERSHOOTGREEN | SHOOTERSHOOTYELLOW | SHOOTERSHOOTBLUE | SHOOTERSHOOTRED |
                                           UNKNOWN ) "UNKNOWN"
           controlDataIdentifier         CDATA #REQUIRED
           value                         CDATA #REQUIRED
