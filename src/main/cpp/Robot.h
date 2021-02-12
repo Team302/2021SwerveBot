@@ -61,10 +61,21 @@ class Robot : public frc::TimedRobot
       void TestInit() override;
       void TestPeriodic() override;
 
+      static int   GetRunMode(void);
+
   private:
-    friend class      RamScan;
     RamScan*          m_RamScan;
 
     std::shared_ptr<SwerveDrive> m_drive;
 
+// the current mode the robot is running in
+   typedef enum
+    {
+        INIT,
+        DISABLED,
+        AUTON,
+        TELEOP,
+        TEST
+    } RunModeType;
+    static RunModeType  m_RunMode;
 };

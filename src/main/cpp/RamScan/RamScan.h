@@ -22,12 +22,10 @@
 
 #include <frc/DriverStation.h>
 #include <frc/Preferences.h>
-#include <string>
 
 // include files for data to scan
 #include <gamepad/TeleopControl.h>
 #include <hw/DragonPigeon.h>
-#include <hw/DragonTalon.h>
 #include <hw/interfaces/IDragonMotorController.h>
 #include <hw/usages/MotorControllerUsage.h>
 #include <subsys/SwerveChassis.h>
@@ -37,8 +35,6 @@ using namespace std;
 
 
 class RamScan {
-
-    friend class    Robot;
 
 public:
     RamScan();
@@ -54,6 +50,7 @@ public:
                                     shared_ptr<IDragonMotorController>      turnMotor,
                                     SwerveModule::ModuleID                  position);
 
+
 private:
 
 // definition of type for each scanned variable
@@ -68,7 +65,6 @@ private:
         ULONG,
         FLOAT,
         DOUBLE,
-        // //STRING
     } ScanElementType;
 
 // result variables for each type
@@ -81,7 +77,6 @@ private:
     static unsigned long    result_ULONG;
     static float            result_FLOAT;
     static double           result_DOUBLE;
-    static string           result_STRING;
 
 // structure to define elements of ScanElementArray(s)
     typedef struct
@@ -97,16 +92,6 @@ private:
     unsigned long int       m_bitMaskPrev;      //  "
 
     static int              m_PacketCntr20ms;   // count comm. packets from driver station (every 20ms)
-
-    typedef enum            // TODO: this should be in the Robot class, but how to access it then?
-    {
-        INIT,
-        DISABLED,
-        AUTON,
-        TELEOP,
-        TEST
-    } RunModeType;
-    static RunModeType      m_RunMode;      // Mode set in Robot.cpp
 
 // pointers to objects containing variables that may be scanned
     static std::shared_ptr<SwerveChassis>   m_chassis;

@@ -54,7 +54,6 @@ RamScan::RamScan()
     m_bitMaskPrev   = 0xDEADBEEF;       // Big Mac
     m_PacketCntr20ms = 0;
     m_prefs         = nullptr;
-    m_RunMode       = INIT;
 
     //
     // pointers to objects containing variables that may be scanned
@@ -175,9 +174,6 @@ if ((m_PacketCntr20ms & 0x00FF) == 0)
 {
     printf("....every 256 loops (5.12s)\n");
 // ?? //    printf("Chassis current speed = %5.2f\n", m_chassis->GetCurrentSpeed());
-// ?? //    printf("CurrentRightPosition = %5.2f\n", m_chassis->GetCurrentRightPosition());
-// ?? //    printf("LD motor RPS = %5.1f\n",
-// ?? //            MotorControllerArray[MotorControllerUsage::MOTOR_CONTROLLER_USAGE::LEFT_DRIVE_MASTER]->GetRPS());
     printf("Driver speed = %4.3f\n", m_teleopControl->GetAxisValue(TeleopControl::SWERVE_DRIVE_DRIVE));
 }
 
@@ -248,10 +244,6 @@ if ((m_PacketCntr20ms & 0x00FF) == 0)
                     frc::SmartDashboard::PutNumber(ElementName, result_DOUBLE);
                     break;
 
-                // //case STRING:
-                 // //   frc::SmartDashboard::PutString(ElementName, result_STRING);
-                 // //   break;
-
                 default:
                     Logger::GetLogger()->LogError("RamScan::ScanVariables - at ", to_string(i));
                     Logger::GetLogger()->LogError(" invalid ElementType:",to_string(ScanElementArray[i].Type));
@@ -304,7 +296,6 @@ void RamScan::SaveSwerveMotorUsage( shared_ptr<IDragonMotorController>  driveMot
 //  static variables in RamScan
 //
     int                         RamScan::m_PacketCntr20ms;
-    RamScan::RunModeType        RamScan::m_RunMode;
 
     shared_ptr<SwerveChassis>   RamScan::m_chassis;
     DriverStation*              RamScan::m_DriverStation;
@@ -339,7 +330,6 @@ void RamScan::SaveSwerveMotorUsage( shared_ptr<IDragonMotorController>  driveMot
     unsigned long   RamScan::result_ULONG;
     float           RamScan::result_FLOAT;
     double          RamScan::result_DOUBLE;
-    string          RamScan::result_STRING;
 
 
 //**********************************************************************************//
@@ -350,7 +340,7 @@ void RamScan::SaveSwerveMotorUsage( shared_ptr<IDragonMotorController>  driveMot
 //**********************************************************************************//
 
 void RamScan::CrazyEights(void)             { result_INT = 8888;}   // for dummy functions
-void RamScan::Get_RunMode(void)             { result_INT = static_cast<int>(m_RunMode);}
+void RamScan::Get_RunMode(void)             { result_INT = Robot::GetRunMode();}
 void RamScan::Get_PacketCntr20ms(void)      { result_INT = m_PacketCntr20ms;}
 
 //

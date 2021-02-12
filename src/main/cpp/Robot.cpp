@@ -39,7 +39,7 @@ using namespace frc;
 /// @return void
 void Robot::RobotInit()
 {
-    RamScan::m_RunMode = RamScan::INIT;     // ?? unnecessary?
+    m_RunMode = INIT;
 
     // Read the robot definition from the xml configuration files and
     // create the hardware (chassis + mechanisms along with their talons,
@@ -48,7 +48,7 @@ void Robot::RobotInit()
     robotXml->ParseXML();
 
     // RAM SCAN: This is at the end of RobotInit() so all the target objects are already created.
-    m_RamScan       = new RamScan();
+    m_RamScan = new RamScan();
     m_RamScan->Init();
 }
 
@@ -73,7 +73,7 @@ void Robot::RobotPeriodic()
 /// @return void
 void Robot::DisabledInit()
 {
-    RamScan::m_RunMode = RamScan::DISABLED;
+    m_RunMode = DISABLED;
 }
 
 
@@ -89,7 +89,7 @@ void Robot::DisabledPeriodic()
 /// @return void
 void Robot::AutonomousInit()
 {
-    RamScan::m_RunMode = RamScan::AUTON;
+    m_RunMode = AUTON;
 
     auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
     if ( swerveChassis.get() != nullptr )
@@ -117,7 +117,6 @@ void Robot::AutonomousPeriodic()
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("AutonomousPeriodic"), string("no swerve chassis"));
     }
-
 }
 
 
@@ -125,7 +124,7 @@ void Robot::AutonomousPeriodic()
 /// @return void
 void Robot::TeleopInit()
 {
-    RamScan::m_RunMode = RamScan::TELEOP;
+    m_RunMode = TELEOP;
 
     auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
     if ( swerveChassis.get() != nullptr )
@@ -154,15 +153,28 @@ void Robot::TeleopPeriodic()
 /// @return void
 void Robot::TestInit()
 {
-    RamScan::m_RunMode = RamScan::TEST;
+    m_RunMode = TEST;
 }
 
 /// @brief Runs every 20 milliseconds when the test state is active.
 /// @return void
 void Robot::TestPeriodic()
 {
-
 }
+
+
+/// @brief Returns the current mode of the robot (AUTON, TELEOP, DISABLED etc.)
+/// @return int
+int    Robot::GetRunMode(void)
+{
+    return(static_cast<int> (Robot::m_RunMode));
+}
+
+//
+//  static variables in Robot
+//
+    Robot::RunModeType      Robot::m_RunMode;
+
 
 #ifndef RUNNING_FRC_TESTS
 int main()
