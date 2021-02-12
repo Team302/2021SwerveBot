@@ -22,8 +22,10 @@
 
 // Team 302 includes
 #include <states/IState.h>
+#include <states/balltransfer/BallTransferStateMgr.h>
 #include <states/shooter/ShooterStateMgr.h>
 #include <states/shooter/ShooterState.h>
+#include <states/turret/TurretStateMgr.h>
 #include <xmlmechdata/StateDataDefn.h>
 #include <controllers/MechanismTargetData.h>
 #include <utils/Logger.h>
@@ -41,7 +43,11 @@ ShooterStateMgr* ShooterStateMgr::GetInstance()
 {
 	if ( ShooterStateMgr::m_instance == nullptr )
 	{
+        // Create the shooter state manager, ball transfer state manager, turret state manager and hopper state manager
 		ShooterStateMgr::m_instance = new ShooterStateMgr();
+        BallTransferStateMgr::GetInstance();
+        TurretStateMgr::GetInstance();
+        // todo add hopper
 	}
 	return ShooterStateMgr::m_instance;
 }
@@ -151,6 +157,9 @@ void ShooterStateMgr::RunCurrentState()
         {
             m_currentState->Run();
         }
+        BallTransferStateMgr::GetInstance()->RunCurrentState();
+        // TODO:  add hopper
+
     }
 
 }
@@ -169,6 +178,11 @@ void ShooterStateMgr::SetCurrentState
             m_currentState = state;
             m_currentStateEnum = stateEnum;
             m_currentState->Init();
+            if ( stateEnum == SHOOTER_STATE::GET_READY || stateEnum == SHOOTER_STATE::SHOOT )
+            {
+                BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, run );
+               // TODO:  add hopper
+            }
             if ( run )
             {
                 if ( MechanismFactory::GetMechanismFactory()->GetShooter().get() != nullptr)

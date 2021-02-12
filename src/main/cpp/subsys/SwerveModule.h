@@ -64,6 +64,9 @@ class SwerveModule
         /// @returns void
         void SetDesiredState(const frc::SwerveModuleState& state);
 
+        void SetDriveSpeed( units::velocity::meters_per_second_t speed );
+        void SetTurnAngle( units::angle::radian_t angle );
+
         /// @brief Return which module this is
         /// @returns ModuleID
         ModuleID GetType() {return m_type;}
@@ -74,15 +77,16 @@ class SwerveModule
     //    frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward {1_V, 0.5_V / 1_rad_per_s};
         frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward {1_V, 0.05_V / 1_rad_per_s};
 
-        void RunTurnMotor( frc::SwerveModuleState state );
-        void RunDriveMotor( frc::SwerveModuleState state );
+        void RunTurnMotor( units::angle::radian_t angle );
+        void RunDriveMotor( units::velocity::meters_per_second_t speed );
 
         ModuleID m_type;
         std::shared_ptr<IDragonMotorController>             m_driveMotor;
         std::shared_ptr<IDragonMotorController>             m_turnMotor;
         std::shared_ptr<ctre::phoenix::sensors::CANCoder>   m_turnSensor;
         units::length::inch_t                               m_wheelDiameter;
-        frc::ProfiledPIDController<units::radians>          m_turningPIDController{ 0.5, 0.0, 0.25, // 1.0
+        // the controller below is initialized here, but the actual values are set in the constructor
+        frc::ProfiledPIDController<units::radians>          m_turningPIDController{ 0.5, 0.0, 0.25, 
                                                                                     { wpi::math::pi * 1_rad_per_s, 
                                                                                       wpi::math::pi * 2_rad_per_s / 1_s}};
 

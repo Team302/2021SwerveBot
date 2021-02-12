@@ -20,7 +20,6 @@
 			       DRIVE_TO_WALL,
              TURN_ANGLE_ABS,
              TURN_ANGLE_REL,
-             AUTO_SHOOT,
              DRIVE_PATH,
              MAX_AUTON_PRIMITIVES
          };

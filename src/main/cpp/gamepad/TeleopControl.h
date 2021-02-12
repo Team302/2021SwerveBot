@@ -92,7 +92,11 @@ class TeleopControl
             float                               scaleFactor    // <I> - scale factor used to limit the range
         );
 
-        
+        void SetDeadBand
+        (
+            TeleopControl::FUNCTION_IDENTIFIER  axis,
+            IDragonGamePad::AXIS_DEADBAND       deadband
+        );
 
         void SetSlewRateLimiter
         (

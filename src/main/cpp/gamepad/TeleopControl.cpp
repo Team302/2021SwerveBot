@@ -247,6 +247,22 @@ void TeleopControl::SetAxisScaleFactor
     }
 }
 
+void TeleopControl::SetDeadBand
+(
+	TeleopControl::FUNCTION_IDENTIFIER		function,
+	IDragonGamePad::AXIS_DEADBAND			deadband    
+)
+{
+	int ctlIndex = m_controllerIndex[ function];
+	IDragonGamePad::AXIS_IDENTIFIER axis = m_axisIDs[ function ];
+    if ( ctlIndex > -1 && axis != IDragonGamePad::AXIS_IDENTIFIER::UNDEFINED_AXIS  )
+    {
+    	if (m_controllers[ ctlIndex ] != nullptr)
+    	{
+    		m_controllers[ ctlIndex ]->SetAxisDeadband( axis,deadband);
+    	}
+    }}
+
 void TeleopControl::SetSlewRateLimiter
 (
 	TeleopControl::FUNCTION_IDENTIFIER		function,

@@ -1,6 +1,5 @@
 #include <auton/PrimitiveEnums.h>
 #include <auton/PrimitiveParams.h>
-#include <states/BallManipulator.h>
 
 PrimitiveParams::PrimitiveParams
 (
@@ -12,8 +11,6 @@ PrimitiveParams::PrimitiveParams
     float                       						heading,
     float                       						startDriveSpeed,
     float                       						endDriveSpeed,
-	BallManipulator::BALL_MANIPULATOR_STATE				ballState,
-	float												turretAngle,
 	std::string                                         pathName
 ):	//Pass over parameters to class variables
 		m_id(id), //Primitive ID
@@ -24,8 +21,6 @@ PrimitiveParams::PrimitiveParams
 		m_heading(heading),
 		m_startDriveSpeed( startDriveSpeed ),
 		m_endDriveSpeed( endDriveSpeed ),
-		m_ballState( ballState ),
-		m_turretAngle( turretAngle ),
 		m_pathName ( pathName)
 {
 }
@@ -70,15 +65,6 @@ float PrimitiveParams::GetEndDriveSpeed() const
     return m_endDriveSpeed;
 }
 
-BallManipulator::BALL_MANIPULATOR_STATE PrimitiveParams::GetBallState() const
-{
-	return m_ballState;
-}
-
-float PrimitiveParams::GetTurretAngle() const
-{
-	return m_turretAngle;
-}
 
 std::string PrimitiveParams::GetPathName() const
 {

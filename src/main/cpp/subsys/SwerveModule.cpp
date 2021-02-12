@@ -84,14 +84,27 @@ SwerveModule::SwerveModule
     
     // Limit the PID Controller's input range between -pi and pi and set the input
     // to be continuous.
-    m_turningPIDController.SetPID(0.1, 0.0, 0.05);  // 1.0
-    m_turningPIDController.SetConstraints({wpi::math::pi * 1_rad_per_s, wpi::math::pi*2_rad_per_s/1_s});
+    m_turningPIDController.SetPID(0.5, 0.0, 0.0001);  // switch from 1, 0, 0 to 0.1, 0, 0.05
+    m_turningPIDController.SetConstraints({wpi::math::pi * 1_rad_per_s, 
+                                           wpi::math::pi*2_rad_per_s/1_s});
     m_turningPIDController.EnableContinuousInput( -2.0*units::radian_t(wpi::math::pi),
                                                    2.0*units::radian_t(wpi::math::pi));
     
     // Set up the Turn Motor
     motor = m_turnMotor.get()->GetSpeedController();
     fx = dynamic_cast<WPI_TalonFX*>(motor.get());
+    auto error = fx->ConfigPeakOutputForward(0.5, 0);
+	if ( error != ErrorCode::OKAY )
+	{
+		Logger::GetLogger()->LogError(string("SwerveModule"), string("ConfigPeakOutputForward error"));
+		error = ErrorCode::OKAY;
+	}
+	error = fx->ConfigPeakOutputReverse(-0.5, 0);
+	if ( error != ErrorCode::OKAY )
+	{
+		Logger::GetLogger()->LogError(string("SwerveModule"), string("ConfigPeakOutputReverse error"));
+		error = ErrorCode::OKAY;
+	}
 
     auto sensors = fx->GetSensorCollection();
     m_initialCounts = sensors.GetIntegratedSensorPosition();
@@ -168,9 +181,7 @@ void SwerveModule::Init
 /// @returns void
 void SwerveModule::ZeroAlignModule()
 {
-    Rotation2d angle {units::angle::degree_t(0.0)};
-    frc::SwerveModuleState state { 0_mps, angle };
-    RunTurnMotor(state);
+    RunTurnMotor( units::angle::radian_t(0.0));
 }
 
 
@@ -206,28 +217,38 @@ void SwerveModule::SetDesiredState
     auto state = SwerveModuleState::Optimize(referenceState, units::angle::radian_t(m_turnSensor.get()->GetAbsolutePosition()));
 
     // Set Drive Target 
-    RunDriveMotor(state);
+    RunDriveMotor(state.speed);
 
     // Set Turn Target 
-    RunTurnMotor(state);
+    RunTurnMotor(state.angle.Radians());
 }
 
-void SwerveModule::RunDriveMotor( frc::SwerveModuleState state )
+void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
+{
+    RunDriveMotor(speed);
+}
+void SwerveModule::SetTurnAngle( units::angle::radian_t angle )
+{
+    RunTurnMotor(angle);
+}
+
+
+void SwerveModule::RunDriveMotor( units::velocity::meters_per_second_t speed )
 {
     // convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel
-    auto driveTarget = state.speed.to<double>() /  units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi;  
+    auto driveTarget = speed.to<double>() /  units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi;  
 	m_nt->PutString("drive motor id", to_string(m_driveMotor.get()->GetID()) );
     m_nt.get()->PutNumber( "drive target", driveTarget );
     m_driveMotor.get()->Set(m_nt, driveTarget);
 }
 
-void SwerveModule::RunTurnMotor( frc::SwerveModuleState state )
+void SwerveModule::RunTurnMotor( units::angle::radian_t angle )
 {
     units::angle::radian_t rads = units::angle::radian_t(m_turnSensor.get()->GetAbsolutePosition());
-    auto turnOutput = m_turningPIDController.Calculate(rads, state.angle.Radians());
+    auto turnOutput = m_turningPIDController.Calculate(rads, angle);
 	m_nt->PutString("turn motor id", to_string(m_turnMotor.get()->GetID()) );
     m_nt.get()->PutNumber( "current angle", units::angle::degree_t(rads).to<double>() );
-    m_nt.get()->PutNumber( "target angle", state.angle.Degrees().to<double>() );
+    m_nt.get()->PutNumber( "target angle", units::angle::degree_t(angle).to<double>() );
     auto motor = m_turnMotor.get()->GetSpeedController();
     auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
     auto turnFeedforward = m_turnFeedforward.Calculate( m_turningPIDController.GetSetpoint().velocity);

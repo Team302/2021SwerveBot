@@ -106,10 +106,10 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
 {
     units::degree_t yaw{m_pigeon->GetYaw()};
     Rotation2d currentOrientation {yaw};
-    //auto states = m_kinematics.ToSwerveModuleStates(
-    //                            fieldRelative ? frc::ChassisSpeeds::FromFieldRelativeSpeeds(
-    //                            xSpeed, ySpeed, rot, currentOrientation) : frc::ChassisSpeeds{xSpeed, ySpeed, rot} );
-    auto states = m_kinematics.ToSwerveModuleStates( frc::ChassisSpeeds{xSpeed, ySpeed, rot}  );
+    auto states = m_kinematics.ToSwerveModuleStates(
+                                fieldRelative ? frc::ChassisSpeeds::FromFieldRelativeSpeeds(
+                                xSpeed, ySpeed, rot, currentOrientation) : frc::ChassisSpeeds{xSpeed, ySpeed, rot} );
+    //auto states = m_kinematics.ToSwerveModuleStates( frc::ChassisSpeeds{xSpeed, ySpeed, rot}  );
 
     m_kinematics.NormalizeWheelSpeeds(&states, m_maxSpeed);
 
@@ -138,15 +138,33 @@ void SwerveChassis::Drive( ChassisSpeeds speeds, bool fieldRelative)
 ///                                     false: direction is based on robot front/back
 void SwerveChassis::Drive( double drive, double steer, double rotate, bool fieldRelative )
 {
-    // scale joystick values to velocities using max chassis values
-    auto maxSpeed = GetMaxSpeed();
-    auto maxRotation = GetMaxAngularSpeed();
+    if ( abs(drive) < 0.01 && abs(steer) < 0.01 && abs(rotate) < 0.01 )
+    {
+        // feed the motors
+        auto state1 = m_frontLeft.get()->GetState();
+        m_frontLeft.get()->SetDesiredState(state1);
 
-    units::velocity::meters_per_second_t driveSpeed = drive * maxSpeed;
-    units::velocity::meters_per_second_t steerSpeed = steer * maxSpeed;
-    units::angular_velocity::radians_per_second_t rotateSpeed = rotate * maxRotation;
+        auto state2 = m_frontRight.get()->GetState();
+        m_frontRight.get()->SetDesiredState(state2);
 
-    Drive( driveSpeed, steerSpeed, rotateSpeed, fieldRelative );
+        auto state3 = m_backLeft.get()->GetState();
+        m_backLeft.get()->SetDesiredState(state3);
+
+        auto state4 = m_backRight.get()->GetState();
+        m_backRight.get()->SetDesiredState(state4);
+    }
+    else
+    {    
+        // scale joystick values to velocities using max chassis values
+        auto maxSpeed = GetMaxSpeed();
+        auto maxRotation = GetMaxAngularSpeed();
+
+        units::velocity::meters_per_second_t driveSpeed = drive * maxSpeed;
+        units::velocity::meters_per_second_t steerSpeed = steer * maxSpeed;
+        units::angular_velocity::radians_per_second_t rotateSpeed = rotate * maxRotation;
+
+        Drive( driveSpeed, steerSpeed, rotateSpeed, fieldRelative );
+    }
 }
 
 /// @brief update the chassis odometry based on current states of the swerve modules and the pigeon

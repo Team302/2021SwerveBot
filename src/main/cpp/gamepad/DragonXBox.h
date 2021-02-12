@@ -147,7 +147,7 @@ class DragonXBox : public IDragonGamePad
             AXIS_IDENTIFIER    			        axis,       // <I> - axis identifier to modify
             float                               scaleFactor // <I> - value  (0 < scale <= 1.0) to scale the axis value
         ) override;
-
+       
         void SetSlewLimit
         (
             AXIS_IDENTIFIER                     axis,
