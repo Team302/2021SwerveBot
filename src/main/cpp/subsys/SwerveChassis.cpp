@@ -141,17 +141,10 @@ void SwerveChassis::Drive( double drive, double steer, double rotate, bool field
     if ( abs(drive) < 0.01 && abs(steer) < 0.01 && abs(rotate) < 0.01 )
     {
         // feed the motors
-        auto state1 = m_frontLeft.get()->GetState();
-        m_frontLeft.get()->SetDesiredState(state1);
-
-        auto state2 = m_frontRight.get()->GetState();
-        m_frontRight.get()->SetDesiredState(state2);
-
-        auto state3 = m_backLeft.get()->GetState();
-        m_backLeft.get()->SetDesiredState(state3);
-
-        auto state4 = m_backRight.get()->GetState();
-        m_backRight.get()->SetDesiredState(state4);
+        m_frontLeft.get()->SetDriveSpeed(units::velocity::meters_per_second_t(0.0));
+        m_frontRight.get()->SetDriveSpeed(units::velocity::meters_per_second_t(0.0));
+        m_backLeft.get()->SetDriveSpeed(units::velocity::meters_per_second_t(0.0));
+        m_backRight.get()->SetDriveSpeed(units::velocity::meters_per_second_t(0.0));
     }
     else
     {    

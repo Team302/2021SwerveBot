@@ -84,7 +84,7 @@ SwerveModule::SwerveModule
     
     // Limit the PID Controller's input range between -pi and pi and set the input
     // to be continuous.
-    m_turningPIDController.SetPID(0.5, 0.0, 0.0001);  // switch from 1, 0, 0 to 0.1, 0, 0.05
+    m_turningPIDController.SetPID(0.1, 0.0, 0.0001);  // switch from 1, 0, 0 to 0.1, 0, 0.05
     m_turningPIDController.SetConstraints({wpi::math::pi * 1_rad_per_s, 
                                            wpi::math::pi*2_rad_per_s/1_s});
     m_turningPIDController.EnableContinuousInput( -2.0*units::radian_t(wpi::math::pi),
