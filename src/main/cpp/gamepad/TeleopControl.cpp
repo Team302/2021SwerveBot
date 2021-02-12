@@ -127,8 +127,8 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		m_controllerIndex[ TURRET_MANUAL_BUTTON] = ctrlNo;
 		m_buttonIDs[ TURRET_MANUAL_BUTTON] = IDragonGamePad::Y_BUTTON;
 
-		m_controllerIndex[SHOOTER_MANUAL_SHOOT] = ctrlNo;
-		m_buttonIDs[SHOOTER_MANUAL_SHOOT] = IDragonGamePad::POV_0;
+		m_controllerIndex[SHOOTER_MANUAL_SHOOT_GREEN] = ctrlNo;
+		m_buttonIDs[SHOOTER_MANUAL_SHOOT_GREEN] = IDragonGamePad::POV_0;
 		
 		m_controllerIndex[SHOOTER_OFF] = ctrlNo;
 		m_buttonIDs[SHOOTER_OFF] = IDragonGamePad::POV_180;

@@ -14,8 +14,23 @@
 	                 controlDataIdentifier="openloop"
 					 value="0.5"
 					 secondValue="0.5"/>
-	<mechanismTarget stateIdentifier="SHOOTERSHOOT"
+
+	<mechanismTarget stateIdentifier="SHOOTERSHOOTGREEN"
+					 controlDataIdentifier="closedloop"
+					 value="25"
+					 secondValue="25"/>
+
+	<mechanismTarget stateIdentifier="SHOOTERSHOOTYELLOW"
 	                 controlDataIdentifier="closedloop"
+					 value="30"
+					 secondValue="30"/>
+
+	<mechanismTarget stateIdentifier="SHOOTERSHOOTBLUE"
+					 controlDataIdentifier="closedloop"
+					 value="35"
+					 secondValue="35"/>
+
+	<mechanismTarget stateIdentifier="SHOOTSHOOTRED"
 					 value="36.50"
 					 secondValue="36.50"/>
 
