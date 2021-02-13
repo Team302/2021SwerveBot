@@ -167,7 +167,7 @@ void  MechanismFactory::CreateIMechanism
 			
 		}
 		break;			
-	/**	
+	
 		case MechanismTypes::MECHANISM_TYPE::SHOOTER:
 		{
 			if ( m_shooter.get() != nullptr )
@@ -186,7 +186,6 @@ void  MechanismFactory::CreateIMechanism
 
 		}
 		break;		
-		**/
 		
 		case MechanismTypes::MECHANISM_TYPE::SHOOTER_HOOD:
 		{

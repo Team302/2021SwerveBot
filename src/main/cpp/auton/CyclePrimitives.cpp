@@ -49,8 +49,8 @@ CyclePrimitives::CyclePrimitives() : m_primParams(),
 									 m_timer( make_unique<Timer>()),
 									 m_maxTime( 0.0 ),
 									 m_isDone( false ),
-									 m_runIntake( false ),
-									 m_pathName("")
+									 m_pathName(""),
+									 m_runIntake( false )
 {
 }
 

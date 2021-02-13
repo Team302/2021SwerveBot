@@ -81,13 +81,14 @@ ShooterStateMgr::ShooterStateMgr() : m_stateVector(),
             if ( m_stateVector[stateEnum] == nullptr )
             {
                 auto controlData = td->GetController();
-                auto target = td->GetTarget();
+                auto target1 = td->GetTarget();
+                auto target2 = td->GetSecondTarget();
 
                 switch ( stateEnum )
                 {
                     case SHOOTER_STATE::OFF:
                     {   
-                        auto thisState = new ShooterState( controlData, target );
+                        auto thisState = new ShooterState( controlData, target1, target2 );
                         m_stateVector[stateEnum] = thisState;
                         m_currentState = thisState;
                         m_currentStateEnum = stateEnum;
@@ -97,35 +98,35 @@ ShooterStateMgr::ShooterStateMgr() : m_stateVector(),
 
                     case SHOOTER_STATE::GET_READY:
                     {   
-                        auto thisState = new ShooterState( controlData, target );
+                        auto thisState = new ShooterState( controlData, target1, target2 );
                         m_stateVector[stateEnum] = thisState;
                     }
                     break;
 
                     case SHOOTER_STATE::SHOOTGREEN:
                     {   
-                        auto thisState = new ShooterState( controlData, target );
+                        auto thisState = new ShooterState( controlData, target1, target2 );
                         m_stateVector[stateEnum] = thisState;
                     }
                     break;
 
                     case SHOOTER_STATE::SHOOTYELLOW:
                     {   
-                        auto thisState = new ShooterState( controlData, target );
+                        auto thisState = new ShooterState( controlData, target1, target2 );
                         m_stateVector[stateEnum] = thisState;
                     }
                     break;
 
                     case SHOOTER_STATE::SHOOTBLUE:
                     {   
-                        auto thisState = new ShooterState( controlData, target );
+                        auto thisState = new ShooterState( controlData, target1, target2 );
                         m_stateVector[stateEnum] = thisState;
                     }
                     break;
                     
                     case SHOOTER_STATE::SHOOTRED:
                     {   
-                        auto thisState = new ShooterState( controlData, target );
+                        auto thisState = new ShooterState( controlData, target1, target2 );
                         m_stateVector[stateEnum] = thisState;
                     }
                     break;

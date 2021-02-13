@@ -63,8 +63,8 @@ class PrimitiveParams
         float                                               m_heading;
         float                                               m_startDriveSpeed;
         float                                               m_endDriveSpeed;
-        bool                                                m_runIntake;
         std::string                                         m_pathName;
+        bool                                                m_runIntake;
 };
 
 typedef std::vector<PrimitiveParams*> PrimitiveParamsVector;
