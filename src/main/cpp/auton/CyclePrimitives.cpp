@@ -101,7 +101,7 @@ void CyclePrimitives::GetNextPrim()
 	{
 		m_currentPrim->Init(currentPrimParam);
 		m_maxTime = currentPrimParam->GetTime();
-		if ( currentPrimParam->GetIntakeState() == true )
+		if ( currentPrimParam->GetIntakeState())
 		{
 			IntakeStateMgr::GetInstance()->SetCurrentState(IntakeStateMgr::ON, false);
 		}
