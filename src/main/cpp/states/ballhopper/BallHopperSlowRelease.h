@@ -15,11 +15,15 @@
 
 #pragma once
 
+//C++ includes
+#include <memory>
+
 //FRC Includes
 #include <frc2/Timer.h>
 
 //Team 302 Includes
 #include <subsys/BallHopper.h>
+#include <states/Mech1MotorState.h>
 
 
 class ControlData;
