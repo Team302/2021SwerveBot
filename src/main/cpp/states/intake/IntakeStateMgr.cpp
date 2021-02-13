@@ -113,15 +113,15 @@ IntakeStateMgr::IntakeStateMgr() : m_stateVector(),
 
 /// @brief  run the current state
 /// @return void
-void IntakeStateMgr::RunCurrentState( INTAKE_STATE intake_state)
+void IntakeStateMgr::RunCurrentState()
 {
     if ( MechanismFactory::GetMechanismFactory()->GetIntake().get() != nullptr )
     {
-            if ( intake_state == INTAKE_STATE::ON)
+            if ( m_currentStateEnum == INTAKE_STATE::ON)
             {
                 SetCurrentState( INTAKE_STATE::ON, false );
             }
-            else if ( intake_state == INTAKE_STATE::OFF)
+            else if ( m_currentStateEnum == INTAKE_STATE::OFF)
             {
                 SetCurrentState( INTAKE_STATE::OFF, false );
             }
