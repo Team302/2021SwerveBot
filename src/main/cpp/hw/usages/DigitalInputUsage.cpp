@@ -42,6 +42,7 @@ DigitalInputUsage::DigitalInputUsage()
 {
     m_usageMap["TURRET_ANGLE_MIN"] = DigitalInputUsage::DIGITAL_SENSOR_USAGE::TURRET_ANGLE_MIN;
     m_usageMap["TURRET_ANGLE_MAX"] = DigitalInputUsage::DIGITAL_SENSOR_USAGE::TURRET_ANGLE_MAX;
+    m_usageMap["HOPPER_BANNER_SENSOR"] = DigitalInputUsage::DIGITAL_SENSOR_USAGE::HOPPER_BANNER_SENSOR;
 }
 
 DigitalInputUsage::~DigitalInputUsage()

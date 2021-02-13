@@ -27,6 +27,10 @@
 		  pwmId = "0"/>
        -->
 
+       <digitalInput usage="HOPPER_BANNER_SENSOR"
+                     digitalID="1"
+                     reversed="false" />
+
 
 <!-- ====================================================
      Chassis
@@ -221,7 +225,6 @@
      Mechanisms
      ==================================================== -->    
     
-    <!--
 	<mechanism type="INTAKE">
 		<motor usage="INTAKE1"
                      canId="4"
@@ -265,6 +268,17 @@
                      reverselimitswitch="false"
                      reverselimitswitchopen="true"/>        
 	</mechanism>
+
+       <mechanism type="BALL_HOPPER">
+              <motor usage="BALL_HOPPER"
+                     canId="20"
+                     pdpID="20"
+                     type="TALONSRX"
+                     inverted="false"
+                     brakeMode="true"/>
+       </mechanism>
+
+       <!--
   
 	<mechanism type="BALL_TRANSFER">
 		<motor usage="BALL_TRANSFER"

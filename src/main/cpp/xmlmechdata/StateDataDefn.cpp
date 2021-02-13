@@ -74,6 +74,10 @@ vector<MechanismTargetData*> StateDataDefn::ParseXML
             mech = string( "intake.xml");
             break;
 
+        case MechanismTypes::BALL_HOPPER:
+            filename += string( "ballhopper.xml");
+            break;
+
         case MechanismTypes::BALL_TRANSFER:
             mech = string( "balltransfer.xml");
             break;

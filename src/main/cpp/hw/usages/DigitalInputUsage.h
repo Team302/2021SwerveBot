@@ -40,6 +40,7 @@ class DigitalInputUsage
             UNKNOWN_DIGITAL_TYPE = -1,
             TURRET_ANGLE_MIN,
             TURRET_ANGLE_MAX,
+            HOPPER_BANNER_SENSOR,
             MAX_DIGITAL_TYPES
         };
 

@@ -1,4 +1,3 @@
-
 //====================================================================================================================================================
 // Copyright 2020 Lake Orion Robotics FIRST Team 302
 //
@@ -14,61 +13,17 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-#pragma once
 
-// C++ Includes
-#include <map>
-#include <memory>
-#include <string>
+//Team 302 Includes
+#include <controllers/ControlData.h>
+#include <states/ballhopper/BallHopperState.h>
+#include <states/Mech1MotorState.h>
+#include <subsys/MechanismFactory.h>
 
-// FRC includes
-
-// Team 302 includes
-
-
-// Third Party Includes
-
-
-
-class MotorControllerUsage
+BallHopperState::BallHopperState
+(
+    ControlData*            control,
+    double                  target
+) : Mech1MotorState( MechanismFactory::GetMechanismFactory()->GetBallHopper().get(), control, target )
 {
-
-    public:
-
-        /// @enum MOTOR_CONTROLLER_USAGE
-        /// @brief Defines motor usages.  This should be modified for each robot.
-        enum MOTOR_CONTROLLER_USAGE
-        {
-            UNKNOWN_MOTOR_CONTROLLER_USAGE = -1,
-            DRIVE,
-            TURN,
-            INTAKE1,
-            INTAKE2,
-            BALL_TRANSFER,
-            BALL_HOPPER,
-            TURRET,
-            SHOOTER_1,            
-            SHOOTER_2,
-            SHOOTER_HOOD,
-            MAX_MOTOR_CONTROLLER_USAGES
-        };
-
-
-        static MotorControllerUsage* GetInstance();
-
-        MOTOR_CONTROLLER_USAGE GetUsage
-        ( 
-            std::string         usageString
-        );
-
-    private:
-        static MotorControllerUsage*    m_instance;
-        MotorControllerUsage();
-        ~MotorControllerUsage();
-        
-		std::map <std::string, MOTOR_CONTROLLER_USAGE> m_usageMap;
-
-};
-
-
-
+}

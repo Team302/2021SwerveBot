@@ -22,6 +22,7 @@
                                           SHOOTERHOODUP | SHOOTERHOODDOWN | 
                                           TURRETHOLD | TURRETAUTOAIM |
                                           SHOOTEROFF | SHOOTERGETREADY | SHOOTERSHOOT |
+                                          BALLHOPPEROFF | BALLHOPPERHOLD | BALLHOPPERSLOWRELEASE | BALLHOPPERRAPIDRELEASE |
                                           UNKNOWN ) "UNKNOWN"
           controlDataIdentifier         CDATA #REQUIRED
           value                         CDATA #REQUIRED

@@ -1,4 +1,3 @@
-
 //====================================================================================================================================================
 // Copyright 2020 Lake Orion Robotics FIRST Team 302
 //
@@ -16,59 +15,45 @@
 
 #pragma once
 
-// C++ Includes
-#include <map>
-#include <memory>
-#include <string>
+//FRC Includes
+#include <frc2/Timer.h>
 
-// FRC includes
-
-// Team 302 includes
+//Team 302 Includes
+#include <subsys/BallHopper.h>
 
 
-// Third Party Includes
+class ControlData;
 
-
-
-class MotorControllerUsage
+class BallHopperSlowRelease : public Mech1MotorState
 {
-
     public:
 
-        /// @enum MOTOR_CONTROLLER_USAGE
-        /// @brief Defines motor usages.  This should be modified for each robot.
-        enum MOTOR_CONTROLLER_USAGE
-        {
-            UNKNOWN_MOTOR_CONTROLLER_USAGE = -1,
-            DRIVE,
-            TURN,
-            INTAKE1,
-            INTAKE2,
-            BALL_TRANSFER,
-            BALL_HOPPER,
-            TURRET,
-            SHOOTER_1,            
-            SHOOTER_2,
-            SHOOTER_HOOD,
-            MAX_MOTOR_CONTROLLER_USAGES
-        };
-
-
-        static MotorControllerUsage* GetInstance();
-
-        MOTOR_CONTROLLER_USAGE GetUsage
-        ( 
-            std::string         usageString
+        BallHopperSlowRelease() = delete;
+        BallHopperSlowRelease
+        (
+            ControlData*        control,
+            double              target
         );
+        ~BallHopperSlowRelease() = default;
+
+        void Init();
+        void Run();
+        bool AtTarget();
 
     private:
-        static MotorControllerUsage*    m_instance;
-        MotorControllerUsage();
-        ~MotorControllerUsage();
-        
-		std::map <std::string, MOTOR_CONTROLLER_USAGE> m_usageMap;
 
+        //Hold timer
+        frc2::Timer      m_timer;
+        //BallHopper object to access sensor to detect balls
+        std::shared_ptr<BallHopper> m_ballHopper;
+        //Time to wait until we release another ball
+        const double m_waitTime = 1.5;
+        //These bools make sure we aren't detecting the same ball multiple times and we are running the right state
+        bool m_isHolding;
+        bool m_canDetect;
+        //used to know when we have hit our target of 3 balls
+        int m_timesSeen;
+        //The pointers to run the holdState and releaseState without switching off of the slowReleaseState in the stateMgr
+        IState*     m_holdState;
+        IState*     m_releaseState;
 };
-
-
-

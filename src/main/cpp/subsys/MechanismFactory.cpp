@@ -147,6 +147,25 @@ void  MechanismFactory::CreateIMechanism
 				found = true;
 			}
 		}
+		break;
+
+		case MechanismTypes::MECHANISM_TYPE::BALL_HOPPER:
+		{
+			if(m_ballhopper.get() != nullptr )
+			{
+				auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::BALL_HOPPER );
+				auto bannerSensor = GetDigitalInput( digitalInputs, DigitalInputUsage::DIGITAL_SENSOR_USAGE::HOPPER_BANNER_SENSOR );
+				if( motor.get() != nullptr && bannerSensor.get() != nullptr)
+				{
+					m_ballhopper = make_shared<BallHopper>(motor, bannerSensor);
+				}
+			}
+			else
+			{
+				found = true;
+			}
+			
+		}
 		break;			
 	/**	
 		case MechanismTypes::MECHANISM_TYPE::SHOOTER:

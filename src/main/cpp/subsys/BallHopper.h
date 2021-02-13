@@ -1,4 +1,3 @@
-
 //====================================================================================================================================================
 // Copyright 2020 Lake Orion Robotics FIRST Team 302
 //
@@ -16,59 +15,27 @@
 
 #pragma once
 
-// C++ Includes
-#include <map>
-#include <memory>
-#include <string>
+//Team 302 Includes
+#include <subsys/Mech1IndMotor.h>
+#include <hw/DragonDigitalInput.h>
 
-// FRC includes
+class IDragonMotorController;
+class DragonDigitalInput;
 
-// Team 302 includes
-
-
-// Third Party Includes
-
-
-
-class MotorControllerUsage
+class BallHopper : public Mech1IndMotor
 {
-
     public:
+    BallHopper
+    (
+        std::shared_ptr<IDragonMotorController>     motorController,
+        std::shared_ptr<DragonDigitalInput>         ballDetection
+    );
 
-        /// @enum MOTOR_CONTROLLER_USAGE
-        /// @brief Defines motor usages.  This should be modified for each robot.
-        enum MOTOR_CONTROLLER_USAGE
-        {
-            UNKNOWN_MOTOR_CONTROLLER_USAGE = -1,
-            DRIVE,
-            TURN,
-            INTAKE1,
-            INTAKE2,
-            BALL_TRANSFER,
-            BALL_HOPPER,
-            TURRET,
-            SHOOTER_1,            
-            SHOOTER_2,
-            SHOOTER_HOOD,
-            MAX_MOTOR_CONTROLLER_USAGES
-        };
+    BallHopper() = delete;
+    ~BallHopper() override = default;
 
-
-        static MotorControllerUsage* GetInstance();
-
-        MOTOR_CONTROLLER_USAGE GetUsage
-        ( 
-            std::string         usageString
-        );
+    bool isBallDetected();
 
     private:
-        static MotorControllerUsage*    m_instance;
-        MotorControllerUsage();
-        ~MotorControllerUsage();
-        
-		std::map <std::string, MOTOR_CONTROLLER_USAGE> m_usageMap;
-
+        std::shared_ptr<DragonDigitalInput>      m_ballSensor;
 };
-
-
-
