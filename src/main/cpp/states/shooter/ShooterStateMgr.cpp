@@ -214,7 +214,8 @@ void ShooterStateMgr::SetCurrentState
             m_currentState = state;
             m_currentStateEnum = stateEnum;
             m_currentState->Init();
-            if ( stateEnum == SHOOTER_STATE::GET_READY || stateEnum == SHOOTER_STATE::SHOOT )
+            if ( stateEnum == SHOOTER_STATE::GET_READY || stateEnum == SHOOTER_STATE::SHOOTBLUE || stateEnum == SHOOTER_STATE::SHOOTGREEN ||
+                                                          stateEnum == SHOOTER_STATE::SHOOTRED  || stateEnum == SHOOTER_STATE::SHOOTYELLOW )
             {
                 BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, run );
                // TODO:  add hopper
