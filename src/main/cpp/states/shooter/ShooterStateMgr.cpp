@@ -23,6 +23,7 @@
 // Team 302 includes
 #include <states/IState.h>
 #include <states/balltransfer/BallTransferStateMgr.h>
+#include <states/ballhopper/BallHopperStateMgr.h>
 #include <states/shooter/ShooterStateMgr.h>
 #include <states/shooter/ShooterState.h>
 #include <states/turret/TurretStateMgr.h>
@@ -167,18 +168,22 @@ void ShooterStateMgr::RunCurrentState()
             if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_GREEN ))
             {
                 SetCurrentState( SHOOTER_STATE::SHOOTGREEN, false );
+                BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::SLOW_RELEASE, false);
             }
-            if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_YELLOW ))
+            else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_YELLOW ))
             {
                 SetCurrentState( SHOOTER_STATE::SHOOTYELLOW, false );
+                BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::SLOW_RELEASE, false);
             }
-            if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_BLUE ))
+            else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_BLUE ))
             {
                 SetCurrentState( SHOOTER_STATE::SHOOTBLUE, false );
+                BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::SLOW_RELEASE, false);
             }
-            if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_RED ))
+            else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_RED ))
             {
                 SetCurrentState( SHOOTER_STATE::SHOOTRED, false );
+                BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::SLOW_RELEASE, false);
             }
             if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_OFF ))
             {
@@ -219,7 +224,6 @@ void ShooterStateMgr::SetCurrentState
                                                           stateEnum == SHOOTER_STATE::SHOOTRED  || stateEnum == SHOOTER_STATE::SHOOTYELLOW )
             {
                 BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, run );
-               // TODO:  add hopper
             }
             if ( run )
             {
