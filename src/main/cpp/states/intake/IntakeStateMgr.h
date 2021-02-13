@@ -42,6 +42,7 @@ class IntakeStateMgr
 
         /// @brief  run the current state
         /// @return void
+        /// @param [in] INTAKE_STATE - state to run
         void RunCurrentState();
 
         /// @brief  set the current state, initialize it and run it
