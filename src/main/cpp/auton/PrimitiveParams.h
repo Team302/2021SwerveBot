@@ -30,6 +30,7 @@ class PrimitiveParams
                 float                                               heading,
                 float                                               startDriveSpeed,
                 float                                               endDriveSpeed,
+                bool                                                runIntake,
                 std::string                                         pathName
         );//Constructor. Takes in all parameters
 
@@ -46,6 +47,7 @@ class PrimitiveParams
         float GetHeading() const;
         float GetDriveSpeed() const;
         float GetEndDriveSpeed() const;
+        bool GetIntakeState() const;
         std::string GetPathName() const;
 
         //Setters
@@ -61,6 +63,7 @@ class PrimitiveParams
         float                                               m_heading;
         float                                               m_startDriveSpeed;
         float                                               m_endDriveSpeed;
+        bool                                                m_runIntake;
         std::string                                         m_pathName;
 };
 

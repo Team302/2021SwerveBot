@@ -63,5 +63,7 @@ class CyclePrimitives : public IState
 		std::unique_ptr<frc::Timer>     m_timer;
 		double                          m_maxTime;
 		bool							m_isDone;
+		std::string						m_pathName;
+		bool							m_runIntake;
 };
 

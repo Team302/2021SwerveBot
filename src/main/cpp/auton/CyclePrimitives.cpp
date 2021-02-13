@@ -31,6 +31,7 @@
 #include <auton/PrimitiveParser.h>
 #include <auton/PrimitiveParams.h>
 #include <auton/primitives/IPrimitive.h>
+#include <states/intake/IntakeStateMgr.h>
 #include <utils/Logger.h>
 
 // Third Party Includes
@@ -47,7 +48,9 @@ CyclePrimitives::CyclePrimitives() : m_primParams(),
 									 m_autonSelector( new AutonSelector()) ,
 									 m_timer( make_unique<Timer>()),
 									 m_maxTime( 0.0 ),
-									 m_isDone( false )
+									 m_isDone( false ),
+									 m_runIntake( false ),
+									 m_pathName("")
 {
 }
 
@@ -68,6 +71,7 @@ void CyclePrimitives::Run()
 	{
 		Logger::GetLogger()->LogError( string("CyclePrimitive::RunCurrentPrimitive"), string("Primitive Detected!"));
 		m_currentPrim->Run();
+		IntakeStateMgr::GetInstance()->RunCurrentState();
 		if (m_currentPrim->IsDone() )
 		{
 			GetNextPrim();
@@ -97,6 +101,10 @@ void CyclePrimitives::GetNextPrim()
 	{
 		m_currentPrim->Init(currentPrimParam);
 		m_maxTime = currentPrimParam->GetTime();
+		if ( currentPrimParam->GetIntakeState() == true )
+		{
+			IntakeStateMgr::GetInstance()->SetCurrentState(IntakeStateMgr::ON, false);
+		}
 		m_timer->Reset();
 		m_timer->Start();
 	}
@@ -117,6 +125,7 @@ void CyclePrimitives::RunDoNothing()
 		                                   0.0,                 // heading
 		                                   0.0,                 // start drive speed
 		                                   0.0,					// end drive speed
+										   false,				//run the intake
 										   string("")   		//empty string for pathName               
 										   );             
 		m_doNothing = m_primFactory->GetIPrimitive(params);

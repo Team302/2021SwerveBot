@@ -49,5 +49,6 @@ private:
     IPrimitive* m_driveDistance;
     IPrimitive* m_turnAngle;
     IPrimitive* m_holdPosition;
+    IPrimitive* m_drivePath;
 };
 

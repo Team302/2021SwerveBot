@@ -46,6 +46,7 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
     float                       endDriveSpeed = 0.0;
     float                       xloc = 0.0;
     float                       yloc = 0.0;
+    bool                        runIntake = false;
     std::string                 pathName;
     bool hasError = false;
     string fulldirfile = string("/home/lvuser/auton/");
@@ -123,6 +124,10 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
                         {
                             pathName = attr.as_float();
                         }
+                        else if ( strcmp ( attr.name(), "runIntake") == 0)
+                        {
+                            runIntake = attr.as_bool();
+                        }
                         else
                         {
                             Logger::GetLogger()->LogError( string("PrimitiveParser::ParseXML invalid attribute"), attr.name());
@@ -139,7 +144,8 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
                                                                        heading,
                                                                        startDriveSpeed,
                                                                        endDriveSpeed,
-                                                                       pathName ) );
+                                                                       runIntake,
+                                                                       pathName) );
                     }
                     else 
                     {
