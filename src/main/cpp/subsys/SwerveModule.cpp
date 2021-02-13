@@ -78,17 +78,9 @@ SwerveModule::SwerveModule
     fx->ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor, 0, 10 );
 
     // Set up the Absolute Turn Sensor
-    m_turnSensor.get()->ConfigFeedbackCoefficient( 0.00153398078788184, string("radians"), SensorTimeBase::PerSecond, 0);
     m_turnSensor.get()->ConfigAbsoluteSensorRange(AbsoluteSensorRange::Signed_PlusMinus180, 0);
     m_turnSensor.get()->GetAbsolutePosition();
     
-    // Limit the PID Controller's input range between -pi and pi and set the input
-    // to be continuous.
-    m_turningPIDController.SetPID(0.1, 0.0, 0.0001);  // switch from 1, 0, 0 to 0.1, 0, 0.05
-    m_turningPIDController.SetConstraints({wpi::math::pi * 1_rad_per_s, 
-                                           wpi::math::pi*2_rad_per_s/1_s});
-    m_turningPIDController.EnableContinuousInput( -2.0*units::radian_t(wpi::math::pi),
-                                                   2.0*units::radian_t(wpi::math::pi));
     
     // Set up the Turn Motor
     motor = m_turnMotor.get()->GetSpeedController();
@@ -106,12 +98,9 @@ SwerveModule::SwerveModule
 		error = ErrorCode::OKAY;
 	}
 
-    auto sensors = fx->GetSensorCollection();
-    m_initialCounts = sensors.GetIntegratedSensorPosition();
-    fx->ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor, 0, 10 );
-
-    fx->ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor, 0, 10 );
-    fx->ConfigIntegratedSensorAbsoluteRange(ctre::phoenix::sensors::AbsoluteSensorRange::Signed_PlusMinus180 );
+    fx->ConfigRemoteFeedbackFilter(m_turnSensor.get()->GetDeviceNumber(), 
+                                   motorcontrol::RemoteSensorSource::RemoteSensorSource_CANCoder , 0, 0);
+    //fx->ConfigRemoteFeedbackFilter(*(m_turnSensor.get()), 0, 0);
 
     string ntName;
     switch ( GetType() )
@@ -148,6 +137,8 @@ void SwerveModule::Init
     units::angular_acceleration::radians_per_second_squared_t   maxAngularAcceleration
 )
 {
+    // 15.0, 0.01, 0.1, 0.2
+    // 0.01, 0, 0, 0.5
     auto driveCData = make_shared<ControlData>( ControlModes::CONTROL_TYPE::VELOCITY_RPS,
                                                 ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
                                                 string("DriveSpeed"),
@@ -162,26 +153,27 @@ void SwerveModule::Init
                                                 0.0 );
     m_driveMotor.get()->SetControlConstants( driveCData.get() );
 
-
-    auto motor = m_turnMotor.get()->GetSpeedController();
-    auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
-    auto error = fx->GetSensorCollection().SetIntegratedSensorPosition(0.0, 0);
-	if ( error != ErrorCode::OKAY )
-	{
-		Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR, ("SwerveModule"), string("SetIntegratedSensorPosition error"));
-		error = ErrorCode::OKAY;
-	}
-    else
-    {
-        m_initialCounts = 0;
-    }   
+    //1.0, 0.0, 0.0
+    //0.1, 0.0, 0.0001
+    auto turnCData = make_shared<ControlData>(  ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE,
+                                                ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
+                                                string("Turn Angle"),
+                                                0.1,
+                                                0.0,
+                                                0.0001,
+                                                0.0,
+                                                0.0,
+                                                maxAcceleration.to<double>(),
+                                                maxVelocity.to<double>(),
+                                                maxVelocity.to<double>(),
+                                                0.0 );
 }
 
 /// @brief Turn all of the wheel to zero degrees yaw according to the pigeon
 /// @returns void
 void SwerveModule::ZeroAlignModule()
 {
-    RunTurnMotor( units::angle::radian_t(0.0));
+    SetTurnAngle( units::angle::degree_t(0.0));
 }
 
 
@@ -194,7 +186,7 @@ SwerveModuleState SwerveModule::GetState() const
     units::velocity::meters_per_second_t mps = units::length::meter_t(GetWheelDiameter() * pi ) / units::angle::radian_t(1.0) * units::angular_velocity::radians_per_second_t(m_driveMotor->GetRPS()*2.0*pi);
 
     // Get the Current Chassis Rotation
-    Rotation2d angle {units::angle::radian_t(m_turnSensor.get()->GetAbsolutePosition())};
+    Rotation2d angle {units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition())};
 
     // Create the state and return it
     SwerveModuleState state{mps,angle};
@@ -214,45 +206,43 @@ void SwerveModule::SetDesiredState
     // If the desired angle is less than 90 degrees from the target angle (e.g., -90 to 90 is the amount of turn), just use the angle and speed values
     // if it is more than 90 degrees (90 to 270), the can turn the opposite direction -- increase the angle by 180 degrees -- and negate the wheel speed
     // finally, get the value between -90 and 90
-    auto state = SwerveModuleState::Optimize(referenceState, units::angle::radian_t(m_turnSensor.get()->GetAbsolutePosition()));
+    Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
+    auto state = SwerveModuleState::Optimize(referenceState, currAngle);
 
     // Set Drive Target 
-    RunDriveMotor(state.speed);
+    SetDriveSpeed(state.speed);
 
     // Set Turn Target 
-    RunTurnMotor(state.angle.Radians());
+    SetTurnAngle(state.angle.Degrees());
 }
 
 void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
 {
-    RunDriveMotor(speed);
-}
-void SwerveModule::SetTurnAngle( units::angle::radian_t angle )
-{
-    RunTurnMotor(angle);
-}
-
-
-void SwerveModule::RunDriveMotor( units::velocity::meters_per_second_t speed )
-{
     // convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel
     auto driveTarget = speed.to<double>() /  units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi;  
-	m_nt->PutString("drive motor id", to_string(m_driveMotor.get()->GetID()) );
+	m_nt.get()->PutString("drive motor id", to_string(m_driveMotor.get()->GetID()) );
     m_nt.get()->PutNumber( "drive target", driveTarget );
     m_driveMotor.get()->Set(m_nt, driveTarget);
 }
 
-void SwerveModule::RunTurnMotor( units::angle::radian_t angle )
+void SwerveModule::SetTurnAngle( units::angle::degree_t angle )
 {
-    units::angle::radian_t rads = units::angle::radian_t(m_turnSensor.get()->GetAbsolutePosition());
-    auto turnOutput = m_turningPIDController.Calculate(rads, angle);
-	m_nt->PutString("turn motor id", to_string(m_turnMotor.get()->GetID()) );
-    m_nt.get()->PutNumber( "current angle", units::angle::degree_t(rads).to<double>() );
-    m_nt.get()->PutNumber( "target angle", units::angle::degree_t(angle).to<double>() );
-    auto motor = m_turnMotor.get()->GetSpeedController();
-    auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
-    auto turnFeedforward = m_turnFeedforward.Calculate( m_turningPIDController.GetSetpoint().velocity);
-    m_nt.get()->PutNumber( "turn voltage", turnOutput+turnFeedforward.to<double>() );
-    fx->SetVoltage(units::volt_t(turnOutput) + turnFeedforward);
+    Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
+    Rotation2d delta = angle - currAngle.Degrees();
 
+    double deltaTicks = (delta.Degrees().to<double>() / 360.0) * 4096;
+
+    CANCoderConfiguration allConfigs;
+    m_turnSensor.get()->GetAllConfigs(allConfigs, 50);
+    double currentTicks = m_turnSensor.get()->GetAbsolutePosition() / allConfigs.sensorCoefficient;
+    double desiredTicks = currentTicks + deltaTicks;
+
+	m_nt.get()->PutString("turn motor id", to_string(m_turnMotor.get()->GetID()) );
+    m_nt.get()->PutNumber( "current angle", currAngle.Degrees().to<double>() );
+    m_nt.get()->PutNumber( "target angle", units::angle::degree_t(angle).to<double>() );
+
+    m_turnMotor.get()->Set(m_nt, desiredTicks);
 }
+
+
+
