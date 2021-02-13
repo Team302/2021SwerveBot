@@ -18,18 +18,27 @@
 #include <memory>
 
 //Team302 Includes
-#include <auton/primitives/IPrimitive.h>
 #include <units/angular_velocity.h>
+#include <auton/PrimitiveParams.h>
+#include <auton/primitives/IPrimitive.h>
 
-//FRC Includes
-#include <frc/geometry/Pose2d.h>
+//FRC,WPI Includes
 
 #include <wpi/SmallString.h>
+#include <wpi/Path.h>
+#include <wpi/math>
+
+#include <frc/geometry/Pose2d.h>
 #include <frc/Filesystem.h>
 #include <frc/trajectory/TrajectoryUtil.h>
-#include <wpi/Path.h>
-#include <frc/controller/RamseteController.h> //geo3
+#include <frc/trajectory/TrajectoryConfig.h>
 
+#include <frc/controller/RamseteController.h> 
+#include <frc/Timer.h>
+#include <frc/estimator/SwerveDrivePoseEstimator.h>
+
+
+#include <subsys/SwerveChassisFactory.h>
 
 class SwerveChassis;
 
@@ -53,16 +62,22 @@ class DrivePath : public IPrimitive
         private:
             std::shared_ptr<SwerveChassis> m_chassis;
             std::unique_ptr<frc::Timer> m_timer;
-
+            
             double                   m_maxTime;
 
             frc::Pose2d              m_currentChassisPosition;
             frc::Trajectory          m_trajectory;  
             frc::RamseteController   m_ramseteController;
+            frc::Pose2d              m_CurPos; // Current position used for motion detect.
+            frc::Pose2d              m_PrevPos;  // previous position of robot for compare to current position.
+            frc::Timer               m_PosChgTimer; // scan time for position change
+            bool                     m_bRobotStopped = false; // check to see if robot is stopped 
+            bool lRobotStopped(frc::Pose2d lCurPos, frc::Pose2d lPrevPos); // routine to check for motion
 
             bool                     m_reverse = false;
             bool                     m_isDone = false;
 
+            
             PRIMITIVE_IDENTIFIER     m_mode;
 
 };
