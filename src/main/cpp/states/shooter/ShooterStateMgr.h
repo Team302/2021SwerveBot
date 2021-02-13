@@ -34,7 +34,10 @@ class ShooterStateMgr
         {
             OFF,
             GET_READY,
-            SHOOT,
+            SHOOTGREEN,
+            SHOOTYELLOW,
+            SHOOTBLUE,
+            SHOOTRED,
             MAX_SHOOTER_STATES
         };
 
