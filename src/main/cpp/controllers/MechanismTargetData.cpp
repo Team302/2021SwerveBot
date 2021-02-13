@@ -27,16 +27,13 @@ MechanismTargetData::MechanismTargetData
     string                                      controller,
     double                                      target,
     SOLENOID                                    solenoid,
-    string                                      failoverController,
-    double                                      failoverTarget
+    double                                      secondTarget
 ) : m_state( state ),
     m_controller( controller ),
     m_target( target ),
     m_controlData(),
     m_solenoid( solenoid ),
-    m_failoverController( failoverController ),
-    m_failoverTarget( failoverTarget ),
-    m_failoverControlData()
+    m_secondTarget( secondTarget )
 {
 
 }
@@ -53,11 +50,7 @@ void MechanismTargetData::Update( std::vector<ControlData*> data )
         {
             m_controlData = cd;
         }
-        if ( m_failoverController.compare( string(cd->GetIdentifier())) == 0 )
-        {
-            m_failoverControlData = cd;
-        }
-        if ( m_controlData != nullptr && m_failoverControlData != nullptr)
+        if ( m_controlData != nullptr )
         {
             break;
         }

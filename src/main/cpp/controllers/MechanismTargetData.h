@@ -33,8 +33,7 @@ class MechanismTargetData
         /// @param [in] controller - controller indentifer
         /// @param [in] target - target value         
         /// @param [in] solenoid value
-        /// @param [in] failovercontroller - controller indentifer if in failover mode
-        /// @param [in] failoverTarget - target value if in failover mode
+        /// @param [in] secondTarget - a second target value that can be used for two independent motors
 
         
         MechanismTargetData
@@ -43,8 +42,7 @@ class MechanismTargetData
             std::string                                 controller,
             double                                      target,
             SOLENOID                                    solenoid,
-            std::string                                 failoverController,
-            double                                      failoverTarget
+            double                                      secondTarget
         );
         MechanismTargetData() = delete;
 
@@ -70,17 +68,9 @@ class MechanismTargetData
         /// @return SOLENOID state of the solenoid
         SOLENOID GetSolenoidState() const { return m_solenoid; }
 
-        /// @brief  Retrieve the controller identifier
-        /// @return std::string controller indentifier
-        inline std::string GetFailoverControllerString() const { return m_failoverController; };
-
-        /// @brief  Retrieve the controller
-        /// @return ControlData* controller
-        inline ControlData* GetFailoverController() const { return m_failoverControlData; };
-
         /// @brief  Retrieve the target value
         /// @return double - target value
-        inline double GetFailoverTarget() const { return m_failoverTarget; };
+        inline double GetSecondTarget() const { return m_secondTarget; };
 
         /// @brief update to include ControlData
         /// @param [in] std::vector<ControlData*> - vector of ControlData Objects
@@ -96,9 +86,7 @@ class MechanismTargetData
         double                                      m_target;
         ControlData*                                m_controlData;
         SOLENOID                                    m_solenoid;
-        std::string                                 m_failoverController;
-        double                                      m_failoverTarget;
-        ControlData*                                m_failoverControlData;
+        double                                      m_secondTarget;
 };
 
 

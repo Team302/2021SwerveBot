@@ -49,8 +49,7 @@ MechanismTargetData*  MechanismTargetDefn::ParseXML
     string controllerIdentifier;
     double target = 0.0;
     MechanismTargetData::SOLENOID solenoid = MechanismTargetData::SOLENOID::NONE; 
-    string failoverControllerIdentifier;
-    double failoverTarget = 0.0;
+    double secondTarget = 0.0;
 
     // parse/validate xml
     for (xml_attribute attr = MechanismDataNode.first_attribute(); attr; attr = attr.next_attribute())
@@ -87,13 +86,9 @@ MechanismTargetData*  MechanismTargetDefn::ParseXML
                 Logger::GetLogger()->LogError( string("MechanismTargetDefn::ParseXML"), string("solenoid enum"));
             }
         }
-        else if ( strcmp( attr.name(), "failoverControlDataIdentifier") == 0 )
+        else if ( strcmp( attr.name(), "secondValue") == 0 )
         {
-            failoverControllerIdentifier = string( attr.value() );
-        }
-        else if ( strcmp( attr.name(), "failoverValue") == 0 )
-        {
-            failoverTarget = attr.as_double();
+            secondTarget = attr.as_double();
         }
         else
         {
@@ -106,7 +101,7 @@ MechanismTargetData*  MechanismTargetDefn::ParseXML
 
     if ( !hasError && !stateName.empty() && !controllerIdentifier.empty() )
     {
-        mechData = new MechanismTargetData( stateName, controllerIdentifier, target, solenoid, failoverControllerIdentifier, failoverTarget );
+        mechData = new MechanismTargetData( stateName, controllerIdentifier, target, solenoid, secondTarget );
     }
     else
     {
