@@ -31,14 +31,14 @@
 class SwerveChassis;
 class PrimitiveParams;
 
-class StayInPlace : public IPrimitive
+class HoldPosition : public IPrimitive
 {
     public: 
             void Init(PrimitiveParams*      params) override;
             void Run() override;
             bool IsDone() override;
-            StayInPlace();
-            virtual ~StayInPlace() = default;
+            HoldPosition();
+            virtual ~HoldPosition() = default;
 
     private:
             std::shared_ptr<SwerveChassis> m_chassis;

@@ -11,6 +11,7 @@ PrimitiveParams::PrimitiveParams
     float                       						heading,
     float                       						startDriveSpeed,
     float                       						endDriveSpeed,
+	bool												runIntake,
 	std::string                                         pathName
 ):	//Pass over parameters to class variables
 		m_id(id), //Primitive ID
@@ -21,7 +22,8 @@ PrimitiveParams::PrimitiveParams
 		m_heading(heading),
 		m_startDriveSpeed( startDriveSpeed ),
 		m_endDriveSpeed( endDriveSpeed ),
-		m_pathName ( pathName)
+		m_pathName ( pathName),
+		m_runIntake ( runIntake )
 {
 }
 
@@ -69,6 +71,11 @@ float PrimitiveParams::GetEndDriveSpeed() const
 std::string PrimitiveParams::GetPathName() const
 {
 	return m_pathName;
+}
+
+bool PrimitiveParams::GetIntakeState() const
+{
+	return m_runIntake;
 }
 
 //Setters
