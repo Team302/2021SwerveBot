@@ -24,20 +24,20 @@
 
 //Team 302 Includes
 #include <auton/PrimitiveParams.h>
-#include <auton/primitives/StayInPlace.h>
+#include <auton/primitives/HoldPosition.h>
 #include <auton/primitives/IPrimitive.h>
 #include <subsys/SwerveChassisFactory.h>
 
 using namespace std;
 
 
-StayInPlace::StayInPlace() :
+HoldPosition::HoldPosition() :
                     m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
                     m_timeRemaining( 0.0 )//Will be changed in init
 {
 }
 
-void StayInPlace::Init(PrimitiveParams* params) 
+void HoldPosition::Init(PrimitiveParams* params) 
 {
     //Get timeRemaining from params
     m_timeRemaining = params->GetTime();
@@ -74,7 +74,7 @@ void StayInPlace::Init(PrimitiveParams* params)
 
 }
 
-void StayInPlace::Run() 
+void HoldPosition::Run() 
 {
     //Decrement time remaining
     m_timeRemaining -= IPrimitive::LOOP_LENGTH;
@@ -86,7 +86,7 @@ void StayInPlace::Run()
     m_backRight.get()->SetDesiredState(m_backRightState);
 }
 
-bool StayInPlace::IsDone()
+bool HoldPosition::IsDone()
 {
     //Return true when time runs out
     bool done = ((m_timeRemaining <= (IPrimitive::LOOP_LENGTH / 2.0)));
