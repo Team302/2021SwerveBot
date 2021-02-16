@@ -117,19 +117,14 @@ void IntakeStateMgr::RunCurrentState()
 {
     if ( MechanismFactory::GetMechanismFactory()->GetIntake().get() != nullptr )
     {
-        // process teleop/manual interrupts
-        auto controller = TeleopControl::GetInstance();
-        if ( controller != nullptr )
-        {
-            if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::INTAKE_ON ) )
+            if ( m_currentStateEnum == INTAKE_STATE::ON)
             {
                 SetCurrentState( INTAKE_STATE::ON, false );
             }
-            else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::INTAKE_OFF ) )
+            else if ( m_currentStateEnum == INTAKE_STATE::OFF)
             {
                 SetCurrentState( INTAKE_STATE::OFF, false );
             }
-        }
 
         Logger::GetLogger()->OnDash(string("Intake State"), to_string(m_currentStateEnum));
 

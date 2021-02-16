@@ -16,7 +16,8 @@ class DragonPigeon
     public:
         DragonPigeon
         (
-            int  canID
+            int  canID,
+            double rotation
         );
         DragonPigeon() = delete;
         virtual ~DragonPigeon() = default;
@@ -30,14 +31,14 @@ class DragonPigeon
 
         std::unique_ptr<ctre::phoenix::sensors::PigeonIMU> m_pigeon;
 
-        double m_initialRoll;
-        double m_initialPitch;
         double m_initialYaw;
+        double m_initialPitch;
+        double m_initialRoll;
 
         // these methods correct orientation, but do not apply the initial offsets
+        double GetRawYaw();
         double GetRawRoll();
         double GetRawPitch();
-        double GetRawYaw();
 };
 
 

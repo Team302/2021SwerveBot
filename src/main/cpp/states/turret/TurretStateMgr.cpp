@@ -15,8 +15,6 @@
 #include <utils/Logger.h>
 #include <gamepad/TeleopControl.h>
 
-#include <states/turret/TurretTurnAngle.h>
-#include <states/turret/ManualAim.h>
 #include <states/turret/LimelightAim.h>
 #include <states/turret/HoldTurretPosition.h>
 #include <hw/factories/LimelightFactory.h>
@@ -50,8 +48,6 @@ TurretStateMgr::TurretStateMgr() : m_stateVector(),
     map<string, TURRET_STATE> stateMap;
     stateMap["TURRETHOLD"] = TURRET_STATE::HOLD;
     stateMap["TURRETAUTOAIM"] = TURRET_STATE::LIMELIGHT_AIM;
-    stateMap["TURRETMANUALAIM"] = TURRET_STATE::MANUAL_AIM;
-    stateMap["TURRETTURNANGLE"] = TURRET_STATE::TURN_ANGLE;
     m_stateVector.resize(4);
 
     for ( auto td: targetData )
@@ -84,20 +80,6 @@ TurretStateMgr::TurretStateMgr() : m_stateVector(),
                     }
                     break;
 
-                    case TURRET_STATE::MANUAL_AIM:
-                    {
-                        auto thisState = new ManualAim(controlData);
-                        m_stateVector[stateEnum] = thisState;
-                    }
-                    break;
-
-                    case TURRET_STATE::TURN_ANGLE:
-                    {
-                        auto thisState = new TurretTurnAngle(controlData, td->GetTarget());
-                        m_stateVector[stateEnum] = thisState;
-                    }
-                    break;
-                    
                     default:
                     {
                         Logger::GetLogger()->LogError( string("TurretHoodStateMgr::TurretHoodStateMgr"), string("unknown state"));
@@ -121,10 +103,6 @@ void TurretStateMgr::RunCurrentState()
         auto controller = TeleopControl::GetInstance();
         if ( controller != nullptr )
         {
-            if (controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::TURRET_MANUAL_BUTTON))
-            {
-                SetCurrentState( TURRET_STATE::MANUAL_AIM, false , 0.0); 
-            }
             if (controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::TURRET_LIMELIGHT_AIM))
             {
                 SetCurrentState( TURRET_STATE::LIMELIGHT_AIM, false, 0.0);
@@ -146,13 +124,6 @@ void TurretStateMgr::SetCurrentState
     /**auto state = m_stateVector[stateEnum];
     if ( state != nullptr && state != m_currentState )
     {
-        if (stateEnum == TURN_ANGLE)
-        {
-            auto cdState = dynamic_cast<TurretTurnAngle*>(state);
-            auto cd = cdState->GetControlData();
-            m_stateVector[stateEnum] = new TurretTurnAngle(cd,turretAngle, MechanismTargetData::SOLENOID::NONE);
-            state = m_stateVector[stateEnum];
-        }
         m_currentState = state;
         m_currentStateEnum = stateEnum;
         m_currentState->Init();

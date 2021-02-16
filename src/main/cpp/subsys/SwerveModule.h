@@ -64,19 +64,35 @@ class SwerveModule
         /// @returns void
         void SetDesiredState(const frc::SwerveModuleState& state);
 
+        void SetDriveSpeed( units::velocity::meters_per_second_t speed );
+        void SetTurnAngle( units::angle::degree_t angle );
+
         /// @brief Return which module this is
         /// @returns ModuleID
-        ModuleID GetType() {return m_type; }
+        ModuleID GetType() {return m_type;}
         units::length::inch_t GetWheelDiameter() const {return m_wheelDiameter;}
 
         
     private:
-       // static constexpr auto ModuleMaxAngularVelocity = wpi::math::pi * 1_rad_per_s; //Radians per second
-       // static constexpr auto ModuleMaxAngularAcceleration = wpi::math::pi * 2_rad_per_s / 1_s; //Radians per second ^2
+    //    frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward {1_V, 0.5_V / 1_rad_per_s};
+        frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward {1_V, 0.05_V / 1_rad_per_s};
+
+        void RunTurnMotor( units::angle::degree_t angle );
+        void RunDriveMotor( units::velocity::meters_per_second_t speed );
 
         ModuleID m_type;
         std::shared_ptr<IDragonMotorController>             m_driveMotor;
         std::shared_ptr<IDragonMotorController>             m_turnMotor;
         std::shared_ptr<ctre::phoenix::sensors::CANCoder>   m_turnSensor;
         units::length::inch_t                               m_wheelDiameter;
+        // the controller below is initialized here, but the actual values are set in the constructor
+        frc::ProfiledPIDController<units::radians>          m_turningPIDController{ 0.5, 0.0, 0.25, 
+                                                                                    { wpi::math::pi * 1_rad_per_s, 
+                                                                                      wpi::math::pi * 2_rad_per_s / 1_s}};
+
+        double                                              m_initialAngle;
+        int                                                 m_initialCounts;
+        std::shared_ptr<nt::NetworkTable>                   m_nt;
+        double                                              m_lastDelta;
+        
 };

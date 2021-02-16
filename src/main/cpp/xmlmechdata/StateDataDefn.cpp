@@ -67,26 +67,27 @@ vector<MechanismTargetData*> StateDataDefn::ParseXML
 
     // set the file to parse
     string filename = "/home/lvuser/config/states/";
+    string mech;
     switch ( mechanism )
     {
         case MechanismTypes::INTAKE:
-            filename += string( "intake.xml");
+            mech = string( "intake.xml");
+            break;
+
+        case MechanismTypes::BALL_HOPPER:
+            filename += string( "ballhopper.xml");
             break;
 
         case MechanismTypes::BALL_TRANSFER:
-            filename += string( "balltransfer.xml");
+            mech = string( "balltransfer.xml");
             break;
 
         case MechanismTypes::TURRET:
-            filename += string( "turret.xml");
+            mech = string( "turret.xml");
             break;
 
         case MechanismTypes::SHOOTER:
-            filename += string( "shooter.xml");
-            break;
-
-        case MechanismTypes::SHOOTER_HOOD:
-            filename += string( "shooterhood.xml");
+            mech = string( "shooter.xml");
             break;
 
         default:
@@ -97,9 +98,16 @@ vector<MechanismTargetData*> StateDataDefn::ParseXML
 
     if ( !hasError )
     {
+        filename += mech;
         // load the xml file into memory (parse it)
         xml_document doc;
         xml_parse_result result = doc.load_file(filename.c_str());
+        if (!result)
+        {
+            filename = "/home/lvuser/deploy/";
+            filename += mech;
+            result = doc.load_file(filename.c_str());
+        }
 
         // if it is good
         if (result)

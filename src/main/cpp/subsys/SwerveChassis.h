@@ -106,6 +106,13 @@ class SwerveChassis
             const Rotation2d&   angle
         );
 
+        /// @brief Reset the current chassis pose based on the provided pose (the rotation comes from the Pigeon)
+        /// @param [in] const Pose2d&       pose        Current XY position
+        void ResetPosition
+        ( 
+            const Pose2d&       pose
+        );
+
         //static constexpr auto MaxSpeed = 3.0_mps; 
         //static constexpr units::angular_velocity::radians_per_second_t MaxAngularSpeed{wpi::math::pi};
 
@@ -119,9 +126,7 @@ class SwerveChassis
         std::shared_ptr<SwerveModule> GetFrontRight() const { return m_frontRight;}
         std::shared_ptr<SwerveModule> GetBackLeft() const { return m_backLeft;}
         std::shared_ptr<SwerveModule> GetBackRight() const { return m_backRight;}
-
-        frc::SwerveDrivePoseEstimator<4> GetPose() { return m_poseEstimator; }  
-
+        frc::SwerveDrivePoseEstimator<4> GetPose() const { return m_poseEstimator; }  
 
     private:
 

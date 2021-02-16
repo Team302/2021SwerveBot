@@ -1,6 +1,6 @@
 var class_primitive_params =
 [
-    [ "PrimitiveParams", "class_primitive_params.html#a94bdf0aa112f837bc1ef73cd9046bd70", null ],
+    [ "PrimitiveParams", "class_primitive_params.html#ade81b5fcb5f42f73a9c15d7e0bf55ba9", null ],
     [ "PrimitiveParams", "class_primitive_params.html#a294ec4f5898cdd78b4e23bdf0a9e78e3", null ],
     [ "~PrimitiveParams", "class_primitive_params.html#a651874aee3001802b288b020e9d713ab", null ],
     [ "GetBallState", "class_primitive_params.html#acae304c2aa2134285d7feca227e799bc", null ],
@@ -9,6 +9,7 @@ var class_primitive_params =
     [ "GetEndDriveSpeed", "class_primitive_params.html#a9b452487c360f320951b178a23300fe2", null ],
     [ "GetHeading", "class_primitive_params.html#ab7908eab72640338306dbaf382e8646a", null ],
     [ "GetID", "class_primitive_params.html#a6d1e129031049f3c94e1c131547fc10a", null ],
+    [ "GetPathName", "class_primitive_params.html#ac3a50b019a206836725bdd496aaac3da", null ],
     [ "GetTime", "class_primitive_params.html#a478d763e9de6526e13de4d23d1dca71c", null ],
     [ "GetTurretAngle", "class_primitive_params.html#a956f05573b6157c4418eb9bafa86470e", null ],
     [ "GetXLocation", "class_primitive_params.html#a692dc9278c6d9ecfe0dc7951afff516a", null ],

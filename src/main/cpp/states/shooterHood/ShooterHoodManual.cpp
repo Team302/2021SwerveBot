@@ -41,8 +41,8 @@ void ShooterHoodManual::Init()
     auto gamepad = TeleopControl::GetInstance();
     if ( gamepad != nullptr )
     {
-        gamepad ->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS, IDragonGamePad::AXIS_PROFILE::CUBED );
-        gamepad ->SetAxisScaleFactor( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS, 0.75 );
+    //    gamepad ->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS, IDragonGamePad::AXIS_PROFILE::CUBED );
+    //    gamepad ->SetAxisScaleFactor( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS, 0.75 );
     }
 }
 
@@ -54,7 +54,7 @@ void ShooterHoodManual::Run()
     auto gamepad = TeleopControl::GetInstance();
     if (mech.get() != nullptr && gamepad != nullptr )  
     {
-        mech.get()->UpdateTarget(gamepad->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS ));
-        mech.get()->Update();
+     //   mech.get()->UpdateTarget(gamepad->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_AXIS ));
+     //   mech.get()->Update();
     }
 }

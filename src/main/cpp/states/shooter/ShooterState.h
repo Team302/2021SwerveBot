@@ -29,7 +29,8 @@ class ShooterState : public Mech2MotorState
         ShooterState
         (
             ControlData*                    controlData,
-            double                          target
+            double                          target1,
+            double                          target2
         );
 
         ShooterState() = delete;

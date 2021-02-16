@@ -24,11 +24,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="roboticslogo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Team 302 Robot
    </div>
-   <div id="projectbrief">Swerve Bot APIs</div>
   </td>
  </tr>
  </tbody>
@@ -95,17 +93,33 @@ $(document).ready(function(){initNavTree('class_swerve_chassis.html',''); initRe
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acf75a483aac33e8c457660bab2d88d5e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#acf75a483aac33e8c457660bab2d88d5e">SwerveChassis</a> (std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt; frontleft, std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt; frontright, std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt; backleft, std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt; backright, units::length::inch_t wheelBase, units::length::inch_t track, units::velocity::meters_per_second_t maxSpeed, units::radians_per_second_t maxAngularSpeed, double maxAcceleration)</td></tr>
-<tr class="memdesc:acf75a483aac33e8c457660bab2d88d5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a swerve chassis.  <a href="class_swerve_chassis.html#acf75a483aac33e8c457660bab2d88d5e">More...</a><br /></td></tr>
-<tr class="separator:acf75a483aac33e8c457660bab2d88d5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fe84a5eaaf15c3646ac06c220dce049"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a5fe84a5eaaf15c3646ac06c220dce049">SwerveChassis</a> (std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt; frontLeft, std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt; frontRight, std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt; backLeft, std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt; backRight, units::length::inch_t wheelBase, units::length::inch_t track, units::velocity::meters_per_second_t maxSpeed, units::radians_per_second_t maxAngularSpeed, units::acceleration::meters_per_second_squared_t maxAcceleration, units::angular_acceleration::radians_per_second_squared_t maxAngularAcceleration)</td></tr>
+<tr class="memdesc:a5fe84a5eaaf15c3646ac06c220dce049"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a swerve chassis.  <a href="class_swerve_chassis.html#a5fe84a5eaaf15c3646ac06c220dce049">More...</a><br /></td></tr>
+<tr class="separator:a5fe84a5eaaf15c3646ac06c220dce049"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a679821259ecceb0f70b92a22ae37ab40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a679821259ecceb0f70b92a22ae37ab40">ZeroAlignSwerveModules</a> ()</td></tr>
 <tr class="memdesc:a679821259ecceb0f70b92a22ae37ab40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Align all of the swerve modules to point forward.  <a href="class_swerve_chassis.html#a679821259ecceb0f70b92a22ae37ab40">More...</a><br /></td></tr>
 <tr class="separator:a679821259ecceb0f70b92a22ae37ab40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0aa8a2388dcbd02fd7eeb4b49b79bd75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a0aa8a2388dcbd02fd7eeb4b49b79bd75">Drive</a> (units::velocity::meters_per_second_t xSpeed, units::velocity::meters_per_second_t ySpeed, units::angular_velocity::radians_per_second_t rot, bool fieldRelative)</td></tr>
 <tr class="memdesc:a0aa8a2388dcbd02fd7eeb4b49b79bd75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Drive the chassis.  <a href="class_swerve_chassis.html#a0aa8a2388dcbd02fd7eeb4b49b79bd75">More...</a><br /></td></tr>
 <tr class="separator:a0aa8a2388dcbd02fd7eeb4b49b79bd75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a953e2d2b3776c36c61582c0608a434e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a953e2d2b3776c36c61582c0608a434e2">Drive</a> (double drivePercent, double steerPercent, double rotatePercent, bool fieldRelative)</td></tr>
+<tr class="memdesc:a953e2d2b3776c36c61582c0608a434e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Drive the chassis.  <a href="class_swerve_chassis.html#a953e2d2b3776c36c61582c0608a434e2">More...</a><br /></td></tr>
+<tr class="separator:a953e2d2b3776c36c61582c0608a434e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f2a266ee4e4fae549331bdc44647c5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a9f2a266ee4e4fae549331bdc44647c5b">Drive</a> (frc::ChassisSpeeds speeds, bool fieldRelative)</td></tr>
+<tr class="memdesc:a9f2a266ee4e4fae549331bdc44647c5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Drive the chassis.  <a href="class_swerve_chassis.html#a9f2a266ee4e4fae549331bdc44647c5b">More...</a><br /></td></tr>
+<tr class="separator:a9f2a266ee4e4fae549331bdc44647c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a121b750bfd33965fd2108fb1cfb21d8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a121b750bfd33965fd2108fb1cfb21d8e">UpdateOdometry</a> ()</td></tr>
+<tr class="memdesc:a121b750bfd33965fd2108fb1cfb21d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">update the chassis odometry based on current states of the swerve modules and the pigeon  <a href="class_swerve_chassis.html#a121b750bfd33965fd2108fb1cfb21d8e">More...</a><br /></td></tr>
 <tr class="separator:a121b750bfd33965fd2108fb1cfb21d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c195e4469e4077b69f6f81d13f20b54"><td class="memItemLeft" align="right" valign="top">frc::ChassisSpeeds&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a7c195e4469e4077b69f6f81d13f20b54">GetChassisSpeeds</a> () const</td></tr>
+<tr class="memdesc:a7c195e4469e4077b69f6f81d13f20b54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the current chassis speed information.  <a href="class_swerve_chassis.html#a7c195e4469e4077b69f6f81d13f20b54">More...</a><br /></td></tr>
+<tr class="separator:a7c195e4469e4077b69f6f81d13f20b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b9d9e7ce8dbfef6c87267fcf02f267e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a8b9d9e7ce8dbfef6c87267fcf02f267e">ResetPosition</a> (const Pose2d &amp;pose, const Rotation2d &amp;angle)</td></tr>
+<tr class="memdesc:a8b9d9e7ce8dbfef6c87267fcf02f267e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the current chassis pose based on the provided pose and rotation.  <a href="class_swerve_chassis.html#a8b9d9e7ce8dbfef6c87267fcf02f267e">More...</a><br /></td></tr>
+<tr class="separator:a8b9d9e7ce8dbfef6c87267fcf02f267e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca7b78a5e974c17e2488075b75260562"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#aca7b78a5e974c17e2488075b75260562">ResetPosition</a> (const Pose2d &amp;pose)</td></tr>
+<tr class="memdesc:aca7b78a5e974c17e2488075b75260562"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the current chassis pose based on the provided pose (the rotation comes from the Pigeon)  <a href="class_swerve_chassis.html#aca7b78a5e974c17e2488075b75260562">More...</a><br /></td></tr>
+<tr class="separator:aca7b78a5e974c17e2488075b75260562"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af138e532b360fa54739306e6777952f6"><td class="memItemLeft" align="right" valign="top">units::length::inch_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#af138e532b360fa54739306e6777952f6">GetWheelBase</a> () const</td></tr>
 <tr class="separator:af138e532b360fa54739306e6777952f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf3b50c698b8398f99ddef8298853687"><td class="memItemLeft" align="right" valign="top">units::length::inch_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#abf3b50c698b8398f99ddef8298853687">GetTrack</a> () const</td></tr>
@@ -114,15 +128,27 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a45e73a7673c628897e07b503814599ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c0781ca8a785f2d2458b5c722ad4118"><td class="memItemLeft" align="right" valign="top">units::radians_per_second_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a9c0781ca8a785f2d2458b5c722ad4118">GetMaxAngularSpeed</a> () const</td></tr>
 <tr class="separator:a9c0781ca8a785f2d2458b5c722ad4118"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95b0f7583e08ae4d2733482579cf28b1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a95b0f7583e08ae4d2733482579cf28b1">GetMaxAcceration</a> () const</td></tr>
-<tr class="separator:a95b0f7583e08ae4d2733482579cf28b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29f4f3ebc7d643f9e31626a285ca0209"><td class="memItemLeft" align="right" valign="top">units::acceleration::meters_per_second_squared_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a29f4f3ebc7d643f9e31626a285ca0209">GetMaxAcceleration</a> () const</td></tr>
+<tr class="separator:a29f4f3ebc7d643f9e31626a285ca0209"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedfb2aee4653bcaaae123bcc2b60ebfa"><td class="memItemLeft" align="right" valign="top">units::angular_acceleration::radians_per_second_squared_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#aedfb2aee4653bcaaae123bcc2b60ebfa">GetMaxAngularAcceleration</a> () const</td></tr>
+<tr class="separator:aedfb2aee4653bcaaae123bcc2b60ebfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d97164802dee0c7e402db6059964329"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a5d97164802dee0c7e402db6059964329">GetFrontLeft</a> () const</td></tr>
+<tr class="separator:a5d97164802dee0c7e402db6059964329"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37f1c95ba7bb36f6d29cea4674649a8a"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a37f1c95ba7bb36f6d29cea4674649a8a">GetFrontRight</a> () const</td></tr>
+<tr class="separator:a37f1c95ba7bb36f6d29cea4674649a8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1781608f00c7b0da3420db4a9ef721a"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#ab1781608f00c7b0da3420db4a9ef721a">GetBackLeft</a> () const</td></tr>
+<tr class="separator:ab1781608f00c7b0da3420db4a9ef721a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f94195c19f0e3283e3d8332a02a330d"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a0f94195c19f0e3283e3d8332a02a330d">GetBackRight</a> () const</td></tr>
+<tr class="separator:a0f94195c19f0e3283e3d8332a02a330d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2be9bf346116beec4524ca48b0ed914f"><td class="memItemLeft" align="right" valign="top">frc::SwerveDrivePoseEstimator&lt; 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis.html#a2be9bf346116beec4524ca48b0ed914f">GetPose</a> ()</td></tr>
+<tr class="separator:a2be9bf346116beec4524ca48b0ed914f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00032">32</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00039">39</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="acf75a483aac33e8c457660bab2d88d5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf75a483aac33e8c457660bab2d88d5e">&#9670;&nbsp;</a></span>SwerveChassis()</h2>
+<a id="a5fe84a5eaaf15c3646ac06c220dce049"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fe84a5eaaf15c3646ac06c220dce049">&#9670;&nbsp;</a></span>SwerveChassis()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,25 +157,25 @@ Public Member Functions</h2></td></tr>
           <td class="memname">SwerveChassis::SwerveChassis </td>
           <td>(</td>
           <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt;&#160;</td>
-          <td class="paramname"><em>frontleft</em>, </td>
+          <td class="paramname"><em>frontLeft</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt;&#160;</td>
-          <td class="paramname"><em>frontright</em>, </td>
+          <td class="paramname"><em>frontRight</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt;&#160;</td>
-          <td class="paramname"><em>backleft</em>, </td>
+          <td class="paramname"><em>backLeft</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt;&#160;</td>
-          <td class="paramname"><em>backright</em>, </td>
+          <td class="paramname"><em>backRight</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -178,8 +204,14 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>maxAcceleration</em>&#160;</td>
+          <td class="paramtype">units::acceleration::meters_per_second_squared_t&#160;</td>
+          <td class="paramname"><em>maxAcceleration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">units::angular_acceleration::radians_per_second_squared_t&#160;</td>
+          <td class="paramname"><em>maxAngularAcceleration</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -205,13 +237,103 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8cpp_source.html#l00047">47</a> of file <a class="el" href="_swerve_chassis_8cpp_source.html">SwerveChassis.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8cpp_source.html#l00049">49</a> of file <a class="el" href="_swerve_chassis_8cpp_source.html">SwerveChassis.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a953e2d2b3776c36c61582c0608a434e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a953e2d2b3776c36c61582c0608a434e2">&#9670;&nbsp;</a></span>Drive() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SwerveChassis::Drive </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>drive</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>steer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>rotate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>fieldRelative</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Drive the chassis. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">double</td><td>drivePercent: forward/reverse percent output (positive is forward) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">double</td><td>steerPercent: left/right percent output (positive is left) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">double</td><td>rotatePercent: Rotation percent output around the vertical (Z) axis; (positive is counter clockwise) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bool</td><td>fieldRelative: true: movement is based on the field (e.g., push it goes away from the driver regardless of the robot orientation), false: direction is based on robot front/back </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8cpp_source.html#l00134">134</a> of file <a class="el" href="_swerve_chassis_8cpp_source.html">SwerveChassis.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9f2a266ee4e4fae549331bdc44647c5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f2a266ee4e4fae549331bdc44647c5b">&#9670;&nbsp;</a></span>Drive() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SwerveChassis::Drive </td>
+          <td>(</td>
+          <td class="paramtype">frc::ChassisSpeeds&#160;</td>
+          <td class="paramname"><em>speeds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>fieldRelative</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Drive the chassis. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">frc::ChassisSpeeds</td><td>speeds: kinematics for how to move the chassis </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bool</td><td>fieldRelative: true: movement is based on the field (e.g., push it goes away from the driver regardless of the robot orientation), false: direction is based on robot front/back </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a0aa8a2388dcbd02fd7eeb4b49b79bd75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0aa8a2388dcbd02fd7eeb4b49b79bd75">&#9670;&nbsp;</a></span>Drive()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aa8a2388dcbd02fd7eeb4b49b79bd75">&#9670;&nbsp;</a></span>Drive() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -255,17 +377,14 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">units::velocity::meters_per_second_t</td><td>ySpeed: left/right speed (positive is left) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">units::angular_velocity::radians_per_second_t</td><td>rot: Rotation speed around the vertical (Z) axis; (positive is counter clockwise) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">bool</td><td>fieldRelative: true: movement is based on the field (e.g., push it goes away from the driver regardless of the robot orientation), false: direction is based on robot front/back </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">units::length::inch_t</td><td>wheelBase: distance between the front and rear wheels </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8cpp_source.html#l00084">84</a> of file <a class="el" href="_swerve_chassis_8cpp_source.html">SwerveChassis.cpp</a>.</p>
-
 </div>
 </div>
-<a id="a95b0f7583e08ae4d2733482579cf28b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95b0f7583e08ae4d2733482579cf28b1">&#9670;&nbsp;</a></span>GetMaxAcceration()</h2>
+<a id="ab1781608f00c7b0da3420db4a9ef721a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1781608f00c7b0da3420db4a9ef721a">&#9670;&nbsp;</a></span>GetBackLeft()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -274,7 +393,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double SwerveChassis::GetMaxAcceration </td>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="class_swerve_module.html">SwerveModule</a>&gt; SwerveChassis::GetBackLeft </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -287,7 +406,163 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00076">76</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00127">127</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
+
+</div>
+</div>
+<a id="a0f94195c19f0e3283e3d8332a02a330d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f94195c19f0e3283e3d8332a02a330d">&#9670;&nbsp;</a></span>GetBackRight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="class_swerve_module.html">SwerveModule</a>&gt; SwerveChassis::GetBackRight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00128">128</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
+
+</div>
+</div>
+<a id="a7c195e4469e4077b69f6f81d13f20b54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c195e4469e4077b69f6f81d13f20b54">&#9670;&nbsp;</a></span>GetChassisSpeeds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ChassisSpeeds SwerveChassis::GetChassisSpeeds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Provide the current chassis speed information. </p>
+
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8cpp_source.html#l00160">160</a> of file <a class="el" href="_swerve_chassis_8cpp_source.html">SwerveChassis.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5d97164802dee0c7e402db6059964329"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d97164802dee0c7e402db6059964329">&#9670;&nbsp;</a></span>GetFrontLeft()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="class_swerve_module.html">SwerveModule</a>&gt; SwerveChassis::GetFrontLeft </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00125">125</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
+
+</div>
+</div>
+<a id="a37f1c95ba7bb36f6d29cea4674649a8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37f1c95ba7bb36f6d29cea4674649a8a">&#9670;&nbsp;</a></span>GetFrontRight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="class_swerve_module.html">SwerveModule</a>&gt; SwerveChassis::GetFrontRight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00126">126</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
+
+</div>
+</div>
+<a id="a29f4f3ebc7d643f9e31626a285ca0209"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29f4f3ebc7d643f9e31626a285ca0209">&#9670;&nbsp;</a></span>GetMaxAcceleration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">units::acceleration::meters_per_second_squared_t SwerveChassis::GetMaxAcceleration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00123">123</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
+
+</div>
+</div>
+<a id="aedfb2aee4653bcaaae123bcc2b60ebfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedfb2aee4653bcaaae123bcc2b60ebfa">&#9670;&nbsp;</a></span>GetMaxAngularAcceleration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">units::angular_acceleration::radians_per_second_squared_t SwerveChassis::GetMaxAngularAcceleration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00124">124</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
 
 </div>
 </div>
@@ -314,7 +589,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00075">75</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00122">122</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
 
 </div>
 </div>
@@ -341,7 +616,34 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00074">74</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00121">121</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
+
+</div>
+</div>
+<a id="a2be9bf346116beec4524ca48b0ed914f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2be9bf346116beec4524ca48b0ed914f">&#9670;&nbsp;</a></span>GetPose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frc::SwerveDrivePoseEstimator&lt;4&gt; SwerveChassis::GetPose </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00130">130</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
 
 </div>
 </div>
@@ -368,7 +670,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00073">73</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00120">120</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
 
 </div>
 </div>
@@ -395,7 +697,74 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00072">72</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8h_source.html#l00119">119</a> of file <a class="el" href="_swerve_chassis_8h_source.html">SwerveChassis.h</a>.</p>
+
+</div>
+</div>
+<a id="aca7b78a5e974c17e2488075b75260562"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca7b78a5e974c17e2488075b75260562">&#9670;&nbsp;</a></span>ResetPosition() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SwerveChassis::ResetPosition </td>
+          <td>(</td>
+          <td class="paramtype">const Pose2d &amp;&#160;</td>
+          <td class="paramname"><em>pose</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reset the current chassis pose based on the provided pose (the rotation comes from the Pigeon) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">const</td><td>Pose2d&amp; pose Current XY position </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8cpp_source.html#l00181">181</a> of file <a class="el" href="_swerve_chassis_8cpp_source.html">SwerveChassis.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a8b9d9e7ce8dbfef6c87267fcf02f267e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b9d9e7ce8dbfef6c87267fcf02f267e">&#9670;&nbsp;</a></span>ResetPosition() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SwerveChassis::ResetPosition </td>
+          <td>(</td>
+          <td class="paramtype">const Pose2d &amp;&#160;</td>
+          <td class="paramname"><em>pose</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Rotation2d &amp;&#160;</td>
+          <td class="paramname"><em>angle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reset the current chassis pose based on the provided pose and rotation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">const</td><td>Pose2d&amp; pose Current XY position </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">const</td><td>Rotation2d&amp; angle Current rotation angle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8cpp_source.html#l00171">171</a> of file <a class="el" href="_swerve_chassis_8cpp_source.html">SwerveChassis.cpp</a>.</p>
 
 </div>
 </div>
@@ -414,7 +783,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8cpp_source.html#l00104">104</a> of file <a class="el" href="_swerve_chassis_8cpp_source.html">SwerveChassis.cpp</a>.</p>
+<p>update the chassis odometry based on current states of the swerve modules and the pigeon </p>
+
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8cpp_source.html#l00148">148</a> of file <a class="el" href="_swerve_chassis_8cpp_source.html">SwerveChassis.cpp</a>.</p>
 
 </div>
 </div>
@@ -435,7 +806,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Align all of the swerve modules to point forward. </p>
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8cpp_source.html#l00068">68</a> of file <a class="el" href="_swerve_chassis_8cpp_source.html">SwerveChassis.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_8cpp_source.html#l00083">83</a> of file <a class="el" href="_swerve_chassis_8cpp_source.html">SwerveChassis.cpp</a>.</p>
 
 </div>
 </div>

@@ -1,0 +1,135 @@
+\hypertarget{class_drive_path}{}\doxysection{Drive\+Path Class Reference}
+\label{class_drive_path}\index{DrivePath@{DrivePath}}
+
+
+{\ttfamily \#include $<$Drive\+Path.\+h$>$}
+
+Inheritance diagram for Drive\+Path\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_drive_path}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_drive_path_a84833583a44d07e0975a554ed50929c1}{Drive\+Path}} ()
+\item 
+virtual \mbox{\hyperlink{class_drive_path_a59eea710dc71d912523ef186b1d83866}{$\sim$\+Drive\+Path}} ()=default
+\item 
+void \mbox{\hyperlink{class_drive_path_a270a9c18ee5521cfbcf2a603ad3f6746}{Init}} (\mbox{\hyperlink{class_primitive_params}{Primitive\+Params}} $\ast$params) override
+\item 
+void \mbox{\hyperlink{class_drive_path_a757cb21398077f9d8323c085e975c58b}{Run}} () override
+\item 
+bool \mbox{\hyperlink{class_drive_path_af815e61f6e8f1113bbb740ec13ce1cf7}{Is\+Done}} () override
+\item 
+void \mbox{\hyperlink{class_drive_path_a3ba34094b1cf6a1f45bdb5c90c7696f7}{Update\+Odometry}} ()
+\item 
+void \mbox{\hyperlink{class_drive_path_a02635c7e28ae2deea59116d19609b6b4}{Reset\+Odometry}} (const frc\+::\+Pose2d \&pose)
+\item 
+frc\+::\+Pose2d \mbox{\hyperlink{class_drive_path_a1247025ca2fa3b5f3a2ad00f8de97b75}{Get\+Pose}} () const
+\item 
+bool \mbox{\hyperlink{class_drive_path_a3a94b925d271be8bf9381726d24fefe0}{Robot\+Stopped}} (frc\+::\+Pose2d Cur\+Pos, frc\+::\+Pose2d Prev\+Pos)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 44 of file Drive\+Path.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_drive_path_a84833583a44d07e0975a554ed50929c1}\label{class_drive_path_a84833583a44d07e0975a554ed50929c1}} 
+\index{DrivePath@{DrivePath}!DrivePath@{DrivePath}}
+\index{DrivePath@{DrivePath}!DrivePath@{DrivePath}}
+\doxysubsubsection{\texorpdfstring{DrivePath()}{DrivePath()}}
+{\footnotesize\ttfamily Drive\+Path\+::\+Drive\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 53 of file Drive\+Path.\+cpp.
+
+\mbox{\Hypertarget{class_drive_path_a59eea710dc71d912523ef186b1d83866}\label{class_drive_path_a59eea710dc71d912523ef186b1d83866}} 
+\index{DrivePath@{DrivePath}!````~DrivePath@{$\sim$DrivePath}}
+\index{````~DrivePath@{$\sim$DrivePath}!DrivePath@{DrivePath}}
+\doxysubsubsection{\texorpdfstring{$\sim$DrivePath()}{~DrivePath()}}
+{\footnotesize\ttfamily virtual Drive\+Path\+::$\sim$\+Drive\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_drive_path_a1247025ca2fa3b5f3a2ad00f8de97b75}\label{class_drive_path_a1247025ca2fa3b5f3a2ad00f8de97b75}} 
+\index{DrivePath@{DrivePath}!GetPose@{GetPose}}
+\index{GetPose@{GetPose}!DrivePath@{DrivePath}}
+\doxysubsubsection{\texorpdfstring{GetPose()}{GetPose()}}
+{\footnotesize\ttfamily frc\+::\+Pose2d Drive\+Path\+::\+Get\+Pose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{class_drive_path_a270a9c18ee5521cfbcf2a603ad3f6746}\label{class_drive_path_a270a9c18ee5521cfbcf2a603ad3f6746}} 
+\index{DrivePath@{DrivePath}!Init@{Init}}
+\index{Init@{Init}!DrivePath@{DrivePath}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void Drive\+Path\+::\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_primitive_params}{Primitive\+Params}} $\ast$}]{params }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_primitive_abe9e4c3b5a5b806d2c551c0f56a075d2}{I\+Primitive}}.
+
+
+
+Definition at line 61 of file Drive\+Path.\+cpp.
+
+\mbox{\Hypertarget{class_drive_path_af815e61f6e8f1113bbb740ec13ce1cf7}\label{class_drive_path_af815e61f6e8f1113bbb740ec13ce1cf7}} 
+\index{DrivePath@{DrivePath}!IsDone@{IsDone}}
+\index{IsDone@{IsDone}!DrivePath@{DrivePath}}
+\doxysubsubsection{\texorpdfstring{IsDone()}{IsDone()}}
+{\footnotesize\ttfamily bool Drive\+Path\+::\+Is\+Done (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_primitive_a5b62801261f9bd974be04217bd86f668}{I\+Primitive}}.
+
+
+
+Definition at line 96 of file Drive\+Path.\+cpp.
+
+\mbox{\Hypertarget{class_drive_path_a02635c7e28ae2deea59116d19609b6b4}\label{class_drive_path_a02635c7e28ae2deea59116d19609b6b4}} 
+\index{DrivePath@{DrivePath}!ResetOdometry@{ResetOdometry}}
+\index{ResetOdometry@{ResetOdometry}!DrivePath@{DrivePath}}
+\doxysubsubsection{\texorpdfstring{ResetOdometry()}{ResetOdometry()}}
+{\footnotesize\ttfamily void Drive\+Path\+::\+Reset\+Odometry (\begin{DoxyParamCaption}\item[{const frc\+::\+Pose2d \&}]{pose }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_drive_path_a3a94b925d271be8bf9381726d24fefe0}\label{class_drive_path_a3a94b925d271be8bf9381726d24fefe0}} 
+\index{DrivePath@{DrivePath}!RobotStopped@{RobotStopped}}
+\index{RobotStopped@{RobotStopped}!DrivePath@{DrivePath}}
+\doxysubsubsection{\texorpdfstring{RobotStopped()}{RobotStopped()}}
+{\footnotesize\ttfamily bool Drive\+Path\+::\+Robot\+Stopped (\begin{DoxyParamCaption}\item[{frc\+::\+Pose2d}]{Cur\+Pos,  }\item[{frc\+::\+Pose2d}]{Prev\+Pos }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_drive_path_a757cb21398077f9d8323c085e975c58b}\label{class_drive_path_a757cb21398077f9d8323c085e975c58b}} 
+\index{DrivePath@{DrivePath}!Run@{Run}}
+\index{Run@{Run}!DrivePath@{DrivePath}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily void Drive\+Path\+::\+Run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_primitive_a3c34bd0f5ddbfe150ecade13303b6cd6}{I\+Primitive}}.
+
+
+
+Definition at line 80 of file Drive\+Path.\+cpp.
+
+\mbox{\Hypertarget{class_drive_path_a3ba34094b1cf6a1f45bdb5c90c7696f7}\label{class_drive_path_a3ba34094b1cf6a1f45bdb5c90c7696f7}} 
+\index{DrivePath@{DrivePath}!UpdateOdometry@{UpdateOdometry}}
+\index{UpdateOdometry@{UpdateOdometry}!DrivePath@{DrivePath}}
+\doxysubsubsection{\texorpdfstring{UpdateOdometry()}{UpdateOdometry()}}
+{\footnotesize\ttfamily void Drive\+Path\+::\+Update\+Odometry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/auton/primitives/\mbox{\hyperlink{_drive_path_8h}{Drive\+Path.\+h}}\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/auton/primitives/\mbox{\hyperlink{_drive_path_8cpp}{Drive\+Path.\+cpp}}\end{DoxyCompactItemize}

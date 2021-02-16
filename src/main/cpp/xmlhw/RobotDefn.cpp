@@ -63,11 +63,17 @@ using namespace std;
 void RobotDefn::ParseXML()
 {
     // set the file to parse
-    const char *filename = "/home/lvuser/config/robot.xml";
+    const char* filename = "/home/lvuser/config/robot.xml";
 
     // load the xml file into memory (parse it)
     xml_document doc;
     xml_parse_result result = doc.load_file(filename);
+    if (!result)
+    {
+        filename = "/home/lvuser/deploy/robot.xml";
+        result = doc.load_file(filename);
+        Logger::GetLogger()->LogError(string("RobotXML Parsing"), string("using deploy version"));
+    }
 
     Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Starting"));
 

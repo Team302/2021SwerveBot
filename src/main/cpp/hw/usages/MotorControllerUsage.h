@@ -45,6 +45,7 @@ class MotorControllerUsage
             INTAKE1,
             INTAKE2,
             BALL_TRANSFER,
+            BALL_HOPPER,
             TURRET,
             SHOOTER_1,            
             SHOOTER_2,

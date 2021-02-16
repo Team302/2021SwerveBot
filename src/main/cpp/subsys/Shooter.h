@@ -28,4 +28,6 @@ class Shooter : public Mech2IndMotors
             std::shared_ptr<IDragonMotorController> motor2
         );
 
+        Shooter() = delete;
+        virtual ~Shooter() = default;
 };

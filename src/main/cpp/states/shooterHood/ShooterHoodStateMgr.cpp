@@ -136,10 +136,10 @@ void ShooterHoodStateMgr::RunCurrentState()
         auto controller = TeleopControl::GetInstance();
         if ( controller != nullptr )
         {
-            if (controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_BUTTON))
-            {
-                SetCurrentState( SHOOTER_HOOD_STATE::MANUAL, false ); 
-            }
+            //if (controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_BUTTON))
+           // {
+            //    SetCurrentState( SHOOTER_HOOD_STATE::MANUAL, false ); 
+           // }
             
             /*if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MOVE_UP ) && 
                 m_currentStateEnum != SHOOTER_HOOD_STATE::MOVE_UP )

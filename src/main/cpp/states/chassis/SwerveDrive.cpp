@@ -55,9 +55,14 @@ void SwerveDrive::Init()
     if ( controller != nullptr )
     {
         controller->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE, IDragonGamePad::AXIS_PROFILE::CUBED );
+        controller->SetDeadBand(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE, IDragonGamePad::AXIS_DEADBAND::APPLY_STANDARD_DEADBAND);
+
         controller->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER, IDragonGamePad::AXIS_PROFILE::CUBED );
+        controller->SetDeadBand(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER, IDragonGamePad::AXIS_DEADBAND::APPLY_STANDARD_DEADBAND);
+
         controller->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, IDragonGamePad::AXIS_PROFILE::CUBED );
-    }
+        controller->SetDeadBand(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, IDragonGamePad::AXIS_DEADBAND::APPLY_STANDARD_DEADBAND);
+   }
 }
 
 
@@ -76,19 +81,7 @@ void SwerveDrive::Run( )
         steer  = controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER);
         rotate =  controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
     }
-
     m_chassis.get()->Drive(drive, steer, rotate, true);
-    return;
-
-    //Get drive, steer, and rotate values
-    units::velocity::meters_per_second_t maxSpeed = m_chassis.get()->GetMaxSpeed();
-    units::velocity::meters_per_second_t driveSpeed = maxSpeed * drive;
-    units::velocity::meters_per_second_t turnSpeed = maxSpeed * steer;
-
-    units::radians_per_second_t maxRotateSpeed = m_chassis.get()->GetMaxAngularSpeed();
-    units::radians_per_second_t rotateSpeed = maxRotateSpeed * rotate; 
-
-    m_chassis.get()->Drive(driveSpeed, turnSpeed, rotateSpeed, true);
 }
 
 /// @brief indicates that we are not at our target
@@ -101,15 +94,12 @@ bool SwerveDrive::AtTarget() const
 void SwerveDrive::RunCurrentState()
 {
     auto controller = TeleopControl::GetInstance();
-
-    auto factory = PigeonFactory::GetFactory();
-
-    auto m_pigeon = factory->GetPigeon();
-
     if ( controller != nullptr)
     {
         if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::REZERO_PIGEON))
         {
+            auto factory = PigeonFactory::GetFactory();
+            auto m_pigeon = factory->GetPigeon();
             m_pigeon->ReZeroPigeon( 0, 0);
         }
     }

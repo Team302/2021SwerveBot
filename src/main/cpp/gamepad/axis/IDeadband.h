@@ -50,6 +50,6 @@ class IDeadband
         ) const = 0;
 
     protected:
-        const double M_DEADBAND_VALUE = 0.1;
+        const double M_DEADBAND_VALUE = 0.02;
 };
 
