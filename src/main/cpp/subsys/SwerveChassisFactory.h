@@ -101,13 +101,13 @@ class SwerveChassisFactory
 		SwerveChassisFactory() = default;
 		virtual ~SwerveChassisFactory() = default;
 
-		static SwerveChassisFactory*	        m_swerveChassisFactory;
+		static SwerveChassisFactory*	    		m_swerveChassisFactory;
 
-        std::shared_ptr<SwerveChassis>			m_chassis;
-        std::shared_ptr<SwerveModule>	    m_leftFront;
-        std::shared_ptr<SwerveModule>	    m_leftBack;
-        std::shared_ptr<SwerveModule>	    m_rightFront;
-        std::shared_ptr<SwerveModule>	    m_rightBack;
+        std::shared_ptr<SwerveChassis>				m_chassis;
+        std::shared_ptr<SwerveModule>	    		m_leftFront;
+        std::shared_ptr<SwerveModule>	    		m_leftBack;
+        std::shared_ptr<SwerveModule>	    		m_rightFront;
+        std::shared_ptr<SwerveModule>	    		m_rightBack;
 
 
 

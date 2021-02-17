@@ -1,0 +1,19 @@
+<!ELEMENT auton (primitive*) >
+
+
+<!ELEMENT primitive EMPTY >
+<!ATTLIST primitive 
+          id                ( DO_NOTHING | HOLD_POSITION | 
+                              DRIVE_DISTANCE | DRIVE_TIME | DRIVE_TO_WALL | 
+                              TURN_ANGLE_ABS | TURN_ANGLE_REL | AUTO_SHOOT ) "DO_NOTHING"
+		  time				CDATA #IMPLIED
+          distance		    CDATA "0.0"
+          heading           CDATA "0.0"
+          drivespeed        CDATA "0.0"
+          enddrivespeed     CDATA "0.0"
+          xloc				CDATA "0.0"
+          yloc				CDATA "0.0"
+          ballState         ( OFF | INTAKE | INTAKE_HUMAN_PLAYER | HOLD | GET_READY_TO_SHOOT | SHOOT | TURRET_TURN_ANGLE ) "OFF"
+          turretAngle       CDATA #IMPLIED
+>
+

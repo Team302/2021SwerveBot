@@ -108,50 +108,40 @@ TeleopControl::TeleopControl() : m_axisIDs(),
     ctrlNo = 1;
     if ( m_controllers[ctrlNo] != nullptr && ds->GetJoystickIsXbox(ctrlNo) )
     {
-		m_controllerIndex[ SHOOTER_HOOD_MANUAL_AXIS] = ctrlNo;
-		m_axisIDs[ SHOOTER_HOOD_MANUAL_AXIS ] = IDragonGamePad::RIGHT_JOYSTICK_Y;
 
-		m_controllerIndex[ TURRET_MANUAL_AXIS] = ctrlNo;
-		m_axisIDs[ TURRET_MANUAL_AXIS] = IDragonGamePad::LEFT_JOYSTICK_X;
+		//m_controllerIndex[ TURRET_MANUAL_AXIS] = ctrlNo;
+		//m_axisIDs[ TURRET_MANUAL_AXIS] = IDragonGamePad::LEFT_JOYSTICK_X;
 
 		m_controllerIndex[ OFF ] = ctrlNo;
 		m_buttonIDs[ OFF ] = IDragonGamePad::START_BUTTON;
 
-		m_controllerIndex[ INTAKE ] = ctrlNo;
-		m_buttonIDs[ INTAKE ] = IDragonGamePad::A_BUTTON;
+		m_controllerIndex[ SHOOTER_MANUAL_SHOOT_GREEN ] = ctrlNo;
+		m_buttonIDs[ SHOOTER_MANUAL_SHOOT_GREEN ] = IDragonGamePad::A_BUTTON;
 
-		m_controllerIndex[ INTAKE_HUMAN_PLAYER] = ctrlNo;
-		m_buttonIDs[ INTAKE_HUMAN_PLAYER ] = IDragonGamePad::B_BUTTON;
+		m_controllerIndex[ SHOOTER_MANUAL_SHOOT_RED] = ctrlNo;
+		m_buttonIDs[ SHOOTER_MANUAL_SHOOT_RED ] = IDragonGamePad::B_BUTTON;
 
-		m_controllerIndex[ SHOOT ] = ctrlNo;
-		m_buttonIDs[ SHOOT ] = IDragonGamePad::X_BUTTON;
+		m_controllerIndex[ SHOOTER_MANUAL_SHOOT_BLUE ] = ctrlNo;
+		m_buttonIDs[ SHOOTER_MANUAL_SHOOT_BLUE ] = IDragonGamePad::X_BUTTON;
 		
-		m_controllerIndex[ TURRET_MANUAL_BUTTON] = ctrlNo;
-		m_buttonIDs[ TURRET_MANUAL_BUTTON] = IDragonGamePad::Y_BUTTON;
+		m_controllerIndex[ SHOOTER_MANUAL_SHOOT_YELLOW] = ctrlNo;
+		m_buttonIDs[ SHOOTER_MANUAL_SHOOT_YELLOW ] = IDragonGamePad::Y_BUTTON;
 
-		m_controllerIndex[ SHOOTER_HOOD_MANUAL_BUTTON] = ctrlNo;
-		m_buttonIDs[ SHOOTER_HOOD_MANUAL_BUTTON] = IDragonGamePad::Y_BUTTON;
-
-		m_controllerIndex[SHOOTER_MANUAL_SHOOT] = ctrlNo;
-		m_buttonIDs[SHOOTER_MANUAL_SHOOT] = IDragonGamePad::POV_0;
+		//m_controllerIndex[SHOOTER_MANUAL_SHOOT_GREEN] = ctrlNo;
+		//m_buttonIDs[SHOOTER_MANUAL_SHOOT_GREEN] = IDragonGamePad::POV_0;
 		
-		m_controllerIndex[SHOOTER_OFF] = ctrlNo;
-		m_buttonIDs[SHOOTER_OFF] = IDragonGamePad::POV_180;
+		//m_controllerIndex[SHOOTER_OFF] = ctrlNo;
+		//m_buttonIDs[SHOOTER_OFF] = IDragonGamePad::POV_180;
 
 		m_controllerIndex[TURRET_LIMELIGHT_AIM] = ctrlNo;
 		m_buttonIDs[TURRET_LIMELIGHT_AIM] = IDragonGamePad::POV_270;
 
-		m_controllerIndex[ UNJAM_CLOCKWISE ] = ctrlNo;
-		m_buttonIDs[ UNJAM_CLOCKWISE ] = IDragonGamePad::RIGHT_BUMPER;
-		
-		m_controllerIndex[ UNJAM_COUNTERCLOCKWISE ] = ctrlNo;
-		m_buttonIDs[ UNJAM_COUNTERCLOCKWISE ] = IDragonGamePad::LEFT_BUMPER;
 
-		m_controllerIndex[ TRANSFER_UP ] = ctrlNo;
-		m_buttonIDs[ TRANSFER_UP ] = IDragonGamePad::LEFT_TRIGGER_PRESSED;
+		//m_controllerIndex[ TRANSFER_UP ] = ctrlNo;
+		//m_buttonIDs[ TRANSFER_UP ] = IDragonGamePad::LEFT_TRIGGER_PRESSED;
 
-		m_controllerIndex[ TRANSFER_DOWN ] = ctrlNo;
-		m_buttonIDs[ TRANSFER_DOWN ] = IDragonGamePad::RIGHT_TRIGGER_PRESSED;
+		//m_controllerIndex[ TRANSFER_DOWN ] = ctrlNo;
+		//m_buttonIDs[ TRANSFER_DOWN ] = IDragonGamePad::RIGHT_TRIGGER_PRESSED;
 		
 		/*
 		m_controllerIndex[ TURRET_LIMELIGHT_AIM] = ctrlNo;
@@ -177,49 +167,14 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		m_controllerIndex[INTAKE_OFF] = ctrlNo;
 		m_buttonIDs[INTAKE_OFF] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_2;
 
-		//m_controllerIndex[IMPELLER_OFF] = ctrlNo;
-		//m_buttonIDs[IMPELLER_OFF] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_3;
-		//m_controllerIndex[IMPELLER_HOLD] = ctrlNo;
-		//m_buttonIDs[IMPELLER_HOLD] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_4;
-		/*m_controllerIndex[IMPELLER_AGITATE] = ctrlNo;
-		m_buttonIDs[IMPELLER_AGITATE] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_5;
-		*/
-		//m_controllerIndex[IMPELLER_TO_SHOOTER] = ctrlNo;
-		//m_buttonIDs[IMPELLER_TO_SHOOTER] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_5;
-		
-
-		//m_controllerIndex[CLIMBER_EXTEND] = ctrlNo;
-		//m_buttonIDs[CLIMBER_EXTEND] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_14_UP;
-		//m_controllerIndex[CLIMBER_LIFT] = ctrlNo;
-		//m_buttonIDs[CLIMBER_LIFT] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_14_DOWN;
-		//m_controllerIndex[CLIMBER_CRAWL] = ctrlNo;
-		//m_buttonIDs[CLIMBER_CRAWL] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_DIAL_23;
 
 		m_controllerIndex[BALL_TRANSFER_OFF] = ctrlNo;
 		m_buttonIDs[BALL_TRANSFER_OFF] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_6;
-		//m_controllerIndex[BALL_TRANSFER_TO_IMPELLER] = ctrlNo;
-		//m_buttonIDs[BALL_TRANSFER_TO_IMPELLER] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_7;
+
 		m_controllerIndex[BALL_TRANSFER_TO_SHOOTER] = ctrlNo;
 		m_buttonIDs[BALL_TRANSFER_TO_SHOOTER] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_8;
 		
-		/*m_controllerIndex[CONTROL_PANEL_STOW] = ctrlNo;
-		m_buttonIDs[CONTROL_PANEL_STOW] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_15_DOWN;
-		m_controllerIndex[CONTROL_PANEL_RAISE] = ctrlNo;
-		m_buttonIDs[CONTROL_PANEL_RAISE] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_15_UP;
-		m_controllerIndex[CONTROL_PANEL_SPIN_WHEEL] = ctrlNo;
-		m_buttonIDs[CONTROL_PANEL_SPIN_WHEEL] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_5;
-		m_controllerIndex[CONTROL_PANEL_TURN_TO_COLOR] = ctrlNo;
-		m_buttonIDs[CONTROL_PANEL_TURN_TO_COLOR] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_6;
-*/
-		
 
-		/*m_controllerIndex[TURRET_MANUAL_BUTTON] = ctrlNo;
-		m_buttonIDs[TURRET_MANUAL_BUTTON] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_11;*/
-		
-		/*m_buttonIDs[SHOOTER_MANUAL_AIM] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_9;
-		m_controllerIndex[SHOOTER_MANUAL_ADJUST_DISTANCE] = ctrlNo;
-		m_buttonIDs[SHOOTER_MANUAL_ADJUST_DISTANCE] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_10;
-		*/
 	}
 	else
 	{
@@ -292,6 +247,22 @@ void TeleopControl::SetAxisScaleFactor
     }
 }
 
+void TeleopControl::SetDeadBand
+(
+	TeleopControl::FUNCTION_IDENTIFIER		function,
+	IDragonGamePad::AXIS_DEADBAND			deadband    
+)
+{
+	int ctlIndex = m_controllerIndex[ function];
+	IDragonGamePad::AXIS_IDENTIFIER axis = m_axisIDs[ function ];
+    if ( ctlIndex > -1 && axis != IDragonGamePad::AXIS_IDENTIFIER::UNDEFINED_AXIS  )
+    {
+    	if (m_controllers[ ctlIndex ] != nullptr)
+    	{
+    		m_controllers[ ctlIndex ]->SetAxisDeadband( axis,deadband);
+    	}
+    }}
+
 void TeleopControl::SetSlewRateLimiter
 (
 	TeleopControl::FUNCTION_IDENTIFIER		function,
@@ -330,7 +301,7 @@ void TeleopControl::SetAxisProfile
     	}
     }
 }
-
+ 
 //------------------------------------------------------------------
 // Method:      GetAxisValue
 // Description: Reads the joystick axis, removes any deadband (small

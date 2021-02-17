@@ -35,6 +35,7 @@ class MechanismTypes
             BALL_TRANSFER,
             TURRET,
             SHOOTER,
+            BALL_HOPPER,
             SHOOTER_HOOD,
             MAX_MECHANISM_TYPES
         };
