@@ -327,7 +327,7 @@ void DragonFalcon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)
 			break;
 
         case ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE:
-			ctreMode =:: ctre::phoenix::motorcontrol::TalonFXControlMode::Position;
+			ctreMode =:: ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic;
 			break;
 
         case ControlModes::CONTROL_TYPE::POSITION_DEGREES:
@@ -689,7 +689,8 @@ void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 	}
 
 	
-	if ( controlInfo->GetMode() == ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE ||
+	if ( controlInfo->GetMode() == ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE ||
+		 controlInfo->GetMode() == ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE ||
 	     controlInfo->GetMode() == ControlModes::CONTROL_TYPE::TRAPEZOID  )
 	{
 		error = m_talon.get()->ConfigMotionAcceleration( controlInfo->GetMaxAcceleration() );

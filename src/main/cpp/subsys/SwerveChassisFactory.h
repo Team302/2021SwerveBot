@@ -58,10 +58,18 @@ class SwerveChassisFactory
 		//=====================================================================================
 		std::shared_ptr<SwerveModule> CreateSwerveModule
 		(
-            SwerveModule::ModuleID                            type,
-			const IDragonMotorControllerMap&        				motorControllers,   // <I> - Motor Controllers
-			std::shared_ptr<ctre::phoenix::sensors::CANCoder>		turnSensor,
-			units::length::inch_t 									wheelDiameter
+            SwerveModule::ModuleID                            			type,
+			const IDragonMotorControllerMap&        					motorControllers,   // <I> - Motor Controllers
+			std::shared_ptr<ctre::phoenix::sensors::CANCoder>			turnSensor,
+			units::length::inch_t 										wheelDiameter,
+			double                                                      turnP,
+			double                                                      turnI,
+			double                                                      turnD,
+			double                                                      turnF,
+			double                                                      turnNominalVal,
+			double                                                      turnPeakVal,
+			double                                                      turnMaxAcc,
+			double                                                      turnCruiseVel
 		);
 
 		//=====================================================================================

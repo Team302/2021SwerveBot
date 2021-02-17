@@ -26,6 +26,7 @@
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableEntry.h>
 #include <units/angle.h>
+#include <units/velocity.h>
 #include <wpi/math>
 
 // Team 302 includes
@@ -57,11 +58,19 @@ using namespace wpi::math;
 /// @param [in] units::length::inch_t                                   wheelDiameter   Diameter of the wheel
 SwerveModule::SwerveModule
 (
-    ModuleID                                                type, 
-    shared_ptr<IDragonMotorController>                      driveMotor, 
-    shared_ptr<IDragonMotorController>                      turnMotor, 
-    std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder,
-    units::length::inch_t                                   wheelDiameter
+    ModuleID                                                    type, 
+    shared_ptr<IDragonMotorController>                          driveMotor, 
+    shared_ptr<IDragonMotorController>                          turnMotor, 
+    std::shared_ptr<ctre::phoenix::sensors::CANCoder>		    canCoder,
+    units::length::inch_t                                       wheelDiameter,
+    double                                                      turnP,
+    double                                                      turnI,
+    double                                                      turnD,
+    double                                                      turnF,
+    double                                                      turnNominalVal,
+    double                                                      turnPeakVal,
+    double                                                      turnMaxAcc,
+    double                                                      turnCruiseVel
 ) : m_type(type), 
     m_driveMotor(driveMotor), 
     m_turnMotor(turnMotor), 
@@ -70,8 +79,12 @@ SwerveModule::SwerveModule
     m_initialAngle(canCoder.get()->GetAbsolutePosition()),
     m_initialCounts(0),
     m_nt(),
-    m_lastDelta(0.0)
+    m_currentState()
 {
+    Rotation2d ang { units::angle::degree_t(0.0)};
+    m_currentState.angle = ang;
+    m_currentState.speed = 0_mps;
+    
     // Set up the Drive Motor
     auto motor = m_driveMotor.get()->GetSpeedController();
     auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
@@ -88,13 +101,13 @@ SwerveModule::SwerveModule
     // Set up the Turn Motor
     motor = m_turnMotor.get()->GetSpeedController();
     fx = dynamic_cast<WPI_TalonFX*>(motor.get());
-    auto error = fx->ConfigPeakOutputForward(0.25, 0);
+    auto error = fx->ConfigPeakOutputForward(0.2, 0);
 	if ( error != ErrorCode::OKAY )
 	{
 		Logger::GetLogger()->LogError(string("SwerveModule"), string("ConfigPeakOutputForward error"));
 		error = ErrorCode::OKAY;
 	}
-	error = fx->ConfigPeakOutputReverse(-0.25, 0);
+	error = fx->ConfigPeakOutputReverse(-0.2, 0);
 	if ( error != ErrorCode::OKAY )
 	{
 		Logger::GetLogger()->LogError(string("SwerveModule"), string("ConfigPeakOutputReverse error"));
@@ -108,6 +121,22 @@ SwerveModule::SwerveModule
     fx->ConfigIntegratedSensorInitializationStrategy(BootToZero);
     auto turnMotorSensors = fx->GetSensorCollection();
     turnMotorSensors.SetIntegratedSensorPosition(0, 0);
+    //1.0, 0.0, 0.0
+    //0.1, 0.0, 0.0001
+    // 0.00000000005,  0.0, 100000000000.0, 0.0001,
+    auto turnCData = make_shared<ControlData>(  ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE,
+                                                ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
+                                                string("Turn Angle"),
+                                                turnP,
+                                                turnI,
+                                                turnD,
+                                                turnF,
+                                                0.0,
+                                                turnMaxAcc,
+                                                turnCruiseVel,
+                                                turnNominalVal,
+                                                turnPeakVal );
+    m_turnMotor.get()->SetControlConstants( turnCData.get() );
 
     string ntName;
     switch ( GetType() )
@@ -160,21 +189,24 @@ void SwerveModule::Init
                                                 0.0 );
     m_driveMotor.get()->SetControlConstants( driveCData.get() );
 
+    /**
     //1.0, 0.0, 0.0
     //0.1, 0.0, 0.0001
+    // 0.00000000005,  0.0, 100000000000.0, 0.0001,
     auto turnCData = make_shared<ControlData>(  ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE,
                                                 ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
                                                 string("Turn Angle"),
-                                                0.0000000000000005,
-                                                0.0,
-                                                100000000.0,
-                                                0.00001,
+                                                1.0,
+                                                0.1,
+                                                10.0,
+                                                1.0,
                                                 0.0,
                                                 maxAcceleration.to<double>(),
                                                 maxVelocity.to<double>(),
                                                 maxVelocity.to<double>(),
                                                 0.0 );
     m_turnMotor.get()->SetControlConstants( turnCData.get() );
+    **/
 }
 
 /// @brief Turn all of the wheel to zero degrees yaw according to the pigeon
@@ -215,17 +247,40 @@ void SwerveModule::SetDesiredState
     // if it is more than 90 degrees (90 to 270), the can turn the opposite direction -- increase the angle by 180 degrees -- and negate the wheel speed
     // finally, get the value between -90 and 90
     Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
-    auto state = SwerveModuleState::Optimize(referenceState, currAngle);
+    //auto state = SwerveModuleState::Optimize(referenceState, currAngle);
+    auto state = referenceState;
+    auto wheelSpeed = state.speed;
+    auto delta = state.angle.Degrees() - currAngle.Degrees();
+    if ( abs(delta.to<double>() > 90.0 ))
+    {
+        if ( delta.to<double>() > 0.0 ) // 90+ degree turn
+        {
+            delta = delta - units::angle::degree_t(180.0);
+            wheelSpeed *= -1.0;
+        }
+        else // -90- degree turn
+        {
+            delta = delta + units::angle::degree_t(180.0);
+            wheelSpeed *= -1.0;
+        }
+    }
 
     // Set Drive Target 
-    SetDriveSpeed(state.speed);
+    SetDriveSpeed(wheelSpeed);
 
     // Set Turn Target 
-    SetTurnAngle(state.angle.Degrees());
+    units::angle::degree_t targetAngle = currAngle.Degrees() + delta;
+    SetTurnAngle(targetAngle);
 }
 
+void SwerveModule::RunCurrentState()
+{
+    SetDriveSpeed(m_currentState.speed);
+    SetTurnAngle(m_currentState.angle.Degrees());
+}
 void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
 {
+    m_currentState.speed = speed;
     // convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel
     auto driveTarget = speed.to<double>() /  units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi;  
 	m_nt.get()->PutString("drive motor id", to_string(m_driveMotor.get()->GetID()) );
@@ -233,33 +288,43 @@ void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
     m_driveMotor.get()->Set(m_nt, driveTarget);
 }
 
-void SwerveModule::SetTurnAngle( units::angle::degree_t angle )
+void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
 {
+    m_currentState.angle = targetAngle;
     Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
-    Rotation2d delta = -1.0*(angle - currAngle.Degrees());
+    Rotation2d deltaAngle = targetAngle - currAngle.Degrees();
+   
 
-//    double deltaTicks = (delta.Degrees().to<double>() / 360.0) * 4096;
+    if ( abs(deltaAngle.Degrees().to<double>() > 0.01) )
+    {
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, string("Swerve Module Turn Motor"), to_string(m_turnMotor.get()->GetID()));
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, string("current angle"), to_string(currAngle.Degrees().to<double>()));
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, string("target angle"), to_string(targetAngle.to<double>()));
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, string("delta angle"), to_string(deltaAngle.Degrees().to<double>()));
 
-//    CANCoderConfiguration allConfigs;
-//    m_turnSensor.get()->GetAllConfigs(allConfigs, 50);
-//    double currentTicks = m_turnSensor.get()->GetAbsolutePosition() / allConfigs.sensorCoefficient;
-//    double desiredTicks = currentTicks + deltaTicks;
+        auto motor = m_turnMotor.get()->GetSpeedController();
+        auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
+        auto sensors = fx->GetSensorCollection();
+        double currentTicks = sensors.GetIntegratedSensorPosition();
+        double deltaTicks = deltaAngle.Degrees().to<double>() * 72.4694;
+        double desiredTicks = currentTicks + deltaTicks;
 
-    auto motor = m_turnMotor.get()->GetSpeedController();
-    auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
-    auto sensors = fx->GetSensorCollection();
-    double currentTicks = sensors.GetIntegratedSensorPosition();
-    double deltaTicks = delta.Degrees().to<double>() * 72.4694;
-    double desiredTicks = currentTicks + deltaTicks;
+        m_nt.get()->PutString("turn motor id", to_string(m_turnMotor.get()->GetID()) );
+        m_nt.get()->PutNumber("current angle", currAngle.Degrees().to<double>() );
+        m_nt.get()->PutNumber("target angle", units::angle::degree_t(targetAngle).to<double>() );
+        m_nt.get()->PutNumber("delta angle", deltaAngle.Degrees().to<double>() );
+        m_nt.get()->PutNumber("currentTicks", currentTicks );
+        m_nt.get()->PutNumber("deltaTicks", deltaTicks );
+        m_nt.get()->PutNumber("desiredTicks", desiredTicks );
 
-	m_nt.get()->PutString("turn motor id", to_string(m_turnMotor.get()->GetID()) );
-    m_nt.get()->PutNumber("current angle", currAngle.Degrees().to<double>() );
-    m_nt.get()->PutNumber("target angle", units::angle::degree_t(angle).to<double>() );
-    m_nt.get()->PutNumber("currentTicks", currentTicks );
-    m_nt.get()->PutNumber("deltaTicks", deltaTicks );
-    m_nt.get()->PutNumber("desiredTicks", desiredTicks );
-
-    m_turnMotor.get()->Set(m_nt, desiredTicks);
+        m_turnMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE);
+        m_turnMotor.get()->Set(m_nt, desiredTicks);
+    }
+    else
+    {
+//        m_turnMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::PERCENT_OUTPUT);
+//        m_turnMotor.get()->Set(m_nt, 0.0);
+    }
 }
 
 

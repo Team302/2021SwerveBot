@@ -37,8 +37,6 @@ class SwerveDrive : public IState
 
         bool AtTarget() const override;
 
-        void RunCurrentState();
-
     private:
         inline TeleopControl* GetController() const { return m_controller; }
         std::shared_ptr<SwerveChassis> m_chassis;
