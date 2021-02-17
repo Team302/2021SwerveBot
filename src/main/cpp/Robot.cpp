@@ -25,7 +25,10 @@
 #include <states/chassis/SwerveDrive.h>
 #include <subsys/SwerveChassisFactory.h>
 #include <subsys/SwerveChassis.h>
+#include <hw/factories/LimelightFactory.h>
+#include <vision/DriverMode.h>
 #include <xmlhw/RobotDefn.h>
+#include <hw/interfaces/IDragonSensor.h>
 
 
 using namespace std;
@@ -43,6 +46,9 @@ void Robot::RobotInit()
     // solenoids, digital inputs, analog inputs, etc.
     unique_ptr<RobotDefn>  robotXml = make_unique<RobotDefn>();
     robotXml->ParseXML();
+
+    //create the limelight camera
+    m_limelight = LimelightFactory::GetLimelightFactory()->GetLimelight( IDragonSensor::MAIN_LIMELIGHT );
 }
 
 /// @brief This function is called every robot packet, no matter the  mode. This is used for items like diagnostics that run 
@@ -108,6 +114,16 @@ void Robot::TeleopInit()
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("TeleopPeriodic"), string("no swerve chassis"));
     }
+
+    //set camera to drivermode to stream to dashboard
+
+
+    //somehow get a DragonLimelight pointer to be used in SetCamToDriveMode
+
+
+
+    m_driverMode(m_limelight);
+    m_driverMode->SetCamToDriveMode();
 
     m_drive = make_shared<SwerveDrive>();
     m_drive.get()->Init();
