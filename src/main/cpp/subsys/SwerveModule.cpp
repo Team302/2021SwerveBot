@@ -134,8 +134,8 @@ SwerveModule::SwerveModule
                                                 0.0,
                                                 turnMaxAcc,
                                                 turnCruiseVel,
-                                                turnNominalVal,
-                                                turnPeakVal );
+                                                turnPeakVal,
+                                                turnNominalVal);
     m_turnMotor.get()->SetControlConstants( turnCData.get() );
 
     string ntName;
@@ -213,7 +213,16 @@ void SwerveModule::Init
 /// @returns void
 void SwerveModule::ZeroAlignModule()
 {
-    SetTurnAngle( units::angle::degree_t(0.0));
+    // Desired State
+    units::velocity::meters_per_second_t mps = 0_mps;
+    Rotation2d angle {units::angle::degree_t(0.0)};
+    SwerveModuleState desiredState{mps,angle};
+
+    // Optimize based on current wheel positions
+    Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
+    auto state = SwerveModuleState::Optimize(desiredState, currAngle);
+    SetTurnAngle(state.angle.Degrees());
+    //SetTurnAngle( units::angle::degree_t(0.0));
 }
 
 
@@ -247,8 +256,8 @@ void SwerveModule::SetDesiredState
     // if it is more than 90 degrees (90 to 270), the can turn the opposite direction -- increase the angle by 180 degrees -- and negate the wheel speed
     // finally, get the value between -90 and 90
     Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
-    //auto state = SwerveModuleState::Optimize(referenceState, currAngle);
-    auto state = referenceState;
+    auto state = SwerveModuleState::Optimize(referenceState, currAngle);
+    //auto state = referenceState;
     auto wheelSpeed = state.speed;
     auto delta = state.angle.Degrees() - currAngle.Degrees();
     if ( abs(delta.to<double>() > 90.0 ))
@@ -293,9 +302,34 @@ void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
     m_currentState.angle = targetAngle;
     Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
     Rotation2d deltaAngle = targetAngle - currAngle.Degrees();
-   
 
-    if ( abs(deltaAngle.Degrees().to<double>() > 0.01) )
+    if ( deltaAngle.Degrees().to<double>() > 180.0 )
+    {
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR, string("delta angle too large motor"), to_string(m_turnMotor.get()->GetID()));
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR, string("delta angle too large"), to_string(deltaAngle.Degrees().to<double>()));
+    }
+
+    m_nt.get()->PutString("turn motor id", to_string(m_turnMotor.get()->GetID()) );
+    m_nt.get()->PutNumber("current angle", currAngle.Degrees().to<double>() );
+    m_nt.get()->PutNumber("target angle", targetAngle.to<double>() );
+    m_nt.get()->PutNumber("delta angle", deltaAngle.Degrees().to<double>() );
+   
+   /**
+    double speed = 0.0;
+    if ( deltaAngle.Degrees().to<double>() > 5.0 )
+    {
+        speed = 0.01;
+    }
+    else if ( deltaAngle.Degrees().to<double>() < -5.0 )
+    {
+        speed = -0.01;
+    }
+    m_turnMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::PERCENT_OUTPUT);
+    m_turnMotor.get()->Set(m_nt, speed);
+    **/
+    
+    
+    if ( abs(deltaAngle.Degrees().to<double>()) > 0.01 )
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, string("Swerve Module Turn Motor"), to_string(m_turnMotor.get()->GetID()));
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, string("current angle"), to_string(currAngle.Degrees().to<double>()));
@@ -306,7 +340,8 @@ void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
         auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
         auto sensors = fx->GetSensorCollection();
         double currentTicks = sensors.GetIntegratedSensorPosition();
-        double deltaTicks = deltaAngle.Degrees().to<double>() * 72.4694;
+    //    double deltaTicks = deltaAngle.Degrees().to<double>() * 72.5; //72.4694;
+        double deltaTicks = (deltaAngle.Degrees().to<double>() * 72.5) / 4.0; //72.4694;
         double desiredTicks = currentTicks + deltaTicks;
 
         m_nt.get()->PutString("turn motor id", to_string(m_turnMotor.get()->GetID()) );
@@ -325,6 +360,7 @@ void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
 //        m_turnMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::PERCENT_OUTPUT);
 //        m_turnMotor.get()->Set(m_nt, 0.0);
     }
+
 }
 
 

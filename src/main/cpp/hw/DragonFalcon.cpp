@@ -689,7 +689,7 @@ void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 	}
 
 	
-	if ( controlInfo->GetMode() == ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE ||
+	if ( //controlInfo->GetMode() == ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE ||
 		 controlInfo->GetMode() == ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE ||
 	     controlInfo->GetMode() == ControlModes::CONTROL_TYPE::TRAPEZOID  )
 	{

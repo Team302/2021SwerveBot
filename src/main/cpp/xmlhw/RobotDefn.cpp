@@ -154,7 +154,7 @@ void RobotDefn::ParseXML()
 
         msg = "Error offset: ";
         msg += result.offset;
-        msg += " error at ...";
+        msg += " error at: ";
         msg += filename;
         msg += result.offset;
         Logger::GetLogger()->LogError( "RobotDefn::ParseXML (3) ", msg );
