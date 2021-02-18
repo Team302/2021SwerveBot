@@ -24,6 +24,9 @@
 #include <RamScan/RamScan.h>
 #include <Robot.h>
 #include <states/chassis/SwerveDrive.h>
+#include <states/shooter/ShooterStateMgr.h>
+#include <subsys/MechanismFactory.h>
+#include <subsys/Shooter.h>
 #include <subsys/SwerveChassisFactory.h>
 #include <subsys/SwerveChassis.h>
 #include <xmlhw/RobotDefn.h>
@@ -89,6 +92,7 @@ void Robot::DisabledPeriodic()
 /// @return void
 void Robot::AutonomousInit()
 {
+    /**
     m_RunMode = AUTON;
 
     auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
@@ -100,6 +104,7 @@ void Robot::AutonomousInit()
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("AutonomousInit"), string("no swerve chassis"));
     }
+    **/
 }
 
 
@@ -126,6 +131,7 @@ void Robot::TeleopInit()
 {
     m_RunMode = TELEOP;
 
+    /**
     auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
     if ( swerveChassis.get() != nullptr )
     {
@@ -135,9 +141,17 @@ void Robot::TeleopInit()
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("TeleopPeriodic"), string("no swerve chassis"));
     }
+    **/
 
     m_drive = make_shared<SwerveDrive>();
     m_drive.get()->Init();
+
+    auto shooter = MechanismFactory::GetMechanismFactory()->GetShooter();
+    m_shooterState = ( shooter.get() != nullptr ) ? ShooterStateMgr::GetInstance() : nullptr;
+    if ( m_shooterState != nullptr )
+    {
+        m_shooterState->RunCurrentState();
+    }
 }
 
 
@@ -146,6 +160,10 @@ void Robot::TeleopInit()
 void Robot::TeleopPeriodic()
 {
     m_drive.get()->Run();
+    if ( m_shooterState != nullptr )
+    {
+        m_shooterState->RunCurrentState();
+    }
 }
 
 

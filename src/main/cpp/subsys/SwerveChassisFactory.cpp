@@ -63,6 +63,14 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
     const IDragonMotorControllerMap&                        motorControllers,   // <I> - Motor Controllers
     std::shared_ptr<ctre::phoenix::sensors::CANCoder>       canCoder,
     units::length::inch_t                                   wheelDiameter
+    double                                                      turnP,
+    double                                                      turnI,
+    double                                                      turnD,
+    double                                                      turnF,
+    double                                                      turnNominalVal,
+    double                                                      turnPeakVal,
+    double                                                      turnMaxAcc,
+    double                                                      turnCruiseVel
 )
 {
     std::shared_ptr<SwerveModule> swerve = nullptr;

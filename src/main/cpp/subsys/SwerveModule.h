@@ -40,7 +40,15 @@ class SwerveModule
                       std::shared_ptr<IDragonMotorController>                   driveMotor, 
                       std::shared_ptr<IDragonMotorController>                   turningMotor,
                       std::shared_ptr<ctre::phoenix::sensors::CANCoder>		    canCoder, 
-                      units::length::inch_t                                     wheelDiameter
+                      units::length::inch_t                                     wheelDiameter,
+                      double                                                    turnP,
+                      double                                                    turnI,
+                      double                                                    turnD,
+                      double                                                    turnF,
+                      double                                                    turnNominalPos,
+                      double                                                    turnNominalNeg,
+                      double                                                    turnMaxAcc,
+                      double                                                    turnCruiseVel
                     );
 
         void Init
@@ -64,8 +72,7 @@ class SwerveModule
         /// @returns void
         void SetDesiredState(const frc::SwerveModuleState& state);
 
-        void SetDriveSpeed( units::velocity::meters_per_second_t speed );
-        void SetTurnAngle( units::angle::degree_t angle );
+        void RunCurrentState();
 
         /// @brief Return which module this is
         /// @returns ModuleID
@@ -76,9 +83,9 @@ class SwerveModule
     private:
     //    frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward {1_V, 0.5_V / 1_rad_per_s};
         frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward {1_V, 0.05_V / 1_rad_per_s};
+        void SetDriveSpeed( units::velocity::meters_per_second_t speed );
+        void SetTurnAngle( units::angle::degree_t angle );
 
-        void RunTurnMotor( units::angle::degree_t angle );
-        void RunDriveMotor( units::velocity::meters_per_second_t speed );
 
         ModuleID m_type;
         std::shared_ptr<IDragonMotorController>             m_driveMotor;
@@ -92,7 +99,6 @@ class SwerveModule
 
         double                                              m_initialAngle;
         int                                                 m_initialCounts;
-        std::shared_ptr<nt::NetworkTable>                   m_nt;
-        double                                              m_lastDelta;
-        
+        std::shared_ptr<nt::NetworkTable>                   m_nt;        
+        frc::SwerveModuleState                              m_currentState;
 };

@@ -66,6 +66,14 @@ std::shared_ptr<SwerveModule> SwerveModuleDefn::ParseXML
     // initialize the attributes to the default values
     SwerveModule::ModuleID position = SwerveModule::ModuleID::LEFT_FRONT;
     units::length::inch_t wheelDiameter(0.0);
+    double turnP = 0.0;
+    double turnI = 0.0;
+    double turnD = 0.0;
+    double turnF = 0.0;
+    double turnNominalVal = 0.0;
+    double turnPeakVal = 1.0;
+    double turnMaxAcc = 0.0;
+    double turnCruiseVel = 0.0;
 
     Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Swerve Modules"));
 
@@ -99,6 +107,38 @@ std::shared_ptr<SwerveModule> SwerveModuleDefn::ParseXML
                 Logger::GetLogger()->LogError( string("SwerveChassisDefn::ParseXML"), msg );
                 hasError = true;
             }
+        }
+        else if (  attrName.compare("turn_p") == 0 )
+        {
+        	turnP = attr.as_double();
+        }
+        else if (  attrName.compare("turn_i") == 0 )
+        {
+        	turnI = attr.as_double();
+        }
+        else if (  attrName.compare("turn_d") == 0 )
+        {
+        	turnD = attr.as_double();
+        }
+        else if (  attrName.compare("turn_f") == 0 )
+        {
+        	turnF = attr.as_double();
+        }
+        else if (  attrName.compare("turn_nominal_val") == 0 )
+        {
+        	turnNominalVal = attr.as_double();
+        }
+        else if (  attrName.compare("turn_peak_val") == 0 )
+        {
+        	turnPeakVal = attr.as_double();
+        }
+        else if (  attrName.compare("turn_max_acc") == 0 )
+        {
+        	turnMaxAcc = attr.as_double();
+        }
+        else if (  attrName.compare("turn_cruise_vel") == 0 )
+        {
+        	turnCruiseVel = attr.as_double();
         }
         else if (  attrName.compare("wheelDiameter") == 0 )
         {
@@ -152,7 +192,18 @@ std::shared_ptr<SwerveModule> SwerveModuleDefn::ParseXML
     if ( !hasError )
     {
         Logger::GetLogger()->OnDash(string("RobotXML Parsing"), string("Create Swerve Module"));
-        module = SwerveChassisFactory::GetSwerveChassisFactory()->CreateSwerveModule(position, motors, turnsensor, wheelDiameter );
+        module = SwerveChassisFactory::GetSwerveChassisFactory()->CreateSwerveModule(position, 
+                                                                                     motors, 
+                                                                                     turnsensor, 
+                                                                                     wheelDiameter,
+                                                                                     turnP,
+                                                                                     turnI,
+                                                                                     turnD,
+                                                                                     turnF,
+                                                                                     turnNominalVal,
+                                                                                     turnPeakVal,
+                                                                                     turnMaxAcc,
+                                                                                     turnCruiseVel );
     }
     return module;
 }
