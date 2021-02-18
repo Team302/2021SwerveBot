@@ -17,14 +17,10 @@
 #include <vision/DriverMode.h>
 #include <hw/DragonLimelight.h>
 
-DriverMode::DriverMode(DragonLimelight*  limelight) : m_limelight(limelight)
+void DriverMode::SetCamToDriveMode(DragonLimelight*  limelight)
 {
-}
-
-void DriverMode::SetCamToDriveMode()
-{
-    m_limelight->SetCamMode( m_limelight->CAM_DRIVER);
-    m_limelight->SetLEDMode( m_limelight->LED_OFF);
-    m_limelight->SetStreamMode( m_limelight->STREAM_DEFAULT);
+    limelight->SetCamMode( limelight->CAM_DRIVER);
+    limelight->SetLEDMode( limelight->LED_OFF);
+    limelight->SetStreamMode( limelight->STREAM_DEFAULT);
 }
 

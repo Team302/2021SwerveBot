@@ -24,16 +24,11 @@
 class DriverMode
 {
     public:
-    DriverMode() = delete;
-
-    DriverMode
-    (
-        DragonLimelight*  limelight
-    );
+    DriverMode() = default;
 
     ~DriverMode() = default;
 
-    void SetCamToDriveMode();
+    void SetCamToDriveMode( DragonLimelight*  limelight );
 
     private:
         DragonLimelight*        m_limelight;

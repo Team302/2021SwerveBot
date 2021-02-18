@@ -116,14 +116,7 @@ void Robot::TeleopInit()
     }
 
     //set camera to drivermode to stream to dashboard
-
-
-    //somehow get a DragonLimelight pointer to be used in SetCamToDriveMode
-
-
-
-    m_driverMode(m_limelight);
-    m_driverMode->SetCamToDriveMode();
+    m_driverMode->SetCamToDriveMode( m_limelight );
 
     m_drive = make_shared<SwerveDrive>();
     m_drive.get()->Init();
