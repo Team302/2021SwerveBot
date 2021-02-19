@@ -28,6 +28,9 @@
 #include <memory>
 
 // FRC includes
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
 
 // Team 302 includes
 #include <hw/interfaces/IDragonMotorController.h>
@@ -37,15 +40,12 @@
 #include <hw/DragonServo.h>
 #include <hw/DragonDigitalInput.h>
 #include <subsys/BallTransfer.h>
+#include <subsys/Intake.h>
 #include <subsys/MechanismFactory.h>
 #include <subsys/MechanismTypes.h>
 #include <utils/Logger.h>
-#include <subsys/Intake.h>
-#include <subsys/ShooterHood.h>
-#include <subsys/Turret.h>
-/**
 #include <subsys/Shooter.h>
-**/
+#include <subsys/Turret.h>
 
 // Third Party Includes
 #include <ctre/phoenix/sensors/CANCoder.h>
@@ -71,17 +71,20 @@ MechanismFactory* MechanismFactory::GetMechanismFactory()
 }
 
 MechanismFactory::MechanismFactory()  : m_balltransfer(),
+										m_ballhopper(),
 										m_intake1(),
 										m_intake2(),
-										m_turret()
-										/**   
 										m_shooter(),
-										 **/
+										m_turret()   
 {
+    auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("MechanismFactory"));
+	nt.get()->PutString("Intake1", string("not created") );
+	nt.get()->PutString("Intake2", string("not created") );
+	nt.get()->PutString("Ball Hopper", string("not created") );
+    nt.get()->PutString("Ball Transfer", string("not created") );
+	nt.get()->PutString("Shooter", string("not created") );
+	nt.get()->PutString("Turret", string("not created") );
 }
-
-
-
 
 /// @brief      create the requested mechanism
 /// @param [in] MechanismTypes::MECHANISM_TYPE  type - the type of mechanism to create
@@ -100,64 +103,46 @@ void  MechanismFactory::CreateIMechanism
 	shared_ptr<CANCoder>					canCoder
 )
 {
-
 	bool found = false;
+
+    auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("MechanismFactory"));
+
 	// Create the mechanism
 	switch ( type )
 	{
 		case MechanismTypes::MECHANISM_TYPE::INTAKE:
 		{
-			auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE1 );
-			if ( motor.get() != nullptr && m_intake1.get() == nullptr )
-			{
-				m_intake1 = make_shared<Intake>( motor );
-			}
+			auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE );
 			if ( motor.get() != nullptr )
 			{
-				found = true;
-			}
-			else
-			{
-				motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE2 );
-				if ( motor.get() != nullptr && m_intake2.get() == nullptr)
+				if ( m_intake1.get() == nullptr )
+				{
+					m_intake1 = make_shared<Intake>( motor );
+				    nt.get()->PutString("Intake1", string("created") );
+				}
+				else if ( m_intake2.get() == nullptr )
 				{
 					m_intake2 = make_shared<Intake>( motor );
-				}		
-				else if ( motor.get() != nullptr )
+				    nt.get()->PutString("Intake2", string("created") );
+				}
+				else
 				{
 					found = true;
 				}
 			}
 		}
 		break;
-		
-
-		case MechanismTypes::MECHANISM_TYPE::BALL_TRANSFER:
-		{
-			if ( m_balltransfer.get() != nullptr )
-			{
-				auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::BALL_TRANSFER );
-				if ( motor.get() != nullptr )
-				{
-					m_balltransfer = make_shared<BallTransfer>( motor );
-				}
-			}
-			else
-			{
-				found = true;
-			}
-		}
-		break;
 
 		case MechanismTypes::MECHANISM_TYPE::BALL_HOPPER:
 		{
-			if(m_ballhopper.get() != nullptr )
+			if(m_ballhopper.get() == nullptr )
 			{
 				auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::BALL_HOPPER );
 				auto bannerSensor = GetDigitalInput( digitalInputs, DigitalInputUsage::DIGITAL_SENSOR_USAGE::HOPPER_BANNER_SENSOR );
 				if( motor.get() != nullptr && bannerSensor.get() != nullptr)
 				{
 					m_ballhopper = make_shared<BallHopper>(motor, bannerSensor);
+				    nt.get()->PutString("Ball Hopper", string("created") );
 				}
 			}
 			else
@@ -166,17 +151,37 @@ void  MechanismFactory::CreateIMechanism
 			}
 			
 		}
-		break;			
+		break;					
+
+		case MechanismTypes::MECHANISM_TYPE::BALL_TRANSFER:
+		{
+			if ( m_balltransfer.get() == nullptr )
+			{
+				auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::BALL_TRANSFER );
+				if ( motor.get() != nullptr )
+				{
+					m_balltransfer = make_shared<BallTransfer>( motor );
+				    nt.get()->PutString("Ball Transfer", string("created") );
+				}
+			}
+			else
+			{
+				found = true;
+			}
+		}
+		break;
+
 	
 		case MechanismTypes::MECHANISM_TYPE::SHOOTER:
 		{
-			if ( m_shooter.get() != nullptr )
+			if ( m_shooter.get() == nullptr )
 			{
 				auto motor1 = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::SHOOTER_1 );
 				auto motor2 = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::SHOOTER_2 );
 				if ( motor1.get() != nullptr && motor2.get() != nullptr )
 				{
 					m_shooter = make_shared<Shooter>(motor1, motor2);
+				    nt.get()->PutString("Shooter", string("created") );
 				}
 			}
 			else
@@ -187,23 +192,6 @@ void  MechanismFactory::CreateIMechanism
 		}
 		break;		
 		
-		case MechanismTypes::MECHANISM_TYPE::SHOOTER_HOOD:
-		{
-			if ( m_shooterhood.get() == nullptr )
-			{
-				auto motor = GetMotorController(motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::SHOOTER_HOOD);
-				if(motor.get() != nullptr)
-				{
-					m_shooterhood = make_shared<ShooterHood>(motor, canCoder);
-				}
-			}
-			else
-			{
-				found = true;
-			}
-		}
-		break;		
-
 		case MechanismTypes::MECHANISM_TYPE::TURRET:
 		{
 			if ( m_turret.get() == nullptr )
@@ -212,6 +200,7 @@ void  MechanismFactory::CreateIMechanism
 				if(motor.get() != nullptr)
 				{
 					m_turret = make_shared<Turret>(motor);
+				    nt.get()->PutString("Turret", string("created") );
 				}
 			}
 			else
@@ -234,7 +223,7 @@ void  MechanismFactory::CreateIMechanism
     {
         string msg = "mechanism already exists";
         msg += to_string( type );
-        Logger::GetLogger()->LogError( string("MechansimFactory::CreateIMechanism" ), msg );
+        Logger::GetLogger()->LogError( string("MechansimFactory::CreateIMechanism " ), msg );
     }
 }
 

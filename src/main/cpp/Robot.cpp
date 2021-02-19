@@ -67,17 +67,7 @@ void Robot::RobotPeriodic()
 /// @return void
 void Robot::AutonomousInit() 
 {
-    /**
-    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
-    if ( swerveChassis.get() != nullptr )
-    {
-        swerveChassis.get()->ZeroAlignSwerveModules();
-    }
-    else 
-    {
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("AutonomousInit"), string("no swerve chassis"));
-    }
-    **/
+
 }
 
 
@@ -103,19 +93,6 @@ void Robot::AutonomousPeriodic()
 /// @return void
 void Robot::TeleopInit() 
 {
-
-    /**
-    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
-    if ( swerveChassis.get() != nullptr )
-    {
-        swerveChassis.get()->ZeroAlignSwerveModules();
-    }
-    else 
-    {
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("TeleopPeriodic"), string("no swerve chassis"));
-    }
-    **/
-
     m_drive = make_shared<SwerveDrive>();
     m_drive.get()->Init();
 
@@ -125,6 +102,11 @@ void Robot::TeleopInit()
     {
         m_shooterState->RunCurrentState();
     }
+    else 
+    {
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("TeleopInit"), string("no shooter state manager"));
+    }
+
 }
 
 

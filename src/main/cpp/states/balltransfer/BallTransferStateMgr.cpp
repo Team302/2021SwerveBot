@@ -19,6 +19,9 @@
 #include <vector>
 
 // FRC includes
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
 
 // Team 302 includes
 #include <states/IState.h>
@@ -61,7 +64,6 @@ BallTransferStateMgr::BallTransferStateMgr() : m_currentState(),
     map<string, BALL_TRANSFER_STATE> stateMap;
     stateMap["BALLTRANSFEROFF"] = BALL_TRANSFER_STATE::OFF;
     stateMap["BALLTRANSFERTOSHOOTER"]  = BALL_TRANSFER_STATE::TO_SHOOTER;
-    stateMap["BALLTRANSFEREJECT"] = BALL_TRANSFER_STATE::EJECT;
     m_stateVector.resize(4);
     // create the states passing the configuration data
     for ( auto td: targetData )
@@ -93,15 +95,7 @@ BallTransferStateMgr::BallTransferStateMgr() : m_currentState(),
                         m_stateVector[stateEnum] = thisState;
                     }
                     break;
-
-                    case BALL_TRANSFER_STATE::EJECT:
-                    {
-                        auto thisState = new BallTransferState(controlData, target);
-                        m_stateVector[stateEnum] = thisState;
-                    
-                    }
-                    break;
-                    
+                   
                     default:
                     {
                         Logger::GetLogger()->LogError( string("BallTransferStateMgr::BallTransferStateMgr"), string("unknown state"));
@@ -125,6 +119,9 @@ BallTransferStateMgr::BallTransferStateMgr() : m_currentState(),
 /// @return void
 void BallTransferStateMgr::RunCurrentState()
 {
+    auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("Ball Transfer State Manager"));
+    nt.get()->PutString("Current State", "none");
+
     if ( MechanismFactory::GetMechanismFactory()->GetBallTransfer().get() != nullptr )
     {
         // process teleop/manual interrupts
@@ -136,19 +133,15 @@ void BallTransferStateMgr::RunCurrentState()
                 m_currentStateEnum != BALL_TRANSFER_STATE::OFF )
             {
                 SetCurrentState( BALL_TRANSFER_STATE::OFF, false );
+                nt.get()->PutString("Current State", "Off");
             }
             else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::BALL_TRANSFER_TO_SHOOTER ) &&
                     m_currentStateEnum != BALL_TRANSFER_STATE::TO_SHOOTER )
             {
                 SetCurrentState( BALL_TRANSFER_STATE::TO_SHOOTER, false );
-            }
-            else
-            {
-                // TODO: handle expel
-            }
-            
+                nt.get()->PutString("Current State", "To Shooter");
+            }           
         }
-        
 
         // run the current state
         if ( m_currentState != nullptr )
@@ -167,15 +160,22 @@ void BallTransferStateMgr::SetCurrentState
     bool                    run
 )
 {
-   
-    
-    
-    Logger::GetLogger()->LogError( string("about to set state current "), to_string(stateEnum));
+
     auto state = m_stateVector[stateEnum];
     if ( state != nullptr && state != m_currentState)
     {    
         m_currentState = state;
         m_currentStateEnum = stateEnum;
+        auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("Ball Transfer State Manager"));
+        if ( m_currentStateEnum == BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER)
+        {
+            nt.get()->PutString("Current State", "To Shooter");
+        }
+        else
+        {
+            nt.get()->PutString("Current State", "Off");
+        }
+        
         m_currentState->Init();
         if ( run )
         {

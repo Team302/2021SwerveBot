@@ -5,10 +5,10 @@
 	<pigeon canId="50"
                rotation="0.0" />
 
-       <!--
+       <!-- was hard coded with all values as 0.0 in limelightAim -->
 	<limelight tablename="limelight"
                   mountingheight="20.0"
-                  horizontaloffset="-10.0"
+                  horizontaloffset="0.0"
                   mountingangle="15.0"
                   rotation="0.0"
                   targetheight="120.0"
@@ -24,7 +24,6 @@
 
 	<blinkin position = "front" 
 		  pwmId = "0"/>
-  -->
 
 <!-- ====================================================
      Chassis
@@ -87,7 +86,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="2"
-                            offset="-107.753906"/>
+                            offset="52.734375"/>
         </swervemodule>
 
         <swervemodule type="LEFT_BACK"
@@ -139,7 +138,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="0"
-                            offset="71.98242"/>
+                            offset="39.0245469"/>
         </swervemodule>
 
         <swervemodule type="RIGHT_FRONT"
@@ -191,7 +190,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="12"
-                            offset="66.35742"/>
+                            offset="-70.225"/>
         </swervemodule>
 
         <swervemodule type="LEFT_FRONT"
@@ -243,7 +242,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="14"
-                            offset="133.242188"/>
+                            offset="-141.152"/>
         </swervemodule>
 
     </swervechassis>  
@@ -251,9 +250,8 @@
 <!-- ====================================================
      Mechanisms
      ==================================================== --> 
-     <!--   
 	<mechanism type="INTAKE">
-		<motor usage="INTAKE1"
+		<motor usage="INTAKE"
                      canId="10"
                      pdpID="10"
                      type="FALCON"
@@ -275,9 +273,9 @@
 	</mechanism>
     
 	<mechanism type="INTAKE">
-		<motor usage="INTAKE2"
-                     canId="4"
-                     pdpID="4"
+		<motor usage="INTAKE"
+                     canId="7"
+                     pdpID="7"
                      type="FALCON"
                      inverted="false"
                      sensorInverted="false"
@@ -316,7 +314,10 @@
                      forwardlimitswitch="false"
                      forwardlimitswitchopen="true"
                      reverselimitswitch="false"
-                     reverselimitswitchopen="true"/>        
+                     reverselimitswitchopen="true"/>  
+              <digitalInput usage="HOPPER_BANNER_SENSOR"
+                            digitalId="2"
+                            reversed="false"/>      
 	</mechanism>
 
 	<mechanism type="BALL_TRANSFER">
@@ -405,5 +406,4 @@
                      reverselimitswitchopen="true"/>        
 
 	</mechanism>
-       -->
 </robot>

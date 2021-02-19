@@ -105,7 +105,7 @@ MechanismTargetData*  MechanismTargetDefn::ParseXML
     }
     else
     {
-        Logger::GetLogger()->LogError( string("MechanismTargetDefn::ParseXML"), string("incomplete date"));
+        Logger::GetLogger()->LogError( string("MechanismTargetDefn::ParseXML"), string("incomplete data"));
     }
     
     return mechData;

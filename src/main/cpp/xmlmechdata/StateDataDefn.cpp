@@ -104,6 +104,7 @@ vector<MechanismTargetData*> StateDataDefn::ParseXML
         xml_parse_result result = doc.load_file(filename.c_str());
         if (!result)
         {
+            Logger::GetLogger()->LogError( string("StateDataDefn::ParseXML using alternate location"), mech );
             filename = "/home/lvuser/deploy/";
             filename += mech;
             result = doc.load_file(filename.c_str());
