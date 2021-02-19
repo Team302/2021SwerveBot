@@ -3,10 +3,22 @@
 <statedata>
 	<controlData identifier="openloop" 
 	             mode="PERCENT_OUTPUT"/>
-	<controlData identifier="closedloop"
+	<controlData identifier="closedloopblue"
 				 mode="VELOCITY_RPS"
 				 proportional="0.03"
-				 feedforward="0.75"/>
+				 feedforward="0.5"/>
+	<controlData identifier="closedloopyellow"
+				 mode="VELOCITY_RPS"
+				 proportional="0.03"
+				 feedforward="0.45"/>
+	<controlData identifier="closedloopgreen"
+				 mode="VELOCITY_RPS"
+				 proportional="0.03"
+				 feedforward="0.65"/>
+	<controlData identifier="closedloopred"
+				 mode="VELOCITY_RPS"
+				 proportional="0.03"
+				 feedforward="0.52"/>
 	<mechanismTarget stateIdentifier="SHOOTEROFF"
 	                 controlDataIdentifier="openloop"
 					 value="0.0"/>
@@ -16,23 +28,23 @@
 					 secondValue="0.5"/>
 
 	<mechanismTarget stateIdentifier="SHOOTERSHOOTGREEN"
-					 controlDataIdentifier="closedloop"
-					 value="25"
-					 secondValue="25"/>
+					 controlDataIdentifier="closedloopgreen"
+					 value="69.2"
+					 secondValue="69.2"/>
 
 	<mechanismTarget stateIdentifier="SHOOTERSHOOTYELLOW"
-	                 controlDataIdentifier="closedloop"
-					 value="30"
-					 secondValue="30"/>
+	                 controlDataIdentifier="closedloopyellow"
+					 value="50"
+					 secondValue="50"/>
 
 	<mechanismTarget stateIdentifier="SHOOTERSHOOTBLUE"
-					 controlDataIdentifier="closedloop"
-					 value="35"
-					 secondValue="35"/>
+					 controlDataIdentifier="closedloopbluer"
+					 value="55"
+					 secondValue="55"/>
 
 	<mechanismTarget stateIdentifier="SHOOTSHOOTRED"
-					 controlDataIdentifier="closedloop"
-					 value="36.50"
-					 secondValue="36.50"/>
+					 controlDataIdentifier="closedloopred"
+					 value="80"
+					 secondValue="80"/>
 
 </statedata>

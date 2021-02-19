@@ -124,9 +124,9 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
                         {
                             pathName = attr.as_float();
                         }
-                        else if ( strcmp ( attr.name(), "runIntake") == 0)
+                        else if ( strcmp ( attr.name(), "intakeState") == 0)
                         {
-                            runIntake = attr.as_bool();
+                            runIntake = strcmp( attr.value(), "INTAKE") == 0;
                         }
                         else
                         {
