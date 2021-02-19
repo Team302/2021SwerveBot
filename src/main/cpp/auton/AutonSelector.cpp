@@ -34,10 +34,8 @@ using namespace std;
 // Description: This creates this object and reads the auto script (CSV)
 //  			files and displays a list on the dashboard.
 //---------------------------------------------------------------------
-AutonSelector::AutonSelector() : m_xmlFiles(),
-								 m_chooser()
+AutonSelector::AutonSelector() : m_chooser()
 {
-	FindXMLFileNames();
 	PutChoicesOnDashboard();
 }
 
@@ -51,7 +49,20 @@ AutonSelector::AutonSelector() : m_xmlFiles(),
 std::string AutonSelector::GetSelectedAutoFile()
 {
 	//Logger::GetLogger()->LogError(string("Auton Selector Get Selected Auton"), m_chooser.GetSelected());
-	return m_chooser.GetSelected();
+	
+	//If statement to grab the corrent galactic search path xml from limelight with GalacticSearchChooser
+
+
+	//if ( m_chooser.GetSelected() == "GS")
+	//{
+		//return GalacticSearchChooser.GetPath();
+	//}
+	//else 
+	//{
+		return m_chooser.GetSelected();
+	//}
+	
+	
 	//return "balltest.xml";
 }
 
@@ -61,6 +72,7 @@ std::string AutonSelector::GetSelectedAutoFile()
 //				stores them in the m_csvFiles attribute.
 // Returns:		void
 //---------------------------------------------------------------------
+/*
 void AutonSelector::FindXMLFileNames()
 {
 	DIR* directory;
@@ -95,6 +107,8 @@ void AutonSelector::FindXMLFileNames()
 	}
 }
 
+*/
+
 //---------------------------------------------------------------------
 // Method: 		PutChoicesOnDashboard
 // Description: This puts the list of files in the m_csvFiles attribute
@@ -103,6 +117,7 @@ void AutonSelector::FindXMLFileNames()
 //---------------------------------------------------------------------
 void AutonSelector::PutChoicesOnDashboard()
 {
+	/*
 	auto gotDefault = false;
 	for (unsigned int inx = 0; inx < m_xmlFiles.size(); ++inx)
 	{
@@ -118,6 +133,13 @@ void AutonSelector::PutChoicesOnDashboard()
 			}
 		}
 	}
+	*/
+
+	m_chooser.AddOption( "Galactic Search", "GS");
+	m_chooser.AddOption("Bounce Path", "Bounce.xml");
+	m_chooser.AddOption("Barrel Racing Path", "Barrel.xml");
+	m_chooser.AddOption("Slalom Path", "Slalom.xml");
+
 	frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 }
 
