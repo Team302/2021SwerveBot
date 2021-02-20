@@ -120,7 +120,6 @@ BallTransferStateMgr::BallTransferStateMgr() : m_currentState(),
 void BallTransferStateMgr::RunCurrentState()
 {
     auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("Ball Transfer State Manager"));
-    nt.get()->PutString("Current State", "none");
 
     if ( MechanismFactory::GetMechanismFactory()->GetBallTransfer().get() != nullptr )
     {
@@ -160,13 +159,14 @@ void BallTransferStateMgr::SetCurrentState
     bool                    run
 )
 {
+    auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("Ball Transfer State Manager"));
+    nt.get()->PutString("Current State", "Off");
 
     auto state = m_stateVector[stateEnum];
     if ( state != nullptr && state != m_currentState)
     {    
         m_currentState = state;
         m_currentStateEnum = stateEnum;
-        auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("Ball Transfer State Manager"));
         if ( m_currentStateEnum == BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER)
         {
             nt.get()->PutString("Current State", "To Shooter");
@@ -177,6 +177,7 @@ void BallTransferStateMgr::SetCurrentState
         }
         
         m_currentState->Init();
+        
         if ( run )
         {
             if ( MechanismFactory::GetMechanismFactory()->GetBallTransfer().get() != nullptr )

@@ -275,11 +275,13 @@ void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
     Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
     Rotation2d deltaAngle = targetAngle - currAngle.Degrees();
 
+    /**
     if ( deltaAngle.Degrees().to<double>() > 180.0 )
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR, string("delta angle too large motor"), to_string(m_turnMotor.get()->GetID()));
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR, string("delta angle too large"), to_string(deltaAngle.Degrees().to<double>()));
     }
+    **/
 
     m_nt.get()->PutString("turn motor id", to_string(m_turnMotor.get()->GetID()) );
     m_nt.get()->PutNumber("current angle", currAngle.Degrees().to<double>() );

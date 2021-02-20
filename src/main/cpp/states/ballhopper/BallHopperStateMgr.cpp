@@ -48,7 +48,7 @@ BallHopperStateMgr* BallHopperStateMgr::GetInstance()
 }
 
 /// @brief initialize the state manager, parse the configuration file and create the states
-BallHopperStateMgr::BallHopperStateMgr() : m_currentState(),
+BallHopperStateMgr::BallHopperStateMgr() : m_currentState(nullptr),
                                            m_stateVector(),
                                            m_currentStateEnum(BALL_HOPPER_STATE::OFF)
 {
@@ -75,6 +75,9 @@ BallHopperStateMgr::BallHopperStateMgr() : m_currentState(),
             {
                 auto controlData = td->GetController();
                 auto target = td->GetTarget();
+                Logger::GetLogger()->LogError( string("ballhopperstatemgr state "),to_string(stateEnum));
+                Logger::GetLogger()->LogError( string("ballhopperstatemgr control data "),controlData == nullptr?string("nullptr"):string("good"));
+                Logger::GetLogger()->LogError( string("ballhopperstatemgr target data "),to_string(target));
                 switch ( stateEnum)
                 {
                     case BALL_HOPPER_STATE::OFF:
@@ -153,10 +156,12 @@ void BallHopperStateMgr::SetCurrentState
     bool                    run
 )
 {
+    auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("Ball Hopper State Manager"));
+    nt.get()->PutString("Current State", "Off");
     auto state = m_stateVector[stateEnum];
-    if ( state != nullptr && state != m_currentState)
+//    if ( state != nullptr && state != m_currentState)
+    if ( state != nullptr )
     {
-        auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("Ball Hopper State Manager"));
         if ( m_currentStateEnum == BallHopperStateMgr::BALL_HOPPER_STATE::HOLD)
         {
             nt.get()->PutString("Current State", "Hold");
@@ -184,5 +189,13 @@ void BallHopperStateMgr::SetCurrentState
                 m_currentState->Run();
             }
         }
+    }
+    else if (state == nullptr)
+    {
+        nt.get()->PutString("Current State", "nullptr");
+    }    
+    else 
+    {
+        nt.get()->PutString("Current State", "same state");
     }
 }

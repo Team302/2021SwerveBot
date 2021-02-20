@@ -51,7 +51,7 @@ class BallHopperSlowRelease : public Mech1MotorState
         //BallHopper object to access sensor to detect balls
         std::shared_ptr<BallHopper> m_ballHopper;
         //Time to wait until we release another ball
-        const double m_waitTime = 1.5;
+        const double m_waitTime;
         //These bools make sure we aren't detecting the same ball multiple times and we are running the right state
         bool m_isHolding;
         bool m_canDetect;
