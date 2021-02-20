@@ -37,6 +37,7 @@
 // team 302 includes
 #include <states/chassis/SwerveDrive.h>
 #include <states/shooter/ShooterStateMgr.h>
+#include <auton/CyclePrimitives.h>
 
 
 // third party includes
@@ -63,6 +64,7 @@ class Robot : public frc::TimedRobot
  
     std::shared_ptr<SwerveDrive>      m_drive;
     ShooterStateMgr*                  m_shooterState;
+    CyclePrimitives*                  m_cyclePrims;
 
 
 };
