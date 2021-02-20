@@ -186,6 +186,7 @@ void SwerveModule::Init
 /// @returns void
 void SwerveModule::ZeroAlignModule()
 {
+    return;
     // Desired State
     units::velocity::meters_per_second_t mps = 0_mps;
     Rotation2d angle {units::angle::degree_t(0.0)};

@@ -38,6 +38,8 @@ class Mech2MotorState : public IState
         void Init() override;
         void Run() override;
         bool AtTarget() const override;
+        double GetPrimaryTarget() const {return m_primaryTarget;}
+        double GetSecondaryTarget() const {return m_secondaryTarget;}
 
     private:
 
