@@ -202,6 +202,18 @@ void DragonLimelight::SetStreamMode(DragonLimelight::STREAM_MODE mode)
     m_networktable.get()->PutNumber("stream", mode);
 }
 
+void DragonLimelight::SetCrosshairPos( double crosshairPosX, double crosshairPosY)
+{
+    m_networktable.get()->PutNumber("cx0", crosshairPosX);
+    m_networktable.get()->PutNumber("cy0", crosshairPosY);
+}
+
+void DragonLimelight::SetSecondaryCrosshairPos( double crosshairPosX, double crosshairPosY)
+{
+    m_networktable.get()->PutNumber("cx1", crosshairPosX);
+    m_networktable.get()->PutNumber("cy1", crosshairPosY);
+}
+
 // MAX of 32 snapshots can be saved
 void DragonLimelight::ToggleSnapshot(DragonLimelight::SNAPSHOT_MODE toggle)
 {

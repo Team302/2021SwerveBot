@@ -143,6 +143,18 @@ class DragonLimelight //: public IDragonSensor, public IDragonDistanceSensor
             DragonLimelight::SNAPSHOT_MODE toggle // 0-No snapshots 1- two snapshots/second: Max of 32 saved
         );
 
+        void SetCrosshairPos
+        (
+            double crosshairPosX,
+            double crosshairPosY
+        );
+
+        void SetSecondaryCrosshairPos
+        (
+            double crosshairPosX,
+            double crosshairPosY
+        );
+
         void PrintValues(); // Prints out all values to ensure everything is working and connected
 
 

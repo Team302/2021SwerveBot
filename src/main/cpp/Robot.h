@@ -36,6 +36,8 @@
 
 // team 302 includes
 #include <states/chassis/SwerveDrive.h>
+#include <hw/DragonLimelight.h>
+#include <vision/DriverMode.h>
 #include <states/shooter/ShooterStateMgr.h>
 #include <auton/CyclePrimitives.h>
 
@@ -62,9 +64,10 @@ class Robot : public frc::TimedRobot
 
   private:
  
+    std::shared_ptr<SwerveDrive> m_drive;
+    DragonLimelight*             m_limelight;
+    DriverMode*                  m_driverMode;
     std::shared_ptr<SwerveDrive>      m_drive;
     ShooterStateMgr*                  m_shooterState;
     CyclePrimitives*                  m_cyclePrims;
-
-
 };

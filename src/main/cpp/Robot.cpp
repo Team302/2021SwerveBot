@@ -28,7 +28,10 @@
 #include <subsys/Shooter.h>
 #include <subsys/SwerveChassisFactory.h>
 #include <subsys/SwerveChassis.h>
+#include <hw/factories/LimelightFactory.h>
+#include <vision/DriverMode.h>
 #include <xmlhw/RobotDefn.h>
+#include <hw/interfaces/IDragonSensor.h>
 
 
 using namespace std;
@@ -46,6 +49,9 @@ void Robot::RobotInit()
     // solenoids, digital inputs, analog inputs, etc.
     unique_ptr<RobotDefn>  robotXml = make_unique<RobotDefn>();
     robotXml->ParseXML();
+
+    //create the limelight camera
+    m_limelight = LimelightFactory::GetLimelightFactory()->GetLimelight( IDragonSensor::MAIN_LIMELIGHT );
     m_cyclePrims= new CyclePrimitives();
 }
 
@@ -77,16 +83,6 @@ void Robot::AutonomousInit()
 void Robot::AutonomousPeriodic() 
 {
     //Real auton magic right here:
-    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
-    if ( swerveChassis.get() != nullptr )
-    {
-        swerveChassis.get()->Drive(1.0, 0.0, 0.0, false);
-    }
-    else 
-    {
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("AutonomousPeriodic"), string("no swerve chassis"));
-    }
-
     m_cyclePrims->Run();
 
 }
@@ -110,6 +106,11 @@ void Robot::TeleopInit()
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("TeleopInit"), string("no shooter state manager"));
     }
 
+    //set camera to drivermode to stream to dashboard
+    m_driverMode->SetCamToDriveMode( m_limelight );
+
+    m_drive = make_shared<SwerveDrive>();
+    m_drive.get()->Init();
 }
 
 
