@@ -136,6 +136,8 @@ void Mech2MotorState::Run()
         auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("Shooter State Manager"));
         nt.get()->PutNumber("Primary Target", GetPrimaryTarget());
         nt.get()->PutNumber("Secondary Target", GetSecondaryTarget());
+        nt.get()->PutNumber("Primary Speed", GetPrimaryRPS());
+        nt.get()->PutNumber("Secondary Speed", GetSecondaryRPS());
 
     }
 }

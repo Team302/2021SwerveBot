@@ -100,7 +100,7 @@ void Robot::TeleopInit()
     m_shooterState = ( shooter.get() != nullptr ) ? ShooterStateMgr::GetInstance() : nullptr;
     if ( m_shooterState != nullptr )
     {
-        m_shooterState->RunCurrentState();
+        m_shooterState->SetCurrentState(ShooterStateMgr::SHOOTER_STATE::OFF, true);
     }
     else 
     {

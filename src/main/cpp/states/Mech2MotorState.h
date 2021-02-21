@@ -40,6 +40,8 @@ class Mech2MotorState : public IState
         bool AtTarget() const override;
         double GetPrimaryTarget() const {return m_primaryTarget;}
         double GetSecondaryTarget() const {return m_secondaryTarget;}
+        double GetPrimaryRPS() const {return m_mechanism->GetPrimarySpeed();}
+        double GetSecondaryRPS() const {return m_mechanism->GetSecondarySpeed();}
 
     private:
 
