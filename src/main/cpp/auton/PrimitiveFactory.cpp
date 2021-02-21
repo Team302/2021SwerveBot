@@ -81,7 +81,6 @@ IPrimitive* PrimitiveFactory::GetIPrimitive(PrimitiveParams* primitivePasser)
         break;
 
     case TURN_ANGLE_REL:
-        // TODO: need new primitive
         if (m_turnAngle == nullptr)
         {
             m_turnAngle = new TurnAngle();
