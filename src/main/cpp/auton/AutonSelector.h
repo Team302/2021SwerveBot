@@ -53,7 +53,6 @@ class AutonSelector
 		//				stores them in the m_csvFiles attribute.
 		// Returns:		void
 		//---------------------------------------------------------------------
-		void FindXMLFileNames();
 
 		//---------------------------------------------------------------------
 		// Method: 		PutChoicesOnDashboard
@@ -64,7 +63,7 @@ class AutonSelector
 		void PutChoicesOnDashboard();
 
 		// Attributues
-		std::vector<std::string> m_xmlFiles;
+		//std::vector<std::string> m_xmlFiles;
 		frc::SendableChooser<std::string> m_chooser;
 };
 
