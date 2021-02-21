@@ -43,7 +43,7 @@ deploy {
             files = fileTree(dir: 'src/main/paths')
             // Deploy to RoboRIO target, into /home/lvuser/deploy
             targets << "roborio"
-            directory = '/home/lvuser/deploy'
+            directory = '/home/lvuser/deploy/paths'
         }
     }
 }

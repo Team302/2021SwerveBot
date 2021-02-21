@@ -35,9 +35,7 @@ class BallTransferStateMgr
         enum BALL_TRANSFER_STATE
         {
             OFF,
-            TO_IMPELLER,
             TO_SHOOTER,
-            EJECT,
             MAX_BALL_TRANSFER_STATES
         };
 

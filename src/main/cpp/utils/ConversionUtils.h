@@ -132,7 +132,8 @@ class ConversionUtils
 		/// @param [in] counts per 100ms
 		/// @param [in] counts per revolution
 		/// @return double RPS
-		inline static double CountsPer100msToRPS( double countsPer100ms, int countsPerRev ) { return CountsToRevolutions(countsPer100ms,countsPerRev)*10.0; }
+		//inline static double CountsPer100msToRPS( double countsPer100ms, int countsPerRev ) { return CountsToRevolutions(countsPer100ms,countsPerRev)*10.0; }
+		inline static double CountsPer100msToRPS( double countsPer100ms, int countsPerRev ) { return 10*countsPer100ms/countsPerRev; }
 
 		
 

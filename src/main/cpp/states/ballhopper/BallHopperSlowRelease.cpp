@@ -35,9 +35,16 @@ BallHopperSlowRelease::BallHopperSlowRelease
 (
     ControlData*        control,
     double              target
-) : Mech1MotorState ( MechanismFactory::GetMechanismFactory()->GetBallHopper().get(), control, target )
+) : Mech1MotorState ( MechanismFactory::GetMechanismFactory()->GetBallHopper().get(), control, target ),
+    m_timer(),
+    m_ballHopper(MechanismFactory::GetMechanismFactory()->GetBallHopper()),
+    m_waitTime(target),
+    m_isHolding(false),
+    m_canDetect(true),
+    m_timesSeen(0),
+    m_holdState(nullptr),
+    m_releaseState(nullptr)
 {
-   m_ballHopper = MechanismFactory::GetMechanismFactory()->GetBallHopper();
 }
 
 void BallHopperSlowRelease::Init()

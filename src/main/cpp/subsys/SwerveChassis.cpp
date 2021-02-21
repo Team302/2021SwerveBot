@@ -81,6 +81,8 @@ SwerveChassis::SwerveChassis
     frontRight.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration );
     backLeft.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration );
     backRight.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration );
+
+    ZeroAlignSwerveModules();
 }
 /// @brief Align all of the swerve modules to point forward
 void SwerveChassis::ZeroAlignSwerveModules()
@@ -128,6 +130,13 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
 void SwerveChassis::Drive( ChassisSpeeds speeds, bool fieldRelative) 
 {
     Drive( speeds.vx, speeds.vy, speeds.omega, fieldRelative);
+
+    
+   // double dmsg = speeds.vx.to<double>();
+   // std::string msg = std::to_string(dmsg);
+
+   //Logger::GetLogger()->LogError(string(" speeds.vx "),  msg );
+ 
 }
 
 /// @brief Drive the chassis
@@ -141,10 +150,10 @@ void SwerveChassis::Drive( double drive, double steer, double rotate, bool field
     if ( abs(drive) < 0.01 && abs(steer) < 0.01 && abs(rotate) < 0.01 )
     {
         // feed the motors
-        m_frontLeft.get()->SetDriveSpeed(units::velocity::meters_per_second_t(0.0));
-        m_frontRight.get()->SetDriveSpeed(units::velocity::meters_per_second_t(0.0));
-        m_backLeft.get()->SetDriveSpeed(units::velocity::meters_per_second_t(0.0));
-        m_backRight.get()->SetDriveSpeed(units::velocity::meters_per_second_t(0.0));
+        m_frontLeft.get()->RunCurrentState();
+        m_frontRight.get()->RunCurrentState();
+        m_backLeft.get()->RunCurrentState();
+        m_backRight.get()->RunCurrentState();       
     }
     else
     {    

@@ -173,17 +173,6 @@ double DragonLimelight::GetPipelineLatency() const
     return m_networktable.get()->GetNumber("tl", 0.0);
 }
 
-///-----------------------------------------------------------------------
-/// Method:      GetUsage
-/// Description: Indicate what the sensor is used for
-/// Returns:     SENSOR_USAGE    sensor usage 
-///-----------------------------------------------------------------------
-/**
-IDragonSensor::SENSOR_USAGE DragonLimelight::GetUsage() const
-{
-    return m_usage;
-}
-**/
 
 void DragonLimelight::SetTargetHeight
 (

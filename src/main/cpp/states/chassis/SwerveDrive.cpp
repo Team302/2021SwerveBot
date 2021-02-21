@@ -59,6 +59,7 @@ void SwerveDrive::Init()
 
         controller->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER, IDragonGamePad::AXIS_PROFILE::CUBED );
         controller->SetDeadBand(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER, IDragonGamePad::AXIS_DEADBAND::APPLY_STANDARD_DEADBAND);
+        controller->SetAxisScaleFactor(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER, -1.0);
 
         controller->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, IDragonGamePad::AXIS_PROFILE::CUBED );
         controller->SetDeadBand(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, IDragonGamePad::AXIS_DEADBAND::APPLY_STANDARD_DEADBAND);
@@ -77,9 +78,18 @@ void SwerveDrive::Run( )
     auto controller = GetController();
     if ( controller != nullptr )
     {
-        drive  = controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE) ;
-        steer  = controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER);
-        rotate =  controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
+        if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::REZERO_PIGEON))
+        {
+            auto factory = PigeonFactory::GetFactory();
+            auto m_pigeon = factory->GetPigeon();
+            m_pigeon->ReZeroPigeon( 0, 0);
+        }
+        else
+        {
+            drive  = controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE) ;
+            steer  = controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER);
+            rotate =  controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
+        }
     }
     m_chassis.get()->Drive(drive, steer, rotate, true);
 }
@@ -89,19 +99,5 @@ void SwerveDrive::Run( )
 bool SwerveDrive::AtTarget() const
 {
     return false;
-}
-
-void SwerveDrive::RunCurrentState()
-{
-    auto controller = TeleopControl::GetInstance();
-    if ( controller != nullptr)
-    {
-        if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::REZERO_PIGEON))
-        {
-            auto factory = PigeonFactory::GetFactory();
-            auto m_pigeon = factory->GetPigeon();
-            m_pigeon->ReZeroPigeon( 0, 0);
-        }
-    }
 }
 

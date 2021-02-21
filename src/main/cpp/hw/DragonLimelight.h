@@ -112,15 +112,6 @@ class DragonLimelight //: public IDragonSensor, public IDragonDistanceSensor
         double EstimateTargetDistance() const;
         std::vector<double> Get3DSolve() const;
 
-        ///-----------------------------------------------------------------------
-        /// Method:      GetUsage
-        /// Description: Indicate what the sensor is used for
-        /// Returns:     SENSOR_USAGE    sensor usage 
-        ///-----------------------------------------------------------------------
-        /**
-        IDragonSensor::SENSOR_USAGE GetUsage() const override;
-        **/
-
         // Setters
         void SetTargetHeight
         (

@@ -69,7 +69,7 @@ shared_ptr<CANCoder> CanCoderDefn::ParseXML
         }        
         else if ( strcmp( attr.name(), "reverse" ) == 0 )
         {
-            offset = attr.as_bool();
+            reverse = attr.as_bool();
         }        
         else
         {

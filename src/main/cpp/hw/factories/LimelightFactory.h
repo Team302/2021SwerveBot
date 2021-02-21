@@ -19,10 +19,7 @@ class LimelightFactory
   public:
     static LimelightFactory* GetLimelightFactory();
 
-    DragonLimelight* GetLimelight
-    (
-      IDragonSensor::SENSOR_USAGE usage
-    );
+    DragonLimelight* GetLimelight() const;
 
     DragonLimelight* CreateLimelight
     (

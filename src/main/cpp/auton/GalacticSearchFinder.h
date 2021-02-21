@@ -12,33 +12,44 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
-
 #pragma once
 
-//C++ Libraries
-#include <memory>
+//C++ Includes
 
-//Team 302 includes
-#include <subsys/SwerveChassis.h>
-#include <gamepad/TeleopControl.h>
-#include <states/IState.h>
-#include <hw/DragonPigeon.h>
+//Team302 Includes
+#include <auton/PrimitiveParams.h>
+#include <auton/primitives/IPrimitive.h>
+#include <utils/Logger.h>
 
-class SwerveDrive : public IState
+//FRC,WPI Includes
+
+#include <frc/geometry/Pose2d.h>
+
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
+
+class GalacticSearchFinder// : public IPrimitive
+
 {
-    public:
+public:
+    GalacticSearchFinder();
 
-        SwerveDrive();
-        ~SwerveDrive() = default;
+    virtual ~GalacticSearchFinder() = default;
 
-        void Init() override;
+    std::string GetGalacticSearchPath() ;  // return path name for galatic search
 
-        void Run() override;
+private:
 
-        bool AtTarget() const override;
+    std::string lGetGSPathFromVisionTbl();
 
-    private:
-        inline TeleopControl* GetController() const { return m_controller; }
-        std::shared_ptr<SwerveChassis> m_chassis;
-        TeleopControl* m_controller;
-};
+    bool CheckTarget(double*, double, double, double,double);
+
+    // network table reading
+    // Using Default table no referances for Swerve Drive Module m_nt.
+    // May need to create a link to m_nt if more than one network table is used.
+    nt::NetworkTableInstance inst = nt::NetworkTableInstance().GetDefault();
+     
+    wpi::Twine sTableName = "visionTable";
+    wpi::StringRef sRef_TblCVAngle = "CellVisionAngle";
+    wpi::StringRef sRef_TblCVDistance = "CellVisionDistance";
+ };

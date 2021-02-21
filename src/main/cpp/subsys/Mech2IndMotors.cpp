@@ -53,6 +53,7 @@ Mech2IndMotors::Mech2IndMotors
 ) : IMech2IndMotors(),
     m_primary( primaryMotor),
     m_secondary( secondaryMotor),
+    m_ntName(networkTableName),
     m_primaryTarget(0.0),
     m_secondaryTarget(0.0)
 {
