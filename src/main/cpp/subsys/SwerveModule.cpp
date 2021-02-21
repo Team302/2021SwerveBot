@@ -79,7 +79,8 @@ SwerveModule::SwerveModule
     m_initialAngle(canCoder.get()->GetAbsolutePosition()),
     m_initialCounts(0),
     m_nt(),
-    m_currentState()
+    m_currentState(),
+    m_maxVelocity(1_mps)
 {
     Rotation2d ang { units::angle::degree_t(0.0)};
     m_currentState.angle = ang;
@@ -101,13 +102,13 @@ SwerveModule::SwerveModule
     // Set up the Turn Motor
     motor = m_turnMotor.get()->GetSpeedController();
     fx = dynamic_cast<WPI_TalonFX*>(motor.get());
-    auto error = fx->ConfigPeakOutputForward(0.5, 0);
+    auto error = fx->ConfigPeakOutputForward(0.3, 0);
 	if ( error != ErrorCode::OKAY )
 	{
 		Logger::GetLogger()->LogError(string("SwerveModule"), string("ConfigPeakOutputForward error"));
 		error = ErrorCode::OKAY;
 	}
-	error = fx->ConfigPeakOutputReverse(-0.2, 0);
+	error = fx->ConfigPeakOutputReverse(-0.3, 0);
 	if ( error != ErrorCode::OKAY )
 	{
 		Logger::GetLogger()->LogError(string("SwerveModule"), string("ConfigPeakOutputReverse error"));
@@ -167,6 +168,7 @@ void SwerveModule::Init
     units::angular_acceleration::radians_per_second_squared_t   maxAngularAcceleration
 )
 {
+    m_maxVelocity = maxVelocity;
     auto driveCData = make_shared<ControlData>( ControlModes::CONTROL_TYPE::VELOCITY_RPS,
                                                 ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
                                                 string("DriveSpeed"),
@@ -262,11 +264,21 @@ void SwerveModule::RunCurrentState()
 }
 void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
 {
-    m_currentState.speed = speed;
+    if ( abs(speed.to<double>()/m_maxVelocity.to<double>()) < 0.05 )
+    {
+        m_currentState.speed = 0_mps;
+    }
+    else
+    {
+        m_currentState.speed = speed;
+    }
+    
     // convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel
-    auto driveTarget = speed.to<double>() /  units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi;  
-	m_nt.get()->PutString("drive motor id", to_string(m_driveMotor.get()->GetID()) );
-    m_nt.get()->PutNumber("drive target", driveTarget );
+    auto driveTarget = m_currentState.speed.to<double>() /  units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi;  
+
+    Logger::GetLogger()->ToNtTable(m_nt, string("turn motor id"), to_string(m_driveMotor.get()->GetID()) );
+    Logger::GetLogger()->ToNtTable(m_nt, string("drive target"), to_string(driveTarget) );
+     
     m_driveMotor.get()->Set(m_nt, driveTarget);
 }
 

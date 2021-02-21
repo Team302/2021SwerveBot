@@ -101,4 +101,6 @@ class SwerveModule
         int                                                 m_initialCounts;
         std::shared_ptr<nt::NetworkTable>                   m_nt;        
         frc::SwerveModuleState                              m_currentState;
+        units::velocity::meters_per_second_t                m_maxVelocity;
+
 };
