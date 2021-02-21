@@ -46,6 +46,7 @@ void Robot::RobotInit()
     // solenoids, digital inputs, analog inputs, etc.
     unique_ptr<RobotDefn>  robotXml = make_unique<RobotDefn>();
     robotXml->ParseXML();
+    m_cyclePrims= new CyclePrimitives();
 }
 
 /// @brief This function is called every robot packet, no matter the  mode. This is used for items like diagnostics that run 
@@ -67,7 +68,7 @@ void Robot::RobotPeriodic()
 /// @return void
 void Robot::AutonomousInit() 
 {
-
+    m_cyclePrims->Init();
 }
 
 
@@ -85,6 +86,8 @@ void Robot::AutonomousPeriodic()
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("AutonomousPeriodic"), string("no swerve chassis"));
     }
+
+    m_cyclePrims->Run();
 
 }
 

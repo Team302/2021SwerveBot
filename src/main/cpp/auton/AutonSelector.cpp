@@ -51,8 +51,8 @@ AutonSelector::AutonSelector() : m_xmlFiles(),
 std::string AutonSelector::GetSelectedAutoFile()
 {
 	//Logger::GetLogger()->LogError(string("Auton Selector Get Selected Auton"), m_chooser.GetSelected());
-	return m_chooser.GetSelected();
-	//return "balltest.xml";
+	//return m_chooser.GetSelected();
+	return "Barrel.xml";
 }
 
 //---------------------------------------------------------------------
@@ -66,7 +66,8 @@ void AutonSelector::FindXMLFileNames()
 	DIR* directory;
 	struct dirent* files;
 
-	directory = opendir("/home/lvuser/auton/");
+	//directory = opendir("/home/lvuser/auton/");
+	directory = opendir("/home/lvuser/deploy/autonxml/");
 	if (directory != nullptr)
 	{
 		bool moreFiles = true;
@@ -81,10 +82,10 @@ void AutonSelector::FindXMLFileNames()
 			else 
 			{
 				auto filename = string( files->d_name);
-				if ( filename != "." && filename != ".." && filename != "auton.dtd" )
-				{
-					m_xmlFiles.emplace_back(string(files->d_name));
-				}
+				//if ( filename != "." && filename != ".." && filename != "auton.dtd" )
+				//{
+					m_xmlFiles.emplace_back(string("barrel.xml"));
+				//}
 
 			} 
 		}

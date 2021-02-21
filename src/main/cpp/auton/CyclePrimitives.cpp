@@ -77,7 +77,7 @@ void CyclePrimitives::Run()
 			GetNextPrim();
 		}
 	}
-	else
+	else if (m_currentPrim == nullptr || m_currentPrim->IsDone())
 	{
 		Logger::GetLogger()->LogError(string("CyclePrimitive"), string("Completed"));
 		m_isDone = true;

@@ -2,5 +2,5 @@
 <!DOCTYPE auton SYSTEM "auton.dtd">
 <auton>
 	<primitive id="DRIVE_PATH"
-			   pathname="Barrel1.wpilib.json"/>
+			   pathname="Calibrate.wpilib.json"/>
 </auton>

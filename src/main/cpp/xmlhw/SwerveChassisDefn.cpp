@@ -112,7 +112,7 @@ shared_ptr<SwerveChassis> SwerveChassisDefn::ParseXML
         }
         else if (  attrName.compare("maxAngularAcceleration") == 0 )
         {
-            maxAcceleration = units::feet_per_second_t(attr.as_double()/12.0) / 1_s;
+            maxAngularAcceleration = units::degrees_per_second_t(attr.as_double()) / 1_s;
         }
         else   // log errors
         {

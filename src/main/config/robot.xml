@@ -34,7 +34,7 @@
                      maxVelocity="194.4"
                      maxAngularVelocity="1591.2"
                      maxAcceleration="24.0"
-                     maxAngularAcceleration="24.0">
+                     maxAngularAcceleration="48.0">
 			 
         <swervemodule type="RIGHT_BACK"
                       turn_p="0.5"
