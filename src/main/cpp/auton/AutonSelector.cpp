@@ -65,7 +65,7 @@ std::string AutonSelector::GetSelectedAutoFile()
 	
 	//return "balltest.xml";
 	//return m_chooser.GetSelected();
-	return "Barrel.xml";
+	return "barrel.xml";
 }
 
 //---------------------------------------------------------------------

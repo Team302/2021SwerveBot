@@ -121,7 +121,7 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
                         {
                             yloc = attr.as_float();
                         }
-                        else if ( strcmp( attr.name(), "pathName") == 0)
+                        else if ( strcmp( attr.name(), "pathname") == 0)
                         {
                             pathName = attr.value();
                         }

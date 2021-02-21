@@ -59,6 +59,8 @@ void CyclePrimitives::Init()
 	m_currentPrimSlot = 0; //Reset current prim
 	m_primParams.clear();
 	m_primParams = PrimitiveParser::ParseXML( m_autonSelector->GetSelectedAutoFile() );
+	unsigned int paramsSize = m_primParams.size();
+	Logger::GetLogger()->ToNtTable("CyclePrims", "Number of Primitives:", to_string(paramsSize));
 	if (!m_primParams.empty())
 	{
 		GetNextPrim();
