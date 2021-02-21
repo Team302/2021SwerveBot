@@ -16,9 +16,6 @@
 // 302 Includes
 
 #include <auton/primitives/DrivePath.h>
-#include <networktables/NetworkTableEntry.h>
-#include <networktables/NetworkTableInstance.h>
-#include <networktables/NetworkTable.h>
 
 using namespace std;
 using namespace frc;
@@ -27,22 +24,21 @@ using namespace wpi::math;
 
 DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
                          m_timer(make_unique<Timer>()),
-                         m_nt(),
                          m_maxTime(0.0),
                          m_currentChassisPosition(units::meter_t(0), units::meter_t(0), units::radian_t(0))
 {
 
 
-  m_nt = nt::NetworkTableInstance::GetDefault().GetTable("DrivePath");
-  m_nt.get()->PutString("initialized","False");
-  m_nt.get()->PutString("Running","False");
-  m_nt.get()->PutString("Done","False");
+  //m_nt = nt::NetworkTableInstance::GetDefault().GetTable("DrivePath");
+  Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "False");
+  Logger::GetLogger()->ToNtTable("DrivePath", "Running", "False");
+  Logger::GetLogger()->ToNtTable("DrivePath", "Done", "False");
 }
 void DrivePath::Init(PrimitiveParams *params)
 {
  
 
- m_nt.get()->PutString("initialized","True");
+Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
   
  sPath2Load = params->GetPathName();     //sPath2Load = "Slalom1.wpilib.json" example
                                          // 
@@ -77,7 +73,7 @@ void DrivePath::Run()
   //m_chassis->UpdateOdometry();  done in robot.cpp
 
 
-m_nt.get()->PutString("Running","True");
+  Logger::GetLogger()->ToNtTable("DrivePath", "Running", "True");
  
   if (sPath2Load != "")
   {
@@ -113,15 +109,13 @@ bool DrivePath::IsDone()
     Logger::GetLogger()->LogError(string("DrivePath - DONE = "), sPath2Load);
     if ( bTimeDone && m_bRobotStopped )
     {
-      m_nt.get()->PutString("Done","true"); 
+      Logger::GetLogger()->ToNtTable("DrivePath", "Done", "True");
     }
     return (bTimeDone && m_bRobotStopped);
   }
   else
   {
-    
     return false;
-
   }
 }
 bool DrivePath::lRobotStopped(frc::Pose2d lCurPos, frc::Pose2d lPrevPos)

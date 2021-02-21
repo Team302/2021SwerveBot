@@ -60,7 +60,6 @@ public:
 private:
     std::shared_ptr<SwerveChassis> m_chassis;
     std::unique_ptr<frc::Timer> m_timer;
-    std::shared_ptr<nt::NetworkTable> m_nt;
  
 
     double m_maxTime;
