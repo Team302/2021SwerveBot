@@ -18,6 +18,9 @@
 #include <memory>
 
 // FRC includes
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
 
 // Team 302 includes
 #include <states/IState.h>
@@ -130,6 +133,12 @@ void Mech2MotorState::Run()
     if ( m_mechanism != nullptr )
     {
         m_mechanism->Update();
+        auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("Shooter State Manager"));
+        nt.get()->PutNumber("Primary Target", GetPrimaryTarget());
+        nt.get()->PutNumber("Secondary Target", GetSecondaryTarget());
+        nt.get()->PutNumber("Primary Speed", GetPrimaryRPS());
+        nt.get()->PutNumber("Secondary Speed", GetSecondaryRPS());
+
     }
 }
 

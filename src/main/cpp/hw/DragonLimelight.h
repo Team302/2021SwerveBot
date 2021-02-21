@@ -112,15 +112,6 @@ class DragonLimelight //: public IDragonSensor, public IDragonDistanceSensor
         double EstimateTargetDistance() const;
         std::vector<double> Get3DSolve() const;
 
-        ///-----------------------------------------------------------------------
-        /// Method:      GetUsage
-        /// Description: Indicate what the sensor is used for
-        /// Returns:     SENSOR_USAGE    sensor usage 
-        ///-----------------------------------------------------------------------
-        /**
-        IDragonSensor::SENSOR_USAGE GetUsage() const override;
-        **/
-
         // Setters
         void SetTargetHeight
         (
@@ -150,6 +141,18 @@ class DragonLimelight //: public IDragonSensor, public IDragonDistanceSensor
         void ToggleSnapshot
         (
             DragonLimelight::SNAPSHOT_MODE toggle // 0-No snapshots 1- two snapshots/second: Max of 32 saved
+        );
+
+        void SetCrosshairPos
+        (
+            double crosshairPosX,
+            double crosshairPosY
+        );
+
+        void SetSecondaryCrosshairPos
+        (
+            double crosshairPosX,
+            double crosshairPosY
         );
 
         void PrintValues(); // Prints out all values to ensure everything is working and connected

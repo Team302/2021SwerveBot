@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE auton SYSTEM "auton.dtd">
+<auton>
+	<primitive id="DRIVE_PATH"
+			   pathname="Bounce1.wpilib.json"/>
+	<primitive id="DRIVE_PATH"
+			   pathname="Bounce2.wpilib.json"/>
+	<primitive id="DRIVE_PATH"
+			   pathname="Bounce3.wpilib.json"/>
+	<primitive id="DRIVE_PATH"
+			   pathname="Bounce4.wpilib.json"/>
+</auton>

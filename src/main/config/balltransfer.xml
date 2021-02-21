@@ -9,8 +9,5 @@
 	<mechanismTarget stateIdentifier="BALLTRANSFERTOSHOOTER"
 	                 controlDataIdentifier="openloop"
 					 value="-1.0"/>
-	<mechanismTarget stateIdentifier="BALLTRANSFEREJECT"
-					 controlDataIdentifier="openloop"
-				     value="1.0"/>
 
 </statedata>

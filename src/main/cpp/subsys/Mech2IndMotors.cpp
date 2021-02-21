@@ -51,6 +51,13 @@ Mech2IndMotors::Mech2IndMotors
     shared_ptr<IDragonMotorController>          primaryMotor,
     shared_ptr<IDragonMotorController>          secondaryMotor
 ) : IMech2IndMotors(),
+    m_type(type),
+    m_controlFile(controlFileName),
+    m_ntName(networkTableName),
+    m_logging(false),
+    m_milliSecondsBetweenLogging(20.0),
+    m_lastTime(0.0),
+    m_timer(),
     m_primary( primaryMotor),
     m_secondary( secondaryMotor),
     m_primaryTarget(0.0),

@@ -18,6 +18,11 @@
 #include <memory>
 #include <vector>
 
+// FRC Includes
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
+
 //Team 302 Includes
 #include <states/IState.h>
 #include <states/ballhopper/BallHopperStateMgr.h>
@@ -43,7 +48,7 @@ BallHopperStateMgr* BallHopperStateMgr::GetInstance()
 }
 
 /// @brief initialize the state manager, parse the configuration file and create the states
-BallHopperStateMgr::BallHopperStateMgr() : m_currentState(),
+BallHopperStateMgr::BallHopperStateMgr() : m_currentState(nullptr),
                                            m_stateVector(),
                                            m_currentStateEnum(BALL_HOPPER_STATE::OFF)
 {
@@ -57,7 +62,7 @@ BallHopperStateMgr::BallHopperStateMgr() : m_currentState(),
     stateMap["BALLHOPPERHOLD"] = BALL_HOPPER_STATE::HOLD;
     stateMap["BALLHOPPERRAPIDRELEASE"] = BALL_HOPPER_STATE::RAPID_RELEASE;
     stateMap["BALLHOPPERSLOWRELEASE"] = BALL_HOPPER_STATE::SLOW_RELEASE;
-    m_stateVector.resize(5);
+    m_stateVector.resize(4);
     //create the states passing the configuration data
     for ( auto td: targetData )
     {
@@ -70,6 +75,9 @@ BallHopperStateMgr::BallHopperStateMgr() : m_currentState(),
             {
                 auto controlData = td->GetController();
                 auto target = td->GetTarget();
+                Logger::GetLogger()->LogError( string("ballhopperstatemgr state "),to_string(stateEnum));
+                Logger::GetLogger()->LogError( string("ballhopperstatemgr control data "),controlData == nullptr?string("nullptr"):string("good"));
+                Logger::GetLogger()->LogError( string("ballhopperstatemgr target data "),to_string(target));
                 switch ( stateEnum)
                 {
                     case BALL_HOPPER_STATE::OFF:
@@ -148,11 +156,29 @@ void BallHopperStateMgr::SetCurrentState
     bool                    run
 )
 {
-
-    Logger::GetLogger()->LogError( Logger::LOGGER_LEVEL::PRINT_ONCE, string("BallHopperStateMgr::SetCurrentState"), string("about to set current state: " + to_string(stateEnum)));
+    auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("Ball Hopper State Manager"));
+    nt.get()->PutString("Current State", "Off");
     auto state = m_stateVector[stateEnum];
-    if ( state != nullptr && state != m_currentState)
+//    if ( state != nullptr && state != m_currentState)
+    if ( state != nullptr )
     {
+        if ( m_currentStateEnum == BallHopperStateMgr::BALL_HOPPER_STATE::HOLD)
+        {
+            nt.get()->PutString("Current State", "Hold");
+        }
+        else if (m_currentStateEnum == BallHopperStateMgr::BALL_HOPPER_STATE::OFF)
+        {
+            nt.get()->PutString("Current State", "Off");
+        }
+        else if (m_currentStateEnum == BallHopperStateMgr::BALL_HOPPER_STATE::RAPID_RELEASE)
+        {
+            nt.get()->PutString("Current State", "Rapid Release");
+        }
+        else
+        {
+            nt.get()->PutString("Current State", "Slow Release");
+        }
+        
         m_currentState = state;
         m_currentStateEnum = stateEnum;
         m_currentState->Init();
@@ -163,5 +189,13 @@ void BallHopperStateMgr::SetCurrentState
                 m_currentState->Run();
             }
         }
+    }
+    else if (state == nullptr)
+    {
+        nt.get()->PutString("Current State", "nullptr");
+    }    
+    else 
+    {
+        nt.get()->PutString("Current State", "same state");
     }
 }
