@@ -16,6 +16,7 @@
 
 // C++ Includes
 #include <memory>
+#include <unistd.h>
 
 // FRC includes
 
@@ -44,6 +45,9 @@ using namespace frc;
 /// @return void
 void Robot::RobotInit() 
 {
+
+    sleep(5);
+
     // Read the robot definition from the xml configuration files and
     // create the hardware (chassis + mechanisms along with their talons,
     // solenoids, digital inputs, analog inputs, etc.
@@ -107,7 +111,10 @@ void Robot::TeleopInit()
     }
 
     //set camera to drivermode to stream to dashboard
-    m_driverMode->SetCamToDriveMode( m_limelight );
+    if ( m_limelight != nullptr)
+    {
+        m_driverMode->SetCamToDriveMode( m_limelight );
+    }
 
     m_drive = make_shared<SwerveDrive>();
     m_drive.get()->Init();

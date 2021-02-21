@@ -101,7 +101,7 @@ SwerveModule::SwerveModule
     // Set up the Turn Motor
     motor = m_turnMotor.get()->GetSpeedController();
     fx = dynamic_cast<WPI_TalonFX*>(motor.get());
-    auto error = fx->ConfigPeakOutputForward(0.2, 0);
+    auto error = fx->ConfigPeakOutputForward(0.5, 0);
 	if ( error != ErrorCode::OKAY )
 	{
 		Logger::GetLogger()->LogError(string("SwerveModule"), string("ConfigPeakOutputForward error"));
@@ -284,10 +284,10 @@ void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
     }
     **/
 
-    m_nt.get()->PutString("turn motor id", to_string(m_turnMotor.get()->GetID()) );
-    m_nt.get()->PutNumber("current angle", currAngle.Degrees().to<double>() );
-    m_nt.get()->PutNumber("target angle", targetAngle.to<double>() );
-    m_nt.get()->PutNumber("delta angle", deltaAngle.Degrees().to<double>() );
+    Logger::GetLogger()->ToNtTable(m_nt, string("turn motor id"), to_string( m_turnMotor.get()->GetID()) );
+    Logger::GetLogger()->ToNtTable(m_nt, string("current angle"), to_string( currAngle.Degrees().to<double>() ) );
+    Logger::GetLogger()->ToNtTable(m_nt, string("target angle"), to_string( targetAngle.to<double>() ) );
+    Logger::GetLogger()->ToNtTable(m_nt, string("delta angle"), to_string( deltaAngle.Degrees().to<double>() ) );
      
     if ( abs(deltaAngle.Degrees().to<double>()) > 0.01 )
     {
@@ -299,9 +299,9 @@ void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
         double deltaTicks = (deltaAngle.Degrees().to<double>() * 72.5) / 4.0; //72.4694;
         double desiredTicks = currentTicks + deltaTicks;
 
-        m_nt.get()->PutNumber("currentTicks", currentTicks );
-        m_nt.get()->PutNumber("deltaTicks", deltaTicks );
-        m_nt.get()->PutNumber("desiredTicks", desiredTicks );
+        Logger::GetLogger()->ToNtTable(m_nt, string("currentTicks"), to_string(currentTicks) );
+        Logger::GetLogger()->ToNtTable(m_nt, string("deltaTicks"), to_string(deltaTicks) );
+        Logger::GetLogger()->ToNtTable(m_nt, string("desiredTicks"), to_string(desiredTicks) );
 
         m_turnMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE);
         m_turnMotor.get()->Set(m_nt, desiredTicks);

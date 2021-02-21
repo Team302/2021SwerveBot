@@ -32,6 +32,9 @@
 
 // FRC includes
 #include <frc/SmartDashboard/SmartDashboard.h>
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
 
 // Team 302 includes
 #include <utils/Logger.h>
@@ -154,6 +157,27 @@ void Logger::OnDash
 )
 {
     SmartDashboard::PutBoolean( locationIdentifier.c_str(), val );
+}
+
+void Logger::ToNtTable
+(
+    const std::string&  ntName,
+    const std::string&  identifier,
+    const std::string&  msg 
+)
+{
+    auto table = nt::NetworkTableInstance::GetDefault().GetTable(ntName);
+    Logger::GetLogger()->ToNtTable( table, identifier, msg);
+}
+
+void Logger::ToNtTable
+(
+    std::shared_ptr<nt::NetworkTable>   ntable,
+    const std::string&                  identifier,
+    const std::string&                  msg 
+)
+{
+	ntable.get()->PutString(identifier, msg);
 }
 
 Logger::Logger() : m_option( LOGGER_OPTION::CONSOLE ), 

@@ -87,6 +87,7 @@ SwerveChassis::SwerveChassis
 /// @brief Align all of the swerve modules to point forward
 void SwerveChassis::ZeroAlignSwerveModules()
 {
+    return;
     m_frontLeft.get()->ZeroAlignModule();
     m_frontRight.get()->ZeroAlignModule();
     m_backLeft.get()->ZeroAlignModule();

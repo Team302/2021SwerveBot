@@ -30,6 +30,9 @@
 #include <set>
 
 // FRC includes
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
 
 // Team 302 includes
 
@@ -119,6 +122,23 @@ class Logger
             const std::string&   locationIdentifier,     
             bool                 value                 
         );
+
+
+        void ToNtTable
+        (
+            const std::string&  ntName,
+            const std::string&  identifier,
+            const std::string&  string 
+        );
+
+        void ToNtTable
+        (
+            std::shared_ptr<nt::NetworkTable>   ntable,
+            const std::string&                  identifier,
+            const std::string&                  msg 
+        );
+
+
 
     protected:
 
