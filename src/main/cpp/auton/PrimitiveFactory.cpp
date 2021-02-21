@@ -101,6 +101,8 @@ IPrimitive* PrimitiveFactory::GetIPrimitive(PrimitiveParams* primitivePasser)
 		{
 			m_drivePath = new DrivePath();
 		}
+		primitive = m_drivePath;
+		break;
 
 	default:
 		break;
