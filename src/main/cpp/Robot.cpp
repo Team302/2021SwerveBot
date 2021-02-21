@@ -51,7 +51,7 @@ void Robot::RobotInit()
     robotXml->ParseXML();
 
     //create the limelight camera
-    m_limelight = LimelightFactory::GetLimelightFactory()->GetLimelight( IDragonSensor::MAIN_LIMELIGHT );
+    m_limelight = LimelightFactory::GetLimelightFactory()->GetLimelight();
     m_cyclePrims= new CyclePrimitives();
 }
 

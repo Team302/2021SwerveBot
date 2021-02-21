@@ -64,9 +64,8 @@ class Robot : public frc::TimedRobot
 
   private:
  
-    std::shared_ptr<SwerveDrive> m_drive;
-    DragonLimelight*             m_limelight;
-    DriverMode*                  m_driverMode;
+    DragonLimelight*                  m_limelight;
+    DriverMode*                       m_driverMode;
     std::shared_ptr<SwerveDrive>      m_drive;
     ShooterStateMgr*                  m_shooterState;
     CyclePrimitives*                  m_cyclePrims;

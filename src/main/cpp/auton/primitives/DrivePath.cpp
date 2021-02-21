@@ -27,10 +27,11 @@ using namespace wpi::math;
 
 DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
                          m_timer(make_unique<Timer>()),
+                         m_nt(),
                          m_maxTime(0.0),
-                         m_currentChassisPosition(units::meter_t(0), units::meter_t(0), units::radian_t(0)),
-                         m_nt()
+                         m_currentChassisPosition(units::meter_t(0), units::meter_t(0), units::radian_t(0))
 {
+
 
   m_nt = nt::NetworkTableInstance::GetDefault().GetTable("DrivePath");
   m_nt.get()->PutString("initialized","False");
