@@ -166,35 +166,35 @@ void ShooterStateMgr::RunCurrentState()
     {
         if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT ))
         {
-            nt.get()->PutString("Current State", "Prepare to Shoot");
+            Logger::GetLogger()->ToNtTable(nt, "Current State", "Prepare to Shoot");
             SetCurrentState( SHOOTER_STATE::GET_READY, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
         }
         else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_GREEN ))
         {
-            nt.get()->PutString("Current State", "Shoot Green");
+            Logger::GetLogger()->ToNtTable(nt, "Current State", "Shoot Green");
             SetCurrentState( SHOOTER_STATE::SHOOTGREEN, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::RAPID_RELEASE, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
         }
         else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_YELLOW ))
         {
-            nt.get()->PutString("Current State", "Shoot Yellow");
+            Logger::GetLogger()->ToNtTable(nt, "Current State", "Shoot Yellow");
             SetCurrentState( SHOOTER_STATE::SHOOTYELLOW, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::RAPID_RELEASE, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
         }
         else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_BLUE ))
         {
-            nt.get()->PutString("Current State", "Shoot Blue");
+            Logger::GetLogger()->ToNtTable(nt, "Current State", "Shoot Blue");
             SetCurrentState( SHOOTER_STATE::SHOOTBLUE, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::RAPID_RELEASE, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
         }
         else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_RED ))
         {
-            nt.get()->PutString("Current State", "Shoot Red");
+            Logger::GetLogger()->ToNtTable(nt, "Current State", "Shoot Red");
             SetCurrentState( SHOOTER_STATE::SHOOTRED, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::RAPID_RELEASE, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
@@ -222,14 +222,14 @@ void ShooterStateMgr::SetCurrentState
     if ( state != nullptr && state != m_currentState )
     {
         auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("Shooter State Manager"));
-        nt.get()->PutString("Current State", "none");
+        Logger::GetLogger()->ToNtTable(nt, "Current State", "none");
         
         m_currentState = state;
         m_currentStateEnum = stateEnum;
         m_currentState->Init();
         if ( stateEnum == SHOOTER_STATE::GET_READY )
         {
-            nt.get()->PutString("Current State", "Prepare to Shoot");
+            Logger::GetLogger()->ToNtTable(nt, "Current State", "Prepare to Shoot");
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, run );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, run);
         }
@@ -240,27 +240,24 @@ void ShooterStateMgr::SetCurrentState
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::RAPID_RELEASE, run);
             if ( stateEnum == SHOOTER_STATE::SHOOTBLUE)
             {
-                nt.get()->PutString("Current State", "Shoot Blue");
+                Logger::GetLogger()->ToNtTable(nt, "Current State", "Shoot Blue");
             }
             else if ( stateEnum == SHOOTER_STATE::SHOOTGREEN)
             {
-                nt.get()->PutString("Current State", "Shoot Green");
+                Logger::GetLogger()->ToNtTable(nt, "Current State", "Shoot Green");
             }
             else if ( stateEnum == SHOOTER_STATE::SHOOTRED)
             {
-                nt.get()->PutString("Current State", "Shoot Red");
+                Logger::GetLogger()->ToNtTable(nt, "Current State", "Shoot Red");
             }
             else
             {
-                nt.get()->PutString("Current State", "Shoot Yellow");
+                Logger::GetLogger()->ToNtTable(nt, "Current State", "Shoot Yellow");
             }
         }
         if ( run )
         {
-            //if ( MechanismFactory::GetMechanismFactory()->GetShooter().get() != nullptr)
-            //{
-                m_currentState->Run();
-            //}
+            m_currentState->Run();
         }
     }
 }

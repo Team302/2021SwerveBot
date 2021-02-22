@@ -167,7 +167,7 @@ void Logger::ToNtTable
 )
 {
     auto table = nt::NetworkTableInstance::GetDefault().GetTable(ntName);
-    Logger::GetLogger()->ToNtTable( table, identifier, msg);
+	table.get()->PutString(identifier, msg);
 }
 
 void Logger::ToNtTable

@@ -63,6 +63,8 @@ class Robot : public frc::TimedRobot
       void TestPeriodic() override;
 
   private:
+
+    void UpdateOdometry();
  
     DragonLimelight*                  m_limelight;
     DriverMode*                       m_driverMode;
