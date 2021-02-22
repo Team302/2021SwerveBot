@@ -19,11 +19,6 @@
 #include <vector>
 
 // FRC includes
-/**
-#include <networktables/NetworkTableInstance.h>
-#include <networktables/NetworkTable.h>
-#include <networktables/NetworkTableEntry.h>
-**/
 
 // Team 302 includes
 #include <states/IState.h>
@@ -163,7 +158,6 @@ void ShooterStateMgr::RunCurrentState()
     auto ntName = MechanismFactory::GetMechanismFactory()->GetShooter().get()->GetNetworkTableName();
     auto controller = TeleopControl::GetInstance();
 
-//    if ( MechanismFactory::GetMechanismFactory()->GetShooter().get() != nullptr && controller != nullptr )
     if (controller != nullptr)
     {
         if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT ))

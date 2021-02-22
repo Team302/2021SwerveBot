@@ -21,6 +21,9 @@
 
 // FRC includes
 #include <frc2/Timer.h>
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
 
 // Team 302 includes
 #include <subsys/Mech1IndMotor.h>
@@ -131,13 +134,15 @@ void Mech2IndMotors::DeactivateLogging()
 /// @return void 
 void Mech2IndMotors::Update()
 {
+    auto ntName = GetNetworkTableName();
+    auto table = nt::NetworkTableInstance::GetDefault().GetTable(ntName);
     if ( m_primary.get() != nullptr )
     {
-        m_primary.get()->Set(m_primaryTarget);
+        m_primary.get()->Set(table, m_primaryTarget);
     }
     if ( m_secondary.get() != nullptr )
     {
-        m_secondary.get()->Set(m_secondaryTarget);
+        m_secondary.get()->Set(table, m_secondaryTarget);
     }
 }
 

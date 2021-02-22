@@ -128,6 +128,9 @@ void Mech1MotorState::Run()
     if ( m_mechanism != nullptr && m_control != nullptr )
     {
         m_mechanism->Update();
+        auto ntName = m_mechanism->GetNetworkTableName();
+        Logger::GetLogger()->ToNtTable(string(ntName), string("Target"), to_string(GetTarget()));
+        Logger::GetLogger()->ToNtTable(string(ntName), string("Speed"), to_string(GetRPS()));
     }
 }
 

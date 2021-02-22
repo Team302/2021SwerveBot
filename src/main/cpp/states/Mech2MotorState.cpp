@@ -18,9 +18,6 @@
 #include <memory>
 
 // FRC includes
-#include <networktables/NetworkTableInstance.h>
-#include <networktables/NetworkTable.h>
-#include <networktables/NetworkTableEntry.h>
 
 // Team 302 includes
 #include <states/IState.h>
@@ -28,6 +25,7 @@
 #include <controllers/ControlData.h>
 #include <controllers/MechanismTargetData.h>
 #include <subsys/interfaces/IMech2IndMotors.h>
+#include <subsys/MechanismFactory.h>
 #include <utils/Logger.h>
 
 #include <gamepad/TeleopControl.h>
@@ -133,12 +131,11 @@ void Mech2MotorState::Run()
     if ( m_mechanism != nullptr )
     {
         m_mechanism->Update();
-        auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("Shooter State Manager"));
-        nt.get()->PutNumber("Primary Target", GetPrimaryTarget());
-        nt.get()->PutNumber("Secondary Target", GetSecondaryTarget());
-        nt.get()->PutNumber("Primary Speed", GetPrimaryRPS());
-        nt.get()->PutNumber("Secondary Speed", GetSecondaryRPS());
-
+        auto ntName = m_mechanism->GetNetworkTableName();
+        Logger::GetLogger()->ToNtTable(string(ntName), string("Primary Target"), to_string(GetPrimaryTarget()));
+        Logger::GetLogger()->ToNtTable(string(ntName), string("Secondary Target"), to_string(GetSecondaryTarget()));
+        Logger::GetLogger()->ToNtTable(string(ntName), string("Primary Speed"), to_string(GetPrimaryRPS()));
+        Logger::GetLogger()->ToNtTable(string(ntName), string("Secondary Speed"), to_string(GetSecondaryRPS()));
     }
 }
 

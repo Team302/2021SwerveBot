@@ -38,6 +38,9 @@ class Mech1MotorState : public IState
         void Run() override;
         bool AtTarget() const override;
 
+        double GetTarget() const {return m_target;}
+        double GetRPS() const {return m_mechanism->GetSpeed();}
+
     private:
 
         IMech1IndMotor*                 m_mechanism;

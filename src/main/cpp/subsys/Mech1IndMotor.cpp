@@ -19,6 +19,9 @@
 
 // FRC includes
 #include <frc2/Timer.h>
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
 
 // Team 302 includes
 #include <controllers/ControlData.h>
@@ -45,7 +48,14 @@ Mech1IndMotor::Mech1IndMotor
     std::string                                 controlFileName,
     std::string                                 networkTableName,
     std::shared_ptr<IDragonMotorController>     motorController
-) : m_motor( motorController ),
+) : m_type(type),
+    m_controlFile(controlFileName),
+    m_ntName(networkTableName),
+    m_logging(false),
+    m_milliSecondsBetweenLogging(20.0),
+    m_lastTime(0.0),
+    m_timer(),
+    m_motor( motorController ),
     m_target( 0.0 )
 {
     if (m_motor.get() == nullptr )
@@ -110,7 +120,9 @@ void Mech1IndMotor::Update()
 {
     if ( m_motor.get() != nullptr )
     {
-        m_motor.get()->Set( m_target );
+        auto ntName = GetNetworkTableName();
+        auto table = nt::NetworkTableInstance::GetDefault().GetTable(ntName);
+        m_motor.get()->Set( table, m_target );
     }
 }
 
