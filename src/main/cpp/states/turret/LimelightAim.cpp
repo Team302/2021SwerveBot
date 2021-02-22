@@ -39,7 +39,7 @@ LimelightAim::LimelightAim
 ) : IState(),
     m_motorState( make_unique<Mech1MotorState>(MechanismFactory::GetMechanismFactory()->GetIntake().get(), control, target)),
     m_turret(MechanismFactory::GetMechanismFactory()->GetTurret()),
-    m_limelight(new DragonLimelight("limelight", 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)),  // TODO:  use the one created using the factory
+    m_limelight(LimelightFactory::GetLimelightFactory()->GetLimelight()),  
     m_atTarget(false),
     m_target(target),
     m_targetPosition(0.0),
@@ -49,42 +49,15 @@ LimelightAim::LimelightAim
 
 void LimelightAim::Init()
 {
-    m_turret.get()->SetControlConstants(m_controlData);
+    m_turret.get()->SetControlConstants(0, m_controlData);
     m_limelight->SetLEDMode(DragonLimelight::LED_ON);
 }
 
 void LimelightAim::Run()
 {
-    /*if(!m_start)
-    {
-        m_turret->SetOutput(m_controlData->GetMode(), m_target);
-        m_start = true;
-    }
-    double targetHorizontalOffset = m_limelight->GetTargetHorizontalOffset();
-    double power = -targetHorizontalOffset / 20 *.5;
-    m_turret->SetOutput(m_controlData->GetMode(), power);
-//    if(m_targetPosition - 5 < m_turret->GetCurrentPosition() < m_targetPosition + 5) //arbitrary tolerance for now will change later
-    if( abs( m_targetPosition - m_turret->GetCurrentPosition() ) <  5.0 ) //arbitrary tolerance for now will change later
-    {
-        m_atTarget = true;
-    }
-    //frc::SmartDashboard::PutNumber("Target Position", targetPosition);
-    frc::SmartDashboard::PutNumber("limelight position", targetHorizontalOffset);
-    */
-   //m_turret->SetOutput(m_controlData->GetMode(), 90.0);
    double targetHorizontalOffset = m_limelight->GetTargetHorizontalOffset();
    frc::SmartDashboard::PutNumber("horizontal offset", targetHorizontalOffset);
    double currentPosition = m_turret.get()->GetPosition();
-   /*double scaledOffset;
-   if(targetHorizontalOffset < 0)
-   {
-       scaledOffset = targetHorizontalOffset - 2.0 - (targetHorizontalOffset/28.0) * 5.0;
-   }
-   else
-   {
-       scaledOffset = targetHorizontalOffset + 2.0 + (targetHorizontalOffset/28.0) * 5.0;
-   }*/
-   //m_turret.get()->SetOutput(ControlModes::POSITION_DEGREES, currentPosition + targetHorizontalOffset + 2.0);
    m_turret.get()->UpdateTarget((currentPosition + targetHorizontalOffset + 2.0));
    m_turret.get()->Update();
 }

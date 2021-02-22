@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE robot SYSTEM "robot.dtd">
 <robot>
-	<!-- pdp canId="0" / -->
+	<pdp canId="0" />
 	<pigeon canId="50"
                rotation="0.0" />
 
-       <!-- was hard coded with all values as 0.0 in limelightAim -->
+       <!--
 	<limelight tablename="limelight"
                   mountingheight="20.0"
-                  horizontaloffset="0.0"
+                  horizontaloffset="-10.0"
                   mountingangle="15.0"
                   rotation="0.0"
                   targetheight="120.0"
@@ -24,6 +24,7 @@
 
 	<blinkin position = "front" 
 		  pwmId = "0"/>
+  -->
 
 <!-- ====================================================
      Chassis
@@ -34,7 +35,7 @@
                      maxVelocity="194.4"
                      maxAngularVelocity="1591.2"
                      maxAcceleration="24.0"
-                     maxAngularAcceleration="48.0">
+                     maxAngularAcceleration="24.0">
 			 
         <swervemodule type="RIGHT_BACK"
                       turn_p="0.5"
@@ -86,7 +87,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="2"
-                            offset="52.734375"/>
+                            offset="-107.753906"/>
         </swervemodule>
 
         <swervemodule type="LEFT_BACK"
@@ -103,7 +104,7 @@
                     canId="1"
                     pdpID="1"
                     type="FALCON"
-                    inverted="true"
+                    inverted="false"
                     sensorInverted="false"
                     feedbackDevice="INTERNAL"
                     countsPerRev="2048"
@@ -138,7 +139,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="0"
-                            offset="39.0245469"/>
+                            offset="71.98242"/>
         </swervemodule>
 
         <swervemodule type="RIGHT_FRONT"
@@ -190,7 +191,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="12"
-                            offset="-70.225"/>
+                            offset="66.35742"/>
         </swervemodule>
 
         <swervemodule type="LEFT_FRONT"
@@ -207,7 +208,7 @@
                     canId="15"
                     pdpID="15"
                     type="FALCON"
-                    inverted="true"
+                    inverted="false"
                     sensorInverted="false"
                     feedbackDevice="INTERNAL"
                     countsPerRev="2048"
@@ -242,7 +243,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="14"
-                            offset="-141.152"/>
+                            offset="133.242188"/>
         </swervemodule>
 
     </swervechassis>  
@@ -250,8 +251,9 @@
 <!-- ====================================================
      Mechanisms
      ==================================================== --> 
+     <!--   
 	<mechanism type="INTAKE">
-		<motor usage="INTAKE"
+		<motor usage="INTAKE1"
                      canId="10"
                      pdpID="10"
                      type="FALCON"
@@ -273,9 +275,9 @@
 	</mechanism>
     
 	<mechanism type="INTAKE">
-		<motor usage="INTAKE"
-                     canId="7"
-                     pdpID="7"
+		<motor usage="INTAKE2"
+                     canId="4"
+                     pdpID="4"
                      type="FALCON"
                      inverted="false"
                      sensorInverted="false"
@@ -314,10 +316,7 @@
                      forwardlimitswitch="false"
                      forwardlimitswitchopen="true"
                      reverselimitswitch="false"
-                     reverselimitswitchopen="true"/>  
-              <digitalInput usage="HOPPER_BANNER_SENSOR"
-                            digitalId="2"
-                            reversed="false"/>      
+                     reverselimitswitchopen="true"/>        
 	</mechanism>
 
 	<mechanism type="BALL_TRANSFER">
@@ -348,11 +347,11 @@
                       canId="5"
                       pdpID="5"
                       type="FALCON"
-                      inverted="true"
+                      inverted="false"
                       sensorInverted="false"
                       feedbackDevice="INTERNAL"
                       countsPerRev="2048"
-                      gearRatio="1.24444"
+                      gearRatio="1.0"
                       brakeMode="false"
                       follow="-1"
                       peakCurrentDuration="50"
@@ -371,7 +370,7 @@
                       sensorInverted="false"
                       feedbackDevice="INTERNAL"
                       countsPerRev="2048"
-                      gearRatio="1.24444"
+                      gearRatio="1.0"
                       brakeMode="false"
                       follow="-1"
                       peakCurrentDuration="15.0"
@@ -406,4 +405,5 @@
                      reverselimitswitchopen="true"/>        
 
 	</mechanism>
+       -->
 </robot>

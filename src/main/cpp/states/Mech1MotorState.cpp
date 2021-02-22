@@ -117,7 +117,7 @@ void Mech1MotorState::Init()
 {
     if ( m_mechanism != nullptr && m_control != nullptr )
     {
-        m_mechanism->SetControlConstants( m_control );
+        m_mechanism->SetControlConstants( 0, m_control );
         m_mechanism->UpdateTarget( m_target );
     }
 }
@@ -128,6 +128,9 @@ void Mech1MotorState::Run()
     if ( m_mechanism != nullptr && m_control != nullptr )
     {
         m_mechanism->Update();
+        auto ntName = m_mechanism->GetNetworkTableName();
+        Logger::GetLogger()->ToNtTable(string(ntName), string("Target"), to_string(GetTarget()));
+        Logger::GetLogger()->ToNtTable(string(ntName), string("Speed"), to_string(GetRPS()));
     }
 }
 

@@ -16,6 +16,7 @@
 
 // C++ Includes
 #include <memory>
+#include <unistd.h>
 
 // FRC includes
 
@@ -29,7 +30,10 @@
 #include <subsys/Shooter.h>
 #include <subsys/SwerveChassisFactory.h>
 #include <subsys/SwerveChassis.h>
+#include <hw/factories/LimelightFactory.h>
+#include <vision/DriverMode.h>
 #include <xmlhw/RobotDefn.h>
+#include <hw/interfaces/IDragonSensor.h>
 
 
 using namespace std;
@@ -42,6 +46,9 @@ using namespace frc;
 /// @return void
 void Robot::RobotInit()
 {
+
+    sleep(10);
+
     m_RunMode = INIT;
 
     // Read the robot definition from the xml configuration files and
@@ -49,6 +56,10 @@ void Robot::RobotInit()
     // solenoids, digital inputs, analog inputs, etc.
     unique_ptr<RobotDefn>  robotXml = make_unique<RobotDefn>();
     robotXml->ParseXML();
+
+    //create the limelight camera
+    m_limelight = LimelightFactory::GetLimelightFactory()->GetLimelight();
+    m_cyclePrims= new CyclePrimitives();
 
     // RAM SCAN: This is at the end of RobotInit() so all the target objects are already created.
     m_RamScan = new RamScan();
@@ -62,11 +73,6 @@ void Robot::RobotInit()
 /// @return void
 void Robot::RobotPeriodic()
 {
-    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
-    if ( swerveChassis.get() != nullptr )
-    {
-        swerveChassis.get()->UpdateOdometry();
-    }
 
     m_RamScan->ScanVariables();     // do this here after other things are done
 }
@@ -92,36 +98,29 @@ void Robot::DisabledPeriodic()
 /// @return void
 void Robot::AutonomousInit()
 {
-    /**
     m_RunMode = AUTON;
+    m_cyclePrims->Init();
+}
 
+void Robot::UpdateOdometry()
+{
     auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
     if ( swerveChassis.get() != nullptr )
     {
-        swerveChassis.get()->ZeroAlignSwerveModules();
+        swerveChassis.get()->UpdateOdometry();
     }
-    else
-    {
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("AutonomousInit"), string("no swerve chassis"));
-    }
-    **/
-}
 
+}
 
 /// @brief Runs every 20 milliseconds when the autonomous state is active.
 /// @return void
 void Robot::AutonomousPeriodic()
 {
+    UpdateOdometry();       // intentionally didn't do this in robot periodic to avoid traffic during disable
+
     //Real auton magic right here:
-    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
-    if ( swerveChassis.get() != nullptr )
-    {
-        swerveChassis.get()->Drive(1.0, 0.0, 0.0, false);
-    }
-    else
-    {
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("AutonomousPeriodic"), string("no swerve chassis"));
-    }
+    m_cyclePrims->Run();
+
 }
 
 
@@ -130,19 +129,6 @@ void Robot::AutonomousPeriodic()
 void Robot::TeleopInit()
 {
     m_RunMode = TELEOP;
-
-    /**
-    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
-    if ( swerveChassis.get() != nullptr )
-    {
-        swerveChassis.get()->ZeroAlignSwerveModules();
-    }
-    else
-    {
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("TeleopPeriodic"), string("no swerve chassis"));
-    }
-    **/
-
     m_drive = make_shared<SwerveDrive>();
     m_drive.get()->Init();
 
@@ -150,8 +136,21 @@ void Robot::TeleopInit()
     m_shooterState = ( shooter.get() != nullptr ) ? ShooterStateMgr::GetInstance() : nullptr;
     if ( m_shooterState != nullptr )
     {
-        m_shooterState->RunCurrentState();
+        m_shooterState->SetCurrentState(ShooterStateMgr::SHOOTER_STATE::OFF, true);
     }
+    else
+    {
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("TeleopInit"), string("no shooter state manager"));
+    }
+
+    //set camera to drivermode to stream to dashboard
+    if ( m_limelight != nullptr)
+    {
+        m_driverMode->SetCamToDriveMode( m_limelight );
+    }
+
+    m_drive = make_shared<SwerveDrive>();
+    m_drive.get()->Init();
 }
 
 
@@ -159,6 +158,8 @@ void Robot::TeleopInit()
 /// @return void
 void Robot::TeleopPeriodic()
 {
+    UpdateOdometry();       // intentionally didn't do this in robot periodic to avoid traffic during disable
+
     m_drive.get()->Run();
     if ( m_shooterState != nullptr )
     {

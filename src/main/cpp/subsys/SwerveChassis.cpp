@@ -87,6 +87,7 @@ SwerveChassis::SwerveChassis
 /// @brief Align all of the swerve modules to point forward
 void SwerveChassis::ZeroAlignSwerveModules()
 {
+    return;
     m_frontLeft.get()->ZeroAlignModule();
     m_frontRight.get()->ZeroAlignModule();
     m_backLeft.get()->ZeroAlignModule();
@@ -130,6 +131,13 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
 void SwerveChassis::Drive( ChassisSpeeds speeds, bool fieldRelative) 
 {
     Drive( speeds.vx, speeds.vy, speeds.omega, fieldRelative);
+
+    
+   // double dmsg = speeds.vx.to<double>();
+   // std::string msg = std::to_string(dmsg);
+
+   //Logger::GetLogger()->LogError(string(" speeds.vx "),  msg );
+ 
 }
 
 /// @brief Drive the chassis

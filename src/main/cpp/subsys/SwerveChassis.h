@@ -19,6 +19,7 @@
 
 #include <frc/AnalogGyro.h>
 #include <frc/estimator/SwerveDrivePoseEstimator.h>
+#include <frc/geometry/Pose2d.h>
 #include <frc/geometry/Translation2d.h>
 #include <frc/geometry/Rotation2d.h>
 #include <frc/kinematics/SwerveDriveKinematics.h>
@@ -35,6 +36,7 @@
 #include <hw/factories/PigeonFactory.h>
 #include <hw/DragonPigeon.h>
 #include <subsys/SwerveModule.h>
+
 
 class SwerveChassis
 {
@@ -102,15 +104,15 @@ class SwerveChassis
         /// @param [in] const Rotation2d&   angle       Current rotation angle
         void ResetPosition
         ( 
-            const Pose2d&       pose,
-            const Rotation2d&   angle
+            const frc::Pose2d&       pose,
+            const frc::Rotation2d&   angle
         );
 
         /// @brief Reset the current chassis pose based on the provided pose (the rotation comes from the Pigeon)
         /// @param [in] const Pose2d&       pose        Current XY position
         void ResetPosition
         ( 
-            const Pose2d&       pose
+            const frc::Pose2d&       pose
         );
 
         //static constexpr auto MaxSpeed = 3.0_mps; 

@@ -56,18 +56,18 @@ DragonLimelight* LimelightFactory::CreateLimelight
         m_limelight->ToggleSnapshot( snapMode );
         if ( defaultXHairX > -1.5 && defaultXHairY > -1.5 )
         {
-            // m_limelight->  todo add method
+            m_limelight->SetCrosshairPos( defaultXHairX, defaultXHairY);
         }        
         if ( secXHairX > -1.5 && secXHairY > -1.5 )
         {
-            // m_limelight->  todo add method
+            m_limelight->SetSecondaryCrosshairPos( secXHairX, secXHairY);
         }
 
     }
     return m_limelight;
 }
 
-DragonLimelight* LimelightFactory::GetLimelight(IDragonSensor::SENSOR_USAGE usage)
+DragonLimelight* LimelightFactory::GetLimelight() const
 {
     return m_limelight;
 }

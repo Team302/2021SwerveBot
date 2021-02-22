@@ -21,6 +21,9 @@
 
 // FRC includes
 #include <frc2/Timer.h>
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
 
 // Team 302 includes
 #include <subsys/Mech1IndMotor.h>
@@ -51,6 +54,13 @@ Mech2IndMotors::Mech2IndMotors
     shared_ptr<IDragonMotorController>          primaryMotor,
     shared_ptr<IDragonMotorController>          secondaryMotor
 ) : IMech2IndMotors(),
+    m_type(type),
+    m_controlFile(controlFileName),
+    m_ntName(networkTableName),
+    m_logging(false),
+    m_milliSecondsBetweenLogging(20.0),
+    m_lastTime(0.0),
+    m_timer(),
     m_primary( primaryMotor),
     m_secondary( secondaryMotor),
     m_primaryTarget(0.0),
@@ -124,13 +134,15 @@ void Mech2IndMotors::DeactivateLogging()
 /// @return void 
 void Mech2IndMotors::Update()
 {
+    auto ntName = GetNetworkTableName();
+    auto table = nt::NetworkTableInstance::GetDefault().GetTable(ntName);
     if ( m_primary.get() != nullptr )
     {
-        m_primary.get()->Set(m_primaryTarget);
+        m_primary.get()->Set(table, m_primaryTarget);
     }
     if ( m_secondary.get() != nullptr )
     {
-        m_secondary.get()->Set(m_secondaryTarget);
+        m_secondary.get()->Set(table, m_secondaryTarget);
     }
 }
 
@@ -180,16 +192,17 @@ double Mech2IndMotors::GetSecondarySpeed() const
 /// @return void
 void Mech2IndMotors::SetControlConstants
 (
+    int                                         slot,
     ControlData*                                pid                 
 ) 
 {
     if ( m_primary.get() != nullptr )
     {
-        m_primary.get()->SetControlConstants(pid);
+        m_primary.get()->SetControlConstants(slot, pid);
     }
     if ( m_secondary.get() != nullptr )
     {
-        m_secondary.get()->SetControlConstants(pid);
+        m_secondary.get()->SetControlConstants(slot, pid);
     }    
 }
 

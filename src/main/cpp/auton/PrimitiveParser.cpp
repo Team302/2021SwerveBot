@@ -49,7 +49,7 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
     bool                        runIntake = false;
     std::string                 pathName;
     bool hasError = false;
-    string fulldirfile = string("/home/lvuser/auton/");
+    string fulldirfile = string("/home/lvuser/deploy/autonxml/");
     fulldirfile += fileName;
     // initialize the xml string to enum maps
     map<string, PRIMITIVE_IDENTIFIER> primStringToEnumMap;
@@ -59,6 +59,7 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
     primStringToEnumMap["DRIVE_TIME"] = DRIVE_TIME;
     primStringToEnumMap["TURN_ANGLE_ABS"] = TURN_ANGLE_ABS;
     primStringToEnumMap["TURN_ANGLE_REL"] = TURN_ANGLE_REL;
+    primStringToEnumMap["DRIVE_PATH"] = DRIVE_PATH;
 
     xml_document doc;
     xml_parse_result result = doc.load_file( fulldirfile.c_str() );
@@ -120,13 +121,13 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
                         {
                             yloc = attr.as_float();
                         }
-                        else if ( strcmp( attr.name(), "pathName") == 0)
+                        else if ( strcmp( attr.name(), "pathname") == 0)
                         {
-                            pathName = attr.as_float();
+                            pathName = attr.value();
                         }
-                        else if ( strcmp ( attr.name(), "runIntake") == 0)
+                        else if ( strcmp ( attr.name(), "intakeState") == 0)
                         {
-                            runIntake = attr.as_bool();
+                            runIntake = strcmp( attr.value(), "INTAKE") == 0;
                         }
                         else
                         {

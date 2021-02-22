@@ -79,7 +79,8 @@ SwerveModule::SwerveModule
     m_initialAngle(canCoder.get()->GetAbsolutePosition()),
     m_initialCounts(0),
     m_nt(),
-    m_currentState()
+    m_currentState(),
+    m_maxVelocity(1_mps)
 {
     Rotation2d ang { units::angle::degree_t(0.0)};
     m_currentState.angle = ang;
@@ -101,29 +102,23 @@ SwerveModule::SwerveModule
     // Set up the Turn Motor
     motor = m_turnMotor.get()->GetSpeedController();
     fx = dynamic_cast<WPI_TalonFX*>(motor.get());
-    auto error = fx->ConfigPeakOutputForward(0.2, 0);
+    auto error = fx->ConfigPeakOutputForward(0.3, 0);
 	if ( error != ErrorCode::OKAY )
 	{
 		Logger::GetLogger()->LogError(string("SwerveModule"), string("ConfigPeakOutputForward error"));
 		error = ErrorCode::OKAY;
 	}
-	error = fx->ConfigPeakOutputReverse(-0.2, 0);
+	error = fx->ConfigPeakOutputReverse(-0.3, 0);
 	if ( error != ErrorCode::OKAY )
 	{
 		Logger::GetLogger()->LogError(string("SwerveModule"), string("ConfigPeakOutputReverse error"));
 		error = ErrorCode::OKAY;
 	}
 
-    //fx->ConfigRemoteFeedbackFilter(m_turnSensor.get()->GetDeviceNumber(), 
-    //                               motorcontrol::RemoteSensorSource::RemoteSensorSource_CANCoder , 0, 0);
-    //fx->ConfigRemoteFeedbackFilter(*(m_turnSensor.get()), 0, 0);
     fx->ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor, 0, 10 );
     fx->ConfigIntegratedSensorInitializationStrategy(BootToZero);
     auto turnMotorSensors = fx->GetSensorCollection();
     turnMotorSensors.SetIntegratedSensorPosition(0, 0);
-    //1.0, 0.0, 0.0
-    //0.1, 0.0, 0.0001
-    // 0.00000000005,  0.0, 100000000000.0, 0.0001,
     auto turnCData = make_shared<ControlData>(  ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE,
                                                 ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
                                                 string("Turn Angle"),
@@ -136,7 +131,7 @@ SwerveModule::SwerveModule
                                                 turnCruiseVel,
                                                 turnPeakVal,
                                                 turnNominalVal);
-    m_turnMotor.get()->SetControlConstants( turnCData.get() );
+    m_turnMotor.get()->SetControlConstants( 0, turnCData.get() );
 
     string ntName;
     switch ( GetType() )
@@ -173,8 +168,7 @@ void SwerveModule::Init
     units::angular_acceleration::radians_per_second_squared_t   maxAngularAcceleration
 )
 {
-    // 15.0, 0.01, 0.1, 0.2
-    // 0.01, 0, 0, 0.5
+    m_maxVelocity = maxVelocity;
     auto driveCData = make_shared<ControlData>( ControlModes::CONTROL_TYPE::VELOCITY_RPS,
                                                 ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
                                                 string("DriveSpeed"),
@@ -187,32 +181,14 @@ void SwerveModule::Init
                                                 maxVelocity.to<double>(),
                                                 maxVelocity.to<double>(),
                                                 0.0 );
-    m_driveMotor.get()->SetControlConstants( driveCData.get() );
-
-    /**
-    //1.0, 0.0, 0.0
-    //0.1, 0.0, 0.0001
-    // 0.00000000005,  0.0, 100000000000.0, 0.0001,
-    auto turnCData = make_shared<ControlData>(  ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE,
-                                                ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
-                                                string("Turn Angle"),
-                                                1.0,
-                                                0.1,
-                                                10.0,
-                                                1.0,
-                                                0.0,
-                                                maxAcceleration.to<double>(),
-                                                maxVelocity.to<double>(),
-                                                maxVelocity.to<double>(),
-                                                0.0 );
-    m_turnMotor.get()->SetControlConstants( turnCData.get() );
-    **/
+    m_driveMotor.get()->SetControlConstants( 0, driveCData.get() );
 }
 
 /// @brief Turn all of the wheel to zero degrees yaw according to the pigeon
 /// @returns void
 void SwerveModule::ZeroAlignModule()
 {
+    return;
     // Desired State
     units::velocity::meters_per_second_t mps = 0_mps;
     Rotation2d angle {units::angle::degree_t(0.0)};
@@ -222,7 +198,6 @@ void SwerveModule::ZeroAlignModule()
     Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
     auto state = SwerveModuleState::Optimize(desiredState, currAngle);
     SetTurnAngle(state.angle.Degrees());
-    //SetTurnAngle( units::angle::degree_t(0.0));
 }
 
 
@@ -289,11 +264,21 @@ void SwerveModule::RunCurrentState()
 }
 void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
 {
-    m_currentState.speed = speed;
+    if ( abs(speed.to<double>()/m_maxVelocity.to<double>()) < 0.05 )
+    {
+        m_currentState.speed = 0_mps;
+    }
+    else
+    {
+        m_currentState.speed = speed;
+    }
+    
     // convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel
-    auto driveTarget = speed.to<double>() /  units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi;  
-	m_nt.get()->PutString("drive motor id", to_string(m_driveMotor.get()->GetID()) );
-    m_nt.get()->PutNumber("drive target", driveTarget );
+    auto driveTarget = m_currentState.speed.to<double>() /  units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi;  
+
+    Logger::GetLogger()->ToNtTable(m_nt, string("turn motor id"), to_string(m_driveMotor.get()->GetID()) );
+    Logger::GetLogger()->ToNtTable(m_nt, string("drive target"), to_string(driveTarget) );
+     
     m_driveMotor.get()->Set(m_nt, driveTarget);
 }
 
@@ -303,39 +288,21 @@ void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
     Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
     Rotation2d deltaAngle = targetAngle - currAngle.Degrees();
 
+    /**
     if ( deltaAngle.Degrees().to<double>() > 180.0 )
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR, string("delta angle too large motor"), to_string(m_turnMotor.get()->GetID()));
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR, string("delta angle too large"), to_string(deltaAngle.Degrees().to<double>()));
     }
-
-    m_nt.get()->PutString("turn motor id", to_string(m_turnMotor.get()->GetID()) );
-    m_nt.get()->PutNumber("current angle", currAngle.Degrees().to<double>() );
-    m_nt.get()->PutNumber("target angle", targetAngle.to<double>() );
-    m_nt.get()->PutNumber("delta angle", deltaAngle.Degrees().to<double>() );
-   
-   /**
-    double speed = 0.0;
-    if ( deltaAngle.Degrees().to<double>() > 5.0 )
-    {
-        speed = 0.01;
-    }
-    else if ( deltaAngle.Degrees().to<double>() < -5.0 )
-    {
-        speed = -0.01;
-    }
-    m_turnMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::PERCENT_OUTPUT);
-    m_turnMotor.get()->Set(m_nt, speed);
     **/
-    
-    
+
+    Logger::GetLogger()->ToNtTable(m_nt, string("turn motor id"), to_string( m_turnMotor.get()->GetID()) );
+    Logger::GetLogger()->ToNtTable(m_nt, string("current angle"), to_string( currAngle.Degrees().to<double>() ) );
+    Logger::GetLogger()->ToNtTable(m_nt, string("target angle"), to_string( targetAngle.to<double>() ) );
+    Logger::GetLogger()->ToNtTable(m_nt, string("delta angle"), to_string( deltaAngle.Degrees().to<double>() ) );
+     
     if ( abs(deltaAngle.Degrees().to<double>()) > 0.01 )
     {
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, string("Swerve Module Turn Motor"), to_string(m_turnMotor.get()->GetID()));
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, string("current angle"), to_string(currAngle.Degrees().to<double>()));
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, string("target angle"), to_string(targetAngle.to<double>()));
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, string("delta angle"), to_string(deltaAngle.Degrees().to<double>()));
-
         auto motor = m_turnMotor.get()->GetSpeedController();
         auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
         auto sensors = fx->GetSensorCollection();
@@ -344,13 +311,9 @@ void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
         double deltaTicks = (deltaAngle.Degrees().to<double>() * 72.5) / 4.0; //72.4694;
         double desiredTicks = currentTicks + deltaTicks;
 
-        m_nt.get()->PutString("turn motor id", to_string(m_turnMotor.get()->GetID()) );
-        m_nt.get()->PutNumber("current angle", currAngle.Degrees().to<double>() );
-        m_nt.get()->PutNumber("target angle", units::angle::degree_t(targetAngle).to<double>() );
-        m_nt.get()->PutNumber("delta angle", deltaAngle.Degrees().to<double>() );
-        m_nt.get()->PutNumber("currentTicks", currentTicks );
-        m_nt.get()->PutNumber("deltaTicks", deltaTicks );
-        m_nt.get()->PutNumber("desiredTicks", desiredTicks );
+        Logger::GetLogger()->ToNtTable(m_nt, string("currentTicks"), to_string(currentTicks) );
+        Logger::GetLogger()->ToNtTable(m_nt, string("deltaTicks"), to_string(deltaTicks) );
+        Logger::GetLogger()->ToNtTable(m_nt, string("desiredTicks"), to_string(desiredTicks) );
 
         m_turnMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE);
         m_turnMotor.get()->Set(m_nt, desiredTicks);

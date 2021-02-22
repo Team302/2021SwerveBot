@@ -1,5 +1,5 @@
 //====================================================================================================================================================
-// Copyright 2020 Lake Orion Robotics FIRST Team 302
+// Copyright 2021 Lake Orion Robotics FIRST Team 302 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
 // to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
@@ -13,51 +13,14 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-#pragma once
-
-//C++ includes
-#include <memory>
-
-//FRC Includes
-#include <frc2/Timer.h>
-
 //Team 302 Includes
-#include <subsys/BallHopper.h>
-#include <states/Mech1MotorState.h>
+#include <vision/DriverMode.h>
+#include <hw/DragonLimelight.h>
 
-
-class ControlData;
-
-class BallHopperSlowRelease : public Mech1MotorState
+void DriverMode::SetCamToDriveMode(DragonLimelight*  limelight)
 {
-    public:
+    limelight->SetCamMode( limelight->CAM_DRIVER);
+    limelight->SetLEDMode( limelight->LED_OFF);
+    limelight->SetStreamMode( limelight->STREAM_DEFAULT);
+}
 
-        BallHopperSlowRelease() = delete;
-        BallHopperSlowRelease
-        (
-            ControlData*        control,
-            double              target
-        );
-        ~BallHopperSlowRelease() = default;
-
-        void Init();
-        void Run();
-        bool AtTarget();
-
-    private:
-
-        //Hold timer
-        frc2::Timer      m_timer;
-        //BallHopper object to access sensor to detect balls
-        std::shared_ptr<BallHopper> m_ballHopper;
-        //Time to wait until we release another ball
-        const double m_waitTime;
-        //These bools make sure we aren't detecting the same ball multiple times and we are running the right state
-        bool m_isHolding;
-        bool m_canDetect;
-        //used to know when we have hit our target of 3 balls
-        int m_timesSeen;
-        //The pointers to run the holdState and releaseState without switching off of the slowReleaseState in the stateMgr
-        IState*     m_holdState;
-        IState*     m_releaseState;
-};

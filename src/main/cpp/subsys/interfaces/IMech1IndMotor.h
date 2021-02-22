@@ -60,6 +60,7 @@ class IMech1IndMotor : public IMech
         /// @return void
         virtual void SetControlConstants
         (
+            int                                         slot,
             ControlData*                                pid                 
         ) = 0;
 

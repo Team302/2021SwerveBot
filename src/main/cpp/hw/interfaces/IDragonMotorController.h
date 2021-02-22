@@ -31,6 +31,7 @@
 
 // Third Party Includes
 #include <ctre/phoenix/motorcontrol/RemoteSensorSource.h>
+#include <ctre/phoenix/motorcontrol/StatusFrame.h>
 
 /// @interface IDragonMotorController
 /// @brief The general interface to motor controllers so that the specific mechanisms that use motors,
@@ -77,20 +78,26 @@ class IDragonMotorController
 
 
         /// @brief  Set the control constants (e.g. PIDF values).
-        /// @param [in] ControlData*   pid - the control constants
+        /// @param [in] int             slot - hardware slot to use
+        /// @param [in] ControlData*    pid - the control constants
         /// @return void
-        virtual void SetControlConstants(ControlData* controlInfo) = 0;
+        virtual void SetControlConstants(int slot, ControlData* controlInfo) = 0;
 
         virtual void SetRemoteSensor
         (
             int                                             canID,
             ctre::phoenix::motorcontrol::RemoteSensorSource deviceType
         ) = 0;
-
+        virtual void UpdateFramePeriods
+        (
+	        ctre::phoenix::motorcontrol::StatusFrameEnhanced	frame,
+            uint8_t			                                    milliseconds
+        ) = 0;
         virtual double GetCountsPerRev() const = 0;
         
         IDragonMotorController() = default;
         virtual ~IDragonMotorController() = default;
+
 
     protected:
 

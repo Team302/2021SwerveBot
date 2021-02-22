@@ -75,7 +75,7 @@ vector<MechanismTargetData*> StateDataDefn::ParseXML
             break;
 
         case MechanismTypes::BALL_HOPPER:
-            filename += string( "ballhopper.xml");
+            mech += string( "ballhopper.xml");
             break;
 
         case MechanismTypes::BALL_TRANSFER:
@@ -104,6 +104,7 @@ vector<MechanismTargetData*> StateDataDefn::ParseXML
         xml_parse_result result = doc.load_file(filename.c_str());
         if (!result)
         {
+            Logger::GetLogger()->LogError( string("StateDataDefn::ParseXML using alternate location"), mech );
             filename = "/home/lvuser/deploy/";
             filename += mech;
             result = doc.load_file(filename.c_str());

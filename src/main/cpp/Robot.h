@@ -37,7 +37,10 @@
 // team 302 includes
 #include <RamScan/RamScan.h>
 #include <states/chassis/SwerveDrive.h>
+#include <hw/DragonLimelight.h>
+#include <vision/DriverMode.h>
 #include <states/shooter/ShooterStateMgr.h>
+#include <auton/CyclePrimitives.h>
 
 
 // third party includes
@@ -67,8 +70,13 @@ class Robot : public frc::TimedRobot
   private:
     RamScan*          m_RamScan;
 
-    std::shared_ptr<SwerveDrive> m_drive;
+    void UpdateOdometry();
+ 
+    DragonLimelight*                  m_limelight;
+    DriverMode*                       m_driverMode;
+    std::shared_ptr<SwerveDrive>      m_drive;
     ShooterStateMgr*                  m_shooterState;
+    CyclePrimitives*                  m_cyclePrims;
 
 // the current mode the robot is running in
    typedef enum

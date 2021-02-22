@@ -76,6 +76,7 @@ class IChassis
         /// @return void
         virtual void SetControlConstants
         (
+            int                                         slot,
             ControlData*                                pid                 
         ) = 0;
 

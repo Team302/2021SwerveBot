@@ -59,6 +59,8 @@ void CyclePrimitives::Init()
 	m_currentPrimSlot = 0; //Reset current prim
 	m_primParams.clear();
 	m_primParams = PrimitiveParser::ParseXML( m_autonSelector->GetSelectedAutoFile() );
+	unsigned int paramsSize = m_primParams.size();
+	Logger::GetLogger()->ToNtTable("CyclePrims", "Number of Primitives:", to_string(paramsSize));
 	if (!m_primParams.empty())
 	{
 		GetNextPrim();
@@ -77,7 +79,7 @@ void CyclePrimitives::Run()
 			GetNextPrim();
 		}
 	}
-	else
+	else if (m_currentPrim == nullptr || m_currentPrim->IsDone())
 	{
 		Logger::GetLogger()->LogError(string("CyclePrimitive"), string("Completed"));
 		m_isDone = true;
@@ -100,6 +102,7 @@ void CyclePrimitives::GetNextPrim()
 	if (m_currentPrim != nullptr)
 	{
 		m_currentPrim->Init(currentPrimParam);
+		Logger::GetLogger()->LogError(string("CyclePrimitives::GetNextPrim"), string("Initializing current primitive"));
 		m_maxTime = currentPrimParam->GetTime();
 		if ( currentPrimParam->GetIntakeState())
 		{

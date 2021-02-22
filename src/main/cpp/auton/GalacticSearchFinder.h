@@ -15,65 +15,41 @@
 #pragma once
 
 //C++ Includes
-#include <memory>
 
 //Team302 Includes
 #include <auton/PrimitiveParams.h>
 #include <auton/primitives/IPrimitive.h>
+#include <utils/Logger.h>
 
 //FRC,WPI Includes
 
-#include <wpi/SmallString.h>
-#include <wpi/Path.h>
-#include <wpi/math>
-
 #include <frc/geometry/Pose2d.h>
-#include <frc/Filesystem.h>
-#include <frc/trajectory/TrajectoryUtil.h>
-#include <frc/trajectory/TrajectoryConfig.h>
 
-#include <frc/controller/RamseteController.h>
-#include <frc/Timer.h>
-#include <frc/estimator/SwerveDrivePoseEstimator.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
 
-#include <subsys/SwerveChassisFactory.h>
-#include <subsys/SwerveModule.h>
+class GalacticSearchFinder// : public IPrimitive
 
-class SwerveChassis;
-
-namespace frc
-{
-    class Timer;
-}
-
-class DrivePath : public IPrimitive
 {
 public:
-    DrivePath();
+    GalacticSearchFinder();
 
-    virtual ~DrivePath() = default;
+    virtual ~GalacticSearchFinder() = default;
 
-    void Init(PrimitiveParams *params) override;
-    void Run() override;
-    bool IsDone() override;
+    std::string GetGalacticSearchPath() ;  // return path name for galatic search
 
 private:
-    std::shared_ptr<SwerveChassis> m_chassis;
-    std::unique_ptr<frc::Timer> m_timer;
- 
 
-    double m_maxTime;
+    std::string lGetGSPathFromVisionTbl();
 
-    frc::Pose2d m_currentChassisPosition;
-    frc::Trajectory m_trajectory;
-    frc::RamseteController m_ramseteController;
-    frc::Pose2d m_CurPos;                                          // Current position used for motion detect.
-    frc::Pose2d m_PrevPos;                                         // previous position of robot for compare to current position.
-    frc::Timer m_PosChgTimer;                                      // scan time for position change
-    bool m_bRobotStopped = false;                                  // check to see if robot is stopped
-    bool lRobotStopped(frc::Pose2d, frc::Pose2d); // routine to check for motion
+    bool CheckTarget(double*, double, double, double,double);
 
-    std::string sPath2Load = ""; // used to read file name of path.
-  
-    PRIMITIVE_IDENTIFIER m_path;  //m_mode Not sure if this should be unique.
-};
+    // network table reading
+    // Using Default table no referances for Swerve Drive Module m_nt.
+    // May need to create a link to m_nt if more than one network table is used.
+    nt::NetworkTableInstance inst = nt::NetworkTableInstance().GetDefault();
+     
+    wpi::Twine sTableName = "visionTable";
+    wpi::StringRef sRef_TblCVAngle = "CellVisionAngle";
+    wpi::StringRef sRef_TblCVDistance = "CellVisionDistance";
+ };

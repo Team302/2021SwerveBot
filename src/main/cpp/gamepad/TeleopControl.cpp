@@ -108,10 +108,6 @@ TeleopControl::TeleopControl() : m_axisIDs(),
     ctrlNo = 1;
     if ( m_controllers[ctrlNo] != nullptr && ds->GetJoystickIsXbox(ctrlNo) )
     {
-
-		//m_controllerIndex[ TURRET_MANUAL_AXIS] = ctrlNo;
-		//m_axisIDs[ TURRET_MANUAL_AXIS] = IDragonGamePad::LEFT_JOYSTICK_X;
-
 		m_controllerIndex[ OFF ] = ctrlNo;
 		m_buttonIDs[ OFF ] = IDragonGamePad::START_BUTTON;
 
@@ -126,27 +122,12 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		
 		m_controllerIndex[ SHOOTER_MANUAL_SHOOT_YELLOW] = ctrlNo;
 		m_buttonIDs[ SHOOTER_MANUAL_SHOOT_YELLOW ] = IDragonGamePad::Y_BUTTON;
-
-		//m_controllerIndex[SHOOTER_MANUAL_SHOOT_GREEN] = ctrlNo;
-		//m_buttonIDs[SHOOTER_MANUAL_SHOOT_GREEN] = IDragonGamePad::POV_0;
-		
-		//m_controllerIndex[SHOOTER_OFF] = ctrlNo;
-		//m_buttonIDs[SHOOTER_OFF] = IDragonGamePad::POV_180;
-
+	
+		m_controllerIndex[SHOOTER_PREPARE_TO_SHOOT] = ctrlNo;
+		m_buttonIDs[SHOOTER_PREPARE_TO_SHOOT] = IDragonGamePad::RIGHT_BUMPER;	
+	
 		m_controllerIndex[TURRET_LIMELIGHT_AIM] = ctrlNo;
-		m_buttonIDs[TURRET_LIMELIGHT_AIM] = IDragonGamePad::POV_270;
-
-
-		//m_controllerIndex[ TRANSFER_UP ] = ctrlNo;
-		//m_buttonIDs[ TRANSFER_UP ] = IDragonGamePad::LEFT_TRIGGER_PRESSED;
-
-		//m_controllerIndex[ TRANSFER_DOWN ] = ctrlNo;
-		//m_buttonIDs[ TRANSFER_DOWN ] = IDragonGamePad::RIGHT_TRIGGER_PRESSED;
-		
-		/*
-		m_controllerIndex[ TURRET_LIMELIGHT_AIM] = ctrlNo;
-		m_buttonIDs[ TURRET_LIMELIGHT_AIM] = IDragonGamePad::B_BUTTON;
-		*/
+		m_buttonIDs[TURRET_LIMELIGHT_AIM] = IDragonGamePad::LEFT_BUMPER;	
 	}
     else if ( m_controllers[ctrlNo] != nullptr )
     {

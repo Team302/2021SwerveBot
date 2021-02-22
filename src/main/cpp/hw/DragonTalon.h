@@ -59,9 +59,10 @@ class DragonTalon : public IDragonMotorController
         void SetSensorInverted(bool inverted) override;
 
         /// @brief  Set the control constants (e.g. PIDF values).
-        /// @param [in] ControlData*   pid - the control constants
+        /// @param [in] int             slot - hardware slot to use
+        /// @param [in] ControlData*    pid - the control constants
         /// @return void
-        void SetControlConstants(ControlData* controlInfo) override;
+        void SetControlConstants(int slot, ControlData* controlInfo) override;
         // Method:		SelectClosedLoopProfile
         // Description:	Selects which profile slot to use for closed-loop control
         // Returns:		void
@@ -104,6 +105,11 @@ class DragonTalon : public IDragonMotorController
         void SetDiameter( double diameter ) override;
 
         double GetCountsPerRev() const override {return m_countsPerRev;}
+        void UpdateFramePeriods
+        (
+	        ctre::phoenix::motorcontrol::StatusFrameEnhanced	frame,
+            uint8_t			                                    milliseconds
+        ) override;
 
 
     private:

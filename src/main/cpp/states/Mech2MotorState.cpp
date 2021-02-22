@@ -25,6 +25,7 @@
 #include <controllers/ControlData.h>
 #include <controllers/MechanismTargetData.h>
 #include <subsys/interfaces/IMech2IndMotors.h>
+#include <subsys/MechanismFactory.h>
 #include <utils/Logger.h>
 
 #include <gamepad/TeleopControl.h>
@@ -119,7 +120,7 @@ void Mech2MotorState::Init()
 {
     if ( m_mechanism != nullptr && m_control != nullptr )
     {
-        m_mechanism->SetControlConstants( m_control );
+        m_mechanism->SetControlConstants( 0, m_control );
         m_mechanism->UpdateTargets( m_primaryTarget, m_secondaryTarget );
     }
 }
@@ -130,6 +131,11 @@ void Mech2MotorState::Run()
     if ( m_mechanism != nullptr )
     {
         m_mechanism->Update();
+        auto ntName = m_mechanism->GetNetworkTableName();
+        Logger::GetLogger()->ToNtTable(string(ntName), string("Primary Target"), to_string(GetPrimaryTarget()));
+        Logger::GetLogger()->ToNtTable(string(ntName), string("Secondary Target"), to_string(GetSecondaryTarget()));
+        Logger::GetLogger()->ToNtTable(string(ntName), string("Primary Speed"), to_string(GetPrimaryRPS()));
+        Logger::GetLogger()->ToNtTable(string(ntName), string("Secondary Speed"), to_string(GetSecondaryRPS()));
     }
 }
 

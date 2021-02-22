@@ -110,9 +110,12 @@ class Mech2IndMotors : public IMech2IndMotors
         /// @return void
         void SetControlConstants
         (
+            int                                         slot,
             ControlData*                                pid                 
         ) override;
 
+        double GetPrimaryTarget() const { return m_primaryTarget; }
+        double GetSecondaryTarget() const { return m_secondaryTarget; }
 
     private: 
         MechanismTypes::MECHANISM_TYPE              m_type;
