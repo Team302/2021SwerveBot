@@ -28,7 +28,7 @@
 
 // Team 302 includes
 #include <hw/DragonTalon.h>
-#include <hw/DragonPDP.h>
+//#include <hw/DragonPDP.h>
 #include <hw/usages/MotorControllerUsage.h>
 #include <utils/ConversionUtils.h>
 #include <utils/Logger.h>
@@ -87,8 +87,9 @@ shared_ptr<SpeedController> DragonTalon::GetSpeedController() const
 
 double DragonTalon::GetCurrent() const
 {
-	PowerDistributionPanel* pdp = DragonPDP::GetInstance()->GetPDP();
-    return ( pdp != nullptr ) ? pdp->GetCurrent( m_pdp ) : 0.0;
+	return 0.0;
+//	PowerDistributionPanel* pdp = DragonPDP::GetInstance()->GetPDP();
+//    return ( pdp != nullptr ) ? pdp->GetCurrent( m_pdp ) : 0.0;
 }
 
 
@@ -479,3 +480,15 @@ void DragonTalon::SetDiameter
 {
 	m_diameter = diameter;
 }
+
+
+
+void DragonTalon::UpdateFramePeriods
+(
+	ctre::phoenix::motorcontrol::StatusFrameEnhanced	frame,
+	uint8_t												milliseconds
+)
+{
+	m_talon.get()->SetStatusFramePeriod( frame, milliseconds, 0 );
+}
+

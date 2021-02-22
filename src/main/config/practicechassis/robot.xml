@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE robot SYSTEM "robot.dtd">
 <robot>
-	<pdp canId="0" />
+	<!-- pdp canId="0" / -->
 	<pigeon canId="50"
                rotation="0.0" />
 

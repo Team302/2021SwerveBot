@@ -105,6 +105,11 @@ class DragonTalon : public IDragonMotorController
         void SetDiameter( double diameter ) override;
 
         double GetCountsPerRev() const override {return m_countsPerRev;}
+        void UpdateFramePeriods
+        (
+	        ctre::phoenix::motorcontrol::StatusFrameEnhanced	frame,
+            uint8_t			                                    milliseconds
+        ) override;
 
 
     private:

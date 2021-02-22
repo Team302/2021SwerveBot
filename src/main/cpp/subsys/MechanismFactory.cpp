@@ -49,11 +49,12 @@
 
 // Third Party Includes
 #include <ctre/phoenix/sensors/CANCoder.h>
+#include <ctre/phoenix/motorcontrol/StatusFrame.h>
 
 
 using namespace std;
 using namespace ctre::phoenix::sensors;
-
+using namespace ctre::phoenix::motorcontrol;
 
 //=====================================================================================
 /// Method:         GetMechanismFactory
@@ -115,6 +116,9 @@ void  MechanismFactory::CreateIMechanism
 			auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE );
 			if ( motor.get() != nullptr )
 			{
+				motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 40);
+				motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 100);
+
 				if ( m_intake1.get() == nullptr )
 				{
 					m_intake1 = make_shared<Intake>( motor );
@@ -141,6 +145,9 @@ void  MechanismFactory::CreateIMechanism
 				auto bannerSensor = GetDigitalInput( digitalInputs, DigitalInputUsage::DIGITAL_SENSOR_USAGE::HOPPER_BANNER_SENSOR );
 				if( motor.get() != nullptr && bannerSensor.get() != nullptr)
 				{
+					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 40);
+					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 100);
+		
 					m_ballhopper = make_shared<BallHopper>(motor, bannerSensor);
 				    nt.get()->PutString("Ball Hopper", string("created") );
 				}
@@ -160,6 +167,8 @@ void  MechanismFactory::CreateIMechanism
 				auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::BALL_TRANSFER );
 				if ( motor.get() != nullptr )
 				{
+					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 40);
+					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 100);
 					m_balltransfer = make_shared<BallTransfer>( motor );
 				    nt.get()->PutString("Ball Transfer", string("created") );
 				}

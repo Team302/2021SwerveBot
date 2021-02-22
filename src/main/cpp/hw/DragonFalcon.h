@@ -28,7 +28,7 @@
 
 // Team 302 includes
 #include <hw/DragonFalcon.h>
-#include <hw/DragonPDP.h>
+//#include <hw/DragonPDP.h>
 #include <hw/usages/MotorControllerUsage.h>
 #include <hw/interfaces/IDragonMotorController.h>
 #include <utils/Logger.h>
@@ -125,6 +125,11 @@ class DragonFalcon : public IDragonMotorController
         void SetVoltage(units::volt_t output);
 
         double GetCountsPerRev() const override {return m_countsPerRev;}
+        void UpdateFramePeriods
+        (
+	        ctre::phoenix::motorcontrol::StatusFrameEnhanced	frame,
+            uint8_t			                                    milliseconds
+        ) override;
 
     private:
         std::shared_ptr<ctre::phoenix::motorcontrol::can::WPI_TalonFX>  m_talon;

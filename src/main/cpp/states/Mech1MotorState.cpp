@@ -120,16 +120,6 @@ void Mech1MotorState::Init()
         m_mechanism->SetControlConstants( 0, m_control );
         m_mechanism->UpdateTarget( m_target );
     }
-    /**
-    else if (m_mechanism == nullptr)
-    {
-        Logger::GetLogger()->LogError(string("Mesh1MotorState init"), string("mechanism nullptr"));
-    }
-    else 
-    {
-        Logger::GetLogger()->LogError(string("Mesh1MotorState init"), string("control data nullptr"));
-    }
-    **/
 }
 
 
@@ -139,16 +129,6 @@ void Mech1MotorState::Run()
     {
         m_mechanism->Update();
     }
-    /**
-    else if (m_mechanism == nullptr)
-    {
-        Logger::GetLogger()->LogError(string("Mesh1MotorState run"), string("mechanism nullptr"));
-    }
-    else 
-    {
-        Logger::GetLogger()->LogError(string("Mesh1MotorState run"), string("control data nullptr"));
-    }
-    **/
 }
 
 bool Mech1MotorState::AtTarget() const
