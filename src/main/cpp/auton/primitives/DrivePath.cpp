@@ -48,16 +48,26 @@ Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
   if (sPath2Load != "") // only go if path name found
   {
 
+    Logger::GetLogger()->LogError(string("DrivePath"), string("Finding Deploy Directory"));
+
     // Read path into trajectory for deploy directory.  JSON File ex. Bounce1.wpilid.json
     wpi::SmallString<64> deployDir;
     frc::filesystem::GetDeployDirectory(deployDir);
     wpi::sys::path::append(deployDir, "paths");
     wpi::sys::path::append(deployDir, sPath2Load); // load path from deploy directory
 
+    Logger::GetLogger()->LogError(string("Deploy path is "), deployDir.str());
+
+
     m_timer->Reset();
 
+    Logger::GetLogger()->LogError(string("At line"), string("64, grabbing trajectory from json"));
     // set current position to initial position which should be first node in path.
+    frc::Trajectory m_trajectory = frc::TrajectoryUtil::FromPathweaverJson(deployDir);
+    Logger::GetLogger()->LogError(string("At line"), string("66, before setting chassis pos to trajectory"));
     m_currentChassisPosition = m_trajectory.InitialPose();
+
+    Logger::GetLogger()->LogError(string("At line"), string("67, just set current chassis pos to trajectory"));
 
     // assume start angel of zero at start of path
     frc::Rotation2d StartAngle;
