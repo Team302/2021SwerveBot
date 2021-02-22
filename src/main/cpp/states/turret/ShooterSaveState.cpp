@@ -45,7 +45,7 @@ ShooterSaveState::ShooterSaveState
 
 void ShooterSaveState::Init()
 {
-    m_turret.get()->SetControlConstants( m_control );
+    m_turret.get()->SetControlConstants(0,  m_control );
 }
 
 void ShooterSaveState::Run()           

@@ -77,9 +77,10 @@ class IDragonMotorController
 
 
         /// @brief  Set the control constants (e.g. PIDF values).
-        /// @param [in] ControlData*   pid - the control constants
+        /// @param [in] int             slot - hardware slot to use
+        /// @param [in] ControlData*    pid - the control constants
         /// @return void
-        virtual void SetControlConstants(ControlData* controlInfo) = 0;
+        virtual void SetControlConstants(int slot, ControlData* controlInfo) = 0;
 
         virtual void SetRemoteSensor
         (

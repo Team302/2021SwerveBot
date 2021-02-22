@@ -131,7 +131,7 @@ SwerveModule::SwerveModule
                                                 turnCruiseVel,
                                                 turnPeakVal,
                                                 turnNominalVal);
-    m_turnMotor.get()->SetControlConstants( turnCData.get() );
+    m_turnMotor.get()->SetControlConstants( 0, turnCData.get() );
 
     string ntName;
     switch ( GetType() )
@@ -181,7 +181,7 @@ void SwerveModule::Init
                                                 maxVelocity.to<double>(),
                                                 maxVelocity.to<double>(),
                                                 0.0 );
-    m_driveMotor.get()->SetControlConstants( driveCData.get() );
+    m_driveMotor.get()->SetControlConstants( 0, driveCData.get() );
 }
 
 /// @brief Turn all of the wheel to zero degrees yaw according to the pigeon

@@ -49,7 +49,7 @@ LimelightAim::LimelightAim
 
 void LimelightAim::Init()
 {
-    m_turret.get()->SetControlConstants(m_controlData);
+    m_turret.get()->SetControlConstants(0, m_controlData);
     m_limelight->SetLEDMode(DragonLimelight::LED_ON);
 }
 

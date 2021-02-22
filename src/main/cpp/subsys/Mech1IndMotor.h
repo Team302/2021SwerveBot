@@ -101,6 +101,7 @@ class Mech1IndMotor : public IMech1IndMotor
         /// @return void
         void SetControlConstants
         (
+            int                                         slot,
             ControlData*                                pid                 
         ) override;
 

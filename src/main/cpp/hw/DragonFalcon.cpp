@@ -383,11 +383,8 @@ void DragonFalcon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)
         	break;
     }	
 
-	if ( nt.get() != nullptr )
-	{
-		nt->PutString("motor id ", to_string(m_talon.get()->GetDeviceID()) );
-		nt->PutNumber("motor output ", output );
-	}
+	Logger::GetLogger()->ToNtTable(nt, string("motor id"), to_string(m_talon.get()->GetDeviceID()));
+	Logger::GetLogger()->ToNtTable(nt, string("motor output"), to_string(output));
 
 	m_talon.get()->Set( ctreMode, output );
 }
@@ -620,20 +617,20 @@ void DragonFalcon::SetAsFollowerMotor
 
 
 /// @brief  Set the control constants (e.g. PIDF values).
-/// @param [in] ControlData*   pid - the control constants
+/// @param [in] int             slot - hardware slot to use
+/// @param [in] ControlData*    pid - the control constants
 /// @return void
-void DragonFalcon::SetControlConstants(ControlData* controlInfo)
+void DragonFalcon::SetControlConstants(int slot, ControlData* controlInfo)
 {
 	SetControlMode(controlInfo->GetMode());
 
 	auto id = m_talon.get()->GetDeviceID();
 	auto ntName = std::string("MotorOutput");
 	ntName += to_string(id);
-	auto nt = nt::NetworkTableInstance::GetDefault().GetTable(ntName);
-	nt.get()->PutNumber("P", controlInfo->GetP());
-	nt.get()->PutNumber("I", controlInfo->GetI());
-	nt.get()->PutNumber("D", controlInfo->GetD());
-	nt.get()->PutNumber("F", controlInfo->GetF());
+	Logger::GetLogger()->ToNtTable(ntName, string("P"), to_string(controlInfo->GetP()));
+	Logger::GetLogger()->ToNtTable(ntName, string("I"), to_string(controlInfo->GetI()));
+	Logger::GetLogger()->ToNtTable(ntName, string("D"), to_string(controlInfo->GetD()));
+	Logger::GetLogger()->ToNtTable(ntName, string("F"), to_string(controlInfo->GetF()));
 
 	auto peak = controlInfo->GetPeakValue();
 	auto error = m_talon.get()->ConfigPeakOutputForward(peak);
@@ -670,27 +667,27 @@ void DragonFalcon::SetControlConstants(ControlData* controlInfo)
 		 controlInfo->GetMode() == ControlModes::CONTROL_TYPE::CURRENT ||
 		 controlInfo->GetMode() == ControlModes::CONTROL_TYPE::TRAPEZOID )
 	{
-		error = m_talon.get()->Config_kP(0, controlInfo->GetP());
+		error = m_talon.get()->Config_kP(slot, controlInfo->GetP());
 		if ( error != ErrorCode::OKAY )
 		{
 			Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kP error"));
 		}
-		error = m_talon.get()->Config_kI(0, controlInfo->GetI());
+		error = m_talon.get()->Config_kI(slot, controlInfo->GetI());
 		if ( error != ErrorCode::OKAY )
 		{
 			Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kI error"));
 		}
-		error = m_talon.get()->Config_kD(0, controlInfo->GetD());
+		error = m_talon.get()->Config_kD(slot, controlInfo->GetD());
 		if ( error != ErrorCode::OKAY )
 		{
 			Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kD error"));
 		}
-		error = m_talon.get()->Config_kF(0, controlInfo->GetF());
+		error = m_talon.get()->Config_kF(slot, controlInfo->GetF());
 		if ( error != ErrorCode::OKAY )
 		{
 			Logger::GetLogger()->LogError(string("DragonFalcon"), string("Config_kF error"));
 		}
-		error = m_talon.get()->SelectProfileSlot(0, 0);
+		error = m_talon.get()->SelectProfileSlot(slot, 0);
 		if ( error != ErrorCode::OKAY )
 		{
 			Logger::GetLogger()->LogError(string("DragonFalcon"), string("SelectProfileSlot error"));

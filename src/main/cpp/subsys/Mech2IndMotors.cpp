@@ -187,16 +187,17 @@ double Mech2IndMotors::GetSecondarySpeed() const
 /// @return void
 void Mech2IndMotors::SetControlConstants
 (
+    int                                         slot,
     ControlData*                                pid                 
 ) 
 {
     if ( m_primary.get() != nullptr )
     {
-        m_primary.get()->SetControlConstants(pid);
+        m_primary.get()->SetControlConstants(slot, pid);
     }
     if ( m_secondary.get() != nullptr )
     {
-        m_secondary.get()->SetControlConstants(pid);
+        m_secondary.get()->SetControlConstants(slot, pid);
     }    
 }
 

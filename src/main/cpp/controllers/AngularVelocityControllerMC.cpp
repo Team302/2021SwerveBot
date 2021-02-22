@@ -59,7 +59,7 @@ void AngularVelocityControllerMC::Init()
 {
     if ( m_motor.get() != nullptr && m_control.get() != nullptr )
     {
-        m_motor.get()->SetControlConstants( m_control.get() );
+        m_motor.get()->SetControlConstants( 0, m_control.get() );
         m_motor.get()->SetControlMode( m_control.get()->GetMode() );
     }
 }

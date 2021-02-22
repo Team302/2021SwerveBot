@@ -144,12 +144,13 @@ double Mech1IndMotor::GetSpeed() const
 /// @return void
 void Mech1IndMotor::SetControlConstants
 (
+    int                                         slot,
     ControlData*                                pid                 
 )
 {
     if ( m_motor.get() != nullptr )
     {
-        m_motor.get()->SetControlConstants( pid );
+        m_motor.get()->SetControlConstants( slot, pid );
     }
 }
 
