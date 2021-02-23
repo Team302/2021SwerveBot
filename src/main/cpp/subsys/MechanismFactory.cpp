@@ -157,8 +157,6 @@ void  MechanismFactory::CreateIMechanism
             {
                 found = true;
             }
-            }
-
         }
         break;
 
@@ -181,7 +179,6 @@ void  MechanismFactory::CreateIMechanism
             }
         }
         break;
-
 
         case MechanismTypes::MECHANISM_TYPE::SHOOTER:
         {
