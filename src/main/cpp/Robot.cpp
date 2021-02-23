@@ -46,7 +46,6 @@ using namespace frc;
 /// @return void
 void Robot::RobotInit()
 {
-
     sleep(10);
 
     m_RunMode = INIT;
@@ -73,7 +72,6 @@ void Robot::RobotInit()
 /// @return void
 void Robot::RobotPeriodic()
 {
-
     m_RamScan->ScanVariables();     // do this here after other things are done
 }
 
@@ -102,6 +100,7 @@ void Robot::AutonomousInit()
     m_cyclePrims->Init();
 }
 
+
 void Robot::UpdateOdometry()
 {
     auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
@@ -109,7 +108,6 @@ void Robot::UpdateOdometry()
     {
         swerveChassis.get()->UpdateOdometry();
     }
-
 }
 
 
@@ -121,7 +119,6 @@ void Robot::AutonomousPeriodic()
 
     //Real auton magic right here:
     m_cyclePrims->Run();
-
 }
 
 
@@ -130,6 +127,7 @@ void Robot::AutonomousPeriodic()
 void Robot::TeleopInit()
 {
     m_RunMode = TELEOP;
+
     m_drive = make_shared<SwerveDrive>();
     m_drive.get()->Init();
 

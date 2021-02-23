@@ -41,7 +41,6 @@
 #include <hw/DragonDigitalInput.h>
 #include <RamScan/RamScan.h>
 #include <subsys/BallTransfer.h>
-#include <subsys/BallTransfer.h>
 #include <subsys/Intake.h>
 #include <subsys/MechanismFactory.h>
 #include <subsys/MechanismTypes.h>
@@ -74,19 +73,19 @@ MechanismFactory* MechanismFactory::GetMechanismFactory()
 }
 
 MechanismFactory::MechanismFactory()  : m_balltransfer(),
-										m_ballhopper(),
-										m_intake1(),
-										m_intake2(),
-										m_shooter(),
-										m_turret()   
+                                        m_ballhopper(),
+                                        m_intake1(),
+                                        m_intake2(),
+                                        m_shooter(),
+                                        m_turret()
 {
     auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("MechanismFactory"));
-	nt.get()->PutString("Intake1", string("not created") );
-	nt.get()->PutString("Intake2", string("not created") );
-	nt.get()->PutString("Ball Hopper", string("not created") );
+    nt.get()->PutString("Intake1", string("not created") );
+    nt.get()->PutString("Intake2", string("not created") );
+    nt.get()->PutString("Ball Hopper", string("not created") );
     nt.get()->PutString("Ball Transfer", string("not created") );
-	nt.get()->PutString("Shooter", string("not created") );
-	nt.get()->PutString("Turret", string("not created") );
+    nt.get()->PutString("Shooter", string("not created") );
+    nt.get()->PutString("Turret", string("not created") );
 }
 
 /// @brief      create the requested mechanism
@@ -106,135 +105,100 @@ void  MechanismFactory::CreateIMechanism
     shared_ptr<CANCoder>                    canCoder
 )
 {
-	bool found = false;
+    bool found = false;
 
     auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("MechanismFactory"));
 
-	// Create the mechanism
-	switch ( type )
-	{
-		case MechanismTypes::MECHANISM_TYPE::INTAKE:
-		{
-			auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE );
-			if ( motor.get() != nullptr )
-			{
-				motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 40);
-				motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 100);
-
-				if ( m_intake1.get() == nullptr )
-				{
-					m_intake1 = make_shared<Intake>( motor );
-				    nt.get()->PutString("Intake1", string("created") );
-				}
-				else if ( m_intake2.get() == nullptr )
-				{
-					m_intake2 = make_shared<Intake>( motor );
-				    nt.get()->PutString("Intake2", string("created") );
-				}
-				else
-				{
-					found = true;
-				}
-			}
-		}
-		break;
-
-		case MechanismTypes::MECHANISM_TYPE::BALL_HOPPER:
-		{
-			if(m_ballhopper.get() == nullptr )
-			{
-				auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::BALL_HOPPER );
-				auto bannerSensor = GetDigitalInput( digitalInputs, DigitalInputUsage::DIGITAL_SENSOR_USAGE::HOPPER_BANNER_SENSOR );
-				if( motor.get() != nullptr && bannerSensor.get() != nullptr)
-				{
-					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 40);
-					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 100);
-		
-					m_ballhopper = make_shared<BallHopper>(motor, bannerSensor);
-				    nt.get()->PutString("Ball Hopper", string("created") );
-				}
-			}
-			else
-			{
-				found = true;
-			}
-			
-		}
-		break;					
-
-		case MechanismTypes::MECHANISM_TYPE::BALL_TRANSFER:
-		{
-			if ( m_balltransfer.get() == nullptr )
-			{
-				auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::BALL_TRANSFER );
-				if ( motor.get() != nullptr )
-				{
-					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 40);
-					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 100);
-					m_balltransfer = make_shared<BallTransfer>( motor );
-				    nt.get()->PutString("Ball Transfer", string("created") );
-				}
-			}
-			else
-			{
-				found = true;
-			}
-		}
-		break;
-
-	
-		case MechanismTypes::MECHANISM_TYPE::SHOOTER:
-		{
-			if ( m_shooter.get() == nullptr )
-			{
-				auto motor1 = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::SHOOTER_1 );
-				auto motor2 = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::SHOOTER_2 );
-				if ( motor1.get() != nullptr && motor2.get() != nullptr )
-				{
-					m_shooter = make_shared<Shooter>(motor1, motor2);
-				    nt.get()->PutString("Shooter", string("created") );
-				}
-			}
-			else
-			{
-				found = true;
-			}
-
-		}
-		break;		
-		
-		case MechanismTypes::MECHANISM_TYPE::TURRET:
-		{
-			if ( m_turret.get() == nullptr )
-			{
-				auto motor = GetMotorController(motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::TURRET);
-				if(motor.get() != nullptr)
-				{
-					m_turret = make_shared<Turret>(motor);
-				    nt.get()->PutString("Turret", string("created") );
-				}
-			}
-			else
-			{
-				found = true;
-			}
-		}
-		break;
-
-        case MechanismTypes::MECHANISM_TYPE::SHOOTER_HOOD:
+    // Create the mechanism
+    switch ( type )
+    {
+        case MechanismTypes::MECHANISM_TYPE::INTAKE:
         {
-            if ( m_shooterhood.get() == nullptr )
+            auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE );
+            if ( motor.get() != nullptr )
             {
-                auto motor = GetMotorController(motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::SHOOTER_HOOD);
-                if(motor.get() != nullptr)
+                motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 40);
+                motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 100);
+
+                if ( m_intake1.get() == nullptr )
                 {
-                    m_shooterhood = make_shared<ShooterHood>(motor, canCoder);
+                    m_intake1 = make_shared<Intake>( motor );
+                    nt.get()->PutString("Intake1", string("created") );
+                }
+                else if ( m_intake2.get() == nullptr )
+                {
+                    m_intake2 = make_shared<Intake>( motor );
+                    nt.get()->PutString("Intake2", string("created") );
+                }
+                else
+                {
+                    found = true;
+                }
+            }
+        }
+        break;
+
+        case MechanismTypes::MECHANISM_TYPE::BALL_HOPPER:
+        {
+            if(m_ballhopper.get() == nullptr )
+            {
+                auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::BALL_HOPPER );
+                auto bannerSensor = GetDigitalInput( digitalInputs, DigitalInputUsage::DIGITAL_SENSOR_USAGE::HOPPER_BANNER_SENSOR );
+                if( motor.get() != nullptr && bannerSensor.get() != nullptr)
+                {
+                    motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 40);
+                    motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 100);
+
+                    m_ballhopper = make_shared<BallHopper>(motor, bannerSensor);
+                    nt.get()->PutString("Ball Hopper", string("created") );
                 }
             }
             else
             {
                 found = true;
             }
+
+        }
+        break;
+
+        case MechanismTypes::MECHANISM_TYPE::BALL_TRANSFER:
+        {
+            if ( m_balltransfer.get() == nullptr )
+            {
+                auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::BALL_TRANSFER );
+                if ( motor.get() != nullptr )
+                {
+                    motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 40);
+                    motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 100);
+                    m_balltransfer = make_shared<BallTransfer>( motor );
+                    nt.get()->PutString("Ball Transfer", string("created") );
+                }
+            }
+            else
+            {
+                found = true;
+            }
+        }
+        break;
+
+
+        case MechanismTypes::MECHANISM_TYPE::SHOOTER:
+        {
+            if ( m_shooter.get() == nullptr )
+            {
+                auto motor1 = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::SHOOTER_1 );
+                auto motor2 = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::SHOOTER_2 );
+                if ( motor1.get() != nullptr && motor2.get() != nullptr )
+                {
+                    m_shooter = make_shared<Shooter>(motor1, motor2);
+                    nt.get()->PutString("Shooter", string("created") );
+                }
+            }
+            else
+            {
+                found = true;
+            }
+
         }
         break;
 
@@ -246,6 +210,7 @@ void  MechanismFactory::CreateIMechanism
                 if(motor.get() != nullptr)
                 {
                     m_turret = make_shared<Turret>(motor);
+                    nt.get()->PutString("Turret", string("created") );
                 }
             }
             else

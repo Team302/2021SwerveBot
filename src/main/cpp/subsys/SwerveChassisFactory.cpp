@@ -62,15 +62,15 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
     SwerveModule::ModuleID                                  position,           // which corner of the robot?
     const IDragonMotorControllerMap&                        motorControllers,   // <I> - Motor Controllers
     std::shared_ptr<ctre::phoenix::sensors::CANCoder>       canCoder,
-    units::length::inch_t                                   wheelDiameter
-    double                                                      turnP,
-    double                                                      turnI,
-    double                                                      turnD,
-    double                                                      turnF,
-    double                                                      turnNominalVal,
-    double                                                      turnPeakVal,
-    double                                                      turnMaxAcc,
-    double                                                      turnCruiseVel
+    units::length::inch_t                                   wheelDiameter,
+    double                                                  turnP,
+    double                                                  turnI,
+    double                                                  turnD,
+    double                                                  turnF,
+    double                                                  turnNominalVal,
+    double                                                  turnPeakVal,
+    double                                                  turnMaxAcc,
+    double                                                  turnCruiseVel
 )
 {
     std::shared_ptr<SwerveModule> swerve = nullptr;
@@ -84,7 +84,19 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
         case SwerveModule::ModuleID::LEFT_FRONT:
             if ( m_leftFront.get() == nullptr )
             {
-                m_leftFront = make_shared<SwerveModule>(position, driveMotor, turnMotor, canCoder, wheelDiameter );
+                m_leftFront = make_shared<SwerveModule>(position,
+                                                        driveMotor,
+                                                        turnMotor,
+                                                        canCoder,
+                                                        wheelDiameter,
+                                                        turnP,
+                                                        turnI,
+                                                        turnD,
+                                                        turnF,
+                                                        turnNominalVal,
+                                                        turnPeakVal,
+                                                        turnMaxAcc,
+                                                        turnCruiseVel );
             }
             swerve = m_leftFront;
             break;
@@ -92,7 +104,19 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
         case SwerveModule::ModuleID::LEFT_BACK:
             if ( m_leftBack.get() == nullptr )
             {
-                m_leftBack = make_shared<SwerveModule>(position, driveMotor, turnMotor, canCoder, wheelDiameter );
+                m_leftBack = make_shared<SwerveModule>( position,
+                                                        driveMotor,
+                                                        turnMotor,
+                                                        canCoder,
+                                                        wheelDiameter,
+                                                        turnP,
+                                                        turnI,
+                                                        turnD,
+                                                        turnF,
+                                                        turnNominalVal,
+                                                        turnPeakVal,
+                                                        turnMaxAcc,
+                                                        turnCruiseVel );
             }
             swerve = m_leftBack;
 
@@ -101,7 +125,19 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
         case SwerveModule::ModuleID::RIGHT_FRONT:
             if ( m_rightFront.get() == nullptr )
             {
-                m_rightFront = make_shared<SwerveModule>(position, driveMotor, turnMotor, canCoder, wheelDiameter );
+                m_rightFront = make_shared<SwerveModule>(position,
+                                                         driveMotor,
+                                                         turnMotor,
+                                                         canCoder,
+                                                         wheelDiameter,
+                                                         turnP,
+                                                         turnI,
+                                                         turnD,
+                                                         turnF,
+                                                         turnNominalVal,
+                                                         turnPeakVal,
+                                                         turnMaxAcc,
+                                                         turnCruiseVel );
             }
             swerve = m_rightFront;
             break;
@@ -109,7 +145,19 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
         case SwerveModule::ModuleID::RIGHT_BACK:
             if ( m_rightBack.get() == nullptr )
             {
-                m_rightBack = make_shared<SwerveModule>(position, driveMotor, turnMotor, canCoder, wheelDiameter );
+                m_rightBack = make_shared<SwerveModule>(position,
+                                                        driveMotor,
+                                                        turnMotor,
+                                                        canCoder,
+                                                        wheelDiameter,
+                                                        turnP,
+                                                        turnI,
+                                                        turnD,
+                                                        turnF,
+                                                        turnNominalVal,
+                                                        turnPeakVal,
+                                                        turnMaxAcc,
+                                                        turnCruiseVel );
             }
             swerve = m_rightBack;
             break;
@@ -129,10 +177,10 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
 //=====================================================================================
 shared_ptr<SwerveChassis> SwerveChassisFactory::CreateSwerveChassis
 (
-    std::shared_ptr<SwerveModule>                               frontLeft, 
+    std::shared_ptr<SwerveModule>                               frontLeft,
     std::shared_ptr<SwerveModule>                               frontRight,
-    std::shared_ptr<SwerveModule>                               backLeft, 
-    std::shared_ptr<SwerveModule>                               backRight, 
+    std::shared_ptr<SwerveModule>                               backLeft,
+    std::shared_ptr<SwerveModule>                               backRight,
     units::length::inch_t                                       wheelBase,
     units::length::inch_t                                       track,
     units::velocity::meters_per_second_t                        maxSpeed,
