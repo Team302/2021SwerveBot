@@ -26,9 +26,9 @@ DragonPigeon::DragonPigeon
     m_pigeon.get()->ConfigFactoryDefault();
     m_pigeon.get()->SetYaw(0.0, 0);
     m_pigeon.get()->SetFusedHeading( rotation, 0);
-    m_pigeon.get()->SetStatusFramePeriod( PigeonIMU_StatusFrame::PigeonIMU_BiasedStatus_4_Mag, 100, 0);
-    m_pigeon.get()->SetStatusFramePeriod( PigeonIMU_StatusFrame::PigeonIMU_CondStatus_11_GyroAccum, 100, 0);
-    m_pigeon.get()->SetStatusFramePeriod( PigeonIMU_StatusFrame::PigeonIMU_CondStatus_9_SixDeg_YPR, 100, 0); // using fused heading not yaw
+    m_pigeon.get()->SetStatusFramePeriod( PigeonIMU_StatusFrame::PigeonIMU_BiasedStatus_4_Mag, 120, 0);
+    m_pigeon.get()->SetStatusFramePeriod( PigeonIMU_StatusFrame::PigeonIMU_CondStatus_11_GyroAccum, 120, 0);
+    m_pigeon.get()->SetStatusFramePeriod( PigeonIMU_StatusFrame::PigeonIMU_CondStatus_9_SixDeg_YPR, 120, 0); // using fused heading not yaw
     
     /**
     double ypr[3];

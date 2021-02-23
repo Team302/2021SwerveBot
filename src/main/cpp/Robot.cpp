@@ -46,7 +46,7 @@ using namespace frc;
 void Robot::RobotInit() 
 {
 
-    sleep(10);
+    sleep(2);
 
     // Read the robot definition from the xml configuration files and
     // create the hardware (chassis + mechanisms along with their talons,
@@ -94,6 +94,11 @@ void Robot::AutonomousPeriodic()
 
     //Real auton magic right here:
     m_cyclePrims->Run();
+    //auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
+    //if ( swerveChassis.get() != nullptr )
+    //{
+    //    swerveChassis.get()->Drive(1.0, 0.0, 0.0, false);
+    //}
 
 }
 
@@ -138,6 +143,11 @@ void Robot::TeleopPeriodic()
     {
         m_shooterState->RunCurrentState();
     }
+    else
+    {
+        Logger::GetLogger()->LogError("robot", "no shooter");
+    }
+    
 }
 
 

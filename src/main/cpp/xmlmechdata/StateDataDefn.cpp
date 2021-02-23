@@ -52,6 +52,14 @@
 using namespace pugi;
 using namespace std;
 
+StateDataDefn::StateDataDefn()
+{
+    Logger::GetLogger()->ToNtTable(string("State Data Defn"), string("intake"), string("not parsed"));
+    Logger::GetLogger()->ToNtTable(string("State Data Defn"), string("ball hopper"), string("not parsed"));
+    Logger::GetLogger()->ToNtTable(string("State Data Defn"), string("ball transfer"), string("not parsed"));
+    Logger::GetLogger()->ToNtTable(string("State Data Defn"), string("shooter"), string("not parsed"));
+    Logger::GetLogger()->ToNtTable(string("State Data Defn"), string("turret"), string("not parsed"));
+}
 
 /// @brief      Parse a mechanismState.xml file
 /// @param [in] MechanismTypes::MECHANISM_TYPE  - mechanism that the states are for
@@ -66,27 +74,32 @@ vector<MechanismTargetData*> StateDataDefn::ParseXML
     vector<MechanismTargetData*> targetDataVector;
 
     // set the file to parse
-    string filename = "/home/lvuser/config/states/";
+    string filename = "/home/lvuser/deploy/";
     string mech;
     switch ( mechanism )
     {
         case MechanismTypes::INTAKE:
+            Logger::GetLogger()->ToNtTable(string("State Data Defn"), string("intake"), string("about to parse"));
             mech = string( "intake.xml");
             break;
 
         case MechanismTypes::BALL_HOPPER:
+            Logger::GetLogger()->ToNtTable(string("State Data Defn"), string("ball hopper"), string("about to parse"));
             mech += string( "ballhopper.xml");
             break;
 
         case MechanismTypes::BALL_TRANSFER:
+            Logger::GetLogger()->ToNtTable(string("State Data Defn"), string("ball transfer"), string("about to parse"));
             mech = string( "balltransfer.xml");
             break;
 
         case MechanismTypes::TURRET:
+            Logger::GetLogger()->ToNtTable(string("State Data Defn"), string("turret"), string("about to parse"));
             mech = string( "turret.xml");
             break;
 
         case MechanismTypes::SHOOTER:
+            Logger::GetLogger()->ToNtTable(string("State Data Defn"), string("shooter"), string("about to parse"));
             mech = string( "shooter.xml");
             break;
 
@@ -102,13 +115,6 @@ vector<MechanismTargetData*> StateDataDefn::ParseXML
         // load the xml file into memory (parse it)
         xml_document doc;
         xml_parse_result result = doc.load_file(filename.c_str());
-        if (!result)
-        {
-            Logger::GetLogger()->LogError( string("StateDataDefn::ParseXML using alternate location"), mech );
-            filename = "/home/lvuser/deploy/";
-            filename += mech;
-            result = doc.load_file(filename.c_str());
-        }
 
         // if it is good
         if (result)

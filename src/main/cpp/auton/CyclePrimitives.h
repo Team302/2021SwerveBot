@@ -65,5 +65,6 @@ class CyclePrimitives : public IState
 		bool							m_isDone;
 		std::string						m_pathName;
 		bool							m_runIntake;
+		bool 							m_hasIntake;
 };
 

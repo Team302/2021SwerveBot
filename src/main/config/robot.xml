@@ -86,7 +86,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="2"
-                            offset="52.734375"/>
+                            offset="=179.033"/>
         </swervemodule>
 
         <swervemodule type="LEFT_BACK"
@@ -138,7 +138,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="0"
-                            offset="39.0245469"/>
+                            offset="-20.215"/>
         </swervemodule>
 
         <swervemodule type="RIGHT_FRONT"
@@ -190,7 +190,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="12"
-                            offset="-70.225"/>
+                            offset="-176.221"/>
         </swervemodule>
 
         <swervemodule type="LEFT_FRONT"
@@ -242,7 +242,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="14"
-                            offset="-141.152"/>
+                            offset="184.658"/>
         </swervemodule>
 
     </swervechassis>  
@@ -270,6 +270,95 @@
                      forwardlimitswitchopen="true"
                      reverselimitswitch="false"
                      reverselimitswitchopen="true"/>        
+	</mechanism>
+
+
+    
+	<mechanism type="SHOOTER">
+		<motor  usage="SHOOTER_1"
+                      canId="5"
+                      pdpID="5"
+                      type="FALCON"
+                      inverted="true"
+                      sensorInverted="false"
+                      feedbackDevice="INTERNAL"
+                      countsPerRev="2048"
+                      gearRatio="1.24444"
+                      brakeMode="false"
+                      follow="-1"
+                      peakCurrentDuration="50"
+                      continuousCurrentLimit="30"
+                      peakCurrentLimit="40"
+                      currentLimiting="true" 
+                      forwardlimitswitch="false"
+                      forwardlimitswitchopen="true"
+                      reverselimitswitch="false"
+                      reverselimitswitchopen="true"/>
+		<motor  usage="SHOOTER_2"
+                      canId="6"
+                      pdpID="6"
+                      type="FALCON"
+                      inverted="false"
+                      sensorInverted="false"
+                      feedbackDevice="INTERNAL"
+                      countsPerRev="2048"
+                      gearRatio="1.24444"
+                      brakeMode="false"
+                      follow="-1"
+                      peakCurrentDuration="15.0"
+                      continuousCurrentLimit="40.0"
+                      peakCurrentLimit="50.0"
+                      currentLimiting="true" 
+                      forwardlimitswitch="false"
+                      forwardlimitswitchopen="true"
+                      reverselimitswitch="false"
+                      reverselimitswitchopen="true"/>
+	</mechanism>
+
+	<mechanism type="BALL_TRANSFER">
+		<motor usage="BALL_TRANSFER"
+                     canId="4"
+                     pdpID="4"
+                     type="FALCON"
+                     inverted="false"
+                     sensorInverted="false"
+                     feedbackDevice="INTERNAL"
+                     countsPerRev="2048"
+                     gearRatio="1.0"
+                     brakeMode="false"
+                     follow="-1"
+                     peakCurrentDuration="15.0"
+                     continuousCurrentLimit="40.0"
+                     peakCurrentLimit="50.0"
+                     currentLimiting="true" 
+                     forwardlimitswitch="false"
+                     forwardlimitswitchopen="true"
+                     reverselimitswitch="false"
+                     reverselimitswitchopen="true"/>        
+ 
+	</mechanism>
+
+	<mechanism type="TURRET">
+		<motor usage="TURRET"
+                     canId="9"
+                     pdpID="9"
+                     type="TALONSRX"
+                     inverted="false"
+                     sensorInverted="false"
+                     feedbackDevice="INTERNAL"
+                     countsPerRev="2048"
+                     gearRatio="8.4"
+                     brakeMode="true"
+                     follow="-1"
+                     peakCurrentDuration="15.0"
+                     continuousCurrentLimit="40.0"
+                     peakCurrentLimit="50.0"
+                     currentLimiting="true" 
+                     forwardlimitswitch="true"
+                     forwardlimitswitchopen="true"
+                     reverselimitswitch="true"
+                     reverselimitswitchopen="true"/>        
+
 	</mechanism>
     
 	<mechanism type="INTAKE">
@@ -320,90 +409,4 @@
                             reversed="false"/>      
 	</mechanism>
 
-	<mechanism type="BALL_TRANSFER">
-		<motor usage="BALL_TRANSFER"
-                     canId="4"
-                     pdpID="4"
-                     type="FALCON"
-                     inverted="false"
-                     sensorInverted="false"
-                     feedbackDevice="INTERNAL"
-                     countsPerRev="2048"
-                     gearRatio="1.0"
-                     brakeMode="false"
-                     follow="-1"
-                     peakCurrentDuration="15.0"
-                     continuousCurrentLimit="40.0"
-                     peakCurrentLimit="50.0"
-                     currentLimiting="true" 
-                     forwardlimitswitch="false"
-                     forwardlimitswitchopen="true"
-                     reverselimitswitch="false"
-                     reverselimitswitchopen="true"/>        
- 
-	</mechanism>
-    
-	<mechanism type="SHOOTER">
-		<motor  usage="SHOOTER_1"
-                      canId="5"
-                      pdpID="5"
-                      type="FALCON"
-                      inverted="true"
-                      sensorInverted="false"
-                      feedbackDevice="INTERNAL"
-                      countsPerRev="2048"
-                      gearRatio="1.24444"
-                      brakeMode="false"
-                      follow="-1"
-                      peakCurrentDuration="50"
-                      continuousCurrentLimit="30"
-                      peakCurrentLimit="40"
-                      currentLimiting="true" 
-                      forwardlimitswitch="false"
-                      forwardlimitswitchopen="true"
-                      reverselimitswitch="false"
-                      reverselimitswitchopen="true"/>
-		<motor  usage="SHOOTER_2"
-                      canId="6"
-                      pdpID="6"
-                      type="FALCON"
-                      inverted="false"
-                      sensorInverted="false"
-                      feedbackDevice="INTERNAL"
-                      countsPerRev="2048"
-                      gearRatio="1.24444"
-                      brakeMode="false"
-                      follow="-1"
-                      peakCurrentDuration="15.0"
-                      continuousCurrentLimit="40.0"
-                      peakCurrentLimit="50.0"
-                      currentLimiting="true" 
-                      forwardlimitswitch="false"
-                      forwardlimitswitchopen="true"
-                      reverselimitswitch="false"
-                      reverselimitswitchopen="true"/>
-	</mechanism>
-    
-	<mechanism type="TURRET">
-		<motor usage="TURRET"
-                     canId="9"
-                     pdpID="9"
-                     type="TALONSRX"
-                     inverted="false"
-                     sensorInverted="false"
-                     feedbackDevice="INTERNAL"
-                     countsPerRev="2048"
-                     gearRatio="8.4"
-                     brakeMode="true"
-                     follow="-1"
-                     peakCurrentDuration="15.0"
-                     continuousCurrentLimit="40.0"
-                     peakCurrentLimit="50.0"
-                     currentLimiting="true" 
-                     forwardlimitswitch="true"
-                     forwardlimitswitchopen="true"
-                     reverselimitswitch="true"
-                     reverselimitswitchopen="true"/>        
-
-	</mechanism>
 </robot>

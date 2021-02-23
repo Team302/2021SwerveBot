@@ -37,7 +37,7 @@
 class StateDataDefn
 {
     public:
-        StateDataDefn() = default;
+        StateDataDefn();
         virtual ~StateDataDefn() = default;
 
         /// @brief      Parse a mechanismState.xml file

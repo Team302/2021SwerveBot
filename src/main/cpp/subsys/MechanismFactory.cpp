@@ -28,9 +28,6 @@
 #include <memory>
 
 // FRC includes
-#include <networktables/NetworkTableInstance.h>
-#include <networktables/NetworkTable.h>
-#include <networktables/NetworkTableEntry.h>
 
 // Team 302 includes
 #include <hw/interfaces/IDragonMotorController.h>
@@ -78,13 +75,12 @@ MechanismFactory::MechanismFactory()  : m_balltransfer(),
 										m_shooter(),
 										m_turret()   
 {
-    auto nt = nt::NetworkTableInstance::GetDefault().GetTable(string("MechanismFactory"));
-	nt.get()->PutString("Intake1", string("not created") );
-	nt.get()->PutString("Intake2", string("not created") );
-	nt.get()->PutString("Ball Hopper", string("not created") );
-    nt.get()->PutString("Ball Transfer", string("not created") );
-	nt.get()->PutString("Shooter", string("not created") );
-	nt.get()->PutString("Turret", string("not created") );
+	Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Intake1"), string("not created"));
+	Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Intake2"), string("not created"));
+	Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Ball Hopper"), string("not created"));
+	Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Ball Transfer"), string("not created"));
+	Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Shooter"), string("not created"));
+	Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Turret"), string("not created"));
 }
 
 /// @brief      create the requested mechanism
@@ -116,18 +112,18 @@ void  MechanismFactory::CreateIMechanism
 			auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE );
 			if ( motor.get() != nullptr )
 			{
-				motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 40);
-				motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 100);
+				motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 60);
+				motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
 
 				if ( m_intake1.get() == nullptr )
 				{
 					m_intake1 = make_shared<Intake>( motor );
-				    nt.get()->PutString("Intake1", string("created") );
+					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Intake1"), string("created"));
 				}
 				else if ( m_intake2.get() == nullptr )
 				{
 					m_intake2 = make_shared<Intake>( motor );
-				    nt.get()->PutString("Intake2", string("created") );
+					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Intake2"), string("created"));
 				}
 				else
 				{
@@ -145,11 +141,11 @@ void  MechanismFactory::CreateIMechanism
 				auto bannerSensor = GetDigitalInput( digitalInputs, DigitalInputUsage::DIGITAL_SENSOR_USAGE::HOPPER_BANNER_SENSOR );
 				if( motor.get() != nullptr && bannerSensor.get() != nullptr)
 				{
-					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 40);
-					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 100);
+					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 60);
+					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
 		
 					m_ballhopper = make_shared<BallHopper>(motor, bannerSensor);
-				    nt.get()->PutString("Ball Hopper", string("created") );
+					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Ball Hopper"), string("created"));
 				}
 			}
 			else
@@ -167,10 +163,10 @@ void  MechanismFactory::CreateIMechanism
 				auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::BALL_TRANSFER );
 				if ( motor.get() != nullptr )
 				{
-					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 40);
-					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 100);
+					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 60);
+					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
 					m_balltransfer = make_shared<BallTransfer>( motor );
-				    nt.get()->PutString("Ball Transfer", string("created") );
+					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Ball Transfer"), string("created"));
 				}
 			}
 			else
@@ -190,7 +186,7 @@ void  MechanismFactory::CreateIMechanism
 				if ( motor1.get() != nullptr && motor2.get() != nullptr )
 				{
 					m_shooter = make_shared<Shooter>(motor1, motor2);
-				    nt.get()->PutString("Shooter", string("created") );
+					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Shooter"), string("created"));
 				}
 			}
 			else
@@ -208,8 +204,9 @@ void  MechanismFactory::CreateIMechanism
 				auto motor = GetMotorController(motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::TURRET);
 				if(motor.get() != nullptr)
 				{
+					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 20);
 					m_turret = make_shared<Turret>(motor);
-				    nt.get()->PutString("Turret", string("created") );
+					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Turret"), string("created"));
 				}
 			}
 			else
