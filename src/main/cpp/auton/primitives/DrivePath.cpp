@@ -13,6 +13,9 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
+//C++
+#include <string>
+
 // 302 Includes
 
 #include <auton/primitives/DrivePath.h>
@@ -60,10 +63,11 @@ Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
 
 
     m_timer->Reset();
+    m_timer->Start();
 
     Logger::GetLogger()->LogError(string("At line"), string("64, grabbing trajectory from json"));
     // set current position to initial position which should be first node in path.
-    frc::Trajectory m_trajectory = frc::TrajectoryUtil::FromPathweaverJson(deployDir);
+    m_trajectory = frc::TrajectoryUtil::FromPathweaverJson(deployDir);
     Logger::GetLogger()->LogError(string("At line"), string("66, before setting chassis pos to trajectory"));
     m_currentChassisPosition = m_trajectory.InitialPose();
 
@@ -72,7 +76,10 @@ Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
     // assume start angel of zero at start of path
     frc::Rotation2d StartAngle;
     StartAngle.Degrees() = units::degree_t(0);
-    m_chassis.get()->ResetPosition(m_currentChassisPosition, StartAngle);
+    //m_chassis->ResetPosition(m_currentChassisPosition, StartAngle);
+
+    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", to_string(m_currentChassisPosition.X().to<double>()));
+    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", to_string(m_currentChassisPosition.Y().to<double>()));
 
     m_PosChgTimer.Start(); // start scan timer to detect motion
   }
@@ -88,15 +95,47 @@ void DrivePath::Run()
   if (sPath2Load != "")
   {
 
+    Logger::GetLogger()->ToNtTable("DrivePath", "Found Path = ", sPath2Load);
+
     if (units::second_t(m_timer.get()->Get()) < m_trajectory.TotalTime())
     {
       auto desiredPose = m_trajectory.Sample(units::second_t(m_timer.get()->Get()));
       // Get the reference chassis speeds from the Ramsete Controller.
       m_currentChassisPosition = m_chassis.get()->GetPose().GetEstimatedPosition();
+      //Pose2d pull out attributes
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseX", to_string(desiredPose.pose.X().to<double>()));
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseY", to_string(desiredPose.pose.Y().to<double>()));
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", to_string(m_currentChassisPosition.X().to<double>()));
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", to_string(m_currentChassisPosition.Y().to<double>()));
+
+      m_ramseteController.SetEnabled(true);
+
       auto refChassisSpeeds = m_ramseteController.Calculate(m_currentChassisPosition, desiredPose);
-      m_chassis->Drive(refChassisSpeeds, false); //
+
+      //auto refChassisSpeeds = m_ramseteController.Calculate(m_currentChassisPosition, );
+
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsX", to_string(refChassisSpeeds.vx()));
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsY", to_string(refChassisSpeeds.vy()));
+
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "TrajectoryTotalTime", to_string(m_trajectory.TotalTime().to<double>()));
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTime", to_string(m_timer.get()->Get()));
+
+
+      m_chassis->Drive(refChassisSpeeds, false);
+
+      //m_chassis->Drive(refChassisSpeeds.vx * 100, refChassisSpeeds.vy * 100, refChassisSpeeds.omega * 100,false); //
+      
+      //m_chassis->Drive( 0.5, 0, 0, false);
+
       Logger::GetLogger()->LogError(string("DrivePath - Running Path = "), sPath2Load);
     }
+    else
+    {
+      Logger::GetLogger()->LogError(string("DrivePath - Error = "), string("Current Time greater than trajectory total time"));
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTime", to_string(m_timer.get()->Get()));
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "TrajectoryTotalTime", to_string(m_trajectory.TotalTime().to<double>()));
+    }
+    
 
     // Motion Detection //
     if (m_PosChgTimer.Get() >= .75) // Scan time for comparing current pose with previous pose
@@ -116,12 +155,14 @@ bool DrivePath::IsDone()
   {
     bool bTimeDone = units::second_t(m_timer.get()->Get()) >= m_trajectory.TotalTime();
     sPath2Load = "";
-    Logger::GetLogger()->LogError(string("DrivePath - DONE = "), sPath2Load);
-    if ( bTimeDone && m_bRobotStopped )
+    if ( bTimeDone //&& m_bRobotStopped
+     )
     {
       Logger::GetLogger()->ToNtTable("DrivePath", "Done", "True");
+      Logger::GetLogger()->LogError(string("DrivePath - DONE = "), sPath2Load);
     }
-    return (bTimeDone && m_bRobotStopped);
+    return (bTimeDone //&& m_bRobotStopped
+    );
   }
   else
   {
