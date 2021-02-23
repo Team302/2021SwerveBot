@@ -75,6 +75,7 @@ void CyclePrimitives::Run()
 	{
 		Logger::GetLogger()->LogError( string("CyclePrimitive::RunCurrentPrimitive"), string("Primitive Detected!"));
 		m_currentPrim->Run();
+
 		if (m_hasIntake)
 		{
 			IntakeStateMgr::GetInstance()->RunCurrentState();
@@ -111,7 +112,7 @@ void CyclePrimitives::GetNextPrim()
 		m_maxTime = currentPrimParam->GetTime();
 		if ( m_hasIntake && currentPrimParam->GetIntakeState())
 		{
-			IntakeStateMgr::GetInstance()->SetCurrentState(IntakeStateMgr::ON, false);
+			  IntakeStateMgr::GetInstance()->SetCurrentState(IntakeStateMgr::ON, false);
 		}
 		m_timer->Reset();
 		m_timer->Start();
