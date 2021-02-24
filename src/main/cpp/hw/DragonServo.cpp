@@ -21,15 +21,7 @@ DragonServo::DragonServo
 	m_minAngle( minAngle ),
 	m_maxAngle( maxAngle )
 {
-    switch ( deviceUsage )
-    {
-        case ServoUsage::SERVO_USAGE::SHOOTER_HOOD:
-            m_servo =new Servo(deviceID);
-            break;
-
-        default:
-         break;
-    }
+    
 }
 
 

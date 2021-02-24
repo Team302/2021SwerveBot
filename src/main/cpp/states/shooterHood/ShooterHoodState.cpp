@@ -20,7 +20,7 @@
 
 // Team 302 includes
 #include <controllers/ControlData.h>
-#include <states/shooterHood/ShooterHoodState.h>
+
 #include <states/Mech1MotorState.h>
 #include <subsys/MechanismFactory.h>
 
@@ -29,10 +29,4 @@
 using namespace std;
 
 
-ShooterHoodState::ShooterHoodState
-(
-    ControlData*                    control,
-    double                          target
-) : Mech1MotorState( MechanismFactory::GetMechanismFactory()->GetShooterHood().get(), control, target )
-{
-}
+

@@ -48,7 +48,7 @@ MotorControllerUsage::MotorControllerUsage()
     m_usageMap["TURRET"] = MOTOR_CONTROLLER_USAGE::TURRET;
     m_usageMap["SHOOTER_1"] = MOTOR_CONTROLLER_USAGE::SHOOTER_1;
     m_usageMap["SHOOTER_2"] = MOTOR_CONTROLLER_USAGE::SHOOTER_2;
-    m_usageMap["SHOOTER_HOOD"] = MOTOR_CONTROLLER_USAGE::SHOOTER_HOOD;
+    
     m_usageMap["BALL_HOPPER"] = MOTOR_CONTROLLER_USAGE::BALL_HOPPER;
 }
 

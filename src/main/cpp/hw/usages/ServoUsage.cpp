@@ -38,10 +38,7 @@ ServoUsage* ServoUsage::GetInstance()
     return m_instance;
 }
 
-ServoUsage::ServoUsage()
-{
-    m_usageMap["SHOOTER_HOOD"] = SERVO_USAGE::SHOOTER_HOOD;
-}
+
 
 ServoUsage::~ServoUsage()
 {

@@ -21,14 +21,12 @@
 
 // Team 302 includes
 #include <states/IState.h>
-#include <states/shooterHood/ShooterHoodStateMgr.h>
+
 #include <xmlmechdata/StateDataDefn.h>
 #include <controllers/MechanismTargetData.h>
 #include <utils/Logger.h>
 #include <gamepad/TeleopControl.h>
-//Put in shooter hood state includes
-#include <states/shooterHood/ShooterHoodState.h>
-#include <states/shooterHood/ShooterHoodManual.h>
+
 #include <subsys/MechanismFactory.h>
 #include <subsys/MechanismTypes.h>
 
@@ -36,160 +34,17 @@
 
 using namespace std;
 
-ShooterHoodStateMgr* ShooterHoodStateMgr::m_instance = nullptr;
-ShooterHoodStateMgr* ShooterHoodStateMgr::GetInstance()
-{
-	if ( ShooterHoodStateMgr::m_instance == nullptr )
-	{
-		ShooterHoodStateMgr::m_instance = new ShooterHoodStateMgr();
-	}
-	return ShooterHoodStateMgr::m_instance;
-}
+
 
 /// @brief    initialize the state manager, parse the configuration file and create the states.
-ShooterHoodStateMgr::ShooterHoodStateMgr() : m_stateVector(),
-                                       m_currentState()
-{
-    // Parse the configuration file 
-    auto stateXML = make_unique<StateDataDefn>();
-    vector<MechanismTargetData*> targetData = stateXML.get()->ParseXML( MechanismTypes::MECHANISM_TYPE::SHOOTER_HOOD );
 
-    // initialize the xml string to state map
-    map<string, SHOOTER_HOOD_STATE> stateMap;
-    stateMap["SHOOTERHOODUP"] = SHOOTER_HOOD_STATE::MOVE_UP;
-    stateMap["SHOOTERHOODDOWN"]  = SHOOTER_HOOD_STATE::MOVE_DOWN;
-    stateMap["SHOOTERHOODHOLD"] = SHOOTER_HOOD_STATE::HOLD_POSITION;
-    stateMap["SHOOTERHOODMANUAL"] = SHOOTER_HOOD_STATE::MANUAL;
-    m_stateVector.resize(4);
-    
-    // create the states passing the configuration data
-    for ( auto td: targetData )
-    {
-        auto stateString = td->GetStateString();
-        auto stateItr = stateMap.find( stateString );
-        if ( stateItr != stateMap.end() )
-        {
-            auto stateEnum = stateItr->second;
-            if ( m_stateVector[stateEnum] == nullptr )
-            {
-                auto controlData = td->GetController();
-                auto target = td->GetTarget();
-                switch ( stateEnum )
-                {
-                    case SHOOTER_HOOD_STATE::MOVE_UP:
-                    {   // todo update the constructor take in controlData and target
-                        auto thisState = new ShooterHoodState(controlData, target);
-                        m_stateVector[stateEnum] = thisState;
-                    }
-                    break;
 
-                    case SHOOTER_HOOD_STATE::MOVE_DOWN:
-                    {   // todo update the constructor take in controlData and target
-                        auto thisState = new ShooterHoodState(controlData, target);
-                        m_stateVector[stateEnum] = thisState;
-                    }
-                    break;
-
-                    case SHOOTER_HOOD_STATE::HOLD_POSITION:
-                    {   // todo update the constructor take in controlData and target
-                        auto thisState = new ShooterHoodState(controlData, target);
-                        m_stateVector[stateEnum] = thisState;
-                        m_currentState = thisState;
-                        m_currentStateEnum = stateEnum;
-                        m_currentState->Init();
-                    }
-                    break;
-
-                    case SHOOTER_HOOD_STATE::MANUAL:
-                    {
-                        auto thisState = new ShooterHoodManual(controlData, target);
-                        m_stateVector[stateEnum] = thisState;
-                    }
-                    break;
-
-                    default:
-                    {
-                        Logger::GetLogger()->LogError( string("ShooterHoodStateMgr::ShooterHoodStateMgr"), string("unknown state"));
-                    }
-                    break;
-                }
-            }
-            else
-            {
-                Logger::GetLogger()->LogError( string("ShooterHoodStateMgr::ShooterHoodStateMgr"), string("multiple mechanism state info for state"));
-            }
-        }
-        else
-        {
-            Logger::GetLogger()->LogError( string("ShooterHoodStateMgr::ShooterHoodStateMgr state not found"), stateString );
-        }
-    }
-}
 
 /// @brief  run the current state
 /// @return void
-void ShooterHoodStateMgr::RunCurrentState()
-{
-    if ( MechanismFactory::GetMechanismFactory()->GetShooterHood().get() != nullptr )
-    {
-        // process teleop/manual interrupts
-        auto controller = TeleopControl::GetInstance();
-        if ( controller != nullptr )
-        {
-            //if (controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MANUAL_BUTTON))
-           // {
-            //    SetCurrentState( SHOOTER_HOOD_STATE::MANUAL, false ); 
-           // }
-            
-            /*if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MOVE_UP ) && 
-                m_currentStateEnum != SHOOTER_HOOD_STATE::MOVE_UP )
-            {
-                SetCurrentState( SHOOTER_HOOD_STATE::MOVE_UP, false );
-            }
-            else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_MOVE_DOWN ) &&
-                    m_currentStateEnum != SHOOTER_HOOD_STATE::MOVE_DOWN )
-            {
-                SetCurrentState( SHOOTER_HOOD_STATE::MOVE_DOWN, false );
-            }
-            else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_HOOD_HOLD_POSITION ) &&
-                    m_currentStateEnum != SHOOTER_HOOD_STATE::HOLD_POSITION )
-            {
-                SetCurrentState( SHOOTER_HOOD_STATE::HOLD_POSITION, false );
-            }*/
-        }
 
-        // run the current state
-        if ( m_currentState != nullptr )
-        {
-            m_currentState->Run();
-        }
-    }
-}
 
 /// @brief  set the current state, initialize it and run it
 /// @return void
-void ShooterHoodStateMgr::SetCurrentState
-(
-    SHOOTER_HOOD_STATE  stateEnum,
-    bool            run
-)
-{
-    auto state = m_stateVector[stateEnum];
-    if ( state != nullptr && state != m_currentState )
-    {
-        
-        m_currentState = state;
-        m_currentStateEnum = stateEnum;
-        m_currentState->Init();
-        if ( run )
-        {
-            if ( MechanismFactory::GetMechanismFactory()->GetShooterHood().get() != nullptr )
-            {
-                m_currentState->Run();
-            }
-        }
-        
-    }
-}
 
 
