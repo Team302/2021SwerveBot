@@ -102,19 +102,6 @@ SwerveModule::SwerveModule
     // Set up the Turn Motor
     motor = m_turnMotor.get()->GetSpeedController();
     fx = dynamic_cast<WPI_TalonFX*>(motor.get());
-    auto error = fx->ConfigPeakOutputForward(0.3, 0);
-	if ( error != ErrorCode::OKAY )
-	{
-		Logger::GetLogger()->LogError(string("SwerveModule"), string("ConfigPeakOutputForward error"));
-		error = ErrorCode::OKAY;
-	}
-	error = fx->ConfigPeakOutputReverse(-0.3, 0);
-	if ( error != ErrorCode::OKAY )
-	{
-		Logger::GetLogger()->LogError(string("SwerveModule"), string("ConfigPeakOutputReverse error"));
-		error = ErrorCode::OKAY;
-	}
-
     fx->ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor, 0, 10 );
     fx->ConfigIntegratedSensorInitializationStrategy(BootToZero);
     auto turnMotorSensors = fx->GetSensorCollection();
@@ -301,14 +288,18 @@ void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
     Logger::GetLogger()->ToNtTable(m_nt, string("target angle"), to_string( targetAngle.to<double>() ) );
     Logger::GetLogger()->ToNtTable(m_nt, string("delta angle"), to_string( deltaAngle.Degrees().to<double>() ) );
      
-    if ( abs(deltaAngle.Degrees().to<double>()) > 0.01 )
+    if ( abs(deltaAngle.Degrees().to<double>()) > 1.0 )
     {
         auto motor = m_turnMotor.get()->GetSpeedController();
         auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
         auto sensors = fx->GetSensorCollection();
         double currentTicks = sensors.GetIntegratedSensorPosition();
-    //    double deltaTicks = deltaAngle.Degrees().to<double>() * 72.5; //72.4694;
-        double deltaTicks = (deltaAngle.Degrees().to<double>() * 72.5) / 4.0; //72.4694;
+        //=============================================================================
+        // 5592 counts on the falcon for 76.729 degree change on the CANCoder (wheel)
+        //=============================================================================
+        // double deltaTicks = deltaAngle.Degrees().to<double>() * 72.5; //72.4694;
+        // double deltaTicks = (deltaAngle.Degrees().to<double>() * 72.5) / 4.0; //72.4694;
+        double deltaTicks = (deltaAngle.Degrees().to<double>() * 5592 / 76.729); 
         double desiredTicks = currentTicks + deltaTicks;
 
         Logger::GetLogger()->ToNtTable(m_nt, string("currentTicks"), to_string(currentTicks) );
@@ -320,8 +311,8 @@ void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
     }
     else
     {
-//        m_turnMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::PERCENT_OUTPUT);
-//        m_turnMotor.get()->Set(m_nt, 0.0);
+        m_turnMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::PERCENT_OUTPUT);
+        m_turnMotor.get()->Set(m_nt, 0.0);
     }
 
 }

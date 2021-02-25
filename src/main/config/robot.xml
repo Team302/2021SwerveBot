@@ -3,7 +3,7 @@
 <robot>
 	<!-- pdp canId="0" / -->
 	<pigeon canId="50"
-               rotation="0.0" />
+               rotation="90.0" />
 
        <!-- was hard coded with all values as 0.0 in limelightAim -->
 	<limelight tablename="limelight"
@@ -37,13 +37,13 @@
                      maxAngularAcceleration="48.0">
 			 
         <swervemodule type="RIGHT_BACK"
-                      turn_p="0.5"
-                      turn_i="0.1"
+                      turn_p="0.95"
+                      turn_i="0.3"
                       turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
-                      turn_peak_val="1.0"
-                      turn_max_acc="20"
+                      turn_peak_val="0.9"
+                      turn_max_acc="10"
                       turn_cruise_vel="50"
                       wheelDiameter="4.0"
 >
@@ -86,16 +86,16 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="2"
-                            offset="=179.033"/>
+                            offset="-135.879"/>
         </swervemodule>
 
         <swervemodule type="LEFT_BACK"
-                      turn_p="0.5"
-                      turn_i="0.1"
+                      turn_p="0.95"
+                      turn_i="0.3"
                       turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
-                      turn_peak_val="1.0"
+                      turn_peak_val="0.9"
                       turn_max_acc="10"
                       turn_cruise_vel="50"
 			 wheelDiameter="4.0">
@@ -138,16 +138,16 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="0"
-                            offset="-20.215"/>
+                            offset="22.676"/>
         </swervemodule>
 
         <swervemodule type="RIGHT_FRONT"
-                      turn_p="0.5"
-                      turn_i="0.1"
+                      turn_p="0.95"
+                      turn_i="0.3"
                       turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
-                      turn_peak_val="1.0"
+                      turn_peak_val="0.9"
                       turn_max_acc="10"
                       turn_cruise_vel="50"
 			 wheelDiameter="4.0">
@@ -190,16 +190,16 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="12"
-                            offset="-176.221"/>
+                            offset="115.137"/>
         </swervemodule>
 
         <swervemodule type="LEFT_FRONT"
-                      turn_p="0.5"
-                      turn_i="0.1"
+                      turn_p="0.95"
+                      turn_i="0.3"
                       turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
-                      turn_peak_val="1.0"
+                      turn_peak_val="0.9"
                       turn_max_acc="10"
                       turn_cruise_vel="50"
 			 wheelDiameter="4.0">
@@ -242,7 +242,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="14"
-                            offset="184.658"/>
+                            offset="-156.797"/>
         </swervemodule>
 
     </swervechassis>  

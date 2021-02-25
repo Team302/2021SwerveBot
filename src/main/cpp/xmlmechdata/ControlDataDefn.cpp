@@ -57,7 +57,7 @@ ControlData* ControlDataDefn::ParseXML
     double maxAccel = 0.0;
     double cruiseVel = 0.0;
     double peak = 1.0;
-    double nominal = 1.0;
+    double nominal = 0.0;
 	
 	map<string, ControlModes::CONTROL_TYPE> modeMap;
 	modeMap[string("PERCENT_OUTPUT")] = ControlModes::CONTROL_TYPE::PERCENT_OUTPUT;
