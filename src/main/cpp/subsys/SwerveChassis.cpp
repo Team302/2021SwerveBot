@@ -182,6 +182,16 @@ void SwerveChassis::UpdateOdometry()
                                 m_backRight.get()->GetState());
 }
 
+/// @brief set all of the encoders to zero
+void SwerveChassis::SetEncodersToZero()
+{
+    m_frontLeft.get()->SetEncodersToZero();
+    m_frontRight.get()->SetEncodersToZero();
+    m_backLeft.get()->SetEncodersToZero();
+    m_backRight.get()->SetEncodersToZero();
+}
+
+
 /// @brief Provide the current chassis speed information
 ChassisSpeeds SwerveChassis::GetChassisSpeeds() const
 {

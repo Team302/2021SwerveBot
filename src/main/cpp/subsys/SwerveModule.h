@@ -63,6 +63,10 @@ class SwerveModule
         /// @returns void
         void ZeroAlignModule();
 
+        /// @brief Set all motor encoders to zero
+        /// @returns void
+        void SetEncodersToZero();
+
         /// @brief Get the current state of the module (speed of the wheel and angle of the wheel)
         /// @returns SwerveModuleState
         frc::SwerveModuleState GetState() const;
@@ -97,10 +101,10 @@ class SwerveModule
                                                                                     { wpi::math::pi * 1_rad_per_s, 
                                                                                       wpi::math::pi * 2_rad_per_s / 1_s}};
 
-        double                                              m_initialAngle;
-        int                                                 m_initialCounts;
-        std::shared_ptr<nt::NetworkTable>                   m_nt;        
-        frc::SwerveModuleState                              m_currentState;
-        units::velocity::meters_per_second_t                m_maxVelocity;
+        double                                                  m_initialAngle;
+        int                                                     m_initialCounts;
+        std::shared_ptr<nt::NetworkTable>                       m_nt;        
+        frc::SwerveModuleState                                  m_currentState;
+        units::velocity::meters_per_second_t                    m_maxVelocity;
 
 };

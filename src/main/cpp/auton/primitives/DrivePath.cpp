@@ -36,6 +36,7 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
   Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "False");
   Logger::GetLogger()->ToNtTable("DrivePath", "Running", "False");
   Logger::GetLogger()->ToNtTable("DrivePath", "Done", "False");
+  Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", "0");
 }
 void DrivePath::Init(PrimitiveParams *params)
 {
@@ -69,14 +70,17 @@ Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
     // set current position to initial position which should be first node in path.
     m_trajectory = frc::TrajectoryUtil::FromPathweaverJson(deployDir);
     Logger::GetLogger()->LogError(string("At line"), string("66, before setting chassis pos to trajectory"));
-    m_currentChassisPosition = m_trajectory.InitialPose();
+    //m_currentChassisPosition = m_trajectory.InitialPose();
 
     Logger::GetLogger()->LogError(string("At line"), string("67, just set current chassis pos to trajectory"));
 
     // assume start angel of zero at start of path
     frc::Rotation2d StartAngle;
     StartAngle.Degrees() = units::degree_t(0);
-    //m_chassis->ResetPosition(m_currentChassisPosition, StartAngle);
+
+    m_chassis->SetEncodersToZero();
+
+    m_chassis->ResetPosition(m_trajectory.InitialPose(), StartAngle);
 
     Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", to_string(m_currentChassisPosition.X().to<double>()));
     Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", to_string(m_currentChassisPosition.Y().to<double>()));
@@ -89,16 +93,21 @@ void DrivePath::Run()
   // Update odometry.
   //m_chassis->UpdateOdometry();  done in robot.cpp
 
+  //Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTimeNoIf", to_string(m_timer.get()->Get()));
 
   Logger::GetLogger()->ToNtTable("DrivePath", "Running", "True");
  
   if (sPath2Load != "")
   {
 
+    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTimeBlankString", to_string(m_timer.get()->Get()));
+
     Logger::GetLogger()->ToNtTable("DrivePath", "Found Path = ", sPath2Load);
 
     if (units::second_t(m_timer.get()->Get()) < m_trajectory.TotalTime())
     {
+      int timesRan = 1;
+
       auto desiredPose = m_trajectory.Sample(units::second_t(m_timer.get()->Get()));
       // Get the reference chassis speeds from the Ramsete Controller.
       m_currentChassisPosition = m_chassis.get()->GetPose().GetEstimatedPosition();
@@ -108,11 +117,12 @@ void DrivePath::Run()
       Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", to_string(m_currentChassisPosition.X().to<double>()));
       Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", to_string(m_currentChassisPosition.Y().to<double>()));
 
+      Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", to_string(timesRan));
+      timesRan++;
+
       m_ramseteController.SetEnabled(true);
 
       auto refChassisSpeeds = m_ramseteController.Calculate(m_currentChassisPosition, desiredPose);
-
-      //auto refChassisSpeeds = m_ramseteController.Calculate(m_currentChassisPosition, );
 
       Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsX", to_string(refChassisSpeeds.vx()));
       Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsY", to_string(refChassisSpeeds.vy()));
@@ -122,8 +132,6 @@ void DrivePath::Run()
 
 
       m_chassis->Drive(refChassisSpeeds, false);
-
-      //m_chassis->Drive(refChassisSpeeds.vx * 100, refChassisSpeeds.vy * 100, refChassisSpeeds.omega * 100,false); //
       
       //m_chassis->Drive( 0.5, 0, 0, false);
 
@@ -131,9 +139,9 @@ void DrivePath::Run()
     }
     else
     {
-      Logger::GetLogger()->LogError(string("DrivePath - Error = "), string("Current Time greater than trajectory total time"));
-      Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTime", to_string(m_timer.get()->Get()));
-      Logger::GetLogger()->ToNtTable("DrivePathValues", "TrajectoryTotalTime", to_string(m_trajectory.TotalTime().to<double>()));
+      //Logger::GetLogger()->LogError(string("DrivePath - Error = "), string("Current Time greater than trajectory total time"));
+      //Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTime", to_string(m_timer.get()->Get()));
+      //Logger::GetLogger()->ToNtTable("DrivePathValues", "TrajectoryTotalTime", to_string(m_trajectory.TotalTime().to<double>()));
     }
     
 
@@ -154,7 +162,6 @@ bool DrivePath::IsDone()
   if (sPath2Load != "")
   {
     bool bTimeDone = units::second_t(m_timer.get()->Get()) >= m_trajectory.TotalTime();
-    sPath2Load = "";
     if ( bTimeDone //&& m_bRobotStopped
      )
     {
