@@ -17,7 +17,6 @@
 // C++ Includes
 #include <memory>
 #include <string>
-#include <vector>
 
 // FRC includes
 #include <networktables/NetworkTableInstance.h>
@@ -291,7 +290,7 @@ double DragonFalcon::GetRotations() const
 
 double DragonFalcon::GetRPS() const
 {
-	return (ConversionUtils::CountsPer100msToRPS( m_talon.get()->GetSelectedSensorVelocity(), m_countsPerRev) * m_gearRatio);
+	return (ConversionUtils::CountsPer100msToRPS( m_talon.get()->GetSelectedSensorVelocity(), m_countsPerRev) / m_gearRatio);
 }
 
 void DragonFalcon::SetControlMode(ControlModes::CONTROL_TYPE mode)
@@ -322,80 +321,93 @@ void DragonFalcon::UpdateFramePeriods
 
 void DragonFalcon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)
 {
-	auto output = value;
-	ctre::phoenix::motorcontrol::TalonFXControlMode ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput;
+	Logger::GetLogger()->ToNtTable(nt, string("motor id"), m_talon.get()->GetDeviceID());
 
-    switch (m_controlMode)
-    {
-        case ControlModes::CONTROL_TYPE::PERCENT_OUTPUT:
-			ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput;
-			break;
+	if ( m_controlMode == ControlModes::CONTROL_TYPE::VOLTAGE)
+	{
+		Logger::GetLogger()->ToNtTable(nt, string("motor target output voltage"), value);
+		m_talon.get()->SetVoltage(units::voltage::volt_t(value));
+	}
+	else
+	{
+		auto output = value;
+		ctre::phoenix::motorcontrol::TalonFXControlMode ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput;
+		switch (m_controlMode)
+		{
+			case ControlModes::CONTROL_TYPE::PERCENT_OUTPUT:
+				ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput;
+				break;
+				
+			case ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE:
+			case ControlModes::CONTROL_TYPE::POSITION_DEGREES:
+			case ControlModes::CONTROL_TYPE::POSITION_INCH:
+				ctreMode =:: ctre::phoenix::motorcontrol::TalonFXControlMode::Position;
+				break;
+
+			case ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE:
+			case ControlModes::CONTROL_TYPE::TRAPEZOID:
+				ctreMode =:: ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic;
+				break;
 			
-		case ControlModes::CONTROL_TYPE::VOLTAGE:
-			ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput;
-			break;
+			case ControlModes::CONTROL_TYPE::VELOCITY_DEGREES:
+			case ControlModes::CONTROL_TYPE::VELOCITY_INCH:
+			case ControlModes::CONTROL_TYPE::VELOCITY_RPS:
+				ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::Velocity;
+				break;
 
-        case ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE:
-			ctreMode =:: ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic;
-			break;
+			case ControlModes::CONTROL_TYPE::CURRENT:
+				ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::Current;
+				break;
 
-        case ControlModes::CONTROL_TYPE::POSITION_DEGREES:
-			ctreMode =:: ctre::phoenix::motorcontrol::TalonFXControlMode::Position;
-			output = (ConversionUtils::DegreesToCounts(value,m_countsPerRev) / m_gearRatio);
-			break;
+			case ControlModes::CONTROL_TYPE::MOTION_PROFILE:
+				ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::MotionProfile;
+				break;
 
-        case ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE:
-			ctreMode =:: ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic;
-			break;
+			case ControlModes::CONTROL_TYPE::MOTION_PROFILE_ARC:
+				ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::MotionProfileArc;
+				break;
 
-        case ControlModes::CONTROL_TYPE::POSITION_INCH:
-            ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::Position;
-			output = (ConversionUtils::InchesToCounts(value, m_countsPerRev, m_diameter) / m_gearRatio);
-        	break;
-        
-        case ControlModes::CONTROL_TYPE::VELOCITY_DEGREES:
-            ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::Velocity;
-			output = (ConversionUtils::DegreesPerSecondToCounts100ms( value, m_countsPerRev ) / m_gearRatio);
-        	break;
+			default:
+				Logger::GetLogger()->LogError( string("DragonFalcon::SetControlMode"), string("Invalid Control Mode"));
+				ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput;
+				break;
+		}	
 
-        case ControlModes::CONTROL_TYPE::VELOCITY_INCH:
-            ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::Velocity;
-			output = (ConversionUtils::InchesPerSecondToCounts100ms( value, m_countsPerRev, m_diameter ) / m_gearRatio);
-        	break;
+		switch (m_controlMode)
+		{
+			case ControlModes::CONTROL_TYPE::POSITION_DEGREES:
+				output = (ConversionUtils::DegreesToCounts(value,m_countsPerRev) * m_gearRatio);
+				break;
 
-		case ControlModes::CONTROL_TYPE::VELOCITY_RPS:
-            ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::Velocity;
-			output = value / m_gearRatio;
-			output = ConversionUtils::RPSToCounts100ms( output, m_countsPerRev );
-        	break;
+			case ControlModes::CONTROL_TYPE::POSITION_INCH:
+			case ControlModes::CONTROL_TYPE::TRAPEZOID:
+				output = (ConversionUtils::InchesToCounts(value, m_countsPerRev, m_diameter) * m_gearRatio);
+				break;
+			
+			case ControlModes::CONTROL_TYPE::VELOCITY_DEGREES:
+				output = (ConversionUtils::DegreesPerSecondToCounts100ms( value, m_countsPerRev ) * m_gearRatio);
+				break;
 
-		case ControlModes::CONTROL_TYPE::CURRENT:
-			ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::Current;
-			break;
+			case ControlModes::CONTROL_TYPE::VELOCITY_INCH:
+				output = (ConversionUtils::InchesPerSecondToCounts100ms( value, m_countsPerRev, m_diameter ) * m_gearRatio);
+				break;
 
-		case ControlModes::CONTROL_TYPE::MOTION_PROFILE:
-			ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::MotionProfile;
-			break;
+			case ControlModes::CONTROL_TYPE::VELOCITY_RPS:
+				output = (ConversionUtils::RPSToCounts100ms( value, m_countsPerRev ) * m_gearRatio);
+				break;
 
-		case ControlModes::CONTROL_TYPE::MOTION_PROFILE_ARC:
-			ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::MotionProfileArc;
-			break;
+			default:
+				Logger::GetLogger()->LogError( string("DragonFalcon::SetControlMode"), string("Invalid Control Mode"));
+				break;
+		}	
 
-		case ControlModes::CONTROL_TYPE::TRAPEZOID:
-			ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::MotionMagic;
-			output = (ConversionUtils::InchesToCounts(value, m_countsPerRev, m_diameter) / m_gearRatio);
-			break;
+		Logger::GetLogger()->ToNtTable(nt, string("motor target output"), output);
 
-        default:
-            Logger::GetLogger()->LogError( string("DragonFalcon::SetControlMode"), string("Invalid Control Mode"));
-        	ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput;
-        	break;
-    }	
+		m_talon.get()->Set( ctreMode, output );
 
-	Logger::GetLogger()->ToNtTable(nt, string("motor id"), to_string(m_talon.get()->GetDeviceID()));
-	Logger::GetLogger()->ToNtTable(nt, string("motor output"), to_string(output));
-
-	m_talon.get()->Set( ctreMode, output );
+	}
+	Logger::GetLogger()->ToNtTable(nt, string("motor current percent output"), m_talon.get()->Get() );
+	Logger::GetLogger()->ToNtTable(nt, string("motor current RPS"), GetRPS() );
 }
 
 void DragonFalcon::Set(double value)
@@ -651,10 +663,10 @@ void DragonFalcon::SetControlConstants(int slot, ControlData* controlInfo)
 	auto id = m_talon.get()->GetDeviceID();
 	auto ntName = std::string("MotorOutput");
 	ntName += to_string(id);
-	Logger::GetLogger()->ToNtTable(ntName, string("P"), to_string(controlInfo->GetP()));
-	Logger::GetLogger()->ToNtTable(ntName, string("I"), to_string(controlInfo->GetI()));
-	Logger::GetLogger()->ToNtTable(ntName, string("D"), to_string(controlInfo->GetD()));
-	Logger::GetLogger()->ToNtTable(ntName, string("F"), to_string(controlInfo->GetF()));
+	Logger::GetLogger()->ToNtTable(ntName, string("P"), controlInfo->GetP());
+	Logger::GetLogger()->ToNtTable(ntName, string("I"), controlInfo->GetI());
+	Logger::GetLogger()->ToNtTable(ntName, string("D"), controlInfo->GetD());
+	Logger::GetLogger()->ToNtTable(ntName, string("F"), controlInfo->GetF());
 
 	auto peak = controlInfo->GetPeakValue();
 	auto error = m_talon.get()->ConfigPeakOutputForward(peak);

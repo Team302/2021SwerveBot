@@ -80,7 +80,8 @@ SwerveModule::SwerveModule
     m_initialCounts(0),
     m_nt(),
     m_currentState(),
-    m_maxVelocity(1_mps)
+    m_maxVelocity(1_mps),
+    m_scale(1.0)
 {
     Rotation2d ang { units::angle::degree_t(0.0)};
     m_currentState.angle = ang;
@@ -175,7 +176,6 @@ void SwerveModule::Init
 /// @returns void
 void SwerveModule::ZeroAlignModule()
 {
-    return;
     // Desired State
     units::velocity::meters_per_second_t mps = 0_mps;
     Rotation2d angle {units::angle::degree_t(0.0)};
@@ -192,11 +192,11 @@ void SwerveModule::ZeroAlignModule()
 /// @returns SwerveModuleState
 SwerveModuleState SwerveModule::GetState() const 
 {
-    // Get the Current Chassis Velocity
-    auto chassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
-    units::velocity::meters_per_second_t mps = units::length::meter_t(GetWheelDiameter() * pi ) / units::angle::radian_t(1.0) * units::angular_velocity::radians_per_second_t(m_driveMotor->GetRPS()*2.0*pi);
+    // Get the Module Drive Motor Speed
+    auto mpr = units::length::meter_t(GetWheelDiameter() * pi );               
+    auto mps = units::velocity::meters_per_second_t(mpr.to<double>() * m_driveMotor.get()->GetRPS());
 
-    // Get the Current Chassis Rotation
+    // Get the Module Current Rotation Angle
     Rotation2d angle {units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition())};
 
     // Create the state and return it
@@ -206,11 +206,11 @@ SwerveModuleState SwerveModule::GetState() const
 
 
 /// @brief Set the current state of the module (speed of the wheel and angle of the wheel)
-/// @param [in] const SwerveModuleState& referenceState:   state to set the module to
+/// @param [in] const SwerveModuleState& targetState:   state to set the module to
 /// @returns void
 void SwerveModule::SetDesiredState
 (
-    const SwerveModuleState& referenceState
+    const SwerveModuleState& targetState
 )
 {
     // Update targets so the angle turned is less than 90 degrees
@@ -218,37 +218,42 @@ void SwerveModule::SetDesiredState
     // if it is more than 90 degrees (90 to 270), the can turn the opposite direction -- increase the angle by 180 degrees -- and negate the wheel speed
     // finally, get the value between -90 and 90
     Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
-    auto state = SwerveModuleState::Optimize(referenceState, currAngle);
-    //auto state = referenceState;
-    auto wheelSpeed = state.speed;
-    auto delta = state.angle.Degrees() - currAngle.Degrees();
-    if ( abs(delta.to<double>() > 90.0 ))
-    {
-        if ( delta.to<double>() > 0.0 ) // 90+ degree turn
-        {
-            delta = delta - units::angle::degree_t(180.0);
-            wheelSpeed *= -1.0;
-        }
-        else // -90- degree turn
-        {
-            delta = delta + units::angle::degree_t(180.0);
-            wheelSpeed *= -1.0;
-        }
-    }
-
-    // Set Drive Target 
-    SetDriveSpeed(wheelSpeed);
+    auto optimizedState = Optimize(targetState, currAngle);
 
     // Set Turn Target 
-    units::angle::degree_t targetAngle = currAngle.Degrees() + delta;
-    SetTurnAngle(targetAngle);
+    SetTurnAngle(optimizedState.angle.Degrees());
+
+    // Set Drive Target 
+    SetDriveSpeed(optimizedState.speed);
 }
+
+// Note:  the following was taken from the WPI code and tweaked because we were seeing some weird 
+//        reversals that we believe was due to not using a tolerance
+SwerveModuleState SwerveModule::Optimize
+( 
+    const SwerveModuleState& desiredState,
+    const Rotation2d& currentAngle
+) 
+{
+    auto delta = desiredState.angle - currentAngle;
+    if ((units::math::abs(delta.Degrees()) - 90_deg) > 0.1_deg) 
+    {
+        return {-desiredState.speed, desiredState.angle + Rotation2d{180_deg}};
+    } 
+    else 
+    {
+        return {desiredState.speed, desiredState.angle};
+    }
+}
+
+
 
 void SwerveModule::RunCurrentState()
 {
     SetDriveSpeed(m_currentState.speed);
     SetTurnAngle(m_currentState.angle.Degrees());
 }
+
 void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
 {
     if ( abs(speed.to<double>()/m_maxVelocity.to<double>()) < 0.05 )
@@ -257,14 +262,14 @@ void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
     }
     else
     {
-        m_currentState.speed = speed;
+        m_currentState.speed = m_scale * speed;
     }
     
     // convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel
     auto driveTarget = m_currentState.speed.to<double>() /  units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi;  
 
-    Logger::GetLogger()->ToNtTable(m_nt, string("turn motor id"), to_string(m_driveMotor.get()->GetID()) );
-    Logger::GetLogger()->ToNtTable(m_nt, string("drive target"), to_string(driveTarget) );
+    Logger::GetLogger()->ToNtTable(m_nt, string("drive motor id"), m_driveMotor.get()->GetID() );
+    Logger::GetLogger()->ToNtTable(m_nt, string("drive target"), driveTarget );
      
     m_driveMotor.get()->Set(m_nt, driveTarget);
 }
@@ -275,36 +280,26 @@ void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
     Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
     Rotation2d deltaAngle = targetAngle - currAngle.Degrees();
 
-    /**
-    if ( deltaAngle.Degrees().to<double>() > 180.0 )
-    {
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR, string("delta angle too large motor"), to_string(m_turnMotor.get()->GetID()));
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR, string("delta angle too large"), to_string(deltaAngle.Degrees().to<double>()));
-    }
-    **/
-
-    Logger::GetLogger()->ToNtTable(m_nt, string("turn motor id"), to_string( m_turnMotor.get()->GetID()) );
-    Logger::GetLogger()->ToNtTable(m_nt, string("current angle"), to_string( currAngle.Degrees().to<double>() ) );
-    Logger::GetLogger()->ToNtTable(m_nt, string("target angle"), to_string( targetAngle.to<double>() ) );
-    Logger::GetLogger()->ToNtTable(m_nt, string("delta angle"), to_string( deltaAngle.Degrees().to<double>() ) );
+    Logger::GetLogger()->ToNtTable(m_nt, string("turn motor id"), m_turnMotor.get()->GetID() );
+    Logger::GetLogger()->ToNtTable(m_nt, string("current angle"), currAngle.Degrees().to<double>() );
+    Logger::GetLogger()->ToNtTable(m_nt, string("target angle"), targetAngle.to<double>() );
+    Logger::GetLogger()->ToNtTable(m_nt, string("delta angle"), deltaAngle.Degrees().to<double>() );
      
     if ( abs(deltaAngle.Degrees().to<double>()) > 1.0 )
     {
         auto motor = m_turnMotor.get()->GetSpeedController();
         auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
         auto sensors = fx->GetSensorCollection();
-        double currentTicks = sensors.GetIntegratedSensorPosition();
         //=============================================================================
         // 5592 counts on the falcon for 76.729 degree change on the CANCoder (wheel)
         //=============================================================================
-        // double deltaTicks = deltaAngle.Degrees().to<double>() * 72.5; //72.4694;
-        // double deltaTicks = (deltaAngle.Degrees().to<double>() * 72.5) / 4.0; //72.4694;
         double deltaTicks = (deltaAngle.Degrees().to<double>() * 5592 / 76.729); 
+        double currentTicks = sensors.GetIntegratedSensorPosition();
         double desiredTicks = currentTicks + deltaTicks;
 
-        Logger::GetLogger()->ToNtTable(m_nt, string("currentTicks"), to_string(currentTicks) );
-        Logger::GetLogger()->ToNtTable(m_nt, string("deltaTicks"), to_string(deltaTicks) );
-        Logger::GetLogger()->ToNtTable(m_nt, string("desiredTicks"), to_string(desiredTicks) );
+        Logger::GetLogger()->ToNtTable(m_nt, string("currentTicks"), currentTicks );
+        Logger::GetLogger()->ToNtTable(m_nt, string("deltaTicks"), deltaTicks );
+        Logger::GetLogger()->ToNtTable(m_nt, string("desiredTicks"), desiredTicks );
 
         m_turnMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE);
         m_turnMotor.get()->Set(m_nt, desiredTicks);

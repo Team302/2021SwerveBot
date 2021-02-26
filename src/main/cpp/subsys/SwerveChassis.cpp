@@ -40,10 +40,10 @@ using namespace std;
 using namespace frc;
 
 /// @brief Construct a swerve chassis
-/// @param [in] std::shared_ptr<SwerveModule>     frontleft:          front left swerve module
-/// @param [in] std::shared_ptr<SwerveModule>     frontright:         front right swerve module
-/// @param [in] std::shared_ptr<SwerveModule>     backleft:           back left swerve module
-/// @param [in] std::shared_ptr<SwerveModule>     backright:          back right swerve module
+/// @param [in] std::shared_ptr<SwerveModule>           frontleft:          front left swerve module
+/// @param [in] std::shared_ptr<SwerveModule>           frontright:         front right swerve module
+/// @param [in] std::shared_ptr<SwerveModule>           backleft:           back left swerve module
+/// @param [in] std::shared_ptr<SwerveModule>           backright:          back right swerve module
 /// @param [in] units::length::inch_t                   wheelBase:          distance between the front and rear wheels
 /// @param [in] units::length::inch_t                   track:              distance between the left and right wheels
 /// @param [in] units::velocity::meters_per_second_t    maxSpeed:           maximum linear speed of the chassis 
@@ -51,10 +51,10 @@ using namespace frc;
 /// @param [in] double                                  maxAcceleration:    maximum acceleration in meters_per_second_squared
 SwerveChassis::SwerveChassis
 (
-    std::shared_ptr<SwerveModule>                               frontLeft, 
-    std::shared_ptr<SwerveModule>                               frontRight,
-    std::shared_ptr<SwerveModule>                               backLeft, 
-    std::shared_ptr<SwerveModule>                               backRight, 
+    shared_ptr<SwerveModule>                                    frontLeft, 
+    shared_ptr<SwerveModule>                                    frontRight,
+    shared_ptr<SwerveModule>                                    backLeft, 
+    shared_ptr<SwerveModule>                                    backRight, 
     units::length::inch_t                                       wheelBase,
     units::length::inch_t                                       track,
     units::velocity::meters_per_second_t                        maxSpeed,
@@ -72,6 +72,7 @@ SwerveChassis::SwerveChassis
     m_maxAcceleration(maxAcceleration),
     m_maxAngularAcceleration(maxAngularAcceleration),
     m_pigeon(PigeonFactory::GetFactory()->GetPigeon()),
+    m_scale(1.0),
     m_frontLeftLocation(wheelBase/2.0, track/2.0),
     m_frontRightLocation(wheelBase/2.0, -1.0*track/2.0),
     m_backLeftLocation(-1.0*wheelBase/2.0, track/2.0),
@@ -87,7 +88,6 @@ SwerveChassis::SwerveChassis
 /// @brief Align all of the swerve modules to point forward
 void SwerveChassis::ZeroAlignSwerveModules()
 {
-    return;
     m_frontLeft.get()->ZeroAlignModule();
     m_frontRight.get()->ZeroAlignModule();
     m_backLeft.get()->ZeroAlignModule();
@@ -109,14 +109,18 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
 {
     units::degree_t yaw{m_pigeon->GetYaw()};
     Rotation2d currentOrientation {yaw};
-    auto states = m_kinematics.ToSwerveModuleStates(
-                                fieldRelative ? frc::ChassisSpeeds::FromFieldRelativeSpeeds(
-                                xSpeed, ySpeed, rot, currentOrientation) : frc::ChassisSpeeds{xSpeed, ySpeed, rot} );
-    //auto states = m_kinematics.ToSwerveModuleStates( frc::ChassisSpeeds{xSpeed, ySpeed, rot}  );
+    auto states = m_kinematics.ToSwerveModuleStates
+                            (fieldRelative ?  ChassisSpeeds::FromFieldRelativeSpeeds(xSpeed, ySpeed, rot, currentOrientation) : 
+                                              ChassisSpeeds{xSpeed, ySpeed, rot} );
 
     m_kinematics.NormalizeWheelSpeeds(&states, m_maxSpeed);
 
     auto [fl, fr, bl, br] = states;
+
+    m_frontLeft.get()->SetDriveScale(m_scale);
+    m_frontRight.get()->SetDriveScale(m_scale);
+    m_backLeft.get()->SetDriveScale(m_scale);
+    m_backRight.get()->SetDriveScale(m_scale);
 
     m_frontLeft.get()->SetDesiredState(fl);
     m_frontRight.get()->SetDesiredState(fr);
@@ -130,14 +134,7 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
 ///                                                 false: direction is based on robot front/back
 void SwerveChassis::Drive( ChassisSpeeds speeds, bool fieldRelative) 
 {
-    Drive( speeds.vx, speeds.vy, speeds.omega, fieldRelative);
-
-    
-   // double dmsg = speeds.vx.to<double>();
-   // std::string msg = std::to_string(dmsg);
-
-   //Logger::GetLogger()->LogError(string(" speeds.vx "),  msg );
- 
+    Drive( speeds.vx, speeds.vy, speeds.omega, fieldRelative); 
 }
 
 /// @brief Drive the chassis
@@ -162,9 +159,9 @@ void SwerveChassis::Drive( double drive, double steer, double rotate, bool field
         auto maxSpeed = GetMaxSpeed();
         auto maxRotation = GetMaxAngularSpeed();
 
-        units::velocity::meters_per_second_t driveSpeed = drive * maxSpeed;
-        units::velocity::meters_per_second_t steerSpeed = steer * maxSpeed;
-        units::angular_velocity::radians_per_second_t rotateSpeed = rotate * maxRotation;
+        units::velocity::meters_per_second_t            driveSpeed = drive * maxSpeed;
+        units::velocity::meters_per_second_t            steerSpeed = steer * maxSpeed;
+        units::angular_velocity::radians_per_second_t   rotateSpeed = rotate * maxRotation;
 
         Drive( driveSpeed, steerSpeed, rotateSpeed, fieldRelative );
     }

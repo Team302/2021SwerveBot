@@ -111,6 +111,11 @@ class DragonTalon : public IDragonMotorController
             uint8_t			                                    milliseconds
         ) override;
 
+        void SetVoltage
+        (
+            units::volt_t output
+        ) override;
+
 
     private:
         std::shared_ptr<ctre::phoenix::motorcontrol::can::WPI_TalonSRX>  m_talon;

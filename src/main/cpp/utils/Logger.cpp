@@ -172,12 +172,33 @@ void Logger::ToNtTable
 
 void Logger::ToNtTable
 (
+    const std::string&  ntName,
+    const std::string&  identifier,
+    double              value 
+)
+{
+    auto table = nt::NetworkTableInstance::GetDefault().GetTable(ntName);
+	table.get()->PutNumber(identifier, value);
+}
+
+void Logger::ToNtTable
+(
     std::shared_ptr<nt::NetworkTable>   ntable,
     const std::string&                  identifier,
     const std::string&                  msg 
 )
 {
 	ntable.get()->PutString(identifier, msg);
+}
+
+void Logger::ToNtTable
+(
+    std::shared_ptr<nt::NetworkTable>   ntable,
+    const std::string&                  identifier,
+    double                              value 
+)
+{
+	ntable.get()->PutNumber(identifier, value);
 }
 
 Logger::Logger() : m_option( LOGGER_OPTION::CONSOLE ), 

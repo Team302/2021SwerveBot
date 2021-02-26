@@ -97,8 +97,20 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		m_axisIDs[ SWERVE_DRIVE_STEER]					= IDragonGamePad::LEFT_JOYSTICK_X;
 		m_controllerIndex[ SWERVE_DRIVE_ROTATE]			= ctrlNo;
 		m_axisIDs[ SWERVE_DRIVE_ROTATE]					= IDragonGamePad::RIGHT_JOYSTICK_X;
-		m_buttonIDs[ REZERO_PIGEON ]					= IDragonGamePad::X_BUTTON;
 		m_controllerIndex[ REZERO_PIGEON ]				= ctrlNo;
+		m_buttonIDs[ REZERO_PIGEON ]					= IDragonGamePad::X_BUTTON;
+
+		m_controllerIndex[DRIVE_FULL] = ctrlNo;
+		m_buttonIDs[DRIVE_FULL] = IDragonGamePad::POV_0;	
+
+		m_controllerIndex[DRIVE_75PERCENT] = ctrlNo;
+		m_buttonIDs[DRIVE_75PERCENT] = IDragonGamePad::POV_90;	
+
+		m_controllerIndex[DRIVE_50PERCENT] = ctrlNo;
+		m_buttonIDs[DRIVE_50PERCENT] = IDragonGamePad::POV_270;	
+
+		m_controllerIndex[DRIVE_25PERCENT] = ctrlNo;
+		m_buttonIDs[DRIVE_25PERCENT] = IDragonGamePad::POV_180;	
     }
     else
     {

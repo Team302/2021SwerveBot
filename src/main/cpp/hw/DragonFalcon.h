@@ -122,7 +122,7 @@ class DragonFalcon : public IDragonMotorController
 
         void SetDiameter( double diameter ) override;
 
-        void SetVoltage(units::volt_t output);
+        void SetVoltage(units::volt_t output) override;
 
         double GetCountsPerRev() const override {return m_countsPerRev;}
         void UpdateFramePeriods

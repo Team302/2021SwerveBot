@@ -39,6 +39,6 @@ class SwerveDrive : public IState
 
     private:
         inline TeleopControl* GetController() const { return m_controller; }
-        std::shared_ptr<SwerveChassis> m_chassis;
-        TeleopControl* m_controller;
+        std::shared_ptr<SwerveChassis>      m_chassis;
+        TeleopControl*                      m_controller;
 };

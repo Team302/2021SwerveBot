@@ -13,7 +13,7 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-//C++ Inlcudes
+//C++ Includes
 #include <memory>
 #include <units/velocity.h>
 #include <units/angular_velocity.h>
@@ -56,13 +56,17 @@ void SwerveDrive::Init()
     {
         controller->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE, IDragonGamePad::AXIS_PROFILE::CUBED );
         controller->SetDeadBand(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE, IDragonGamePad::AXIS_DEADBAND::APPLY_STANDARD_DEADBAND);
+        controller->SetSlewRateLimiter(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE, 3.0);
 
         controller->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER, IDragonGamePad::AXIS_PROFILE::CUBED );
         controller->SetDeadBand(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER, IDragonGamePad::AXIS_DEADBAND::APPLY_STANDARD_DEADBAND);
         controller->SetAxisScaleFactor(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER, -1.0);
+        controller->SetSlewRateLimiter(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER, 3.0);
 
         controller->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, IDragonGamePad::AXIS_PROFILE::CUBED );
         controller->SetDeadBand(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, IDragonGamePad::AXIS_DEADBAND::APPLY_STANDARD_DEADBAND);
+        controller->SetAxisScaleFactor(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, -1.0);
+        controller->SetSlewRateLimiter(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, 3.0);
    }
 }
 
@@ -84,11 +88,27 @@ void SwerveDrive::Run( )
             auto m_pigeon = factory->GetPigeon();
             m_pigeon->ReZeroPigeon( 0, 0);
         }
+        else if (controller->IsButtonPressed( TeleopControl::DRIVE_FULL))
+        {
+            m_chassis->SetDriveScaleFactor(1.0);
+        }
+        else if (controller->IsButtonPressed(TeleopControl::DRIVE_75PERCENT))
+        {
+            m_chassis->SetDriveScaleFactor(0.75);
+        }
+        else if (controller->IsButtonPressed(TeleopControl::DRIVE_50PERCENT))
+        {
+            m_chassis->SetDriveScaleFactor(0.50);
+        }
+        else if (controller->IsButtonPressed(TeleopControl::DRIVE_25PERCENT))
+        {
+            m_chassis->SetDriveScaleFactor(0.25);
+        }
         else
         {
             drive  = controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE) ;
             steer  = controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER);
-            rotate =  controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
+            rotate = controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
         }
     }
     m_chassis.get()->Drive(drive, steer, rotate, true);
