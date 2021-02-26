@@ -133,6 +133,8 @@ class SwerveChassis
         std::shared_ptr<SwerveModule> GetBackRight() const { return m_backRight;}
         frc::SwerveDrivePoseEstimator<4> GetPose() const { return m_poseEstimator; }  
 
+        void SetDriveScaleFactor( double scale ) { m_scale = scale;}
+
     private:
 
         std::shared_ptr<SwerveModule>                               m_frontLeft;
@@ -148,6 +150,7 @@ class SwerveChassis
         units::angular_acceleration::radians_per_second_squared_t   m_maxAngularAcceleration;
 
         DragonPigeon*                                               m_pigeon;
+        double                                                      m_scale;
         
         frc::Translation2d m_frontLeftLocation;
         frc::Translation2d m_frontRightLocation;

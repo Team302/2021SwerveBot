@@ -75,6 +75,7 @@ class IDragonMotorController
         virtual void Invert(bool inverted) = 0;
         virtual void SetSensorInverted(bool inverted) = 0;
 		virtual void SetDiameter( double diameter ) = 0;
+        virtual void SetVoltage(  units::volt_t output ) = 0;
 
 
         /// @brief  Set the control constants (e.g. PIDF values).

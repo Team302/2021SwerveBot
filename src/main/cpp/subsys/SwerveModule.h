@@ -1,21 +1,45 @@
+//====================================================================================================================================================
+// Copyright 2020 Lake Orion Robotics FIRST Team 302
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
+// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
+//====================================================================================================================================================
+
 #pragma once
 
+//C++ Includes
 #include <memory>
 
+// FRC Includes
 #include <frc/Encoder.h>
+#include <frc/geometry/Rotation2d.h>
 #include <frc/controller/PIDController.h>
 #include <frc/controller/ProfiledPIDController.h>
 #include <frc/controller/SimpleMotorFeedforward.h>
 #include <frc/kinematics/SwerveModuleState.h>
+
 #include <units/acceleration.h>
 #include <units/angular_acceleration.h>
 #include <units/angular_velocity.h>
 #include <units/time.h>
 #include <units/velocity.h>
 #include <units/voltage.h>
+
 #include <wpi/math>
+
+// Team 302 Includes
 #include <hw/DragonFalcon.h>
 #include <hw/interfaces/IDragonMotorController.h>
+
+// Third Party Includes
 #include <ctre/phoenix/sensors/CANCoder.h>
 
 
@@ -83,8 +107,17 @@ class SwerveModule
         ModuleID GetType() {return m_type;}
         units::length::inch_t GetWheelDiameter() const {return m_wheelDiameter;}
 
+        void SetDriveScale( double scale ) { m_scale = scale; }
         
     private:
+        // Note:  the following was taken from the WPI code and tweaked because we were seeing some weird 
+        //        reversals that we believe was due to not using a tolerance
+        frc::SwerveModuleState Optimize
+        ( 
+            const frc::SwerveModuleState& desiredState,
+            const frc::Rotation2d& currentAngle
+        );
+
     //    frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward {1_V, 0.5_V / 1_rad_per_s};
         frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward {1_V, 0.05_V / 1_rad_per_s};
         void SetDriveSpeed( units::velocity::meters_per_second_t speed );
@@ -101,10 +134,12 @@ class SwerveModule
                                                                                     { wpi::math::pi * 1_rad_per_s, 
                                                                                       wpi::math::pi * 2_rad_per_s / 1_s}};
 
-        double                                                  m_initialAngle;
-        int                                                     m_initialCounts;
-        std::shared_ptr<nt::NetworkTable>                       m_nt;        
-        frc::SwerveModuleState                                  m_currentState;
-        units::velocity::meters_per_second_t                    m_maxVelocity;
+        double                                              m_initialAngle;
+        int                                                 m_initialCounts;
+        std::shared_ptr<nt::NetworkTable>                   m_nt;        
+        frc::SwerveModuleState                              m_currentState;
+        units::velocity::meters_per_second_t                m_maxVelocity;
+        double                                              m_scale;
+
 
 };

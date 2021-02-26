@@ -133,9 +133,22 @@ class Logger
 
         void ToNtTable
         (
+            const std::string&  ntName,
+            const std::string&  identifier,
+            double              value 
+        );
+
+        void ToNtTable
+        (
             std::shared_ptr<nt::NetworkTable>   ntable,
             const std::string&                  identifier,
             const std::string&                  msg 
+        );
+        void ToNtTable
+        (
+            std::shared_ptr<nt::NetworkTable>   ntable,
+            const std::string&                  identifier,
+            double                              value 
         );
 
 

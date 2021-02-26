@@ -26,7 +26,7 @@
 //C++ Includes
 #include <units/dimensionless.h>
 
-//FRC Inlcudes
+//FRC Includes
 #include <frc/SlewRateLimiter.h>
 
 class SlewedAxis
