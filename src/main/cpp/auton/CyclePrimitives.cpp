@@ -62,7 +62,7 @@ void CyclePrimitives::Init()
 	m_primParams.clear();
 	m_primParams = PrimitiveParser::ParseXML( m_autonSelector->GetSelectedAutoFile() );
 	unsigned int paramsSize = m_primParams.size();
-	Logger::GetLogger()->ToNtTable("CyclePrims", "Number of Primitives:", to_string(paramsSize));
+	Logger::GetLogger()->ToNtTable("CyclePrims", "Number of Primitives:", paramsSize);
 	if (!m_primParams.empty())
 	{
 		GetNextPrim();

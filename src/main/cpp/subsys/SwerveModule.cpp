@@ -246,6 +246,24 @@ SwerveModuleState SwerveModule::Optimize
 ) 
 {
     auto delta = desiredState.angle - currentAngle;
+
+    // make sure the delta is between -180.0 and 180.0
+    if (delta.Degrees() < -180.0_deg)
+    {
+        while (delta.Degrees() < -180.0_deg )
+        {
+            delta.Degrees() = delta.Degrees() + 360.0_deg;
+        }
+    }
+    else if (delta.Degrees() > 180.0_deg)
+    {
+        while (delta.Degrees() > 180.0_deg)
+        {
+            delta.Degrees() = delta.Degrees() - 360.0_deg;
+        }
+    }
+
+    // if the delta is > 90 degrees, rotate the 
     if ((units::math::abs(delta.Degrees()) - 90_deg) > 0.1_deg) 
     {
         return {-desiredState.speed, desiredState.angle + Rotation2d{180_deg}};

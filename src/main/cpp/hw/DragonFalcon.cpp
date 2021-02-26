@@ -26,6 +26,7 @@
 #include <frc/SpeedController.h>
 
 // Team 302 includes
+#include <hw/interfaces/IDragonMotorController.h>
 #include <hw/DragonFalcon.h>
 //#include <hw/DragonPDP.h>
 #include <hw/usages/MotorControllerUsage.h>
@@ -317,6 +318,64 @@ void DragonFalcon::UpdateFramePeriods
 )
 {
 	m_talon.get()->SetStatusFramePeriod( frame, milliseconds, 0 );
+}
+
+void DragonFalcon::SetFramePeriodPriority
+(
+	MOTOR_PRIORITY              priority
+)
+{
+	switch ( priority )
+	{
+		case HIGH:
+			UpdateFramePeriods( StatusFrameEnhanced::Status_1_General, 10 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_2_Feedback0, 20 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_3_Quadrature, 100 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_4_AinTempVbat, 150 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_8_PulseWidth, 120 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_10_Targets, 120 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_11_UartGadgeteer, 120 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_12_Feedback1, 120 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_13_Base_PIDF0, 120 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_14_Turn_PIDF1, 120 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_15_FirmareApiStatus, 200 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_Brushless_Current, 200 );
+			break;
+
+		case MEDIUM:
+			UpdateFramePeriods( StatusFrameEnhanced::Status_1_General, 60 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_2_Feedback0, 120 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_3_Quadrature, 150 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_4_AinTempVbat, 200 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_8_PulseWidth, 150 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_10_Targets, 150 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_11_UartGadgeteer, 150 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_12_Feedback1, 150 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_13_Base_PIDF0, 150 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_14_Turn_PIDF1, 150 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_15_FirmareApiStatus, 200 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_Brushless_Current, 200 );
+			break;
+
+		case LOW:
+			UpdateFramePeriods( StatusFrameEnhanced::Status_1_General, 120 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_2_Feedback0, 200 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_3_Quadrature, 200 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_4_AinTempVbat, 200 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_8_PulseWidth, 200 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_10_Targets, 200 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_11_UartGadgeteer, 200 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_12_Feedback1, 200 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_13_Base_PIDF0, 200 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_14_Turn_PIDF1, 200 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_15_FirmareApiStatus, 200 );
+			UpdateFramePeriods( StatusFrameEnhanced::Status_Brushless_Current, 200 );
+			break;
+
+		default:
+		break;
+
+	}
 }
 
 void DragonFalcon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)

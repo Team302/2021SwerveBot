@@ -110,6 +110,11 @@ class DragonTalon : public IDragonMotorController
 	        ctre::phoenix::motorcontrol::StatusFrameEnhanced	frame,
             uint8_t			                                    milliseconds
         ) override;
+        
+        void SetFramePeriodPriority
+        (
+            MOTOR_PRIORITY              priority
+        ) override;
 
         void SetVoltage
         (

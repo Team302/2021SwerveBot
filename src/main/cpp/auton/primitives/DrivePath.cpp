@@ -36,7 +36,7 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
   Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "False");
   Logger::GetLogger()->ToNtTable("DrivePath", "Running", "False");
   Logger::GetLogger()->ToNtTable("DrivePath", "Done", "False");
-  Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", "0");
+  Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", 0);
 }
 void DrivePath::Init(PrimitiveParams *params)
 {
@@ -82,8 +82,8 @@ Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
 
     m_chassis->ResetPosition(m_trajectory.InitialPose(), StartAngle);
 
-    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", to_string(m_currentChassisPosition.X().to<double>()));
-    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", to_string(m_currentChassisPosition.Y().to<double>()));
+    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", m_currentChassisPosition.X().to<double>());
+    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", m_currentChassisPosition.Y().to<double>());
 
     m_PosChgTimer.Start(); // start scan timer to detect motion
   }
@@ -93,14 +93,14 @@ void DrivePath::Run()
   // Update odometry.
   //m_chassis->UpdateOdometry();  done in robot.cpp
 
-  //Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTimeNoIf", to_string(m_timer.get()->Get()));
+  //Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTimeNoIf", m_timer.get()->Get());
 
   Logger::GetLogger()->ToNtTable("DrivePath", "Running", "True");
  
   if (sPath2Load != "")
   {
 
-    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTimeBlankString", to_string(m_timer.get()->Get()));
+    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTimeBlankString", m_timer.get()->Get());
 
     Logger::GetLogger()->ToNtTable("DrivePath", "Found Path = ", sPath2Load);
 
@@ -112,23 +112,23 @@ void DrivePath::Run()
       // Get the reference chassis speeds from the Ramsete Controller.
       m_currentChassisPosition = m_chassis.get()->GetPose().GetEstimatedPosition();
       //Pose2d pull out attributes
-      Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseX", to_string(desiredPose.pose.X().to<double>()));
-      Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseY", to_string(desiredPose.pose.Y().to<double>()));
-      Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", to_string(m_currentChassisPosition.X().to<double>()));
-      Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", to_string(m_currentChassisPosition.Y().to<double>()));
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseX", desiredPose.pose.X().to<double>());
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseY", desiredPose.pose.Y().to<double>());
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", m_currentChassisPosition.X().to<double>());
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", m_currentChassisPosition.Y().to<double>());
 
-      Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", to_string(timesRan));
+      Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", timesRan);
       timesRan++;
 
       m_ramseteController.SetEnabled(true);
 
       auto refChassisSpeeds = m_ramseteController.Calculate(m_currentChassisPosition, desiredPose);
 
-      Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsX", to_string(refChassisSpeeds.vx()));
-      Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsY", to_string(refChassisSpeeds.vy()));
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsX", refChassisSpeeds.vx());
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsY", refChassisSpeeds.vy());
 
-      Logger::GetLogger()->ToNtTable("DrivePathValues", "TrajectoryTotalTime", to_string(m_trajectory.TotalTime().to<double>()));
-      Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTime", to_string(m_timer.get()->Get()));
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "TrajectoryTotalTime", m_trajectory.TotalTime().to<double>());
+      Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTime", m_timer.get()->Get());
 
 
       m_chassis->Drive(refChassisSpeeds, false);
@@ -140,8 +140,8 @@ void DrivePath::Run()
     else
     {
       //Logger::GetLogger()->LogError(string("DrivePath - Error = "), string("Current Time greater than trajectory total time"));
-      //Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTime", to_string(m_timer.get()->Get()));
-      //Logger::GetLogger()->ToNtTable("DrivePathValues", "TrajectoryTotalTime", to_string(m_trajectory.TotalTime().to<double>()));
+      //Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTime", m_timer.get()->Get());
+      //Logger::GetLogger()->ToNtTable("DrivePathValues", "TrajectoryTotalTime", m_trajectory.TotalTime().to<double>());
     }
     
 

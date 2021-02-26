@@ -129,8 +129,8 @@ void Mech1MotorState::Run()
     {
         m_mechanism->Update();
         auto ntName = m_mechanism->GetNetworkTableName();
-        Logger::GetLogger()->ToNtTable(string(ntName), string("Target"), to_string(GetTarget()));
-        Logger::GetLogger()->ToNtTable(string(ntName), string("Speed"), to_string(GetRPS()));
+        Logger::GetLogger()->ToNtTable(string(ntName), string("Target"), GetTarget());
+        Logger::GetLogger()->ToNtTable(string(ntName), string("Speed"), GetRPS());
     }
 }
 

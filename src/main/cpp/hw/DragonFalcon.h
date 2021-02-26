@@ -130,7 +130,10 @@ class DragonFalcon : public IDragonMotorController
 	        ctre::phoenix::motorcontrol::StatusFrameEnhanced	frame,
             uint8_t			                                    milliseconds
         ) override;
-
+        void SetFramePeriodPriority
+        (
+            MOTOR_PRIORITY              priority
+        ) override;
     private:
         std::shared_ptr<ctre::phoenix::motorcontrol::can::WPI_TalonFX>  m_talon;
         ControlModes::CONTROL_TYPE m_controlMode;

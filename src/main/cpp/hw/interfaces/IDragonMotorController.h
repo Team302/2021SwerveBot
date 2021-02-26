@@ -39,6 +39,14 @@
 class IDragonMotorController
 {
     public:
+
+        enum MOTOR_PRIORITY
+        {
+            HIGH,
+            MEDIUM,
+            LOW
+        };
+
         // Getters
         /// @brief  Return the number of revolutions the output shaft has spun
         /// @return double number of revolutions
@@ -94,6 +102,13 @@ class IDragonMotorController
 	        ctre::phoenix::motorcontrol::StatusFrameEnhanced	frame,
             uint8_t			                                    milliseconds
         ) = 0;
+
+        
+        virtual void SetFramePeriodPriority
+        (
+            MOTOR_PRIORITY              priority
+        ) = 0;
+            
         virtual double GetCountsPerRev() const = 0;
         
         IDragonMotorController() = default;

@@ -112,8 +112,9 @@ void  MechanismFactory::CreateIMechanism
 			auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE );
 			if ( motor.get() != nullptr )
 			{
-				motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
-				motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
+				motor.get()->SetFramePeriodPriority( IDragonMotorController::MOTOR_PRIORITY::LOW);
+				//motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
+				//motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
 
 				if ( m_intake1.get() == nullptr )
 				{
@@ -141,8 +142,9 @@ void  MechanismFactory::CreateIMechanism
 				auto bannerSensor = GetDigitalInput( digitalInputs, DigitalInputUsage::DIGITAL_SENSOR_USAGE::HOPPER_BANNER_SENSOR );
 				if( motor.get() != nullptr && bannerSensor.get() != nullptr)
 				{
-					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 80);
-					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
+					//motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 80);
+					//motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
+					motor.get()->SetFramePeriodPriority( IDragonMotorController::MOTOR_PRIORITY::MEDIUM);
 		
 					m_ballhopper = make_shared<BallHopper>(motor, bannerSensor);
 					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Ball Hopper"), string("created"));
@@ -163,8 +165,9 @@ void  MechanismFactory::CreateIMechanism
 				auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::BALL_TRANSFER );
 				if ( motor.get() != nullptr )
 				{
-					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 60);
-					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
+					motor.get()->SetFramePeriodPriority( IDragonMotorController::MOTOR_PRIORITY::MEDIUM);
+					//motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 60);
+					//motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
 					m_balltransfer = make_shared<BallTransfer>( motor );
 					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Ball Transfer"), string("created"));
 				}
@@ -204,7 +207,8 @@ void  MechanismFactory::CreateIMechanism
 				auto motor = GetMotorController(motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::TURRET);
 				if(motor.get() != nullptr)
 				{
-					motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 60);
+					motor.get()->SetFramePeriodPriority( IDragonMotorController::MOTOR_PRIORITY::MEDIUM);
+					//motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 60);
 					m_turret = make_shared<Turret>(motor);
 					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Turret"), string("created"));
 				}
