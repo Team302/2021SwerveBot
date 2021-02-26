@@ -154,7 +154,7 @@ bool DrivePath::IsDone()
   if (sPath2Load != "")
   {
     bool bTimeDone = units::second_t(m_timer.get()->Get()) >= m_trajectory.TotalTime();
-    sPath2Load = "";
+  //  sPath2Load = "";
     if ( bTimeDone //&& m_bRobotStopped
      )
     {
