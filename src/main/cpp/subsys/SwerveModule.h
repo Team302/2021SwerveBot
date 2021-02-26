@@ -87,6 +87,10 @@ class SwerveModule
         /// @returns void
         void ZeroAlignModule();
 
+        /// @brief Set all motor encoders to zero
+        /// @returns void
+        void SetEncodersToZero();
+
         /// @brief Get the current state of the module (speed of the wheel and angle of the wheel)
         /// @returns SwerveModuleState
         frc::SwerveModuleState GetState() const;
@@ -136,5 +140,6 @@ class SwerveModule
         frc::SwerveModuleState                              m_currentState;
         units::velocity::meters_per_second_t                m_maxVelocity;
         double                                              m_scale;
+
 
 };

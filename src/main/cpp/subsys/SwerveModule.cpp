@@ -172,6 +172,28 @@ void SwerveModule::Init
     m_driveMotor.get()->SetControlConstants( 0, driveCData.get() );
 }
 
+/*
+/// @brief Set all motor encoders to zero
+/// @brief void
+void SwerveModule::SetEncodersToZero(std::shared_ptr<IDragonMotorController> motor)
+{
+    auto motorSpeed = motor.get()->GetSpeedController();
+    auto fx = dynamic_cast<WPI_TalonFX*>(motorSpeed.get());
+    auto motorSensors = fx->GetSensorCollection();
+    motorSensors.SetIntegratedSensorPosition(0, 0);
+} 
+*/
+
+/// @brief Set all motor encoders to zero
+/// @brief void
+void SwerveModule::SetEncodersToZero()
+{
+    auto motor = m_driveMotor.get()->GetSpeedController();
+    auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
+    auto driveMotorSensors = fx->GetSensorCollection();
+    driveMotorSensors.SetIntegratedSensorPosition(0, 0);
+} 
+
 /// @brief Turn all of the wheel to zero degrees yaw according to the pigeon
 /// @returns void
 void SwerveModule::ZeroAlignModule()

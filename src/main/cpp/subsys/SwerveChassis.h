@@ -99,6 +99,9 @@ class SwerveChassis
         /// @brief Provide the current chassis speed information
         frc::ChassisSpeeds GetChassisSpeeds() const;
 
+        /// @brief Sets of the motor encoders to zero
+        void SetEncodersToZero();
+
         /// @brief Reset the current chassis pose based on the provided pose and rotation
         /// @param [in] const Pose2d&       pose        Current XY position
         /// @param [in] const Rotation2d&   angle       Current rotation angle
