@@ -38,6 +38,10 @@ ServoUsage* ServoUsage::GetInstance()
     return m_instance;
 }
 
+ServoUsage::ServoUsage()
+{
+
+}
 
 
 ServoUsage::~ServoUsage()
