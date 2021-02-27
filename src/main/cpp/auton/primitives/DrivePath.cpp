@@ -119,6 +119,11 @@ void DrivePath::Run()
       Logger::GetLogger()->ToNtTable("EncoderValues", "FLEncoder", to_string(m_chassis->GetFrontLeft()->GetEncoderValues()));
       Logger::GetLogger()->ToNtTable("EncoderValues", "FREncoder", to_string(m_chassis->GetFrontRight()->GetEncoderValues()));
 
+      Logger::GetLogger()->ToNtTable("EncoderValues", "BLEncoder", to_string(m_chassis->GetBackLeft()->GetEncoderValues()));
+      Logger::GetLogger()->ToNtTable("EncoderValues", "BREncoder", to_string(m_chassis->GetBackRight()->GetEncoderValues()));
+      Logger::GetLogger()->ToNtTable("EncoderValues", "FLEncoder", to_string(m_chassis->GetFrontLeft()->GetEncoderValues()));
+      Logger::GetLogger()->ToNtTable("EncoderValues", "FREncoder", to_string(m_chassis->GetFrontRight()->GetEncoderValues()));
+
       Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", to_string(timesRan));
       timesRan++;
 
