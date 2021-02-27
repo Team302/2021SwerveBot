@@ -472,6 +472,15 @@ void DragonFalcon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)
 	}
 	Logger::GetLogger()->ToNtTable(nt, string("motor current percent output"), m_talon.get()->Get() );
 	Logger::GetLogger()->ToNtTable(nt, string("motor current RPS"), GetRPS() );
+	Logger::GetLogger()->ToNtTable(nt, string("voltage"), m_talon.get()->GetMotorOutputVoltage());
+
+	auto id = m_talon.get()->GetDeviceID();
+	auto ntName = std::string("MotorOutput");
+	ntName += to_string(id);
+	Logger::GetLogger()->ToNtTable(ntName, string("motor current percent output"), m_talon.get()->Get() );
+	Logger::GetLogger()->ToNtTable(ntName, string("motor current RPS"), GetRPS() );
+	Logger::GetLogger()->ToNtTable(ntName, string("voltage"), m_talon.get()->GetMotorOutputVoltage());
+
 }
 
 void DragonFalcon::Set(double value)

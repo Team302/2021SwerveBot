@@ -107,6 +107,12 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
                            units::radians_per_second_t rot, 
                            bool fieldRelative) 
 {
+    Logger::GetLogger()->ToNtTable("Swerve Chassis", "XSpeed", xSpeed.to<double>() );
+    Logger::GetLogger()->ToNtTable("Swerve Chassis", "YSpeed", ySpeed.to<double>() );
+    Logger::GetLogger()->ToNtTable("Swerve Chassis", "ZSpeed", rot.to<double>() );
+    Logger::GetLogger()->ToNtTable("Swerve Chassis", "yaw", m_pigeon->GetYaw() );
+    Logger::GetLogger()->ToNtTable("Swerve Chassis", "scale", m_scale );
+    
     units::degree_t yaw{m_pigeon->GetYaw()};
     Rotation2d currentOrientation {yaw};
     auto states = m_kinematics.ToSwerveModuleStates

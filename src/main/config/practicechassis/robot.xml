@@ -38,9 +38,9 @@
                      maxAngularAcceleration="24.0">
 			 
         <swervemodule type="RIGHT_BACK"
-                      turn_p="1.0"
-                      turn_i="0.0"
-                      turn_d="0.05"
+                      turn_p="0.1"
+                      turn_i="0.01"
+                      turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
                       turn_peak_val="0.9"
@@ -91,9 +91,9 @@
         </swervemodule>
 
         <swervemodule type="LEFT_BACK"
-                      turn_p="1.0"
-                      turn_i="0.0"
-                      turn_d="0.05"
+                      turn_p="0.1"
+                      turn_i="0.01"
+                      turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
                       turn_peak_val="0.9"
@@ -143,9 +143,9 @@
         </swervemodule>
 
         <swervemodule type="RIGHT_FRONT"
-                      turn_p="1.0"
-                      turn_i="0.0"
-                      turn_d="0.05"
+                      turn_p="0.1"
+                      turn_i="0.01"
+                      turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
                       turn_peak_val="0.9"
@@ -195,9 +195,9 @@
         </swervemodule>
 
         <swervemodule type="LEFT_FRONT"
-                      turn_p="1.0"
-                      turn_i="0.0"
-                      turn_d="0.05"
+                      turn_p="0.1"
+                      turn_i="0.01"
+                      turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
                       turn_peak_val="0.9"
