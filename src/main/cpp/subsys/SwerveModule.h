@@ -91,6 +91,10 @@ class SwerveModule
         /// @returns void
         void SetEncodersToZero();
 
+        ///@brief
+        /// @returns
+        double GetEncoderValues();
+
         /// @brief Get the current state of the module (speed of the wheel and angle of the wheel)
         /// @returns SwerveModuleState
         frc::SwerveModuleState GetState() const;

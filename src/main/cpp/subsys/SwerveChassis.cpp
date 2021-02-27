@@ -188,6 +188,11 @@ void SwerveChassis::SetEncodersToZero()
     m_backRight.get()->SetEncodersToZero();
 }
 
+double SwerveChassis::GetEncoderValues(std::shared_ptr<SwerveModule> motor)
+{
+    return motor.get()->GetEncoderValues();
+}
+
 
 /// @brief Provide the current chassis speed information
 ChassisSpeeds SwerveChassis::GetChassisSpeeds() const
