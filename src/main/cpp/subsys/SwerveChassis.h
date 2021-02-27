@@ -102,6 +102,9 @@ class SwerveChassis
         /// @brief Sets of the motor encoders to zero
         void SetEncodersToZero();
 
+        /// @brief Get encoder values
+        double GetEncoderValues(std::shared_ptr<SwerveModule> motor);
+
         /// @brief Reset the current chassis pose based on the provided pose and rotation
         /// @param [in] const Pose2d&       pose        Current XY position
         /// @param [in] const Rotation2d&   angle       Current rotation angle
