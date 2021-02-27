@@ -72,7 +72,7 @@ SwerveChassis::SwerveChassis
     m_maxAcceleration(maxAcceleration),
     m_maxAngularAcceleration(maxAngularAcceleration),
     m_pigeon(PigeonFactory::GetFactory()->GetPigeon()),
-    m_scale(1.0),
+    m_scale(0.25),
     m_frontLeftLocation(wheelBase/2.0, track/2.0),
     m_frontRightLocation(wheelBase/2.0, -1.0*track/2.0),
     m_backLeftLocation(-1.0*wheelBase/2.0, track/2.0),

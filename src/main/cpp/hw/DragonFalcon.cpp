@@ -381,6 +381,7 @@ void DragonFalcon::SetFramePeriodPriority
 void DragonFalcon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)
 {
 	Logger::GetLogger()->ToNtTable(nt, string("motor id"), m_talon.get()->GetDeviceID());
+	Logger::GetLogger()->ToNtTable(nt, string("control mode"), m_controlMode);
 
 	if ( m_controlMode == ControlModes::CONTROL_TYPE::VOLTAGE)
 	{
@@ -427,7 +428,12 @@ void DragonFalcon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)
 				break;
 
 			default:
-				Logger::GetLogger()->LogError( string("DragonFalcon::SetControlMode"), string("Invalid Control Mode"));
+				string msg;
+				msg = string("Invalid control mode ");
+				msg += to_string(m_controlMode);
+				msg += " ";
+				msg += to_string(m_talon.get()->GetDeviceID());
+				Logger::GetLogger()->LogError( string("DragonFalcon::SetControlMode"), msg);
 				ctreMode = ctre::phoenix::motorcontrol::TalonFXControlMode::PercentOutput;
 				break;
 		}	
@@ -456,7 +462,6 @@ void DragonFalcon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)
 				break;
 
 			default:
-				Logger::GetLogger()->LogError( string("DragonFalcon::SetControlMode"), string("Invalid Control Mode"));
 				break;
 		}	
 

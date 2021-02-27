@@ -140,6 +140,4 @@ class SwerveModule
         frc::SwerveModuleState                              m_currentState;
         units::velocity::meters_per_second_t                m_maxVelocity;
         double                                              m_scale;
-
-
 };

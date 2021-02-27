@@ -35,10 +35,10 @@
                      maxAngularVelocity="1591.2"
                      maxAcceleration="5.0"
                      maxAngularAcceleration="5.0">
-			 
+	<!-- .25 -->
         <swervemodule type="RIGHT_BACK"
-                      turn_p="0.25"
-                      turn_i="0.0"
+                      turn_p="0.1"
+                      turn_i="0.01"
                       turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
@@ -66,6 +66,7 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>                  
+              <!-- gearRatio="8.4" -->
              <motor  usage="TURN"
                     canId="2"
                     pdpID="2"
@@ -74,7 +75,7 @@
                     sensorInverted="false"
                     feedbackDevice="INTERNAL"
                     countsPerRev="2048"
-                    gearRatio="8.4"
+                    gearRatio="1.0"
                     brakeMode="true"
                     follow="-1"
                     peakCurrentDuration="15.0"
@@ -89,9 +90,10 @@
                             offset="-135.879"/>
         </swervemodule>
 
+       <!-- .25 -->
         <swervemodule type="LEFT_BACK"
-                      turn_p="0.25"
-                      turn_i="0.0"
+                      turn_p="0.1"
+                      turn_i="0.01"
                       turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
@@ -118,6 +120,7 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>                  
+              <!-- gearRatio="8.4" -->
              <motor usage="TURN"
                     canId="0"
                     pdpID="0"
@@ -126,7 +129,7 @@
                     sensorInverted="false"
                     feedbackDevice="INTERNAL"
                     countsPerRev="2048"
-                    gearRatio="8.4"
+                    gearRatio="1.0"
                     brakeMode="true"
                     follow="-1"
                     peakCurrentDuration="15.0"
@@ -141,9 +144,10 @@
                             offset="22.676"/>
         </swervemodule>
 
+       <!-- .25 -->
         <swervemodule type="RIGHT_FRONT"
-                      turn_p="0.25"
-                      turn_i="0.0"
+                      turn_p="0.1"
+                      turn_i="0.01"
                       turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
@@ -170,6 +174,7 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>                  
+              <!-- gearRatio="8.4" -->
              <motor  usage="TURN"
                     canId="12"
                     pdpID="12"
@@ -178,7 +183,7 @@
                     sensorInverted="false"
                     feedbackDevice="INTERNAL"
                     countsPerRev="2048"
-                    gearRatio="8.4"
+                    gearRatio="1.0"
                     brakeMode="true"
                     follow="-1"
                     peakCurrentDuration="15.0"
@@ -193,9 +198,10 @@
                             offset="115.137"/>
         </swervemodule>
 
+       <!-- 0.25 -->
         <swervemodule type="LEFT_FRONT"
-                      turn_p="0.25"
-                      turn_i="0.0"
+                      turn_p="0.1"
+                      turn_i="0.01"
                       turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
@@ -222,6 +228,7 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>                  
+              <!-- gearRatio="8.4" -->
              <motor usage="TURN"
                     canId="14"
                     pdpID="14"
@@ -230,7 +237,7 @@
                     sensorInverted="false"
                     feedbackDevice="INTERNAL"
                     countsPerRev="2048"
-                    gearRatio="8.4"
+                    gearRatio="1.0"
                     brakeMode="true"
                     follow="-1"
                     peakCurrentDuration="15.0"

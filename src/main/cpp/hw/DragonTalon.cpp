@@ -446,8 +446,6 @@ void DragonTalon::Set(std::shared_ptr<nt::NetworkTable> nt, double value)
 				break;
 
 			default:
-				Logger::GetLogger()->LogError( string("DragonTalon::SetControlMode"), string("Invalid Control Mode"));
-				ctreMode = ctre::phoenix::motorcontrol::ControlMode::PercentOutput;
 				break;
 		}	
 
