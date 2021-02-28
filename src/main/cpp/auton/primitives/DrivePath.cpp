@@ -47,7 +47,6 @@ Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
  sPath2Load = params->GetPathName();     //sPath2Load = "Slalom1.wpilib.json" example
                                          // 
  Logger::GetLogger()->LogError(string("DrivePath - Loaded = "), sPath2Load);
- 
 
   if (sPath2Load != "") // only go if path name found
   {
@@ -76,7 +75,7 @@ Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
 
     // assume start angel of zero at start of path
     frc::Rotation2d StartAngle;
-    StartAngle.Degrees() = units::degree_t(0);
+    StartAngle.Degrees() = m_trajectory.InitialPose().Rotation().Degrees();
 
     m_chassis->SetEncodersToZero();
 
@@ -100,8 +99,6 @@ void DrivePath::Run()
   if (sPath2Load != "")
   {
 
-    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTimeBlankString", m_timer.get()->Get());
-
     Logger::GetLogger()->ToNtTable("DrivePath", "Found Path = ", sPath2Load);
 
     if (units::second_t(m_timer.get()->Get()) < m_trajectory.TotalTime())
@@ -117,7 +114,17 @@ void DrivePath::Run()
       Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", m_currentChassisPosition.X().to<double>());
       Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", m_currentChassisPosition.Y().to<double>());
 
-      Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", timesRan);
+      Logger::GetLogger()->ToNtTable("EncoderValues", "BLEncoder", to_string(m_chassis->GetBackLeft()->GetEncoderValues()));
+      Logger::GetLogger()->ToNtTable("EncoderValues", "BREncoder", to_string(m_chassis->GetBackRight()->GetEncoderValues()));
+      Logger::GetLogger()->ToNtTable("EncoderValues", "FLEncoder", to_string(m_chassis->GetFrontLeft()->GetEncoderValues()));
+      Logger::GetLogger()->ToNtTable("EncoderValues", "FREncoder", to_string(m_chassis->GetFrontRight()->GetEncoderValues()));
+
+      Logger::GetLogger()->ToNtTable("EncoderValues", "BLEncoder", to_string(m_chassis->GetBackLeft()->GetEncoderValues()));
+      Logger::GetLogger()->ToNtTable("EncoderValues", "BREncoder", to_string(m_chassis->GetBackRight()->GetEncoderValues()));
+      Logger::GetLogger()->ToNtTable("EncoderValues", "FLEncoder", to_string(m_chassis->GetFrontLeft()->GetEncoderValues()));
+      Logger::GetLogger()->ToNtTable("EncoderValues", "FREncoder", to_string(m_chassis->GetFrontRight()->GetEncoderValues()));
+
+      Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", to_string(timesRan));
       timesRan++;
 
       m_ramseteController.SetEnabled(true);
@@ -131,9 +138,9 @@ void DrivePath::Run()
       Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTime", m_timer.get()->Get());
 
 
-      m_chassis->Drive(refChassisSpeeds, false);
+      //m_chassis->Drive(refChassisSpeeds, true);
       
-      //m_chassis->Drive( 0.5, 0, 0, false);
+      m_chassis->Drive( 0.5, 0, 0, false);
 
       Logger::GetLogger()->LogError(string("DrivePath - Running Path = "), sPath2Load);
     }
