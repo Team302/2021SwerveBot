@@ -87,6 +87,7 @@ void SwerveDrive::Run( )
             auto factory = PigeonFactory::GetFactory();
             auto m_pigeon = factory->GetPigeon();
             m_pigeon->ReZeroPigeon( 0, 0);
+            m_chassis.get()->ZeroAlignSwerveModules();
         }
         else if (controller->IsButtonPressed( TeleopControl::DRIVE_FULL))
         {

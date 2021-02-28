@@ -196,6 +196,7 @@ double SwerveModule::GetEncoderValues()
 /// @returns void
 void SwerveModule::ZeroAlignModule()
 {
+    /*
     auto motor = m_turnMotor.get()->GetSpeedController();
     auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
     auto sensor = fx->GetSensorCollection();
@@ -205,17 +206,10 @@ void SwerveModule::ZeroAlignModule()
     double currentTicks = sensor.GetIntegratedSensorPosition();
     Logger::GetLogger()->ToNtTable(m_nt, string("currentTicks"), currentTicks );
     Logger::GetLogger()->ToNtTable(m_nt, string("current angle"), m_turnSensor.get()->GetAbsolutePosition() );
+    */
 
-    return;
     // Desired State
-    units::velocity::meters_per_second_t mps = 0_mps;
-    Rotation2d angle {units::angle::degree_t(0.0)};
-    SwerveModuleState desiredState{mps,angle};
-
-    // Optimize based on current wheel positions
-    Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
-    auto state = SwerveModuleState::Optimize(desiredState, currAngle);
-    SetTurnAngle(state.angle.Degrees());
+    SetTurnAngle(units::degree_t(0));
 }
 
 

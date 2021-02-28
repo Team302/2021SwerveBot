@@ -15,6 +15,7 @@
              UNKNOWN_PRIMITIVE = -1,
              DO_NOTHING,
              HOLD_POSITION,
+             RESET_POSITION,
              DRIVE_FORWARD,
              DRIVE_DISTANCE,
              DRIVE_TIME,
