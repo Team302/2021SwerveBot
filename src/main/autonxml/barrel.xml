@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE auton SYSTEM "auton.dtd">
 <auton>
+	<primitive id="RESET_POSITION"
+			   pathname="Barrel1.wpilib.json"/>
 	<primitive id="DRIVE_PATH"
-			   pathname="Calibrate.wpilib.json"/>
+			   pathname="Barrel1.wpilib.json"/>
 </auton>
