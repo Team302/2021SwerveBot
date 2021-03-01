@@ -5,14 +5,13 @@
 	<pigeon canId="50"
                rotation="90.0" />
 
-       <!-- was hard coded with all values as 0.0 in limelightAim -->
 	<limelight tablename="limelight"
-                  mountingheight="20.0"
+                  mountingheight="31.5"
                   horizontaloffset="0.0"
-                  mountingangle="15.0"
-                  rotation="0.0"
-                  targetheight="120.0"
-                  targetheight2="30.0"
+                  mountingangle="30.0"
+                  rotation="180.0"
+                  targetheight="98.25"
+                  targetheight2="0.0"
                   defaultledmode="currentpipeline"
                   defaultcammode="vision"
                   streammode="sidebyside"

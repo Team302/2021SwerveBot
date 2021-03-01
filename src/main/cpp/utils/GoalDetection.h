@@ -18,23 +18,38 @@
 
 // C++ Includes
 
+
 // FRC includes
 
 // Team 302 includes
+#include <hw/DragonLimelight.h>
+#include <hw/factories/LimeLightFactory.h>
 
 // Third Party Includes
 
-enum PRIMITIVE_IDENTIFIER
-  {
-      UNKNOWN_PRIMITIVE = -1,
-      DO_NOTHING,
-      HOLD_POSITION,
-      RESET_POSITION,
-      DRIVE_DISTANCE,
-      DRIVE_TIME,
-      TURN_ANGLE_ABS,
-      TURN_ANGLE_REL,
-      DRIVE_PATH,
-      MAX_AUTON_PRIMITIVES
-  };
 
+class GoalDetection
+{
+    public:
+	    static GoalDetection* GetInstance();
+
+        bool SeeOuterGoal() const;
+        bool SeeInnerGoal() const;
+
+        units::angle::degree_t GetHorizontalAngleToOuterGoal() const;
+        units::angle::degree_t GetHorizontalAngleToInnerGoal() const;
+
+        units::angle::degree_t GetVerticalAngleToOuterGoal() const;
+        units::angle::degree_t GetVerticalAngleToInnerGoal() const;
+
+        units::length::inch_t GetDistanceToOuterGoal() const;
+        units::length::inch_t GetDistanceToInnerGoal() const;
+
+    private:
+        static GoalDetection* m_instance;
+        GoalDetection();
+        ~GoalDetection() = default;
+
+        DragonLimelight*        m_camera;
+
+};

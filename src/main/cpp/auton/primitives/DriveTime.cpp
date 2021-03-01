@@ -14,27 +14,50 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-#pragma once
-
-// C++ Includes
+// C++ includes
+#include <memory>
 
 // FRC includes
+#include <units/time.h>
+#include <units/velocity.h>
 
-// Team 302 includes
+// 302 includes
+#include <auton/PrimitiveParams.h>
+#include <auton/primitives/DriveDirection.h>
+#include <auton/primitives/DriveTime.h>
 
-// Third Party Includes
 
-enum PRIMITIVE_IDENTIFIER
-  {
-      UNKNOWN_PRIMITIVE = -1,
-      DO_NOTHING,
-      HOLD_POSITION,
-      RESET_POSITION,
-      DRIVE_DISTANCE,
-      DRIVE_TIME,
-      TURN_ANGLE_ABS,
-      TURN_ANGLE_REL,
-      DRIVE_PATH,
-      MAX_AUTON_PRIMITIVES
-  };
 
+using namespace std;
+using namespace frc;
+
+DriveTime::DriveTime() :  DriveDirection(), m_time(), m_startSpeed()
+{
+}
+
+void DriveTime::Init(PrimitiveParams* params)
+{
+    m_time = units::time::second_t(params->GetTime());
+    m_startSpeed = units::velocity::feet_per_second_t(params->GetDriveSpeed()/12.0);
+    m_timer = make_shared<Timer>();
+    m_timer.get()->Start();
+}
+
+void DriveTime::Run()
+{
+    // TODO:: add PID to slow down as we get close instead of this ramp
+    auto currTime = units::time::second_t(m_timer.get()->Get());
+    auto percent = (currTime / m_time);
+    if (percent > 0.75)
+    {
+        UpdateSpeed((1.0-percent)*m_startSpeed);
+    }
+    DriveDirection::Run();
+}
+
+
+bool DriveTime::IsDone()
+{
+    auto currTime = units::time::second_t(m_timer.get()->Get());
+    return (currTime > m_time);
+}

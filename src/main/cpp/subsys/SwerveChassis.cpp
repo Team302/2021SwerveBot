@@ -18,10 +18,6 @@
 #include <memory>
 
 // FRC includes
-//#include <frc2/Timer.h>
-
-#include <frc/trajectory/constraint/SwerveDriveKinematicsConstraint.h>
-
 #include <units/acceleration.h>
 #include <units/angular_acceleration.h>
 #include <units/angular_velocity.h>
@@ -33,8 +29,6 @@
 
 // Third Party Includes
 #include <ctre/phoenix/sensors/CANCoder.h>
-
-//#include "ExampleGlobalMeasurementSensor.h"
 
 using namespace std;
 using namespace frc;

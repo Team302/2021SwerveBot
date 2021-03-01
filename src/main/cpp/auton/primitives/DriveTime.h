@@ -16,25 +16,31 @@
 
 #pragma once
 
-// C++ Includes
+// c++ includes
+#include <memory>
 
 // FRC includes
+#include <units/time.h>
+#include <units/velocity.h>
+#include <frc/Timer.h>
 
-// Team 302 includes
+// 302 includes 
+#include <auton/primitives/IPrimitive.h>
+#include <auton/primitives/DriveDirection.h>
 
-// Third Party Includes
+class PrimitiveParams;
+class DriveTime : public DriveDirection
+{
+    public:
+        void Init(PrimitiveParams*	Parms) override;
+        void Run() override;
+        bool IsDone() override;        
+        
+        DriveTime();
+        virtual ~DriveTime() = default;
 
-enum PRIMITIVE_IDENTIFIER
-  {
-      UNKNOWN_PRIMITIVE = -1,
-      DO_NOTHING,
-      HOLD_POSITION,
-      RESET_POSITION,
-      DRIVE_DISTANCE,
-      DRIVE_TIME,
-      TURN_ANGLE_ABS,
-      TURN_ANGLE_REL,
-      DRIVE_PATH,
-      MAX_AUTON_PRIMITIVES
-  };
-
+    private:
+        units::time::second_t                   m_time;
+        units::velocity::feet_per_second_t      m_startSpeed;
+        std::shared_ptr<frc::Timer>             m_timer;
+};

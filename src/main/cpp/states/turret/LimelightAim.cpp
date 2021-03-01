@@ -27,6 +27,7 @@
 #include <states/Mech1MotorState.h>
 #include <subsys/MechanismFactory.h>
 #include <subsys/Turret.h>
+#include <utils/GoalDetection.h>
 
 // Third Party Includes
 
@@ -39,7 +40,6 @@ LimelightAim::LimelightAim
 ) : IState(),
     m_motorState( make_unique<Mech1MotorState>(MechanismFactory::GetMechanismFactory()->GetIntake().get(), control, target)),
     m_turret(MechanismFactory::GetMechanismFactory()->GetTurret()),
-    m_limelight(LimelightFactory::GetLimelightFactory()->GetLimelight()),  
     m_atTarget(false),
     m_target(target),
     m_targetPosition(0.0),
@@ -50,15 +50,14 @@ LimelightAim::LimelightAim
 void LimelightAim::Init()
 {
     m_turret.get()->SetControlConstants(0, m_controlData);
-    m_limelight->SetLEDMode(DragonLimelight::LED_ON);
 }
 
 void LimelightAim::Run()
 {
-   double targetHorizontalOffset = m_limelight->GetTargetHorizontalOffset();
-   frc::SmartDashboard::PutNumber("horizontal offset", targetHorizontalOffset);
+   auto targetHorizontalOffset = GoalDetection::GetInstance()->GetHorizontalAngleToInnerGoal();
    double currentPosition = m_turret.get()->GetPosition();
-   m_turret.get()->UpdateTarget((currentPosition + targetHorizontalOffset + 2.0));
+   //m_turret.get()->UpdateTarget((currentPosition + targetHorizontalOffset + 2.0));
+   m_turret.get()->UpdateTarget((currentPosition + targetHorizontalOffset.to<double>()));
    m_turret.get()->Update();
 }
 

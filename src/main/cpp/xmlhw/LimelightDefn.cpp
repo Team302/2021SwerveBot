@@ -1,15 +1,25 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+
+//====================================================================================================================================================
+// Copyright 2020 Lake Orion Robotics FIRST Team 302 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
+// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
+//====================================================================================================================================================
+
 #include <string>
-#include "xmlhw/LimelightDefn.h"
-#include "hw/DragonLimelight.h"
-#include "utils/HardwareIDValidation.h"
-#include "utils/UsageValidation.h"
-#include "utils/Logger.h"
+#include <xmlhw/LimelightDefn.h>
+#include <hw/DragonLimelight.h>
+#include <utils/HardwareIDValidation.h>
+#include <utils/UsageValidation.h>
+#include <utils/Logger.h>
 #include <hw/factories/LimelightFactory.h>
 
 #include <pugixml/pugixml.hpp>
@@ -25,12 +35,12 @@ DragonLimelight* LimelightDefn::ParseXML(pugi::xml_node    limelightNode)
 
     // initialize attributes to default values
     std::string tableName = "";
-    double mountingHeight = 0.0;
-    double horizontalOffset = 0.0;
-    double mountingAngle = 0.0;
-    double rotation = 0.0;
-    double targetHeight = 0.0;
-    double targetHeight2 = 0.0;
+    units::length::inch_t mountingHeight = units::length::inch_t(0.0);
+    units::length::inch_t horizontalOffset = units::length::inch_t(0.0);
+    units::angle::degree_t mountingAngle = units::angle::degree_t(0.0);
+    units::angle::degree_t rotation = units::angle::degree_t(0.0);
+    units::length::inch_t targetHeight = units::length::inch_t(0.0);
+    units::length::inch_t targetHeight2 = units::length::inch_t(0.0);
 
     DragonLimelight::LED_MODE ledMode = DragonLimelight::LED_MODE::LED_DEFAULT;
     DragonLimelight::CAM_MODE camMode = DragonLimelight::CAM_MODE::CAM_VISION;
@@ -50,28 +60,28 @@ DragonLimelight* LimelightDefn::ParseXML(pugi::xml_node    limelightNode)
         }
         else if ( strcmp( attr.name(), "mountingheight" ) == 0 )
         {
-            mountingHeight = attr.as_double();
+            mountingHeight = units::length::inch_t(attr.as_double());
         }
         else if ( strcmp( attr.name(), "horizontaloffset" ) == 0 )
         {
-            horizontalOffset = attr.as_double();
+            horizontalOffset = units::length::inch_t(attr.as_double());
         }
         else if ( strcmp( attr.name(), "mountingangle" ) == 0 )
         {
-            mountingAngle = attr.as_double();
+            mountingAngle = units::angle::degree_t(attr.as_double());
         }
         else if ( strcmp( attr.name(), "rotation" ) == 0 )
         {
-            rotation = attr.as_double();
+            rotation = units::angle::degree_t(attr.as_double());
         }
 		//todo: should this come from state XMLs
         else if ( strcmp( attr.name(), "targetheight" ) == 0 )
         {
-            targetHeight = attr.as_double();
+            targetHeight = units::length::inch_t(attr.as_double());
         }
         else if ( strcmp( attr.name(), "targetheight2" ) == 0 )
         {
-            targetHeight2 = attr.as_double();
+            targetHeight2 = units::length::inch_t(attr.as_double());
         }
         else if ( strcmp( attr.name(), "defaultledmode" ) == 0 )
         {
