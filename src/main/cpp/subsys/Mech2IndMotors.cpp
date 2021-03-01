@@ -57,10 +57,6 @@ Mech2IndMotors::Mech2IndMotors
     m_type(type),
     m_controlFile(controlFileName),
     m_ntName(networkTableName),
-    m_logging(false),
-    m_milliSecondsBetweenLogging(20.0),
-    m_lastTime(0.0),
-    m_timer(),
     m_primary( primaryMotor),
     m_secondary( secondaryMotor),
     m_primaryTarget(0.0),
@@ -99,36 +95,21 @@ std::string Mech2IndMotors::GetNetworkTableName() const
     return m_ntName;
 }
 
-/// @brief Activates logging key values to network table
-/// @param [in] int: indicate how many millisecondsBetweenLogging updates to the network table 
-void Mech2IndMotors::ActivateLogging
-(
-    units::second_t     millisecondsBetweenLogging
-) 
-{
-    m_milliSecondsBetweenLogging = millisecondsBetweenLogging;
-    m_logging = true;
-}
-
 /// @brief log data to the network table if it is activated and time period has past
 void Mech2IndMotors::LogData()
 {
-    if(m_logging)
-    {
-        auto currentTime = m_timer.get()->GetFPGATimestamp();
-        if ((currentTime - m_lastTime) > m_milliSecondsBetweenLogging )
-        {
-            // TODO:  update the network table
-        }
+    auto ntName = GetNetworkTableName();
+    auto table = nt::NetworkTableInstance::GetDefault().GetTable(ntName);
 
-    }
+    Logger::GetLogger()->ToNtTable(table, "Speed - Primary", GetPrimarySpeed() );
+    Logger::GetLogger()->ToNtTable(table, "Speed - Secondary", GetSecondarySpeed() );
+    
+    Logger::GetLogger()->ToNtTable(table, "Position - Primary", GetPrimaryPosition() );
+    Logger::GetLogger()->ToNtTable(table, "Position - Secondary", GetSecondaryPosition() );
+    
+    Logger::GetLogger()->ToNtTable(table, "Target - Primary", GetPrimaryTarget() );
+    Logger::GetLogger()->ToNtTable(table, "Target - Secondary", GetSecondaryTarget() );
 }
-/// @brief Stop updating the key values to network table
-void Mech2IndMotors::DeactivateLogging() 
-{
-    m_logging = false;
-}
-
 
 /// @brief update the output to the mechanism using the current controller and target value(s)
 /// @return void 
@@ -144,6 +125,8 @@ void Mech2IndMotors::Update()
     {
         m_secondary.get()->Set(table, m_secondaryTarget);
     }
+
+    LogData();
 }
 
 void Mech2IndMotors::UpdateTargets
@@ -200,12 +183,18 @@ void Mech2IndMotors::SetControlConstants
     {
         m_primary.get()->SetControlConstants(slot, pid);
     }
+}
+void Mech2IndMotors::SetSecondaryControlConstants
+(
+    int                                         slot,
+    ControlData*                                pid                 
+) 
+{
     if ( m_secondary.get() != nullptr )
     {
         m_secondary.get()->SetControlConstants(slot, pid);
     }    
 }
-
 
 
 

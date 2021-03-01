@@ -359,5 +359,11 @@ void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
 
 }
 
+void SwerveModule::StopMotors()
+{
+    m_turnMotor.get()->GetSpeedController()->StopMotor();
+    m_driveMotor.get()->GetSpeedController()->StopMotor();
+}
+
 
 

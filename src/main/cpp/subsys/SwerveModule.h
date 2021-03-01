@@ -112,6 +112,8 @@ class SwerveModule
         units::length::inch_t GetWheelDiameter() const {return m_wheelDiameter;}
 
         void SetDriveScale( double scale ) { m_scale = scale; }
+
+        void StopMotors();
         
     private:
         // Note:  the following was taken from the WPI code and tweaked because we were seeing some weird 

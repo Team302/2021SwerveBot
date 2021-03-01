@@ -5,46 +5,52 @@
 	             mode="PERCENT_OUTPUT"/>
 	<controlData identifier="closedloopblue"
 				 mode="VELOCITY_RPS"
-				 proportional="0.03"
-				 feedforward="0.28"/>
+				 proportional="0.15"
+				 feedforward="0.035"/>
 	<controlData identifier="closedloopyellow"
 				 mode="VELOCITY_RPS"
-				 proportional="0.03"
-				 feedforward="0.18"/>
+				 proportional="0.15"
+				 feedforward="0.0385"/>
 	<controlData identifier="closedloopgreen"
 				 mode="VELOCITY_RPS"
-				 proportional="0.03"
-				 feedforward="0.09"/>
+				 proportional="0.15"
+				 feedforward="0.055"/>
 	<controlData identifier="closedloopred"
 				 mode="VELOCITY_RPS"
-				 proportional="0.03"
-				 feedforward="0.37"/>
+				 proportional="0.15"
+				 feedforward="0.041"/>
 	<mechanismTarget stateIdentifier="SHOOTEROFF"
 	                 controlDataIdentifier="openloop"
+	                 controlDataIdentifier2="openloop"
 					 value="0.0"/>
 	<mechanismTarget stateIdentifier="SHOOTERGETREADY"
 	                 controlDataIdentifier="openloop"
+	                 controlDataIdentifier2="openloop"
 					 value="0.5"
 					 secondValue="0.5"/>
 
 	<mechanismTarget stateIdentifier="SHOOTERSHOOTGREEN"
 					 controlDataIdentifier="closedloopgreen"
-					 value="10"
-					 secondValue="10"/>
+					 controlDataIdentifier2="closedloopgreen"
+					 value="37"
+					 secondValue="37"/>
 
 	<mechanismTarget stateIdentifier="SHOOTERSHOOTYELLOW"
 	                 controlDataIdentifier="closedloopyellow"
-					 value="20"
-					 secondValue="20"/>
+	                 controlDataIdentifier2="closedloopyellow"
+					 value="29.5"
+					 secondValue="29.5"/>
 
 	<mechanismTarget stateIdentifier="SHOOTERSHOOTBLUE"
-					 controlDataIdentifier="closedloopbluer"
-					 value="30"
-					 secondValue="30"/>
+					 controlDataIdentifier="closedloopblue"
+					 controlDataIdentifier2="closedloopblue"
+					 value="32"
+					 secondValue="32"/>
 
-	<mechanismTarget stateIdentifier="SHOOTSHOOTRED"
+	<mechanismTarget stateIdentifier="SHOOTERSHOOTRED"
 					 controlDataIdentifier="closedloopred"
-					 value="40"
-					 secondValue="40"/>
+					 controlDataIdentifier2="closedloopred"
+					 value="35"
+					 secondValue="35"/>
 
 </statedata>

@@ -113,25 +113,35 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
     Logger::GetLogger()->ToNtTable("Swerve Chassis", "yaw", m_pigeon->GetYaw() );
     Logger::GetLogger()->ToNtTable("Swerve Chassis", "scale", m_scale );
     
-    units::degree_t yaw{m_pigeon->GetYaw()};
-    Rotation2d currentOrientation {yaw};
-    auto states = m_kinematics.ToSwerveModuleStates
-                            (fieldRelative ?  ChassisSpeeds::FromFieldRelativeSpeeds(xSpeed, ySpeed, rot, currentOrientation) : 
-                                              ChassisSpeeds{xSpeed, ySpeed, rot} );
+    if ( (abs(xSpeed.to<double>()) < 0.01) && (abs(ySpeed.to<double>()) < 0.01) && (abs(rot.to<double>()) < 0.01))
+    {
+        m_frontLeft.get()->StopMotors();
+        m_frontRight.get()->StopMotors();
+        m_backLeft.get()->StopMotors();
+        m_backRight.get()->StopMotors();
+    }
+    else
+    {   
+        units::degree_t yaw{m_pigeon->GetYaw()};
+        Rotation2d currentOrientation {yaw};
+        auto states = m_kinematics.ToSwerveModuleStates
+                                (fieldRelative ?  ChassisSpeeds::FromFieldRelativeSpeeds(xSpeed, ySpeed, rot, currentOrientation) : 
+                                                ChassisSpeeds{xSpeed, ySpeed, rot} );
 
-    m_kinematics.NormalizeWheelSpeeds(&states, m_maxSpeed);
+        m_kinematics.NormalizeWheelSpeeds(&states, m_maxSpeed);
 
-    auto [fl, fr, bl, br] = states;
+        auto [fl, fr, bl, br] = states;
 
-    m_frontLeft.get()->SetDriveScale(m_scale);
-    m_frontRight.get()->SetDriveScale(m_scale);
-    m_backLeft.get()->SetDriveScale(m_scale);
-    m_backRight.get()->SetDriveScale(m_scale);
+        m_frontLeft.get()->SetDriveScale(m_scale);
+        m_frontRight.get()->SetDriveScale(m_scale);
+        m_backLeft.get()->SetDriveScale(m_scale);
+        m_backRight.get()->SetDriveScale(m_scale);
 
-    m_frontLeft.get()->SetDesiredState(fl);
-    m_frontRight.get()->SetDesiredState(fr);
-    m_backLeft.get()->SetDesiredState(bl);
-    m_backRight.get()->SetDesiredState(br);
+        m_frontLeft.get()->SetDesiredState(fl);
+        m_frontRight.get()->SetDesiredState(fr);
+        m_backLeft.get()->SetDesiredState(bl);
+        m_backRight.get()->SetDesiredState(br);
+    }
 }
 
 /// @brief Drive the chassis
@@ -154,10 +164,10 @@ void SwerveChassis::Drive( double drive, double steer, double rotate, bool field
     if ( abs(drive) < 0.01 && abs(steer) < 0.01 && abs(rotate) < 0.01 )
     {
         // feed the motors
-        m_frontLeft.get()->RunCurrentState();
-        m_frontRight.get()->RunCurrentState();
-        m_backLeft.get()->RunCurrentState();
-        m_backRight.get()->RunCurrentState();       
+        m_frontLeft.get()->StopMotors();
+        m_frontRight.get()->StopMotors();
+        m_backLeft.get()->StopMotors();
+        m_backRight.get()->StopMotors();       
     }
     else
     {    

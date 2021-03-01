@@ -72,6 +72,11 @@ class IMech2IndMotors : public IMech
             int                                         slot,
             ControlData*                                pid                 
         ) = 0;
+        virtual void SetSecondaryControlConstants
+        (
+            int                                         slot,
+            ControlData*                                pid                 
+        ) = 0;
 
 
 	    IMech2IndMotors() = default;
