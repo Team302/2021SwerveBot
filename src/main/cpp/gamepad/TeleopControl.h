@@ -96,7 +96,7 @@ class TeleopControl
         void SetAxisScaleFactor
         (
             TeleopControl::FUNCTION_IDENTIFIER  axis,          // <I> - axis number to update
-            float                               scaleFactor    // <I> - scale factor used to limit the range
+            double                              scaleFactor    // <I> - scale factor used to limit the range
         );
 
         void SetDeadBand
@@ -108,7 +108,7 @@ class TeleopControl
         void SetSlewRateLimiter
         (
             TeleopControl::FUNCTION_IDENTIFIER  axis,
-            float                               slewRateLimiter
+            double                               slewRateLimiter
         );
 
         //------------------------------------------------------------------
@@ -126,9 +126,9 @@ class TeleopControl
         // Method:      GetAxisValue
         // Description: Reads the joystick axis, removes any deadband (small
         //              value) and then scales as requested.
-        // Returns:     float   -  scaled axis value
+        // Returns:     double   -  scaled axis value
         //------------------------------------------------------------------
-        float GetAxisValue
+        double GetAxisValue
         (
             TeleopControl::FUNCTION_IDENTIFIER     axis // <I> - axis number to update
         ) const;

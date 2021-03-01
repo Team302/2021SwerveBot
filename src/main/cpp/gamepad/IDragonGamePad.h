@@ -233,14 +233,14 @@ class IDragonGamePad
         virtual void SetAxisScale
         (
             AXIS_IDENTIFIER    			        axis,       // <I> - axis identifier to modify
-            float                               scaleFactor // <I> - value  (0 < scale <= 1.0) to scale the axis value
+            double                              scaleFactor // <I> - value  (0 < scale <= 1.0) to scale the axis value
         ) = 0;
 
 
         virtual void SetSlewLimit
         (
             AXIS_IDENTIFIER                     axis,
-            float                               scaleFactor
+            double                              scaleFactor
         ) = 0;
 
         //==================================================================================

@@ -65,13 +65,13 @@ class DragonGamepad : public IDragonGamePad
         void SetAxisScale
         (
             AXIS_IDENTIFIER axis,
-            float scaleFactor
+            double scaleFactor
         ) override;
 
         void SetSlewLimit
         (
             AXIS_IDENTIFIER axis,
-            float slewRateFactor
+            double slewRateFactor
         ) override;
 
         void SetButtonMode
@@ -100,8 +100,8 @@ class DragonGamepad : public IDragonGamePad
         frc::Joystick* m_gamepad;
         
         std::vector<AnalogAxis*> m_axis;
-        std::vector<float> m_axisScale;
-        std::vector<float> m_axisInversionFactor;
+        std::vector<double> m_axisScale;
+        std::vector<double> m_axisInversionFactor;
         std::vector<AXIS_PROFILE> m_axisProfile;
 
         std::vector<IButton*> m_button;

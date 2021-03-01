@@ -113,7 +113,9 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
     Logger::GetLogger()->ToNtTable("Swerve Chassis", "yaw", m_pigeon->GetYaw() );
     Logger::GetLogger()->ToNtTable("Swerve Chassis", "scale", m_scale );
     
-    if ( (abs(xSpeed.to<double>()) < 0.01) && (abs(ySpeed.to<double>()) < 0.01) && (abs(rot.to<double>()) < 0.01))
+    if ( (abs(xSpeed.to<double>()) < m_deadband) && 
+         (abs(ySpeed.to<double>()) < m_deadband) && 
+         (abs(rot.to<double>())    < m_deadband) )
     {
         m_frontLeft.get()->StopMotors();
         m_frontRight.get()->StopMotors();
@@ -126,7 +128,7 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
         Rotation2d currentOrientation {yaw};
         auto states = m_kinematics.ToSwerveModuleStates
                                 (fieldRelative ?  ChassisSpeeds::FromFieldRelativeSpeeds(xSpeed, ySpeed, rot, currentOrientation) : 
-                                                ChassisSpeeds{xSpeed, ySpeed, rot} );
+                                                  ChassisSpeeds{xSpeed, ySpeed, rot} );
 
         m_kinematics.NormalizeWheelSpeeds(&states, m_maxSpeed);
 
@@ -161,7 +163,9 @@ void SwerveChassis::Drive( ChassisSpeeds speeds, bool fieldRelative)
 ///                                     false: direction is based on robot front/back
 void SwerveChassis::Drive( double drive, double steer, double rotate, bool fieldRelative )
 {
-    if ( abs(drive) < 0.01 && abs(steer) < 0.01 && abs(rotate) < 0.01 )
+    if ( abs(drive)  < m_deadband && 
+         abs(steer)  < m_deadband && 
+         abs(rotate) < m_deadband )
     {
         // feed the motors
         m_frontLeft.get()->StopMotors();

@@ -126,9 +126,6 @@ void Robot::TeleopInit()
     {
         m_driverMode->SetCamToDriveMode( m_limelight );
     }
-
-    m_drive = make_shared<SwerveDrive>();
-    m_drive.get()->Init();
 }
 
 
