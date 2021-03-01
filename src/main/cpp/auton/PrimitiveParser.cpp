@@ -60,6 +60,7 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
     primStringToEnumMap["TURN_ANGLE_ABS"] = TURN_ANGLE_ABS;
     primStringToEnumMap["TURN_ANGLE_REL"] = TURN_ANGLE_REL;
     primStringToEnumMap["DRIVE_PATH"] = DRIVE_PATH;
+    primStringToEnumMap["RESET_POSITION"] = RESET_POSITION;
 
     xml_document doc;
     xml_parse_result result = doc.load_file( fulldirfile.c_str() );

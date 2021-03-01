@@ -1,5 +1,3 @@
-
-
 //====================================================================================================================================================
 // Copyright 2019 Lake Orion Robotics FIRST Team 302
 //
@@ -17,40 +15,37 @@
 
 #pragma once
 
-// C++ Includes
+//C++ Includes
+#include <memory>
 
-// FRC includes
+//FRC/WPI Includes
+#include <frc/trajectory/TrajectoryUtil.h>
+#include <frc/trajectory/TrajectoryConfig.h>
+#include <frc/Filesystem.h>
+#include <wpi/SmallString.h>
+#include <wpi/Path.h>
 
-// Team 302 includes
+//Team 302 Includes
+#include <auton/primitives/IPrimitive.h>
 
-// Third Party Includes
-
-
-
-#include <auton/PrimitiveEnums.h>
-
-class IPrimitive;
+//Forward Declares
+class SwerveChassis;
 class PrimitiveParams;
 
-class PrimitiveFactory 
+class ResetPosition : public IPrimitive
 {
-public:
+    public:
+        ResetPosition();
 
+        virtual ~ResetPosition() = default;
 
-	PrimitiveFactory();
-	virtual ~PrimitiveFactory();
-	static PrimitiveFactory* GetInstance();
-	IPrimitive* GetIPrimitive(PrimitiveParams* primitivePasser);
+        void Init(PrimitiveParams* params) override;
 
-private:
-    static PrimitiveFactory* m_instance;
-    IPrimitive* m_doNothing;
-    IPrimitive* m_driveTime;
-    IPrimitive* m_driveForward;
-    IPrimitive* m_driveDistance;
-    IPrimitive* m_turnAngle;
-    IPrimitive* m_holdPosition;
-    IPrimitive* m_drivePath;
-    IPrimitive* m_resetPosition;
+        void Run() override;
+
+        bool IsDone() override;
+    
+    private:
+        std::shared_ptr<SwerveChassis> m_chassis;
+        frc::Trajectory                m_trajectory;
 };
-

@@ -1,5 +1,3 @@
-
-
 //====================================================================================================================================================
 // Copyright 2019 Lake Orion Robotics FIRST Team 302
 //
@@ -15,42 +13,51 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-#pragma once
+//C++ Includes
+#include <memory>
+#include <string>
 
-// C++ Includes
+//Team 302 includes
+#include <auton/primitives/ResetPosition.h>
+#include <auton/PrimitiveParams.h>
+#include <auton/primitives/IPrimitive.h>
+#include <subsys/SwerveChassisFactory.h>
 
-// FRC includes
+using namespace std;
+using namespace frc;
 
-// Team 302 includes
-
-// Third Party Includes
-
-
-
-#include <auton/PrimitiveEnums.h>
-
-class IPrimitive;
-class PrimitiveParams;
-
-class PrimitiveFactory 
+ResetPosition::ResetPosition() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis())
 {
-public:
+}
 
+void ResetPosition::Init(PrimitiveParams* params)
+{
+    string pathToLoad = params->GetPathName();
 
-	PrimitiveFactory();
-	virtual ~PrimitiveFactory();
-	static PrimitiveFactory* GetInstance();
-	IPrimitive* GetIPrimitive(PrimitiveParams* primitivePasser);
+    if (pathToLoad != "")
+    {
+        wpi::SmallString<64> deployDir;
+        frc::filesystem::GetDeployDirectory(deployDir);
+        wpi::sys::path::append(deployDir, "paths");
+        wpi::sys::path::append(deployDir, pathToLoad);
 
-private:
-    static PrimitiveFactory* m_instance;
-    IPrimitive* m_doNothing;
-    IPrimitive* m_driveTime;
-    IPrimitive* m_driveForward;
-    IPrimitive* m_driveDistance;
-    IPrimitive* m_turnAngle;
-    IPrimitive* m_holdPosition;
-    IPrimitive* m_drivePath;
-    IPrimitive* m_resetPosition;
-};
+        m_trajectory = frc::TrajectoryUtil::FromPathweaverJson(deployDir);
 
+        frc::Rotation2d StartAngle;
+        StartAngle.Degrees() = m_trajectory.InitialPose().Rotation().Degrees();
+
+        m_chassis->SetEncodersToZero();
+
+        m_chassis->ResetPosition(m_trajectory.InitialPose(), StartAngle);
+    }
+}
+
+void ResetPosition::Run()
+{
+
+}
+
+bool ResetPosition::IsDone()
+{
+    return true;
+}

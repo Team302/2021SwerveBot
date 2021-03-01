@@ -33,6 +33,7 @@
 #include <frc/trajectory/TrajectoryConfig.h>
 
 #include <frc/controller/RamseteController.h>
+#include <frc/controller/HolonomicDriveController.h>
 #include <frc/Timer.h>
 #include <frc/estimator/SwerveDrivePoseEstimator.h>
 
@@ -67,6 +68,7 @@ private:
     frc::Pose2d m_currentChassisPosition;
     frc::Trajectory m_trajectory;
     frc::RamseteController m_ramseteController;
+    frc::HolonomicDriveController m_holoController;
     frc::Pose2d m_CurPos;                                          // Current position used for motion detect.
     frc::Pose2d m_PrevPos;                                         // previous position of robot for compare to current position.
     frc::Timer m_PosChgTimer;                                      // scan time for position change

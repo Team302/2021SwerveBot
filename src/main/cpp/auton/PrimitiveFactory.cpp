@@ -17,6 +17,7 @@
 #include <auton/primitives/TurnAngle.h>
 #include <auton/primitives/IPrimitive.h>
 #include <auton/primitives/DrivePath.h>
+#include <auton/primitives/ResetPosition.h>
 
 PrimitiveFactory* PrimitiveFactory::m_instance = nullptr;
 
@@ -33,7 +34,8 @@ PrimitiveFactory::PrimitiveFactory() :
 				m_driveDistance(nullptr),
 				m_turnAngle(nullptr),
 				m_holdPosition(nullptr),
-				m_drivePath(nullptr)
+				m_drivePath(nullptr),
+				m_resetPosition(nullptr)
 {
 }
 
@@ -54,6 +56,13 @@ IPrimitive* PrimitiveFactory::GetIPrimitive(PrimitiveParams* primitivePasser)
 		primitive =  m_doNothing;
 		break;
 
+	case RESET_POSITION:
+		if (m_resetPosition == nullptr)
+		{
+			m_resetPosition = new ResetPosition();
+		}
+		primitive = m_resetPosition;
+		break;
 	/*
 	case DRIVE_TIME:
 		if (m_driveTime == nullptr)
