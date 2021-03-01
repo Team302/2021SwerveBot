@@ -3,7 +3,7 @@
 <robot>
 	<!-- pdp canId="0" / -->
 	<pigeon canId="50"
-               rotation="90.0" />
+               rotation="0.0" />
 
 	<limelight tablename="limelight"
                   mountingheight="31.5"
@@ -30,11 +30,11 @@
     <swervechassis   type="SWERVE"
                      wheelBase="14.0"  
                      track="14.0"
-                     maxVelocity="194.4"
+                     maxVelocity="6"
                      maxAngularVelocity="1591.2"
-                     maxAcceleration="5.0"
-                     maxAngularAcceleration="5.0">
-	<!-- .25 -->
+                     maxAcceleration="1"
+                     maxAngularAcceleration="1">
+			 
         <swervemodule type="RIGHT_BACK"
                       turn_p="0.1"
                       turn_i="0.01"
@@ -42,8 +42,8 @@
                       turn_f="0.0"
                       turn_nominal_val="0.0"
                       turn_peak_val="0.9"
-                      turn_max_acc="13200"
-                      turn_cruise_vel="13200"
+                      turn_max_acc="20"
+                      turn_cruise_vel="50"
                       wheelDiameter="4.0"
 >
             <motor  usage="DRIVE"
@@ -65,7 +65,6 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>                  
-              <!-- gearRatio="8.4" -->
              <motor  usage="TURN"
                     canId="2"
                     pdpID="2"
@@ -74,7 +73,7 @@
                     sensorInverted="false"
                     feedbackDevice="INTERNAL"
                     countsPerRev="2048"
-                    gearRatio="1.0"
+                    gearRatio="8.4"
                     brakeMode="true"
                     follow="-1"
                     peakCurrentDuration="15.0"
@@ -86,10 +85,9 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="2"
-                            offset="-135.879"/>
+                            offset="-107.753906"/>
         </swervemodule>
 
-       <!-- .25 -->
         <swervemodule type="LEFT_BACK"
                       turn_p="0.1"
                       turn_i="0.01"
@@ -97,8 +95,8 @@
                       turn_f="0.0"
                       turn_nominal_val="0.0"
                       turn_peak_val="0.9"
-                      turn_max_acc="13200"
-                      turn_cruise_vel="13200"
+                      turn_max_acc="10"
+                      turn_cruise_vel="50"
 			 wheelDiameter="4.0">
             <motor  usage="DRIVE"
                     canId="1"
@@ -119,7 +117,6 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>                  
-              <!-- gearRatio="8.4" -->
              <motor usage="TURN"
                     canId="0"
                     pdpID="0"
@@ -128,7 +125,7 @@
                     sensorInverted="false"
                     feedbackDevice="INTERNAL"
                     countsPerRev="2048"
-                    gearRatio="1.0"
+                    gearRatio="8.4"
                     brakeMode="true"
                     follow="-1"
                     peakCurrentDuration="15.0"
@@ -140,10 +137,9 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="0"
-                            offset="22.676"/>
+                            offset="71.98242"/>
         </swervemodule>
 
-       <!-- .25 -->
         <swervemodule type="RIGHT_FRONT"
                       turn_p="0.1"
                       turn_i="0.01"
@@ -151,8 +147,8 @@
                       turn_f="0.0"
                       turn_nominal_val="0.0"
                       turn_peak_val="0.9"
-                      turn_max_acc="13200"
-                      turn_cruise_vel="13200"
+                      turn_max_acc="10"
+                      turn_cruise_vel="50"
 			 wheelDiameter="4.0">
             <motor  usage="DRIVE"
                     canId="13"
@@ -173,7 +169,6 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>                  
-              <!-- gearRatio="8.4" -->
              <motor  usage="TURN"
                     canId="12"
                     pdpID="12"
@@ -182,7 +177,7 @@
                     sensorInverted="false"
                     feedbackDevice="INTERNAL"
                     countsPerRev="2048"
-                    gearRatio="1.0"
+                    gearRatio="8.4"
                     brakeMode="true"
                     follow="-1"
                     peakCurrentDuration="15.0"
@@ -194,10 +189,9 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="12"
-                            offset="115.137"/>
+                            offset="66.35742"/>
         </swervemodule>
 
-       <!-- 0.25 -->
         <swervemodule type="LEFT_FRONT"
                       turn_p="0.1"
                       turn_i="0.01"
@@ -205,8 +199,8 @@
                       turn_f="0.0"
                       turn_nominal_val="0.0"
                       turn_peak_val="0.9"
-                      turn_max_acc="13200"
-                      turn_cruise_vel="13200"
+                      turn_max_acc="10"
+                      turn_cruise_vel="50"
 			 wheelDiameter="4.0">
             <motor  usage="DRIVE"
                     canId="15"
@@ -227,7 +221,6 @@
                     forwardlimitswitchopen="true"
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>                  
-              <!-- gearRatio="8.4" -->
              <motor usage="TURN"
                     canId="14"
                     pdpID="14"
@@ -236,7 +229,7 @@
                     sensorInverted="false"
                     feedbackDevice="INTERNAL"
                     countsPerRev="2048"
-                    gearRatio="1.0"
+                    gearRatio="8.4"
                     brakeMode="true"
                     follow="-1"
                     peakCurrentDuration="15.0"
@@ -248,7 +241,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="14"
-                            offset="-156.797"/>
+                            offset="133.242188"/>
         </swervemodule>
 
     </swervechassis>  
@@ -256,8 +249,9 @@
 <!-- ====================================================
      Mechanisms
      ==================================================== --> 
+     <!--   
 	<mechanism type="INTAKE">
-		<motor usage="INTAKE"
+		<motor usage="INTAKE1"
                      canId="10"
                      pdpID="10"
                      type="FALCON"
@@ -277,100 +271,11 @@
                      reverselimitswitch="false"
                      reverselimitswitchopen="true"/>        
 	</mechanism>
-
-
-    
-	<mechanism type="SHOOTER">
-		<motor  usage="SHOOTER_1"
-                      canId="5"
-                      pdpID="5"
-                      type="FALCON"
-                      inverted="true"
-                      sensorInverted="false"
-                      feedbackDevice="INTERNAL"
-                      countsPerRev="2048"
-                      gearRatio="1.24444"
-                      brakeMode="false"
-                      follow="-1"
-                      peakCurrentDuration="50"
-                      continuousCurrentLimit="30"
-                      peakCurrentLimit="40"
-                      currentLimiting="true" 
-                      forwardlimitswitch="false"
-                      forwardlimitswitchopen="true"
-                      reverselimitswitch="false"
-                      reverselimitswitchopen="true"/>
-		<motor  usage="SHOOTER_2"
-                      canId="6"
-                      pdpID="6"
-                      type="FALCON"
-                      inverted="false"
-                      sensorInverted="false"
-                      feedbackDevice="INTERNAL"
-                      countsPerRev="2048"
-                      gearRatio="1.24444"
-                      brakeMode="false"
-                      follow="-1"
-                      peakCurrentDuration="15.0"
-                      continuousCurrentLimit="40.0"
-                      peakCurrentLimit="50.0"
-                      currentLimiting="true" 
-                      forwardlimitswitch="false"
-                      forwardlimitswitchopen="true"
-                      reverselimitswitch="false"
-                      reverselimitswitchopen="true"/>
-	</mechanism>
-
-	<mechanism type="BALL_TRANSFER">
-		<motor usage="BALL_TRANSFER"
-                     canId="4"
-                     pdpID="4"
-                     type="FALCON"
-                     inverted="false"
-                     sensorInverted="false"
-                     feedbackDevice="INTERNAL"
-                     countsPerRev="2048"
-                     gearRatio="1.0"
-                     brakeMode="false"
-                     follow="-1"
-                     peakCurrentDuration="15.0"
-                     continuousCurrentLimit="40.0"
-                     peakCurrentLimit="50.0"
-                     currentLimiting="true" 
-                     forwardlimitswitch="false"
-                     forwardlimitswitchopen="true"
-                     reverselimitswitch="false"
-                     reverselimitswitchopen="true"/>        
- 
-	</mechanism>
-
-	<mechanism type="TURRET">
-		<motor usage="TURRET"
-                     canId="9"
-                     pdpID="9"
-                     type="TALONSRX"
-                     inverted="false"
-                     sensorInverted="false"
-                     feedbackDevice="INTERNAL"
-                     countsPerRev="2048"
-                     gearRatio="8.4"
-                     brakeMode="true"
-                     follow="-1"
-                     peakCurrentDuration="15.0"
-                     continuousCurrentLimit="40.0"
-                     peakCurrentLimit="50.0"
-                     currentLimiting="true" 
-                     forwardlimitswitch="true"
-                     forwardlimitswitchopen="true"
-                     reverselimitswitch="true"
-                     reverselimitswitchopen="true"/>        
-
-	</mechanism>
     
 	<mechanism type="INTAKE">
-		<motor usage="INTAKE"
-                     canId="7"
-                     pdpID="7"
+		<motor usage="INTAKE2"
+                     canId="4"
+                     pdpID="4"
                      type="FALCON"
                      inverted="false"
                      sensorInverted="false"
@@ -409,10 +314,94 @@
                      forwardlimitswitch="false"
                      forwardlimitswitchopen="true"
                      reverselimitswitch="false"
-                     reverselimitswitchopen="true"/>  
-              <digitalInput usage="HOPPER_BANNER_SENSOR"
-                            digitalId="2"
-                            reversed="false"/>      
+                     reverselimitswitchopen="true"/>        
 	</mechanism>
 
+	<mechanism type="BALL_TRANSFER">
+		<motor usage="BALL_TRANSFER"
+                     canId="4"
+                     pdpID="4"
+                     type="FALCON"
+                     inverted="false"
+                     sensorInverted="false"
+                     feedbackDevice="INTERNAL"
+                     countsPerRev="2048"
+                     gearRatio="1.0"
+                     brakeMode="false"
+                     follow="-1"
+                     peakCurrentDuration="15.0"
+                     continuousCurrentLimit="40.0"
+                     peakCurrentLimit="50.0"
+                     currentLimiting="true" 
+                     forwardlimitswitch="false"
+                     forwardlimitswitchopen="true"
+                     reverselimitswitch="false"
+                     reverselimitswitchopen="true"/>        
+ 
+	</mechanism>
+    
+	<mechanism type="SHOOTER">
+		<motor  usage="SHOOTER_1"
+                      canId="5"
+                      pdpID="5"
+                      type="FALCON"
+                      inverted="false"
+                      sensorInverted="false"
+                      feedbackDevice="INTERNAL"
+                      countsPerRev="2048"
+                      gearRatio="1.0"
+                      brakeMode="false"
+                      follow="-1"
+                      peakCurrentDuration="50"
+                      continuousCurrentLimit="30"
+                      peakCurrentLimit="40"
+                      currentLimiting="true" 
+                      forwardlimitswitch="false"
+                      forwardlimitswitchopen="true"
+                      reverselimitswitch="false"
+                      reverselimitswitchopen="true"/>
+		<motor  usage="SHOOTER_2"
+                      canId="6"
+                      pdpID="6"
+                      type="FALCON"
+                      inverted="false"
+                      sensorInverted="false"
+                      feedbackDevice="INTERNAL"
+                      countsPerRev="2048"
+                      gearRatio="1.0"
+                      brakeMode="false"
+                      follow="-1"
+                      peakCurrentDuration="15.0"
+                      continuousCurrentLimit="40.0"
+                      peakCurrentLimit="50.0"
+                      currentLimiting="true" 
+                      forwardlimitswitch="false"
+                      forwardlimitswitchopen="true"
+                      reverselimitswitch="false"
+                      reverselimitswitchopen="true"/>
+	</mechanism>
+    
+	<mechanism type="TURRET">
+		<motor usage="TURRET"
+                     canId="9"
+                     pdpID="9"
+                     type="TALONSRX"
+                     inverted="false"
+                     sensorInverted="false"
+                     feedbackDevice="INTERNAL"
+                     countsPerRev="2048"
+                     gearRatio="8.4"
+                     brakeMode="true"
+                     follow="-1"
+                     peakCurrentDuration="15.0"
+                     continuousCurrentLimit="40.0"
+                     peakCurrentLimit="50.0"
+                     currentLimiting="true" 
+                     forwardlimitswitch="true"
+                     forwardlimitswitchopen="true"
+                     reverselimitswitch="true"
+                     reverselimitswitchopen="true"/>        
+
+	</mechanism>
+       -->
 </robot>
