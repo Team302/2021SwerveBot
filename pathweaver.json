@@ -2,8 +2,8 @@
   "lengthUnit": "Meter",
   "exportUnit": "Always Meters",
   "maxVelocity": 5.0,
-  "maxAcceleration": 2.0,
+  "maxAcceleration": 0.9,
   "wheelBase": 0.3356,
-  "gameName": "Barrel Racing Path",
+  "gameName": "Galactic Search A",
   "outputDir": "../../test1out"
 }
