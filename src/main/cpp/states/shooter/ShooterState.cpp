@@ -23,8 +23,9 @@
 ShooterState::ShooterState
 (
     ControlData*                    controlData, 
+    ControlData*                    controlData2, 
     double                          target1,
     double                          target2
-) : Mech2MotorState( MechanismFactory::GetMechanismFactory()->GetShooter().get(), controlData, target1, target2 )
+) : Mech2MotorState( MechanismFactory::GetMechanismFactory()->GetShooter().get(), controlData, controlData2, target1, target2 )
 {
 }

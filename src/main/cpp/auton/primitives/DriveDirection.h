@@ -15,26 +15,38 @@
 //====================================================================================================================================================
 
 #pragma once
-
-// C++ Includes
+// c++ includes
+#include <memory>
 
 // FRC includes
+#include <units/angle.h>
+#include <units/velocity.h>
+#include <frc/geometry/Pose2d.h>
 
-// Team 302 includes
+// 302 includes 
+#include <auton/primitives/IPrimitive.h>
+#include <subsys/SwerveChassis.h>
 
-// Third Party Includes
+class PrimitiveParams;
+class DriveDirection : public IPrimitive
+{
+    public:
+        bool IsDone() override;
+        void Init(PrimitiveParams* params) override;
+        void Run() override;
+        DriveDirection();
+        virtual ~DriveDirection() = default;
+    
+    protected:
+        units::velocity::meters_per_second_t GetCurrentSpeed() { return m_speed;}
+        void UpdateSpeed(units::velocity::meters_per_second_t newSpeed) { m_speed=newSpeed;}
 
-enum PRIMITIVE_IDENTIFIER
-  {
-      UNKNOWN_PRIMITIVE = -1,
-      DO_NOTHING,
-      HOLD_POSITION,
-      RESET_POSITION,
-      DRIVE_DISTANCE,
-      DRIVE_TIME,
-      TURN_ANGLE_ABS,
-      TURN_ANGLE_REL,
-      DRIVE_PATH,
-      MAX_AUTON_PRIMITIVES
-  };
-
+    private:
+        std::shared_ptr<SwerveChassis>          m_chassis;
+        units::angle::degree_t                  m_heading;
+        units::velocity::meters_per_second_t    m_speed;
+        std::shared_ptr<SwerveModule>           m_frontLeft;
+        std::shared_ptr<SwerveModule>           m_frontRight;
+        std::shared_ptr<SwerveModule>           m_backLeft;
+        std::shared_ptr<SwerveModule>           m_backRight;
+};

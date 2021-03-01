@@ -25,6 +25,7 @@
                                           BALLHOPPEROFF | BALLHOPPERHOLD | BALLHOPPERSLOWRELEASE | BALLHOPPERRAPIDRELEASE |
                                           UNKNOWN ) "UNKNOWN"
           controlDataIdentifier         CDATA #REQUIRED
+          controlDataIdentifier2        CDATA #IMPLIED
           value                         CDATA #REQUIRED
           secondValue                   CDATA #IMPLIED
 >

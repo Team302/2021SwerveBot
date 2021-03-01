@@ -16,8 +16,11 @@
 //C++
 #include <string>
 
-// 302 Includes
+//FRC Includes
+#include <frc/PIDController.h>
+#include <frc/controller/ProfiledPIDController.h>
 
+// 302 Includes
 #include <auton/primitives/DrivePath.h>
 
 using namespace std;
@@ -28,11 +31,12 @@ using namespace wpi::math;
 DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
                          m_timer(make_unique<Timer>()),
                          m_maxTime(0.0),
-                         m_currentChassisPosition(units::meter_t(0), units::meter_t(0), units::radian_t(0))
+                         m_currentChassisPosition(units::meter_t(0), units::meter_t(0), units::radian_t(0)),
+                         m_holoController(frc2::PIDController{1, 0, 0}, 
+                                                 frc2::PIDController{1, 0, 0}, 
+                                                 frc::ProfiledPIDController<units::radian>{1, 0, 0, 
+                                                 frc::TrapezoidProfile<units::radian>::Constraints{6.28_rad_per_s, 3.14_rad_per_s / 1_s}})
 {
-
-
-  //m_nt = nt::NetworkTableInstance::GetDefault().GetTable("DrivePath");
   Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "False");
   Logger::GetLogger()->ToNtTable("DrivePath", "Running", "False");
   Logger::GetLogger()->ToNtTable("DrivePath", "Done", "False");
@@ -40,9 +44,8 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
 }
 void DrivePath::Init(PrimitiveParams *params)
 {
- 
 
-Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
+ Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
   
  sPath2Load = params->GetPathName();     //sPath2Load = "Slalom1.wpilib.json" example
                                          // 
@@ -61,7 +64,6 @@ Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
 
     Logger::GetLogger()->LogError(string("Deploy path is "), deployDir.str());
 
-
     m_timer->Reset();
     m_timer->Start();
 
@@ -72,14 +74,6 @@ Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
     //m_currentChassisPosition = m_trajectory.InitialPose();
 
     Logger::GetLogger()->LogError(string("At line"), string("67, just set current chassis pos to trajectory"));
-
-    // assume start angel of zero at start of path
-    frc::Rotation2d StartAngle;
-    StartAngle.Degrees() = m_trajectory.InitialPose().Rotation().Degrees();
-
-    m_chassis->SetEncodersToZero();
-
-    m_chassis->ResetPosition(m_trajectory.InitialPose(), StartAngle);
 
     Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", m_currentChassisPosition.X().to<double>());
     Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", m_currentChassisPosition.Y().to<double>());
@@ -105,7 +99,7 @@ void DrivePath::Run()
     {
       int timesRan = 1;
 
-      auto desiredPose = m_trajectory.Sample(units::second_t(m_timer.get()->Get()));
+      auto desiredPose = m_trajectory.Sample(units::second_t(m_timer.get()->Get() + 0.02));
       // Get the reference chassis speeds from the Ramsete Controller.
       m_currentChassisPosition = m_chassis.get()->GetPose().GetEstimatedPosition();
       //Pose2d pull out attributes
@@ -113,23 +107,25 @@ void DrivePath::Run()
       Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseY", desiredPose.pose.Y().to<double>());
       Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", m_currentChassisPosition.X().to<double>());
       Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", m_currentChassisPosition.Y().to<double>());
+      Logger::GetLogger()->ToNtTable("DeltaValues", "DeltaX", desiredPose.pose.X().to<double>() - m_currentChassisPosition.X().to<double>());
+      Logger::GetLogger()->ToNtTable("DeltaValues", "DeltaY", desiredPose.pose.Y().to<double>() - m_currentChassisPosition.Y().to<double>());
 
+
+      /*
       Logger::GetLogger()->ToNtTable("EncoderValues", "BLEncoder", to_string(m_chassis->GetBackLeft()->GetEncoderValues()));
       Logger::GetLogger()->ToNtTable("EncoderValues", "BREncoder", to_string(m_chassis->GetBackRight()->GetEncoderValues()));
       Logger::GetLogger()->ToNtTable("EncoderValues", "FLEncoder", to_string(m_chassis->GetFrontLeft()->GetEncoderValues()));
       Logger::GetLogger()->ToNtTable("EncoderValues", "FREncoder", to_string(m_chassis->GetFrontRight()->GetEncoderValues()));
-
-      Logger::GetLogger()->ToNtTable("EncoderValues", "BLEncoder", to_string(m_chassis->GetBackLeft()->GetEncoderValues()));
-      Logger::GetLogger()->ToNtTable("EncoderValues", "BREncoder", to_string(m_chassis->GetBackRight()->GetEncoderValues()));
-      Logger::GetLogger()->ToNtTable("EncoderValues", "FLEncoder", to_string(m_chassis->GetFrontLeft()->GetEncoderValues()));
-      Logger::GetLogger()->ToNtTable("EncoderValues", "FREncoder", to_string(m_chassis->GetFrontRight()->GetEncoderValues()));
+      */
 
       Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", to_string(timesRan));
       timesRan++;
 
-      m_ramseteController.SetEnabled(true);
+      //m_ramseteController.SetEnabled(true);
 
-      auto refChassisSpeeds = m_ramseteController.Calculate(m_currentChassisPosition, desiredPose);
+      //switching to holo controller would take in same args for Calculate 
+      //auto refChassisSpeeds = m_ramseteController.Calculate(m_currentChassisPosition, desiredPose);
+      auto refChassisSpeeds = m_holoController.Calculate(m_currentChassisPosition, desiredPose, desiredPose.pose.Rotation());
 
       Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsX", refChassisSpeeds.vx());
       Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsY", refChassisSpeeds.vy());
@@ -137,10 +133,10 @@ void DrivePath::Run()
       Logger::GetLogger()->ToNtTable("DrivePathValues", "TrajectoryTotalTime", m_trajectory.TotalTime().to<double>());
       Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTime", m_timer.get()->Get());
 
-
-      //m_chassis->Drive(refChassisSpeeds, true);
+      //refChassisSpeeds.omega = units::radians_per_second_t(0);
+      m_chassis->Drive(refChassisSpeeds, false);
       
-      m_chassis->Drive( 0.5, 0, 0, false);
+      //m_chassis->Drive( 0.5, 0, 0, false);
 
       Logger::GetLogger()->LogError(string("DrivePath - Running Path = "), sPath2Load);
     }
@@ -170,9 +166,9 @@ bool DrivePath::IsDone()
   {
     bool bTimeDone = units::second_t(m_timer.get()->Get()) >= m_trajectory.TotalTime();
 
-  //  sPath2Load = "";
+  //  sPath2Load = "";)
     if ( bTimeDone //&& m_bRobotStopped
-     )
+       )
     {
       Logger::GetLogger()->ToNtTable("DrivePath", "Done", "True");
       Logger::GetLogger()->LogError(string("DrivePath - DONE = "), sPath2Load);

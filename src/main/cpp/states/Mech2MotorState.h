@@ -29,6 +29,7 @@ class Mech2MotorState : public IState
         (
             IMech2IndMotors*                mechanism,
             ControlData*                    control,
+            ControlData*                    control2,
             double                          primaryTarget,
             double                          secondaryTarget
         );
@@ -47,6 +48,7 @@ class Mech2MotorState : public IState
 
         IMech2IndMotors*                m_mechanism;
         ControlData*                    m_control;
+        ControlData*                    m_control2;
         double                          m_primaryTarget;
         double                          m_secondaryTarget;
         bool                            m_positionBased;

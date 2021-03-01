@@ -206,7 +206,7 @@ void DragonGamepad::SetAxisProfile
 void DragonGamepad::SetAxisScale
 (
     AXIS_IDENTIFIER axis,
-    float scaleFactor
+    double scaleFactor
 )
 {
     if ( m_axis[axis] != nullptr )
@@ -223,7 +223,7 @@ void DragonGamepad::SetAxisScale
 void DragonGamepad::SetSlewLimit
 (
     AXIS_IDENTIFIER axis,
-    float slewRateFactor
+    double slewRateFactor
 )
 {
     if ( m_axis[axis] != nullptr )

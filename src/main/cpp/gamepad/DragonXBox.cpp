@@ -201,7 +201,7 @@ void DragonXBox::SetAxisProfile
 void DragonXBox::SetAxisScale
 (
     AXIS_IDENTIFIER    			        axis,       // <I> - axis identifier to modify
-    float                               scaleFactor // <I> - value  (0 < scale <= 1.0) to scale the axis value
+    double                              scaleFactor // <I> - value  (0 < scale <= 1.0) to scale the axis value
 )
 {
     if ( m_axis[axis] != nullptr )
@@ -213,7 +213,7 @@ void DragonXBox::SetAxisScale
 void DragonXBox::SetSlewLimit
 (
     AXIS_IDENTIFIER                     axis,
-    float                               slewRateFactor
+    double                              slewRateFactor
 )
 {
     if ( m_axis[axis] != nullptr )

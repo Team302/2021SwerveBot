@@ -25,13 +25,16 @@ MechanismTargetData::MechanismTargetData
 (
     string                                      state,
     string                                      controller,
+    string                                      controller2,
     double                                      target,
     SOLENOID                                    solenoid,
     double                                      secondTarget
 ) : m_state( state ),
     m_controller( controller ),
+    m_controller2( controller2 ),
     m_target( target ),
     m_controlData(),
+    m_controlData2(),
     m_solenoid( solenoid ),
     m_secondTarget( secondTarget )
 {
@@ -50,9 +53,17 @@ void MechanismTargetData::Update( std::vector<ControlData*> data )
         {
             m_controlData = cd;
         }
-        if ( m_controlData != nullptr )
+        if ( m_controller2.compare( string(cd->GetIdentifier())) == 0)
+        {
+            m_controlData2 = cd;
+        }
+        if ( m_controlData != nullptr && m_controlData2 != nullptr )
         {
             break;
         }
+    }
+    if ( m_controlData2 == nullptr && m_controlData != nullptr)
+    {
+        m_controlData2 = m_controlData;
     }
 }

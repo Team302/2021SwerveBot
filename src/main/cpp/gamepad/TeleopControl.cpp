@@ -229,7 +229,7 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 void TeleopControl::SetAxisScaleFactor
 (
     TeleopControl::FUNCTION_IDENTIFIER  	function,      // <I> - function that will update an axis
-    float                                   scaleFactor    // <I> - scale factor used to limit the range
+    double                                  scaleFactor    // <I> - scale factor used to limit the range
 )
 {
 	int ctlIndex = m_controllerIndex[ function];
@@ -262,7 +262,7 @@ void TeleopControl::SetDeadBand
 void TeleopControl::SetSlewRateLimiter
 (
 	TeleopControl::FUNCTION_IDENTIFIER		function,
-	float 									slewRateFactor
+	double 									slewRateFactor
 )
 {
 	int ctlIndex = m_controllerIndex[ function ];
@@ -302,14 +302,14 @@ void TeleopControl::SetAxisProfile
 // Method:      GetAxisValue
 // Description: Reads the joystick axis, removes any deadband (small
 //              value) and then scales as requested.
-// Returns:     float   -  scaled axis value
+// Returns:     double   -  scaled axis value
 //------------------------------------------------------------------
-float TeleopControl::GetAxisValue
+double TeleopControl::GetAxisValue
 (
     TeleopControl::FUNCTION_IDENTIFIER  function    // <I> - function that whose axis will be read
 ) const
 {
-    float value = 0.0;
+    double value = 0.0;
 	int ctlIndex = m_controllerIndex[ function];
 	IDragonGamePad::AXIS_IDENTIFIER axis = m_axisIDs[ function ];
     if ( ctlIndex > -1 && axis != IDragonGamePad::AXIS_IDENTIFIER::UNDEFINED_AXIS  )

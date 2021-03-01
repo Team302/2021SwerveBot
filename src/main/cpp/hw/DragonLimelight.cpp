@@ -23,7 +23,9 @@
 #include <networktables/NetworkTableInstance.h>
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableEntry.h>
-#include <frc/smartdashboard/SmartDashboard.h>
+#include <units/angle.h>
+#include <units/length.h>
+#include <units/time.h>
 
 // Team 302 includes
 #include <hw/DragonLimelight.h>
@@ -41,12 +43,12 @@ using namespace std;
 DragonLimelight::DragonLimelight
 (
     string                      tableName,                  /// <I> - network table name
-    double                      mountingHeight,             /// <I> - mounting height of the limelight
-    double                      mountingHorizontalOffset,   /// <I> - mounting horizontal offset from the middle of the robot,
-    double                      rotation,                   /// <I> - clockwise rotation of limelight
-    double                      mountingAngle,              /// <I> - mounting angle of the camera
-    double                      targetHeight,               /// <I> - height the target
-    double                      targetHeight2               /// <I> - height of second target
+    units::length::inch_t       mountingHeight,             /// <I> - mounting height of the limelight
+    units::length::inch_t       mountingHorizontalOffset,   /// <I> - mounting horizontal offset from the middle of the robot,
+    units::angle::degree_t      rotation,                   /// <I> - clockwise rotation of limelight
+    units::angle::degree_t      mountingAngle,              /// <I> - mounting angle of the camera
+    units::length::inch_t       targetHeight,               /// <I> - height the target
+    units::length::inch_t       targetHeight2               /// <I> - height of second target
 ) : //IDragonSensor(),
     //IDragonDistanceSensor(),
     m_networktable( NetworkTableInstance::GetDefault().GetTable( tableName.c_str()) ),
@@ -60,37 +62,6 @@ DragonLimelight::DragonLimelight
     SetLEDMode( DragonLimelight::LED_MODE::LED_OFF);
 }
 
-///-----------------------------------------------------------------------
-/// Method:      GetDistance
-/// Description: Return the measured distance in inches
-/// Returns:     double     Measured Distance
-///-----------------------------------------------------------------------
-double DragonLimelight::GetDistance() const
-{
-    double distance = -1.0;
-    if ( HasTarget() )
-    {
-        distance = (m_targetHeight - m_mountHeight) / tan( m_mountingAngle + GetTargetVerticalOffset() );
-    }
-    return distance;
-}
-
-///-----------------------------------------------------------------------
-/// Method:      GetConfidence
-/// Description: Indicates how accurate the returned value is
-/// Returns:     double    0.0 == ignore (sensor has an error)
-///                        1.0 == very confident 
-///-----------------------------------------------------------------------
-double DragonLimelight::GetConfidence() const
-{
-    double confidence = 0.0;
-    if ( HasTarget() )
-    {
-        confidence = 1.0;
-    }
-    return confidence;
-}
-
 std::vector<double> DragonLimelight::Get3DSolve() const
 {
     return m_networktable.get()->GetNumberArray("camtran", 0);
@@ -101,59 +72,59 @@ bool DragonLimelight::HasTarget() const
     return ( m_networktable.get()->GetNumber("tv", 0.0) > 0.1 );
 }
 
-double DragonLimelight::GetTargetHorizontalOffset() const
+units::angle::degree_t DragonLimelight::GetTargetHorizontalOffset() const
 {
-    double tx = m_networktable.get()->GetNumber("tx", 0.0);
-    double ty = m_networktable.get()->GetNumber("ty", 0.0);
-    if(m_rotation == 0.0)
+    units::angle::degree_t tx = units::angle::degree_t(m_networktable.get()->GetNumber("tx", 0.0));
+    units::angle::degree_t ty = units::angle::degree_t(m_networktable.get()->GetNumber("ty", 0.0));
+    if(m_rotation == units::angle::degree_t(0.0))
     {
         return tx;
     }
-    else if(m_rotation == 90.0)
+    else if(m_rotation == units::angle::degree_t(90.0))
     {
         return -ty;
     }
-    else if(m_rotation == 180.0)
+    else if(m_rotation == units::angle::degree_t(180.0))
     {
         return -tx;
     }
-    else if(m_rotation == 270.0)
+    else if(m_rotation == units::angle::degree_t(270.0))
     {
         return ty;
     }
     else
     {
         Logger::GetLogger()->LogError("DragonLimelight::GetTargetVerticalOffset", "Invalid limelight rotation");
-        return -1.0;
+        return units::angle::degree_t(-180.0);
     }
     
    
 }
 
-double DragonLimelight::GetTargetVerticalOffset() const
+units::angle::degree_t DragonLimelight::GetTargetVerticalOffset() const
 {
-    double tx = m_networktable.get()->GetNumber("tx", 0.0);
-    double ty = m_networktable.get()->GetNumber("ty", 0.0);
-    if(m_rotation == 0.0)
+    units::angle::degree_t tx = units::angle::degree_t(m_networktable.get()->GetNumber("tx", 0.0));
+    units::angle::degree_t ty = units::angle::degree_t(m_networktable.get()->GetNumber("ty", 0.0));
+    if(m_rotation == units::angle::degree_t(0.0))
     {
         return ty;
     }
-    else if(m_rotation == 90.0)
+    else if(m_rotation == units::angle::degree_t(90.0))
     {
         return tx;
     }
-    else if(m_rotation == 180.0)
+    else if(m_rotation == units::angle::degree_t(180.0))
     {
         return -ty;
     }
-    else if(m_rotation == 270.0)
+    else if(m_rotation == units::angle::degree_t(270.0))
     {
         return -tx;
     }
     else
     {
         Logger::GetLogger()->LogError("DragonLimelight::GetTargetVerticalOffset", "Invalid limelight rotation");
-        return -1.0;
+        return units::angle::degree_t(-180.0);
     }
     
 }
@@ -163,20 +134,20 @@ double DragonLimelight::GetTargetArea() const
     return m_networktable.get()->GetNumber("ta", 0.0);
 }
 
-double DragonLimelight::GetTargetSkew() const
+units::angle::degree_t DragonLimelight::GetTargetSkew() const
 {
-    return m_networktable.get()->GetNumber("ts", 0.0);
+    return units::angle::degree_t(m_networktable.get()->GetNumber("ts", 0.0));
 }
 
-double DragonLimelight::GetPipelineLatency() const
+units::time::microsecond_t DragonLimelight::GetPipelineLatency() const
 {
-    return m_networktable.get()->GetNumber("tl", 0.0);
+    return units::time::second_t(m_networktable.get()->GetNumber("tl", 0.0));
 }
 
 
 void DragonLimelight::SetTargetHeight
 (
-    double targetHeight
+    units::length::inch_t targetHeight
 )
 {
     m_targetHeight = targetHeight;
@@ -223,15 +194,16 @@ void DragonLimelight::ToggleSnapshot(DragonLimelight::SNAPSHOT_MODE toggle)
 void DragonLimelight::PrintValues()
 {
     Logger::GetLogger()->LogError( "DragonLimelight::PrintValues HasTarget", to_string( HasTarget() ) );    
-    Logger::GetLogger()->LogError( "DragonLimelight::PrintValues XOffset", to_string( GetTargetHorizontalOffset() ) ); 
-    Logger::GetLogger()->LogError( "DragonLimelight::PrintValues YOffset", to_string( GetTargetVerticalOffset() ) ); 
+    Logger::GetLogger()->LogError( "DragonLimelight::PrintValues XOffset", to_string( GetTargetHorizontalOffset().to<double>() ) ); 
+    Logger::GetLogger()->LogError( "DragonLimelight::PrintValues YOffset", to_string( GetTargetVerticalOffset().to<double>() ) ); 
     Logger::GetLogger()->LogError( "DragonLimelight::PrintValues Area", to_string( GetTargetArea() ) ); 
-    Logger::GetLogger()->LogError( "DragonLimelight::PrintValues Skew", to_string( GetTargetSkew() ) ); 
-    Logger::GetLogger()->LogError( "DragonLimelight::PrintValues Latency", to_string( GetPipelineLatency() ) ); 
+    Logger::GetLogger()->LogError( "DragonLimelight::PrintValues Skew", to_string( GetTargetSkew().to<double>() ) ); 
+    Logger::GetLogger()->LogError( "DragonLimelight::PrintValues Latency", to_string( GetPipelineLatency().to<double>() ) ); 
 }
 
-double DragonLimelight::EstimateTargetDistance() const
+units::length::inch_t DragonLimelight::EstimateTargetDistance() const
 {
-    double angleDifference = (47 + GetTargetVerticalOffset()) / 180 * PI;
-    return (91.25-21.5) / tan(angleDifference);
+    units::angle::degree_t angleDifference = (GetMountingAngle() + GetTargetVerticalOffset());
+    units::angle::radian_t angleRad = angleDifference;
+    return (GetTargetHeight()-GetMountingHeight()) / tan(angleRad.to<double>());
 }

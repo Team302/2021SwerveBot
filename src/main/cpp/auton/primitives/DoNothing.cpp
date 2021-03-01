@@ -44,7 +44,8 @@ using namespace frc;
 
 
 /// @brief constructor that creates/initializes the object
-DoNothing::DoNothing() : m_maxTime(0.0),
+DoNothing::DoNothing() : IPrimitive(),
+						 m_maxTime(0.0),
 						 m_currentTime(0.0),
 						 m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
 						 m_timer( make_unique<Timer>() )

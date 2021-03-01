@@ -15,26 +15,36 @@
 //====================================================================================================================================================
 
 #pragma once
-
-// C++ Includes
+// c++ includes
+#include <memory>
 
 // FRC includes
+#include <units/angle.h>
+#include <units/velocity.h>
+#include <frc/geometry/Pose2d.h>
 
-// Team 302 includes
+// 302 includes 
+#include <auton/primitives/IPrimitive.h>
+#include <auton/primitives/DriveDirection.h>
+#include <subsys/SwerveChassis.h>
 
-// Third Party Includes
+class PrimitiveParams;
+class DriveDistance : public DriveDirection
+{
+    public:
+        void Init(PrimitiveParams*	Parms) override;
+        void Run() override;
+        bool IsDone() override;        
+        
+        DriveDistance();
+        virtual ~DriveDistance() = default;
 
-enum PRIMITIVE_IDENTIFIER
-  {
-      UNKNOWN_PRIMITIVE = -1,
-      DO_NOTHING,
-      HOLD_POSITION,
-      RESET_POSITION,
-      DRIVE_DISTANCE,
-      DRIVE_TIME,
-      TURN_ANGLE_ABS,
-      TURN_ANGLE_REL,
-      DRIVE_PATH,
-      MAX_AUTON_PRIMITIVES
-  };
+    private:
+        double PercentToTarget();
 
+
+        frc::Pose2d                             m_startPose;
+        units::length::inch_t                   m_distance;
+        units::velocity::feet_per_second_t      m_startSpeed;
+        double                                  m_percentToTarget;
+};

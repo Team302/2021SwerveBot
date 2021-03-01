@@ -49,7 +49,7 @@ void ScaledAxis::SetScaleFactor
     }
     else
     {
-        m_scale = -1.0 * scaleFactor;
+        m_scale = -1.0 * abs(scaleFactor);
     }
 }
 

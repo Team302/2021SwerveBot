@@ -67,14 +67,6 @@ class Mech1IndMotor : public IMech1IndMotor
         /// @return std::string the name of the network table 
         std::string GetNetworkTableName() const override;
 
-        /// @brief Activates logging key values to network table
-        /// @param [in] int: indicate how many millisecondsBetweenLogging updates to the network table 
-        void ActivateLogging
-        (
-            units::second_t                 millisecondsBetweenLogging
-        ) override final;
-        /// @brief Stop updating the key values to network table
-        void DeactivateLogging() override final;
 
         /// @brief log data to the network table if it is activated and time period has past
         void LogData() override;

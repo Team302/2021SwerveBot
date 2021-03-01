@@ -154,6 +154,8 @@ class SwerveChassis
 
         DragonPigeon*                                               m_pigeon;
         double                                                      m_scale;
+
+        const double                                                m_deadband = 0.1;
         
         frc::Translation2d m_frontLeftLocation;
         frc::Translation2d m_frontRightLocation;

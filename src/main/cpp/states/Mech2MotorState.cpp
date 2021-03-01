@@ -40,11 +40,13 @@ Mech2MotorState::Mech2MotorState
 (
     IMech2IndMotors*                mechanism,
     ControlData*                    control,
+    ControlData*                    control2,
     double                          primaryTarget,
     double                          secondaryTarget
 ) : IState(),
     m_mechanism( mechanism ),
     m_control( control ),
+    m_control2( control2 ),
     m_primaryTarget( primaryTarget ),
     m_secondaryTarget( secondaryTarget ),
     m_positionBased( false ),
@@ -58,60 +60,73 @@ Mech2MotorState::Mech2MotorState
     if ( control == nullptr )
     {
         Logger::GetLogger()->LogError( string("Mech2MotorState::Mech2MotorState"), string("no control data"));
+    }    
+    else if ( control2 == nullptr )
+    {
+        Logger::GetLogger()->LogError( string("Mech2MotorState::Mech2MotorState"), string("no control2 data"));
     }
     else
     {
         auto mode = control->GetMode();
-        switch (mode)
+        auto mode2 = control2->GetMode();
+        if ( mode == mode2)
         {
-            case ControlModes::CONTROL_TYPE::PERCENT_OUTPUT:
-                m_positionBased = false;
-                m_speedBased = false;
-                break;
+            switch (mode)
+            {
+                case ControlModes::CONTROL_TYPE::PERCENT_OUTPUT:
+                    m_positionBased = false;
+                    m_speedBased = false;
+                    break;
 
-            case ControlModes::CONTROL_TYPE::VOLTAGE:
-                m_positionBased = false;
-                m_speedBased = false;
-                break;
+                case ControlModes::CONTROL_TYPE::VOLTAGE:
+                    m_positionBased = false;
+                    m_speedBased = false;
+                    break;
 
-            case ControlModes::CONTROL_TYPE::POSITION_DEGREES:
-            case ControlModes::CONTROL_TYPE::POSITION_INCH:
-                m_positionBased = true;
-                m_speedBased = false;
-                break;
-            
-            case ControlModes::CONTROL_TYPE::VELOCITY_DEGREES:
-            case ControlModes::CONTROL_TYPE::VELOCITY_INCH:
-            case ControlModes::CONTROL_TYPE::VELOCITY_RPS:
-                m_positionBased = false;
-                m_speedBased = true;
-                break;
+                case ControlModes::CONTROL_TYPE::POSITION_DEGREES:
+                case ControlModes::CONTROL_TYPE::POSITION_INCH:
+                    m_positionBased = true;
+                    m_speedBased = false;
+                    break;
+                
+                case ControlModes::CONTROL_TYPE::VELOCITY_DEGREES:
+                case ControlModes::CONTROL_TYPE::VELOCITY_INCH:
+                case ControlModes::CONTROL_TYPE::VELOCITY_RPS:
+                    m_positionBased = false;
+                    m_speedBased = true;
+                    break;
 
-            case ControlModes::CONTROL_TYPE::CURRENT:
-                m_positionBased = false;
-                m_speedBased = false;
-                break;
+                case ControlModes::CONTROL_TYPE::CURRENT:
+                    m_positionBased = false;
+                    m_speedBased = false;
+                    break;
 
-            case ControlModes::CONTROL_TYPE::MOTION_PROFILE:
-                m_positionBased = false;
-                m_speedBased = false;
-                break;
+                case ControlModes::CONTROL_TYPE::MOTION_PROFILE:
+                    m_positionBased = false;
+                    m_speedBased = false;
+                    break;
 
-            case ControlModes::CONTROL_TYPE::MOTION_PROFILE_ARC:
-                m_positionBased = false;
-                m_speedBased = false;
-                break;
+                case ControlModes::CONTROL_TYPE::MOTION_PROFILE_ARC:
+                    m_positionBased = false;
+                    m_speedBased = false;
+                    break;
 
-            case ControlModes::CONTROL_TYPE::TRAPEZOID:
-                m_positionBased = false;
-                m_speedBased = false;
-                break;
+                case ControlModes::CONTROL_TYPE::TRAPEZOID:
+                    m_positionBased = false;
+                    m_speedBased = false;
+                    break;
 
-            default:
-                m_positionBased = false;
-                m_speedBased = false;
-                break;
+                default:
+                    m_positionBased = false;
+                    m_speedBased = false;
+                    break;
+            }
         }
+        else
+        {
+            Logger::GetLogger()->LogError( string("Mech2MotorState::Mech2MotorState"), string("inconsistent control modes"));
+        }
+        
     }
     
 }
@@ -121,6 +136,7 @@ void Mech2MotorState::Init()
     if ( m_mechanism != nullptr && m_control != nullptr )
     {
         m_mechanism->SetControlConstants( 0, m_control );
+        m_mechanism->SetSecondaryControlConstants( 0, m_control2 );
         m_mechanism->UpdateTargets( m_primaryTarget, m_secondaryTarget );
     }
 }

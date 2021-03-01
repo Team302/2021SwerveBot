@@ -54,7 +54,7 @@ ShooterStateMgr* ShooterStateMgr::GetInstance()
 }
 
 /// @brief    initialize the state manager, parse the configuration file and create the states.
-ShooterStateMgr::ShooterStateMgr() : m_stateVector(),
+ShooterStateMgr::ShooterStateMgr() : m_states(),
                                      m_currentState()
 {
     // Parse the configuration file 
@@ -69,10 +69,17 @@ ShooterStateMgr::ShooterStateMgr() : m_stateVector(),
     stateStringToEnumMap["SHOOTERSHOOTYELLOW"] = SHOOTER_STATE::SHOOTYELLOW;
     stateStringToEnumMap["SHOOTERSHOOTBLUE"] = SHOOTER_STATE::SHOOTBLUE;
     stateStringToEnumMap["SHOOTERSHOOTRED"] = SHOOTER_STATE::SHOOTRED;
-    m_stateVector.resize(6);
-    for (auto inx=0; inx<6; ++inx)
+
+    auto ntName = MechanismFactory::GetMechanismFactory()->GetShooter().get()->GetNetworkTableName();
+    Logger::GetLogger()->ToNtTable(ntName, "SHOOTEROFF", "not created");
+    Logger::GetLogger()->ToNtTable(ntName, "SHOOTERGETREADY", "not created");
+    Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTGREEN", "not created");
+    Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTYELLOW", "not created");
+    Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTBLUE", "not created");
+    Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTRED", "not created");
+    for (auto inx=0; inx<MAX_SHOOTER_STATES; ++inx)
     {
-       m_stateVector[inx] = nullptr;
+       m_states[inx] = nullptr;
     }
 
     // create the states passing the configuration data
@@ -83,9 +90,10 @@ ShooterStateMgr::ShooterStateMgr() : m_stateVector(),
         if ( stateStringToEnumMapItr != stateStringToEnumMap.end() )
         {
             auto stateEnum = stateStringToEnumMapItr->second;
-            if ( m_stateVector[stateEnum] == nullptr )
+            if ( m_states[stateEnum] == nullptr )
             {
                 auto controlData = td->GetController();
+                auto controlData2 = td->GetController2();
                 auto target1 = td->GetTarget();
                 auto target2 = td->GetSecondTarget();
 
@@ -93,40 +101,46 @@ ShooterStateMgr::ShooterStateMgr() : m_stateVector(),
                 {
                     case SHOOTER_STATE::OFF:
                     {   
-                        m_stateVector[SHOOTER_STATE::OFF] = new ShooterState( controlData, target1, target2 );
-                        m_currentState = m_stateVector[SHOOTER_STATE::OFF];
+                        m_states[SHOOTER_STATE::OFF] = new ShooterState( controlData, controlData2, target1, target2 );
+                        m_currentState = m_states[SHOOTER_STATE::OFF];
                         m_currentStateEnum = stateEnum;
                         m_currentState->Init();
+                        Logger::GetLogger()->ToNtTable(ntName, "SHOOTEROFF", "created");
                     }
                     break;
 
                     case SHOOTER_STATE::GET_READY:
                     {   
-                        m_stateVector[stateEnum] = new ShooterState( controlData, target1, target2 );
+                        m_states[stateEnum] = new ShooterState( controlData, controlData2, target1, target2 );
+                        Logger::GetLogger()->ToNtTable(ntName, "SHOOTERGETREADY", "created");
                     }
                     break;
 
                     case SHOOTER_STATE::SHOOTGREEN:
                     {   
-                        m_stateVector[stateEnum] = new ShooterState( controlData, target1, target2 );
+                        m_states[stateEnum] = new ShooterState( controlData, controlData2, target1, target2 );
+                        Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTGREEN", "created");
                     }
                     break;
 
                     case SHOOTER_STATE::SHOOTYELLOW:
                     {   
-                        m_stateVector[stateEnum] = new ShooterState( controlData, target1, target2 );
+                        m_states[stateEnum] = new ShooterState( controlData, controlData2, target1, target2 );
+                        Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTYELLOW", "created");
                     }
                     break;
 
                     case SHOOTER_STATE::SHOOTBLUE:
                     {   
-                        m_stateVector[stateEnum] = new ShooterState( controlData, target1, target2 );
+                        m_states[stateEnum] = new ShooterState( controlData, controlData2, target1, target2 );
+                        Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTBLUE", "created");
                     }
                     break;
                     
                     case SHOOTER_STATE::SHOOTRED:
                     {   
-                        m_stateVector[stateEnum] = new ShooterState( controlData, target1, target2 );
+                        m_states[stateEnum] = new ShooterState( controlData, controlData2, target1, target2 );
+                        Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTRED", "created");
                     }
                     break;
 
@@ -212,8 +226,9 @@ void ShooterStateMgr::SetCurrentState
     bool            run
 )
 {
-    auto state = m_stateVector[stateEnum];
-    if ( state != nullptr && state != m_currentState )
+    auto state = m_states[stateEnum];
+//    if ( state != nullptr && state != m_currentState )
+    if ( state != nullptr )
     {
         auto ntName = MechanismFactory::GetMechanismFactory()->GetShooter().get()->GetNetworkTableName();
         Logger::GetLogger()->ToNtTable(ntName, "Current State", "none");

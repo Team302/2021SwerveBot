@@ -40,6 +40,7 @@ class MechanismTargetData
         (
             std::string                                 state,
             std::string                                 controller,
+            std::string                                 controller2,
             double                                      target,
             SOLENOID                                    solenoid,
             double                                      secondTarget
@@ -59,6 +60,11 @@ class MechanismTargetData
         /// @brief  Retrieve the controller
         /// @return ControlData* controller
         inline ControlData* GetController() const { return m_controlData; };
+
+
+        /// @brief  Retrieve the controller
+        /// @return ControlData* controller
+        inline ControlData* GetController2() const { return m_controlData2; };
 
         /// @brief  Retrieve the target value
         /// @return double - target value
@@ -83,8 +89,10 @@ class MechanismTargetData
     private:
         std::string                                 m_state;
         std::string                                 m_controller;
+        std::string                                 m_controller2;
         double                                      m_target;
         ControlData*                                m_controlData;
+        ControlData*                                m_controlData2;
         SOLENOID                                    m_solenoid;
         double                                      m_secondTarget;
 };

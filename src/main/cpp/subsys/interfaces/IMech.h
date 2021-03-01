@@ -56,14 +56,6 @@ class IMech
 	    IMech() = default;
 	    virtual ~IMech() = default;
 
-        /// @brief Activates logging key values to network table
-        /// @param [in] int: indicate how many millisecondsBetweenLogging updates to the network table 
-        virtual void ActivateLogging
-        (
-            units::second_t                 millisecondsBetweenLogging
-        ) = 0;
-        /// @brief Stop updating the key values to network table
-        virtual void DeactivateLogging() = 0;
 
         /// @brief log data to the network table if it is activated and time period has past
         virtual void LogData() =0;

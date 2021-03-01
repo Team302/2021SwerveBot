@@ -29,6 +29,7 @@ class ShooterState : public Mech2MotorState
         ShooterState
         (
             ControlData*                    controlData,
+            ControlData*                    controlData2,
             double                          target1,
             double                          target2
         );

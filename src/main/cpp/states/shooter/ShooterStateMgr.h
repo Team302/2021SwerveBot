@@ -67,8 +67,7 @@ class ShooterStateMgr
         inline SHOOTER_STATE GetCurrentState() const { return m_currentStateEnum; };
 
     private:
-
-        std::vector<IState*> m_stateVector;
+        std::array<IState*,MAX_SHOOTER_STATES> m_states;
         IState* m_currentState;
         SHOOTER_STATE m_currentStateEnum;
 

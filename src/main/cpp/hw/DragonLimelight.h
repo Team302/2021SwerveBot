@@ -24,6 +24,9 @@
 
 // FRC includes
 #include <networktables/NetworkTable.h>
+#include <units/angle.h>
+#include <units/length.h>
+#include <units/time.h>
 
 // Team 302 includes
 #include <hw/interfaces/IDragonSensor.h>
@@ -71,12 +74,12 @@ class DragonLimelight //: public IDragonSensor, public IDragonDistanceSensor
         DragonLimelight
         (
             std::string                 tableName,                  /// <I> - network table name
-            double                      mountingHeight,             /// <I> - mounting height of the limelight
-            double                      mountingHorizontalOffset,   /// <I> - mounting horizontal offset from the middle of the robot
-            double                      rotation,                   /// <I> - clockwise rotation of limelight
-            double                      mountingAngle,              /// <I> - mounting angle of the camera
-            double                      targetHeight,               /// <I> - height the target
-            double                      targetHeight2               /// <I> - height of second target
+            units::length::inch_t       mountingHeight,             /// <I> - mounting height of the limelight
+            units::length::inch_t       mountingHorizontalOffset,   /// <I> - mounting horizontal offset from the middle of the robot
+            units::angle::degree_t      rotation,                   /// <I> - clockwise rotation of limelight
+            units::angle::degree_t      mountingAngle,              /// <I> - mounting angle of the camera
+            units::length::inch_t       targetHeight,               /// <I> - height the target
+            units::length::inch_t       targetHeight2               /// <I> - height of second target
         );
 
         ///-----------------------------------------------------------------------------------
@@ -86,36 +89,20 @@ class DragonLimelight //: public IDragonSensor, public IDragonDistanceSensor
         ~DragonLimelight() = default;
 
 
-        ///-----------------------------------------------------------------------
-        /// Method:      GetDistance
-        /// Description: Return the measured distance in inches
-        /// Returns:     double     Measured Distance
-        ///-----------------------------------------------------------------------
-        double GetDistance() const; //override;   // IDragonDistanceSensor
-
-
-        ///-----------------------------------------------------------------------
-        /// Method:      GetConfidence
-        /// Description: Indicates how accurate the returned value is
-        /// Returns:     double    0.0 == ignore (sensor has an error)
-        ///                        1.0 == very confident 
-        ///-----------------------------------------------------------------------
-        double GetConfidence() const;// override; // IDragonSensor
-
         // Getters
         bool HasTarget() const;
-        double GetTargetHorizontalOffset() const;
-        double GetTargetVerticalOffset() const;
+        units::angle::degree_t GetTargetHorizontalOffset() const;
+        units::angle::degree_t GetTargetVerticalOffset() const;
         double GetTargetArea() const;
-        double GetTargetSkew() const;
-        double GetPipelineLatency() const;
-        double EstimateTargetDistance() const;
+        units::angle::degree_t GetTargetSkew() const;
+        units::time::microsecond_t GetPipelineLatency() const;
+        units::length::inch_t EstimateTargetDistance() const;
         std::vector<double> Get3DSolve() const;
 
         // Setters
         void SetTargetHeight
         (
-            double targetHeight
+            units::length::inch_t targetHeight
         );
 
         void SetLEDMode
@@ -157,15 +144,18 @@ class DragonLimelight //: public IDragonSensor, public IDragonDistanceSensor
 
         void PrintValues(); // Prints out all values to ensure everything is working and connected
 
+        units::angle::degree_t GetMountingAngle() const {return m_mountingAngle;}
+        units::length::inch_t  GetMountingHeight() const {return m_mountHeight;}
+        units::length::inch_t  GetTargetHeight() const {return m_targetHeight;}
 
     private:
         std::shared_ptr<nt::NetworkTable> m_networktable;
-        double m_mountHeight;
-        double m_mountingHorizontalOffset;
-        double m_rotation;
-        double m_mountingAngle;
-        double m_targetHeight;
-        double m_targetHeight2;
+        units::length::inch_t m_mountHeight;
+        units::length::inch_t m_mountingHorizontalOffset;
+        units::angle::degree_t m_rotation;
+        units::angle::degree_t m_mountingAngle;
+        units::length::inch_t m_targetHeight;
+        units::length::inch_t m_targetHeight2;
 
         double PI = 3.14159265;
 

@@ -5,14 +5,13 @@
 	<pigeon canId="50"
                rotation="0.0" />
 
-       <!--
 	<limelight tablename="limelight"
-                  mountingheight="20.0"
-                  horizontaloffset="-10.0"
-                  mountingangle="15.0"
-                  rotation="0.0"
-                  targetheight="120.0"
-                  targetheight2="30.0"
+                  mountingheight="31.5"
+                  horizontaloffset="0.0"
+                  mountingangle="30.0"
+                  rotation="180.0"
+                  targetheight="98.25"
+                  targetheight2="0.0"
                   defaultledmode="currentpipeline"
                   defaultcammode="vision"
                   streammode="sidebyside"
@@ -24,7 +23,6 @@
 
 	<blinkin position = "front" 
 		  pwmId = "0"/>
-  -->
 
 <!-- ====================================================
      Chassis
