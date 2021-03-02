@@ -36,6 +36,7 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
                                                  frc2::PIDController{1, 0, 0}, 
                                                  frc::ProfiledPIDController<units::radian>{1, 0, 0, 
                                                  frc::TrapezoidProfile<units::radian>::Constraints{6.28_rad_per_s, 3.14_rad_per_s / 1_s}})
+                                                 //max velocity of 1 rotation per second and a max acceleration of 180 degrees per second squared.
 {
   Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "False");
   Logger::GetLogger()->ToNtTable("DrivePath", "Running", "False");
@@ -173,7 +174,7 @@ bool DrivePath::IsDone()
       Logger::GetLogger()->ToNtTable("DrivePath", "Done", "True");
       Logger::GetLogger()->LogError(string("DrivePath - DONE = "), sPath2Load);
     }
-    return (bTimeDone //&& m_bRobotStopped
+    return (bTimeDone // && m_bRobotStopped
     );
   }
   else
