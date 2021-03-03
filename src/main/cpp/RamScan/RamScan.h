@@ -108,13 +108,12 @@ private:
         MotorControllerArray[static_cast<int>(MotorControllerUsage::MAX_MOTOR_CONTROLLER_USAGES)];
 
 // pointers to motor controllers (nullptr if that motor doesn't exist)
-    static shared_ptr<IDragonMotorController>  m_Motor_INTAKE1;
-    static shared_ptr<IDragonMotorController>  m_Motor_INTAKE2;
+    static shared_ptr<IDragonMotorController>  m_Motor_INTAKE;
+    static shared_ptr<IDragonMotorController>  m_Motor_BALL_HOPPER;
     static shared_ptr<IDragonMotorController>  m_Motor_BALL_TRANSFER;
     static shared_ptr<IDragonMotorController>  m_Motor_TURRET;
     static shared_ptr<IDragonMotorController>  m_Motor_SHOOTER_1;
     static shared_ptr<IDragonMotorController>  m_Motor_SHOOTER_2;
-    static shared_ptr<IDragonMotorController>  m_Motor_SHOOTER_HOOD;
 
 //==============================================================================//
 //                                                                              //
@@ -131,7 +130,13 @@ private:
     static void Get_Pigeon_Roll(void);
     static void Get_Pigeon_Yaw(void);
 
-    static void Chassis_CurrentSpeed(void);
+    static void ChassisPoseX(void);
+    static void ChassisPoseY(void);
+    static void ChassisPoseDeg(void);
+
+    static void ChassisSpeedX(void);
+    static void ChassisSpeedY(void);
+    static void ChassisSpeedOmega(void);
 
 // for the chassis motors
     // Left Front swerve module
@@ -165,12 +170,12 @@ private:
     static void Chassis_RB_Turn_Current(void);
 
 //  for the mechanism motors
-    static void Motor_INTAKE1_GetRotations(void);
-    static void Motor_INTAKE1_GetRPS(void);
-    static void Motor_INTAKE1_GetCurrent(void);
-    static void Motor_INTAKE2_GetRotations(void);
-    static void Motor_INTAKE2_GetRPS(void);
-    static void Motor_INTAKE2_GetCurrent(void);
+    static void Motor_INTAKE_GetRotations(void);
+    static void Motor_INTAKE_GetRPS(void);
+    static void Motor_INTAKE_GetCurrent(void);
+    static void Motor_BALL_HOPPER_GetRotations(void);
+    static void Motor_BALL_HOPPER_GetRPS(void);
+    static void Motor_BALL_HOPPER_GetCurrent(void);
     static void Motor_BALL_TRANSFER_GetRotations(void);
     static void Motor_BALL_TRANSFER_GetRPS(void);
     static void Motor_BALL_TRANSFER_GetCurrent(void);
@@ -183,16 +188,11 @@ private:
     static void Motor_SHOOTER_2_GetRotations(void);
     static void Motor_SHOOTER_2_GetRPS(void);
     static void Motor_SHOOTER_2_GetCurrent(void);
-// SHOOTER_HOOD is going away, but keep these awhile to prove it doesn't crash the build.
-    static void Motor_SHOOTER_HOOD_GetRotations(void);
-    static void Motor_SHOOTER_HOOD_GetRPS(void);
-    static void Motor_SHOOTER_HOOD_GetCurrent(void);
 //
 //  teleop axis inputs
     static void TeleopAxis_SWERVE_DRIVE_DRIVE(void);
     static void TeleopAxis_SWERVE_DRIVE_ROTATE(void);
     static void TeleopAxis_SWERVE_DRIVE_STEER(void);
-    static void TeleopAxis_TURRET_MANUAL_AXIS(void);
 //
 //  teleop button inputs
     static void TeleopButton_INTAKE_ON(void);
@@ -200,9 +200,10 @@ private:
     static void TeleopButton_BALL_TRANSFER_OFF(void);
     static void TeleopButton_BALL_TRANSFER_TO_SHOOTER(void);
     static void TeleopAxis_SHOOTER_PREPARE_TO_SHOOT(void);
-    static void TeleopButton_SHOOTER_MANUAL_SHOOT(void);
-    static void TeleopButton_SHOOTER_OFF(void);
-    static void TeleopButton_TURRET_MANUAL_BUTTON(void);
+    static void TeleopButton_SHOOTER_MANUAL_SHOOT_GREEN(void);
+    static void TeleopButton_SHOOTER_MANUAL_SHOOT_YELLOW(void);
+    static void TeleopButton_SHOOTER_MANUAL_SHOOT_BLUE(void);
+    static void TeleopButton_SHOOTER_MANUAL_SHOOT_RED(void);
     static void TeleopButton_TURRET_LIMELIGHT_AIM(void);
     static void TeleopButton_REZERO_PIGEON(void);
     static void TeleopButton_OFF(void);
@@ -222,44 +223,45 @@ private:
 //  NamePtr (displayed on dashboard)        Type    AccAdd (address of accessor function)   Hex value of bit
 //  --------------------------------        ----    -------------------------------------   ----------------
     {(char*)("B00 RunMode:"),               INT,    (&Get_RunMode)},                        // 0.0001
-    {(char*)("B01 PacketCntr20ms:"),        INT,    (&Get_PacketCntr20ms)},                 // 0.0002
-    {(char*)("B02 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0004
-    {(char*)("B03 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0008
+    {(char*)("B01 PigeonPitch:"),           DOUBLE, (&Get_Pigeon_Pitch)},                   // 0.0001
+    {(char*)("B02 PigeonRoll:"),            DOUBLE, (&Get_Pigeon_Roll)},                    // 0.0002
+    {(char*)("B03 PigeonYaw:"),             DOUBLE, (&Get_Pigeon_Yaw)},                     // 0.0004
 
-    {(char*)("B04 PigeonPitch:"),           DOUBLE, (&Get_Pigeon_Pitch)},                   // 0.0010
-    {(char*)("B05 PigeonRoll:"),            DOUBLE, (&Get_Pigeon_Roll)},                    // 0.0020
-    {(char*)("B06 PigeonYaw:"),             DOUBLE, (&Get_Pigeon_Yaw)},                     // 0.0040
-    {(char*)("B07 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0080
+    {(char*)("B04 CHASSIS_POSE_X"),         DOUBLE, (&ChassisPoseX)},                       // 0.0010
+    {(char*)("B05 CHASSIS_POSE_Y"),         DOUBLE, (&ChassisPoseY)},                       // 0.0020
+    {(char*)("B06 CHASSIS_POSE_DEG"),       DOUBLE, (&ChassisPoseDeg)},                     // 0.0040
+    {(char*)("B07 PacketCntr20ms:"),        INT,    (&Get_PacketCntr20ms)},                 // 0.0080
 
-    {(char*)("B08 INTAKE1_Rotations"),      DOUBLE, (&Motor_INTAKE1_GetRotations)},         // 0.0100
-    {(char*)("B09 INTAKE1_RPS"),            DOUBLE, (&Motor_INTAKE1_GetRPS)},               // 0.0200
-    {(char*)("B10 INTAKE1_Current"),        DOUBLE, (&Motor_INTAKE1_GetCurrent)},           // 0.0400
+
+    {(char*)("B08 CHASSIS_SPEED_X"),        DOUBLE, (&ChassisSpeedX)},                      // 0.0100
+    {(char*)("B09 CHASSIS_SPEED_Y"),        DOUBLE, (&ChassisSpeedY)},                      // 0.0200
+    {(char*)("B10 CHASSIS_SPEED_DEG"),      DOUBLE, (&ChassisSpeedOmega)},                  // 0.0400
     {(char*)("B11 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0800
 
-    {(char*)("B08 INTAKE2_Rotations"),      DOUBLE, (&Motor_INTAKE2_GetRotations)},         // 0.1000
-    {(char*)("B13 INTAKE2_RPS"),            DOUBLE, (&Motor_INTAKE2_GetRPS)},               // 0.2000
-    {(char*)("B14 INTAKE2_Current"),        DOUBLE, (&Motor_INTAKE2_GetCurrent)},           // 0.4000
+    {(char*)("B12 INTAKE_Rotations"),       DOUBLE, (&Motor_INTAKE_GetRotations)},          // 0.1000
+    {(char*)("B13 INTAKE_RPS"),             DOUBLE, (&Motor_INTAKE_GetRPS)},                // 0.2000
+    {(char*)("B14 INTAKE_Current"),         DOUBLE, (&Motor_INTAKE_GetCurrent)},            // 0.4000
     {(char*)("B15 dummy:"),                 INT,    (&CrazyEights)},                        // 0.8000
 
-    {(char*)("B08 BALL_TRANSFER_Rotations"),DOUBLE, (&Motor_BALL_TRANSFER_GetRotations)},   // 0001.0
-    {(char*)("B17 BALL_TRANSFER_RPS"),      DOUBLE, (&Motor_BALL_TRANSFER_GetRPS)},         // 0002.0
-    {(char*)("B18 BALL_TRANSFER_Current"),  DOUBLE, (&Motor_BALL_TRANSFER_GetCurrent)},     // 0004.0
+    {(char*)("B16 BALL_HOPPER_Rotations"),  DOUBLE, (&Motor_BALL_HOPPER_GetRotations)},     // 0001.0
+    {(char*)("B17 BALL_HOPPER_RPS"),        DOUBLE, (&Motor_BALL_HOPPER_GetRPS)},           // 0002.0
+    {(char*)("B18 BALL_HOPPER_Current"),    DOUBLE, (&Motor_BALL_HOPPER_GetCurrent)},       // 0004.0
     {(char*)("B19 dummy:"),                 INT,    (&CrazyEights)},                        // 0008.0
 
-    {(char*)("B08 TURRET_Rotations"),       DOUBLE, (&Motor_TURRET_GetRotations)},          // 0010.0
-    {(char*)("B21 TURRET_RPS"),             DOUBLE, (&Motor_TURRET_GetRPS)},                // 0020.0
-    {(char*)("B22 TURRET_Current"),         DOUBLE, (&Motor_TURRET_GetCurrent)},            // 0040.0
+    {(char*)("B20 BALL_TRANSFER_Rotations"),DOUBLE, (&Motor_BALL_TRANSFER_GetRotations)},   // 0010.0
+    {(char*)("B21 BALL_TRANSFER_RPS"),      DOUBLE, (&Motor_BALL_TRANSFER_GetRPS)},         // 0020.0
+    {(char*)("B22 BALL_TRANSFER_Current"),  DOUBLE, (&Motor_BALL_TRANSFER_GetCurrent)},     // 0040.0
     {(char*)("B23 dummy:"),                 INT,    (&CrazyEights)},                        // 0080.0
 
-    {(char*)("B24 SHOOTER_1_RPS"),          DOUBLE, (&Motor_SHOOTER_1_GetRPS)},             // 0100.0
-    {(char*)("B25 SHOOTER_1_Current"),      DOUBLE, (&Motor_SHOOTER_1_GetCurrent)},         // 0200.0
-    {(char*)("B26 SHOOTER_2_RPS"),          DOUBLE, (&Motor_SHOOTER_2_GetRPS)},             // 0400.0
-    {(char*)("B27 SHOOTER_2_Current"),      DOUBLE, (&Motor_SHOOTER_2_GetCurrent)},         // 0800.0
+    {(char*)("B24 TURRET_Rotations"),       DOUBLE, (&Motor_TURRET_GetRotations)},          // 0100.0
+    {(char*)("B25 TURRET_RPS"),             DOUBLE, (&Motor_TURRET_GetRPS)},                // 0200.0
+    {(char*)("B26 TURRET_Current"),         DOUBLE, (&Motor_TURRET_GetCurrent)},            // 0400.0
+    {(char*)("B27 dummy:"),                 INT,    (&CrazyEights)},                        // 0800.0
 
-    {(char*)("B08 SHOOTER_HOOD_Rotations"), DOUBLE, (&Motor_SHOOTER_HOOD_GetRotations)},    // 1000.0
-    {(char*)("B25 SHOOTER_HOOD_RPS"),       DOUBLE, (&Motor_SHOOTER_HOOD_GetRPS)},          // 2000.0
-    {(char*)("B26 SHOOTER_HOOD_Current"),   DOUBLE, (&Motor_SHOOTER_HOOD_GetCurrent)},      // 4000.0
-    {(char*)("B27 dummy:"),                 INT,    (&CrazyEights)},                        // 8000.0
+    {(char*)("B28 SHOOTER_1_RPS"),          DOUBLE, (&Motor_SHOOTER_1_GetRPS)},             // 1000.0
+    {(char*)("B29 SHOOTER_1_Current"),      DOUBLE, (&Motor_SHOOTER_1_GetCurrent)},         // 2000.0
+    {(char*)("B30 SHOOTER_2_RPS"),          DOUBLE, (&Motor_SHOOTER_2_GetRPS)},             // 4000.0
+    {(char*)("B31 SHOOTER_2_Current"),      DOUBLE, (&Motor_SHOOTER_2_GetCurrent)},         // 8000.0
 
     {(char*)("THE END"), INT, nullptr }    // Great move, Columbus, you just fell off the edge of the world!
   };
@@ -267,37 +269,41 @@ private:
   // not used yet - wait for multiple 32-bit arrays
   const ScanElement ScanElementArray2[NUM_OF_SCAN_ELEMENTS+1] =       // Driver Station inputs
   {
-    {(char*)("B00 SWERVE_DRIVE_DRIVE"),     DOUBLE, (&TeleopAxis_SWERVE_DRIVE_DRIVE)},      // 0.0001
-    {(char*)("B01 SWERVE_DRIVE_ROTATE"),    DOUBLE, (&TeleopAxis_SWERVE_DRIVE_ROTATE)},     // 0.0002
-    {(char*)("B02 SWERVE_DRIVE_STEER"),     DOUBLE, (&TeleopAxis_SWERVE_DRIVE_STEER)},      // 0.0004
-    {(char*)("B03 TURRET_MANUAL_AXIS"),     DOUBLE, (&TeleopAxis_TURRET_MANUAL_AXIS)},      // 0.0008
-    {(char*)("B04 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0010
-    {(char*)("B05 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0020
-    {(char*)("B06 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0040
-    {(char*)("B07 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0080
+    {(char*)("B00 SWERVE_DRIVE_DRIVE"),     FLOAT,  (&TeleopAxis_SWERVE_DRIVE_DRIVE)},      // 0.0001
+    {(char*)("B01 SWERVE_DRIVE_ROTATE"),    FLOAT,  (&TeleopAxis_SWERVE_DRIVE_ROTATE)},     // 0.0002
+    {(char*)("B02 SWERVE_DRIVE_STEER"),     FLOAT,  (&TeleopAxis_SWERVE_DRIVE_STEER)},      // 0.0004
+    {(char*)("B03 INTAKE_ON"),              BOOL,   (&TeleopButton_INTAKE_ON)},             // 0.0008
 
-    {(char*)("B08 INTAKE_ON"),              BOOL,   (&TeleopButton_INTAKE_ON)},             // 0.0100
-    {(char*)("B09 INTAKE_OFF"),             BOOL,   (&TeleopButton_INTAKE_OFF)},            // 0.0200
-    {(char*)("B10 BALL_OFF"),               BOOL,   (&TeleopButton_BALL_TRANSFER_OFF)},     // 0.0400
-    {(char*)("B11 BALL_TRANSFER_SHOOTER"),  BOOL,   (&TeleopButton_BALL_TRANSFER_TO_SHOOTER)},//0.0800
-    {(char*)("B12 SHOOTER_PREPARE_SHOOT"),  FLOAT,  (&TeleopAxis_SHOOTER_PREPARE_TO_SHOOT)},//0.1000
-    {(char*)("B13 SHOOTER_MANUAL_SHOOT"),   BOOL,   (&TeleopButton_SHOOTER_MANUAL_SHOOT)},  // 0.2000
-    {(char*)("B14 SHOOTER_OFF"),            BOOL,   (&TeleopButton_SHOOTER_OFF)},           // 0.4000
-    {(char*)("B15 TURRET_MANUAL_BUTTON"),   BOOL,   (&TeleopButton_TURRET_MANUAL_BUTTON)},  // 0.8000
+    {(char*)("B04 INTAKE_OFF"),             BOOL,   (&TeleopButton_INTAKE_OFF)},            // 0.0010
+    {(char*)("B05 BALL_TRANSFER_OFF"),      BOOL,   (&TeleopButton_BALL_TRANSFER_OFF)},     // 0.0020
+    {(char*)("B06 BALL_TRANSFER_SHOOTER"),  BOOL,   (&TeleopButton_BALL_TRANSFER_TO_SHOOTER)},//0.0040
+    {(char*)("B07 SHOOTER_PREPARE_SHOOT"),  FLOAT,  (&TeleopAxis_SHOOTER_PREPARE_TO_SHOOT)}, //0.0080
 
-    {(char*)("B16 REZERO_PIGEON"),          BOOL,   (&TeleopButton_REZERO_PIGEON)},         // 0001.0
-    {(char*)("B17 OFF"),                    BOOL,   (&TeleopButton_OFF)},                   // 0002.0
-    {(char*)("B18 SHOOT"),                  BOOL,   (&TeleopButton_SHOOT)},                 // 0004.0
+    {(char*)("B08 SHOOTER_MN_SHOOT_GREEN"), BOOL,   (&TeleopButton_SHOOTER_MANUAL_SHOOT_GREEN)}, // 0.0100
+    {(char*)("B09 SHOOTER_MN_SHOOT_YELLOW"),BOOL,   (&TeleopButton_SHOOTER_MANUAL_SHOOT_YELLOW)},// 0.0200
+    {(char*)("B10 SHOOTER_MN_SHOOT_BLUE"),  BOOL,   (&TeleopButton_SHOOTER_MANUAL_SHOOT_BLUE)},// 0.0400
+    {(char*)("B11 SHOOTER_MN_SHOOT_RED"),   BOOL,   (&TeleopButton_SHOOTER_MANUAL_SHOOT_RED)},// 0.0800
+
+    {(char*)("B12 TURRET_LIMELIGHT_AIM"),   BOOL,   (&TeleopButton_TURRET_LIMELIGHT_AIM)},  // 0.1000
+    {(char*)("B13 REZERO_PIGEON"),          BOOL,   (&TeleopButton_REZERO_PIGEON)},         // 0.2000
+    {(char*)("B14 OFF"),                    BOOL,   (&TeleopButton_OFF)},                   // 0.4000
+    {(char*)("B15 dummy:"),                 INT,    (&CrazyEights)},                        // 0.8000
+
+    {(char*)("B16 dummy:"),                 INT,    (&CrazyEights)},                        // 0001.0
+    {(char*)("B17 dummy:"),                 INT,    (&CrazyEights)},                        // 0002.0
+    {(char*)("B18 dummy:"),                 INT,    (&CrazyEights)},                        // 0004.0
     {(char*)("B19 dummy:"),                 INT,    (&CrazyEights)},                        // 0008.0
+
     {(char*)("B20 dummy:"),                 INT,    (&CrazyEights)},                        // 0010.0
     {(char*)("B21 dummy:"),                 INT,    (&CrazyEights)},                        // 0020.0
     {(char*)("B22 dummy:"),                 INT,    (&CrazyEights)},                        // 0040.0
     {(char*)("B23 dummy:"),                 INT,    (&CrazyEights)},                        // 0080.0
 
-    {(char*)("B24 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0100
-    {(char*)("B25 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0200
-    {(char*)("B26 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0400
-    {(char*)("B27 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0800
+    {(char*)("B24 dummy:"),                 INT,    (&CrazyEights)},                        // 0100.0
+    {(char*)("B25 dummy:"),                 INT,    (&CrazyEights)},                        // 0200.0
+    {(char*)("B26 dummy:"),                 INT,    (&CrazyEights)},                        // 0400.0
+    {(char*)("B27 dummy:"),                 INT,    (&CrazyEights)},                        // 0800.0
+
     {(char*)("B28 dummy:"),                 INT,    (&CrazyEights)},                        // 1000.0
     {(char*)("B29 dummy:"),                 INT,    (&CrazyEights)},                        // 2000.0
     {(char*)("B30 dummy:"),                 INT,    (&CrazyEights)},                        // 4000.0
@@ -309,7 +315,7 @@ private:
   // not used yet - wait for multiple 32-bit arrays
   const ScanElement ScanElementArray3[NUM_OF_SCAN_ELEMENTS+1] =       // Swerve motor variables
   {
-  // Front Left module
+  // Left Front module
     {(char*)("B00 CHASS_LF_DRV_ROTATIONS"), DOUBLE, (&Chassis_LF_Drive_Rotations)},         // 0.0001
     {(char*)("B01 CHASS_LF_DRV_RPS"),       DOUBLE, (&Chassis_LF_Drive_RPS), },             // 0.0002
     {(char*)("B02 CHASS_LF_DRV_CURRENT"),   DOUBLE, (&Chassis_LF_Drive_Current)},           // 0.0004
@@ -318,7 +324,7 @@ private:
     {(char*)("B05 CHASS_LF_TURN_RPS"),      DOUBLE, (&Chassis_LF_Turn_RPS), },              // 0.0020
     {(char*)("B06 CHASS_LF_TURN_CURRENT"),  DOUBLE, (&Chassis_LF_Turn_Current)},            // 0.0040
     {(char*)("B07 dummy:"),                 INT,    (&CrazyEights)},                        // 0.0080
-  // Front Right module
+  // Right Front module
     {(char*)("B08 CHASS_RF_DRV_ROTATIONS"), DOUBLE, (&Chassis_RF_Drive_Rotations)},         // 0.0100
     {(char*)("B09 CHASS_RF_DRV_RPS"),       DOUBLE, (&Chassis_RF_Drive_RPS), },             // 0.0200
     {(char*)("B11 CHASS_RF_DRV_CURRENT"),   DOUBLE, (&Chassis_LB_Drive_Current)},           // 0.0400

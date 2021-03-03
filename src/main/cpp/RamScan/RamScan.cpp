@@ -63,13 +63,12 @@ RamScan::RamScan()
     m_pigeon        = nullptr;
     m_teleopControl = nullptr;
 
-    m_Motor_INTAKE1         = nullptr;
-    m_Motor_INTAKE2         = nullptr;
+    m_Motor_INTAKE          = nullptr;
     m_Motor_BALL_TRANSFER   = nullptr;
+    m_Motor_BALL_HOPPER     = nullptr;
     m_Motor_TURRET          = nullptr;
     m_Motor_SHOOTER_1       = nullptr;
     m_Motor_SHOOTER_2       = nullptr;
-    m_Motor_SHOOTER_HOOD    = nullptr;
 }
 
 // destructor
@@ -126,23 +125,12 @@ void RamScan::Init()
     //
     auto MotorControllerInstance = MotorControllerUsage::GetInstance();
 
-    m_Motor_INTAKE1         = MotorControllerArray[MotorControllerInstance->GetUsage("INTAKE1")];
-    m_Motor_INTAKE2         = MotorControllerArray[MotorControllerInstance->GetUsage("INTAKE2")];
+    m_Motor_INTAKE          = MotorControllerArray[MotorControllerInstance->GetUsage("INTAKE")];
     m_Motor_BALL_TRANSFER   = MotorControllerArray[MotorControllerInstance->GetUsage("BALL_TRANSFER")];
+    m_Motor_BALL_HOPPER     = MotorControllerArray[MotorControllerInstance->GetUsage("BALL_HOPPER")];
     m_Motor_TURRET          = MotorControllerArray[MotorControllerInstance->GetUsage("TURRET")];
     m_Motor_SHOOTER_1       = MotorControllerArray[MotorControllerInstance->GetUsage("SHOOTER_1")];
     m_Motor_SHOOTER_2       = MotorControllerArray[MotorControllerInstance->GetUsage("SHOOTER_2")];
-    m_Motor_SHOOTER_HOOD    = MotorControllerArray[MotorControllerInstance->GetUsage("SHOOTER_HOOD")];
-
-// ?? ////
-// ?? ////  Get pointers to all the mechanisms
-// ?? ////
-// ?? //    auto Mfactory = MechanismFactory::GetMechanismFactory();
-// ?? //
-// ?? //    if ( Mfactory == nullptr )
-// ?? //    {   Logger::GetLogger()->LogError("RamScan::Init", "Mfactory = nullptr"); }
-// ?? //    // then what?
-
 
 //
 // Show which motors are not created & saved by SaveMechanismMotorUsageSaveMotorUsage() in MotorControllerArray.
@@ -173,8 +161,17 @@ void RamScan::ScanVariables()
 if ((m_PacketCntr20ms & 0x00FF) == 0)
 {
     printf("....every 256 loops (5.12s)\n");
-// ?? //    printf("Chassis current speed = %5.2f\n", m_chassis->GetCurrentSpeed());
-    printf("Driver speed = %4.3f\n", m_teleopControl->GetAxisValue(TeleopControl::SWERVE_DRIVE_DRIVE));
+    printf("Driver speed = %4.3f\n", m_teleopControl->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE));
+
+    auto chassisSpeeds = m_chassis.get()->GetChassisSpeeds();
+    printf("Chassis current speed X= %5.2f",   static_cast<double>(chassisSpeeds.vx) );
+    printf(                    ", Y= %5.2f",   static_cast<double>(chassisSpeeds.vy) );
+    printf(                ", Omega= %5.2f\n", static_cast<double>(chassisSpeeds.omega) );
+
+    frc::Pose2d  currentChassisPosition = m_chassis.get()->GetPose().GetEstimatedPosition();
+    printf("Chassis Position X= %4.3f",   static_cast<double>(currentChassisPosition.X()) );
+    printf(               ", Y= %4.3f",   static_cast<double>(currentChassisPosition.Y()) );
+    printf(             ", Deg= %4.3f\n", static_cast<double>(currentChassisPosition.Rotation().Degrees()) );
 }
 
 //
@@ -310,13 +307,12 @@ void RamScan::SaveSwerveMotorUsage( shared_ptr<IDragonMotorController>  driveMot
         RamScan::MotorControllerArray[static_cast<int>(MotorControllerUsage::MAX_MOTOR_CONTROLLER_USAGES)];
 
 // pointers to motor controllers (nullptr if that motor doesn't exist)
-    shared_ptr<IDragonMotorController>  RamScan::m_Motor_INTAKE1;
-    shared_ptr<IDragonMotorController>  RamScan::m_Motor_INTAKE2;
+    shared_ptr<IDragonMotorController>  RamScan::m_Motor_INTAKE;
     shared_ptr<IDragonMotorController>  RamScan::m_Motor_BALL_TRANSFER;
+    shared_ptr<IDragonMotorController>  RamScan::m_Motor_BALL_HOPPER;
     shared_ptr<IDragonMotorController>  RamScan::m_Motor_TURRET;
     shared_ptr<IDragonMotorController>  RamScan::m_Motor_SHOOTER_1;
     shared_ptr<IDragonMotorController>  RamScan::m_Motor_SHOOTER_2;
-    shared_ptr<IDragonMotorController>  RamScan::m_Motor_SHOOTER_HOOD;
 
     //
     //  result variables for each type
@@ -343,9 +339,9 @@ void RamScan::CrazyEights(void)             { result_INT = 8888;}   // for dummy
 void RamScan::Get_RunMode(void)             { result_INT = Robot::GetRunMode();}
 void RamScan::Get_PacketCntr20ms(void)      { result_INT = m_PacketCntr20ms;}
 
-//
-// pigeon variables
-//
+//======================================//
+//  pigeon variables                    //
+//======================================//
 void RamScan::Get_Pigeon_Pitch(void)    {
     if (m_pigeon==nullptr) {result_DOUBLE= 9999.99;}
     else {result_DOUBLE = m_pigeon->GetPitch();}
@@ -358,16 +354,38 @@ void RamScan::Get_Pigeon_Yaw(void)      {
     if (m_pigeon==nullptr) {result_DOUBLE= 9999.99;}
     else {result_DOUBLE = m_pigeon->GetYaw();}
 }
-//
-//  accessors for chassis variables
-//
-void RamScan::Chassis_CurrentSpeed(void)
-// ?? //{ if (m_chassis==nullptr)
-{result_DOUBLE= 9999.99;}
-// ?? //    else {result_DOUBLE = m_chassis->GetCurrentSpeed();}
-// ?? //}
 
+//======================================//
+//  accessors for chassis variables     //
+//======================================//
 
+//
+//  for the chassis positions
+//
+void RamScan::ChassisPoseX(void) {
+    auto  currentChassisPosition = m_chassis.get()->GetPose().GetEstimatedPosition();
+    result_DOUBLE = static_cast<double>(currentChassisPosition.X());
+}
+void RamScan::ChassisPoseY(void) {
+    auto  currentChassisPosition = m_chassis.get()->GetPose().GetEstimatedPosition();
+    result_DOUBLE = static_cast<double>(currentChassisPosition.Y());
+}
+void RamScan::ChassisPoseDeg(void) {
+    auto  currentChassisPosition = m_chassis.get()->GetPose().GetEstimatedPosition();
+    result_DOUBLE = static_cast<double>(currentChassisPosition.Rotation().Degrees());
+}
+//
+// for the chassis speeds
+//
+void RamScan::ChassisSpeedX(void) {
+    result_DOUBLE = static_cast<double>(m_chassis.get()->GetChassisSpeeds().vx);
+}
+void RamScan::ChassisSpeedY(void) {
+    result_DOUBLE = static_cast<double>(m_chassis.get()->GetChassisSpeeds().vy);
+}
+void RamScan::ChassisSpeedOmega(void) {
+    result_DOUBLE = static_cast<double>(m_chassis.get()->GetChassisSpeeds().omega);
+}
 //
 // for the chassis motors
 //
@@ -495,32 +513,33 @@ void RamScan::Chassis_RB_Turn_Current(void) {
     if (controller == nullptr) {result_DOUBLE= 9999.99;}
     else {result_DOUBLE = controller->GetCurrent();}
 }
-//
-//  For the mechanism motors...
-//
-void RamScan::Motor_INTAKE1_GetRotations(void) {
-    if (m_Motor_INTAKE1 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_INTAKE1->GetRotations();}
+
+//======================================//
+//  For the mechanism motors            //
+//======================================//
+void RamScan::Motor_INTAKE_GetRotations(void) {
+    if (m_Motor_INTAKE == nullptr) {result_DOUBLE= 9999.99;}
+    else {result_DOUBLE = m_Motor_INTAKE->GetRotations();}
 }
-void RamScan::Motor_INTAKE1_GetRPS(void) {
-    if (m_Motor_INTAKE1 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_INTAKE1->GetRPS();}
+void RamScan::Motor_INTAKE_GetRPS(void) {
+    if (m_Motor_INTAKE == nullptr) {result_DOUBLE= 9999.99;}
+    else {result_DOUBLE = m_Motor_INTAKE->GetRPS();}
 }
-void RamScan::Motor_INTAKE1_GetCurrent(void) {
-    if (m_Motor_INTAKE1 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_INTAKE1->GetCurrent();}
+void RamScan::Motor_INTAKE_GetCurrent(void) {
+    if (m_Motor_INTAKE == nullptr) {result_DOUBLE= 9999.99;}
+    else {result_DOUBLE = m_Motor_INTAKE->GetCurrent();}
 }
-void RamScan::Motor_INTAKE2_GetRotations(void) {
-    if (m_Motor_INTAKE2 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_INTAKE2->GetRotations();}
+void RamScan::Motor_BALL_HOPPER_GetRotations(void) {
+    if (m_Motor_BALL_HOPPER == nullptr) {result_DOUBLE= 9999.99;}
+    else {result_DOUBLE = m_Motor_BALL_HOPPER->GetRotations();}
 }
-void RamScan::Motor_INTAKE2_GetRPS(void) {
-    if (m_Motor_INTAKE2 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_INTAKE2->GetRPS();}
+void RamScan::Motor_BALL_HOPPER_GetRPS(void) {
+    if (m_Motor_BALL_HOPPER == nullptr) {result_DOUBLE= 9999.99;}
+    else {result_DOUBLE = m_Motor_BALL_HOPPER->GetRPS();}
 }
-void RamScan::Motor_INTAKE2_GetCurrent(void) {
-    if (m_Motor_INTAKE2 == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_INTAKE2->GetCurrent();}
+void RamScan::Motor_BALL_HOPPER_GetCurrent(void) {
+    if (m_Motor_BALL_HOPPER == nullptr) {result_DOUBLE= 9999.99;}
+    else {result_DOUBLE = m_Motor_BALL_HOPPER->GetCurrent();}
 }
 void RamScan::Motor_BALL_TRANSFER_GetRotations(void) {
     if (m_Motor_BALL_TRANSFER == nullptr) {result_DOUBLE= 9999.99;}
@@ -570,70 +589,56 @@ void RamScan::Motor_SHOOTER_2_GetCurrent(void) {
     if (m_Motor_SHOOTER_2 == nullptr) {result_DOUBLE= 9999.99;}
     else {result_DOUBLE = m_Motor_SHOOTER_2->GetCurrent();}
 }
-void RamScan::Motor_SHOOTER_HOOD_GetRotations(void) {
-    if (m_Motor_SHOOTER_HOOD == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_SHOOTER_HOOD->GetRotations();}
-}
-void RamScan::Motor_SHOOTER_HOOD_GetRPS(void) {
-    if (m_Motor_SHOOTER_HOOD == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_SHOOTER_HOOD->GetRPS();}
-}
-void RamScan::Motor_SHOOTER_HOOD_GetCurrent(void) {
-    if (m_Motor_SHOOTER_HOOD == nullptr) {result_DOUBLE= 9999.99;}
-    else {result_DOUBLE = m_Motor_SHOOTER_HOOD->GetCurrent();}
-}
-//
-//  For DriverStation analog inputs
-//
+
+//======================================//
+//  For DriverStation analog inputs     //
+//======================================//
 void RamScan::TeleopAxis_SWERVE_DRIVE_DRIVE(void)   {
-    result_DOUBLE = m_DriverStation->GetStickAxis(0, IDragonGamePad::LEFT_JOYSTICK_Y);
+    result_FLOAT = m_teleopControl->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE);
 }
 void RamScan::TeleopAxis_SWERVE_DRIVE_ROTATE(void)  {
-    result_DOUBLE = m_DriverStation->GetStickAxis(0, IDragonGamePad::RIGHT_JOYSTICK_X);
+    result_FLOAT = m_teleopControl->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
 }
 void RamScan::TeleopAxis_SWERVE_DRIVE_STEER(void)   {
-    result_DOUBLE = m_DriverStation->GetStickAxis(0, IDragonGamePad::LEFT_JOYSTICK_X);
-}
-void RamScan::TeleopAxis_TURRET_MANUAL_AXIS(void) {
-    result_DOUBLE = m_DriverStation->GetStickAxis(1, IDragonGamePad::LEFT_JOYSTICK_Y);
+    result_FLOAT = m_teleopControl->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER);
 }
 //
 //  For DriverStation button inputs
 //
 void RamScan::TeleopButton_INTAKE_ON(void) {
-    result_BOOL = m_DriverStation->GetStickButton(2, IDragonGamePad::GAMEPAD_BUTTON_1);
+    result_BOOL = m_teleopControl->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::INTAKE_ON);
 }
 void RamScan::TeleopButton_INTAKE_OFF(void) {
-    result_BOOL = m_DriverStation->GetStickButton(2, IDragonGamePad::GAMEPAD_BUTTON_2);
+    result_BOOL = m_teleopControl->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::INTAKE_OFF);
 }
 void RamScan::TeleopButton_BALL_TRANSFER_OFF(void) {
-    result_BOOL = m_DriverStation->GetStickButton(2, IDragonGamePad::GAMEPAD_BUTTON_6);
+    result_BOOL = m_teleopControl->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::BALL_TRANSFER_OFF);
 }
 void RamScan::TeleopButton_BALL_TRANSFER_TO_SHOOTER(void) {
-    result_BOOL = m_DriverStation->GetStickButton(2, IDragonGamePad::GAMEPAD_BUTTON_8);
+    result_BOOL = m_teleopControl->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::BALL_TRANSFER_TO_SHOOTER);
 }
 void RamScan::TeleopAxis_SHOOTER_PREPARE_TO_SHOOT(void){
-    /***if (m_teleopControl==nullptr)***/ {result_FLOAT= 9999.99;}
-    /***else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SHOOTER_PREPARE_TO_SHOOT);}***/
+    if (m_teleopControl==nullptr) {result_FLOAT= 9999.99;}
+    else {result_FLOAT = m_teleopControl->GetAxisValue(TeleopControl::SHOOTER_PREPARE_TO_SHOOT);}
 }
-void RamScan::TeleopButton_SHOOTER_MANUAL_SHOOT(void) {
-    result_BOOL = m_DriverStation->GetStickButton(1, IDragonGamePad::POV_0);
+void RamScan::TeleopButton_SHOOTER_MANUAL_SHOOT_GREEN(void) {
+    result_BOOL = m_teleopControl->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_GREEN);
 }
-void RamScan::TeleopButton_SHOOTER_OFF(void) {
-    result_BOOL = m_DriverStation->GetStickButton(1, IDragonGamePad::POV_180);
+void RamScan::TeleopButton_SHOOTER_MANUAL_SHOOT_YELLOW(void) {
+    result_BOOL = m_teleopControl->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_YELLOW);
 }
-void RamScan::TeleopButton_TURRET_MANUAL_BUTTON(void)   {
-    result_BOOL = m_DriverStation->GetStickButton(0, IDragonGamePad::Y_BUTTON);
+void RamScan::TeleopButton_SHOOTER_MANUAL_SHOOT_BLUE(void) {
+    result_BOOL = m_teleopControl->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_BLUE);
+}
+void RamScan::TeleopButton_SHOOTER_MANUAL_SHOOT_RED(void) {
+    result_BOOL = m_teleopControl->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_MANUAL_SHOOT_RED);
 }
 void RamScan::TeleopButton_TURRET_LIMELIGHT_AIM(void) {
-    result_BOOL = m_DriverStation->GetStickButton(1, IDragonGamePad::POV_270);
+    result_BOOL = m_teleopControl->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::TURRET_LIMELIGHT_AIM);
 }
 void RamScan::TeleopButton_REZERO_PIGEON(void) {
-    result_BOOL = m_DriverStation->GetStickButton(0, IDragonGamePad::X_BUTTON);
+    result_BOOL = m_teleopControl->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::REZERO_PIGEON);
 }
 void RamScan::TeleopButton_OFF(void) {
-    result_BOOL = m_DriverStation->GetStickButton(1, IDragonGamePad::START_BUTTON);
-}
-void RamScan::TeleopButton_SHOOT(void) {
-    result_BOOL = m_DriverStation->GetStickButton(1, IDragonGamePad::X_BUTTON);
+    result_BOOL = m_teleopControl->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::OFF);
 }
