@@ -59,23 +59,23 @@ public:
     bool IsDone() override;
 
 private:
-    std::shared_ptr<SwerveChassis> m_chassis;
-    std::unique_ptr<frc::Timer> m_timer;
+    bool IsSamePose(frc::Pose2d, frc::Pose2d); // routine to check for motion
+    void GetTrajectory(std::string  path);
+
+
+    std::shared_ptr<SwerveChassis>  m_chassis;
+    std::unique_ptr<frc::Timer>     m_timer;
+
+    frc::Pose2d                     m_currentChassisPosition;
+    frc::Trajectory                 m_trajectory;
+    bool                            m_runHaloController;
+    frc::RamseteController          m_ramseteController;
+    frc::HolonomicDriveController   m_holoController;
+    frc::Pose2d                     m_PrevPos;                                         // previous position of robot for compare to current position.
+    std::unique_ptr<frc::Timer>     m_PosChgTimer;                                      // scan time for position change
+    int                             m_timesRun;
+    frc::Pose2d                     m_targetPose;
+    double                          m_deltaX;
+    double                          m_deltaY;
  
-
-    double m_maxTime;
-
-    frc::Pose2d m_currentChassisPosition;
-    frc::Trajectory m_trajectory;
-    frc::RamseteController m_ramseteController;
-    frc::HolonomicDriveController m_holoController;
-    frc::Pose2d m_CurPos;                                          // Current position used for motion detect.
-    frc::Pose2d m_PrevPos;                                         // previous position of robot for compare to current position.
-    frc::Timer m_PosChgTimer;                                      // scan time for position change
-    bool m_bRobotStopped = false;                                  // check to see if robot is stopped
-    bool lRobotStopped(frc::Pose2d, frc::Pose2d); // routine to check for motion
-
-    std::string sPath2Load = ""; // used to read file name of path.
-  
-    PRIMITIVE_IDENTIFIER m_path;  //m_mode Not sure if this should be unique.
 };
