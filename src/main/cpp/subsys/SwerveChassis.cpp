@@ -88,6 +88,15 @@ void SwerveChassis::ZeroAlignSwerveModules()
     m_backRight.get()->ZeroAlignModule();
 }
 
+void SwerveChassis::SetDriveScaleFactor( double scale )
+{
+    m_scale = scale;
+    m_frontLeft.get()->SetDriveScale(m_scale);
+    m_frontRight.get()->SetDriveScale(m_scale);
+    m_backLeft.get()->SetDriveScale(m_scale);
+    m_backRight.get()->SetDriveScale(m_scale);
+}
+
 
 
 /// @brief Drive the chassis
@@ -128,11 +137,13 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
 
         auto [fl, fr, bl, br] = states;
 
+        /**
         m_frontLeft.get()->SetDriveScale(m_scale);
         m_frontRight.get()->SetDriveScale(m_scale);
         m_backLeft.get()->SetDriveScale(m_scale);
         m_backRight.get()->SetDriveScale(m_scale);
-
+        **/
+       
         m_frontLeft.get()->SetDesiredState(fl);
         m_frontRight.get()->SetDesiredState(fr);
         m_backLeft.get()->SetDesiredState(bl);

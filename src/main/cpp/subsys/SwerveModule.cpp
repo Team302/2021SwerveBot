@@ -309,12 +309,13 @@ void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
     }
     else
     {
-        m_currentState.speed = m_scale * speed;
+        m_currentState.speed = speed;
     }
     
     // convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel
     auto driveTarget = m_currentState.speed.to<double>() /  units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi;  
-
+    driveTarget *= m_scale;
+    
     Logger::GetLogger()->ToNtTable(m_nt, string("drive motor id"), m_driveMotor.get()->GetID() );
     Logger::GetLogger()->ToNtTable(m_nt, string("drive target"), driveTarget );
      

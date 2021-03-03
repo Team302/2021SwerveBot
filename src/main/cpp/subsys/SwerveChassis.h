@@ -136,7 +136,7 @@ class SwerveChassis
         std::shared_ptr<SwerveModule> GetBackRight() const { return m_backRight;}
         frc::SwerveDrivePoseEstimator<4> GetPose() const { return m_poseEstimator; }  
 
-        void SetDriveScaleFactor( double scale ) { m_scale = scale;}
+        void SetDriveScaleFactor( double scale );
 
     private:
 
