@@ -88,6 +88,8 @@ void Robot::DisabledInit()
 /// @return void
 void Robot::DisabledPeriodic()
 {
+    UpdateOdometry();       // intentionally didn't do this in robot periodic to avoid traffic during disable
+
     // Its awfully lonely in here. Could someone write some code for me?
 }
 
