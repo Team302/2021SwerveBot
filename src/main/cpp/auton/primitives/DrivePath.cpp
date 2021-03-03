@@ -58,6 +58,7 @@ void DrivePath::Init(PrimitiveParams *params)
     Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
 
     GetTrajectory(params->GetPathName());
+    Logger::GetLogger()->ToNtTable("Trajectory", "Time", m_trajectory.TotalTime().to<double>());
     if (m_trajectory.TotalTime().to<double>()>0.0) // only go if path name found
     {
         m_timer.get()->Reset();
