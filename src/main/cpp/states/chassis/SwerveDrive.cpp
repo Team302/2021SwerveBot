@@ -112,6 +112,11 @@ void SwerveDrive::Run( )
             rotate = controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
         }
     }
+
+    Logger::GetLogger()->ToNtTable("Swerve Drive", "drive", drive);
+    Logger::GetLogger()->ToNtTable("Swerve Drive", "steer", steer);
+    Logger::GetLogger()->ToNtTable("Swerve Drive", "rotate", rotate);
+    
     m_chassis.get()->Drive(drive, steer, rotate, true);
 }
 

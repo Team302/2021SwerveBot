@@ -85,9 +85,9 @@ double AnalogAxis::GetAxisValue()
     {
         value = GetRawValue();
         value = m_deadband->ApplyDeadband( value );
+    //    value = m_slewRateFactor->SlewRate( value );
         value = m_profile->ApplyProfile( value );
         value = m_scale->Scale( value );
-        value = m_slewRateFactor->SlewRate( value );
     }
     else
     {
