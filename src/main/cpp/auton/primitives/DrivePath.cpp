@@ -36,6 +36,7 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
                                                  frc2::PIDController{1, 0, 0}, 
                                                  frc::ProfiledPIDController<units::radian>{1, 0, 0, 
                                                  frc::TrapezoidProfile<units::radian>::Constraints{6.28_rad_per_s, 3.14_rad_per_s / 1_s}})
+                                                 //max velocity of 1 rotation per second and a max acceleration of 180 degrees per second squared.
 {
   Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "False");
   Logger::GetLogger()->ToNtTable("DrivePath", "Running", "False");
@@ -95,8 +96,6 @@ void DrivePath::Run()
 
     Logger::GetLogger()->ToNtTable("DrivePath", "Found Path = ", sPath2Load);
 
-    if (units::second_t(m_timer.get()->Get()) < m_trajectory.TotalTime())
-    {
       int timesRan = 1;
 
       auto desiredPose = m_trajectory.Sample(units::second_t(m_timer.get()->Get() + 0.02));
@@ -138,15 +137,7 @@ void DrivePath::Run()
       
       //m_chassis->Drive( 0.5, 0, 0, false);
 
-      Logger::GetLogger()->LogError(string("DrivePath - Running Path = "), sPath2Load);
-    }
-    else
-    {
-      //Logger::GetLogger()->LogError(string("DrivePath - Error = "), string("Current Time greater than trajectory total time"));
-      //Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentTime", m_timer.get()->Get());
-      //Logger::GetLogger()->ToNtTable("DrivePathValues", "TrajectoryTotalTime", m_trajectory.TotalTime().to<double>());
-    }
-    
+      Logger::GetLogger()->LogError(string("DrivePath - Running Path = "), sPath2Load);    
 
     // Motion Detection //
     if (m_PosChgTimer.Get() >= .75) // Scan time for comparing current pose with previous pose
@@ -167,13 +158,14 @@ bool DrivePath::IsDone()
     bool bTimeDone = units::second_t(m_timer.get()->Get()) >= m_trajectory.TotalTime();
 
   //  sPath2Load = "";)
-    if ( bTimeDone //&& m_bRobotStopped
-       )
+  m_currentChassisPosition = m_chassis.get()->GetPose().GetEstimatedPosition();
+    if ( lRobotStopped(m_trajectory.Sample(m_trajectory.TotalTime()).pose, m_currentChassisPosition))
+      //bTimeDone && m_bRobotStopped
     {
       Logger::GetLogger()->ToNtTable("DrivePath", "Done", "True");
       Logger::GetLogger()->LogError(string("DrivePath - DONE = "), sPath2Load);
     }
-    return (bTimeDone //&& m_bRobotStopped
+    return (bTimeDone // && m_bRobotStopped
     );
   }
   else
