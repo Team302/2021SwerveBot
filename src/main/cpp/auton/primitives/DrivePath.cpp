@@ -106,15 +106,9 @@ void DrivePath::Run()
         Logger::GetLogger()->ToNtTable("DeltaValues", "DeltaX", desiredPose.pose.X().to<double>() - m_currentChassisPosition.X().to<double>());
         Logger::GetLogger()->ToNtTable("DeltaValues", "DeltaY", desiredPose.pose.Y().to<double>() - m_currentChassisPosition.Y().to<double>());
 
-        ChassisSpeeds refChassisSpeeds;
-        if (m_runHaloController)
-        {
-          refChassisSpeeds = m_holoController.Calculate(m_currentChassisPosition, desiredPose, desiredPose.pose.Rotation());
-        }
-        else
-        {
-          refChassisSpeeds = m_ramseteController.Calculate(m_currentChassisPosition, desiredPose);
-        }
+        auto refChassisSpeeds = m_runHaloController ? m_holoController.Calculate(m_currentChassisPosition, desiredPose, desiredPose.pose.Rotation()) :
+                                                      m_ramseteController.Calculate(m_currentChassisPosition, desiredPose);
+
         Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsX", refChassisSpeeds.vx());
         Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsY", refChassisSpeeds.vy());
 
@@ -182,6 +176,7 @@ bool DrivePath::IsDone()
     {
         return true;
     }
+    return isDone;
 }
 bool DrivePath::IsSamePose(frc::Pose2d lCurPos, frc::Pose2d lPrevPos)
 {
