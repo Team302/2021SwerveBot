@@ -32,7 +32,7 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
                          m_timer(make_unique<Timer>()),
                          m_currentChassisPosition(units::meter_t(0), units::meter_t(0), units::radian_t(0)),
                          m_trajectory(),
-                         m_runHaloController(true),
+                         m_runHoloController(true),
                          m_ramseteController(),
                          m_holoController(frc2::PIDController{1, 0, 0},
                                           frc2::PIDController{1, 0, 0},
@@ -67,7 +67,7 @@ void DrivePath::Init(PrimitiveParams *params)
         Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", m_currentChassisPosition.Y().to<double>());
         m_PosChgTimer.get()->Start(); // start scan timer to detect motion
 
-        if (m_runHaloController)
+        if (m_runHoloController)
         {
             m_holoController.SetEnabled(true);
         }
@@ -106,7 +106,7 @@ void DrivePath::Run()
         Logger::GetLogger()->ToNtTable("DeltaValues", "DeltaX", desiredPose.pose.X().to<double>() - m_currentChassisPosition.X().to<double>());
         Logger::GetLogger()->ToNtTable("DeltaValues", "DeltaY", desiredPose.pose.Y().to<double>() - m_currentChassisPosition.Y().to<double>());
 
-        auto refChassisSpeeds = m_runHaloController ? m_holoController.Calculate(m_currentChassisPosition, desiredPose, desiredPose.pose.Rotation()) :
+        auto refChassisSpeeds = m_runHoloController ? m_holoController.Calculate(m_currentChassisPosition, desiredPose, desiredPose.pose.Rotation()) :
                                                       m_ramseteController.Calculate(m_currentChassisPosition, desiredPose);
 
         Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsX", refChassisSpeeds.vx());
