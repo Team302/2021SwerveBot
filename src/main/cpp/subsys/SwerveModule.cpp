@@ -160,10 +160,10 @@ void SwerveModule::Init
     auto driveCData = make_shared<ControlData>( ControlModes::CONTROL_TYPE::VELOCITY_RPS,
                                                 ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
                                                 string("DriveSpeed"),
-                                                0.01,
+                                                1.0,  // 0.01
                                                 0.0,
                                                 0.0,
-                                                0.5,
+                                                0.0,  // 0.5
                                                 0.0,
                                                 maxAcceleration.to<double>(),
                                                 maxVelocity.to<double>(),
@@ -311,7 +311,10 @@ void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
     {
         m_currentState.speed = speed;
     }
-    
+
+    Logger::GetLogger()->ToNtTable(m_nt, string("State Speed - mps"), m_currentState.speed.to<double>() );
+    Logger::GetLogger()->ToNtTable(m_nt, string("Wheel Diameter - meters"), units::length::meter_t(m_wheelDiameter).to<double>() );
+       
     // convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel
     auto driveTarget = m_currentState.speed.to<double>() / (units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi);  
     driveTarget *= m_scale;
