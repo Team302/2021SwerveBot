@@ -48,7 +48,7 @@ IntakeStateMgr* IntakeStateMgr::GetInstance()
 }
 
 /// @brief    initialize the state manager, parse the configuration file and create the states.
-IntakeStateMgr::IntakeStateMgr() : m_stateVector(),
+IntakeStateMgr::IntakeStateMgr() : m_states(),
                                    m_currentState()
 {
     // Parse the configuration file 
@@ -59,8 +59,12 @@ IntakeStateMgr::IntakeStateMgr() : m_stateVector(),
     map<string, INTAKE_STATE> stateStringToEnumMap;
     stateStringToEnumMap["INTAKEOFF"] = INTAKE_STATE::OFF;
     stateStringToEnumMap["INTAKEON"]  = INTAKE_STATE::ON;
-    m_stateVector.resize(2);
 
+    for (auto inx=0; inx<MAX_INTAKE_STATES; ++inx)
+    {
+       m_states[inx] = nullptr;
+    }
+    
     // create the states passing the configuration data
     for ( auto td: targetData )
     {
@@ -69,7 +73,7 @@ IntakeStateMgr::IntakeStateMgr() : m_stateVector(),
         if ( stateStringToEnumItr != stateStringToEnumMap.end() )
         {
             auto stateEnum = stateStringToEnumItr->second;
-            if ( m_stateVector[stateEnum] == nullptr )
+            if ( m_states[stateEnum] == nullptr )
             {
                 auto controlData = td->GetController();
                 auto target = td->GetTarget();
@@ -78,14 +82,14 @@ IntakeStateMgr::IntakeStateMgr() : m_stateVector(),
                     case INTAKE_STATE::ON:
                     {   
                         auto thisState = new IntakeState( controlData, target);
-                        m_stateVector[stateEnum] = thisState;
+                        m_states[stateEnum] = thisState;
                     }
                     break;
 
                     case INTAKE_STATE::OFF:
                     {   
                         auto thisState = new IntakeState( controlData, target);
-                        m_stateVector[stateEnum] = thisState;
+                        m_states[stateEnum] = thisState;
                         m_currentState = thisState;
                         m_currentStateEnum = stateEnum;
                         m_currentState->Init();
@@ -144,7 +148,7 @@ void IntakeStateMgr::SetCurrentState
     bool            run
 )
 {
-    auto state = m_stateVector[stateEnum];
+    auto state = m_states[stateEnum];
     if ( state != nullptr && state != m_currentState )
     {
         m_currentState = state;

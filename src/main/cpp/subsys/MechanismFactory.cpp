@@ -71,7 +71,7 @@ MechanismFactory* MechanismFactory::GetMechanismFactory()
 MechanismFactory::MechanismFactory()  : m_balltransfer(),
 										m_ballhopper(),
 										m_intake1(),
-										m_intake2(),
+										//m_intake2(),
 										m_shooter(),
 										m_turret()   
 {
@@ -121,11 +121,13 @@ void  MechanismFactory::CreateIMechanism
 					m_intake1 = make_shared<Intake>( motor );
 					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Intake1"), string("created"));
 				}
+				/**
 				else if ( m_intake2.get() == nullptr )
 				{
 					m_intake2 = make_shared<Intake>( motor );
 					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Intake2"), string("created"));
 				}
+				**/
 				else
 				{
 					found = true;

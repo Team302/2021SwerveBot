@@ -15,12 +15,11 @@
 
 #pragma once
 
-#include <states/IState.h>
 #include <states/Mech1MotorState.h>
 
 class ControlData;
 
-class IntakeState : public IState
+class IntakeState : public Mech1MotorState
 {
     public:
 
@@ -28,16 +27,7 @@ class IntakeState : public IState
     (
         ControlData* control,
         double target
-        //Servo may be added later for releasing
     );
     IntakeState() = delete;
     ~IntakeState() = default;
-
-        void Init() override;
-        void Run() override;
-        bool AtTarget() const override;
-
-    private:
-        std::unique_ptr<Mech1MotorState>    m_motorState;
-
 };

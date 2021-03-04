@@ -43,6 +43,7 @@ class MotorControllerUsage
             DRIVE,
             TURN,
             INTAKE,
+            INTAKE2,
             BALL_TRANSFER,
             BALL_HOPPER,
             TURRET,

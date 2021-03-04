@@ -13,54 +13,25 @@
 /// OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-//========================================================================================================
-/// File name: IntakeOff
-//========================================================================================================
-///
-/// File Description:
-/// When intake is "off", sets motors to off and brings solenoid/intake into the robot.
-///
-//========================================================================================================
-
 // C++ Includes
 
 // FRC includes
 
 // Team 302 includes
 #include <controllers/ControlData.h>
-#include <controllers/MechanismTargetData.h>
 #include <states/intake/IntakeState.h>
-#include <states/IState.h>
 #include <states/Mech1MotorState.h>
 #include <subsys/MechanismFactory.h>
 
 // Third Party Includes
-
-using namespace std;
 
 
 IntakeState::IntakeState
 (
     ControlData* control,
     double target
-) : IState()
-    //m_motorState( make_unique<Mech1MotorState>(MechanismFactory::GetMechanismFactory()->GetIntake().get(), control, target)),
-    //TODO Hook up MechanismFactory
+) : Mech1MotorState(MechanismFactory::GetMechanismFactory()->GetIntake().get(), control, target)
 {
 }
 
-void IntakeState::Init()
-{
-    m_motorState.get()->Init();
-}
 
-
-void IntakeState::Run()           
-{
-    m_motorState.get()->Run();
-}
-
-bool IntakeState::AtTarget() const
-{
-    return ( m_motorState.get()->AtTarget());
-}
