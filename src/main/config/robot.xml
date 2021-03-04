@@ -30,7 +30,7 @@
     <swervechassis   type="SWERVE"
                      wheelBase="14.0"  
                      track="14.0"
-                     maxVelocity="6"
+                     maxVelocity="23.27"
                      maxAngularVelocity="1591.2"
                      maxAcceleration="1"
                      maxAngularAcceleration="1">
@@ -86,7 +86,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="2"
-                            offset="-135.879"/>
+                            offset="-140.98"/>
         </swervemodule>
 
        <!-- .25 -->
@@ -140,7 +140,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="0"
-                            offset="22.676"/>
+                            offset="16.927"/>
         </swervemodule>
 
        <!-- .25 -->
@@ -194,7 +194,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="12"
-                            offset="115.137"/>
+                            offset="109.25"/>
         </swervemodule>
 
        <!-- 0.25 -->
@@ -248,7 +248,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="14"
-                            offset="-156.797"/>
+                            offset="-162.94"/>
         </swervemodule>
 
     </swervechassis>  
