@@ -276,6 +276,25 @@
                      forwardlimitswitchopen="true"
                      reverselimitswitch="false"
                      reverselimitswitchopen="true"/>        
+		<motor usage="INTAKE2"
+                     canId="7"
+                     pdpID="7"
+                     type="FALCON"
+                     inverted="true"
+                     sensorInverted="false"
+                     feedbackDevice="INTERNAL"
+                     countsPerRev="2048"
+                     gearRatio="1.0"
+                     brakeMode="false"
+                     follow="10"
+                     peakCurrentDuration="15.0"
+                     continuousCurrentLimit="40.0"
+                     peakCurrentLimit="50.0"
+                     currentLimiting="true" 
+                     forwardlimitswitch="false"
+                     forwardlimitswitchopen="true"
+                     reverselimitswitch="false"
+                     reverselimitswitchopen="true"/>  
 	</mechanism>
 
 
@@ -367,7 +386,7 @@
 
 	</mechanism>
     
-	<mechanism type="INTAKE">
+	<!-- mechanism type="INTAKE">
 		<motor usage="INTAKE"
                      canId="7"
                      pdpID="7"
@@ -387,7 +406,7 @@
                      forwardlimitswitchopen="true"
                      reverselimitswitch="false"
                      reverselimitswitchopen="true"/>        
-	</mechanism>
+	</mechanism -->
 
     
 	<mechanism type="BALL_HOPPER">

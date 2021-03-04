@@ -33,7 +33,8 @@ class IntakeStateMgr
         enum INTAKE_STATE
         {
             OFF,
-            ON
+            ON,
+            MAX_INTAKE_STATES
         };
 
 		/// @brief  Find or create the state manmanager
@@ -61,7 +62,7 @@ class IntakeStateMgr
 
     private:
 
-        std::vector<IState*> m_stateVector;
+        std::array<IState*,MAX_INTAKE_STATES> m_states;
         IState* m_currentState;
         INTAKE_STATE m_currentStateEnum;
 

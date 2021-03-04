@@ -82,7 +82,7 @@ class MechanismFactory
 		);
 
 		inline std::shared_ptr<Intake> GetIntake() const { return m_intake1;};
-		inline std::shared_ptr<Intake> GetIntake2() const { return m_intake2;};
+		//inline std::shared_ptr<Intake> GetIntake2() const { return m_intake2;};
 		inline std::shared_ptr<BallHopper> GetBallHopper() const { return m_ballhopper;};
 		inline std::shared_ptr<BallTransfer> GetBallTransfer() const { return m_balltransfer;};
 		inline std::shared_ptr<Shooter> GetShooter() const { return m_shooter;};
@@ -117,7 +117,7 @@ class MechanismFactory
 		std::shared_ptr<BallTransfer> 	m_balltransfer;
 		std::shared_ptr<BallHopper>		m_ballhopper;
 		std::shared_ptr<Intake> 		m_intake1;
-		std::shared_ptr<Intake> 		m_intake2;
+		//std::shared_ptr<Intake> 		m_intake2;
 		std::shared_ptr<Shooter>		m_shooter;
 		std::shared_ptr<Turret>			m_turret;
 
