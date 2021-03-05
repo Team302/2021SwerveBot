@@ -120,6 +120,7 @@ void CyclePrimitives::GetNextPrim()
 		**/
 		m_timer->Reset();
 		m_timer->Start();
+		m_currentPrim->Run();
 	}
 
 	m_currentPrimSlot++;

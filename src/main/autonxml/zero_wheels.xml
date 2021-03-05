@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<!DOCTYPE auton SYSTEM "auton.dtd">
+<auton>
+        <primitive id="ZERO_WHEELS"/>
+</auton>
