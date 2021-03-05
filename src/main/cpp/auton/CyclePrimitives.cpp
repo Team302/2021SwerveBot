@@ -110,6 +110,7 @@ void CyclePrimitives::GetNextPrim()
 	if (m_currentPrim != nullptr)
 	{
 		m_currentPrim->Init(currentPrimParam);
+		m_currentPrim->Run();
 		Logger::GetLogger()->LogError(string("CyclePrimitives::GetNextPrim"), string("Initializing current primitive"));
 		m_maxTime = currentPrimParam->GetTime();
 		/**

@@ -41,4 +41,5 @@ class SwerveDrive : public IState
         inline TeleopControl* GetController() const { return m_controller; }
         std::shared_ptr<SwerveChassis>      m_chassis;
         TeleopControl*                      m_controller;
+        bool                                m_usePWLinearProfile;
 };
