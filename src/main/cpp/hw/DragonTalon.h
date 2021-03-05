@@ -121,6 +121,7 @@ class DragonTalon : public IDragonMotorController
             units::volt_t output
         ) override;
 
+        double GetGearRatio() const override { return m_gearRatio;}
 
     private:
         std::shared_ptr<ctre::phoenix::motorcontrol::can::WPI_TalonSRX>  m_talon;

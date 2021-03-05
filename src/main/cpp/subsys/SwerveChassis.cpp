@@ -184,6 +184,9 @@ void SwerveChassis::Drive( double drive, double steer, double rotate, bool field
         auto maxSpeed = GetMaxSpeed();
         auto maxRotation = GetMaxAngularSpeed();
 
+        Logger::GetLogger()->ToNtTable("Swerve Chassis", "MaxSpeed", maxSpeed.to<double>() );
+        Logger::GetLogger()->ToNtTable("Swerve Chassis", "maxRotation", maxRotation.to<double>() );
+
         units::velocity::meters_per_second_t            driveSpeed = drive * maxSpeed;
         units::velocity::meters_per_second_t            steerSpeed = steer * maxSpeed;
         units::angular_velocity::radians_per_second_t   rotateSpeed = rotate * maxRotation;

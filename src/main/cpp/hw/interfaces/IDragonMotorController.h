@@ -113,6 +113,7 @@ class IDragonMotorController
         
         IDragonMotorController() = default;
         virtual ~IDragonMotorController() = default;
+        virtual double GetGearRatio() const = 0;
 
 
     protected:
