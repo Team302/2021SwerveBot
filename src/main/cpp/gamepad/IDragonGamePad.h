@@ -134,6 +134,7 @@ class IDragonGamePad
             LINEAR,
             SQUARED,
             CUBED,
+            PIECEWISE_LINEAR,
             MAX_PROFILES
         };
 
