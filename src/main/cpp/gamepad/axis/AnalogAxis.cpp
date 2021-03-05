@@ -83,12 +83,19 @@ double AnalogAxis::GetAxisValue()
 
     if ( m_gamepad != nullptr )
     {
+        auto ntName = string("Axis - ");
+        ntName += to_string(m_axis);
+
         value = GetRawValue();
+        Logger::GetLogger()->ToNtTable(ntName, "raw value", value );
         value = m_deadband->ApplyDeadband( value );
+        Logger::GetLogger()->ToNtTable(ntName, "after deadband", value );
     //    value = m_slewRateFactor->SlewRate( value );
         value = m_profile->ApplyProfile( value );
+        Logger::GetLogger()->ToNtTable(ntName, "after profile", value );
         value = m_scale->Scale( value );
-    }
+        Logger::GetLogger()->ToNtTable(ntName, "after scale", value );
+   }
     else
     {
             string msg = "missing gamepad ";

@@ -142,7 +142,7 @@ void Robot::TeleopPeriodic()
     }
     else
     {
-        Logger::GetLogger()->LogError("robot", "no shooter");
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT_ONCE, "robot", "no shooter");
     }
     
 }

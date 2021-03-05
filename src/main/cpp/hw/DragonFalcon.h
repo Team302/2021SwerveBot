@@ -134,6 +134,9 @@ class DragonFalcon : public IDragonMotorController
         (
             MOTOR_PRIORITY              priority
         ) override;
+
+        double GetGearRatio() const override { return m_gearRatio;}
+
     private:
         std::shared_ptr<ctre::phoenix::motorcontrol::can::WPI_TalonFX>  m_talon;
         ControlModes::CONTROL_TYPE m_controlMode;
