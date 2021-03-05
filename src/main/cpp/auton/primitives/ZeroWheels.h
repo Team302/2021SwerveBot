@@ -15,11 +15,6 @@
 
 #pragma once
 
-// C++ Includes
-#include <memory>
-
-// FRC includes
-
 // Team 302 includes
 #include <auton/primitives/IPrimitive.h>
 

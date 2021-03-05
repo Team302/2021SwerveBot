@@ -13,16 +13,12 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-//C++ Includes
-#include <memory>
-#include <string>
-
-
 //Team 302 includes
 #include <auton/PrimitiveParams.h>
 #include <auton/primitives/IPrimitive.h>
 #include <subsys/SwerveChassisFactory.h>
 #include <auton/primitives/ZeroWheels.h>
+#include <subsys/SwerveChassis.h>
 
 using namespace std;
 using namespace frc;
