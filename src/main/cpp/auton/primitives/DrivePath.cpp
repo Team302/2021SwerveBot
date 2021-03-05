@@ -32,7 +32,7 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
                          m_timer(make_unique<Timer>()),
                          m_currentChassisPosition(units::meter_t(0), units::meter_t(0), units::radian_t(0)),
                          m_trajectory(),
-                         m_runHoloController(true),
+                         m_runHoloController(false),
                          m_ramseteController(),
                          m_holoController(frc2::PIDController{1, 0, 0},
                                           frc2::PIDController{1, 0, 0},
@@ -54,7 +54,6 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
 }
 void DrivePath::Init(PrimitiveParams *params)
 {
-
     Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
 
     GetTrajectory(params->GetPathName());
@@ -94,7 +93,8 @@ void DrivePath::Run()
         m_timesRun++;
         Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", m_timesRun);
 
-        auto sampleTime = units::time::second_t(m_timer.get()->Get() + 0.02);
+        auto sampleTime = units::time::second_t(m_timer.get()->Get() //+ 0.02
+        );
         auto desiredPose = (sampleTime <= m_trajectory.TotalTime()) ? m_trajectory.Sample(sampleTime) :
                                                                       m_trajectory.Sample(m_trajectory.TotalTime());
         // Get the reference chassis speeds from the Ramsete Controller.

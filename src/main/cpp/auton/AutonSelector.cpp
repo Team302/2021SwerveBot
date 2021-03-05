@@ -53,19 +53,17 @@ std::string AutonSelector::GetSelectedAutoFile()
 	//If statement to grab the corrent galactic search path xml from limelight with GalacticSearchChooser
 
 
-	//if ( m_chooser.GetSelected() == "GS")
-	//{
+	if ( m_chooser.GetSelected() == "GS")
+	{
 		//return GalacticSearchChooser.GetPath();
-	//}
-	//else 
-	//{
-	//	return m_chooser.GetSelected();
-	//}
+	}
+
+	return m_chooser.GetSelected();
 	
 	
 	//return "balltest.xml";
 	//return m_chooser.GetSelected();
-	return "barrel.xml";
+	//return "barrel.xml";
 }
 
 //---------------------------------------------------------------------
@@ -138,10 +136,11 @@ void AutonSelector::PutChoicesOnDashboard()
 	}
 	*/
 
-	m_chooser.AddOption( "Galactic Search", "GS");
-	m_chooser.AddOption("Bounce Path", "Bounce.xml");
-	m_chooser.AddOption("Barrel Racing Path", "Barrel.xml");
-	m_chooser.AddOption("Slalom Path", "Slalom.xml");
+	m_chooser.AddOption("Galactic Search", "GS");
+	m_chooser.AddOption("Bounce Path", "bounce.xml");
+	m_chooser.AddOption("Barrel Racing Path", "barrel.xml");
+	m_chooser.AddOption("Slalom Path", "slalom.xml");
+	m_chooser.AddOption("Zero Wheels", "zero_wheels.xml");
 
 	frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 }
