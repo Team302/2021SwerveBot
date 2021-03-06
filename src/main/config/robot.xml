@@ -86,7 +86,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="2"
-                            offset="-140.98"/>
+                            offset="-130.078"/>
         </swervemodule>
 
        <!-- .25 -->
@@ -140,7 +140,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="0"
-                            offset="16.927"/>
+                            offset="18.727"/>
         </swervemodule>
 
        <!-- .25 -->
@@ -194,7 +194,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="12"
-                            offset="109.25"/>
+                            offset="128.848"/>
         </swervemodule>
 
        <!-- 0.25 -->
@@ -248,7 +248,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="14"
-                            offset="-162.94"/>
+                            offset="-144.053"/>
         </swervemodule>
 
     </swervechassis>  
