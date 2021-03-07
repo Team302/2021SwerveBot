@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: SwerveChassisDefn Class Reference</title>
+<title>Team 302 Swerve Robot: SwerveChassisDefn Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -103,7 +103,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ad7400be33cacb4dc2cf38228625f966c"><td class="mdescLeft">&#160;</td><td class="mdescRight">destroy a <a class="el" href="class_swerve_chassis_defn.html" title="Create a chassis from an XML definition. CHASSIS_TYPE (ChassisFactory.h) determines the type of chass...">SwerveChassisDefn</a> object and free the memory  <a href="class_swerve_chassis_defn.html#ad7400be33cacb4dc2cf38228625f966c">More...</a><br /></td></tr>
 <tr class="separator:ad7400be33cacb4dc2cf38228625f966c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c21fdc429316c55604584d5428d2099"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_swerve_chassis.html">SwerveChassis</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis_defn.html#a8c21fdc429316c55604584d5428d2099">ParseXML</a> (pugi::xml_node chassisNode)</td></tr>
-<tr class="memdesc:a8c21fdc429316c55604584d5428d2099"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the chassie element (and it children). When this is done a <a class="el" href="class_i_chassis.html" title="Interface for differential drives.">IChassis</a> object exists. It can be retrieved from the factory.  <a href="class_swerve_chassis_defn.html#a8c21fdc429316c55604584d5428d2099">More...</a><br /></td></tr>
+<tr class="memdesc:a8c21fdc429316c55604584d5428d2099"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the chassie element (and it children). When this is done a <a class="el" href="class_swerve_chassis.html">SwerveChassis</a> object exists. It can be retrieved from the factory.  <a href="class_swerve_chassis_defn.html#a8c21fdc429316c55604584d5428d2099">More...</a><br /></td></tr>
 <tr class="separator:a8c21fdc429316c55604584d5428d2099"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -183,14 +183,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Parse the chassie element (and it children). When this is done a <a class="el" href="class_i_chassis.html" title="Interface for differential drives.">IChassis</a> object exists. It can be retrieved from the factory. </p>
+<p>Parse the chassie element (and it children). When this is done a <a class="el" href="class_swerve_chassis.html">SwerveChassis</a> object exists. It can be retrieved from the factory. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">pugi::xml_node</td><td>the chassis element in the XML document </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>std::shared_ptr&lt;IChassis&gt; <br  />
+<dl class="section return"><dt>Returns</dt><dd>std::shared_ptr&lt;SwerveChassis&gt; <br  />
 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/subsys/interfaces/IMech2IndMotors.h Source File</title>
+<title>Team 302 Swerve Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/subsys/interfaces/IMech2IndMotors.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -137,18 +137,24 @@ $(document).ready(function(){initNavTree('_i_mech2_ind_motors_8h_source.html',''
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="class_i_mech2_ind_motors.html#a41b0aa917183790731e76f39a8f9cc2d">   65</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="class_i_mech2_ind_motors.html#a41b0aa917183790731e76f39a8f9cc2d">GetSecondarySpeed</a>() <span class="keyword">const</span> = 0;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="class_i_mech2_ind_motors.html#a9de8f3c889207a96895ff6d6f005bd95">   70</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_i_mech2_ind_motors.html#a9de8f3c889207a96895ff6d6f005bd95">SetControlConstants</a></div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="class_i_mech2_ind_motors.html#a79b05f7e5f56aadd1f088eb342b95765">   70</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_i_mech2_ind_motors.html#a79b05f7e5f56aadd1f088eb342b95765">SetControlConstants</a></div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        (</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <a class="code" href="class_control_data.html">ControlData</a>*                                pid                 </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        ) = 0;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="class_i_mech2_ind_motors.html#aae994a9575acd84fe641a8566d53a698">   76</a></span>&#160;        <a class="code" href="class_i_mech2_ind_motors.html#aae994a9575acd84fe641a8566d53a698">IMech2IndMotors</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="class_i_mech2_ind_motors.html#a1a48455442ca9739822957d902536712">   77</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_i_mech2_ind_motors.html#a1a48455442ca9739822957d902536712">~IMech2IndMotors</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keywordtype">int</span>                                         slot,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <a class="code" href="class_control_data.html">ControlData</a>*                                pid                 </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        ) = 0;</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="class_i_mech2_ind_motors.html#adb5ecdb71c63e70de2b1d563abe16c94">   75</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_i_mech2_ind_motors.html#adb5ecdb71c63e70de2b1d563abe16c94">SetSecondaryControlConstants</a></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        (</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordtype">int</span>                                         slot,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <a class="code" href="class_control_data.html">ControlData</a>*                                pid                 </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        ) = 0;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="class_i_mech2_ind_motors.html#aae994a9575acd84fe641a8566d53a698">   82</a></span>&#160;        <a class="code" href="class_i_mech2_ind_motors.html#aae994a9575acd84fe641a8566d53a698">IMech2IndMotors</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="class_i_mech2_ind_motors.html#a1a48455442ca9739822957d902536712">   83</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_i_mech2_ind_motors.html#a1a48455442ca9739822957d902536712">~IMech2IndMotors</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_i_mech2_ind_motors_html_a37a3fe93fa4ca711bb96a97100bc0187"><div class="ttname"><a href="class_i_mech2_ind_motors.html#a37a3fe93fa4ca711bb96a97100bc0187">IMech2IndMotors::UpdateTargets</a></div><div class="ttdeci">virtual void UpdateTargets(double primary, double secondary)=0</div></div>
@@ -157,20 +163,21 @@ $(document).ready(function(){initNavTree('_i_mech2_ind_motors_8h_source.html',''
 <div class="ttc" id="aclass_i_mech2_ind_motors_html_a9a9b1dd5585600ea1255a8b0f030d768"><div class="ttname"><a href="class_i_mech2_ind_motors.html#a9a9b1dd5585600ea1255a8b0f030d768">IMech2IndMotors::GetSecondaryPosition</a></div><div class="ttdeci">virtual double GetSecondaryPosition() const =0</div><div class="ttdoc">Return the current position of the secondary motor in the mechanism. The value is in inches or degree...</div></div>
 <div class="ttc" id="a_control_data_8h_html"><div class="ttname"><a href="_control_data_8h.html">ControlData.h</a></div></div>
 <div class="ttc" id="aclass_i_mech2_ind_motors_html"><div class="ttname"><a href="class_i_mech2_ind_motors.html">IMech2IndMotors</a></div><div class="ttdoc">This is the interface for mechanisms that have two independently controlled motors.</div><div class="ttdef"><b>Definition:</b> <a href="_i_mech2_ind_motors_8h_source.html#l00038">IMech2IndMotors.h:39</a></div></div>
+<div class="ttc" id="aclass_i_mech2_ind_motors_html_adb5ecdb71c63e70de2b1d563abe16c94"><div class="ttname"><a href="class_i_mech2_ind_motors.html#adb5ecdb71c63e70de2b1d563abe16c94">IMech2IndMotors::SetSecondaryControlConstants</a></div><div class="ttdeci">virtual void SetSecondaryControlConstants(int slot, ControlData *pid)=0</div></div>
 <div class="ttc" id="aclass_i_mech2_ind_motors_html_a1a48455442ca9739822957d902536712"><div class="ttname"><a href="class_i_mech2_ind_motors.html#a1a48455442ca9739822957d902536712">IMech2IndMotors::~IMech2IndMotors</a></div><div class="ttdeci">virtual ~IMech2IndMotors()=default</div></div>
 <div class="ttc" id="aclass_i_mech2_ind_motors_html_aae994a9575acd84fe641a8566d53a698"><div class="ttname"><a href="class_i_mech2_ind_motors.html#aae994a9575acd84fe641a8566d53a698">IMech2IndMotors::IMech2IndMotors</a></div><div class="ttdeci">IMech2IndMotors()=default</div></div>
 <div class="ttc" id="aclass_i_mech2_ind_motors_html_aba2df5de0db4ada23cd69521f8419199"><div class="ttname"><a href="class_i_mech2_ind_motors.html#aba2df5de0db4ada23cd69521f8419199">IMech2IndMotors::GetPrimarySpeed</a></div><div class="ttdeci">virtual double GetPrimarySpeed() const =0</div><div class="ttdoc">Get the current speed of the primary motor in the mechanism. The value is in inches per second or deg...</div></div>
 <div class="ttc" id="aclass_control_data_html"><div class="ttname"><a href="class_control_data.html">ControlData</a></div><div class="ttdef"><b>Definition:</b> <a href="_control_data_8h_source.html#l00022">ControlData.h:23</a></div></div>
 <div class="ttc" id="aclass_i_mech2_ind_motors_html_afc8cfcace7afd4f6c698af2208f9a9b8"><div class="ttname"><a href="class_i_mech2_ind_motors.html#afc8cfcace7afd4f6c698af2208f9a9b8">IMech2IndMotors::GetPrimaryPosition</a></div><div class="ttdeci">virtual double GetPrimaryPosition() const =0</div><div class="ttdoc">Return the current position of the primary motor in the mechanism. The value is in inches or degrees.</div></div>
 <div class="ttc" id="aclass_i_mech_html"><div class="ttname"><a href="class_i_mech.html">IMech</a></div><div class="ttdoc">This is the interface for mechanisms regardless of what control items are available.</div><div class="ttdef"><b>Definition:</b> <a href="_i_mech_8h_source.html#l00040">IMech.h:41</a></div></div>
+<div class="ttc" id="aclass_i_mech2_ind_motors_html_a79b05f7e5f56aadd1f088eb342b95765"><div class="ttname"><a href="class_i_mech2_ind_motors.html#a79b05f7e5f56aadd1f088eb342b95765">IMech2IndMotors::SetControlConstants</a></div><div class="ttdeci">virtual void SetControlConstants(int slot, ControlData *pid)=0</div><div class="ttdoc">Set the control constants (e.g. PIDF values).</div></div>
 <div class="ttc" id="aclass_i_mech2_ind_motors_html_a41b0aa917183790731e76f39a8f9cc2d"><div class="ttname"><a href="class_i_mech2_ind_motors.html#a41b0aa917183790731e76f39a8f9cc2d">IMech2IndMotors::GetSecondarySpeed</a></div><div class="ttdeci">virtual double GetSecondarySpeed() const =0</div><div class="ttdoc">Get the current speed of the secondary motor in the mechanism. The value is in inches per second or d...</div></div>
 <div class="ttc" id="a_control_modes_8h_html"><div class="ttname"><a href="_control_modes_8h.html">ControlModes.h</a></div></div>
-<div class="ttc" id="aclass_i_mech2_ind_motors_html_a9de8f3c889207a96895ff6d6f005bd95"><div class="ttname"><a href="class_i_mech2_ind_motors.html#a9de8f3c889207a96895ff6d6f005bd95">IMech2IndMotors::SetControlConstants</a></div><div class="ttdeci">virtual void SetControlConstants(ControlData *pid)=0</div><div class="ttdoc">Set the control constants (e.g. PIDF values).</div></div>
 <div class="ttc" id="a_mechanism_types_8h_html"><div class="ttname"><a href="_mechanism_types_8h.html">MechanismTypes.h</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_ac84794d7bd2f341951dcef92c7613df.html">subsys</a></li><li class="navelem"><a class="el" href="dir_cd1f6f1755610de0f5f492b5bb529412.html">interfaces</a></li><li class="navelem"><a class="el" href="_i_mech2_ind_motors_8h.html">IMech2IndMotors.h</a></li>
+    <li class="navelem"><a class="el" href="dir_4a8796b0ba1d3dc122873832137fbe4e.html">GitRepos</a></li><li class="navelem"><a class="el" href="dir_1c47665bf58b31faa465c1927c1a00b8.html">2021SwerveBot</a></li><li class="navelem"><a class="el" href="dir_4c5ca149a7966e928c927d1b502f4c6f.html">src</a></li><li class="navelem"><a class="el" href="dir_6d6810671ff2e85cbf46bcf7f794863c.html">main</a></li><li class="navelem"><a class="el" href="dir_62e39780e9d5ee1b2eb3d29e32dcab01.html">cpp</a></li><li class="navelem"><a class="el" href="dir_f06fce08f279d4ac2e1d8ad0e7d85859.html">subsys</a></li><li class="navelem"><a class="el" href="dir_dcf33a2406c367d6ce84d3120caf542a.html">interfaces</a></li><li class="navelem"><a class="el" href="_i_mech2_ind_motors_8h.html">IMech2IndMotors.h</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

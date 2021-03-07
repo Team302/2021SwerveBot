@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/states/turret/ShooterSaveState.cpp Source File</title>
+<title>Team 302 Swerve Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/states/turret/ShooterSaveState.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('_shooter_save_state_8cpp_source.html',
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_shooter_save_state.html#a7b06af7fb1e6a69be0b45376343a7a7b">   46</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_shooter_save_state.html#a7b06af7fb1e6a69be0b45376343a7a7b">ShooterSaveState::Init</a>()</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    m_turret.get()-&gt;SetControlConstants( m_control );</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    m_turret.get()-&gt;SetControlConstants(0,  m_control );</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_shooter_save_state.html#ab73cf3781e2ee9415a7d92d2024396f9">   51</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_shooter_save_state.html#ab73cf3781e2ee9415a7d92d2024396f9">ShooterSaveState::Run</a>()           </div>
@@ -141,19 +141,19 @@ $(document).ready(function(){initNavTree('_shooter_save_state_8cpp_source.html',
 <div class="ttc" id="aclass_shooter_save_state_html_abb8e2f927b0b0acedcc1af6367e5ef40"><div class="ttname"><a href="class_shooter_save_state.html#abb8e2f927b0b0acedcc1af6367e5ef40">ShooterSaveState::AtTarget</a></div><div class="ttdeci">bool AtTarget() const override</div><div class="ttdef"><b>Definition:</b> <a href="_shooter_save_state_8cpp_source.html#l00057">ShooterSaveState.cpp:57</a></div></div>
 <div class="ttc" id="a_mech1_motor_state_8h_html"><div class="ttname"><a href="_mech1_motor_state_8h.html">Mech1MotorState.h</a></div></div>
 <div class="ttc" id="a_control_data_8h_html"><div class="ttname"><a href="_control_data_8h.html">ControlData.h</a></div></div>
-<div class="ttc" id="aclass_mechanism_factory_html"><div class="ttname"><a href="class_mechanism_factory.html">MechanismFactory</a></div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8h_source.html#l00059">MechanismFactory.h:60</a></div></div>
+<div class="ttc" id="aclass_mechanism_factory_html"><div class="ttname"><a href="class_mechanism_factory.html">MechanismFactory</a></div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8h_source.html#l00062">MechanismFactory.h:63</a></div></div>
 <div class="ttc" id="aclass_mech1_motor_state_html"><div class="ttname"><a href="class_mech1_motor_state.html">Mech1MotorState</a></div><div class="ttdoc">information about the control (open loop, closed loop position, closed loop velocity,...</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_motor_state_8h_source.html#l00024">Mech1MotorState.h:25</a></div></div>
 <div class="ttc" id="a_hold_turret_position_8h_html"><div class="ttname"><a href="_hold_turret_position_8h.html">HoldTurretPosition.h</a></div></div>
 <div class="ttc" id="aclass_shooter_save_state_html_af9c560a083cc3da208e4ce60a8750743"><div class="ttname"><a href="class_shooter_save_state.html#af9c560a083cc3da208e4ce60a8750743">ShooterSaveState::ShooterSaveState</a></div><div class="ttdeci">ShooterSaveState()=delete</div></div>
 <div class="ttc" id="a_turret_8h_html"><div class="ttname"><a href="_turret_8h.html">Turret.h</a></div></div>
 <div class="ttc" id="aclass_control_data_html"><div class="ttname"><a href="class_control_data.html">ControlData</a></div><div class="ttdef"><b>Definition:</b> <a href="_control_data_8h_source.html#l00022">ControlData.h:23</a></div></div>
 <div class="ttc" id="a_shooter_save_state_8h_html"><div class="ttname"><a href="_shooter_save_state_8h.html">ShooterSaveState.h</a></div></div>
-<div class="ttc" id="aclass_mechanism_factory_html_a11b20a573ca93c56cb5da66ac5cbd2c0"><div class="ttname"><a href="class_mechanism_factory.html#a11b20a573ca93c56cb5da66ac5cbd2c0">MechanismFactory::GetMechanismFactory</a></div><div class="ttdeci">static MechanismFactory * GetMechanismFactory()</div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8cpp_source.html#l00064">MechanismFactory.cpp:64</a></div></div>
-<div class="ttc" id="aclass_mechanism_factory_html_a4d6057325cf48bb971137d1227ea573c"><div class="ttname"><a href="class_mechanism_factory.html#a4d6057325cf48bb971137d1227ea573c">MechanismFactory::GetTurret</a></div><div class="ttdeci">std::shared_ptr&lt; Turret &gt; GetTurret() const</div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8h_source.html#l00087">MechanismFactory.h:87</a></div></div>
+<div class="ttc" id="aclass_mechanism_factory_html_a11b20a573ca93c56cb5da66ac5cbd2c0"><div class="ttname"><a href="class_mechanism_factory.html#a11b20a573ca93c56cb5da66ac5cbd2c0">MechanismFactory::GetMechanismFactory</a></div><div class="ttdeci">static MechanismFactory * GetMechanismFactory()</div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8cpp_source.html#l00062">MechanismFactory.cpp:62</a></div></div>
+<div class="ttc" id="aclass_mechanism_factory_html_a4d6057325cf48bb971137d1227ea573c"><div class="ttname"><a href="class_mechanism_factory.html#a4d6057325cf48bb971137d1227ea573c">MechanismFactory::GetTurret</a></div><div class="ttdeci">std::shared_ptr&lt; Turret &gt; GetTurret() const</div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8h_source.html#l00089">MechanismFactory.h:89</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_41c41181ce15b7c19c61d1bd081a9910.html">states</a></li><li class="navelem"><a class="el" href="dir_39a2b69ed6f1d89f5369c71791f04dc5.html">turret</a></li><li class="navelem"><a class="el" href="_shooter_save_state_8cpp.html">ShooterSaveState.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_4a8796b0ba1d3dc122873832137fbe4e.html">GitRepos</a></li><li class="navelem"><a class="el" href="dir_1c47665bf58b31faa465c1927c1a00b8.html">2021SwerveBot</a></li><li class="navelem"><a class="el" href="dir_4c5ca149a7966e928c927d1b502f4c6f.html">src</a></li><li class="navelem"><a class="el" href="dir_6d6810671ff2e85cbf46bcf7f794863c.html">main</a></li><li class="navelem"><a class="el" href="dir_62e39780e9d5ee1b2eb3d29e32dcab01.html">cpp</a></li><li class="navelem"><a class="el" href="dir_6690ad191a400a686898d515d289d6e4.html">states</a></li><li class="navelem"><a class="el" href="dir_3f2721cb6f6e4cba652672761a78f7aa.html">turret</a></li><li class="navelem"><a class="el" href="_shooter_save_state_8cpp.html">ShooterSaveState.cpp</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

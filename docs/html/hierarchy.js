@@ -1,7 +1,9 @@
 var hierarchy =
 [
     [ "AnalogAxis", "class_analog_axis.html", null ],
-    [ "BallManipulator", "class_ball_manipulator.html", null ],
+    [ "AngularVelocityControllerMC", "class_angular_velocity_controller_m_c.html", null ],
+    [ "AutonSelector", "class_auton_selector.html", null ],
+    [ "BallHopperStateMgr", "class_ball_hopper_state_mgr.html", null ],
     [ "BallTransferStateMgr", "class_ball_transfer_state_mgr.html", null ],
     [ "BlinkinDefn", "class_blinkin_defn.html", null ],
     [ "CameraDefn", "class_camera_defn.html", null ],
@@ -22,7 +24,10 @@ var hierarchy =
     [ "DragonServo", "class_dragon_servo.html", null ],
     [ "DragonServoFactory", "class_dragon_servo_factory.html", null ],
     [ "DragonVision", "class_dragon_vision.html", null ],
+    [ "DriverMode", "class_driver_mode.html", null ],
     [ "FunctionMap", "class_function_map.html", null ],
+    [ "GalacticSearchFinder", "class_galactic_search_finder.html", null ],
+    [ "GoalDetection", "class_goal_detection.html", null ],
     [ "HardwareIDValidation", "class_hardware_i_d_validation.html", null ],
     [ "IButton", "class_i_button.html", [
       [ "AnalogButton", "class_analog_button.html", null ],
@@ -32,7 +37,6 @@ var hierarchy =
       [ "DigitalButton", "class_digital_button.html", null ],
       [ "POVButton", "class_p_o_v_button.html", null ]
     ] ],
-    [ "IChassis", "class_i_chassis.html", null ],
     [ "IDeadband", "class_i_deadband.html", [
       [ "DeadbandValue", "class_deadband_value.html", null ],
       [ "NoDeadbandValue", "class_no_deadband_value.html", null ],
@@ -51,6 +55,7 @@ var hierarchy =
     [ "IMech", "class_i_mech.html", [
       [ "IMech1IndMotor", "class_i_mech1_ind_motor.html", [
         [ "Mech1IndMotor", "class_mech1_ind_motor.html", [
+          [ "BallHopper", "class_ball_hopper.html", null ],
           [ "BallTransfer", "class_ball_transfer.html", null ],
           [ "Intake", "class_intake.html", null ],
           [ "ShooterHood", "class_shooter_hood.html", null ],
@@ -69,26 +74,35 @@ var hierarchy =
     ] ],
     [ "IntakeStateMgr", "class_intake_state_mgr.html", null ],
     [ "IPrimitive", "class_i_primitive.html", [
+      [ "DoNothing", "class_do_nothing.html", null ],
+      [ "DriveDirection", "class_drive_direction.html", [
+        [ "DriveDistance", "class_drive_distance.html", null ],
+        [ "DriveTime", "class_drive_time.html", null ]
+      ] ],
       [ "DrivePath", "class_drive_path.html", null ],
-      [ "StayInPlace", "class_stay_in_place.html", null ],
-      [ "TurnAngle", "class_turn_angle.html", null ]
+      [ "HoldPosition", "class_hold_position.html", null ],
+      [ "ResetPosition", "class_reset_position.html", null ],
+      [ "TurnAngle", "class_turn_angle.html", null ],
+      [ "ZeroWheels", "class_zero_wheels.html", null ]
     ] ],
     [ "IProfile", "class_i_profile.html", [
       [ "CubedProfile", "class_cubed_profile.html", null ],
       [ "LinearProfile", "class_linear_profile.html", null ],
+      [ "PiecewiseLinearProfile", "class_piecewise_linear_profile.html", null ],
       [ "SquaredProfile", "class_squared_profile.html", null ]
     ] ],
     [ "IState", "class_i_state.html", [
-      [ "IntakeState", "class_intake_state.html", null ],
+      [ "CyclePrimitives", "class_cycle_primitives.html", null ],
       [ "LimelightAim", "class_limelight_aim.html", null ],
       [ "Mech1MotorState", "class_mech1_motor_state.html", [
+        [ "BallHopperSlowRelease", "class_ball_hopper_slow_release.html", null ],
+        [ "BallHopperState", "class_ball_hopper_state.html", null ],
         [ "BallTransferState", "class_ball_transfer_state.html", null ],
         [ "HoldTurretPosition", "class_hold_turret_position.html", null ],
-        [ "ManualAim", "class_manual_aim.html", null ],
+        [ "IntakeState", "class_intake_state.html", null ],
         [ "ShooterHoodManual", "class_shooter_hood_manual.html", null ],
         [ "ShooterHoodState", "class_shooter_hood_state.html", null ],
-        [ "ShooterSaveState", "class_shooter_save_state.html", null ],
-        [ "TurretTurnAngle", "class_turret_turn_angle.html", null ]
+        [ "ShooterSaveState", "class_shooter_save_state.html", null ]
       ] ],
       [ "Mech2MotorState", "class_mech2_motor_state.html", [
         [ "ShooterState", "class_shooter_state.html", null ]
@@ -109,7 +123,9 @@ var hierarchy =
     [ "PDPDefn", "class_p_d_p_defn.html", null ],
     [ "PigeonDefn", "class_pigeon_defn.html", null ],
     [ "PigeonFactory", "class_pigeon_factory.html", null ],
+    [ "PrimitiveFactory", "class_primitive_factory.html", null ],
     [ "PrimitiveParams", "class_primitive_params.html", null ],
+    [ "PrimitiveParser", "class_primitive_parser.html", null ],
     [ "RobotDefn", "class_robot_defn.html", null ],
     [ "ScaledAxis", "class_scaled_axis.html", [
       [ "FlippedAxis", "class_flipped_axis.html", null ]

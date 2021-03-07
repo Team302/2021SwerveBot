@@ -18,5 +18,9 @@ var class_logger =
     [ "OnDash", "class_logger.html#aca97721e0531390ab459dafe49697cee", null ],
     [ "OnDash", "class_logger.html#a258aeb4010abaae86c40b35d6cceed5e", null ],
     [ "SetLoggingLevel", "class_logger.html#a017fb8d84e86b95761ff50b33a67d8dd", null ],
-    [ "SetLoggingOption", "class_logger.html#a81e0fa4eef4a980adb91577eac4bdebd", null ]
+    [ "SetLoggingOption", "class_logger.html#a81e0fa4eef4a980adb91577eac4bdebd", null ],
+    [ "ToNtTable", "class_logger.html#aa056353d680800bbbf0f5c5cc048c295", null ],
+    [ "ToNtTable", "class_logger.html#aeebfaac040e298c60fb95ebfbc3de1b0", null ],
+    [ "ToNtTable", "class_logger.html#a9866b90b836c4e42a3c90c97464b2463", null ],
+    [ "ToNtTable", "class_logger.html#acca0574ba6d6fdd424b60804837fc194", null ]
 ];

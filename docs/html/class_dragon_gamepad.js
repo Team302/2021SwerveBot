@@ -6,9 +6,9 @@ var class_dragon_gamepad =
     [ "IsButtonPressed", "class_dragon_gamepad.html#a736e3af20879da0b6c9ab71608968be7", null ],
     [ "SetAxisDeadband", "class_dragon_gamepad.html#af03d2edf95e4fd043059134e05ae807c", null ],
     [ "SetAxisProfile", "class_dragon_gamepad.html#aa206d96358046a54318db0ff82db648d", null ],
-    [ "SetAxisScale", "class_dragon_gamepad.html#a4c621d8b78609c4b52cefbc09b881975", null ],
+    [ "SetAxisScale", "class_dragon_gamepad.html#af299fe49c5d4587a02a6845e6b73b54e", null ],
     [ "SetButtonMode", "class_dragon_gamepad.html#aedddee103b3f859b9d94944eb89c9011", null ],
-    [ "SetSlewLimit", "class_dragon_gamepad.html#a0b927c32ab4853b53f234a356d1c6380", null ],
+    [ "SetSlewLimit", "class_dragon_gamepad.html#a6c0ad9bb41106236679f47f44fddc01d", null ],
     [ "WasButtonPressed", "class_dragon_gamepad.html#a954798e159dab694fbd6c48a96c36657", null ],
     [ "WasButtonReleased", "class_dragon_gamepad.html#afb3895ef1ce1f46c7fd9b1070ca30e64", null ]
 ];

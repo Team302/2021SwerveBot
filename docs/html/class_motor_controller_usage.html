@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: MotorControllerUsage Class Reference</title>
+<title>Team 302 Swerve Robot: MotorControllerUsage Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -99,14 +99,15 @@ Public Types</h2></td></tr>
 &#160;&#160;<a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aa88dc96bc07f2a3d51e868dc1d8a35ffe">UNKNOWN_MOTOR_CONTROLLER_USAGE</a> = -1, 
 <a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aabdf9b2ede1c2c42f73b31bfb4e52033a">DRIVE</a>, 
 <a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aa12b0b8e8bbebeb10d47cf14b9ae6edb4">TURN</a>, 
-<a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aaaca175dfb5825b9dab772038fa689eb3">INTAKE1</a>, 
+<a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aa01aee16a773c1cd4513779950e8fb351">INTAKE</a>, 
 <br />
 &#160;&#160;<a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aa50720fa2de631df1251c19551aafaef2">INTAKE2</a>, 
 <a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aa78dc128073b235dd2153e5b012137487">BALL_TRANSFER</a>, 
+<a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aa2a87a5282354c5cad78c304df79b1077">BALL_HOPPER</a>, 
 <a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aae9d0bae3dc4df63175ca1465703faafb">TURRET</a>, 
-<a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aabb98232b78cf4cff418b3b8d09e3ee6a">SHOOTER_1</a>, 
 <br />
-&#160;&#160;<a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aa80676be295874a3907c6e62b04bbf1e0">SHOOTER_2</a>, 
+&#160;&#160;<a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aabb98232b78cf4cff418b3b8d09e3ee6a">SHOOTER_1</a>, 
+<a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aa80676be295874a3907c6e62b04bbf1e0">SHOOTER_2</a>, 
 <a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aaa933f79d505478771757ab03637aa8ae">SHOOTER_HOOD</a>, 
 <a class="el" href="class_motor_controller_usage.html#a03b7ee94f8c7e42884d5da8974e3a51aaa1e41d1d7157cac6ca75d23905704de1">MAX_MOTOR_CONTROLLER_USAGES</a>
 <br />
@@ -145,9 +146,10 @@ Static Public Member Functions</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a03b7ee94f8c7e42884d5da8974e3a51aa88dc96bc07f2a3d51e868dc1d8a35ffe"></a>UNKNOWN_MOTOR_CONTROLLER_USAGE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a03b7ee94f8c7e42884d5da8974e3a51aabdf9b2ede1c2c42f73b31bfb4e52033a"></a>DRIVE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a03b7ee94f8c7e42884d5da8974e3a51aa12b0b8e8bbebeb10d47cf14b9ae6edb4"></a>TURN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a03b7ee94f8c7e42884d5da8974e3a51aaaca175dfb5825b9dab772038fa689eb3"></a>INTAKE1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a03b7ee94f8c7e42884d5da8974e3a51aa01aee16a773c1cd4513779950e8fb351"></a>INTAKE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a03b7ee94f8c7e42884d5da8974e3a51aa50720fa2de631df1251c19551aafaef2"></a>INTAKE2&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a03b7ee94f8c7e42884d5da8974e3a51aa78dc128073b235dd2153e5b012137487"></a>BALL_TRANSFER&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a03b7ee94f8c7e42884d5da8974e3a51aa2a87a5282354c5cad78c304df79b1077"></a>BALL_HOPPER&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a03b7ee94f8c7e42884d5da8974e3a51aae9d0bae3dc4df63175ca1465703faafb"></a>TURRET&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a03b7ee94f8c7e42884d5da8974e3a51aabb98232b78cf4cff418b3b8d09e3ee6a"></a>SHOOTER_1&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a03b7ee94f8c7e42884d5da8974e3a51aa80676be295874a3907c6e62b04bbf1e0"></a>SHOOTER_2&#160;</td><td class="fielddoc"></td></tr>

@@ -22,14 +22,6 @@ void \mbox{\hyperlink{class_drive_path_a270a9c18ee5521cfbcf2a603ad3f6746}{Init}}
 void \mbox{\hyperlink{class_drive_path_a757cb21398077f9d8323c085e975c58b}{Run}} () override
 \item 
 bool \mbox{\hyperlink{class_drive_path_af815e61f6e8f1113bbb740ec13ce1cf7}{Is\+Done}} () override
-\item 
-void \mbox{\hyperlink{class_drive_path_a3ba34094b1cf6a1f45bdb5c90c7696f7}{Update\+Odometry}} ()
-\item 
-void \mbox{\hyperlink{class_drive_path_a02635c7e28ae2deea59116d19609b6b4}{Reset\+Odometry}} (const frc\+::\+Pose2d \&pose)
-\item 
-frc\+::\+Pose2d \mbox{\hyperlink{class_drive_path_a1247025ca2fa3b5f3a2ad00f8de97b75}{Get\+Pose}} () const
-\item 
-bool \mbox{\hyperlink{class_drive_path_a3a94b925d271be8bf9381726d24fefe0}{Robot\+Stopped}} (frc\+::\+Pose2d Cur\+Pos, frc\+::\+Pose2d Prev\+Pos)
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -37,7 +29,7 @@ bool \mbox{\hyperlink{class_drive_path_a3a94b925d271be8bf9381726d24fefe0}{Robot\
 \doxysubsection{Detailed Description}
 
 
-Definition at line 44 of file Drive\+Path.\+h.
+Definition at line 50 of file Drive\+Path.\+h.
 
 
 
@@ -50,7 +42,7 @@ Definition at line 44 of file Drive\+Path.\+h.
 
 
 
-Definition at line 53 of file Drive\+Path.\+cpp.
+Definition at line 31 of file Drive\+Path.\+cpp.
 
 \mbox{\Hypertarget{class_drive_path_a59eea710dc71d912523ef186b1d83866}\label{class_drive_path_a59eea710dc71d912523ef186b1d83866}} 
 \index{DrivePath@{DrivePath}!````~DrivePath@{$\sim$DrivePath}}
@@ -61,12 +53,6 @@ Definition at line 53 of file Drive\+Path.\+cpp.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_drive_path_a1247025ca2fa3b5f3a2ad00f8de97b75}\label{class_drive_path_a1247025ca2fa3b5f3a2ad00f8de97b75}} 
-\index{DrivePath@{DrivePath}!GetPose@{GetPose}}
-\index{GetPose@{GetPose}!DrivePath@{DrivePath}}
-\doxysubsubsection{\texorpdfstring{GetPose()}{GetPose()}}
-{\footnotesize\ttfamily frc\+::\+Pose2d Drive\+Path\+::\+Get\+Pose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
-
 \mbox{\Hypertarget{class_drive_path_a270a9c18ee5521cfbcf2a603ad3f6746}\label{class_drive_path_a270a9c18ee5521cfbcf2a603ad3f6746}} 
 \index{DrivePath@{DrivePath}!Init@{Init}}
 \index{Init@{Init}!DrivePath@{DrivePath}}
@@ -79,7 +65,7 @@ Implements \mbox{\hyperlink{class_i_primitive_abe9e4c3b5a5b806d2c551c0f56a075d2}
 
 
 
-Definition at line 61 of file Drive\+Path.\+cpp.
+Definition at line 58 of file Drive\+Path.\+cpp.
 
 \mbox{\Hypertarget{class_drive_path_af815e61f6e8f1113bbb740ec13ce1cf7}\label{class_drive_path_af815e61f6e8f1113bbb740ec13ce1cf7}} 
 \index{DrivePath@{DrivePath}!IsDone@{IsDone}}
@@ -93,19 +79,7 @@ Implements \mbox{\hyperlink{class_i_primitive_a5b62801261f9bd974be04217bd86f668}
 
 
 
-Definition at line 96 of file Drive\+Path.\+cpp.
-
-\mbox{\Hypertarget{class_drive_path_a02635c7e28ae2deea59116d19609b6b4}\label{class_drive_path_a02635c7e28ae2deea59116d19609b6b4}} 
-\index{DrivePath@{DrivePath}!ResetOdometry@{ResetOdometry}}
-\index{ResetOdometry@{ResetOdometry}!DrivePath@{DrivePath}}
-\doxysubsubsection{\texorpdfstring{ResetOdometry()}{ResetOdometry()}}
-{\footnotesize\ttfamily void Drive\+Path\+::\+Reset\+Odometry (\begin{DoxyParamCaption}\item[{const frc\+::\+Pose2d \&}]{pose }\end{DoxyParamCaption})}
-
-\mbox{\Hypertarget{class_drive_path_a3a94b925d271be8bf9381726d24fefe0}\label{class_drive_path_a3a94b925d271be8bf9381726d24fefe0}} 
-\index{DrivePath@{DrivePath}!RobotStopped@{RobotStopped}}
-\index{RobotStopped@{RobotStopped}!DrivePath@{DrivePath}}
-\doxysubsubsection{\texorpdfstring{RobotStopped()}{RobotStopped()}}
-{\footnotesize\ttfamily bool Drive\+Path\+::\+Robot\+Stopped (\begin{DoxyParamCaption}\item[{frc\+::\+Pose2d}]{Cur\+Pos,  }\item[{frc\+::\+Pose2d}]{Prev\+Pos }\end{DoxyParamCaption})}
+Definition at line 129 of file Drive\+Path.\+cpp.
 
 \mbox{\Hypertarget{class_drive_path_a757cb21398077f9d8323c085e975c58b}\label{class_drive_path_a757cb21398077f9d8323c085e975c58b}} 
 \index{DrivePath@{DrivePath}!Run@{Run}}
@@ -119,13 +93,7 @@ Implements \mbox{\hyperlink{class_i_primitive_a3c34bd0f5ddbfe150ecade13303b6cd6}
 
 
 
-Definition at line 80 of file Drive\+Path.\+cpp.
-
-\mbox{\Hypertarget{class_drive_path_a3ba34094b1cf6a1f45bdb5c90c7696f7}\label{class_drive_path_a3ba34094b1cf6a1f45bdb5c90c7696f7}} 
-\index{DrivePath@{DrivePath}!UpdateOdometry@{UpdateOdometry}}
-\index{UpdateOdometry@{UpdateOdometry}!DrivePath@{DrivePath}}
-\doxysubsubsection{\texorpdfstring{UpdateOdometry()}{UpdateOdometry()}}
-{\footnotesize\ttfamily void Drive\+Path\+::\+Update\+Odometry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+Definition at line 98 of file Drive\+Path.\+cpp.
 
 
 

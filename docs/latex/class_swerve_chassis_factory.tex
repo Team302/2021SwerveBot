@@ -7,7 +7,7 @@
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ \mbox{\hyperlink{class_swerve_chassis_factory_addff5f93957eb8c947d3af91fc203132}{Create\+Swerve\+Module}} (\mbox{\hyperlink{class_swerve_module_a63f05945d3858366ee0382523df173f3}{Swerve\+Module\+::\+Module\+ID}} type, const \mbox{\hyperlink{_i_dragon_motor_controller_map_8h_a36a6214ec089416c4f6b97db3690d9b5}{I\+Dragon\+Motor\+Controller\+Map}} \&motor\+Controllers, std\+::shared\+\_\+ptr$<$ ctre\+::phoenix\+::sensors\+::\+C\+A\+N\+Coder $>$ turn\+Sensor, units\+::length\+::inch\+\_\+t wheel\+Diameter)
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ \mbox{\hyperlink{class_swerve_chassis_factory_a3fcc5914ed42324093b56b663875241f}{Create\+Swerve\+Module}} (\mbox{\hyperlink{class_swerve_module_a63f05945d3858366ee0382523df173f3}{Swerve\+Module\+::\+Module\+ID}} type, const \mbox{\hyperlink{_i_dragon_motor_controller_map_8h_a36a6214ec089416c4f6b97db3690d9b5}{I\+Dragon\+Motor\+Controller\+Map}} \&motor\+Controllers, std\+::shared\+\_\+ptr$<$ ctre\+::phoenix\+::sensors\+::\+C\+A\+N\+Coder $>$ turn\+Sensor, units\+::length\+::inch\+\_\+t wheel\+Diameter, double turnP, double turnI, double turnD, double turnF, double turn\+Nominal\+Val, double turn\+Peak\+Val, double turn\+Max\+Acc, double turn\+Cruise\+Vel)
 \item 
 std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_chassis}{Swerve\+Chassis}} $>$ \mbox{\hyperlink{class_swerve_chassis_factory_a535d7c5b45fd125864492427e600c23a}{Create\+Swerve\+Chassis}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ front\+Left, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ front\+Right, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ back\+Left, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ back\+Right, units\+::length\+::inch\+\_\+t wheel\+Base, units\+::length\+::inch\+\_\+t track, units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t max\+Speed, units\+::radians\+\_\+per\+\_\+second\+\_\+t max\+Angular\+Speed, units\+::acceleration\+::meters\+\_\+per\+\_\+second\+\_\+squared\+\_\+t max\+Acceleration, units\+::angular\+\_\+acceleration\+::radians\+\_\+per\+\_\+second\+\_\+squared\+\_\+t max\+Angular\+Acceleration)
 \item 
@@ -44,13 +44,13 @@ Definition at line 46 of file Swerve\+Chassis\+Factory.\+h.
 
 Method\+: Create\+Swerve\+Chassis Description\+: Find or create the swerve chassis Returns\+: Swerve\+Chassis$\ast$ pointer to the swerve chassis or nullptr if it doesn\textquotesingle{}t exist and cannot be created. 
 
-Definition at line 119 of file Swerve\+Chassis\+Factory.\+cpp.
+Definition at line 175 of file Swerve\+Chassis\+Factory.\+cpp.
 
-\mbox{\Hypertarget{class_swerve_chassis_factory_addff5f93957eb8c947d3af91fc203132}\label{class_swerve_chassis_factory_addff5f93957eb8c947d3af91fc203132}} 
+\mbox{\Hypertarget{class_swerve_chassis_factory_a3fcc5914ed42324093b56b663875241f}\label{class_swerve_chassis_factory_a3fcc5914ed42324093b56b663875241f}} 
 \index{SwerveChassisFactory@{SwerveChassisFactory}!CreateSwerveModule@{CreateSwerveModule}}
 \index{CreateSwerveModule@{CreateSwerveModule}!SwerveChassisFactory@{SwerveChassisFactory}}
 \doxysubsubsection{\texorpdfstring{CreateSwerveModule()}{CreateSwerveModule()}}
-{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ Swerve\+Chassis\+Factory\+::\+Create\+Swerve\+Module (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_swerve_module_a63f05945d3858366ee0382523df173f3}{Swerve\+Module\+::\+Module\+ID}}}]{type,  }\item[{const \mbox{\hyperlink{_i_dragon_motor_controller_map_8h_a36a6214ec089416c4f6b97db3690d9b5}{I\+Dragon\+Motor\+Controller\+Map}} \&}]{motor\+Controllers,  }\item[{std\+::shared\+\_\+ptr$<$ ctre\+::phoenix\+::sensors\+::\+C\+A\+N\+Coder $>$}]{can\+Coder,  }\item[{units\+::length\+::inch\+\_\+t}]{wheel\+Diameter }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ Swerve\+Chassis\+Factory\+::\+Create\+Swerve\+Module (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_swerve_module_a63f05945d3858366ee0382523df173f3}{Swerve\+Module\+::\+Module\+ID}}}]{type,  }\item[{const \mbox{\hyperlink{_i_dragon_motor_controller_map_8h_a36a6214ec089416c4f6b97db3690d9b5}{I\+Dragon\+Motor\+Controller\+Map}} \&}]{motor\+Controllers,  }\item[{std\+::shared\+\_\+ptr$<$ ctre\+::phoenix\+::sensors\+::\+C\+A\+N\+Coder $>$}]{can\+Coder,  }\item[{units\+::length\+::inch\+\_\+t}]{wheel\+Diameter,  }\item[{double}]{turnP,  }\item[{double}]{turnI,  }\item[{double}]{turnD,  }\item[{double}]{turnF,  }\item[{double}]{turn\+Nominal\+Val,  }\item[{double}]{turn\+Peak\+Val,  }\item[{double}]{turn\+Max\+Acc,  }\item[{double}]{turn\+Cruise\+Vel }\end{DoxyParamCaption})}
 
 Method\+: Create\+Swerve\+Module Description\+: Find or create the swerve module Returns\+: \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $\ast$ pointer to the swerve module or nullptr if it doesn\textquotesingle{}t exist and cannot be created. 
 
@@ -64,7 +64,7 @@ Definition at line 59 of file Swerve\+Chassis\+Factory.\+cpp.
 
 
 
-Definition at line 89 of file Swerve\+Chassis\+Factory.\+h.
+Definition at line 97 of file Swerve\+Chassis\+Factory.\+h.
 
 \mbox{\Hypertarget{class_swerve_chassis_factory_a63f713502e9431f832ffef676682c5a5}\label{class_swerve_chassis_factory_a63f713502e9431f832ffef676682c5a5}} 
 \index{SwerveChassisFactory@{SwerveChassisFactory}!GetLeftFrontSwerveModule@{GetLeftFrontSwerveModule}}
@@ -74,7 +74,7 @@ Definition at line 89 of file Swerve\+Chassis\+Factory.\+h.
 
 
 
-Definition at line 88 of file Swerve\+Chassis\+Factory.\+h.
+Definition at line 96 of file Swerve\+Chassis\+Factory.\+h.
 
 \mbox{\Hypertarget{class_swerve_chassis_factory_abb6bbfe2472f62d9b208c5b32647acf4}\label{class_swerve_chassis_factory_abb6bbfe2472f62d9b208c5b32647acf4}} 
 \index{SwerveChassisFactory@{SwerveChassisFactory}!GetRightBackSwerveModule@{GetRightBackSwerveModule}}
@@ -84,7 +84,7 @@ Definition at line 88 of file Swerve\+Chassis\+Factory.\+h.
 
 
 
-Definition at line 91 of file Swerve\+Chassis\+Factory.\+h.
+Definition at line 99 of file Swerve\+Chassis\+Factory.\+h.
 
 \mbox{\Hypertarget{class_swerve_chassis_factory_a3f5667e7e77dc8af75614482f92ff4b8}\label{class_swerve_chassis_factory_a3f5667e7e77dc8af75614482f92ff4b8}} 
 \index{SwerveChassisFactory@{SwerveChassisFactory}!GetRightFrontSwerveModule@{GetRightFrontSwerveModule}}
@@ -94,7 +94,7 @@ Definition at line 91 of file Swerve\+Chassis\+Factory.\+h.
 
 
 
-Definition at line 90 of file Swerve\+Chassis\+Factory.\+h.
+Definition at line 98 of file Swerve\+Chassis\+Factory.\+h.
 
 \mbox{\Hypertarget{class_swerve_chassis_factory_a545f50e429b29380df4ecdb712ecd777}\label{class_swerve_chassis_factory_a545f50e429b29380df4ecdb712ecd777}} 
 \index{SwerveChassisFactory@{SwerveChassisFactory}!GetSwerveChassis@{GetSwerveChassis}}
@@ -104,7 +104,7 @@ Definition at line 90 of file Swerve\+Chassis\+Factory.\+h.
 
 
 
-Definition at line 87 of file Swerve\+Chassis\+Factory.\+h.
+Definition at line 95 of file Swerve\+Chassis\+Factory.\+h.
 
 \mbox{\Hypertarget{class_swerve_chassis_factory_ada029d75d8c93f13db42d44b5910c813}\label{class_swerve_chassis_factory_ada029d75d8c93f13db42d44b5910c813}} 
 \index{SwerveChassisFactory@{SwerveChassisFactory}!GetSwerveChassisFactory@{GetSwerveChassisFactory}}

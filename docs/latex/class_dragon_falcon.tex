@@ -49,7 +49,7 @@ void \mbox{\hyperlink{class_dragon_falcon_a01a9cbfe59d25b805ec376d94af0cfdd}{Inv
 \item 
 void \mbox{\hyperlink{class_dragon_falcon_a4efe5d7355a1d82577a8232fdbc9fe7d}{Set\+Sensor\+Inverted}} (bool inverted) override
 \item 
-void \mbox{\hyperlink{class_dragon_falcon_a1504585d6a7671449c274adb254d6aa6}{Set\+Control\+Constants}} (\mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$control\+Info) override
+void \mbox{\hyperlink{class_dragon_falcon_a6b34b7b6faac4550a1abecc684f989b4}{Set\+Control\+Constants}} (int slot, \mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$control\+Info) override
 \begin{DoxyCompactList}\small\item\em Set the control constants (e.\+g. P\+I\+DF values). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_dragon_falcon_a801071a9180910e6d5d2cdf120b54bbf}{Select\+Closed\+Loop\+Profile}} (int slot, int pid\+Index)
 \item 
@@ -73,10 +73,17 @@ void \mbox{\hyperlink{class_dragon_falcon_ac2802287e9336cb907c5e0ce77e03d26}{Set
 \item 
 void \mbox{\hyperlink{class_dragon_falcon_a58a336a886347ec83d2b393569fc9d19}{Set\+Diameter}} (double diameter) override
 \item 
-void \mbox{\hyperlink{class_dragon_falcon_a16d9bde1c10c8146a62cb86b3ce8331a}{Set\+Voltage}} (units\+::volt\+\_\+t output)
+void \mbox{\hyperlink{class_dragon_falcon_af1c829e220dc76fb7c3b900f292dc0b8}{Set\+Voltage}} (units\+::volt\+\_\+t output) override
 \item 
 double \mbox{\hyperlink{class_dragon_falcon_ae894f55f2c1a4ffb5da2a8055d62fc9b}{Get\+Counts\+Per\+Rev}} () const override
+\item 
+void \mbox{\hyperlink{class_dragon_falcon_ab2202a24efc28956e5c0879026927744}{Update\+Frame\+Periods}} (ctre\+::phoenix\+::motorcontrol\+::\+Status\+Frame\+Enhanced frame, uint8\+\_\+t milliseconds) override
+\item 
+void \mbox{\hyperlink{class_dragon_falcon_a1d71d968b3323ba9a86bdff04b563d31}{Set\+Frame\+Period\+Priority}} (\mbox{\hyperlink{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2}{M\+O\+T\+O\+R\+\_\+\+P\+R\+I\+O\+R\+I\+TY}} priority) override
+\item 
+double \mbox{\hyperlink{class_dragon_falcon_a83cb79704403799050396f81f888a0d8}{Get\+Gear\+Ratio}} () const override
 \end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -99,7 +106,7 @@ Definition at line 44 of file Dragon\+Falcon.\+h.
 \doxysubsubsection{\texorpdfstring{DragonFalcon()}{DragonFalcon()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily Dragon\+Falcon\+::\+Dragon\+Falcon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_motor_controller_usage_a03b7ee94f8c7e42884d5da8974e3a51a}{Motor\+Controller\+Usage\+::\+M\+O\+T\+O\+R\+\_\+\+C\+O\+N\+T\+R\+O\+L\+L\+E\+R\+\_\+\+U\+S\+A\+GE}}}]{device\+Type,  }\item[{int}]{device\+ID,  }\item[{int}]{pdp\+ID,  }\item[{int}]{counts\+Per\+Rev,  }\item[{double}]{gear\+Ratio }\end{DoxyParamCaption})}
 
-Talon\+F\+X\+Configuration configs; m\+\_\+talon.\+get()-\/$>$Get\+All\+Configs(configs, 50); string key = string(\char`\"{}talon\+Fx\char`\"{}) + to\+\_\+string(device\+I\+D); \mbox{\hyperlink{class_logger_ae85cfbef8b7e6940475a5012fa1935c6}{Logger\+::\+Get\+Logger()}}-\/$>$Log\+Error(Logger\+::\+L\+O\+G\+G\+E\+R\+\_\+\+L\+E\+V\+E\+L\+::\+P\+R\+I\+N\+T\+\_\+\+O\+N\+CE, key, configs.\+to\+String());
+
 
 Definition at line 47 of file Dragon\+Falcon.\+cpp.
 
@@ -120,7 +127,7 @@ Definition at line 47 of file Dragon\+Falcon.\+cpp.
 
 
 
-Definition at line 584 of file Dragon\+Falcon.\+cpp.
+Definition at line 685 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_aca634f67ecb792b90a71b983a88f9079}\label{class_dragon_falcon_aca634f67ecb792b90a71b983a88f9079}} 
 \index{DragonFalcon@{DragonFalcon}!ConfigPeakCurrentDuration@{ConfigPeakCurrentDuration}}
@@ -130,7 +137,7 @@ Definition at line 584 of file Dragon\+Falcon.\+cpp.
 
 
 
-Definition at line 555 of file Dragon\+Falcon.\+cpp.
+Definition at line 654 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_acce7f9c24073a91ba7c7c5cc3aaa8d48}\label{class_dragon_falcon_acce7f9c24073a91ba7c7c5cc3aaa8d48}} 
 \index{DragonFalcon@{DragonFalcon}!ConfigPeakCurrentLimit@{ConfigPeakCurrentLimit}}
@@ -140,7 +147,7 @@ Definition at line 555 of file Dragon\+Falcon.\+cpp.
 
 
 
-Definition at line 526 of file Dragon\+Falcon.\+cpp.
+Definition at line 623 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_ad5d07e0a8a7ce81204563711cb726f72}\label{class_dragon_falcon_ad5d07e0a8a7ce81204563711cb726f72}} 
 \index{DragonFalcon@{DragonFalcon}!ConfigSelectedFeedbackSensor@{ConfigSelectedFeedbackSensor}}
@@ -166,7 +173,7 @@ Implements \mbox{\hyperlink{class_i_dragon_motor_controller_a35b6fe6bc4b6a582d99
 
 
 
-Definition at line 445 of file Dragon\+Falcon.\+cpp.
+Definition at line 540 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_a8a76c720cf50e2bc79fb7c9f1a1cd771}\label{class_dragon_falcon_a8a76c720cf50e2bc79fb7c9f1a1cd771}} 
 \index{DragonFalcon@{DragonFalcon}!EnableCurrentLimiting@{EnableCurrentLimiting}}
@@ -180,7 +187,7 @@ Implements \mbox{\hyperlink{class_i_dragon_motor_controller_aabc3307852ea64aebdf
 
 
 
-Definition at line 428 of file Dragon\+Falcon.\+cpp.
+Definition at line 521 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_ae894f55f2c1a4ffb5da2a8055d62fc9b}\label{class_dragon_falcon_ae894f55f2c1a4ffb5da2a8055d62fc9b}} 
 \index{DragonFalcon@{DragonFalcon}!GetCountsPerRev@{GetCountsPerRev}}
@@ -194,7 +201,7 @@ Implements \mbox{\hyperlink{class_i_dragon_motor_controller_adad0d5e0e39fddd1896
 
 
 
-Definition at line 126 of file Dragon\+Falcon.\+h.
+Definition at line 127 of file Dragon\+Falcon.\+h.
 
 \mbox{\Hypertarget{class_dragon_falcon_aef9e7316a70af58f1dc02a9fae5cfd8a}\label{class_dragon_falcon_aef9e7316a70af58f1dc02a9fae5cfd8a}} 
 \index{DragonFalcon@{DragonFalcon}!GetCurrent@{GetCurrent}}
@@ -217,6 +224,20 @@ Implements \mbox{\hyperlink{class_i_dragon_motor_controller_a95921146f1d1157bfcb
 
 Definition at line 307 of file Dragon\+Falcon.\+cpp.
 
+\mbox{\Hypertarget{class_dragon_falcon_a83cb79704403799050396f81f888a0d8}\label{class_dragon_falcon_a83cb79704403799050396f81f888a0d8}} 
+\index{DragonFalcon@{DragonFalcon}!GetGearRatio@{GetGearRatio}}
+\index{GetGearRatio@{GetGearRatio}!DragonFalcon@{DragonFalcon}}
+\doxysubsubsection{\texorpdfstring{GetGearRatio()}{GetGearRatio()}}
+{\footnotesize\ttfamily double Dragon\+Falcon\+::\+Get\+Gear\+Ratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_dragon_motor_controller_a3b753bd72bad542f7866785ca397c33a}{I\+Dragon\+Motor\+Controller}}.
+
+
+
+Definition at line 138 of file Dragon\+Falcon.\+h.
+
 \mbox{\Hypertarget{class_dragon_falcon_a09c99e5934e299873e65068b1c74fd2b}\label{class_dragon_falcon_a09c99e5934e299873e65068b1c74fd2b}} 
 \index{DragonFalcon@{DragonFalcon}!GetID@{GetID}}
 \index{GetID@{GetID}!DragonFalcon@{DragonFalcon}}
@@ -236,7 +257,7 @@ Implements \mbox{\hyperlink{class_i_dragon_motor_controller_ad70e1b0a007c03cc07a
 
 
 
-Definition at line 465 of file Dragon\+Falcon.\+cpp.
+Definition at line 560 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_aee9013f3c3bf7f48d891d650b919253e}\label{class_dragon_falcon_aee9013f3c3bf7f48d891d650b919253e}} 
 \index{DragonFalcon@{DragonFalcon}!GetRotations@{GetRotations}}
@@ -320,7 +341,7 @@ Implements \mbox{\hyperlink{class_i_dragon_motor_controller_a0b4ae4352bf46cae7d7
 
 
 
-Definition at line 460 of file Dragon\+Falcon.\+cpp.
+Definition at line 555 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_a01a9cbfe59d25b805ec376d94af0cfdd}\label{class_dragon_falcon_a01a9cbfe59d25b805ec376d94af0cfdd}} 
 \index{DragonFalcon@{DragonFalcon}!Invert@{Invert}}
@@ -334,7 +355,7 @@ Implements \mbox{\hyperlink{class_i_dragon_motor_controller_aae1077a659ed6c8f89d
 
 
 
-Definition at line 450 of file Dragon\+Falcon.\+cpp.
+Definition at line 545 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_a801071a9180910e6d5d2cdf120b54bbf}\label{class_dragon_falcon_a801071a9180910e6d5d2cdf120b54bbf}} 
 \index{DragonFalcon@{DragonFalcon}!SelectClosedLoopProfile@{SelectClosedLoopProfile}}
@@ -344,7 +365,7 @@ Definition at line 450 of file Dragon\+Falcon.\+cpp.
 
 
 
-Definition at line 475 of file Dragon\+Falcon.\+cpp.
+Definition at line 570 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_acf967485e409c54f5932732f276cb44d}\label{class_dragon_falcon_acf967485e409c54f5932732f276cb44d}} 
 \index{DragonFalcon@{DragonFalcon}!Set@{Set}}
@@ -358,7 +379,7 @@ Implements \mbox{\hyperlink{class_i_dragon_motor_controller_adacee402a923d6a10d5
 
 
 
-Definition at line 395 of file Dragon\+Falcon.\+cpp.
+Definition at line 486 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_a61856e9790dee0e61cb15670d64f95cd}\label{class_dragon_falcon_a61856e9790dee0e61cb15670d64f95cd}} 
 \index{DragonFalcon@{DragonFalcon}!Set@{Set}}
@@ -372,7 +393,7 @@ Implements \mbox{\hyperlink{class_i_dragon_motor_controller_a23921e5a5bc9f4db45e
 
 
 
-Definition at line 314 of file Dragon\+Falcon.\+cpp.
+Definition at line 381 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_aa158b4baf0b216d99fb44457d432477c}\label{class_dragon_falcon_aa158b4baf0b216d99fb44457d432477c}} 
 \index{DragonFalcon@{DragonFalcon}!SetAsFollowerMotor@{SetAsFollowerMotor}}
@@ -382,13 +403,13 @@ Definition at line 314 of file Dragon\+Falcon.\+cpp.
 
 
 
-Definition at line 613 of file Dragon\+Falcon.\+cpp.
+Definition at line 716 of file Dragon\+Falcon.\+cpp.
 
-\mbox{\Hypertarget{class_dragon_falcon_a1504585d6a7671449c274adb254d6aa6}\label{class_dragon_falcon_a1504585d6a7671449c274adb254d6aa6}} 
+\mbox{\Hypertarget{class_dragon_falcon_a6b34b7b6faac4550a1abecc684f989b4}\label{class_dragon_falcon_a6b34b7b6faac4550a1abecc684f989b4}} 
 \index{DragonFalcon@{DragonFalcon}!SetControlConstants@{SetControlConstants}}
 \index{SetControlConstants@{SetControlConstants}!DragonFalcon@{DragonFalcon}}
 \doxysubsubsection{\texorpdfstring{SetControlConstants()}{SetControlConstants()}}
-{\footnotesize\ttfamily void Dragon\+Falcon\+::\+Set\+Control\+Constants (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$}]{control\+Info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void Dragon\+Falcon\+::\+Set\+Control\+Constants (\begin{DoxyParamCaption}\item[{int}]{slot,  }\item[{\mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$}]{control\+Info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -396,6 +417,8 @@ Set the control constants (e.\+g. P\+I\+DF values).
 
 
 \begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em int} & slot -\/ hardware slot to use \\
+\hline
 \mbox{\texttt{ in}}  & {\em Control\+Data$\ast$} & pid -\/ the control constants \\
 \hline
 \end{DoxyParams}
@@ -404,11 +427,11 @@ void
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_i_dragon_motor_controller_abdca297c707d0c1f5e36bc0be37396d5}{I\+Dragon\+Motor\+Controller}}.
+Implements \mbox{\hyperlink{class_i_dragon_motor_controller_a0431ed9a17473910613b2faf37704036}{I\+Dragon\+Motor\+Controller}}.
 
 
 
-Definition at line 625 of file Dragon\+Falcon.\+cpp.
+Definition at line 729 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_a4a582d3070a1623396dbf5120bb4f390}\label{class_dragon_falcon_a4a582d3070a1623396dbf5120bb4f390}} 
 \index{DragonFalcon@{DragonFalcon}!SetControlMode@{SetControlMode}}
@@ -436,7 +459,7 @@ Implements \mbox{\hyperlink{class_i_dragon_motor_controller_ae94b716ecf9b1bb64c7
 
 
 
-Definition at line 754 of file Dragon\+Falcon.\+cpp.
+Definition at line 880 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_ac27bea9fdfe7ba6134244d51f5369fa4}\label{class_dragon_falcon_ac27bea9fdfe7ba6134244d51f5369fa4}} 
 \index{DragonFalcon@{DragonFalcon}!SetForwardLimitSwitch@{SetForwardLimitSwitch}}
@@ -446,7 +469,21 @@ Definition at line 754 of file Dragon\+Falcon.\+cpp.
 
 
 
-Definition at line 710 of file Dragon\+Falcon.\+cpp.
+Definition at line 830 of file Dragon\+Falcon.\+cpp.
+
+\mbox{\Hypertarget{class_dragon_falcon_a1d71d968b3323ba9a86bdff04b563d31}\label{class_dragon_falcon_a1d71d968b3323ba9a86bdff04b563d31}} 
+\index{DragonFalcon@{DragonFalcon}!SetFramePeriodPriority@{SetFramePeriodPriority}}
+\index{SetFramePeriodPriority@{SetFramePeriodPriority}!DragonFalcon@{DragonFalcon}}
+\doxysubsubsection{\texorpdfstring{SetFramePeriodPriority()}{SetFramePeriodPriority()}}
+{\footnotesize\ttfamily void Dragon\+Falcon\+::\+Set\+Frame\+Period\+Priority (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2}{M\+O\+T\+O\+R\+\_\+\+P\+R\+I\+O\+R\+I\+TY}}}]{priority }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_dragon_motor_controller_ab25248538d3b61655a4638ba6bf84f77}{I\+Dragon\+Motor\+Controller}}.
+
+
+
+Definition at line 323 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_ac2802287e9336cb907c5e0ce77e03d26}\label{class_dragon_falcon_ac2802287e9336cb907c5e0ce77e03d26}} 
 \index{DragonFalcon@{DragonFalcon}!SetRemoteSensor@{SetRemoteSensor}}
@@ -460,7 +497,7 @@ Implements \mbox{\hyperlink{class_i_dragon_motor_controller_a5f5568cf4e1c64b3277
 
 
 
-Definition at line 736 of file Dragon\+Falcon.\+cpp.
+Definition at line 860 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_af55d7051e52f7b65dedbff53d9e81c0f}\label{class_dragon_falcon_af55d7051e52f7b65dedbff53d9e81c0f}} 
 \index{DragonFalcon@{DragonFalcon}!SetReverseLimitSwitch@{SetReverseLimitSwitch}}
@@ -470,7 +507,7 @@ Definition at line 736 of file Dragon\+Falcon.\+cpp.
 
 
 
-Definition at line 723 of file Dragon\+Falcon.\+cpp.
+Definition at line 845 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_ab9080ba4bfbada1afa05f9c532564251}\label{class_dragon_falcon_ab9080ba4bfbada1afa05f9c532564251}} 
 \index{DragonFalcon@{DragonFalcon}!SetRotationOffset@{SetRotationOffset}}
@@ -484,7 +521,7 @@ Implements \mbox{\hyperlink{class_i_dragon_motor_controller_ab8ceadc2e3c436b6c5b
 
 
 
-Definition at line 404 of file Dragon\+Falcon.\+cpp.
+Definition at line 495 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_a4efe5d7355a1d82577a8232fdbc9fe7d}\label{class_dragon_falcon_a4efe5d7355a1d82577a8232fdbc9fe7d}} 
 \index{DragonFalcon@{DragonFalcon}!SetSensorInverted@{SetSensorInverted}}
@@ -498,17 +535,21 @@ Implements \mbox{\hyperlink{class_i_dragon_motor_controller_a108645163a4c281f5c8
 
 
 
-Definition at line 455 of file Dragon\+Falcon.\+cpp.
+Definition at line 550 of file Dragon\+Falcon.\+cpp.
 
-\mbox{\Hypertarget{class_dragon_falcon_a16d9bde1c10c8146a62cb86b3ce8331a}\label{class_dragon_falcon_a16d9bde1c10c8146a62cb86b3ce8331a}} 
+\mbox{\Hypertarget{class_dragon_falcon_af1c829e220dc76fb7c3b900f292dc0b8}\label{class_dragon_falcon_af1c829e220dc76fb7c3b900f292dc0b8}} 
 \index{DragonFalcon@{DragonFalcon}!SetVoltage@{SetVoltage}}
 \index{SetVoltage@{SetVoltage}!DragonFalcon@{DragonFalcon}}
 \doxysubsubsection{\texorpdfstring{SetVoltage()}{SetVoltage()}}
-{\footnotesize\ttfamily void Dragon\+Falcon\+::\+Set\+Voltage (\begin{DoxyParamCaption}\item[{units\+::volt\+\_\+t}]{output }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Dragon\+Falcon\+::\+Set\+Voltage (\begin{DoxyParamCaption}\item[{units\+::volt\+\_\+t}]{output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Definition at line 762 of file Dragon\+Falcon.\+cpp.
+Implements \mbox{\hyperlink{class_i_dragon_motor_controller_acecacc07a8d110ff7470be2cfc615364}{I\+Dragon\+Motor\+Controller}}.
+
+
+
+Definition at line 888 of file Dragon\+Falcon.\+cpp.
 
 \mbox{\Hypertarget{class_dragon_falcon_a596613a088e7d87182377b04ced5b16a}\label{class_dragon_falcon_a596613a088e7d87182377b04ced5b16a}} 
 \index{DragonFalcon@{DragonFalcon}!SetVoltageRamping@{SetVoltageRamping}}
@@ -522,7 +563,21 @@ Implements \mbox{\hyperlink{class_i_dragon_motor_controller_adf68e251d62ea48a3cf
 
 
 
-Definition at line 410 of file Dragon\+Falcon.\+cpp.
+Definition at line 501 of file Dragon\+Falcon.\+cpp.
+
+\mbox{\Hypertarget{class_dragon_falcon_ab2202a24efc28956e5c0879026927744}\label{class_dragon_falcon_ab2202a24efc28956e5c0879026927744}} 
+\index{DragonFalcon@{DragonFalcon}!UpdateFramePeriods@{UpdateFramePeriods}}
+\index{UpdateFramePeriods@{UpdateFramePeriods}!DragonFalcon@{DragonFalcon}}
+\doxysubsubsection{\texorpdfstring{UpdateFramePeriods()}{UpdateFramePeriods()}}
+{\footnotesize\ttfamily void Dragon\+Falcon\+::\+Update\+Frame\+Periods (\begin{DoxyParamCaption}\item[{ctre\+::phoenix\+::motorcontrol\+::\+Status\+Frame\+Enhanced}]{frame,  }\item[{uint8\+\_\+t}]{milliseconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_dragon_motor_controller_a436bc02bae19f53f567e0f4e8c67a6f9}{I\+Dragon\+Motor\+Controller}}.
+
+
+
+Definition at line 314 of file Dragon\+Falcon.\+cpp.
 
 
 

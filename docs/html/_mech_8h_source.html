@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/subsys/Mech.h Source File</title>
+<title>Team 302 Swerve Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/subsys/Mech.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -129,51 +129,43 @@ $(document).ready(function(){initNavTree('_mech_8h_source.html',''); initResizab
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        std::string <a class="code" href="class_mech.html#a502d8be2ff8725323c22371cba93dd37">GetNetworkTableName</a>() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech.html#ad2cfbcb9033be2844d450aeea6a92f78">ActivateLogging</a></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        (</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            units::second_t                 millisecondsBetweenLogging</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        ) <span class="keyword">override</span> <span class="keyword">final</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech.html#ac9ad0746220c95dde4abe97c34710fc2">DeactivateLogging</a>() <span class="keyword">override</span> <span class="keyword">final</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech.html#ab8e245e9cf0061ef1acf09a9103e41c4">LogData</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="class_mech.html#aff77a20e8a7746aef8bac427c60c3586">Mech</a></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        (</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <a class="code" href="class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284b">MechanismTypes::MECHANISM_TYPE</a>  type,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            std::string                     controlFileName,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            std::string                     networkTableName</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        );</div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="class_mech.html#aff77a20e8a7746aef8bac427c60c3586">   75</a></span>&#160;        <a class="code" href="class_mech.html#aff77a20e8a7746aef8bac427c60c3586">Mech</a>() = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="class_mech.html#a8214b4f377b97b64c8d93a248bc21460">   76</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_mech.html#a8214b4f377b97b64c8d93a248bc21460">~Mech</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <a class="code" href="class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284b">MechanismTypes::MECHANISM_TYPE</a>  m_type;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        std::string                     m_controlFile;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        std::string                     m_ntName;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordtype">bool</span>                            m_logging;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        units::second_t                 m_milliSecondsBetweenLogging;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        units::second_t                 m_lastTime;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        std::unique_ptr&lt;frc2::Timer&gt;    m_timer;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech.html#ab8e245e9cf0061ef1acf09a9103e41c4">LogData</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="class_mech.html#aff77a20e8a7746aef8bac427c60c3586">Mech</a></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        (</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <a class="code" href="class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284b">MechanismTypes::MECHANISM_TYPE</a>  type,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            std::string                     controlFileName,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            std::string                     networkTableName</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        );</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="class_mech.html#aff77a20e8a7746aef8bac427c60c3586">   66</a></span>&#160;        <a class="code" href="class_mech.html#aff77a20e8a7746aef8bac427c60c3586">Mech</a>() = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="class_mech.html#a8214b4f377b97b64c8d93a248bc21460">   67</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_mech.html#a8214b4f377b97b64c8d93a248bc21460">~Mech</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <a class="code" href="class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284b">MechanismTypes::MECHANISM_TYPE</a>  m_type;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        std::string                     m_controlFile;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        std::string                     m_ntName;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordtype">bool</span>                            m_logging;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        units::second_t                 m_milliSecondsBetweenLogging;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        units::second_t                 m_lastTime;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        std::unique_ptr&lt;frc2::Timer&gt;    m_timer;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_mech_html_a8214b4f377b97b64c8d93a248bc21460"><div class="ttname"><a href="class_mech.html#a8214b4f377b97b64c8d93a248bc21460">Mech::~Mech</a></div><div class="ttdeci">virtual ~Mech()=default</div></div>
 <div class="ttc" id="a_i_mech_8h_html"><div class="ttname"><a href="_i_mech_8h.html">IMech.h</a></div></div>
 <div class="ttc" id="aclass_mech_html_aff77a20e8a7746aef8bac427c60c3586"><div class="ttname"><a href="class_mech.html#aff77a20e8a7746aef8bac427c60c3586">Mech::Mech</a></div><div class="ttdeci">Mech()=delete</div></div>
-<div class="ttc" id="aclass_mech_html_ac9ad0746220c95dde4abe97c34710fc2"><div class="ttname"><a href="class_mech.html#ac9ad0746220c95dde4abe97c34710fc2">Mech::DeactivateLogging</a></div><div class="ttdeci">void DeactivateLogging() override final</div><div class="ttdoc">Stop updating the key values to network table.</div><div class="ttdef"><b>Definition:</b> <a href="_mech_8cpp_source.html#l00115">Mech.cpp:115</a></div></div>
-<div class="ttc" id="aclass_mech_html_ab8e245e9cf0061ef1acf09a9103e41c4"><div class="ttname"><a href="class_mech.html#ab8e245e9cf0061ef1acf09a9103e41c4">Mech::LogData</a></div><div class="ttdeci">void LogData() override</div><div class="ttdoc">log data to the network table if it is activated and time period has past</div><div class="ttdef"><b>Definition:</b> <a href="_mech_8cpp_source.html#l00102">Mech.cpp:102</a></div></div>
+<div class="ttc" id="aclass_mech_html_ab8e245e9cf0061ef1acf09a9103e41c4"><div class="ttname"><a href="class_mech.html#ab8e245e9cf0061ef1acf09a9103e41c4">Mech::LogData</a></div><div class="ttdeci">void LogData() override</div><div class="ttdoc">log data to the network table if it is activated and time period has past</div><div class="ttdef"><b>Definition:</b> <a href="_mech_8cpp_source.html#l00088">Mech.cpp:88</a></div></div>
 <div class="ttc" id="aclass_mech_html"><div class="ttname"><a href="class_mech.html">Mech</a></div><div class="ttdef"><b>Definition:</b> <a href="_mech_8h_source.html#l00037">Mech.h:38</a></div></div>
 <div class="ttc" id="aclass_mechanism_types_html_adad17689ea795c3d65e2062bdc09284b"><div class="ttname"><a href="class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284b">MechanismTypes::MECHANISM_TYPE</a></div><div class="ttdeci">MECHANISM_TYPE</div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_types_8h_source.html#l00031">MechanismTypes.h:32</a></div></div>
-<div class="ttc" id="aclass_mech_html_a502d8be2ff8725323c22371cba93dd37"><div class="ttname"><a href="class_mech.html#a502d8be2ff8725323c22371cba93dd37">Mech::GetNetworkTableName</a></div><div class="ttdeci">std::string GetNetworkTableName() const override</div><div class="ttdoc">indicate the Network Table name used to setting tracking parameters</div><div class="ttdef"><b>Definition:</b> <a href="_mech_8cpp_source.html#l00085">Mech.cpp:85</a></div></div>
+<div class="ttc" id="aclass_mech_html_a502d8be2ff8725323c22371cba93dd37"><div class="ttname"><a href="class_mech.html#a502d8be2ff8725323c22371cba93dd37">Mech::GetNetworkTableName</a></div><div class="ttdeci">std::string GetNetworkTableName() const override</div><div class="ttdoc">indicate the Network Table name used to setting tracking parameters</div><div class="ttdef"><b>Definition:</b> <a href="_mech_8cpp_source.html#l00081">Mech.cpp:81</a></div></div>
 <div class="ttc" id="aclass_i_mech_html"><div class="ttname"><a href="class_i_mech.html">IMech</a></div><div class="ttdoc">This is the interface for mechanisms regardless of what control items are available.</div><div class="ttdef"><b>Definition:</b> <a href="_i_mech_8h_source.html#l00040">IMech.h:41</a></div></div>
-<div class="ttc" id="aclass_mech_html_a920a923776b0a1b827e5ad689bc6ecf8"><div class="ttname"><a href="class_mech.html#a920a923776b0a1b827e5ad689bc6ecf8">Mech::GetControlFileName</a></div><div class="ttdeci">std::string GetControlFileName() const override</div><div class="ttdoc">indicate the file used to get the control parameters from</div><div class="ttdef"><b>Definition:</b> <a href="_mech_8cpp_source.html#l00077">Mech.cpp:77</a></div></div>
-<div class="ttc" id="aclass_mech_html_acb9e3f4091481906e0a191e10f2f0a04"><div class="ttname"><a href="class_mech.html#acb9e3f4091481906e0a191e10f2f0a04">Mech::GetType</a></div><div class="ttdeci">MechanismTypes::MECHANISM_TYPE GetType() const override</div><div class="ttdoc">Indicates the type of mechanism this is.</div><div class="ttdef"><b>Definition:</b> <a href="_mech_8cpp_source.html#l00070">Mech.cpp:70</a></div></div>
+<div class="ttc" id="aclass_mech_html_a920a923776b0a1b827e5ad689bc6ecf8"><div class="ttname"><a href="class_mech.html#a920a923776b0a1b827e5ad689bc6ecf8">Mech::GetControlFileName</a></div><div class="ttdeci">std::string GetControlFileName() const override</div><div class="ttdoc">indicate the file used to get the control parameters from</div><div class="ttdef"><b>Definition:</b> <a href="_mech_8cpp_source.html#l00073">Mech.cpp:73</a></div></div>
+<div class="ttc" id="aclass_mech_html_acb9e3f4091481906e0a191e10f2f0a04"><div class="ttname"><a href="class_mech.html#acb9e3f4091481906e0a191e10f2f0a04">Mech::GetType</a></div><div class="ttdeci">MechanismTypes::MECHANISM_TYPE GetType() const override</div><div class="ttdoc">Indicates the type of mechanism this is.</div><div class="ttdef"><b>Definition:</b> <a href="_mech_8cpp_source.html#l00066">Mech.cpp:66</a></div></div>
 <div class="ttc" id="a_mechanism_types_8h_html"><div class="ttname"><a href="_mechanism_types_8h.html">MechanismTypes.h</a></div></div>
-<div class="ttc" id="aclass_mech_html_ad2cfbcb9033be2844d450aeea6a92f78"><div class="ttname"><a href="class_mech.html#ad2cfbcb9033be2844d450aeea6a92f78">Mech::ActivateLogging</a></div><div class="ttdeci">void ActivateLogging(units::second_t millisecondsBetweenLogging) override final</div><div class="ttdoc">Activates logging key values to network table.</div><div class="ttdef"><b>Definition:</b> <a href="_mech_8cpp_source.html#l00092">Mech.cpp:93</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_ac84794d7bd2f341951dcef92c7613df.html">subsys</a></li><li class="navelem"><a class="el" href="_mech_8h.html">Mech.h</a></li>
+    <li class="navelem"><a class="el" href="dir_4a8796b0ba1d3dc122873832137fbe4e.html">GitRepos</a></li><li class="navelem"><a class="el" href="dir_1c47665bf58b31faa465c1927c1a00b8.html">2021SwerveBot</a></li><li class="navelem"><a class="el" href="dir_4c5ca149a7966e928c927d1b502f4c6f.html">src</a></li><li class="navelem"><a class="el" href="dir_6d6810671ff2e85cbf46bcf7f794863c.html">main</a></li><li class="navelem"><a class="el" href="dir_62e39780e9d5ee1b2eb3d29e32dcab01.html">cpp</a></li><li class="navelem"><a class="el" href="dir_f06fce08f279d4ac2e1d8ad0e7d85859.html">subsys</a></li><li class="navelem"><a class="el" href="_mech_8h.html">Mech.h</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

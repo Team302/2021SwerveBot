@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/states/Mech2MotorState.h Source File</title>
+<title>Team 302 Swerve Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/states/Mech2MotorState.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -104,44 +104,56 @@ $(document).ready(function(){initNavTree('_mech2_motor_state_8h_source.html','')
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        (</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <a class="code" href="class_i_mech2_ind_motors.html">IMech2IndMotors</a>*                mechanism,</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <a class="code" href="class_control_data.html">ControlData</a>*                    control,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keywordtype">double</span>                          primaryTarget,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordtype">double</span>                          secondaryTarget</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        );</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_mech2_motor_state.html#a40bc3064af9b0410bd17e5701585747a">   35</a></span>&#160;        <a class="code" href="class_mech2_motor_state.html#a40bc3064af9b0410bd17e5701585747a">Mech2MotorState</a>() = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_mech2_motor_state.html#aa281cf971bc5282b1b1d2e6c29d6b780">   36</a></span>&#160;        <a class="code" href="class_mech2_motor_state.html#aa281cf971bc5282b1b1d2e6c29d6b780">~Mech2MotorState</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech2_motor_state.html#a430785c96c31d43bd1479497a32dc6d5">Init</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech2_motor_state.html#af5f910af18c1b36f2e301b6c6bebd88a">Run</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_mech2_motor_state.html#a6cda4b518f7af0761cf119fbe3b4459d">AtTarget</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="class_i_mech2_ind_motors.html">IMech2IndMotors</a>*                m_mechanism;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="class_control_data.html">ControlData</a>*                    m_control;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">double</span>                          m_primaryTarget;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">double</span>                          m_secondaryTarget;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordtype">bool</span>                            m_positionBased;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">bool</span>                            m_speedBased;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <a class="code" href="class_control_data.html">ControlData</a>*                    control2,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordtype">double</span>                          primaryTarget,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordtype">double</span>                          secondaryTarget</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        );</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_mech2_motor_state.html#a40bc3064af9b0410bd17e5701585747a">   36</a></span>&#160;        <a class="code" href="class_mech2_motor_state.html#a40bc3064af9b0410bd17e5701585747a">Mech2MotorState</a>() = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_mech2_motor_state.html#aa281cf971bc5282b1b1d2e6c29d6b780">   37</a></span>&#160;        <a class="code" href="class_mech2_motor_state.html#aa281cf971bc5282b1b1d2e6c29d6b780">~Mech2MotorState</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech2_motor_state.html#a430785c96c31d43bd1479497a32dc6d5">Init</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech2_motor_state.html#af5f910af18c1b36f2e301b6c6bebd88a">Run</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_mech2_motor_state.html#a6cda4b518f7af0761cf119fbe3b4459d">AtTarget</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_mech2_motor_state.html#a3fa1128cbed902ccedde13b27b99a7db">   42</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="class_mech2_motor_state.html#a3fa1128cbed902ccedde13b27b99a7db">GetPrimaryTarget</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> m_primaryTarget;}</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_mech2_motor_state.html#ac6a0abdf23ebf31bd8c32070d1daf369">   43</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="class_mech2_motor_state.html#ac6a0abdf23ebf31bd8c32070d1daf369">GetSecondaryTarget</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> m_secondaryTarget;}</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_mech2_motor_state.html#a91742b31f260870a2b58af2f2eb43d5c">   44</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="class_mech2_motor_state.html#a91742b31f260870a2b58af2f2eb43d5c">GetPrimaryRPS</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> m_mechanism-&gt;<a class="code" href="class_i_mech2_ind_motors.html#aba2df5de0db4ada23cd69521f8419199">GetPrimarySpeed</a>();}</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_mech2_motor_state.html#ae6a5dd330fca29caf4cd4417656394ea">   45</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="class_mech2_motor_state.html#ae6a5dd330fca29caf4cd4417656394ea">GetSecondaryRPS</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> m_mechanism-&gt;<a class="code" href="class_i_mech2_ind_motors.html#a41b0aa917183790731e76f39a8f9cc2d">GetSecondarySpeed</a>();}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="class_i_mech2_ind_motors.html">IMech2IndMotors</a>*                m_mechanism;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="class_control_data.html">ControlData</a>*                    m_control;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="class_control_data.html">ControlData</a>*                    m_control2;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">double</span>                          m_primaryTarget;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">double</span>                          m_secondaryTarget;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">bool</span>                            m_positionBased;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">bool</span>                            m_speedBased;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_mech2_motor_state_html_a430785c96c31d43bd1479497a32dc6d5"><div class="ttname"><a href="class_mech2_motor_state.html#a430785c96c31d43bd1479497a32dc6d5">Mech2MotorState::Init</a></div><div class="ttdeci">void Init() override</div><div class="ttdef"><b>Definition:</b> <a href="_mech2_motor_state_8cpp_source.html#l00118">Mech2MotorState.cpp:118</a></div></div>
+<div class="ttc" id="aclass_mech2_motor_state_html_a430785c96c31d43bd1479497a32dc6d5"><div class="ttname"><a href="class_mech2_motor_state.html#a430785c96c31d43bd1479497a32dc6d5">Mech2MotorState::Init</a></div><div class="ttdeci">void Init() override</div><div class="ttdef"><b>Definition:</b> <a href="_mech2_motor_state_8cpp_source.html#l00134">Mech2MotorState.cpp:134</a></div></div>
 <div class="ttc" id="aclass_i_state_html"><div class="ttname"><a href="class_i_state.html">IState</a></div><div class="ttdoc">Interface for state classes.</div><div class="ttdef"><b>Definition:</b> <a href="_i_state_8h_source.html#l00021">IState.h:22</a></div></div>
 <div class="ttc" id="aclass_mech2_motor_state_html"><div class="ttname"><a href="class_mech2_motor_state.html">Mech2MotorState</a></div><div class="ttdoc">information about the control (open loop, closed loop position, closed loop velocity,...</div><div class="ttdef"><b>Definition:</b> <a href="_mech2_motor_state_8h_source.html#l00024">Mech2MotorState.h:25</a></div></div>
-<div class="ttc" id="aclass_mech2_motor_state_html_af5f910af18c1b36f2e301b6c6bebd88a"><div class="ttname"><a href="class_mech2_motor_state.html#af5f910af18c1b36f2e301b6c6bebd88a">Mech2MotorState::Run</a></div><div class="ttdeci">void Run() override</div><div class="ttdef"><b>Definition:</b> <a href="_mech2_motor_state_8cpp_source.html#l00128">Mech2MotorState.cpp:128</a></div></div>
-<div class="ttc" id="aclass_mech2_motor_state_html_a6cda4b518f7af0761cf119fbe3b4459d"><div class="ttname"><a href="class_mech2_motor_state.html#a6cda4b518f7af0761cf119fbe3b4459d">Mech2MotorState::AtTarget</a></div><div class="ttdeci">bool AtTarget() const override</div><div class="ttdef"><b>Definition:</b> <a href="_mech2_motor_state_8cpp_source.html#l00136">Mech2MotorState.cpp:136</a></div></div>
+<div class="ttc" id="aclass_mech2_motor_state_html_af5f910af18c1b36f2e301b6c6bebd88a"><div class="ttname"><a href="class_mech2_motor_state.html#af5f910af18c1b36f2e301b6c6bebd88a">Mech2MotorState::Run</a></div><div class="ttdeci">void Run() override</div><div class="ttdef"><b>Definition:</b> <a href="_mech2_motor_state_8cpp_source.html#l00145">Mech2MotorState.cpp:145</a></div></div>
+<div class="ttc" id="aclass_mech2_motor_state_html_a6cda4b518f7af0761cf119fbe3b4459d"><div class="ttname"><a href="class_mech2_motor_state.html#a6cda4b518f7af0761cf119fbe3b4459d">Mech2MotorState::AtTarget</a></div><div class="ttdeci">bool AtTarget() const override</div><div class="ttdef"><b>Definition:</b> <a href="_mech2_motor_state_8cpp_source.html#l00158">Mech2MotorState.cpp:158</a></div></div>
 <div class="ttc" id="a_control_data_8h_html"><div class="ttname"><a href="_control_data_8h.html">ControlData.h</a></div></div>
 <div class="ttc" id="aclass_i_mech2_ind_motors_html"><div class="ttname"><a href="class_i_mech2_ind_motors.html">IMech2IndMotors</a></div><div class="ttdoc">This is the interface for mechanisms that have two independently controlled motors.</div><div class="ttdef"><b>Definition:</b> <a href="_i_mech2_ind_motors_8h_source.html#l00038">IMech2IndMotors.h:39</a></div></div>
 <div class="ttc" id="a_mechanism_target_data_8h_html"><div class="ttname"><a href="_mechanism_target_data_8h.html">MechanismTargetData.h</a></div></div>
 <div class="ttc" id="a_i_mech2_ind_motors_8h_html"><div class="ttname"><a href="_i_mech2_ind_motors_8h.html">IMech2IndMotors.h</a></div></div>
+<div class="ttc" id="aclass_mech2_motor_state_html_ac6a0abdf23ebf31bd8c32070d1daf369"><div class="ttname"><a href="class_mech2_motor_state.html#ac6a0abdf23ebf31bd8c32070d1daf369">Mech2MotorState::GetSecondaryTarget</a></div><div class="ttdeci">double GetSecondaryTarget() const</div><div class="ttdef"><b>Definition:</b> <a href="_mech2_motor_state_8h_source.html#l00043">Mech2MotorState.h:43</a></div></div>
+<div class="ttc" id="aclass_mech2_motor_state_html_a3fa1128cbed902ccedde13b27b99a7db"><div class="ttname"><a href="class_mech2_motor_state.html#a3fa1128cbed902ccedde13b27b99a7db">Mech2MotorState::GetPrimaryTarget</a></div><div class="ttdeci">double GetPrimaryTarget() const</div><div class="ttdef"><b>Definition:</b> <a href="_mech2_motor_state_8h_source.html#l00042">Mech2MotorState.h:42</a></div></div>
+<div class="ttc" id="aclass_i_mech2_ind_motors_html_aba2df5de0db4ada23cd69521f8419199"><div class="ttname"><a href="class_i_mech2_ind_motors.html#aba2df5de0db4ada23cd69521f8419199">IMech2IndMotors::GetPrimarySpeed</a></div><div class="ttdeci">virtual double GetPrimarySpeed() const =0</div><div class="ttdoc">Get the current speed of the primary motor in the mechanism. The value is in inches per second or deg...</div></div>
 <div class="ttc" id="a_i_state_8h_html"><div class="ttname"><a href="_i_state_8h.html">IState.h</a></div></div>
 <div class="ttc" id="aclass_mech2_motor_state_html_aa281cf971bc5282b1b1d2e6c29d6b780"><div class="ttname"><a href="class_mech2_motor_state.html#aa281cf971bc5282b1b1d2e6c29d6b780">Mech2MotorState::~Mech2MotorState</a></div><div class="ttdeci">~Mech2MotorState()=default</div></div>
 <div class="ttc" id="aclass_control_data_html"><div class="ttname"><a href="class_control_data.html">ControlData</a></div><div class="ttdef"><b>Definition:</b> <a href="_control_data_8h_source.html#l00022">ControlData.h:23</a></div></div>
+<div class="ttc" id="aclass_i_mech2_ind_motors_html_a41b0aa917183790731e76f39a8f9cc2d"><div class="ttname"><a href="class_i_mech2_ind_motors.html#a41b0aa917183790731e76f39a8f9cc2d">IMech2IndMotors::GetSecondarySpeed</a></div><div class="ttdeci">virtual double GetSecondarySpeed() const =0</div><div class="ttdoc">Get the current speed of the secondary motor in the mechanism. The value is in inches per second or d...</div></div>
 <div class="ttc" id="aclass_mech2_motor_state_html_a40bc3064af9b0410bd17e5701585747a"><div class="ttname"><a href="class_mech2_motor_state.html#a40bc3064af9b0410bd17e5701585747a">Mech2MotorState::Mech2MotorState</a></div><div class="ttdeci">Mech2MotorState()=delete</div></div>
+<div class="ttc" id="aclass_mech2_motor_state_html_a91742b31f260870a2b58af2f2eb43d5c"><div class="ttname"><a href="class_mech2_motor_state.html#a91742b31f260870a2b58af2f2eb43d5c">Mech2MotorState::GetPrimaryRPS</a></div><div class="ttdeci">double GetPrimaryRPS() const</div><div class="ttdef"><b>Definition:</b> <a href="_mech2_motor_state_8h_source.html#l00044">Mech2MotorState.h:44</a></div></div>
+<div class="ttc" id="aclass_mech2_motor_state_html_ae6a5dd330fca29caf4cd4417656394ea"><div class="ttname"><a href="class_mech2_motor_state.html#ae6a5dd330fca29caf4cd4417656394ea">Mech2MotorState::GetSecondaryRPS</a></div><div class="ttdeci">double GetSecondaryRPS() const</div><div class="ttdef"><b>Definition:</b> <a href="_mech2_motor_state_8h_source.html#l00045">Mech2MotorState.h:45</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_41c41181ce15b7c19c61d1bd081a9910.html">states</a></li><li class="navelem"><a class="el" href="_mech2_motor_state_8h.html">Mech2MotorState.h</a></li>
+    <li class="navelem"><a class="el" href="dir_4a8796b0ba1d3dc122873832137fbe4e.html">GitRepos</a></li><li class="navelem"><a class="el" href="dir_1c47665bf58b31faa465c1927c1a00b8.html">2021SwerveBot</a></li><li class="navelem"><a class="el" href="dir_4c5ca149a7966e928c927d1b502f4c6f.html">src</a></li><li class="navelem"><a class="el" href="dir_6d6810671ff2e85cbf46bcf7f794863c.html">main</a></li><li class="navelem"><a class="el" href="dir_62e39780e9d5ee1b2eb3d29e32dcab01.html">cpp</a></li><li class="navelem"><a class="el" href="dir_6690ad191a400a686898d515d289d6e4.html">states</a></li><li class="navelem"><a class="el" href="_mech2_motor_state_8h.html">Mech2MotorState.h</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

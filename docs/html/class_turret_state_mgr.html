@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: TurretStateMgr Class Reference</title>
+<title>Team 302 Swerve Robot: TurretStateMgr Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -95,14 +95,9 @@ $(document).ready(function(){initNavTree('class_turret_state_mgr.html',''); init
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aa185afc9e9d378aca360e2f2376c1b98"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_turret_state_mgr.html#aa185afc9e9d378aca360e2f2376c1b98">TURRET_STATE</a> { <br />
-&#160;&#160;<a class="el" href="class_turret_state_mgr.html#aa185afc9e9d378aca360e2f2376c1b98a187f8fdd26136f4012c473534805dc15">HOLD</a>, 
+<tr class="memitem:aa185afc9e9d378aca360e2f2376c1b98"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_turret_state_mgr.html#aa185afc9e9d378aca360e2f2376c1b98">TURRET_STATE</a> { <a class="el" href="class_turret_state_mgr.html#aa185afc9e9d378aca360e2f2376c1b98a187f8fdd26136f4012c473534805dc15">HOLD</a>, 
 <a class="el" href="class_turret_state_mgr.html#aa185afc9e9d378aca360e2f2376c1b98a54bef97d298e8ca2bc34c29999dc81ea">LIMELIGHT_AIM</a>, 
-<a class="el" href="class_turret_state_mgr.html#aa185afc9e9d378aca360e2f2376c1b98aeeb2a5101bf41ce410113c70b546c91a">MANUAL_AIM</a>, 
-<a class="el" href="class_turret_state_mgr.html#aa185afc9e9d378aca360e2f2376c1b98ae5e8528c4563bcd397a154b28fc8b1ba">TURN_ANGLE</a>, 
-<br />
-&#160;&#160;<a class="el" href="class_turret_state_mgr.html#aa185afc9e9d378aca360e2f2376c1b98a6899ca987c0c625ba905301aa83d2a51">MAX_TURRET_STATES</a>
-<br />
+<a class="el" href="class_turret_state_mgr.html#aa185afc9e9d378aca360e2f2376c1b98a6899ca987c0c625ba905301aa83d2a51">MAX_TURRET_STATES</a>
  }</td></tr>
 <tr class="separator:aa185afc9e9d378aca360e2f2376c1b98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -144,8 +139,6 @@ Static Public Member Functions</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa185afc9e9d378aca360e2f2376c1b98a187f8fdd26136f4012c473534805dc15"></a>HOLD&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aa185afc9e9d378aca360e2f2376c1b98a54bef97d298e8ca2bc34c29999dc81ea"></a>LIMELIGHT_AIM&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa185afc9e9d378aca360e2f2376c1b98aeeb2a5101bf41ce410113c70b546c91a"></a>MANUAL_AIM&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa185afc9e9d378aca360e2f2376c1b98ae5e8528c4563bcd397a154b28fc8b1ba"></a>TURN_ANGLE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aa185afc9e9d378aca360e2f2376c1b98a6899ca987c0c625ba905301aa83d2a51"></a>MAX_TURRET_STATES&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
@@ -180,7 +173,7 @@ Static Public Member Functions</h2></td></tr>
 <p>return the current state </p>
 <dl class="section return"><dt>Returns</dt><dd>SHOOTER_HOOD_STATE - the current state </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_turret_state_mgr_8h_source.html#l00048">48</a> of file <a class="el" href="_turret_state_mgr_8h_source.html">TurretStateMgr.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_turret_state_mgr_8h_source.html#l00046">46</a> of file <a class="el" href="_turret_state_mgr_8h_source.html">TurretStateMgr.h</a>.</p>
 
 </div>
 </div>
@@ -210,7 +203,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Find or create the state manmanager. </p>
 <dl class="section return"><dt>Returns</dt><dd>TurretStateMgr* pointer to the state manager </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_turret_state_mgr_8cpp_source.html#l00030">30</a> of file <a class="el" href="_turret_state_mgr_8cpp_source.html">TurretStateMgr.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_turret_state_mgr_8cpp_source.html#l00028">28</a> of file <a class="el" href="_turret_state_mgr_8cpp_source.html">TurretStateMgr.cpp</a>.</p>
 
 </div>
 </div>
@@ -232,7 +225,7 @@ Static Public Member Functions</h2></td></tr>
 <p>run the current state </p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_turret_state_mgr_8cpp_source.html#l00116">116</a> of file <a class="el" href="_turret_state_mgr_8cpp_source.html">TurretStateMgr.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_turret_state_mgr_8cpp_source.html#l00098">98</a> of file <a class="el" href="_turret_state_mgr_8cpp_source.html">TurretStateMgr.cpp</a>.</p>
 
 </div>
 </div>
@@ -260,7 +253,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_turret_state_mgr_8h_source.html#l00050">50</a> of file <a class="el" href="_turret_state_mgr_8h_source.html">TurretStateMgr.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_turret_state_mgr_8h_source.html#l00048">48</a> of file <a class="el" href="_turret_state_mgr_8h_source.html">TurretStateMgr.h</a>.</p>
 
 </div>
 </div>
@@ -305,7 +298,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<p>auto state = m_stateVector[stateEnum]; if ( state != nullptr &amp;&amp; state != m_currentState ) { if (stateEnum == TURN_ANGLE) { auto cdState = dynamic_cast&lt;TurretTurnAngle*&gt;(state); auto cd = cdState-&gt;GetControlData(); m_stateVector[stateEnum] = new <a class="el" href="class_turret_turn_angle.html">TurretTurnAngle(cd,turretAngle, MechanismTargetData::SOLENOID::NONE)</a>; state = m_stateVector[stateEnum]; } m_currentState = state; m_currentStateEnum = stateEnum; m_currentState-&gt;Init(); if ( stateEnum == LIMELIGHT_AIM ) { auto llAim = dynamic_cast&lt;LimelightAim*&gt;(m_currentState); if ( llAim != nullptr ) { llAim-&gt;UpdateTarget( m_approxTargetAngle ); } }</p>
+<p>auto state = m_stateVector[stateEnum]; if ( state != nullptr &amp;&amp; state != m_currentState ) { m_currentState = state; m_currentStateEnum = stateEnum; m_currentState-&gt;Init(); if ( stateEnum == LIMELIGHT_AIM ) { auto llAim = dynamic_cast&lt;LimelightAim*&gt;(m_currentState); if ( llAim != nullptr ) { llAim-&gt;UpdateTarget( m_approxTargetAngle ); } }</p>
 <pre class="fragment">if ( run )
 {
     if ( MechanismFactory::GetMechanismFactory()-&gt;GetTurret().get() != nullptr )
@@ -315,7 +308,7 @@ Static Public Member Functions</h2></td></tr>
 }
 </pre><p>}</p>
 
-<p class="definition">Definition at line <a class="el" href="_turret_state_mgr_8cpp_source.html#l00139">139</a> of file <a class="el" href="_turret_state_mgr_8cpp_source.html">TurretStateMgr.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_turret_state_mgr_8cpp_source.html#l00117">117</a> of file <a class="el" href="_turret_state_mgr_8cpp_source.html">TurretStateMgr.cpp</a>.</p>
 
 </div>
 </div>

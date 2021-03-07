@@ -30,8 +30,10 @@ virtual double \mbox{\hyperlink{class_i_mech2_ind_motors_aba2df5de0db4ada23cd695
 \begin{DoxyCompactList}\small\item\em Get the current speed of the primary motor in the mechanism. The value is in inches per second or degrees per second. \end{DoxyCompactList}\item 
 virtual double \mbox{\hyperlink{class_i_mech2_ind_motors_a41b0aa917183790731e76f39a8f9cc2d}{Get\+Secondary\+Speed}} () const =0
 \begin{DoxyCompactList}\small\item\em Get the current speed of the secondary motor in the mechanism. The value is in inches per second or degrees per second. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{class_i_mech2_ind_motors_a9de8f3c889207a96895ff6d6f005bd95}{Set\+Control\+Constants}} (\mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$pid)=0
+virtual void \mbox{\hyperlink{class_i_mech2_ind_motors_a79b05f7e5f56aadd1f088eb342b95765}{Set\+Control\+Constants}} (int slot, \mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$pid)=0
 \begin{DoxyCompactList}\small\item\em Set the control constants (e.\+g. P\+I\+DF values). \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_i_mech2_ind_motors_adb5ecdb71c63e70de2b1d563abe16c94}{Set\+Secondary\+Control\+Constants}} (int slot, \mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$pid)=0
+\item 
 \mbox{\hyperlink{class_i_mech2_ind_motors_aae994a9575acd84fe641a8566d53a698}{I\+Mech2\+Ind\+Motors}} ()=default
 \item 
 virtual \mbox{\hyperlink{class_i_mech2_ind_motors_a1a48455442ca9739822957d902536712}{$\sim$\+I\+Mech2\+Ind\+Motors}} ()=default
@@ -131,11 +133,11 @@ double speed in inches/second (translating mechanisms) or degrees/second (rotati
 
 Implemented in \mbox{\hyperlink{class_mech2_ind_motors_ab5a23357fc5b2789fdb6c93d9ca9ae79}{Mech2\+Ind\+Motors}}.
 
-\mbox{\Hypertarget{class_i_mech2_ind_motors_a9de8f3c889207a96895ff6d6f005bd95}\label{class_i_mech2_ind_motors_a9de8f3c889207a96895ff6d6f005bd95}} 
+\mbox{\Hypertarget{class_i_mech2_ind_motors_a79b05f7e5f56aadd1f088eb342b95765}\label{class_i_mech2_ind_motors_a79b05f7e5f56aadd1f088eb342b95765}} 
 \index{IMech2IndMotors@{IMech2IndMotors}!SetControlConstants@{SetControlConstants}}
 \index{SetControlConstants@{SetControlConstants}!IMech2IndMotors@{IMech2IndMotors}}
 \doxysubsubsection{\texorpdfstring{SetControlConstants()}{SetControlConstants()}}
-{\footnotesize\ttfamily virtual void I\+Mech2\+Ind\+Motors\+::\+Set\+Control\+Constants (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$}]{pid }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void I\+Mech2\+Ind\+Motors\+::\+Set\+Control\+Constants (\begin{DoxyParamCaption}\item[{int}]{slot,  }\item[{\mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$}]{pid }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -151,7 +153,17 @@ void
 \end{DoxyReturn}
 
 
-Implemented in \mbox{\hyperlink{class_mech2_ind_motors_a8b4280e243380336ef54fd26027b5dd9}{Mech2\+Ind\+Motors}}.
+Implemented in \mbox{\hyperlink{class_mech2_ind_motors_a6d3ddd20a70dbe6a2bae51d9017355a2}{Mech2\+Ind\+Motors}}.
+
+\mbox{\Hypertarget{class_i_mech2_ind_motors_adb5ecdb71c63e70de2b1d563abe16c94}\label{class_i_mech2_ind_motors_adb5ecdb71c63e70de2b1d563abe16c94}} 
+\index{IMech2IndMotors@{IMech2IndMotors}!SetSecondaryControlConstants@{SetSecondaryControlConstants}}
+\index{SetSecondaryControlConstants@{SetSecondaryControlConstants}!IMech2IndMotors@{IMech2IndMotors}}
+\doxysubsubsection{\texorpdfstring{SetSecondaryControlConstants()}{SetSecondaryControlConstants()}}
+{\footnotesize\ttfamily virtual void I\+Mech2\+Ind\+Motors\+::\+Set\+Secondary\+Control\+Constants (\begin{DoxyParamCaption}\item[{int}]{slot,  }\item[{\mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$}]{pid }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_mech2_ind_motors_a63bcea45c84955bff782e270440c2cb4}{Mech2\+Ind\+Motors}}.
 
 \mbox{\Hypertarget{class_i_mech2_ind_motors_a1da8a8c5acef53aece885e984431ee3b}\label{class_i_mech2_ind_motors_a1da8a8c5acef53aece885e984431ee3b}} 
 \index{IMech2IndMotors@{IMech2IndMotors}!Update@{Update}}

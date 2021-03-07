@@ -25,6 +25,7 @@ var class_i_dragon_game_pad =
       [ "LINEAR", "class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676abdde71687676a038262ff33d2492bcbf", null ],
       [ "SQUARED", "class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676a7d94c01ced44b8a2c7a121e96c369ebc", null ],
       [ "CUBED", "class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676a356559cd793745311f007aa46a127033", null ],
+      [ "PIECEWISE_LINEAR", "class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676ae5f652e848c4766826857e477bb4f294", null ],
       [ "MAX_PROFILES", "class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676a7fc93528fdb8c6e235b2c5879c2597bf", null ]
     ] ],
     [ "BUTTON_IDENTIFIER", "class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29", [
@@ -91,9 +92,9 @@ var class_i_dragon_game_pad =
     [ "IsButtonPressed", "class_i_dragon_game_pad.html#ad02cf839ae313c2e70ea8258e6d6d738", null ],
     [ "SetAxisDeadband", "class_i_dragon_game_pad.html#a487befc3794be0ee1729fc2a6833f2bd", null ],
     [ "SetAxisProfile", "class_i_dragon_game_pad.html#ac0f51e1292e7a3b17962642e2a5a0445", null ],
-    [ "SetAxisScale", "class_i_dragon_game_pad.html#a471db7f67ec6604d042195ab65231116", null ],
+    [ "SetAxisScale", "class_i_dragon_game_pad.html#ac555ebafd89a6757810326c0452a9dc7", null ],
     [ "SetButtonMode", "class_i_dragon_game_pad.html#a0fc4a2d497a912d10ab2755018b43445", null ],
-    [ "SetSlewLimit", "class_i_dragon_game_pad.html#a03b3f6d85337b2857586b69c9d590686", null ],
+    [ "SetSlewLimit", "class_i_dragon_game_pad.html#a86b16cb5f79811fa79b60755646ff611", null ],
     [ "WasButtonPressed", "class_i_dragon_game_pad.html#aff0121c0eee282fa27d0849795fcce91", null ],
     [ "WasButtonReleased", "class_i_dragon_game_pad.html#a8b62f3bcf3a8fbfcdbd18cac65519720", null ]
 ];

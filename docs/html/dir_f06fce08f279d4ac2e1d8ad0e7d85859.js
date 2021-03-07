@@ -1,6 +1,10 @@
 var dir_f06fce08f279d4ac2e1d8ad0e7d85859 =
 [
     [ "interfaces", "dir_dcf33a2406c367d6ce84d3120caf542a.html", "dir_dcf33a2406c367d6ce84d3120caf542a" ],
+    [ "BallHopper.cpp", "_ball_hopper_8cpp.html", null ],
+    [ "BallHopper.h", "_ball_hopper_8h.html", [
+      [ "BallHopper", "class_ball_hopper.html", "class_ball_hopper" ]
+    ] ],
     [ "BallTransfer.cpp", "_ball_transfer_8cpp.html", null ],
     [ "BallTransfer.h", "_ball_transfer_8h.html", [
       [ "BallTransfer", "class_ball_transfer.html", "class_ball_transfer" ]

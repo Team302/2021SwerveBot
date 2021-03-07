@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: IMech2IndMotors Interface Reference</title>
+<title>Team 302 Swerve Robot: IMech2IndMotors Interface Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -124,9 +124,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a41b0aa917183790731e76f39a8f9cc2d"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_mech2_ind_motors.html#a41b0aa917183790731e76f39a8f9cc2d">GetSecondarySpeed</a> () const =0</td></tr>
 <tr class="memdesc:a41b0aa917183790731e76f39a8f9cc2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current speed of the secondary motor in the mechanism. The value is in inches per second or degrees per second.  <a href="class_i_mech2_ind_motors.html#a41b0aa917183790731e76f39a8f9cc2d">More...</a><br /></td></tr>
 <tr class="separator:a41b0aa917183790731e76f39a8f9cc2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9de8f3c889207a96895ff6d6f005bd95"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_mech2_ind_motors.html#a9de8f3c889207a96895ff6d6f005bd95">SetControlConstants</a> (<a class="el" href="class_control_data.html">ControlData</a> *pid)=0</td></tr>
-<tr class="memdesc:a9de8f3c889207a96895ff6d6f005bd95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control constants (e.g. PIDF values).  <a href="class_i_mech2_ind_motors.html#a9de8f3c889207a96895ff6d6f005bd95">More...</a><br /></td></tr>
-<tr class="separator:a9de8f3c889207a96895ff6d6f005bd95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79b05f7e5f56aadd1f088eb342b95765"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_mech2_ind_motors.html#a79b05f7e5f56aadd1f088eb342b95765">SetControlConstants</a> (int slot, <a class="el" href="class_control_data.html">ControlData</a> *pid)=0</td></tr>
+<tr class="memdesc:a79b05f7e5f56aadd1f088eb342b95765"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control constants (e.g. PIDF values).  <a href="class_i_mech2_ind_motors.html#a79b05f7e5f56aadd1f088eb342b95765">More...</a><br /></td></tr>
+<tr class="separator:a79b05f7e5f56aadd1f088eb342b95765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb5ecdb71c63e70de2b1d563abe16c94"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_mech2_ind_motors.html#adb5ecdb71c63e70de2b1d563abe16c94">SetSecondaryControlConstants</a> (int slot, <a class="el" href="class_control_data.html">ControlData</a> *pid)=0</td></tr>
+<tr class="separator:adb5ecdb71c63e70de2b1d563abe16c94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae994a9575acd84fe641a8566d53a698"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_mech2_ind_motors.html#aae994a9575acd84fe641a8566d53a698">IMech2IndMotors</a> ()=default</td></tr>
 <tr class="separator:aae994a9575acd84fe641a8566d53a698"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a48455442ca9739822957d902536712"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_mech2_ind_motors.html#a1a48455442ca9739822957d902536712">~IMech2IndMotors</a> ()=default</td></tr>
@@ -145,12 +147,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abc01c2761809f6a477e72da77d99595f inherit pub_methods_class_i_mech"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac415971e67e52e0cd2b3c1aa1312f1a1 inherit pub_methods_class_i_mech"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_mech.html#ac415971e67e52e0cd2b3c1aa1312f1a1">~IMech</a> ()=default</td></tr>
 <tr class="separator:ac415971e67e52e0cd2b3c1aa1312f1a1 inherit pub_methods_class_i_mech"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae36bb88f573108e3bd6c462ac73a65a5 inherit pub_methods_class_i_mech"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_mech.html#ae36bb88f573108e3bd6c462ac73a65a5">ActivateLogging</a> (units::second_t millisecondsBetweenLogging)=0</td></tr>
-<tr class="memdesc:ae36bb88f573108e3bd6c462ac73a65a5 inherit pub_methods_class_i_mech"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activates logging key values to network table.  <a href="class_i_mech.html#ae36bb88f573108e3bd6c462ac73a65a5">More...</a><br /></td></tr>
-<tr class="separator:ae36bb88f573108e3bd6c462ac73a65a5 inherit pub_methods_class_i_mech"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab6c09d4742d031c1c4e0720df90a6ef inherit pub_methods_class_i_mech"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_mech.html#aab6c09d4742d031c1c4e0720df90a6ef">DeactivateLogging</a> ()=0</td></tr>
-<tr class="memdesc:aab6c09d4742d031c1c4e0720df90a6ef inherit pub_methods_class_i_mech"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop updating the key values to network table.  <a href="class_i_mech.html#aab6c09d4742d031c1c4e0720df90a6ef">More...</a><br /></td></tr>
-<tr class="separator:aab6c09d4742d031c1c4e0720df90a6ef inherit pub_methods_class_i_mech"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ef8718f9a677623b49da0e2250fa326 inherit pub_methods_class_i_mech"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_mech.html#a8ef8718f9a677623b49da0e2250fa326">LogData</a> ()=0</td></tr>
 <tr class="memdesc:a8ef8718f9a677623b49da0e2250fa326 inherit pub_methods_class_i_mech"><td class="mdescLeft">&#160;</td><td class="mdescRight">log data to the network table if it is activated and time period has past  <a href="class_i_mech.html#a8ef8718f9a677623b49da0e2250fa326">More...</a><br /></td></tr>
 <tr class="separator:a8ef8718f9a677623b49da0e2250fa326 inherit pub_methods_class_i_mech"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -332,8 +328,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9de8f3c889207a96895ff6d6f005bd95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9de8f3c889207a96895ff6d6f005bd95">&#9670;&nbsp;</a></span>SetControlConstants()</h2>
+<a id="a79b05f7e5f56aadd1f088eb342b95765"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79b05f7e5f56aadd1f088eb342b95765">&#9670;&nbsp;</a></span>SetControlConstants()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -344,9 +340,19 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void IMech2IndMotors::SetControlConstants </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_control_data.html">ControlData</a> *&#160;</td>
-          <td class="paramname"><em>pid</em></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>slot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="class_control_data.html">ControlData</a> *&#160;</td>
+          <td class="paramname"><em>pid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -365,7 +371,45 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Implemented in <a class="el" href="class_mech2_ind_motors.html#a8b4280e243380336ef54fd26027b5dd9">Mech2IndMotors</a>.</p>
+<p>Implemented in <a class="el" href="class_mech2_ind_motors.html#a6d3ddd20a70dbe6a2bae51d9017355a2">Mech2IndMotors</a>.</p>
+
+</div>
+</div>
+<a id="adb5ecdb71c63e70de2b1d563abe16c94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb5ecdb71c63e70de2b1d563abe16c94">&#9670;&nbsp;</a></span>SetSecondaryControlConstants()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void IMech2IndMotors::SetSecondaryControlConstants </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>slot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_control_data.html">ControlData</a> *&#160;</td>
+          <td class="paramname"><em>pid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_mech2_ind_motors.html#a63bcea45c84955bff782e270440c2cb4">Mech2IndMotors</a>.</p>
 
 </div>
 </div>

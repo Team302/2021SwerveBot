@@ -6,6 +6,7 @@ var class_mechanism_types =
       [ "BALL_TRANSFER", "class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284bae5b6f8324e5f9c417b4ac91b7438ed9e", null ],
       [ "TURRET", "class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284ba678e7373d7e0e40324f61c1be89f986f", null ],
       [ "SHOOTER", "class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284ba5751201c8cf975192a6ad9cf90e793b7", null ],
+      [ "BALL_HOPPER", "class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284ba0eb11f392f623b50b99bd91f1d1fd949", null ],
       [ "SHOOTER_HOOD", "class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284ba38d684c3976bffd9902a1852dc22d654", null ],
       [ "MAX_MECHANISM_TYPES", "class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284ba56460d0cccd455dc6a5beaef20b49a5d", null ]
     ] ]

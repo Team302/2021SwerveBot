@@ -41,7 +41,15 @@ void \mbox{\hyperlink{class_logger_a94e57f440914047a967572adf4478d99}{Log\+Error
 void \mbox{\hyperlink{class_logger_a258aeb4010abaae86c40b35d6cceed5e}{On\+Dash}} (const std\+::string \&location\+Identifier, const std\+::string \&message)
 \begin{DoxyCompactList}\small\item\em Write a message to the dashboard. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_logger_aca97721e0531390ab459dafe49697cee}{On\+Dash}} (const std\+::string \&location\+Identifier, bool value)
-\begin{DoxyCompactList}\small\item\em Write a message to the dashboard. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Write a message to the dashboard. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_logger_aa056353d680800bbbf0f5c5cc048c295}{To\+Nt\+Table}} (const std\+::string \&nt\+Name, const std\+::string \&identifier, const std\+::string \&string)
+\item 
+void \mbox{\hyperlink{class_logger_aeebfaac040e298c60fb95ebfbc3de1b0}{To\+Nt\+Table}} (const std\+::string \&nt\+Name, const std\+::string \&identifier, double value)
+\item 
+void \mbox{\hyperlink{class_logger_a9866b90b836c4e42a3c90c97464b2463}{To\+Nt\+Table}} (std\+::shared\+\_\+ptr$<$ nt\+::\+Network\+Table $>$ ntable, const std\+::string \&identifier, const std\+::string \&msg)
+\item 
+void \mbox{\hyperlink{class_logger_acca0574ba6d6fdd424b60804837fc194}{To\+Nt\+Table}} (std\+::shared\+\_\+ptr$<$ nt\+::\+Network\+Table $>$ ntable, const std\+::string \&identifier, double value)
+\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -54,7 +62,7 @@ static \mbox{\hyperlink{class_logger}{Logger}} $\ast$ \mbox{\hyperlink{class_log
 
 File Description\+: This logs error messages 
 
-Definition at line 41 of file Logger.\+h.
+Definition at line 44 of file Logger.\+h.
 
 
 
@@ -97,7 +105,7 @@ P\+R\+I\+N\+T\+\_\+\+O\+N\+CE&this is an information/debug message we only want 
 \end{DoxyEnumFields}
 
 
-Definition at line 56 of file Logger.\+h.
+Definition at line 59 of file Logger.\+h.
 
 \mbox{\Hypertarget{class_logger_a4edb2ae414fe730aa45c9279c07f013a}\label{class_logger_a4edb2ae414fe730aa45c9279c07f013a}} 
 \index{Logger@{Logger}!LOGGER\_OPTION@{LOGGER\_OPTION}}
@@ -125,7 +133,7 @@ E\+A\+T\+\_\+\+IT&don\textquotesingle{}t write anything (useful at comps where w
 \end{DoxyEnumFields}
 
 
-Definition at line 47 of file Logger.\+h.
+Definition at line 50 of file Logger.\+h.
 
 
 
@@ -145,7 +153,7 @@ Logger$\ast$ pointer to the logger
 \end{DoxyReturn}
 
 
-Definition at line 49 of file Logger.\+cpp.
+Definition at line 52 of file Logger.\+cpp.
 
 \mbox{\Hypertarget{class_logger_a98d7aec19dcdfb9d8faa46d83d927883}\label{class_logger_a98d7aec19dcdfb9d8faa46d83d927883}} 
 \index{Logger@{Logger}!LogError@{LogError}}
@@ -234,7 +242,7 @@ set the level for messages that will be displayed
 \end{DoxyParams}
 
 
-Definition at line 70 of file Logger.\+cpp.
+Definition at line 73 of file Logger.\+cpp.
 
 \mbox{\Hypertarget{class_logger_a81e0fa4eef4a980adb91577eac4bdebd}\label{class_logger_a81e0fa4eef4a980adb91577eac4bdebd}} 
 \index{Logger@{Logger}!SetLoggingOption@{SetLoggingOption}}
@@ -253,7 +261,47 @@ set the option for where the logging messages should be displayed
 \end{DoxyParams}
 
 
-Definition at line 60 of file Logger.\+cpp.
+Definition at line 63 of file Logger.\+cpp.
+
+\mbox{\Hypertarget{class_logger_aa056353d680800bbbf0f5c5cc048c295}\label{class_logger_aa056353d680800bbbf0f5c5cc048c295}} 
+\index{Logger@{Logger}!ToNtTable@{ToNtTable}}
+\index{ToNtTable@{ToNtTable}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{ToNtTable()}{ToNtTable()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void Logger\+::\+To\+Nt\+Table (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{nt\+Name,  }\item[{const std\+::string \&}]{identifier,  }\item[{const std\+::string \&}]{string }\end{DoxyParamCaption})}
+
+
+
+Definition at line 162 of file Logger.\+cpp.
+
+\mbox{\Hypertarget{class_logger_aeebfaac040e298c60fb95ebfbc3de1b0}\label{class_logger_aeebfaac040e298c60fb95ebfbc3de1b0}} 
+\index{Logger@{Logger}!ToNtTable@{ToNtTable}}
+\index{ToNtTable@{ToNtTable}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{ToNtTable()}{ToNtTable()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void Logger\+::\+To\+Nt\+Table (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{nt\+Name,  }\item[{const std\+::string \&}]{identifier,  }\item[{double}]{value }\end{DoxyParamCaption})}
+
+
+
+Definition at line 173 of file Logger.\+cpp.
+
+\mbox{\Hypertarget{class_logger_a9866b90b836c4e42a3c90c97464b2463}\label{class_logger_a9866b90b836c4e42a3c90c97464b2463}} 
+\index{Logger@{Logger}!ToNtTable@{ToNtTable}}
+\index{ToNtTable@{ToNtTable}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{ToNtTable()}{ToNtTable()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void Logger\+::\+To\+Nt\+Table (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ nt\+::\+Network\+Table $>$}]{ntable,  }\item[{const std\+::string \&}]{identifier,  }\item[{const std\+::string \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+Definition at line 184 of file Logger.\+cpp.
+
+\mbox{\Hypertarget{class_logger_acca0574ba6d6fdd424b60804837fc194}\label{class_logger_acca0574ba6d6fdd424b60804837fc194}} 
+\index{Logger@{Logger}!ToNtTable@{ToNtTable}}
+\index{ToNtTable@{ToNtTable}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{ToNtTable()}{ToNtTable()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void Logger\+::\+To\+Nt\+Table (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ nt\+::\+Network\+Table $>$}]{ntable,  }\item[{const std\+::string \&}]{identifier,  }\item[{double}]{value }\end{DoxyParamCaption})}
+
+
+
+Definition at line 194 of file Logger.\+cpp.
 
 
 

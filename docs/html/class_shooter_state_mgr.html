@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: ShooterStateMgr Class Reference</title>
+<title>Team 302 Swerve Robot: ShooterStateMgr Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -95,10 +95,16 @@ $(document).ready(function(){initNavTree('class_shooter_state_mgr.html',''); ini
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aaf1212bf0ab2ee8a79e315bd1401b670"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shooter_state_mgr.html#aaf1212bf0ab2ee8a79e315bd1401b670">SHOOTER_STATE</a> { <a class="el" href="class_shooter_state_mgr.html#aaf1212bf0ab2ee8a79e315bd1401b670a7b11253c228d45fe55fb99f8945f7a2f">OFF</a>, 
+<tr class="memitem:aaf1212bf0ab2ee8a79e315bd1401b670"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shooter_state_mgr.html#aaf1212bf0ab2ee8a79e315bd1401b670">SHOOTER_STATE</a> { <br />
+&#160;&#160;<a class="el" href="class_shooter_state_mgr.html#aaf1212bf0ab2ee8a79e315bd1401b670a7b11253c228d45fe55fb99f8945f7a2f">OFF</a>, 
 <a class="el" href="class_shooter_state_mgr.html#aaf1212bf0ab2ee8a79e315bd1401b670a5eaa1911895b76c49e3a062a7a412420">GET_READY</a>, 
-<a class="el" href="class_shooter_state_mgr.html#aaf1212bf0ab2ee8a79e315bd1401b670a4b6acf6863504e99e128dec35a0e7d95">SHOOT</a>, 
+<a class="el" href="class_shooter_state_mgr.html#aaf1212bf0ab2ee8a79e315bd1401b670ab661da4b4250251d3e5acfc2fcf34dea">SHOOTGREEN</a>, 
+<a class="el" href="class_shooter_state_mgr.html#aaf1212bf0ab2ee8a79e315bd1401b670a855504830eb7a1e2b3fc03b6f3dc0574">SHOOTYELLOW</a>, 
+<br />
+&#160;&#160;<a class="el" href="class_shooter_state_mgr.html#aaf1212bf0ab2ee8a79e315bd1401b670acdae22270a080d40ebbde7129b5f41ed">SHOOTBLUE</a>, 
+<a class="el" href="class_shooter_state_mgr.html#aaf1212bf0ab2ee8a79e315bd1401b670a9a44677edb97277a09114dd8f65c1c2a">SHOOTRED</a>, 
 <a class="el" href="class_shooter_state_mgr.html#aaf1212bf0ab2ee8a79e315bd1401b670a46cc9c3a6b213cb552941a6508728f79">MAX_SHOOTER_STATES</a>
+<br />
  }</td></tr>
 <tr class="separator:aaf1212bf0ab2ee8a79e315bd1401b670"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -138,7 +144,10 @@ Static Public Member Functions</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aaf1212bf0ab2ee8a79e315bd1401b670a7b11253c228d45fe55fb99f8945f7a2f"></a>OFF&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aaf1212bf0ab2ee8a79e315bd1401b670a5eaa1911895b76c49e3a062a7a412420"></a>GET_READY&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aaf1212bf0ab2ee8a79e315bd1401b670a4b6acf6863504e99e128dec35a0e7d95"></a>SHOOT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaf1212bf0ab2ee8a79e315bd1401b670ab661da4b4250251d3e5acfc2fcf34dea"></a>SHOOTGREEN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaf1212bf0ab2ee8a79e315bd1401b670a855504830eb7a1e2b3fc03b6f3dc0574"></a>SHOOTYELLOW&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaf1212bf0ab2ee8a79e315bd1401b670acdae22270a080d40ebbde7129b5f41ed"></a>SHOOTBLUE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaf1212bf0ab2ee8a79e315bd1401b670a9a44677edb97277a09114dd8f65c1c2a"></a>SHOOTRED&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aaf1212bf0ab2ee8a79e315bd1401b670a46cc9c3a6b213cb552941a6508728f79"></a>MAX_SHOOTER_STATES&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
@@ -173,7 +182,7 @@ Static Public Member Functions</h2></td></tr>
 <p>return the current state </p>
 <dl class="section return"><dt>Returns</dt><dd>SHOOTER_STATE - the current state </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shooter_state_mgr_8h_source.html#l00064">64</a> of file <a class="el" href="_shooter_state_mgr_8h_source.html">ShooterStateMgr.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shooter_state_mgr_8h_source.html#l00067">67</a> of file <a class="el" href="_shooter_state_mgr_8h_source.html">ShooterStateMgr.h</a>.</p>
 
 </div>
 </div>
@@ -203,7 +212,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Find or create the state manmanager. </p>
 <dl class="section return"><dt>Returns</dt><dd>ShooterStateMgr* pointer to the state manager </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shooter_state_mgr_8cpp_source.html#l00040">40</a> of file <a class="el" href="_shooter_state_mgr_8cpp_source.html">ShooterStateMgr.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shooter_state_mgr_8cpp_source.html#l00043">43</a> of file <a class="el" href="_shooter_state_mgr_8cpp_source.html">ShooterStateMgr.cpp</a>.</p>
 
 </div>
 </div>
@@ -225,7 +234,7 @@ Static Public Member Functions</h2></td></tr>
 <p>run the current state </p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shooter_state_mgr_8cpp_source.html#l00124">124</a> of file <a class="el" href="_shooter_state_mgr_8cpp_source.html">ShooterStateMgr.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shooter_state_mgr_8cpp_source.html#l00168">168</a> of file <a class="el" href="_shooter_state_mgr_8cpp_source.html">ShooterStateMgr.cpp</a>.</p>
 
 </div>
 </div>
@@ -267,7 +276,7 @@ Static Public Member Functions</h2></td></tr>
 <dd>
 void </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shooter_state_mgr_8cpp_source.html#l00160">160</a> of file <a class="el" href="_shooter_state_mgr_8cpp_source.html">ShooterStateMgr.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shooter_state_mgr_8cpp_source.html#l00223">223</a> of file <a class="el" href="_shooter_state_mgr_8cpp_source.html">ShooterStateMgr.cpp</a>.</p>
 
 </div>
 </div>

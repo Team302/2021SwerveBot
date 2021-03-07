@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: Class Members - Functions</title>
+<title>Team 302 Swerve Robot: Class Members - Functions</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -87,9 +87,6 @@ $(document).ready(function(){initNavTree('functions_func_i.html',''); initResiza
 <li>IButton()
 : <a class="el" href="class_i_button.html#a521c75988151b8b0e53deda4295e079c">IButton</a>
 </li>
-<li>IChassis()
-: <a class="el" href="class_i_chassis.html#af4d7d56ee1cd2e0a249402941e3c8f48">IChassis</a>
-</li>
 <li>IDragonDistanceSensor()
 : <a class="el" href="class_i_dragon_distance_sensor.html#ab192c7707e597027b8ddef0183d0e0e2">IDragonDistanceSensor</a>
 </li>
@@ -127,24 +124,31 @@ $(document).ready(function(){initNavTree('functions_func_i.html',''); initResiza
 : <a class="el" href="class_conversion_utils.html#a7d464ea695ee8b8db8050c9d6c62b8e5">ConversionUtils</a>
 </li>
 <li>Init()
-: <a class="el" href="class_drive_path.html#a270a9c18ee5521cfbcf2a603ad3f6746">DrivePath</a>
+: <a class="el" href="class_angular_velocity_controller_m_c.html#a2c3a8bce2aaf8297a5381ac39e649553">AngularVelocityControllerMC</a>
+, <a class="el" href="class_ball_hopper_slow_release.html#ac3a53d3a25a981eccbb0170a81c8f8cb">BallHopperSlowRelease</a>
+, <a class="el" href="class_cycle_primitives.html#a65cc624864058fc7e5baac5eaba5bb43">CyclePrimitives</a>
+, <a class="el" href="class_do_nothing.html#aa05ad0a633ed8380cc8725b9b7747660">DoNothing</a>
+, <a class="el" href="class_drive_direction.html#a8372381ebc2dea98cc74924d2a963cf6">DriveDirection</a>
+, <a class="el" href="class_drive_distance.html#a180cc58f8494bd298b44201fd8bba1a9">DriveDistance</a>
+, <a class="el" href="class_drive_path.html#a270a9c18ee5521cfbcf2a603ad3f6746">DrivePath</a>
+, <a class="el" href="class_drive_time.html#a3b30617186899fe32b099904dea31259">DriveTime</a>
+, <a class="el" href="class_hold_position.html#a6059d2b98170913f3051b9a24de13cce">HoldPosition</a>
 , <a class="el" href="class_hold_turret_position.html#a0ad48ec9fb424d6bc86471f097125f0a">HoldTurretPosition</a>
-, <a class="el" href="class_intake_state.html#a9f4c251ac74c1cc9e08e089fdf621a38">IntakeState</a>
 , <a class="el" href="class_i_primitive.html#abe9e4c3b5a5b806d2c551c0f56a075d2">IPrimitive</a>
 , <a class="el" href="class_i_state.html#ac1400e68fde2f088873f5ec283309977">IState</a>
 , <a class="el" href="class_limelight_aim.html#a2247a913c594a63077af4d65fe98a80d">LimelightAim</a>
-, <a class="el" href="class_manual_aim.html#afaa246359e73c502e37bb5ce5128fa50">ManualAim</a>
 , <a class="el" href="class_mech1_motor_state.html#afe74c8988e329bd3ecbc7ac7c87ee5df">Mech1MotorState</a>
 , <a class="el" href="class_mech2_motor_state.html#a430785c96c31d43bd1479497a32dc6d5">Mech2MotorState</a>
+, <a class="el" href="class_reset_position.html#adb35fbc87c4893587dbde0eb9ec93061">ResetPosition</a>
 , <a class="el" href="class_shooter_hood_manual.html#a9ba03aabad3263cd283777165009bbb3">ShooterHoodManual</a>
 , <a class="el" href="class_shooter_save_state.html#a7b06af7fb1e6a69be0b45376343a7a7b">ShooterSaveState</a>
-, <a class="el" href="class_stay_in_place.html#af351ceee87ad3fe4e3e3d8b0676accd1">StayInPlace</a>
 , <a class="el" href="class_swerve_drive.html#aa4d7dd862100800547789e7948fba29a">SwerveDrive</a>
 , <a class="el" href="class_swerve_module.html#a352021a91784a69e20b68b68b4977fc2">SwerveModule</a>
 , <a class="el" href="class_turn_angle.html#a80a892d30883e9b570227eece66bf36c">TurnAngle</a>
+, <a class="el" href="class_zero_wheels.html#a467c60e853aa738b4721f6295d4b7641">ZeroWheels</a>
 </li>
 <li>Intake()
-: <a class="el" href="class_intake.html#ae1aee2c821aad67fee455c0810a5e6b2">Intake</a>
+: <a class="el" href="class_intake.html#a3938e5c57f3e7980025a2846642753ba">Intake</a>
 </li>
 <li>IntakeState()
 : <a class="el" href="class_intake_state.html#a9d3ced7fd3e2fef18c5ac9effaaf064f">IntakeState</a>
@@ -156,6 +160,9 @@ $(document).ready(function(){initNavTree('functions_func_i.html',''); initResiza
 </li>
 <li>IPrimitive()
 : <a class="el" href="class_i_primitive.html#aa67f91faaa42e0a8b1b80b905dd42cad">IPrimitive</a>
+</li>
+<li>isBallDetected()
+: <a class="el" href="class_ball_hopper.html#ae8b386499d835a452992339f4153adbb">BallHopper</a>
 </li>
 <li>IsButtonPressed()
 : <a class="el" href="class_analog_button.html#a530a96e393a6267bf84beaf9392390c7">AnalogButton</a>
@@ -170,10 +177,16 @@ $(document).ready(function(){initNavTree('functions_func_i.html',''); initResiza
 , <a class="el" href="class_toggle_button.html#a0c511c3d7701fa2efb72ad3373583d60">ToggleButton</a>
 </li>
 <li>IsDone()
-: <a class="el" href="class_drive_path.html#af815e61f6e8f1113bbb740ec13ce1cf7">DrivePath</a>
+: <a class="el" href="class_do_nothing.html#a921cf984d26cf9991de393a609719188">DoNothing</a>
+, <a class="el" href="class_drive_direction.html#a99b6a2623fab6087c309e6cbebb089b6">DriveDirection</a>
+, <a class="el" href="class_drive_distance.html#acbd6bfcdbecd3b81ddb9201d8025f0d6">DriveDistance</a>
+, <a class="el" href="class_drive_path.html#af815e61f6e8f1113bbb740ec13ce1cf7">DrivePath</a>
+, <a class="el" href="class_drive_time.html#a2cb7c304e83f109a7f35f719a5b95495">DriveTime</a>
+, <a class="el" href="class_hold_position.html#a33c4a23d63999bc25845e7dd0ef2fdab">HoldPosition</a>
 , <a class="el" href="class_i_primitive.html#a5b62801261f9bd974be04217bd86f668">IPrimitive</a>
-, <a class="el" href="class_stay_in_place.html#a18592a29b140af00aedd6a1075df4e41">StayInPlace</a>
+, <a class="el" href="class_reset_position.html#a25991199c7908b7b3fb48cc05cb8cc02">ResetPosition</a>
 , <a class="el" href="class_turn_angle.html#ad423fdd2e504132a5eda6edd997b3859">TurnAngle</a>
+, <a class="el" href="class_zero_wheels.html#aadbcc31bd2c889e6b30b413c12eccaaa">ZeroWheels</a>
 </li>
 <li>IsGreaterThan()
 : <a class="el" href="class_turn_angle.html#a78bb53adbfe948fa91fbf3a63614edc9">TurnAngle</a>

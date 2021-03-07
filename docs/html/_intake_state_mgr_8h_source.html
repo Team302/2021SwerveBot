@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/states/intake/IntakeStateMgr.h Source File</title>
+<title>Team 302 Swerve Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/states/intake/IntakeStateMgr.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -119,50 +119,52 @@ $(document).ready(function(){initNavTree('_intake_state_mgr_8h_source.html','');
 <div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56c">   33</a></span>&#160;        <span class="keyword">enum</span> <a class="code" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56c">INTAKE_STATE</a></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        {</div>
 <div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56ca8ebaf448652ce307bb0332e236495a99">   35</a></span>&#160;            <a class="code" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56ca8ebaf448652ce307bb0332e236495a99">OFF</a>,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <a class="code" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56caf6d21481875c74e75a8d895516b88649">ON</a></div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56caf6d21481875c74e75a8d895516b88649">   37</a></span>&#160;        };</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">static</span> <a class="code" href="class_intake_state_mgr.html">IntakeStateMgr</a>* <a class="code" href="class_intake_state_mgr.html#a9e8b03c92d18d2c115f8f352d63569fe">GetInstance</a>();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_intake_state_mgr.html#ac27ccde795f471c38f5ae0c123e1ada3">RunCurrentState</a>();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_intake_state_mgr.html#a1e25c496c344124e7a52b7bbdfa09f87">SetCurrentState</a></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        (</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <a class="code" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56c">INTAKE_STATE</a>    state,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordtype">bool</span>            run</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        );</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_intake_state_mgr.html#ab830ea475e60fca1e06fbff31a4c7980">   59</a></span>&#160;        <span class="keyword">inline</span> <a class="code" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56c">INTAKE_STATE</a> <a class="code" href="class_intake_state_mgr.html#ab830ea475e60fca1e06fbff31a4c7980">GetCurrentState</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_currentStateEnum; };</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56caf6d21481875c74e75a8d895516b88649">   36</a></span>&#160;            <a class="code" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56caf6d21481875c74e75a8d895516b88649">ON</a>,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <a class="code" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56ca820efa88b53ddab362a6f41b2b843e3a">MAX_INTAKE_STATES</a></div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56ca820efa88b53ddab362a6f41b2b843e3a">   38</a></span>&#160;        };</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">static</span> <a class="code" href="class_intake_state_mgr.html">IntakeStateMgr</a>* <a class="code" href="class_intake_state_mgr.html#a9e8b03c92d18d2c115f8f352d63569fe">GetInstance</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_intake_state_mgr.html#ac27ccde795f471c38f5ae0c123e1ada3">RunCurrentState</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_intake_state_mgr.html#a1e25c496c344124e7a52b7bbdfa09f87">SetCurrentState</a></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        (</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <a class="code" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56c">INTAKE_STATE</a>    state,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordtype">bool</span>            run</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        );</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="class_intake_state_mgr.html#ab830ea475e60fca1e06fbff31a4c7980">   61</a></span>&#160;        <span class="keyword">inline</span> <a class="code" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56c">INTAKE_STATE</a> <a class="code" href="class_intake_state_mgr.html#ab830ea475e60fca1e06fbff31a4c7980">GetCurrentState</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_currentStateEnum; };</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        std::vector&lt;IState*&gt; m_stateVector;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <a class="code" href="class_i_state.html">IState</a>* m_currentState;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <a class="code" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56c">INTAKE_STATE</a> m_currentStateEnum;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="class_intake_state_mgr.html">IntakeStateMgr</a>();</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        ~<a class="code" href="class_intake_state_mgr.html">IntakeStateMgr</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keyword">static</span> <a class="code" href="class_intake_state_mgr.html">IntakeStateMgr</a>*  m_instance;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        std::array&lt;IState*,MAX_INTAKE_STATES&gt; m_states;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="class_i_state.html">IState</a>* m_currentState;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56c">INTAKE_STATE</a> m_currentStateEnum;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="class_intake_state_mgr.html">IntakeStateMgr</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        ~<a class="code" href="class_intake_state_mgr.html">IntakeStateMgr</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">static</span> <a class="code" href="class_intake_state_mgr.html">IntakeStateMgr</a>*  m_instance;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_i_state_html"><div class="ttname"><a href="class_i_state.html">IState</a></div><div class="ttdoc">Interface for state classes.</div><div class="ttdef"><b>Definition:</b> <a href="_i_state_8h_source.html#l00021">IState.h:22</a></div></div>
-<div class="ttc" id="aclass_intake_state_mgr_html_ab830ea475e60fca1e06fbff31a4c7980"><div class="ttname"><a href="class_intake_state_mgr.html#ab830ea475e60fca1e06fbff31a4c7980">IntakeStateMgr::GetCurrentState</a></div><div class="ttdeci">INTAKE_STATE GetCurrentState() const</div><div class="ttdoc">return the current state</div><div class="ttdef"><b>Definition:</b> <a href="_intake_state_mgr_8h_source.html#l00059">IntakeStateMgr.h:59</a></div></div>
+<div class="ttc" id="aclass_intake_state_mgr_html_ab830ea475e60fca1e06fbff31a4c7980"><div class="ttname"><a href="class_intake_state_mgr.html#ab830ea475e60fca1e06fbff31a4c7980">IntakeStateMgr::GetCurrentState</a></div><div class="ttdeci">INTAKE_STATE GetCurrentState() const</div><div class="ttdoc">return the current state</div><div class="ttdef"><b>Definition:</b> <a href="_intake_state_mgr_8h_source.html#l00061">IntakeStateMgr.h:61</a></div></div>
 <div class="ttc" id="aclass_intake_state_mgr_html_aaa5d73e08f73a95dca5c6aaa1de6b56ca8ebaf448652ce307bb0332e236495a99"><div class="ttname"><a href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56ca8ebaf448652ce307bb0332e236495a99">IntakeStateMgr::OFF</a></div><div class="ttdeci">@ OFF</div><div class="ttdef"><b>Definition:</b> <a href="_intake_state_mgr_8h_source.html#l00035">IntakeStateMgr.h:35</a></div></div>
+<div class="ttc" id="aclass_intake_state_mgr_html_aaa5d73e08f73a95dca5c6aaa1de6b56ca820efa88b53ddab362a6f41b2b843e3a"><div class="ttname"><a href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56ca820efa88b53ddab362a6f41b2b843e3a">IntakeStateMgr::MAX_INTAKE_STATES</a></div><div class="ttdeci">@ MAX_INTAKE_STATES</div><div class="ttdef"><b>Definition:</b> <a href="_intake_state_mgr_8h_source.html#l00038">IntakeStateMgr.h:37</a></div></div>
 <div class="ttc" id="aclass_intake_state_mgr_html"><div class="ttname"><a href="class_intake_state_mgr.html">IntakeStateMgr</a></div><div class="ttdef"><b>Definition:</b> <a href="_intake_state_mgr_8h_source.html#l00029">IntakeStateMgr.h:30</a></div></div>
 <div class="ttc" id="aclass_intake_state_mgr_html_a9e8b03c92d18d2c115f8f352d63569fe"><div class="ttname"><a href="class_intake_state_mgr.html#a9e8b03c92d18d2c115f8f352d63569fe">IntakeStateMgr::GetInstance</a></div><div class="ttdeci">static IntakeStateMgr * GetInstance()</div><div class="ttdoc">Find or create the state manmanager.</div><div class="ttdef"><b>Definition:</b> <a href="_intake_state_mgr_8cpp_source.html#l00041">IntakeStateMgr.cpp:41</a></div></div>
 <div class="ttc" id="a_i_state_8h_html"><div class="ttname"><a href="_i_state_8h.html">IState.h</a></div></div>
-<div class="ttc" id="aclass_intake_state_mgr_html_a1e25c496c344124e7a52b7bbdfa09f87"><div class="ttname"><a href="class_intake_state_mgr.html#a1e25c496c344124e7a52b7bbdfa09f87">IntakeStateMgr::SetCurrentState</a></div><div class="ttdeci">void SetCurrentState(INTAKE_STATE state, bool run)</div><div class="ttdoc">set the current state, initialize it and run it</div><div class="ttdef"><b>Definition:</b> <a href="_intake_state_mgr_8cpp_source.html#l00146">IntakeStateMgr.cpp:147</a></div></div>
+<div class="ttc" id="aclass_intake_state_mgr_html_a1e25c496c344124e7a52b7bbdfa09f87"><div class="ttname"><a href="class_intake_state_mgr.html#a1e25c496c344124e7a52b7bbdfa09f87">IntakeStateMgr::SetCurrentState</a></div><div class="ttdeci">void SetCurrentState(INTAKE_STATE state, bool run)</div><div class="ttdoc">set the current state, initialize it and run it</div><div class="ttdef"><b>Definition:</b> <a href="_intake_state_mgr_8cpp_source.html#l00145">IntakeStateMgr.cpp:146</a></div></div>
 <div class="ttc" id="aclass_intake_state_mgr_html_aaa5d73e08f73a95dca5c6aaa1de6b56c"><div class="ttname"><a href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56c">IntakeStateMgr::INTAKE_STATE</a></div><div class="ttdeci">INTAKE_STATE</div><div class="ttdef"><b>Definition:</b> <a href="_intake_state_mgr_8h_source.html#l00033">IntakeStateMgr.h:34</a></div></div>
-<div class="ttc" id="aclass_intake_state_mgr_html_aaa5d73e08f73a95dca5c6aaa1de6b56caf6d21481875c74e75a8d895516b88649"><div class="ttname"><a href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56caf6d21481875c74e75a8d895516b88649">IntakeStateMgr::ON</a></div><div class="ttdeci">@ ON</div><div class="ttdef"><b>Definition:</b> <a href="_intake_state_mgr_8h_source.html#l00037">IntakeStateMgr.h:36</a></div></div>
-<div class="ttc" id="aclass_intake_state_mgr_html_ac27ccde795f471c38f5ae0c123e1ada3"><div class="ttname"><a href="class_intake_state_mgr.html#ac27ccde795f471c38f5ae0c123e1ada3">IntakeStateMgr::RunCurrentState</a></div><div class="ttdeci">void RunCurrentState()</div><div class="ttdoc">run the current state</div><div class="ttdef"><b>Definition:</b> <a href="_intake_state_mgr_8cpp_source.html#l00116">IntakeStateMgr.cpp:116</a></div></div>
+<div class="ttc" id="aclass_intake_state_mgr_html_aaa5d73e08f73a95dca5c6aaa1de6b56caf6d21481875c74e75a8d895516b88649"><div class="ttname"><a href="class_intake_state_mgr.html#aaa5d73e08f73a95dca5c6aaa1de6b56caf6d21481875c74e75a8d895516b88649">IntakeStateMgr::ON</a></div><div class="ttdeci">@ ON</div><div class="ttdef"><b>Definition:</b> <a href="_intake_state_mgr_8h_source.html#l00036">IntakeStateMgr.h:36</a></div></div>
+<div class="ttc" id="aclass_intake_state_mgr_html_ac27ccde795f471c38f5ae0c123e1ada3"><div class="ttname"><a href="class_intake_state_mgr.html#ac27ccde795f471c38f5ae0c123e1ada3">IntakeStateMgr::RunCurrentState</a></div><div class="ttdeci">void RunCurrentState()</div><div class="ttdoc">run the current state</div><div class="ttdef"><b>Definition:</b> <a href="_intake_state_mgr_8cpp_source.html#l00120">IntakeStateMgr.cpp:120</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_41c41181ce15b7c19c61d1bd081a9910.html">states</a></li><li class="navelem"><a class="el" href="dir_8d89e66864996d70384a16192416069a.html">intake</a></li><li class="navelem"><a class="el" href="_intake_state_mgr_8h.html">IntakeStateMgr.h</a></li>
+    <li class="navelem"><a class="el" href="dir_4a8796b0ba1d3dc122873832137fbe4e.html">GitRepos</a></li><li class="navelem"><a class="el" href="dir_1c47665bf58b31faa465c1927c1a00b8.html">2021SwerveBot</a></li><li class="navelem"><a class="el" href="dir_4c5ca149a7966e928c927d1b502f4c6f.html">src</a></li><li class="navelem"><a class="el" href="dir_6d6810671ff2e85cbf46bcf7f794863c.html">main</a></li><li class="navelem"><a class="el" href="dir_62e39780e9d5ee1b2eb3d29e32dcab01.html">cpp</a></li><li class="navelem"><a class="el" href="dir_6690ad191a400a686898d515d289d6e4.html">states</a></li><li class="navelem"><a class="el" href="dir_c95f039df5b2ede31ddd0558279ded23.html">intake</a></li><li class="navelem"><a class="el" href="_intake_state_mgr_8h.html">IntakeStateMgr.h</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

@@ -1,9 +1,12 @@
 var searchData=
 [
-  ['ballmanipulator_902',['BallManipulator',['../class_ball_manipulator.html',1,'']]],
-  ['balltransfer_903',['BallTransfer',['../class_ball_transfer.html',1,'']]],
-  ['balltransferstate_904',['BallTransferState',['../class_ball_transfer_state.html',1,'']]],
-  ['balltransferstatemgr_905',['BallTransferStateMgr',['../class_ball_transfer_state_mgr.html',1,'']]],
-  ['blinkindefn_906',['BlinkinDefn',['../class_blinkin_defn.html',1,'']]],
-  ['buttondecorator_907',['ButtonDecorator',['../class_button_decorator.html',1,'']]]
+  ['ballhopper_983',['BallHopper',['../class_ball_hopper.html',1,'']]],
+  ['ballhopperslowrelease_984',['BallHopperSlowRelease',['../class_ball_hopper_slow_release.html',1,'']]],
+  ['ballhopperstate_985',['BallHopperState',['../class_ball_hopper_state.html',1,'']]],
+  ['ballhopperstatemgr_986',['BallHopperStateMgr',['../class_ball_hopper_state_mgr.html',1,'']]],
+  ['balltransfer_987',['BallTransfer',['../class_ball_transfer.html',1,'']]],
+  ['balltransferstate_988',['BallTransferState',['../class_ball_transfer_state.html',1,'']]],
+  ['balltransferstatemgr_989',['BallTransferStateMgr',['../class_ball_transfer_state_mgr.html',1,'']]],
+  ['blinkindefn_990',['BlinkinDefn',['../class_blinkin_defn.html',1,'']]],
+  ['buttondecorator_991',['ButtonDecorator',['../class_button_decorator.html',1,'']]]
 ];

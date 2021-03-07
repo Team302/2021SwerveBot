@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/subsys/SwerveModule.cpp Source File</title>
+<title>Team 302 Swerve Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/subsys/SwerveModule.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -113,228 +113,379 @@ $(document).ready(function(){initNavTree('_swerve_module_8cpp_source.html',''); 
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;networktables/NetworkTable.h&gt;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;networktables/NetworkTableEntry.h&gt;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;units/angle.h&gt;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;wpi/math&gt;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// Team 302 includes</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_control_data_8h.html">controllers/ControlData.h</a>&gt;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_control_modes_8h.html">controllers/ControlModes.h</a>&gt;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_swerve_chassis_8h.html">subsys/SwerveChassis.h</a>&gt;</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_swerve_chassis_factory_8h.html">subsys/SwerveChassisFactory.h</a>&gt;</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_swerve_module_8h.html">subsys/SwerveModule.h</a>&gt;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_logger_8h.html">utils/Logger.h</a>&gt;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// Third Party Includes</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &lt;ctre/phoenix/motorcontrol/can/WPI_TalonFX.h&gt;</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &lt;ctre/phoenix/sensors/CANCoder.h&gt;</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacefrc.html">frc</a>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">using namespace </span>ctre::phoenix::motorcontrol::can;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacectre_1_1phoenix_1_1sensors.html">ctre::phoenix::sensors</a>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">using namespace </span>wpi::math;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_swerve_module.html#a2c519cdb2558ed28a5e38bb6a57d2515">   56</a></span>&#160;<a class="code" href="class_swerve_module.html#a2c519cdb2558ed28a5e38bb6a57d2515">SwerveModule::SwerveModule</a></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;(</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">ModuleID</a>                                                type, </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    shared_ptr&lt;IDragonMotorController&gt;                      driveMotor, </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    shared_ptr&lt;IDragonMotorController&gt;                      turnMotor, </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    std::shared_ptr&lt;ctre::phoenix::sensors::CANCoder&gt;       canCoder,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    units::length::inch_t                                   wheelDiameter</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;) : m_type(type), </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    m_driveMotor(driveMotor), </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    m_turnMotor(turnMotor), </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    m_turnSensor(canCoder), </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    m_wheelDiameter(wheelDiameter),</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    m_initialAngle(canCoder.get()-&gt;GetAbsolutePosition()),</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    m_initialCounts(0),</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    m_nt()</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="comment">// Set up the Drive Motor</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">auto</span> motor = m_driveMotor.get()-&gt;GetSpeedController();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">auto</span> fx = <span class="keyword">dynamic_cast&lt;</span>WPI_TalonFX*<span class="keyword">&gt;</span>(motor.get());</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    fx-&gt;ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor, 0, 10 );</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">// Set up the Absolute Turn Sensor</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    m_turnSensor.get()-&gt;ConfigAbsoluteSensorRange(AbsoluteSensorRange::Signed_PlusMinus180, 0);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    m_turnSensor.get()-&gt;GetAbsolutePosition();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="comment">// Set up the Turn Motor</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    motor = m_turnMotor.get()-&gt;GetSpeedController();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    fx = <span class="keyword">dynamic_cast&lt;</span>WPI_TalonFX*<span class="keyword">&gt;</span>(motor.get());</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">auto</span> sensors = fx-&gt;GetSensorCollection();</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    m_initialCounts = sensors.GetIntegratedSensorPosition();</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    fx-&gt;ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor, 0, 10 );</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">//    fx-&gt;ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor, 0, 10 );</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">//    fx-&gt;ConfigIntegratedSensorAbsoluteRange(ctre::phoenix::sensors::AbsoluteSensorRange::Signed_PlusMinus180 );</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">//    fx-&gt;ConfigRemoteFeedbackFilter(m_turnSensor.get()-&gt;GetDeviceNumber(), ctre::phoenix::motorcontrol::RemoteSensorSource::RemoteSensorSource_CANCoder, 0, 10 );</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">//    fx-&gt;ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::RemoteFeedbackDevice::RemoteSensor0, 0, 10 );</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;units/velocity.h&gt;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;wpi/math&gt;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// Team 302 includes</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_control_data_8h.html">controllers/ControlData.h</a>&gt;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_control_modes_8h.html">controllers/ControlModes.h</a>&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_swerve_chassis_8h.html">subsys/SwerveChassis.h</a>&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_swerve_chassis_factory_8h.html">subsys/SwerveChassisFactory.h</a>&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_swerve_module_8h.html">subsys/SwerveModule.h</a>&gt;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_logger_8h.html">utils/Logger.h</a>&gt;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// Third Party Includes</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &lt;ctre/phoenix/motorcontrol/can/WPI_TalonFX.h&gt;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &lt;ctre/phoenix/sensors/CANCoder.h&gt;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacefrc.html">frc</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacectre_1_1phoenix.html">ctre::phoenix</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">using namespace </span>ctre::phoenix::motorcontrol::can;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacectre_1_1phoenix_1_1sensors.html">ctre::phoenix::sensors</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">using namespace </span>wpi::math;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_swerve_module.html#ad6d3427d5ba2351a1d383405a1f5037e">   59</a></span>&#160;<a class="code" href="class_swerve_module.html#ad6d3427d5ba2351a1d383405a1f5037e">SwerveModule::SwerveModule</a></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;(</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">ModuleID</a>                                                    type, </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    shared_ptr&lt;IDragonMotorController&gt;                          driveMotor, </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    shared_ptr&lt;IDragonMotorController&gt;                          turnMotor, </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    std::shared_ptr&lt;ctre::phoenix::sensors::CANCoder&gt;           canCoder,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    units::length::inch_t                                       wheelDiameter,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">double</span>                                                      turnP,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">double</span>                                                      turnI,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">double</span>                                                      turnD,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">double</span>                                                      turnF,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">double</span>                                                      turnNominalVal,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">double</span>                                                      turnPeakVal,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">double</span>                                                      turnMaxAcc,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">double</span>                                                      turnCruiseVel</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;) : m_type(type), </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    m_driveMotor(driveMotor), </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    m_turnMotor(turnMotor), </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    m_turnSensor(canCoder), </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    m_wheelDiameter(wheelDiameter),</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    m_initialAngle(canCoder.get()-&gt;GetAbsolutePosition()),</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    m_initialCounts(0),</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    m_nt(),</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    m_currentState(),</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    m_maxVelocity(1_mps),</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    m_scale(0.25),</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    m_runClosedLoopDrive(false)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;{</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    Rotation2d ang { units::angle::degree_t(0.0)};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    m_currentState.angle = ang;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    m_currentState.speed = 0_mps;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="comment">// Set up the Drive Motor</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">auto</span> motor = m_driveMotor.get()-&gt;GetSpeedController();</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">auto</span> fx = <span class="keyword">dynamic_cast&lt;</span>WPI_TalonFX*<span class="keyword">&gt;</span>(motor.get());</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">string</span> ntName;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">switch</span> ( <a class="code" href="class_swerve_module.html#a4aa933adb396e8913e8e26dfc1e5ea01">GetType</a>() )</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">case</span> ModuleID::LEFT_FRONT:</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            ntName = <span class="stringliteral">&quot;LeftFrontSwerveModule&quot;</span>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">case</span> ModuleID::LEFT_BACK:</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            ntName = <span class="stringliteral">&quot;LeftBackSwerveModule&quot;</span>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordflow">case</span> ModuleID::RIGHT_FRONT:</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            ntName = <span class="stringliteral">&quot;RightFrontSwerveModule&quot;</span>;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordflow">case</span> ModuleID::RIGHT_BACK:</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            ntName = <span class="stringliteral">&quot;RightBackSwerveModule&quot;</span>;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( Logger::LOGGER_LEVEL::ERROR_ONCE, <span class="keywordtype">string</span>(<span class="stringliteral">&quot;SwerveModuleDrive&quot;</span>), <span class="keywordtype">string</span>(<span class="stringliteral">&quot;unknown module&quot;</span>));</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            ntName = <span class="stringliteral">&quot;UnknownSwerveModule&quot;</span>;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    m_nt = nt::NetworkTableInstance::GetDefault().GetTable(ntName);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="class_swerve_module.html#a352021a91784a69e20b68b68b4977fc2">  122</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_swerve_module.html#a352021a91784a69e20b68b68b4977fc2">SwerveModule::Init</a></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;(</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    units::velocity::meters_per_second_t                        maxVelocity,</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    units::angular_velocity::radians_per_second_t               maxAngularVelocity,</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    units::acceleration::meters_per_second_squared_t            maxAcceleration,</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    units::angular_acceleration::radians_per_second_squared_t   maxAngularAcceleration</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;)</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;{</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keyword">auto</span> driveCTL = make_unique&lt;ControlData&gt;( ControlModes::CONTROL_TYPE::VELOCITY_RPS,</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                                              ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                                              <span class="keywordtype">string</span>(<span class="stringliteral">&quot;DriveSpeed&quot;</span>),</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                                              0.01,</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                                              0.0,</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                                              0.0,</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                                              0.5,</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                                              0.0,</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                                              maxAcceleration.to&lt;<span class="keywordtype">double</span>&gt;(),</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                                              maxVelocity.to&lt;<span class="keywordtype">double</span>&gt;(),</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                                              maxVelocity.to&lt;<span class="keywordtype">double</span>&gt;(),</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                                              0.0 );</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    m_driveMotor.get()-&gt;SetControlConstants( driveCTL.get() );</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keyword">auto</span> turnCTL  = make_unique&lt;ControlData&gt;( ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE,</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                                              ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                                              <span class="keywordtype">string</span>(<span class="stringliteral">&quot;TurnProfile&quot;</span>),</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                                              0.1,</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                                              0.0,</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                                              0.0,</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                                              0.5,</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                                              0.0,</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                                              maxAngularAcceleration.to&lt;<span class="keywordtype">double</span>&gt;(),</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                                              maxAngularVelocity.to&lt;<span class="keywordtype">double</span>&gt;(),</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                                              maxAngularVelocity.to&lt;<span class="keywordtype">double</span>&gt;(),</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                                              0.0 );</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    m_turnMotor.get()-&gt;SetControlConstants( turnCTL.get() );</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;}</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="class_swerve_module.html#a83b4f8530f6bcbbc262fd65df43add9f">  175</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_swerve_module.html#a83b4f8530f6bcbbc262fd65df43add9f">SwerveModule::ZeroAlignModule</a>()</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;{</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;     m_turnMotor.get()-&gt;Set(m_nt, ConvertTargetAngleToCounts( 0.0 ));</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;}</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    fx-&gt;ConfigOpenloopRamp(0.4, 0);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    fx-&gt;ConfigClosedloopRamp(0.4, 0);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    fx-&gt;ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor, 0, 10 );</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    fx-&gt;ConfigIntegratedSensorInitializationStrategy(BootToZero);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">auto</span> driveMotorSensors = fx-&gt;GetSensorCollection();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    driveMotorSensors.SetIntegratedSensorPosition(0, 0);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="comment">// Set up the Absolute Turn Sensor</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    m_turnSensor.get()-&gt;ConfigAbsoluteSensorRange(AbsoluteSensorRange::Signed_PlusMinus180, 0);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    m_turnSensor.get()-&gt;GetAbsolutePosition();</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="comment">// Set up the Turn Motor</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    motor = m_turnMotor.get()-&gt;GetSpeedController();</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    fx = <span class="keyword">dynamic_cast&lt;</span>WPI_TalonFX*<span class="keyword">&gt;</span>(motor.get());</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    fx-&gt;ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor, 0, 10 );</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    fx-&gt;ConfigIntegratedSensorInitializationStrategy(BootToZero);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keyword">auto</span> turnMotorSensors = fx-&gt;GetSensorCollection();</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    turnMotorSensors.SetIntegratedSensorPosition(0, 0);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">auto</span> turnCData = make_shared&lt;ControlData&gt;(  ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE,</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                                                ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                                                std::string(<span class="stringliteral">&quot;Turn Angle&quot;</span>),</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                                                turnP,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                                                turnI,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                                                turnD,</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                                                turnF,</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                                                0.0,</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                                                turnMaxAcc,</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                                                turnCruiseVel,</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                                                turnPeakVal,</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                                                turnNominalVal);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    m_turnMotor.get()-&gt;SetControlConstants( 0, turnCData.get() );</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordtype">string</span> ntName;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordflow">switch</span> ( <a class="code" href="class_swerve_module.html#a4aa933adb396e8913e8e26dfc1e5ea01">GetType</a>() )</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordflow">case</span> ModuleID::LEFT_FRONT:</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            ntName = <span class="stringliteral">&quot;LeftFrontSwerveModule&quot;</span>;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <span class="keywordflow">case</span> ModuleID::LEFT_BACK:</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            ntName = <span class="stringliteral">&quot;LeftBackSwerveModule&quot;</span>;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordflow">case</span> ModuleID::RIGHT_FRONT:</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            ntName = <span class="stringliteral">&quot;RightFrontSwerveModule&quot;</span>;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="keywordflow">case</span> ModuleID::RIGHT_BACK:</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            ntName = <span class="stringliteral">&quot;RightBackSwerveModule&quot;</span>;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">LogError</a>( Logger::LOGGER_LEVEL::ERROR_ONCE, <span class="keywordtype">string</span>(<span class="stringliteral">&quot;SwerveModuleDrive&quot;</span>), <span class="keywordtype">string</span>(<span class="stringliteral">&quot;unknown module&quot;</span>));</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            ntName = <span class="stringliteral">&quot;UnknownSwerveModule&quot;</span>;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    }</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    m_nt = nt::NetworkTableInstance::GetDefault().GetTable(ntName);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;}</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="class_swerve_module.html#a352021a91784a69e20b68b68b4977fc2">  157</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_swerve_module.html#a352021a91784a69e20b68b68b4977fc2">SwerveModule::Init</a></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;(</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    units::velocity::meters_per_second_t                        maxVelocity,</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    units::angular_velocity::radians_per_second_t               maxAngularVelocity,</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    units::acceleration::meters_per_second_squared_t            maxAcceleration,</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    units::angular_acceleration::radians_per_second_squared_t   maxAngularAcceleration</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;)</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;{</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    m_maxVelocity = maxVelocity;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keyword">auto</span> driveCData = make_shared&lt;ControlData&gt;( ControlModes::CONTROL_TYPE::VELOCITY_RPS,</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                                                ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                                                std::string(<span class="stringliteral">&quot;DriveSpeed&quot;</span>),</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                                                0.01,  <span class="comment">// 0.01</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                                                0.0,</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                                                0.0,</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                                                0.5,  <span class="comment">// 0.5</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                                                0.0,</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                                                maxAcceleration.to&lt;<span class="keywordtype">double</span>&gt;(),</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                                                maxVelocity.to&lt;<span class="keywordtype">double</span>&gt;(),</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                                                maxVelocity.to&lt;<span class="keywordtype">double</span>&gt;(),</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                                                0.0 );</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    m_driveMotor.get()-&gt;SetControlConstants( 0, driveCData.get() );</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;}</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00183"></a><span class="lineno"><a class="line" href="class_swerve_module.html#a573bd5c53def321adc412e020d5e673d">  183</a></span>&#160;SwerveModuleState <a class="code" href="class_swerve_module.html#a573bd5c53def321adc412e020d5e673d">SwerveModule::GetState</a>()<span class="keyword"> const </span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="comment">// Get the Current Chassis Velocity</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keyword">auto</span> chassis = <a class="code" href="class_swerve_chassis_factory.html#ada029d75d8c93f13db42d44b5910c813">SwerveChassisFactory::GetSwerveChassisFactory</a>()-&gt;<a class="code" href="class_swerve_chassis_factory.html#a545f50e429b29380df4ecdb712ecd777">GetSwerveChassis</a>();</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    units::velocity::meters_per_second_t mps = units::length::meter_t(<a class="code" href="class_swerve_module.html#aff3fd7a6da70381d6d281cc4d154b7db">GetWheelDiameter</a>() * pi ) / units::angle::radian_t(1.0) * units::angular_velocity::radians_per_second_t(m_driveMotor-&gt;GetRPS()*2.0*pi);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="comment">// Get the Current Chassis Rotation</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    Rotation2d angle {units::angle::degree_t(m_turnSensor.get()-&gt;GetAbsolutePosition())};</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="comment">// Create the state and return it</span></div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    SwerveModuleState state{mps,angle};</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keywordflow">return</span> state;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;}</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
-<div class="line"><a name="l00201"></a><span class="lineno"><a class="line" href="class_swerve_module.html#a4872ebaaa09fb0b1727b574b3b96934a">  201</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_swerve_module.html#a4872ebaaa09fb0b1727b574b3b96934a">SwerveModule::SetDesiredState</a></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;(</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="keyword">const</span> SwerveModuleState&amp; referenceState</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;)</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;{</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="comment">// Update targets so the angle turned is less than 90 degrees</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="comment">// If the desired angle is less than 90 degrees from the target angle (e.g., -90 to 90 is the amount of turn), just use the angle and speed values</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="comment">// if it is more than 90 degrees (90 to 270), the can turn the opposite direction -- increase the angle by 180 degrees -- and negate the wheel speed</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="comment">// finally, get the value between -90 and 90</span></div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keyword">auto</span> state = SwerveModuleState::Optimize(referenceState, units::angle::degree_t(m_turnSensor.get()-&gt;GetAbsolutePosition()));</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="comment">// Set Drive Target </span></div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="comment">// convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keyword">auto</span> driveTarget = state.speed.to&lt;<span class="keywordtype">double</span>&gt;() /  units::length::meter_t(m_wheelDiameter).to&lt;<span class="keywordtype">double</span>&gt;() * wpi::math::pi;  </div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="comment">// Set Turn Target</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keyword">auto</span> turnTarget = state.angle.Degrees().to&lt;<span class="keywordtype">double</span>&gt;();  </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keyword">auto</span> targetCounts = ConvertTargetAngleToCounts( turnTarget );</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="comment">// Run the motors</span></div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    m_nt.get()-&gt;PutNumber( <span class="stringliteral">&quot;drive target&quot;</span>, driveTarget );</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    m_nt.get()-&gt;PutNumber( <span class="stringliteral">&quot;target counts&quot;</span>, targetCounts );</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    m_driveMotor.get()-&gt;Set(m_nt, driveTarget);</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    m_turnMotor.get()-&gt;Set(m_nt, targetCounts);</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="comment">//m_turnMotor.get()-&gt;Set(m_nt, turnTarget);</span></div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;}</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="keywordtype">double</span> SwerveModule::ConvertTargetAngleToCounts</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;(</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordtype">double</span> targetAngle</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;)</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;{</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    m_nt.get()-&gt;PutNumber( <span class="stringliteral">&quot;current angle&quot;</span>, m_turnSensor.get()-&gt;GetAbsolutePosition() );</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    m_nt.get()-&gt;PutNumber( <span class="stringliteral">&quot;target angle&quot;</span>, targetAngle );</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keyword">auto</span> deltaDegs = m_initialAngle - targetAngle;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="comment">//auto deltaCounts = deltaDegs * 8.5333 * 2048 / 360.0; </span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keyword">auto</span> deltaCounts = (deltaDegs / 360.0) * 2048; </div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keyword">auto</span> targetCounts = m_initialCounts + deltaCounts;</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    m_nt.get()-&gt;PutNumber( <span class="stringliteral">&quot;initial angle&quot;</span>, m_initialAngle );</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    m_nt.get()-&gt;PutNumber( <span class="stringliteral">&quot;delta degrees&quot;</span>, deltaDegs );</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    m_nt.get()-&gt;PutNumber( <span class="stringliteral">&quot;delta counts&quot;</span>, deltaCounts );</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    m_nt.get()-&gt;PutNumber( <span class="stringliteral">&quot;initial counts&quot;</span>, m_initialCounts );</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    m_nt.get()-&gt;PutNumber( <span class="stringliteral">&quot;target counts&quot;</span>, targetCounts );</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keywordflow">return</span> targetCounts;</div>
+<div class="line"><a name="l00183"></a><span class="lineno"><a class="line" href="class_swerve_module.html#a104ba1520704cfc70869aa95eca838f6">  183</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_swerve_module.html#a104ba1520704cfc70869aa95eca838f6">SwerveModule::SetEncodersToZero</a>()</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;{</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keyword">auto</span> motor = m_driveMotor.get()-&gt;GetSpeedController();</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keyword">auto</span> fx = <span class="keyword">dynamic_cast&lt;</span>WPI_TalonFX*<span class="keyword">&gt;</span>(motor.get());</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keyword">auto</span> driveMotorSensors = fx-&gt;GetSensorCollection();</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    driveMotorSensors.SetIntegratedSensorPosition(0, 0);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;} </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="class_swerve_module.html#a3d641dd7f7d3ef7ab2881b2a8e724055">  193</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="class_swerve_module.html#a3d641dd7f7d3ef7ab2881b2a8e724055">SwerveModule::GetEncoderValues</a>()</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;{</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keyword">auto</span> motor = m_driveMotor.get()-&gt;GetSpeedController();</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keyword">auto</span> fx = <span class="keyword">dynamic_cast&lt;</span>WPI_TalonFX*<span class="keyword">&gt;</span>(motor.get());</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keyword">auto</span> driveMotorSensors = fx-&gt;GetSensorCollection();</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordflow">return</span> driveMotorSensors.GetIntegratedSensorPosition();</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;}</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno"><a class="line" href="class_swerve_module.html#a83b4f8530f6bcbbc262fd65df43add9f">  203</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_swerve_module.html#a83b4f8530f6bcbbc262fd65df43add9f">SwerveModule::ZeroAlignModule</a>()</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;{</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="comment">// Desired State</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    SetTurnAngle(units::degree_t(0));</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;}</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
+<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="class_swerve_module.html#a573bd5c53def321adc412e020d5e673d">  212</a></span>&#160;SwerveModuleState <a class="code" href="class_swerve_module.html#a573bd5c53def321adc412e020d5e673d">SwerveModule::GetState</a>()<span class="keyword"> const </span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="comment">// Get the Module Drive Motor Speed</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keyword">auto</span> mpr = units::length::meter_t(<a class="code" href="class_swerve_module.html#aff3fd7a6da70381d6d281cc4d154b7db">GetWheelDiameter</a>() * pi );               </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="keyword">auto</span> mps = units::velocity::meters_per_second_t(mpr.to&lt;<span class="keywordtype">double</span>&gt;() * m_driveMotor.get()-&gt;GetRPS());</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="comment">// Get the Module Current Rotation Angle</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    Rotation2d angle {units::angle::degree_t(m_turnSensor.get()-&gt;GetAbsolutePosition())};</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="comment">// Create the state and return it</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    SwerveModuleState state{mps,angle};</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keywordflow">return</span> state;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;}</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00230"></a><span class="lineno"><a class="line" href="class_swerve_module.html#a4872ebaaa09fb0b1727b574b3b96934a">  230</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_swerve_module.html#a4872ebaaa09fb0b1727b574b3b96934a">SwerveModule::SetDesiredState</a></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;(</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keyword">const</span> SwerveModuleState&amp; targetState</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;)</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;{</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="comment">// Update targets so the angle turned is less than 90 degrees</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="comment">// If the desired angle is less than 90 degrees from the target angle (e.g., -90 to 90 is the amount of turn), just use the angle and speed values</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="comment">// if it is more than 90 degrees (90 to 270), the can turn the opposite direction -- increase the angle by 180 degrees -- and negate the wheel speed</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="comment">// finally, get the value between -90 and 90</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()-&gt;GetAbsolutePosition()));</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;   <span class="keyword">auto</span> optimizedState = Optimize(targetState, currAngle);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;   <span class="comment">// auto optimizedState = SwerveModuleState::Optimize(targetState, currAngle);</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;   <span class="comment">// auto optimizedState = targetState;</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="comment">// Set Turn Target </span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    SetTurnAngle(optimizedState.angle.Degrees());</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="comment">// Set Drive Target </span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    SetDriveSpeed(optimizedState.speed);</div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;}</div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">// Note:  the following was taken from the WPI code and tweaked because we were seeing some weird </span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">//        reversals that we believe was due to not using a tolerance</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;SwerveModuleState SwerveModule::Optimize</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;( </div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keyword">const</span> SwerveModuleState&amp; desiredState,</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    <span class="keyword">const</span> Rotation2d&amp; currentAngle</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;) </div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;{</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keyword">auto</span> delta = desiredState.angle - currentAngle;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(<span class="stringliteral">&quot;Optimize&quot;</span>, <span class="stringliteral">&quot;current&quot;</span>, currentAngle.Degrees().to&lt;<span class="keywordtype">double</span>&gt;());</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(<span class="stringliteral">&quot;Optimize&quot;</span>, <span class="stringliteral">&quot;target&quot;</span>, desiredState.angle.Degrees().to&lt;<span class="keywordtype">double</span>&gt;());</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(<span class="stringliteral">&quot;Optimize&quot;</span>, <span class="stringliteral">&quot;delta&quot;</span>, delta.Degrees().to&lt;<span class="keywordtype">double</span>&gt;());</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="comment">// make sure the delta is between -180.0 and 180.0</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keywordflow">if</span> (delta.Degrees() &lt; -180.0_deg)</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    {</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <span class="keywordflow">while</span> (delta.Degrees() &lt; -180.0_deg )</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        {</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;            delta.Degrees() = delta.Degrees() + 360.0_deg;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        }</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    }</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (delta.Degrees() &gt; 180.0_deg)</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    {</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        <span class="keywordflow">while</span> (delta.Degrees() &gt; 180.0_deg)</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        {</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;            delta.Degrees() = delta.Degrees() - 360.0_deg;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        }</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    }</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="comment">// if the delta is &gt; 90 degrees, rotate the </span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">//    if ((units::math::abs(delta.Degrees()) - 90_deg) &gt; 0.1_deg) </span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="keywordflow">if</span> ((units::math::abs(delta.Degrees()) - 160_deg) &gt; 0.1_deg) </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    {</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(<span class="stringliteral">&quot;Optimize&quot;</span>, <span class="stringliteral">&quot;optimized&quot;</span>, (desiredState.angle + Rotation2d{180_deg}).Degrees().to&lt;<span class="keywordtype">double</span>&gt;());</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="keywordflow">return</span> {-desiredState.speed, desiredState.angle + Rotation2d{180_deg}};</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    } </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="keywordflow">else</span> </div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    {</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(<span class="stringliteral">&quot;Optimize&quot;</span>, <span class="stringliteral">&quot;optimized&quot;</span>, desiredState.angle.Degrees().to&lt;<span class="keywordtype">double</span>&gt;());</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        <span class="keywordflow">return</span> {desiredState.speed, desiredState.angle};</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    }</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;}</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
+<div class="line"><a name="l00310"></a><span class="lineno"><a class="line" href="class_swerve_module.html#a50df5147c881967af63a249efe3918ed">  310</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_swerve_module.html#a50df5147c881967af63a249efe3918ed">SwerveModule::RunCurrentState</a>()</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;{</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    SetDriveSpeed(m_currentState.speed);</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    <span class="comment">//SetTurnAngle(m_currentState.angle.Degrees());</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keyword">auto</span> motor = m_turnMotor.get()-&gt;GetSpeedController();</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keyword">auto</span> fx = <span class="keyword">dynamic_cast&lt;</span>WPI_TalonFX*<span class="keyword">&gt;</span>(motor.get());</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    fx-&gt;StopMotor();  </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;}</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="keywordtype">void</span> SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;{</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="keywordflow">if</span> ( abs(speed.to&lt;<span class="keywordtype">double</span>&gt;()/m_maxVelocity.to&lt;<span class="keywordtype">double</span>&gt;()) &lt; 0.05 )</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    {</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        m_currentState.speed = 0_mps;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    }</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    {</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        m_currentState.speed = speed;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    }</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(m_nt, <span class="keywordtype">string</span>(<span class="stringliteral">&quot;State Speed - mps&quot;</span>), m_currentState.speed.to&lt;<span class="keywordtype">double</span>&gt;() );</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(m_nt, <span class="keywordtype">string</span>(<span class="stringliteral">&quot;Wheel Diameter - meters&quot;</span>), units::length::meter_t(m_wheelDiameter).to&lt;double&gt;() );</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordflow">if</span> (m_runClosedLoopDrive)</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    {</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        <span class="comment">// convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        <span class="keyword">auto</span> driveTarget = m_currentState.speed.to&lt;<span class="keywordtype">double</span>&gt;() / (units::length::meter_t(m_wheelDiameter).to&lt;<span class="keywordtype">double</span>&gt;() * wpi::math::pi);  </div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        driveTarget /= m_driveMotor.get()-&gt;GetGearRatio();</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        driveTarget *= m_scale;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(m_nt, <span class="keywordtype">string</span>(<span class="stringliteral">&quot;drive motor id&quot;</span>), m_driveMotor.get()-&gt;GetID() );</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(m_nt, <span class="keywordtype">string</span>(<span class="stringliteral">&quot;drive target&quot;</span>), driveTarget );</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(m_nt, <span class="keywordtype">string</span>(<span class="stringliteral">&quot;drive scale&quot;</span>), m_scale );</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        </div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        m_driveMotor.get()-&gt;SetControlMode(ControlModes::CONTROL_TYPE::VELOCITY_RPS);</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        m_driveMotor.get()-&gt;Set(m_nt, driveTarget);</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    }</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    {</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="keyword">auto</span> percent = m_currentState.speed / m_maxVelocity;</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        percent *= m_scale;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        m_driveMotor.get()-&gt;SetControlMode(ControlModes::CONTROL_TYPE::PERCENT_OUTPUT);</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        m_driveMotor.get()-&gt;Set(m_nt, percent);</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    }</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;}</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="keywordtype">void</span> SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;{</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    m_currentState.angle = targetAngle;</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()-&gt;GetAbsolutePosition()));</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    Rotation2d deltaAngle = targetAngle - currAngle.Degrees();</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(m_nt, <span class="keywordtype">string</span>(<span class="stringliteral">&quot;turn motor id&quot;</span>), m_turnMotor.get()-&gt;GetID() );</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(m_nt, <span class="keywordtype">string</span>(<span class="stringliteral">&quot;current angle&quot;</span>), currAngle.Degrees().to&lt;<span class="keywordtype">double</span>&gt;() );</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(m_nt, <span class="keywordtype">string</span>(<span class="stringliteral">&quot;target angle&quot;</span>), targetAngle.to&lt;<span class="keywordtype">double</span>&gt;() );</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(m_nt, <span class="keywordtype">string</span>(<span class="stringliteral">&quot;delta angle&quot;</span>), deltaAngle.Degrees().to&lt;<span class="keywordtype">double</span>&gt;() );</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;     </div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <span class="keywordflow">if</span> ( abs(deltaAngle.Degrees().to&lt;<span class="keywordtype">double</span>&gt;()) &gt; 1.0 )</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    {</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="keyword">auto</span> motor = m_turnMotor.get()-&gt;GetSpeedController();</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        <span class="keyword">auto</span> fx = <span class="keyword">dynamic_cast&lt;</span>WPI_TalonFX*<span class="keyword">&gt;</span>(motor.get());</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        <span class="keyword">auto</span> sensors = fx-&gt;GetSensorCollection();</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="comment">//=============================================================================</span></div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        <span class="comment">// 5592 counts on the falcon for 76.729 degree change on the CANCoder (wheel)</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        <span class="comment">//=============================================================================</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        <span class="keywordtype">double</span> deltaTicks = (deltaAngle.Degrees().to&lt;<span class="keywordtype">double</span>&gt;() * 5592 / 76.729); </div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        <span class="keywordtype">double</span> currentTicks = sensors.GetIntegratedSensorPosition();</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        <span class="keywordtype">double</span> desiredTicks = currentTicks + deltaTicks;</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; </div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(m_nt, <span class="keywordtype">string</span>(<span class="stringliteral">&quot;currentTicks&quot;</span>), currentTicks );</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(m_nt, <span class="keywordtype">string</span>(<span class="stringliteral">&quot;deltaTicks&quot;</span>), deltaTicks );</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        <a class="code" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a>()-&gt;<a class="code" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a>(m_nt, <span class="keywordtype">string</span>(<span class="stringliteral">&quot;desiredTicks&quot;</span>), desiredTicks );</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        m_turnMotor.get()-&gt;SetControlMode(ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE);</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;        m_turnMotor.get()-&gt;Set(m_nt, desiredTicks);</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    }</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    {</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        m_turnMotor.get()-&gt;SetControlMode(ControlModes::CONTROL_TYPE::PERCENT_OUTPUT);</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        m_turnMotor.get()-&gt;Set(m_nt, 0.0);</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    }</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160; </div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;}</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160; </div>
+<div class="line"><a name="l00394"></a><span class="lineno"><a class="line" href="class_swerve_module.html#afd4382362f6ff33eec8bfd6f95f31123">  394</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_swerve_module.html#afd4382362f6ff33eec8bfd6f95f31123">SwerveModule::StopMotors</a>()</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;{</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    m_turnMotor.get()-&gt;GetSpeedController()-&gt;StopMotor();</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    m_driveMotor.get()-&gt;GetSpeedController()-&gt;StopMotor();</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;}</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160; </div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160; </div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_swerve_module_html_a4aa933adb396e8913e8e26dfc1e5ea01"><div class="ttname"><a href="class_swerve_module.html#a4aa933adb396e8913e8e26dfc1e5ea01">SwerveModule::GetType</a></div><div class="ttdeci">ModuleID GetType()</div><div class="ttdoc">Return which module this is.</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8h_source.html#l00069">SwerveModule.h:69</a></div></div>
+<div class="ttc" id="aclass_swerve_module_html_afd4382362f6ff33eec8bfd6f95f31123"><div class="ttname"><a href="class_swerve_module.html#afd4382362f6ff33eec8bfd6f95f31123">SwerveModule::StopMotors</a></div><div class="ttdeci">void StopMotors()</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8cpp_source.html#l00394">SwerveModule.cpp:394</a></div></div>
+<div class="ttc" id="aclass_swerve_module_html_a4aa933adb396e8913e8e26dfc1e5ea01"><div class="ttname"><a href="class_swerve_module.html#a4aa933adb396e8913e8e26dfc1e5ea01">SwerveModule::GetType</a></div><div class="ttdeci">ModuleID GetType()</div><div class="ttdoc">Return which module this is.</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8h_source.html#l00111">SwerveModule.h:111</a></div></div>
 <div class="ttc" id="a_swerve_module_8h_html"><div class="ttname"><a href="_swerve_module_8h.html">SwerveModule.h</a></div></div>
-<div class="ttc" id="aclass_swerve_module_html_a2c519cdb2558ed28a5e38bb6a57d2515"><div class="ttname"><a href="class_swerve_module.html#a2c519cdb2558ed28a5e38bb6a57d2515">SwerveModule::SwerveModule</a></div><div class="ttdeci">SwerveModule(ModuleID type, std::shared_ptr&lt; IDragonMotorController &gt; driveMotor, std::shared_ptr&lt; IDragonMotorController &gt; turningMotor, std::shared_ptr&lt; ctre::phoenix::sensors::CANCoder &gt; canCoder, units::length::inch_t wheelDiameter)</div><div class="ttdoc">Constructs a Swerve Module. This is assuming 2 TalonFX (Falcons) with a CanCoder for the turn angle.</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8cpp_source.html#l00056">SwerveModule.cpp:57</a></div></div>
-<div class="ttc" id="aclass_swerve_module_html_a4872ebaaa09fb0b1727b574b3b96934a"><div class="ttname"><a href="class_swerve_module.html#a4872ebaaa09fb0b1727b574b3b96934a">SwerveModule::SetDesiredState</a></div><div class="ttdeci">void SetDesiredState(const frc::SwerveModuleState &amp;state)</div><div class="ttdoc">Set the current state of the module (speed of the wheel and angle of the wheel)</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8cpp_source.html#l00201">SwerveModule.cpp:202</a></div></div>
+<div class="ttc" id="aclass_swerve_module_html_a4872ebaaa09fb0b1727b574b3b96934a"><div class="ttname"><a href="class_swerve_module.html#a4872ebaaa09fb0b1727b574b3b96934a">SwerveModule::SetDesiredState</a></div><div class="ttdeci">void SetDesiredState(const frc::SwerveModuleState &amp;state)</div><div class="ttdoc">Set the current state of the module (speed of the wheel and angle of the wheel)</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8cpp_source.html#l00230">SwerveModule.cpp:231</a></div></div>
 <div class="ttc" id="a_control_data_8h_html"><div class="ttname"><a href="_control_data_8h.html">ControlData.h</a></div></div>
-<div class="ttc" id="aclass_swerve_module_html_a83b4f8530f6bcbbc262fd65df43add9f"><div class="ttname"><a href="class_swerve_module.html#a83b4f8530f6bcbbc262fd65df43add9f">SwerveModule::ZeroAlignModule</a></div><div class="ttdeci">void ZeroAlignModule()</div><div class="ttdoc">Turn all of the wheel to zero degrees yaw according to the pigeon.</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8cpp_source.html#l00175">SwerveModule.cpp:175</a></div></div>
-<div class="ttc" id="aclass_swerve_module_html_aff3fd7a6da70381d6d281cc4d154b7db"><div class="ttname"><a href="class_swerve_module.html#aff3fd7a6da70381d6d281cc4d154b7db">SwerveModule::GetWheelDiameter</a></div><div class="ttdeci">units::length::inch_t GetWheelDiameter() const</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8h_source.html#l00070">SwerveModule.h:70</a></div></div>
+<div class="ttc" id="aclass_logger_html_aa056353d680800bbbf0f5c5cc048c295"><div class="ttname"><a href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">Logger::ToNtTable</a></div><div class="ttdeci">void ToNtTable(const std::string &amp;ntName, const std::string &amp;identifier, const std::string &amp;string)</div><div class="ttdef"><b>Definition:</b> <a href="_logger_8cpp_source.html#l00162">Logger.cpp:163</a></div></div>
+<div class="ttc" id="anamespacectre_1_1phoenix_html"><div class="ttname"><a href="namespacectre_1_1phoenix.html">ctre::phoenix</a></div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8h_source.html#l00053">MechanismFactory.h:54</a></div></div>
+<div class="ttc" id="aclass_swerve_module_html_a83b4f8530f6bcbbc262fd65df43add9f"><div class="ttname"><a href="class_swerve_module.html#a83b4f8530f6bcbbc262fd65df43add9f">SwerveModule::ZeroAlignModule</a></div><div class="ttdeci">void ZeroAlignModule()</div><div class="ttdoc">Turn all of the wheel to zero degrees yaw according to the pigeon.</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8cpp_source.html#l00203">SwerveModule.cpp:203</a></div></div>
+<div class="ttc" id="aclass_swerve_module_html_aff3fd7a6da70381d6d281cc4d154b7db"><div class="ttname"><a href="class_swerve_module.html#aff3fd7a6da70381d6d281cc4d154b7db">SwerveModule::GetWheelDiameter</a></div><div class="ttdeci">units::length::inch_t GetWheelDiameter() const</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8h_source.html#l00112">SwerveModule.h:112</a></div></div>
 <div class="ttc" id="a_swerve_chassis_8h_html"><div class="ttname"><a href="_swerve_chassis_8h.html">SwerveChassis.h</a></div></div>
-<div class="ttc" id="aclass_swerve_chassis_factory_html_a545f50e429b29380df4ecdb712ecd777"><div class="ttname"><a href="class_swerve_chassis_factory.html#a545f50e429b29380df4ecdb712ecd777">SwerveChassisFactory::GetSwerveChassis</a></div><div class="ttdeci">std::shared_ptr&lt; SwerveChassis &gt; GetSwerveChassis()</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_chassis_factory_8h_source.html#l00087">SwerveChassisFactory.h:87</a></div></div>
+<div class="ttc" id="aclass_swerve_module_html_a3d641dd7f7d3ef7ab2881b2a8e724055"><div class="ttname"><a href="class_swerve_module.html#a3d641dd7f7d3ef7ab2881b2a8e724055">SwerveModule::GetEncoderValues</a></div><div class="ttdeci">double GetEncoderValues()</div><div class="ttdoc">Get the encoder values.</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8cpp_source.html#l00193">SwerveModule.cpp:193</a></div></div>
 <div class="ttc" id="a_logger_8h_html"><div class="ttname"><a href="_logger_8h.html">Logger.h</a></div></div>
 <div class="ttc" id="a_swerve_chassis_factory_8h_html"><div class="ttname"><a href="_swerve_chassis_factory_8h.html">SwerveChassisFactory.h</a></div></div>
-<div class="ttc" id="aclass_swerve_chassis_factory_html_ada029d75d8c93f13db42d44b5910c813"><div class="ttname"><a href="class_swerve_chassis_factory.html#ada029d75d8c93f13db42d44b5910c813">SwerveChassisFactory::GetSwerveChassisFactory</a></div><div class="ttdeci">static SwerveChassisFactory * GetSwerveChassisFactory()</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_chassis_factory_8cpp_source.html#l00044">SwerveChassisFactory.cpp:44</a></div></div>
+<div class="ttc" id="aclass_swerve_module_html_a50df5147c881967af63a249efe3918ed"><div class="ttname"><a href="class_swerve_module.html#a50df5147c881967af63a249efe3918ed">SwerveModule::RunCurrentState</a></div><div class="ttdeci">void RunCurrentState()</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8cpp_source.html#l00310">SwerveModule.cpp:310</a></div></div>
 <div class="ttc" id="aclass_logger_html_a98d7aec19dcdfb9d8faa46d83d927883"><div class="ttname"><a href="class_logger.html#a98d7aec19dcdfb9d8faa46d83d927883">Logger::LogError</a></div><div class="ttdeci">void LogError(const std::string &amp;locationIdentifier, const std::string &amp;message)</div><div class="ttdoc">log a message</div></div>
-<div class="ttc" id="aclass_swerve_module_html_a63f05945d3858366ee0382523df173f3"><div class="ttname"><a href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">SwerveModule::ModuleID</a></div><div class="ttdeci">ModuleID</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8h_source.html#l00025">SwerveModule.h:26</a></div></div>
-<div class="ttc" id="aclass_logger_html_ae85cfbef8b7e6940475a5012fa1935c6"><div class="ttname"><a href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a></div><div class="ttdeci">static Logger * GetLogger()</div><div class="ttdoc">Find or create the singleton logger.</div><div class="ttdef"><b>Definition:</b> <a href="_logger_8cpp_source.html#l00049">Logger.cpp:49</a></div></div>
-<div class="ttc" id="aclass_swerve_module_html_a573bd5c53def321adc412e020d5e673d"><div class="ttname"><a href="class_swerve_module.html#a573bd5c53def321adc412e020d5e673d">SwerveModule::GetState</a></div><div class="ttdeci">frc::SwerveModuleState GetState() const</div><div class="ttdoc">Get the current state of the module (speed of the wheel and angle of the wheel)</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8cpp_source.html#l00183">SwerveModule.cpp:183</a></div></div>
-<div class="ttc" id="aclass_swerve_module_html_a352021a91784a69e20b68b68b4977fc2"><div class="ttname"><a href="class_swerve_module.html#a352021a91784a69e20b68b68b4977fc2">SwerveModule::Init</a></div><div class="ttdeci">void Init(units::velocity::meters_per_second_t maxVelocity, units::angular_velocity::radians_per_second_t maxAngularVelocity, units::acceleration::meters_per_second_squared_t maxAcceleration, units::angular_acceleration::radians_per_second_squared_t maxAngularAcceleration)</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8cpp_source.html#l00122">SwerveModule.cpp:123</a></div></div>
-<div class="ttc" id="anamespacefrc_html"><div class="ttname"><a href="namespacefrc.html">frc</a></div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8h_source.html#l00038">DrivePath.h:39</a></div></div>
-<div class="ttc" id="anamespacectre_1_1phoenix_1_1sensors_html"><div class="ttname"><a href="namespacectre_1_1phoenix_1_1sensors.html">ctre::phoenix::sensors</a></div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8h_source.html#l00052">MechanismFactory.h:53</a></div></div>
+<div class="ttc" id="aclass_swerve_module_html_a63f05945d3858366ee0382523df173f3"><div class="ttname"><a href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">SwerveModule::ModuleID</a></div><div class="ttdeci">ModuleID</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8h_source.html#l00049">SwerveModule.h:50</a></div></div>
+<div class="ttc" id="aclass_logger_html_ae85cfbef8b7e6940475a5012fa1935c6"><div class="ttname"><a href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6">Logger::GetLogger</a></div><div class="ttdeci">static Logger * GetLogger()</div><div class="ttdoc">Find or create the singleton logger.</div><div class="ttdef"><b>Definition:</b> <a href="_logger_8cpp_source.html#l00052">Logger.cpp:52</a></div></div>
+<div class="ttc" id="aclass_swerve_module_html_ad6d3427d5ba2351a1d383405a1f5037e"><div class="ttname"><a href="class_swerve_module.html#ad6d3427d5ba2351a1d383405a1f5037e">SwerveModule::SwerveModule</a></div><div class="ttdeci">SwerveModule(ModuleID type, std::shared_ptr&lt; IDragonMotorController &gt; driveMotor, std::shared_ptr&lt; IDragonMotorController &gt; turningMotor, std::shared_ptr&lt; ctre::phoenix::sensors::CANCoder &gt; canCoder, units::length::inch_t wheelDiameter, double turnP, double turnI, double turnD, double turnF, double turnNominalPos, double turnNominalNeg, double turnMaxAcc, double turnCruiseVel)</div><div class="ttdoc">Constructs a Swerve Module. This is assuming 2 TalonFX (Falcons) with a CanCoder for the turn angle.</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8cpp_source.html#l00059">SwerveModule.cpp:60</a></div></div>
+<div class="ttc" id="aclass_swerve_module_html_a573bd5c53def321adc412e020d5e673d"><div class="ttname"><a href="class_swerve_module.html#a573bd5c53def321adc412e020d5e673d">SwerveModule::GetState</a></div><div class="ttdeci">frc::SwerveModuleState GetState() const</div><div class="ttdoc">Get the current state of the module (speed of the wheel and angle of the wheel)</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8cpp_source.html#l00212">SwerveModule.cpp:212</a></div></div>
+<div class="ttc" id="aclass_swerve_module_html_a352021a91784a69e20b68b68b4977fc2"><div class="ttname"><a href="class_swerve_module.html#a352021a91784a69e20b68b68b4977fc2">SwerveModule::Init</a></div><div class="ttdeci">void Init(units::velocity::meters_per_second_t maxVelocity, units::angular_velocity::radians_per_second_t maxAngularVelocity, units::acceleration::meters_per_second_squared_t maxAcceleration, units::angular_acceleration::radians_per_second_squared_t maxAngularAcceleration)</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8cpp_source.html#l00157">SwerveModule.cpp:158</a></div></div>
+<div class="ttc" id="anamespacefrc_html"><div class="ttname"><a href="namespacefrc.html">frc</a></div><div class="ttdef"><b>Definition:</b> <a href="_do_nothing_8h_source.html#l00033">DoNothing.h:34</a></div></div>
+<div class="ttc" id="aclass_swerve_module_html_a104ba1520704cfc70869aa95eca838f6"><div class="ttname"><a href="class_swerve_module.html#a104ba1520704cfc70869aa95eca838f6">SwerveModule::SetEncodersToZero</a></div><div class="ttdeci">void SetEncodersToZero()</div><div class="ttdoc">Set all motor encoders to zero.</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_module_8cpp_source.html#l00183">SwerveModule.cpp:183</a></div></div>
+<div class="ttc" id="anamespacectre_1_1phoenix_1_1sensors_html"><div class="ttname"><a href="namespacectre_1_1phoenix_1_1sensors.html">ctre::phoenix::sensors</a></div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8h_source.html#l00055">MechanismFactory.h:56</a></div></div>
 <div class="ttc" id="a_control_modes_8h_html"><div class="ttname"><a href="_control_modes_8h.html">ControlModes.h</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_ac84794d7bd2f341951dcef92c7613df.html">subsys</a></li><li class="navelem"><a class="el" href="_swerve_module_8cpp.html">SwerveModule.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_4a8796b0ba1d3dc122873832137fbe4e.html">GitRepos</a></li><li class="navelem"><a class="el" href="dir_1c47665bf58b31faa465c1927c1a00b8.html">2021SwerveBot</a></li><li class="navelem"><a class="el" href="dir_4c5ca149a7966e928c927d1b502f4c6f.html">src</a></li><li class="navelem"><a class="el" href="dir_6d6810671ff2e85cbf46bcf7f794863c.html">main</a></li><li class="navelem"><a class="el" href="dir_62e39780e9d5ee1b2eb3d29e32dcab01.html">cpp</a></li><li class="navelem"><a class="el" href="dir_f06fce08f279d4ac2e1d8ad0e7d85859.html">subsys</a></li><li class="navelem"><a class="el" href="_swerve_module_8cpp.html">SwerveModule.cpp</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

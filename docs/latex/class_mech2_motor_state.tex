@@ -18,7 +18,7 @@ Inheritance diagram for Mech2\+Motor\+State\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_mech2_motor_state_a54b18f34138a406196ae861acc1bf0ca}{Mech2\+Motor\+State}} (\mbox{\hyperlink{class_i_mech2_ind_motors}{I\+Mech2\+Ind\+Motors}} $\ast$mechanism, \mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$control, double primary\+Target, double secondary\+Target)
+\mbox{\hyperlink{class_mech2_motor_state_ab7bdb26aed2ec1f6c797eb50fc599825}{Mech2\+Motor\+State}} (\mbox{\hyperlink{class_i_mech2_ind_motors}{I\+Mech2\+Ind\+Motors}} $\ast$mechanism, \mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$control, \mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$control2, double primary\+Target, double secondary\+Target)
 \item 
 \mbox{\hyperlink{class_mech2_motor_state_a40bc3064af9b0410bd17e5701585747a}{Mech2\+Motor\+State}} ()=delete
 \item 
@@ -29,6 +29,14 @@ void \mbox{\hyperlink{class_mech2_motor_state_a430785c96c31d43bd1479497a32dc6d5}
 void \mbox{\hyperlink{class_mech2_motor_state_af5f910af18c1b36f2e301b6c6bebd88a}{Run}} () override
 \item 
 bool \mbox{\hyperlink{class_mech2_motor_state_a6cda4b518f7af0761cf119fbe3b4459d}{At\+Target}} () const override
+\item 
+double \mbox{\hyperlink{class_mech2_motor_state_a3fa1128cbed902ccedde13b27b99a7db}{Get\+Primary\+Target}} () const
+\item 
+double \mbox{\hyperlink{class_mech2_motor_state_ac6a0abdf23ebf31bd8c32070d1daf369}{Get\+Secondary\+Target}} () const
+\item 
+double \mbox{\hyperlink{class_mech2_motor_state_a91742b31f260870a2b58af2f2eb43d5c}{Get\+Primary\+R\+PS}} () const
+\item 
+double \mbox{\hyperlink{class_mech2_motor_state_ae6a5dd330fca29caf4cd4417656394ea}{Get\+Secondary\+R\+PS}} () const
 \end{DoxyCompactItemize}
 
 
@@ -48,15 +56,15 @@ Definition at line 24 of file Mech2\+Motor\+State.\+h.
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_mech2_motor_state_a54b18f34138a406196ae861acc1bf0ca}\label{class_mech2_motor_state_a54b18f34138a406196ae861acc1bf0ca}} 
+\mbox{\Hypertarget{class_mech2_motor_state_ab7bdb26aed2ec1f6c797eb50fc599825}\label{class_mech2_motor_state_ab7bdb26aed2ec1f6c797eb50fc599825}} 
 \index{Mech2MotorState@{Mech2MotorState}!Mech2MotorState@{Mech2MotorState}}
 \index{Mech2MotorState@{Mech2MotorState}!Mech2MotorState@{Mech2MotorState}}
 \doxysubsubsection{\texorpdfstring{Mech2MotorState()}{Mech2MotorState()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily Mech2\+Motor\+State\+::\+Mech2\+Motor\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_i_mech2_ind_motors}{I\+Mech2\+Ind\+Motors}} $\ast$}]{mechanism,  }\item[{\mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$}]{control,  }\item[{double}]{primary\+Target,  }\item[{double}]{secondary\+Target }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Mech2\+Motor\+State\+::\+Mech2\+Motor\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_i_mech2_ind_motors}{I\+Mech2\+Ind\+Motors}} $\ast$}]{mechanism,  }\item[{\mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$}]{control,  }\item[{\mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$}]{control2,  }\item[{double}]{primary\+Target,  }\item[{double}]{secondary\+Target }\end{DoxyParamCaption})}
 
 
 
-Definition at line 38 of file Mech2\+Motor\+State.\+cpp.
+Definition at line 39 of file Mech2\+Motor\+State.\+cpp.
 
 \mbox{\Hypertarget{class_mech2_motor_state_a40bc3064af9b0410bd17e5701585747a}\label{class_mech2_motor_state_a40bc3064af9b0410bd17e5701585747a}} 
 \index{Mech2MotorState@{Mech2MotorState}!Mech2MotorState@{Mech2MotorState}}
@@ -85,7 +93,47 @@ Implements \mbox{\hyperlink{class_i_state_a15624686c47f28cf90f76bb28e938937}{I\+
 
 
 
-Definition at line 136 of file Mech2\+Motor\+State.\+cpp.
+Definition at line 158 of file Mech2\+Motor\+State.\+cpp.
+
+\mbox{\Hypertarget{class_mech2_motor_state_a91742b31f260870a2b58af2f2eb43d5c}\label{class_mech2_motor_state_a91742b31f260870a2b58af2f2eb43d5c}} 
+\index{Mech2MotorState@{Mech2MotorState}!GetPrimaryRPS@{GetPrimaryRPS}}
+\index{GetPrimaryRPS@{GetPrimaryRPS}!Mech2MotorState@{Mech2MotorState}}
+\doxysubsubsection{\texorpdfstring{GetPrimaryRPS()}{GetPrimaryRPS()}}
+{\footnotesize\ttfamily double Mech2\+Motor\+State\+::\+Get\+Primary\+R\+PS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 44 of file Mech2\+Motor\+State.\+h.
+
+\mbox{\Hypertarget{class_mech2_motor_state_a3fa1128cbed902ccedde13b27b99a7db}\label{class_mech2_motor_state_a3fa1128cbed902ccedde13b27b99a7db}} 
+\index{Mech2MotorState@{Mech2MotorState}!GetPrimaryTarget@{GetPrimaryTarget}}
+\index{GetPrimaryTarget@{GetPrimaryTarget}!Mech2MotorState@{Mech2MotorState}}
+\doxysubsubsection{\texorpdfstring{GetPrimaryTarget()}{GetPrimaryTarget()}}
+{\footnotesize\ttfamily double Mech2\+Motor\+State\+::\+Get\+Primary\+Target (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 42 of file Mech2\+Motor\+State.\+h.
+
+\mbox{\Hypertarget{class_mech2_motor_state_ae6a5dd330fca29caf4cd4417656394ea}\label{class_mech2_motor_state_ae6a5dd330fca29caf4cd4417656394ea}} 
+\index{Mech2MotorState@{Mech2MotorState}!GetSecondaryRPS@{GetSecondaryRPS}}
+\index{GetSecondaryRPS@{GetSecondaryRPS}!Mech2MotorState@{Mech2MotorState}}
+\doxysubsubsection{\texorpdfstring{GetSecondaryRPS()}{GetSecondaryRPS()}}
+{\footnotesize\ttfamily double Mech2\+Motor\+State\+::\+Get\+Secondary\+R\+PS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 45 of file Mech2\+Motor\+State.\+h.
+
+\mbox{\Hypertarget{class_mech2_motor_state_ac6a0abdf23ebf31bd8c32070d1daf369}\label{class_mech2_motor_state_ac6a0abdf23ebf31bd8c32070d1daf369}} 
+\index{Mech2MotorState@{Mech2MotorState}!GetSecondaryTarget@{GetSecondaryTarget}}
+\index{GetSecondaryTarget@{GetSecondaryTarget}!Mech2MotorState@{Mech2MotorState}}
+\doxysubsubsection{\texorpdfstring{GetSecondaryTarget()}{GetSecondaryTarget()}}
+{\footnotesize\ttfamily double Mech2\+Motor\+State\+::\+Get\+Secondary\+Target (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 43 of file Mech2\+Motor\+State.\+h.
 
 \mbox{\Hypertarget{class_mech2_motor_state_a430785c96c31d43bd1479497a32dc6d5}\label{class_mech2_motor_state_a430785c96c31d43bd1479497a32dc6d5}} 
 \index{Mech2MotorState@{Mech2MotorState}!Init@{Init}}
@@ -99,7 +147,7 @@ Implements \mbox{\hyperlink{class_i_state_ac1400e68fde2f088873f5ec283309977}{I\+
 
 
 
-Definition at line 118 of file Mech2\+Motor\+State.\+cpp.
+Definition at line 134 of file Mech2\+Motor\+State.\+cpp.
 
 \mbox{\Hypertarget{class_mech2_motor_state_af5f910af18c1b36f2e301b6c6bebd88a}\label{class_mech2_motor_state_af5f910af18c1b36f2e301b6c6bebd88a}} 
 \index{Mech2MotorState@{Mech2MotorState}!Run@{Run}}
@@ -113,7 +161,7 @@ Implements \mbox{\hyperlink{class_i_state_a1dc31736da7d9e9322c1cc417672ea0f}{I\+
 
 
 
-Definition at line 128 of file Mech2\+Motor\+State.\+cpp.
+Definition at line 145 of file Mech2\+Motor\+State.\+cpp.
 
 
 

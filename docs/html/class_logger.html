@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: Logger Class Reference</title>
+<title>Team 302 Swerve Robot: Logger Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -137,6 +137,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aca97721e0531390ab459dafe49697cee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logger.html#aca97721e0531390ab459dafe49697cee">OnDash</a> (const std::string &amp;locationIdentifier, bool value)</td></tr>
 <tr class="memdesc:aca97721e0531390ab459dafe49697cee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a message to the dashboard.  <a href="class_logger.html#aca97721e0531390ab459dafe49697cee">More...</a><br /></td></tr>
 <tr class="separator:aca97721e0531390ab459dafe49697cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa056353d680800bbbf0f5c5cc048c295"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logger.html#aa056353d680800bbbf0f5c5cc048c295">ToNtTable</a> (const std::string &amp;ntName, const std::string &amp;identifier, const std::string &amp;string)</td></tr>
+<tr class="separator:aa056353d680800bbbf0f5c5cc048c295"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeebfaac040e298c60fb95ebfbc3de1b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logger.html#aeebfaac040e298c60fb95ebfbc3de1b0">ToNtTable</a> (const std::string &amp;ntName, const std::string &amp;identifier, double value)</td></tr>
+<tr class="separator:aeebfaac040e298c60fb95ebfbc3de1b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9866b90b836c4e42a3c90c97464b2463"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logger.html#a9866b90b836c4e42a3c90c97464b2463">ToNtTable</a> (std::shared_ptr&lt; nt::NetworkTable &gt; ntable, const std::string &amp;identifier, const std::string &amp;msg)</td></tr>
+<tr class="separator:a9866b90b836c4e42a3c90c97464b2463"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acca0574ba6d6fdd424b60804837fc194"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logger.html#acca0574ba6d6fdd424b60804837fc194">ToNtTable</a> (std::shared_ptr&lt; nt::NetworkTable &gt; ntable, const std::string &amp;identifier, double value)</td></tr>
+<tr class="separator:acca0574ba6d6fdd424b60804837fc194"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -148,7 +156,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="textblock"><p><a class="el" href="_logger_8h.html">Logger.h</a>. </p>
 <p>File Description: This logs error messages </p>
 
-<p class="definition">Definition at line <a class="el" href="_logger_8h_source.html#l00041">41</a> of file <a class="el" href="_logger_8h_source.html">Logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8h_source.html#l00044">44</a> of file <a class="el" href="_logger_8h_source.html">Logger.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a0cf36c17e25416ff106ff069f2518822"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0cf36c17e25416ff106ff069f2518822">&#9670;&nbsp;</a></span>LOGGER_LEVEL</h2>
@@ -178,7 +186,7 @@ Static Public Member Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_logger_8h_source.html#l00056">56</a> of file <a class="el" href="_logger_8h_source.html">Logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8h_source.html#l00059">59</a> of file <a class="el" href="_logger_8h_source.html">Logger.h</a>.</p>
 
 </div>
 </div>
@@ -204,7 +212,7 @@ Static Public Member Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_logger_8h_source.html#l00047">47</a> of file <a class="el" href="_logger_8h_source.html">Logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8h_source.html#l00050">50</a> of file <a class="el" href="_logger_8h_source.html">Logger.h</a>.</p>
 
 </div>
 </div>
@@ -235,7 +243,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Find or create the singleton logger. </p>
 <dl class="section return"><dt>Returns</dt><dd>Logger* pointer to the logger </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_logger_8cpp_source.html#l00049">49</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8cpp_source.html#l00052">52</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -418,7 +426,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_logger_8cpp_source.html#l00070">70</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8cpp_source.html#l00073">73</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -446,7 +454,151 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_logger_8cpp_source.html#l00060">60</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8cpp_source.html#l00063">63</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa056353d680800bbbf0f5c5cc048c295"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa056353d680800bbbf0f5c5cc048c295">&#9670;&nbsp;</a></span>ToNtTable() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logger::ToNtTable </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ntName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>identifier</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>string</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_logger_8cpp_source.html#l00162">162</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aeebfaac040e298c60fb95ebfbc3de1b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeebfaac040e298c60fb95ebfbc3de1b0">&#9670;&nbsp;</a></span>ToNtTable() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logger::ToNtTable </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ntName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>identifier</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_logger_8cpp_source.html#l00173">173</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9866b90b836c4e42a3c90c97464b2463"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9866b90b836c4e42a3c90c97464b2463">&#9670;&nbsp;</a></span>ToNtTable() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logger::ToNtTable </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; nt::NetworkTable &gt;&#160;</td>
+          <td class="paramname"><em>ntable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>identifier</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>msg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_logger_8cpp_source.html#l00184">184</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
+
+</div>
+</div>
+<a id="acca0574ba6d6fdd424b60804837fc194"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acca0574ba6d6fdd424b60804837fc194">&#9670;&nbsp;</a></span>ToNtTable() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Logger::ToNtTable </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; nt::NetworkTable &gt;&#160;</td>
+          <td class="paramname"><em>ntable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>identifier</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_logger_8cpp_source.html#l00194">194</a> of file <a class="el" href="_logger_8cpp_source.html">Logger.cpp</a>.</p>
 
 </div>
 </div>

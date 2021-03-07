@@ -7,7 +7,7 @@
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_primitive_params_ade81b5fcb5f42f73a9c15d7e0bf55ba9}{Primitive\+Params}} (\mbox{\hyperlink{_primitive_enums_8h_a35fa04dbcd6e8ebd76550c9b14ade0dc}{P\+R\+I\+M\+I\+T\+I\+V\+E\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}} id, float time, float distance, float x\+Loc, float y\+Loc, float heading, float start\+Drive\+Speed, float end\+Drive\+Speed, \mbox{\hyperlink{class_ball_manipulator_a91bf71119c5fecb46b41a90485f7a9a4}{Ball\+Manipulator\+::\+B\+A\+L\+L\+\_\+\+M\+A\+N\+I\+P\+U\+L\+A\+T\+O\+R\+\_\+\+S\+T\+A\+TE}} ball\+State, float turret\+Angle, std\+::string path\+Name)
+\mbox{\hyperlink{class_primitive_params_a330a5824e234615f29cc3bc904694ec1}{Primitive\+Params}} (\mbox{\hyperlink{_primitive_enums_8h_a35fa04dbcd6e8ebd76550c9b14ade0dc}{P\+R\+I\+M\+I\+T\+I\+V\+E\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}} id, float time, float distance, float x\+Loc, float y\+Loc, float heading, float start\+Drive\+Speed, float end\+Drive\+Speed, bool run\+Intake, std\+::string path\+Name)
 \item 
 \mbox{\hyperlink{class_primitive_params_a294ec4f5898cdd78b4e23bdf0a9e78e3}{Primitive\+Params}} ()=delete
 \item 
@@ -29,9 +29,7 @@ float \mbox{\hyperlink{class_primitive_params_aef9f99610cc71c25d4844d731cc8c6a2}
 \item 
 float \mbox{\hyperlink{class_primitive_params_a9b452487c360f320951b178a23300fe2}{Get\+End\+Drive\+Speed}} () const
 \item 
-\mbox{\hyperlink{class_ball_manipulator_a91bf71119c5fecb46b41a90485f7a9a4}{Ball\+Manipulator\+::\+B\+A\+L\+L\+\_\+\+M\+A\+N\+I\+P\+U\+L\+A\+T\+O\+R\+\_\+\+S\+T\+A\+TE}} \mbox{\hyperlink{class_primitive_params_acae304c2aa2134285d7feca227e799bc}{Get\+Ball\+State}} () const
-\item 
-float \mbox{\hyperlink{class_primitive_params_a956f05573b6157c4418eb9bafa86470e}{Get\+Turret\+Angle}} () const
+bool \mbox{\hyperlink{class_primitive_params_a2778ce15f7ca0bb45591ef1133a944d9}{Get\+Intake\+State}} () const
 \item 
 std\+::string \mbox{\hyperlink{class_primitive_params_ac3a50b019a206836725bdd496aaac3da}{Get\+Path\+Name}} () const
 \item 
@@ -42,20 +40,20 @@ void \mbox{\hyperlink{class_primitive_params_a9338f36c76fd412ec8d05dcfc300b18d}{
 \doxysubsection{Detailed Description}
 
 
-Definition at line 21 of file Primitive\+Params.\+h.
+Definition at line 34 of file Primitive\+Params.\+h.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_primitive_params_ade81b5fcb5f42f73a9c15d7e0bf55ba9}\label{class_primitive_params_ade81b5fcb5f42f73a9c15d7e0bf55ba9}} 
+\mbox{\Hypertarget{class_primitive_params_a330a5824e234615f29cc3bc904694ec1}\label{class_primitive_params_a330a5824e234615f29cc3bc904694ec1}} 
 \index{PrimitiveParams@{PrimitiveParams}!PrimitiveParams@{PrimitiveParams}}
 \index{PrimitiveParams@{PrimitiveParams}!PrimitiveParams@{PrimitiveParams}}
 \doxysubsubsection{\texorpdfstring{PrimitiveParams()}{PrimitiveParams()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily Primitive\+Params\+::\+Primitive\+Params (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_primitive_enums_8h_a35fa04dbcd6e8ebd76550c9b14ade0dc}{P\+R\+I\+M\+I\+T\+I\+V\+E\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}}}]{id,  }\item[{float}]{time,  }\item[{float}]{distance,  }\item[{float}]{x\+Loc,  }\item[{float}]{y\+Loc,  }\item[{float}]{heading,  }\item[{float}]{start\+Drive\+Speed,  }\item[{float}]{end\+Drive\+Speed,  }\item[{\mbox{\hyperlink{class_ball_manipulator_a91bf71119c5fecb46b41a90485f7a9a4}{Ball\+Manipulator\+::\+B\+A\+L\+L\+\_\+\+M\+A\+N\+I\+P\+U\+L\+A\+T\+O\+R\+\_\+\+S\+T\+A\+TE}}}]{ball\+State,  }\item[{float}]{turret\+Angle,  }\item[{std\+::string}]{path\+Name }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Primitive\+Params\+::\+Primitive\+Params (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_primitive_enums_8h_a35fa04dbcd6e8ebd76550c9b14ade0dc}{P\+R\+I\+M\+I\+T\+I\+V\+E\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}}}]{id,  }\item[{float}]{time,  }\item[{float}]{distance,  }\item[{float}]{x\+Loc,  }\item[{float}]{y\+Loc,  }\item[{float}]{heading,  }\item[{float}]{start\+Drive\+Speed,  }\item[{float}]{end\+Drive\+Speed,  }\item[{bool}]{run\+Intake,  }\item[{std\+::string}]{path\+Name }\end{DoxyParamCaption})}
 
 
 
-Definition at line 5 of file Primitive\+Params.\+cpp.
+Definition at line 20 of file Primitive\+Params.\+cpp.
 
 \mbox{\Hypertarget{class_primitive_params_a294ec4f5898cdd78b4e23bdf0a9e78e3}\label{class_primitive_params_a294ec4f5898cdd78b4e23bdf0a9e78e3}} 
 \index{PrimitiveParams@{PrimitiveParams}!PrimitiveParams@{PrimitiveParams}}
@@ -72,16 +70,6 @@ Definition at line 5 of file Primitive\+Params.\+cpp.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_primitive_params_acae304c2aa2134285d7feca227e799bc}\label{class_primitive_params_acae304c2aa2134285d7feca227e799bc}} 
-\index{PrimitiveParams@{PrimitiveParams}!GetBallState@{GetBallState}}
-\index{GetBallState@{GetBallState}!PrimitiveParams@{PrimitiveParams}}
-\doxysubsubsection{\texorpdfstring{GetBallState()}{GetBallState()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_ball_manipulator_a91bf71119c5fecb46b41a90485f7a9a4}{Ball\+Manipulator\+::\+B\+A\+L\+L\+\_\+\+M\+A\+N\+I\+P\+U\+L\+A\+T\+O\+R\+\_\+\+S\+T\+A\+TE}} Primitive\+Params\+::\+Get\+Ball\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
-
-
-
-Definition at line 74 of file Primitive\+Params.\+cpp.
-
 \mbox{\Hypertarget{class_primitive_params_af2c666b36d1b271b03c05c4cf51a7bab}\label{class_primitive_params_af2c666b36d1b271b03c05c4cf51a7bab}} 
 \index{PrimitiveParams@{PrimitiveParams}!GetDistance@{GetDistance}}
 \index{GetDistance@{GetDistance}!PrimitiveParams@{PrimitiveParams}}
@@ -90,7 +78,7 @@ Definition at line 74 of file Primitive\+Params.\+cpp.
 
 
 
-Definition at line 44 of file Primitive\+Params.\+cpp.
+Definition at line 56 of file Primitive\+Params.\+cpp.
 
 \mbox{\Hypertarget{class_primitive_params_aef9f99610cc71c25d4844d731cc8c6a2}\label{class_primitive_params_aef9f99610cc71c25d4844d731cc8c6a2}} 
 \index{PrimitiveParams@{PrimitiveParams}!GetDriveSpeed@{GetDriveSpeed}}
@@ -100,7 +88,7 @@ Definition at line 44 of file Primitive\+Params.\+cpp.
 
 
 
-Definition at line 64 of file Primitive\+Params.\+cpp.
+Definition at line 76 of file Primitive\+Params.\+cpp.
 
 \mbox{\Hypertarget{class_primitive_params_a9b452487c360f320951b178a23300fe2}\label{class_primitive_params_a9b452487c360f320951b178a23300fe2}} 
 \index{PrimitiveParams@{PrimitiveParams}!GetEndDriveSpeed@{GetEndDriveSpeed}}
@@ -110,7 +98,7 @@ Definition at line 64 of file Primitive\+Params.\+cpp.
 
 
 
-Definition at line 69 of file Primitive\+Params.\+cpp.
+Definition at line 81 of file Primitive\+Params.\+cpp.
 
 \mbox{\Hypertarget{class_primitive_params_ab7908eab72640338306dbaf382e8646a}\label{class_primitive_params_ab7908eab72640338306dbaf382e8646a}} 
 \index{PrimitiveParams@{PrimitiveParams}!GetHeading@{GetHeading}}
@@ -120,7 +108,7 @@ Definition at line 69 of file Primitive\+Params.\+cpp.
 
 
 
-Definition at line 59 of file Primitive\+Params.\+cpp.
+Definition at line 71 of file Primitive\+Params.\+cpp.
 
 \mbox{\Hypertarget{class_primitive_params_a6d1e129031049f3c94e1c131547fc10a}\label{class_primitive_params_a6d1e129031049f3c94e1c131547fc10a}} 
 \index{PrimitiveParams@{PrimitiveParams}!GetID@{GetID}}
@@ -130,7 +118,17 @@ Definition at line 59 of file Primitive\+Params.\+cpp.
 
 
 
-Definition at line 34 of file Primitive\+Params.\+cpp.
+Definition at line 46 of file Primitive\+Params.\+cpp.
+
+\mbox{\Hypertarget{class_primitive_params_a2778ce15f7ca0bb45591ef1133a944d9}\label{class_primitive_params_a2778ce15f7ca0bb45591ef1133a944d9}} 
+\index{PrimitiveParams@{PrimitiveParams}!GetIntakeState@{GetIntakeState}}
+\index{GetIntakeState@{GetIntakeState}!PrimitiveParams@{PrimitiveParams}}
+\doxysubsubsection{\texorpdfstring{GetIntakeState()}{GetIntakeState()}}
+{\footnotesize\ttfamily bool Primitive\+Params\+::\+Get\+Intake\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 92 of file Primitive\+Params.\+cpp.
 
 \mbox{\Hypertarget{class_primitive_params_ac3a50b019a206836725bdd496aaac3da}\label{class_primitive_params_ac3a50b019a206836725bdd496aaac3da}} 
 \index{PrimitiveParams@{PrimitiveParams}!GetPathName@{GetPathName}}
@@ -140,7 +138,7 @@ Definition at line 34 of file Primitive\+Params.\+cpp.
 
 
 
-Definition at line 89 of file Primitive\+Params.\+cpp.
+Definition at line 87 of file Primitive\+Params.\+cpp.
 
 \mbox{\Hypertarget{class_primitive_params_a478d763e9de6526e13de4d23d1dca71c}\label{class_primitive_params_a478d763e9de6526e13de4d23d1dca71c}} 
 \index{PrimitiveParams@{PrimitiveParams}!GetTime@{GetTime}}
@@ -150,17 +148,7 @@ Definition at line 89 of file Primitive\+Params.\+cpp.
 
 
 
-Definition at line 39 of file Primitive\+Params.\+cpp.
-
-\mbox{\Hypertarget{class_primitive_params_a956f05573b6157c4418eb9bafa86470e}\label{class_primitive_params_a956f05573b6157c4418eb9bafa86470e}} 
-\index{PrimitiveParams@{PrimitiveParams}!GetTurretAngle@{GetTurretAngle}}
-\index{GetTurretAngle@{GetTurretAngle}!PrimitiveParams@{PrimitiveParams}}
-\doxysubsubsection{\texorpdfstring{GetTurretAngle()}{GetTurretAngle()}}
-{\footnotesize\ttfamily float Primitive\+Params\+::\+Get\+Turret\+Angle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
-
-
-
-Definition at line 79 of file Primitive\+Params.\+cpp.
+Definition at line 51 of file Primitive\+Params.\+cpp.
 
 \mbox{\Hypertarget{class_primitive_params_a692dc9278c6d9ecfe0dc7951afff516a}\label{class_primitive_params_a692dc9278c6d9ecfe0dc7951afff516a}} 
 \index{PrimitiveParams@{PrimitiveParams}!GetXLocation@{GetXLocation}}
@@ -170,7 +158,7 @@ Definition at line 79 of file Primitive\+Params.\+cpp.
 
 
 
-Definition at line 49 of file Primitive\+Params.\+cpp.
+Definition at line 61 of file Primitive\+Params.\+cpp.
 
 \mbox{\Hypertarget{class_primitive_params_a598e9b3b72f7c5968cdb0a569c982f3f}\label{class_primitive_params_a598e9b3b72f7c5968cdb0a569c982f3f}} 
 \index{PrimitiveParams@{PrimitiveParams}!GetYLocation@{GetYLocation}}
@@ -180,7 +168,7 @@ Definition at line 49 of file Primitive\+Params.\+cpp.
 
 
 
-Definition at line 54 of file Primitive\+Params.\+cpp.
+Definition at line 66 of file Primitive\+Params.\+cpp.
 
 \mbox{\Hypertarget{class_primitive_params_a9338f36c76fd412ec8d05dcfc300b18d}\label{class_primitive_params_a9338f36c76fd412ec8d05dcfc300b18d}} 
 \index{PrimitiveParams@{PrimitiveParams}!SetDistance@{SetDistance}}
@@ -190,7 +178,7 @@ Definition at line 54 of file Primitive\+Params.\+cpp.
 
 
 
-Definition at line 85 of file Primitive\+Params.\+cpp.
+Definition at line 98 of file Primitive\+Params.\+cpp.
 
 
 

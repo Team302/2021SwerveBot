@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: SwerveChassisFactory Class Reference</title>
+<title>Team 302 Swerve Robot: SwerveChassisFactory Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -94,8 +94,8 @@ $(document).ready(function(){initNavTree('class_swerve_chassis_factory.html','')
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:addff5f93957eb8c947d3af91fc203132"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis_factory.html#addff5f93957eb8c947d3af91fc203132">CreateSwerveModule</a> (<a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">SwerveModule::ModuleID</a> type, const <a class="el" href="_i_dragon_motor_controller_map_8h.html#a36a6214ec089416c4f6b97db3690d9b5">IDragonMotorControllerMap</a> &amp;motorControllers, std::shared_ptr&lt; ctre::phoenix::sensors::CANCoder &gt; turnSensor, units::length::inch_t wheelDiameter)</td></tr>
-<tr class="separator:addff5f93957eb8c947d3af91fc203132"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fcc5914ed42324093b56b663875241f"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis_factory.html#a3fcc5914ed42324093b56b663875241f">CreateSwerveModule</a> (<a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">SwerveModule::ModuleID</a> type, const <a class="el" href="_i_dragon_motor_controller_map_8h.html#a36a6214ec089416c4f6b97db3690d9b5">IDragonMotorControllerMap</a> &amp;motorControllers, std::shared_ptr&lt; ctre::phoenix::sensors::CANCoder &gt; turnSensor, units::length::inch_t wheelDiameter, double turnP, double turnI, double turnD, double turnF, double turnNominalVal, double turnPeakVal, double turnMaxAcc, double turnCruiseVel)</td></tr>
+<tr class="separator:a3fcc5914ed42324093b56b663875241f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a535d7c5b45fd125864492427e600c23a"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_swerve_chassis.html">SwerveChassis</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis_factory.html#a535d7c5b45fd125864492427e600c23a">CreateSwerveChassis</a> (std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt; frontLeft, std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt; frontRight, std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt; backLeft, std::shared_ptr&lt; <a class="el" href="class_swerve_module.html">SwerveModule</a> &gt; backRight, units::length::inch_t wheelBase, units::length::inch_t track, units::velocity::meters_per_second_t maxSpeed, units::radians_per_second_t maxAngularSpeed, units::acceleration::meters_per_second_squared_t maxAcceleration, units::angular_acceleration::radians_per_second_squared_t maxAngularAcceleration)</td></tr>
 <tr class="separator:a535d7c5b45fd125864492427e600c23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a545f50e429b29380df4ecdb712ecd777"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_swerve_chassis.html">SwerveChassis</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_chassis_factory.html#a545f50e429b29380df4ecdb712ecd777">GetSwerveChassis</a> ()</td></tr>
@@ -193,12 +193,12 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Method: CreateSwerveChassis Description: Find or create the swerve chassis Returns: SwerveChassis* pointer to the swerve chassis or nullptr if it doesn't exist and cannot be created. </p>
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_factory_8cpp_source.html#l00119">119</a> of file <a class="el" href="_swerve_chassis_factory_8cpp_source.html">SwerveChassisFactory.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_factory_8cpp_source.html#l00175">175</a> of file <a class="el" href="_swerve_chassis_factory_8cpp_source.html">SwerveChassisFactory.cpp</a>.</p>
 
 </div>
 </div>
-<a id="addff5f93957eb8c947d3af91fc203132"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#addff5f93957eb8c947d3af91fc203132">&#9670;&nbsp;</a></span>CreateSwerveModule()</h2>
+<a id="a3fcc5914ed42324093b56b663875241f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fcc5914ed42324093b56b663875241f">&#9670;&nbsp;</a></span>CreateSwerveModule()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,7 +225,55 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">units::length::inch_t&#160;</td>
-          <td class="paramname"><em>wheelDiameter</em>&#160;</td>
+          <td class="paramname"><em>wheelDiameter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnD</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnF</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnNominalVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnPeakVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnMaxAcc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnCruiseVel</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -263,7 +311,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_factory_8h_source.html#l00089">89</a> of file <a class="el" href="_swerve_chassis_factory_8h_source.html">SwerveChassisFactory.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_factory_8h_source.html#l00097">97</a> of file <a class="el" href="_swerve_chassis_factory_8h_source.html">SwerveChassisFactory.h</a>.</p>
 
 </div>
 </div>
@@ -290,7 +338,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_factory_8h_source.html#l00088">88</a> of file <a class="el" href="_swerve_chassis_factory_8h_source.html">SwerveChassisFactory.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_factory_8h_source.html#l00096">96</a> of file <a class="el" href="_swerve_chassis_factory_8h_source.html">SwerveChassisFactory.h</a>.</p>
 
 </div>
 </div>
@@ -317,7 +365,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_factory_8h_source.html#l00091">91</a> of file <a class="el" href="_swerve_chassis_factory_8h_source.html">SwerveChassisFactory.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_factory_8h_source.html#l00099">99</a> of file <a class="el" href="_swerve_chassis_factory_8h_source.html">SwerveChassisFactory.h</a>.</p>
 
 </div>
 </div>
@@ -344,7 +392,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_factory_8h_source.html#l00090">90</a> of file <a class="el" href="_swerve_chassis_factory_8h_source.html">SwerveChassisFactory.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_factory_8h_source.html#l00098">98</a> of file <a class="el" href="_swerve_chassis_factory_8h_source.html">SwerveChassisFactory.h</a>.</p>
 
 </div>
 </div>
@@ -371,7 +419,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_chassis_factory_8h_source.html#l00087">87</a> of file <a class="el" href="_swerve_chassis_factory_8h_source.html">SwerveChassisFactory.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_chassis_factory_8h_source.html#l00095">95</a> of file <a class="el" href="_swerve_chassis_factory_8h_source.html">SwerveChassisFactory.h</a>.</p>
 
 </div>
 </div>

@@ -30,6 +30,10 @@ var dir_24eb7d13a7403f35102eb8af8e6575d2 =
     [ "NoDeadbandValue.h", "_no_deadband_value_8h.html", [
       [ "NoDeadbandValue", "class_no_deadband_value.html", "class_no_deadband_value" ]
     ] ],
+    [ "PiecewiseLinearProfile.cpp", "_piecewise_linear_profile_8cpp.html", null ],
+    [ "PiecewiseLinearProfile.h", "_piecewise_linear_profile_8h.html", [
+      [ "PiecewiseLinearProfile", "class_piecewise_linear_profile.html", "class_piecewise_linear_profile" ]
+    ] ],
     [ "ScaledAxis.cpp", "_scaled_axis_8cpp.html", null ],
     [ "ScaledAxis.h", "_scaled_axis_8h.html", [
       [ "ScaledAxis", "class_scaled_axis.html", "class_scaled_axis" ]

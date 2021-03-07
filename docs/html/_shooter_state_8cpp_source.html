@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/states/shooter/ShooterState.cpp Source File</title>
+<title>Team 302 Swerve Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/states/shooter/ShooterState.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -107,13 +107,15 @@ $(document).ready(function(){initNavTree('_shooter_state_8cpp_source.html',''); 
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_mechanism_factory_8h.html">subsys/MechanismFactory.h</a>&gt;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_shooter_state.html#aac59e0bbc8268cc49279d311a007f918">   23</a></span>&#160;<a class="code" href="class_shooter_state.html#a083ce3135c990443a3319af663c83caf">ShooterState::ShooterState</a></div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_shooter_state.html#a07e9446ae691b334a42a15358316d35c">   23</a></span>&#160;<a class="code" href="class_shooter_state.html#a083ce3135c990443a3319af663c83caf">ShooterState::ShooterState</a></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;(</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_control_data.html">ControlData</a>*                    controlData, </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">double</span>                          target</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;) : <a class="code" href="class_mech2_motor_state.html">Mech2MotorState</a>( <a class="code" href="class_mechanism_factory.html">MechanismFactory</a>::GetMechanismFactory()-&gt;GetShooter().get(), controlData, target, target )</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_control_data.html">ControlData</a>*                    controlData2, </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">double</span>                          target1,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">double</span>                          target2</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;) : <a class="code" href="class_mech2_motor_state.html">Mech2MotorState</a>( <a class="code" href="class_mechanism_factory.html">MechanismFactory</a>::GetMechanismFactory()-&gt;GetShooter().get(), controlData, controlData2, target1, target2 )</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_shooter_state_html_a083ce3135c990443a3319af663c83caf"><div class="ttname"><a href="class_shooter_state.html#a083ce3135c990443a3319af663c83caf">ShooterState::ShooterState</a></div><div class="ttdeci">ShooterState()=delete</div></div>
@@ -122,13 +124,13 @@ $(document).ready(function(){initNavTree('_shooter_state_8cpp_source.html',''); 
 <div class="ttc" id="a_mechanism_factory_8h_html"><div class="ttname"><a href="_mechanism_factory_8h.html">MechanismFactory.h</a></div></div>
 <div class="ttc" id="a_control_data_8h_html"><div class="ttname"><a href="_control_data_8h.html">ControlData.h</a></div></div>
 <div class="ttc" id="a_mechanism_target_data_8h_html"><div class="ttname"><a href="_mechanism_target_data_8h.html">MechanismTargetData.h</a></div></div>
-<div class="ttc" id="aclass_mechanism_factory_html"><div class="ttname"><a href="class_mechanism_factory.html">MechanismFactory</a></div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8h_source.html#l00059">MechanismFactory.h:60</a></div></div>
+<div class="ttc" id="aclass_mechanism_factory_html"><div class="ttname"><a href="class_mechanism_factory.html">MechanismFactory</a></div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_factory_8h_source.html#l00062">MechanismFactory.h:63</a></div></div>
 <div class="ttc" id="aclass_control_data_html"><div class="ttname"><a href="class_control_data.html">ControlData</a></div><div class="ttdef"><b>Definition:</b> <a href="_control_data_8h_source.html#l00022">ControlData.h:23</a></div></div>
 <div class="ttc" id="a_shooter_state_8h_html"><div class="ttname"><a href="_shooter_state_8h.html">ShooterState.h</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_41c41181ce15b7c19c61d1bd081a9910.html">states</a></li><li class="navelem"><a class="el" href="dir_08aa021794bee3e0175dc85e7b1d2c7f.html">shooter</a></li><li class="navelem"><a class="el" href="_shooter_state_8cpp.html">ShooterState.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_4a8796b0ba1d3dc122873832137fbe4e.html">GitRepos</a></li><li class="navelem"><a class="el" href="dir_1c47665bf58b31faa465c1927c1a00b8.html">2021SwerveBot</a></li><li class="navelem"><a class="el" href="dir_4c5ca149a7966e928c927d1b502f4c6f.html">src</a></li><li class="navelem"><a class="el" href="dir_6d6810671ff2e85cbf46bcf7f794863c.html">main</a></li><li class="navelem"><a class="el" href="dir_62e39780e9d5ee1b2eb3d29e32dcab01.html">cpp</a></li><li class="navelem"><a class="el" href="dir_6690ad191a400a686898d515d289d6e4.html">states</a></li><li class="navelem"><a class="el" href="dir_b52d53abe6a4a5746cf5da57f73f5bbe.html">shooter</a></li><li class="navelem"><a class="el" href="_shooter_state_8cpp.html">ShooterState.cpp</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: IMech Interface Reference</title>
+<title>Team 302 Swerve Robot: IMech Interface Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -99,16 +99,17 @@ Inheritance diagram for IMech:</div>
  <div class="center">
   <img src="class_i_mech.png" usemap="#IMech_map" alt=""/>
   <map id="IMech_map" name="IMech_map">
-<area href="class_i_mech1_ind_motor.html" title="This is the interface for mechanisms that have one independently controlled motor." alt="IMech1IndMotor" shape="rect" coords="180,56,290,80"/>
-<area href="class_i_mech2_ind_motors.html" title="This is the interface for mechanisms that have two independently controlled motors." alt="IMech2IndMotors" shape="rect" coords="480,56,590,80"/>
-<area href="class_mech.html" alt="Mech" shape="rect" coords="600,56,710,80"/>
-<area href="class_mech1_ind_motor.html" alt="Mech1IndMotor" shape="rect" coords="180,112,290,136"/>
-<area href="class_mech2_ind_motors.html" alt="Mech2IndMotors" shape="rect" coords="480,112,590,136"/>
-<area href="class_ball_transfer.html" alt="BallTransfer" shape="rect" coords="0,168,110,192"/>
-<area href="class_intake.html" alt="Intake" shape="rect" coords="120,168,230,192"/>
-<area href="class_shooter_hood.html" alt="ShooterHood" shape="rect" coords="240,168,350,192"/>
-<area href="class_turret.html" alt="Turret" shape="rect" coords="360,168,470,192"/>
-<area href="class_shooter.html" alt="Shooter" shape="rect" coords="480,168,590,192"/>
+<area href="class_i_mech1_ind_motor.html" title="This is the interface for mechanisms that have one independently controlled motor." alt="IMech1IndMotor" shape="rect" coords="240,56,350,80"/>
+<area href="class_i_mech2_ind_motors.html" title="This is the interface for mechanisms that have two independently controlled motors." alt="IMech2IndMotors" shape="rect" coords="600,56,710,80"/>
+<area href="class_mech.html" alt="Mech" shape="rect" coords="720,56,830,80"/>
+<area href="class_mech1_ind_motor.html" alt="Mech1IndMotor" shape="rect" coords="240,112,350,136"/>
+<area href="class_mech2_ind_motors.html" alt="Mech2IndMotors" shape="rect" coords="600,112,710,136"/>
+<area href="class_ball_hopper.html" alt="BallHopper" shape="rect" coords="0,168,110,192"/>
+<area href="class_ball_transfer.html" alt="BallTransfer" shape="rect" coords="120,168,230,192"/>
+<area href="class_intake.html" alt="Intake" shape="rect" coords="240,168,350,192"/>
+<area href="class_shooter_hood.html" alt="ShooterHood" shape="rect" coords="360,168,470,192"/>
+<area href="class_turret.html" alt="Turret" shape="rect" coords="480,168,590,192"/>
+<area href="class_shooter.html" alt="Shooter" shape="rect" coords="600,168,710,192"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -127,12 +128,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abc01c2761809f6a477e72da77d99595f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac415971e67e52e0cd2b3c1aa1312f1a1"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_mech.html#ac415971e67e52e0cd2b3c1aa1312f1a1">~IMech</a> ()=default</td></tr>
 <tr class="separator:ac415971e67e52e0cd2b3c1aa1312f1a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae36bb88f573108e3bd6c462ac73a65a5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_mech.html#ae36bb88f573108e3bd6c462ac73a65a5">ActivateLogging</a> (units::second_t millisecondsBetweenLogging)=0</td></tr>
-<tr class="memdesc:ae36bb88f573108e3bd6c462ac73a65a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activates logging key values to network table.  <a href="class_i_mech.html#ae36bb88f573108e3bd6c462ac73a65a5">More...</a><br /></td></tr>
-<tr class="separator:ae36bb88f573108e3bd6c462ac73a65a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab6c09d4742d031c1c4e0720df90a6ef"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_mech.html#aab6c09d4742d031c1c4e0720df90a6ef">DeactivateLogging</a> ()=0</td></tr>
-<tr class="memdesc:aab6c09d4742d031c1c4e0720df90a6ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop updating the key values to network table.  <a href="class_i_mech.html#aab6c09d4742d031c1c4e0720df90a6ef">More...</a><br /></td></tr>
-<tr class="separator:aab6c09d4742d031c1c4e0720df90a6ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ef8718f9a677623b49da0e2250fa326"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_mech.html#a8ef8718f9a677623b49da0e2250fa326">LogData</a> ()=0</td></tr>
 <tr class="memdesc:a8ef8718f9a677623b49da0e2250fa326"><td class="mdescLeft">&#160;</td><td class="mdescRight">log data to the network table if it is activated and time period has past  <a href="class_i_mech.html#a8ef8718f9a677623b49da0e2250fa326">More...</a><br /></td></tr>
 <tr class="separator:a8ef8718f9a677623b49da0e2250fa326"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -194,72 +189,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae36bb88f573108e3bd6c462ac73a65a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae36bb88f573108e3bd6c462ac73a65a5">&#9670;&nbsp;</a></span>ActivateLogging()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void IMech::ActivateLogging </td>
-          <td>(</td>
-          <td class="paramtype">units::second_t&#160;</td>
-          <td class="paramname"><em>millisecondsBetweenLogging</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Activates logging key values to network table. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">int</td><td>indicate how many millisecondsBetweenLogging updates to the network table <br  />
- </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implemented in <a class="el" href="class_mech2_ind_motors.html#a9e3d9f04187c82f6ff5d51db27066e3e">Mech2IndMotors</a>, <a class="el" href="class_mech1_ind_motor.html#a2ea51d20899048beb5776eb677fbda06">Mech1IndMotor</a>, and <a class="el" href="class_mech.html#ad2cfbcb9033be2844d450aeea6a92f78">Mech</a>.</p>
-
-</div>
-</div>
-<a id="aab6c09d4742d031c1c4e0720df90a6ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab6c09d4742d031c1c4e0720df90a6ef">&#9670;&nbsp;</a></span>DeactivateLogging()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void IMech::DeactivateLogging </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Stop updating the key values to network table. </p>
-
-<p>Implemented in <a class="el" href="class_mech2_ind_motors.html#a529e95c673e272e2b7708c180964937d">Mech2IndMotors</a>, <a class="el" href="class_mech1_ind_motor.html#a14e69788c1af3292dde755421d224250">Mech1IndMotor</a>, and <a class="el" href="class_mech.html#ac9ad0746220c95dde4abe97c34710fc2">Mech</a>.</p>
-
-</div>
-</div>
 <a id="a696bed03ac45f3da85cbe26e8658e0fd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a696bed03ac45f3da85cbe26e8658e0fd">&#9670;&nbsp;</a></span>GetControlFileName()</h2>
 

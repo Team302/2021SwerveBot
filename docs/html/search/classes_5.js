@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hardwareidvalidation_936',['HardwareIDValidation',['../class_hardware_i_d_validation.html',1,'']]],
-  ['holdturretposition_937',['HoldTurretPosition',['../class_hold_turret_position.html',1,'']]]
+  ['galacticsearchfinder_1026',['GalacticSearchFinder',['../class_galactic_search_finder.html',1,'']]],
+  ['goaldetection_1027',['GoalDetection',['../class_goal_detection.html',1,'']]]
 ];

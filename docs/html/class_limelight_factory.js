@@ -1,5 +1,5 @@
 var class_limelight_factory =
 [
-    [ "CreateLimelight", "class_limelight_factory.html#ad9b9e66ffcb91cdcbfc55a86a6f0ba0b", null ],
-    [ "GetLimelight", "class_limelight_factory.html#a89723d11275c95f3bd1e4f4996027868", null ]
+    [ "CreateLimelight", "class_limelight_factory.html#ac1fab3622cd270b765eb29fe91d2b89c", null ],
+    [ "GetLimelight", "class_limelight_factory.html#a8ffee3befbc7fa5ffa81c47298133e53", null ]
 ];

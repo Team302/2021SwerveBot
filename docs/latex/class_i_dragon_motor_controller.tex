@@ -15,6 +15,14 @@ Inheritance diagram for I\+Dragon\+Motor\+Controller\+:\begin{figure}[H]
 \includegraphics[height=2.000000cm]{class_i_dragon_motor_controller}
 \end{center}
 \end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2}{M\+O\+T\+O\+R\+\_\+\+P\+R\+I\+O\+R\+I\+TY}} \{ \mbox{\hyperlink{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2af8b1a69321524d92b9dec3eb6b95c50d}{H\+I\+GH}}, 
+\mbox{\hyperlink{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2ac5df8b2359a0263857b7060a4aa5209e}{M\+E\+D\+I\+UM}}, 
+\mbox{\hyperlink{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2ab25b1f33cbe7fcf9cd6f12159ca0ca62}{L\+OW}}
+ \}
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -50,22 +58,57 @@ virtual void \mbox{\hyperlink{class_i_dragon_motor_controller_a108645163a4c281f5
 \item 
 virtual void \mbox{\hyperlink{class_i_dragon_motor_controller_ae94b716ecf9b1bb64c7184d904ef9e6d}{Set\+Diameter}} (double diameter)=0
 \item 
-virtual void \mbox{\hyperlink{class_i_dragon_motor_controller_abdca297c707d0c1f5e36bc0be37396d5}{Set\+Control\+Constants}} (\mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$control\+Info)=0
+virtual void \mbox{\hyperlink{class_i_dragon_motor_controller_acecacc07a8d110ff7470be2cfc615364}{Set\+Voltage}} (units\+::volt\+\_\+t output)=0
+\item 
+virtual void \mbox{\hyperlink{class_i_dragon_motor_controller_a0431ed9a17473910613b2faf37704036}{Set\+Control\+Constants}} (int slot, \mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$control\+Info)=0
 \begin{DoxyCompactList}\small\item\em Set the control constants (e.\+g. P\+I\+DF values). \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_i_dragon_motor_controller_a5f5568cf4e1c64b327795135753678a1}{Set\+Remote\+Sensor}} (int can\+ID, ctre\+::phoenix\+::motorcontrol\+::\+Remote\+Sensor\+Source device\+Type)=0
+\item 
+virtual void \mbox{\hyperlink{class_i_dragon_motor_controller_a436bc02bae19f53f567e0f4e8c67a6f9}{Update\+Frame\+Periods}} (ctre\+::phoenix\+::motorcontrol\+::\+Status\+Frame\+Enhanced frame, uint8\+\_\+t milliseconds)=0
+\item 
+virtual void \mbox{\hyperlink{class_i_dragon_motor_controller_ab25248538d3b61655a4638ba6bf84f77}{Set\+Frame\+Period\+Priority}} (\mbox{\hyperlink{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2}{M\+O\+T\+O\+R\+\_\+\+P\+R\+I\+O\+R\+I\+TY}} priority)=0
 \item 
 virtual double \mbox{\hyperlink{class_i_dragon_motor_controller_adad0d5e0e39fddd18961e8c880ede086}{Get\+Counts\+Per\+Rev}} () const =0
 \item 
 \mbox{\hyperlink{class_i_dragon_motor_controller_abd89e75a66f4aa8ab989b2196e5d912f}{I\+Dragon\+Motor\+Controller}} ()=default
 \item 
 virtual \mbox{\hyperlink{class_i_dragon_motor_controller_a93f40b43658f5744e50292dbf6fc470b}{$\sim$\+I\+Dragon\+Motor\+Controller}} ()=default
+\item 
+virtual double \mbox{\hyperlink{class_i_dragon_motor_controller_a3b753bd72bad542f7866785ca397c33a}{Get\+Gear\+Ratio}} () const =0
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 The general interface to motor controllers so that the specific mechanisms that use motors, don\textquotesingle{}t need to special case what motor controller is being used. 
 
-Definition at line 38 of file I\+Dragon\+Motor\+Controller.\+h.
+Definition at line 39 of file I\+Dragon\+Motor\+Controller.\+h.
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2}\label{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2}} 
+\index{IDragonMotorController@{IDragonMotorController}!MOTOR\_PRIORITY@{MOTOR\_PRIORITY}}
+\index{MOTOR\_PRIORITY@{MOTOR\_PRIORITY}!IDragonMotorController@{IDragonMotorController}}
+\doxysubsubsection{\texorpdfstring{MOTOR\_PRIORITY}{MOTOR\_PRIORITY}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2}{I\+Dragon\+Motor\+Controller\+::\+M\+O\+T\+O\+R\+\_\+\+P\+R\+I\+O\+R\+I\+TY}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HIGH@{HIGH}!IDragonMotorController@{IDragonMotorController}}\index{IDragonMotorController@{IDragonMotorController}!HIGH@{HIGH}}}\mbox{\Hypertarget{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2af8b1a69321524d92b9dec3eb6b95c50d}\label{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2af8b1a69321524d92b9dec3eb6b95c50d}} 
+H\+I\+GH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MEDIUM@{MEDIUM}!IDragonMotorController@{IDragonMotorController}}\index{IDragonMotorController@{IDragonMotorController}!MEDIUM@{MEDIUM}}}\mbox{\Hypertarget{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2ac5df8b2359a0263857b7060a4aa5209e}\label{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2ac5df8b2359a0263857b7060a4aa5209e}} 
+M\+E\+D\+I\+UM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LOW@{LOW}!IDragonMotorController@{IDragonMotorController}}\index{IDragonMotorController@{IDragonMotorController}!LOW@{LOW}}}\mbox{\Hypertarget{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2ab25b1f33cbe7fcf9cd6f12159ca0ca62}\label{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2ab25b1f33cbe7fcf9cd6f12159ca0ca62}} 
+L\+OW&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 43 of file I\+Dragon\+Motor\+Controller.\+h.
 
 
 
@@ -131,6 +174,16 @@ double -\/ amperage usage for the controller
 
 
 Implemented in \mbox{\hyperlink{class_dragon_talon_aa5fe4416de572b8c84ee1e063fd1b66e}{Dragon\+Talon}}, and \mbox{\hyperlink{class_dragon_falcon_aef9e7316a70af58f1dc02a9fae5cfd8a}{Dragon\+Falcon}}.
+
+\mbox{\Hypertarget{class_i_dragon_motor_controller_a3b753bd72bad542f7866785ca397c33a}\label{class_i_dragon_motor_controller_a3b753bd72bad542f7866785ca397c33a}} 
+\index{IDragonMotorController@{IDragonMotorController}!GetGearRatio@{GetGearRatio}}
+\index{GetGearRatio@{GetGearRatio}!IDragonMotorController@{IDragonMotorController}}
+\doxysubsubsection{\texorpdfstring{GetGearRatio()}{GetGearRatio()}}
+{\footnotesize\ttfamily virtual double I\+Dragon\+Motor\+Controller\+::\+Get\+Gear\+Ratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_dragon_talon_a211756f0b511e10e8b26a2bc44cf16f8}{Dragon\+Talon}}, and \mbox{\hyperlink{class_dragon_falcon_a83cb79704403799050396f81f888a0d8}{Dragon\+Falcon}}.
 
 \mbox{\Hypertarget{class_i_dragon_motor_controller_ad70e1b0a007c03cc07a6ee531d6701d6}\label{class_i_dragon_motor_controller_ad70e1b0a007c03cc07a6ee531d6701d6}} 
 \index{IDragonMotorController@{IDragonMotorController}!GetID@{GetID}}
@@ -247,11 +300,11 @@ Implemented in \mbox{\hyperlink{class_dragon_talon_a32074257a1082666c5c25fbb9cb9
 
 Implemented in \mbox{\hyperlink{class_dragon_talon_aefde37c10d274681d3850ceab178365c}{Dragon\+Talon}}, and \mbox{\hyperlink{class_dragon_falcon_a61856e9790dee0e61cb15670d64f95cd}{Dragon\+Falcon}}.
 
-\mbox{\Hypertarget{class_i_dragon_motor_controller_abdca297c707d0c1f5e36bc0be37396d5}\label{class_i_dragon_motor_controller_abdca297c707d0c1f5e36bc0be37396d5}} 
+\mbox{\Hypertarget{class_i_dragon_motor_controller_a0431ed9a17473910613b2faf37704036}\label{class_i_dragon_motor_controller_a0431ed9a17473910613b2faf37704036}} 
 \index{IDragonMotorController@{IDragonMotorController}!SetControlConstants@{SetControlConstants}}
 \index{SetControlConstants@{SetControlConstants}!IDragonMotorController@{IDragonMotorController}}
 \doxysubsubsection{\texorpdfstring{SetControlConstants()}{SetControlConstants()}}
-{\footnotesize\ttfamily virtual void I\+Dragon\+Motor\+Controller\+::\+Set\+Control\+Constants (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$}]{control\+Info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void I\+Dragon\+Motor\+Controller\+::\+Set\+Control\+Constants (\begin{DoxyParamCaption}\item[{int}]{slot,  }\item[{\mbox{\hyperlink{class_control_data}{Control\+Data}} $\ast$}]{control\+Info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -259,6 +312,8 @@ Set the control constants (e.\+g. P\+I\+DF values).
 
 
 \begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em int} & slot -\/ hardware slot to use \\
+\hline
 \mbox{\texttt{ in}}  & {\em Control\+Data$\ast$} & pid -\/ the control constants \\
 \hline
 \end{DoxyParams}
@@ -267,7 +322,7 @@ void
 \end{DoxyReturn}
 
 
-Implemented in \mbox{\hyperlink{class_dragon_talon_a051e7d9a21b9caf9db65bcb2c613808e}{Dragon\+Talon}}, and \mbox{\hyperlink{class_dragon_falcon_a1504585d6a7671449c274adb254d6aa6}{Dragon\+Falcon}}.
+Implemented in \mbox{\hyperlink{class_dragon_talon_a798f56a9ad9b2021f3074cc2ff62cecd}{Dragon\+Talon}}, and \mbox{\hyperlink{class_dragon_falcon_a6b34b7b6faac4550a1abecc684f989b4}{Dragon\+Falcon}}.
 
 \mbox{\Hypertarget{class_i_dragon_motor_controller_ac1436f0089d933ba4310abca76059e63}\label{class_i_dragon_motor_controller_ac1436f0089d933ba4310abca76059e63}} 
 \index{IDragonMotorController@{IDragonMotorController}!SetControlMode@{SetControlMode}}
@@ -288,6 +343,16 @@ Implemented in \mbox{\hyperlink{class_dragon_talon_a51ae73cebf47695a4c37cc874d7d
 
 
 Implemented in \mbox{\hyperlink{class_dragon_talon_a741ea243997b62373ef198f75846704d}{Dragon\+Talon}}, and \mbox{\hyperlink{class_dragon_falcon_a58a336a886347ec83d2b393569fc9d19}{Dragon\+Falcon}}.
+
+\mbox{\Hypertarget{class_i_dragon_motor_controller_ab25248538d3b61655a4638ba6bf84f77}\label{class_i_dragon_motor_controller_ab25248538d3b61655a4638ba6bf84f77}} 
+\index{IDragonMotorController@{IDragonMotorController}!SetFramePeriodPriority@{SetFramePeriodPriority}}
+\index{SetFramePeriodPriority@{SetFramePeriodPriority}!IDragonMotorController@{IDragonMotorController}}
+\doxysubsubsection{\texorpdfstring{SetFramePeriodPriority()}{SetFramePeriodPriority()}}
+{\footnotesize\ttfamily virtual void I\+Dragon\+Motor\+Controller\+::\+Set\+Frame\+Period\+Priority (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_i_dragon_motor_controller_aa318b4b9dd9603fda549de42c386fcd2}{M\+O\+T\+O\+R\+\_\+\+P\+R\+I\+O\+R\+I\+TY}}}]{priority }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_dragon_talon_a8357e689a6e0745411d60eda6963bff3}{Dragon\+Talon}}, and \mbox{\hyperlink{class_dragon_falcon_a1d71d968b3323ba9a86bdff04b563d31}{Dragon\+Falcon}}.
 
 \mbox{\Hypertarget{class_i_dragon_motor_controller_a5f5568cf4e1c64b327795135753678a1}\label{class_i_dragon_motor_controller_a5f5568cf4e1c64b327795135753678a1}} 
 \index{IDragonMotorController@{IDragonMotorController}!SetRemoteSensor@{SetRemoteSensor}}
@@ -319,6 +384,16 @@ Implemented in \mbox{\hyperlink{class_dragon_talon_a50cab200ce935067feed69d862f4
 
 Implemented in \mbox{\hyperlink{class_dragon_talon_a87d056ac6683ceec4a985dff184b42e5}{Dragon\+Talon}}, and \mbox{\hyperlink{class_dragon_falcon_a4efe5d7355a1d82577a8232fdbc9fe7d}{Dragon\+Falcon}}.
 
+\mbox{\Hypertarget{class_i_dragon_motor_controller_acecacc07a8d110ff7470be2cfc615364}\label{class_i_dragon_motor_controller_acecacc07a8d110ff7470be2cfc615364}} 
+\index{IDragonMotorController@{IDragonMotorController}!SetVoltage@{SetVoltage}}
+\index{SetVoltage@{SetVoltage}!IDragonMotorController@{IDragonMotorController}}
+\doxysubsubsection{\texorpdfstring{SetVoltage()}{SetVoltage()}}
+{\footnotesize\ttfamily virtual void I\+Dragon\+Motor\+Controller\+::\+Set\+Voltage (\begin{DoxyParamCaption}\item[{units\+::volt\+\_\+t}]{output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_dragon_talon_a26ee74999b0df1bf60dc14c8372571b9}{Dragon\+Talon}}, and \mbox{\hyperlink{class_dragon_falcon_af1c829e220dc76fb7c3b900f292dc0b8}{Dragon\+Falcon}}.
+
 \mbox{\Hypertarget{class_i_dragon_motor_controller_adf68e251d62ea48a3cf1ca4c395529a6}\label{class_i_dragon_motor_controller_adf68e251d62ea48a3cf1ca4c395529a6}} 
 \index{IDragonMotorController@{IDragonMotorController}!SetVoltageRamping@{SetVoltageRamping}}
 \index{SetVoltageRamping@{SetVoltageRamping}!IDragonMotorController@{IDragonMotorController}}
@@ -328,6 +403,16 @@ Implemented in \mbox{\hyperlink{class_dragon_talon_a87d056ac6683ceec4a985dff184b
 
 
 Implemented in \mbox{\hyperlink{class_dragon_talon_a1e450e634cd6d34cd0ba8f9bb0aebea1}{Dragon\+Talon}}, and \mbox{\hyperlink{class_dragon_falcon_a596613a088e7d87182377b04ced5b16a}{Dragon\+Falcon}}.
+
+\mbox{\Hypertarget{class_i_dragon_motor_controller_a436bc02bae19f53f567e0f4e8c67a6f9}\label{class_i_dragon_motor_controller_a436bc02bae19f53f567e0f4e8c67a6f9}} 
+\index{IDragonMotorController@{IDragonMotorController}!UpdateFramePeriods@{UpdateFramePeriods}}
+\index{UpdateFramePeriods@{UpdateFramePeriods}!IDragonMotorController@{IDragonMotorController}}
+\doxysubsubsection{\texorpdfstring{UpdateFramePeriods()}{UpdateFramePeriods()}}
+{\footnotesize\ttfamily virtual void I\+Dragon\+Motor\+Controller\+::\+Update\+Frame\+Periods (\begin{DoxyParamCaption}\item[{ctre\+::phoenix\+::motorcontrol\+::\+Status\+Frame\+Enhanced}]{frame,  }\item[{uint8\+\_\+t}]{milliseconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_dragon_talon_a6522d93f816e76a2c46b884633856ad1}{Dragon\+Talon}}, and \mbox{\hyperlink{class_dragon_falcon_ab2202a24efc28956e5c0879026927744}{Dragon\+Falcon}}.
 
 
 

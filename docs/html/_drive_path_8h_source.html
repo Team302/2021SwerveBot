@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/auton/primitives/DrivePath.h Source File</title>
+<title>Team 302 Swerve Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/auton/primitives/DrivePath.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -86,7 +86,7 @@ $(document).ready(function(){initNavTree('_drive_path_8h_source.html',''); initR
 </div><!--header-->
 <div class="contents">
 <a href="_drive_path_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//====================================================================================================================================================</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Copyright 2020 Lake Orion Robotics FIRST Team 302 </span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Copyright 2020 Lake Orion Robotics FIRST Team 302</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;),</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,</span></div>
@@ -105,99 +105,91 @@ $(document).ready(function(){initNavTree('_drive_path_8h_source.html',''); initR
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//Team302 Includes</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_i_primitive_8h.html">auton/primitives/IPrimitive.h</a>&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;units/angular_velocity.h&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_primitive_params_8h.html">auton/PrimitiveParams.h</a>&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_i_primitive_8h.html">auton/primitives/IPrimitive.h</a>&gt;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//FRC Includes</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;frc/geometry/Pose2d.h&gt;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;wpi/SmallString.h&gt;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;frc/Filesystem.h&gt;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;frc/trajectory/TrajectoryUtil.h&gt;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;wpi/Path.h&gt;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_swerve_chassis_8h.html">subsys/SwerveChassis.h</a>&gt;</span><span class="comment">//Geo3</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;frc/controller/RamseteController.h&gt;</span> <span class="comment">//geo3</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//FRC,WPI Includes</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;wpi/SmallString.h&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;wpi/Path.h&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;wpi/math&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;frc/geometry/Pose2d.h&gt;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;frc/Filesystem.h&gt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;frc/trajectory/TrajectoryUtil.h&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;frc/trajectory/TrajectoryConfig.h&gt;</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">class </span><a class="code" href="class_swerve_chassis.html">SwerveChassis</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="namespacefrc.html">   38</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacefrc.html">frc</a></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">class </span>Timer;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;frc/controller/RamseteController.h&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;frc/controller/HolonomicDriveController.h&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;frc/Timer.h&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;frc/estimator/SwerveDrivePoseEstimator.h&gt;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_swerve_chassis_factory_8h.html">subsys/SwerveChassisFactory.h</a>&gt;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_swerve_module_8h.html">subsys/SwerveModule.h</a>&gt;</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_drive_path.html">   44</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_drive_path.html">DrivePath</a> : <span class="keyword">public</span> <a class="code" href="class_i_primitive.html">IPrimitive</a></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="class_drive_path.html#a84833583a44d07e0975a554ed50929c1">DrivePath</a>();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_drive_path.html#a59eea710dc71d912523ef186b1d83866">   49</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_drive_path.html#a59eea710dc71d912523ef186b1d83866">~DrivePath</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_drive_path.html#a270a9c18ee5521cfbcf2a603ad3f6746">Init</a>(<a class="code" href="class_primitive_params.html">PrimitiveParams</a>* params) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_drive_path.html#a757cb21398077f9d8323c085e975c58b">Run</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_drive_path.html#af815e61f6e8f1113bbb740ec13ce1cf7">IsDone</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">//Geo////////////////////////////////////////////////////////////////////</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_drive_path.html#a3ba34094b1cf6a1f45bdb5c90c7696f7">   56</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_drive_path.html#a3ba34094b1cf6a1f45bdb5c90c7696f7">UpdateOdometry</a>();</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="class_drive_path.html#a02635c7e28ae2deea59116d19609b6b4">   57</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_drive_path.html#a02635c7e28ae2deea59116d19609b6b4">ResetOdometry</a>(<span class="keyword">const</span> frc::Pose2d&amp; pose);</div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="class_drive_path.html#a1247025ca2fa3b5f3a2ad00f8de97b75">   58</a></span>&#160;        frc::Pose2d <a class="code" href="class_drive_path.html#a1247025ca2fa3b5f3a2ad00f8de97b75">GetPose</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_drive_path.html#a3a94b925d271be8bf9381726d24fefe0">   60</a></span>&#160;        <span class="keyword">public</span>: <span class="keywordtype">bool</span> <a class="code" href="class_drive_path.html#a3a94b925d271be8bf9381726d24fefe0">RobotStopped</a>(frc::Pose2d CurPos,frc::Pose2d PrevPos);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            std::shared_ptr&lt;SwerveChassis&gt; m_chassis;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            std::unique_ptr&lt;frc::Timer&gt; m_timer;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">class </span><a class="code" href="class_swerve_chassis.html">SwerveChassis</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacefrc.html">frc</a></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">class </span>Timer;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_drive_path.html">   50</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_drive_path.html">DrivePath</a> : <span class="keyword">public</span> <a class="code" href="class_i_primitive.html">IPrimitive</a></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="class_drive_path.html#a84833583a44d07e0975a554ed50929c1">DrivePath</a>();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_drive_path.html#a59eea710dc71d912523ef186b1d83866">   55</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_drive_path.html#a59eea710dc71d912523ef186b1d83866">~DrivePath</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_drive_path.html#a270a9c18ee5521cfbcf2a603ad3f6746">Init</a>(<a class="code" href="class_primitive_params.html">PrimitiveParams</a> *params) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_drive_path.html#a757cb21398077f9d8323c085e975c58b">Run</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_drive_path.html#af815e61f6e8f1113bbb740ec13ce1cf7">IsDone</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">bool</span> IsSamePose(frc::Pose2d, frc::Pose2d); <span class="comment">// routine to check for motion</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> GetTrajectory(std::string  path);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> CalcCurrentAndDesiredStates();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordtype">double</span>                   m_maxTime;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keywordtype">double</span>                   m_newTargetAngle;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordtype">double</span>                   m_distanceToAngleConversion;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            frc::Pose2d              m_currentChassisPosition;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            frc::Trajectory          m_trajectory;  <span class="comment">//geo3</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            frc::RamseteController   m_ramseteController;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordtype">bool</span>                     m_reverse = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordtype">bool</span>                     m_isDone = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordtype">float</span>                    m_driveSpeed;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <a class="code" href="_primitive_enums_8h.html#a35fa04dbcd6e8ebd76550c9b14ade0dc">PRIMITIVE_IDENTIFIER</a>     m_mode;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            units::degree_t          m_targetAngle;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            units::degree_t          m_relativeAngle;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            frc::TrapezoidProfile&lt;units::meters&gt;::State m_goal;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            frc::TrapezoidProfile&lt;units::meters&gt;::State m_setpoint;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            frc::TrapezoidProfile&lt;units::meters&gt;::Constraints m_constraints;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;};</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    std::shared_ptr&lt;SwerveChassis&gt;          m_chassis;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    std::unique_ptr&lt;frc::Timer&gt;             m_timer;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    frc::Pose2d                             m_currentChassisPosition;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    frc::Trajectory                         m_trajectory;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">bool</span>                                    m_runHoloController;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    frc::RamseteController                  m_ramseteController;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    frc::HolonomicDriveController           m_holoController;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    frc::Pose2d                             m_PrevPos;          <span class="comment">// previous position of robot for compare to current position.</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    std::unique_ptr&lt;frc::Timer&gt;             m_PosChgTimer;      <span class="comment">// scan time for position change</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">int</span>                                     m_timesRun;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    frc::Pose2d                             m_targetPose;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">double</span>                                  m_deltaX;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">double</span>                                  m_deltaY;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    std::vector&lt;frc::Trajectory::State&gt;     m_trajectoryStates;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    frc::Trajectory::State                  m_desiredState;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_drive_path_html"><div class="ttname"><a href="class_drive_path.html">DrivePath</a></div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8h_source.html#l00044">DrivePath.h:45</a></div></div>
-<div class="ttc" id="a_primitive_enums_8h_html_a35fa04dbcd6e8ebd76550c9b14ade0dc"><div class="ttname"><a href="_primitive_enums_8h.html#a35fa04dbcd6e8ebd76550c9b14ade0dc">PRIMITIVE_IDENTIFIER</a></div><div class="ttdeci">PRIMITIVE_IDENTIFIER</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_enums_8h_source.html#l00013">PrimitiveEnums.h:14</a></div></div>
+<div class="ttc" id="aclass_drive_path_html"><div class="ttname"><a href="class_drive_path.html">DrivePath</a></div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8h_source.html#l00050">DrivePath.h:51</a></div></div>
 <div class="ttc" id="a_i_primitive_8h_html"><div class="ttname"><a href="_i_primitive_8h.html">IPrimitive.h</a></div></div>
-<div class="ttc" id="aclass_drive_path_html_a1247025ca2fa3b5f3a2ad00f8de97b75"><div class="ttname"><a href="class_drive_path.html#a1247025ca2fa3b5f3a2ad00f8de97b75">DrivePath::GetPose</a></div><div class="ttdeci">frc::Pose2d GetPose() const</div></div>
+<div class="ttc" id="a_swerve_module_8h_html"><div class="ttname"><a href="_swerve_module_8h.html">SwerveModule.h</a></div></div>
 <div class="ttc" id="aclass_i_primitive_html"><div class="ttname"><a href="class_i_primitive.html">IPrimitive</a></div><div class="ttdef"><b>Definition:</b> <a href="_i_primitive_8h_source.html#l00005">IPrimitive.h:6</a></div></div>
-<div class="ttc" id="aclass_primitive_params_html"><div class="ttname"><a href="class_primitive_params.html">PrimitiveParams</a></div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8h_source.html#l00021">PrimitiveParams.h:22</a></div></div>
-<div class="ttc" id="a_swerve_chassis_8h_html"><div class="ttname"><a href="_swerve_chassis_8h.html">SwerveChassis.h</a></div></div>
+<div class="ttc" id="aclass_primitive_params_html"><div class="ttname"><a href="class_primitive_params.html">PrimitiveParams</a></div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8h_source.html#l00034">PrimitiveParams.h:35</a></div></div>
 <div class="ttc" id="aclass_drive_path_html_a59eea710dc71d912523ef186b1d83866"><div class="ttname"><a href="class_drive_path.html#a59eea710dc71d912523ef186b1d83866">DrivePath::~DrivePath</a></div><div class="ttdeci">virtual ~DrivePath()=default</div></div>
-<div class="ttc" id="aclass_drive_path_html_a3ba34094b1cf6a1f45bdb5c90c7696f7"><div class="ttname"><a href="class_drive_path.html#a3ba34094b1cf6a1f45bdb5c90c7696f7">DrivePath::UpdateOdometry</a></div><div class="ttdeci">void UpdateOdometry()</div></div>
-<div class="ttc" id="aclass_drive_path_html_a84833583a44d07e0975a554ed50929c1"><div class="ttname"><a href="class_drive_path.html#a84833583a44d07e0975a554ed50929c1">DrivePath::DrivePath</a></div><div class="ttdeci">DrivePath()</div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8cpp_source.html#l00053">DrivePath.cpp:53</a></div></div>
-<div class="ttc" id="aclass_swerve_chassis_html"><div class="ttname"><a href="class_swerve_chassis.html">SwerveChassis</a></div><div class="ttdef"><b>Definition:</b> <a href="_swerve_chassis_8h_source.html#l00039">SwerveChassis.h:40</a></div></div>
-<div class="ttc" id="aclass_drive_path_html_a270a9c18ee5521cfbcf2a603ad3f6746"><div class="ttname"><a href="class_drive_path.html#a270a9c18ee5521cfbcf2a603ad3f6746">DrivePath::Init</a></div><div class="ttdeci">void Init(PrimitiveParams *params) override</div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8cpp_source.html#l00061">DrivePath.cpp:61</a></div></div>
-<div class="ttc" id="aclass_drive_path_html_a02635c7e28ae2deea59116d19609b6b4"><div class="ttname"><a href="class_drive_path.html#a02635c7e28ae2deea59116d19609b6b4">DrivePath::ResetOdometry</a></div><div class="ttdeci">void ResetOdometry(const frc::Pose2d &amp;pose)</div></div>
-<div class="ttc" id="anamespacefrc_html"><div class="ttname"><a href="namespacefrc.html">frc</a></div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8h_source.html#l00038">DrivePath.h:39</a></div></div>
-<div class="ttc" id="aclass_drive_path_html_a3a94b925d271be8bf9381726d24fefe0"><div class="ttname"><a href="class_drive_path.html#a3a94b925d271be8bf9381726d24fefe0">DrivePath::RobotStopped</a></div><div class="ttdeci">bool RobotStopped(frc::Pose2d CurPos, frc::Pose2d PrevPos)</div></div>
-<div class="ttc" id="aclass_drive_path_html_a757cb21398077f9d8323c085e975c58b"><div class="ttname"><a href="class_drive_path.html#a757cb21398077f9d8323c085e975c58b">DrivePath::Run</a></div><div class="ttdeci">void Run() override</div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8cpp_source.html#l00080">DrivePath.cpp:80</a></div></div>
-<div class="ttc" id="aclass_drive_path_html_af815e61f6e8f1113bbb740ec13ce1cf7"><div class="ttname"><a href="class_drive_path.html#af815e61f6e8f1113bbb740ec13ce1cf7">DrivePath::IsDone</a></div><div class="ttdeci">bool IsDone() override</div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8cpp_source.html#l00096">DrivePath.cpp:96</a></div></div>
+<div class="ttc" id="a_swerve_chassis_factory_8h_html"><div class="ttname"><a href="_swerve_chassis_factory_8h.html">SwerveChassisFactory.h</a></div></div>
+<div class="ttc" id="aclass_drive_path_html_a84833583a44d07e0975a554ed50929c1"><div class="ttname"><a href="class_drive_path.html#a84833583a44d07e0975a554ed50929c1">DrivePath::DrivePath</a></div><div class="ttdeci">DrivePath()</div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8cpp_source.html#l00031">DrivePath.cpp:31</a></div></div>
+<div class="ttc" id="aclass_swerve_chassis_html"><div class="ttname"><a href="class_swerve_chassis.html">SwerveChassis</a></div><div class="ttdef"><b>Definition:</b> <a href="_swerve_chassis_8h_source.html#l00041">SwerveChassis.h:42</a></div></div>
+<div class="ttc" id="aclass_drive_path_html_a270a9c18ee5521cfbcf2a603ad3f6746"><div class="ttname"><a href="class_drive_path.html#a270a9c18ee5521cfbcf2a603ad3f6746">DrivePath::Init</a></div><div class="ttdeci">void Init(PrimitiveParams *params) override</div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8cpp_source.html#l00058">DrivePath.cpp:58</a></div></div>
+<div class="ttc" id="a_primitive_params_8h_html"><div class="ttname"><a href="_primitive_params_8h.html">PrimitiveParams.h</a></div></div>
+<div class="ttc" id="anamespacefrc_html"><div class="ttname"><a href="namespacefrc.html">frc</a></div><div class="ttdef"><b>Definition:</b> <a href="_do_nothing_8h_source.html#l00033">DoNothing.h:34</a></div></div>
+<div class="ttc" id="aclass_drive_path_html_a757cb21398077f9d8323c085e975c58b"><div class="ttname"><a href="class_drive_path.html#a757cb21398077f9d8323c085e975c58b">DrivePath::Run</a></div><div class="ttdeci">void Run() override</div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8cpp_source.html#l00098">DrivePath.cpp:98</a></div></div>
+<div class="ttc" id="aclass_drive_path_html_af815e61f6e8f1113bbb740ec13ce1cf7"><div class="ttname"><a href="class_drive_path.html#af815e61f6e8f1113bbb740ec13ce1cf7">DrivePath::IsDone</a></div><div class="ttdeci">bool IsDone() override</div><div class="ttdef"><b>Definition:</b> <a href="_drive_path_8cpp_source.html#l00129">DrivePath.cpp:129</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_9c09812115232a9059d6bb0fb4b8b934.html">auton</a></li><li class="navelem"><a class="el" href="dir_ea26b0ce141fddf72ba26aefec00180f.html">primitives</a></li><li class="navelem"><a class="el" href="_drive_path_8h.html">DrivePath.h</a></li>
+    <li class="navelem"><a class="el" href="dir_4a8796b0ba1d3dc122873832137fbe4e.html">GitRepos</a></li><li class="navelem"><a class="el" href="dir_1c47665bf58b31faa465c1927c1a00b8.html">2021SwerveBot</a></li><li class="navelem"><a class="el" href="dir_4c5ca149a7966e928c927d1b502f4c6f.html">src</a></li><li class="navelem"><a class="el" href="dir_6d6810671ff2e85cbf46bcf7f794863c.html">main</a></li><li class="navelem"><a class="el" href="dir_62e39780e9d5ee1b2eb3d29e32dcab01.html">cpp</a></li><li class="navelem"><a class="el" href="dir_3a0cb2a33dadc2d9a9aca573ea9319fa.html">auton</a></li><li class="navelem"><a class="el" href="dir_dd5b97871da39df0370a04d37fbdb7ee.html">primitives</a></li><li class="navelem"><a class="el" href="_drive_path_8h.html">DrivePath.h</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

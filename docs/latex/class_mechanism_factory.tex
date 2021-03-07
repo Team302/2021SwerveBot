@@ -9,17 +9,17 @@
 \item 
 void \mbox{\hyperlink{class_mechanism_factory_a8e92b034bf7f73accdd59f8b37b8b3e9}{Create\+I\+Mechanism}} (\mbox{\hyperlink{class_mechanism_types_adad17689ea795c3d65e2062bdc09284b}{Mechanism\+Types\+::\+M\+E\+C\+H\+A\+N\+I\+S\+M\+\_\+\+T\+Y\+PE}} type, const \mbox{\hyperlink{_i_dragon_motor_controller_map_8h_a36a6214ec089416c4f6b97db3690d9b5}{I\+Dragon\+Motor\+Controller\+Map}} \&motor\+Controllers, const \mbox{\hyperlink{_servo_map_8h_ab3699451cd5d836195032aae194f2008}{Servo\+Map}} \&servos, const \mbox{\hyperlink{_digital_input_map_8h_ae1558090bfb60f7bb516b6c7ff3cd307}{Digital\+Input\+Map}} \&digital\+Inputs, std\+::shared\+\_\+ptr$<$ ctre\+::phoenix\+::sensors\+::\+C\+A\+N\+Coder $>$ can\+Coder)
 \begin{DoxyCompactList}\small\item\em create the requested mechanism \end{DoxyCompactList}\item 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_ball_transfer}{Ball\+Transfer}} $>$ \mbox{\hyperlink{class_mechanism_factory_a555846d089ee577450428786984a9a21}{Get\+Ball\+Transfer}} () const
-\item 
 std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_intake}{Intake}} $>$ \mbox{\hyperlink{class_mechanism_factory_a68a830e2a93967e8bd7b67fc8ac05c83}{Get\+Intake}} () const
 \item 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_intake}{Intake}} $>$ \mbox{\hyperlink{class_mechanism_factory_ad11fcaa30b2d77f70ab3711267c4e86f}{Get\+Intake2}} () const
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_ball_hopper}{Ball\+Hopper}} $>$ \mbox{\hyperlink{class_mechanism_factory_a4add63022b0a7acf595cab2932a01ac0}{Get\+Ball\+Hopper}} () const
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_ball_transfer}{Ball\+Transfer}} $>$ \mbox{\hyperlink{class_mechanism_factory_a555846d089ee577450428786984a9a21}{Get\+Ball\+Transfer}} () const
 \item 
 std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_shooter}{Shooter}} $>$ \mbox{\hyperlink{class_mechanism_factory_ac6367e5fa9b237385a492cd14c216816}{Get\+Shooter}} () const
 \item 
-std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_shooter_hood}{Shooter\+Hood}} $>$ \mbox{\hyperlink{class_mechanism_factory_a30bf637747d63f5f3bf86da1462ab3dd}{Get\+Shooter\+Hood}} () const
-\item 
 std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_turret}{Turret}} $>$ \mbox{\hyperlink{class_mechanism_factory_a4d6057325cf48bb971137d1227ea573c}{Get\+Turret}} () const
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_shooter_hood}{Shooter\+Hood}} $>$ \mbox{\hyperlink{class_mechanism_factory_a30bf637747d63f5f3bf86da1462ab3dd}{Get\+Shooter\+Hood}} () const
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -31,7 +31,7 @@ static \mbox{\hyperlink{class_mechanism_factory}{Mechanism\+Factory}} $\ast$ \mb
 \doxysubsection{Detailed Description}
 
 
-Definition at line 59 of file Mechanism\+Factory.\+h.
+Definition at line 62 of file Mechanism\+Factory.\+h.
 
 
 
@@ -57,12 +57,19 @@ Method\+: Create\+I\+Mechanism Description\+: Find or create the requested mecha
 \mbox{\texttt{ in}}  & {\em } & \\
 \hline
 \end{DoxyParams}
-case Mechanism\+Types\+::\+M\+E\+C\+H\+A\+N\+I\+S\+M\+\_\+\+T\+Y\+P\+E\+::\+S\+H\+O\+O\+T\+ER\+: \{ if ( m\+\_\+shooter.\+get() != nullptr ) \{ auto motor1 = Get\+Motor\+Controller( motor\+Controllers, Motor\+Controller\+Usage\+::\+M\+O\+T\+O\+R\+\_\+\+C\+O\+N\+T\+R\+O\+L\+L\+E\+R\+\_\+\+U\+S\+A\+G\+E\+::\+S\+H\+O\+O\+T\+E\+R\+\_\+1 ); auto motor2 = Get\+Motor\+Controller( motor\+Controllers, Motor\+Controller\+Usage\+::\+M\+O\+T\+O\+R\+\_\+\+C\+O\+N\+T\+R\+O\+L\+L\+E\+R\+\_\+\+U\+S\+A\+G\+E\+::\+S\+H\+O\+O\+T\+E\+R\+\_\+2 ); if ( motor1.\+get() != nullptr \&\& motor2.\+get() != nullptr ) \{ m\+\_\+shooter = make\+\_\+shared$<$\+Shooter$>$(motor1, motor2); \} \} else \{ found = true; \}
-
-\} break; ~\newline
-
+else if ( m\+\_\+intake2.\+get() == nullptr ) \{ m\+\_\+intake2 = make\+\_\+shared$<$\+Intake$>$( motor ); \mbox{\hyperlink{class_logger_ae85cfbef8b7e6940475a5012fa1935c6}{Logger\+::\+Get\+Logger()}}-\/$>$To\+Nt\+Table(string(\char`\"{}\+Mechanism\+Factory\char`\"{}), string(\char`\"{}\+Intake2\char`\"{}), string(\char`\"{}created\char`\"{})); \}
 
 Definition at line 94 of file Mechanism\+Factory.\+cpp.
+
+\mbox{\Hypertarget{class_mechanism_factory_a4add63022b0a7acf595cab2932a01ac0}\label{class_mechanism_factory_a4add63022b0a7acf595cab2932a01ac0}} 
+\index{MechanismFactory@{MechanismFactory}!GetBallHopper@{GetBallHopper}}
+\index{GetBallHopper@{GetBallHopper}!MechanismFactory@{MechanismFactory}}
+\doxysubsubsection{\texorpdfstring{GetBallHopper()}{GetBallHopper()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_ball_hopper}{Ball\+Hopper}}$>$ Mechanism\+Factory\+::\+Get\+Ball\+Hopper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 86 of file Mechanism\+Factory.\+h.
 
 \mbox{\Hypertarget{class_mechanism_factory_a555846d089ee577450428786984a9a21}\label{class_mechanism_factory_a555846d089ee577450428786984a9a21}} 
 \index{MechanismFactory@{MechanismFactory}!GetBallTransfer@{GetBallTransfer}}
@@ -72,7 +79,7 @@ Definition at line 94 of file Mechanism\+Factory.\+cpp.
 
 
 
-Definition at line 81 of file Mechanism\+Factory.\+h.
+Definition at line 87 of file Mechanism\+Factory.\+h.
 
 \mbox{\Hypertarget{class_mechanism_factory_a68a830e2a93967e8bd7b67fc8ac05c83}\label{class_mechanism_factory_a68a830e2a93967e8bd7b67fc8ac05c83}} 
 \index{MechanismFactory@{MechanismFactory}!GetIntake@{GetIntake}}
@@ -82,17 +89,7 @@ Definition at line 81 of file Mechanism\+Factory.\+h.
 
 
 
-Definition at line 82 of file Mechanism\+Factory.\+h.
-
-\mbox{\Hypertarget{class_mechanism_factory_ad11fcaa30b2d77f70ab3711267c4e86f}\label{class_mechanism_factory_ad11fcaa30b2d77f70ab3711267c4e86f}} 
-\index{MechanismFactory@{MechanismFactory}!GetIntake2@{GetIntake2}}
-\index{GetIntake2@{GetIntake2}!MechanismFactory@{MechanismFactory}}
-\doxysubsubsection{\texorpdfstring{GetIntake2()}{GetIntake2()}}
-{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_intake}{Intake}}$>$ Mechanism\+Factory\+::\+Get\+Intake2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line 83 of file Mechanism\+Factory.\+h.
+Definition at line 84 of file Mechanism\+Factory.\+h.
 
 \mbox{\Hypertarget{class_mechanism_factory_a11b20a573ca93c56cb5da66ac5cbd2c0}\label{class_mechanism_factory_a11b20a573ca93c56cb5da66ac5cbd2c0}} 
 \index{MechanismFactory@{MechanismFactory}!GetMechanismFactory@{GetMechanismFactory}}
@@ -102,7 +99,7 @@ Definition at line 83 of file Mechanism\+Factory.\+h.
 
 
 
-Definition at line 64 of file Mechanism\+Factory.\+cpp.
+Definition at line 62 of file Mechanism\+Factory.\+cpp.
 
 \mbox{\Hypertarget{class_mechanism_factory_ac6367e5fa9b237385a492cd14c216816}\label{class_mechanism_factory_ac6367e5fa9b237385a492cd14c216816}} 
 \index{MechanismFactory@{MechanismFactory}!GetShooter@{GetShooter}}
@@ -112,7 +109,7 @@ Definition at line 64 of file Mechanism\+Factory.\+cpp.
 
 
 
-Definition at line 84 of file Mechanism\+Factory.\+h.
+Definition at line 88 of file Mechanism\+Factory.\+h.
 
 \mbox{\Hypertarget{class_mechanism_factory_a30bf637747d63f5f3bf86da1462ab3dd}\label{class_mechanism_factory_a30bf637747d63f5f3bf86da1462ab3dd}} 
 \index{MechanismFactory@{MechanismFactory}!GetShooterHood@{GetShooterHood}}
@@ -122,7 +119,7 @@ Definition at line 84 of file Mechanism\+Factory.\+h.
 
 
 
-Definition at line 85 of file Mechanism\+Factory.\+h.
+Definition at line 91 of file Mechanism\+Factory.\+h.
 
 \mbox{\Hypertarget{class_mechanism_factory_a4d6057325cf48bb971137d1227ea573c}\label{class_mechanism_factory_a4d6057325cf48bb971137d1227ea573c}} 
 \index{MechanismFactory@{MechanismFactory}!GetTurret@{GetTurret}}
@@ -132,7 +129,7 @@ Definition at line 85 of file Mechanism\+Factory.\+h.
 
 
 
-Definition at line 87 of file Mechanism\+Factory.\+h.
+Definition at line 89 of file Mechanism\+Factory.\+h.
 
 
 

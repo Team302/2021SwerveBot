@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/auton/PrimitiveParams.cpp Source File</title>
+<title>Team 302 Swerve Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/auton/PrimitiveParams.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -85,122 +85,128 @@ $(document).ready(function(){initNavTree('_primitive_params_8cpp_source.html',''
 <div class="title">PrimitiveParams.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_primitive_params_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_primitive_enums_8h.html">auton/PrimitiveEnums.h</a>&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_primitive_params_8h.html">auton/PrimitiveParams.h</a>&gt;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_ball_manipulator_8h.html">states/BallManipulator.h</a>&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="class_primitive_params.html#ade81b5fcb5f42f73a9c15d7e0bf55ba9">    5</a></span>&#160;<a class="code" href="class_primitive_params.html#a294ec4f5898cdd78b4e23bdf0a9e78e3">PrimitiveParams::PrimitiveParams</a></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;(</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <a class="code" href="_primitive_enums_8h.html#a35fa04dbcd6e8ebd76550c9b14ade0dc">PRIMITIVE_IDENTIFIER</a>                                <span class="keywordtype">id</span>,</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keywordtype">float</span>                                               time,</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">float</span>                                               distance,</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keywordtype">float</span>                                               xLoc,</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordtype">float</span>                                               yLoc,</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">float</span>                                               heading,</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">float</span>                                               startDriveSpeed,</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">float</span>                                               endDriveSpeed,</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4">BallManipulator::BALL_MANIPULATOR_STATE</a>             ballState,</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">float</span>                                               turretAngle,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    std::string                                         pathName</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;):  <span class="comment">//Pass over parameters to class variables</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        m_id(id), <span class="comment">//Primitive ID</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        m_time(time),</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        m_distance(distance),</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        m_xLoc( xLoc ),</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        m_yLoc( yLoc ),</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        m_heading(heading),</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        m_startDriveSpeed( startDriveSpeed ),</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        m_endDriveSpeed( endDriveSpeed ),</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        m_ballState( ballState ),</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        m_turretAngle( turretAngle ),</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        m_pathName(pathName)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a6d1e129031049f3c94e1c131547fc10a">   34</a></span>&#160;<a class="code" href="_primitive_enums_8h.html#a35fa04dbcd6e8ebd76550c9b14ade0dc">PRIMITIVE_IDENTIFIER</a> <a class="code" href="class_primitive_params.html#a6d1e129031049f3c94e1c131547fc10a">PrimitiveParams::GetID</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">return</span> m_id;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a478d763e9de6526e13de4d23d1dca71c">   39</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#a478d763e9de6526e13de4d23d1dca71c">PrimitiveParams::GetTime</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">return</span> m_time;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_primitive_params.html#af2c666b36d1b271b03c05c4cf51a7bab">   44</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#af2c666b36d1b271b03c05c4cf51a7bab">PrimitiveParams::GetDistance</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> m_distance;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a692dc9278c6d9ecfe0dc7951afff516a">   49</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#a692dc9278c6d9ecfe0dc7951afff516a">PrimitiveParams::GetXLocation</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">return</span> m_xLoc;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a598e9b3b72f7c5968cdb0a569c982f3f">   54</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#a598e9b3b72f7c5968cdb0a569c982f3f">PrimitiveParams::GetYLocation</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> m_yLoc;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_primitive_params.html#ab7908eab72640338306dbaf382e8646a">   59</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#ab7908eab72640338306dbaf382e8646a">PrimitiveParams::GetHeading</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">return</span> m_heading;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="class_primitive_params.html#aef9f99610cc71c25d4844d731cc8c6a2">   64</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#aef9f99610cc71c25d4844d731cc8c6a2">PrimitiveParams::GetDriveSpeed</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">return</span> m_startDriveSpeed;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a9b452487c360f320951b178a23300fe2">   69</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#a9b452487c360f320951b178a23300fe2">PrimitiveParams::GetEndDriveSpeed</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">return</span> m_endDriveSpeed;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="class_primitive_params.html#acae304c2aa2134285d7feca227e799bc">   74</a></span>&#160;<a class="code" href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4">BallManipulator::BALL_MANIPULATOR_STATE</a> <a class="code" href="class_primitive_params.html#acae304c2aa2134285d7feca227e799bc">PrimitiveParams::GetBallState</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">return</span> m_ballState;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a956f05573b6157c4418eb9bafa86470e">   79</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#a956f05573b6157c4418eb9bafa86470e">PrimitiveParams::GetTurretAngle</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">return</span> m_turretAngle;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">//Setters</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a9338f36c76fd412ec8d05dcfc300b18d">   85</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_primitive_params.html#a9338f36c76fd412ec8d05dcfc300b18d">PrimitiveParams::SetDistance</a>(<span class="keywordtype">float</span> distance)</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;{</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    m_distance = distance;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="class_primitive_params.html#ac3a50b019a206836725bdd496aaac3da">   89</a></span>&#160;std::string <a class="code" href="class_primitive_params.html#ac3a50b019a206836725bdd496aaac3da">PrimitiveParams::GetPathName</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">return</span> m_pathName;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
+<a href="_primitive_params_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//====================================================================================================================================================</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Copyright 2020 Lake Orion Robotics FIRST Team 302</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;),</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// OR OTHER DEALINGS IN THE SOFTWARE.</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//====================================================================================================================================================</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_primitive_enums_8h.html">auton/PrimitiveEnums.h</a>&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_primitive_params_8h.html">auton/PrimitiveParams.h</a>&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a330a5824e234615f29cc3bc904694ec1">   20</a></span>&#160;<a class="code" href="class_primitive_params.html#a294ec4f5898cdd78b4e23bdf0a9e78e3">PrimitiveParams::PrimitiveParams</a></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;(</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="_primitive_enums_8h.html#a35fa04dbcd6e8ebd76550c9b14ade0dc">PRIMITIVE_IDENTIFIER</a>                                <span class="keywordtype">id</span>,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">float</span>                                               time,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">float</span>                                               distance,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">float</span>                                               xLoc,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">float</span>                                               yLoc,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">float</span>                                               heading,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">float</span>                                               startDriveSpeed,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">float</span>                                               endDriveSpeed,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">bool</span>                                                runIntake,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    std::string                                         pathName</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;):  <span class="comment">//Pass over parameters to class variables</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        m_id(id), <span class="comment">//Primitive ID</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        m_time(time),</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        m_distance(distance),</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        m_xLoc( xLoc ),</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        m_yLoc( yLoc ),</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        m_heading(heading),</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        m_startDriveSpeed( startDriveSpeed ),</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        m_endDriveSpeed( endDriveSpeed ),</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        m_pathName ( pathName),</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        m_runIntake ( runIntake )</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a6d1e129031049f3c94e1c131547fc10a">   46</a></span>&#160;<a class="code" href="_primitive_enums_8h.html#a35fa04dbcd6e8ebd76550c9b14ade0dc">PRIMITIVE_IDENTIFIER</a> <a class="code" href="class_primitive_params.html#a6d1e129031049f3c94e1c131547fc10a">PrimitiveParams::GetID</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">return</span> m_id;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a478d763e9de6526e13de4d23d1dca71c">   51</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#a478d763e9de6526e13de4d23d1dca71c">PrimitiveParams::GetTime</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">return</span> m_time;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_primitive_params.html#af2c666b36d1b271b03c05c4cf51a7bab">   56</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#af2c666b36d1b271b03c05c4cf51a7bab">PrimitiveParams::GetDistance</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> m_distance;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a692dc9278c6d9ecfe0dc7951afff516a">   61</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#a692dc9278c6d9ecfe0dc7951afff516a">PrimitiveParams::GetXLocation</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">return</span> m_xLoc;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a598e9b3b72f7c5968cdb0a569c982f3f">   66</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#a598e9b3b72f7c5968cdb0a569c982f3f">PrimitiveParams::GetYLocation</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">return</span> m_yLoc;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="class_primitive_params.html#ab7908eab72640338306dbaf382e8646a">   71</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#ab7908eab72640338306dbaf382e8646a">PrimitiveParams::GetHeading</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> m_heading;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="class_primitive_params.html#aef9f99610cc71c25d4844d731cc8c6a2">   76</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#aef9f99610cc71c25d4844d731cc8c6a2">PrimitiveParams::GetDriveSpeed</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> m_startDriveSpeed;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a9b452487c360f320951b178a23300fe2">   81</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="class_primitive_params.html#a9b452487c360f320951b178a23300fe2">PrimitiveParams::GetEndDriveSpeed</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">return</span> m_endDriveSpeed;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="class_primitive_params.html#ac3a50b019a206836725bdd496aaac3da">   87</a></span>&#160;std::string <a class="code" href="class_primitive_params.html#ac3a50b019a206836725bdd496aaac3da">PrimitiveParams::GetPathName</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">return</span> m_pathName;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a2778ce15f7ca0bb45591ef1133a944d9">   92</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_primitive_params.html#a2778ce15f7ca0bb45591ef1133a944d9">PrimitiveParams::GetIntakeState</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordflow">return</span> m_runIntake;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">//Setters</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="class_primitive_params.html#a9338f36c76fd412ec8d05dcfc300b18d">   98</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_primitive_params.html#a9338f36c76fd412ec8d05dcfc300b18d">PrimitiveParams::SetDistance</a>(<span class="keywordtype">float</span> distance)</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;{</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    m_distance = distance;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_primitive_params_html_a294ec4f5898cdd78b4e23bdf0a9e78e3"><div class="ttname"><a href="class_primitive_params.html#a294ec4f5898cdd78b4e23bdf0a9e78e3">PrimitiveParams::PrimitiveParams</a></div><div class="ttdeci">PrimitiveParams()=delete</div></div>
-<div class="ttc" id="a_primitive_enums_8h_html_a35fa04dbcd6e8ebd76550c9b14ade0dc"><div class="ttname"><a href="_primitive_enums_8h.html#a35fa04dbcd6e8ebd76550c9b14ade0dc">PRIMITIVE_IDENTIFIER</a></div><div class="ttdeci">PRIMITIVE_IDENTIFIER</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_enums_8h_source.html#l00013">PrimitiveEnums.h:14</a></div></div>
-<div class="ttc" id="a_ball_manipulator_8h_html"><div class="ttname"><a href="_ball_manipulator_8h.html">BallManipulator.h</a></div></div>
-<div class="ttc" id="aclass_primitive_params_html_a9338f36c76fd412ec8d05dcfc300b18d"><div class="ttname"><a href="class_primitive_params.html#a9338f36c76fd412ec8d05dcfc300b18d">PrimitiveParams::SetDistance</a></div><div class="ttdeci">void SetDistance(float distance)</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00085">PrimitiveParams.cpp:85</a></div></div>
-<div class="ttc" id="aclass_primitive_params_html_a598e9b3b72f7c5968cdb0a569c982f3f"><div class="ttname"><a href="class_primitive_params.html#a598e9b3b72f7c5968cdb0a569c982f3f">PrimitiveParams::GetYLocation</a></div><div class="ttdeci">float GetYLocation() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00054">PrimitiveParams.cpp:54</a></div></div>
-<div class="ttc" id="aclass_primitive_params_html_a6d1e129031049f3c94e1c131547fc10a"><div class="ttname"><a href="class_primitive_params.html#a6d1e129031049f3c94e1c131547fc10a">PrimitiveParams::GetID</a></div><div class="ttdeci">PRIMITIVE_IDENTIFIER GetID() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00034">PrimitiveParams.cpp:34</a></div></div>
-<div class="ttc" id="aclass_primitive_params_html_ac3a50b019a206836725bdd496aaac3da"><div class="ttname"><a href="class_primitive_params.html#ac3a50b019a206836725bdd496aaac3da">PrimitiveParams::GetPathName</a></div><div class="ttdeci">std::string GetPathName() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00089">PrimitiveParams.cpp:89</a></div></div>
-<div class="ttc" id="aclass_primitive_params_html_a956f05573b6157c4418eb9bafa86470e"><div class="ttname"><a href="class_primitive_params.html#a956f05573b6157c4418eb9bafa86470e">PrimitiveParams::GetTurretAngle</a></div><div class="ttdeci">float GetTurretAngle() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00079">PrimitiveParams.cpp:79</a></div></div>
-<div class="ttc" id="aclass_primitive_params_html_a9b452487c360f320951b178a23300fe2"><div class="ttname"><a href="class_primitive_params.html#a9b452487c360f320951b178a23300fe2">PrimitiveParams::GetEndDriveSpeed</a></div><div class="ttdeci">float GetEndDriveSpeed() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00069">PrimitiveParams.cpp:69</a></div></div>
-<div class="ttc" id="aclass_primitive_params_html_ab7908eab72640338306dbaf382e8646a"><div class="ttname"><a href="class_primitive_params.html#ab7908eab72640338306dbaf382e8646a">PrimitiveParams::GetHeading</a></div><div class="ttdeci">float GetHeading() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00059">PrimitiveParams.cpp:59</a></div></div>
-<div class="ttc" id="aclass_primitive_params_html_aef9f99610cc71c25d4844d731cc8c6a2"><div class="ttname"><a href="class_primitive_params.html#aef9f99610cc71c25d4844d731cc8c6a2">PrimitiveParams::GetDriveSpeed</a></div><div class="ttdeci">float GetDriveSpeed() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00064">PrimitiveParams.cpp:64</a></div></div>
-<div class="ttc" id="aclass_primitive_params_html_a692dc9278c6d9ecfe0dc7951afff516a"><div class="ttname"><a href="class_primitive_params.html#a692dc9278c6d9ecfe0dc7951afff516a">PrimitiveParams::GetXLocation</a></div><div class="ttdeci">float GetXLocation() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00049">PrimitiveParams.cpp:49</a></div></div>
-<div class="ttc" id="aclass_primitive_params_html_af2c666b36d1b271b03c05c4cf51a7bab"><div class="ttname"><a href="class_primitive_params.html#af2c666b36d1b271b03c05c4cf51a7bab">PrimitiveParams::GetDistance</a></div><div class="ttdeci">float GetDistance() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00044">PrimitiveParams.cpp:44</a></div></div>
-<div class="ttc" id="aclass_primitive_params_html_a478d763e9de6526e13de4d23d1dca71c"><div class="ttname"><a href="class_primitive_params.html#a478d763e9de6526e13de4d23d1dca71c">PrimitiveParams::GetTime</a></div><div class="ttdeci">float GetTime() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00039">PrimitiveParams.cpp:39</a></div></div>
-<div class="ttc" id="aclass_ball_manipulator_html_a91bf71119c5fecb46b41a90485f7a9a4"><div class="ttname"><a href="class_ball_manipulator.html#a91bf71119c5fecb46b41a90485f7a9a4">BallManipulator::BALL_MANIPULATOR_STATE</a></div><div class="ttdeci">BALL_MANIPULATOR_STATE</div><div class="ttdef"><b>Definition:</b> <a href="_ball_manipulator_8h_source.html#l00037">BallManipulator.h:38</a></div></div>
+<div class="ttc" id="a_primitive_enums_8h_html_a35fa04dbcd6e8ebd76550c9b14ade0dc"><div class="ttname"><a href="_primitive_enums_8h.html#a35fa04dbcd6e8ebd76550c9b14ade0dc">PRIMITIVE_IDENTIFIER</a></div><div class="ttdeci">PRIMITIVE_IDENTIFIER</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_enums_8h_source.html#l00027">PrimitiveEnums.h:28</a></div></div>
+<div class="ttc" id="aclass_primitive_params_html_a9338f36c76fd412ec8d05dcfc300b18d"><div class="ttname"><a href="class_primitive_params.html#a9338f36c76fd412ec8d05dcfc300b18d">PrimitiveParams::SetDistance</a></div><div class="ttdeci">void SetDistance(float distance)</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00098">PrimitiveParams.cpp:98</a></div></div>
+<div class="ttc" id="aclass_primitive_params_html_a598e9b3b72f7c5968cdb0a569c982f3f"><div class="ttname"><a href="class_primitive_params.html#a598e9b3b72f7c5968cdb0a569c982f3f">PrimitiveParams::GetYLocation</a></div><div class="ttdeci">float GetYLocation() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00066">PrimitiveParams.cpp:66</a></div></div>
+<div class="ttc" id="aclass_primitive_params_html_a6d1e129031049f3c94e1c131547fc10a"><div class="ttname"><a href="class_primitive_params.html#a6d1e129031049f3c94e1c131547fc10a">PrimitiveParams::GetID</a></div><div class="ttdeci">PRIMITIVE_IDENTIFIER GetID() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00046">PrimitiveParams.cpp:46</a></div></div>
+<div class="ttc" id="aclass_primitive_params_html_ac3a50b019a206836725bdd496aaac3da"><div class="ttname"><a href="class_primitive_params.html#ac3a50b019a206836725bdd496aaac3da">PrimitiveParams::GetPathName</a></div><div class="ttdeci">std::string GetPathName() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00087">PrimitiveParams.cpp:87</a></div></div>
+<div class="ttc" id="aclass_primitive_params_html_a2778ce15f7ca0bb45591ef1133a944d9"><div class="ttname"><a href="class_primitive_params.html#a2778ce15f7ca0bb45591ef1133a944d9">PrimitiveParams::GetIntakeState</a></div><div class="ttdeci">bool GetIntakeState() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00092">PrimitiveParams.cpp:92</a></div></div>
+<div class="ttc" id="aclass_primitive_params_html_a9b452487c360f320951b178a23300fe2"><div class="ttname"><a href="class_primitive_params.html#a9b452487c360f320951b178a23300fe2">PrimitiveParams::GetEndDriveSpeed</a></div><div class="ttdeci">float GetEndDriveSpeed() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00081">PrimitiveParams.cpp:81</a></div></div>
+<div class="ttc" id="aclass_primitive_params_html_ab7908eab72640338306dbaf382e8646a"><div class="ttname"><a href="class_primitive_params.html#ab7908eab72640338306dbaf382e8646a">PrimitiveParams::GetHeading</a></div><div class="ttdeci">float GetHeading() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00071">PrimitiveParams.cpp:71</a></div></div>
+<div class="ttc" id="aclass_primitive_params_html_aef9f99610cc71c25d4844d731cc8c6a2"><div class="ttname"><a href="class_primitive_params.html#aef9f99610cc71c25d4844d731cc8c6a2">PrimitiveParams::GetDriveSpeed</a></div><div class="ttdeci">float GetDriveSpeed() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00076">PrimitiveParams.cpp:76</a></div></div>
+<div class="ttc" id="aclass_primitive_params_html_a692dc9278c6d9ecfe0dc7951afff516a"><div class="ttname"><a href="class_primitive_params.html#a692dc9278c6d9ecfe0dc7951afff516a">PrimitiveParams::GetXLocation</a></div><div class="ttdeci">float GetXLocation() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00061">PrimitiveParams.cpp:61</a></div></div>
+<div class="ttc" id="aclass_primitive_params_html_af2c666b36d1b271b03c05c4cf51a7bab"><div class="ttname"><a href="class_primitive_params.html#af2c666b36d1b271b03c05c4cf51a7bab">PrimitiveParams::GetDistance</a></div><div class="ttdeci">float GetDistance() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00056">PrimitiveParams.cpp:56</a></div></div>
+<div class="ttc" id="aclass_primitive_params_html_a478d763e9de6526e13de4d23d1dca71c"><div class="ttname"><a href="class_primitive_params.html#a478d763e9de6526e13de4d23d1dca71c">PrimitiveParams::GetTime</a></div><div class="ttdeci">float GetTime() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00051">PrimitiveParams.cpp:51</a></div></div>
 <div class="ttc" id="a_primitive_params_8h_html"><div class="ttname"><a href="_primitive_params_8h.html">PrimitiveParams.h</a></div></div>
 <div class="ttc" id="a_primitive_enums_8h_html"><div class="ttname"><a href="_primitive_enums_8h.html">PrimitiveEnums.h</a></div></div>
-<div class="ttc" id="aclass_primitive_params_html_acae304c2aa2134285d7feca227e799bc"><div class="ttname"><a href="class_primitive_params.html#acae304c2aa2134285d7feca227e799bc">PrimitiveParams::GetBallState</a></div><div class="ttdeci">BallManipulator::BALL_MANIPULATOR_STATE GetBallState() const</div><div class="ttdef"><b>Definition:</b> <a href="_primitive_params_8cpp_source.html#l00074">PrimitiveParams.cpp:74</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_9c09812115232a9059d6bb0fb4b8b934.html">auton</a></li><li class="navelem"><a class="el" href="_primitive_params_8cpp.html">PrimitiveParams.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_4a8796b0ba1d3dc122873832137fbe4e.html">GitRepos</a></li><li class="navelem"><a class="el" href="dir_1c47665bf58b31faa465c1927c1a00b8.html">2021SwerveBot</a></li><li class="navelem"><a class="el" href="dir_4c5ca149a7966e928c927d1b502f4c6f.html">src</a></li><li class="navelem"><a class="el" href="dir_6d6810671ff2e85cbf46bcf7f794863c.html">main</a></li><li class="navelem"><a class="el" href="dir_62e39780e9d5ee1b2eb3d29e32dcab01.html">cpp</a></li><li class="navelem"><a class="el" href="dir_3a0cb2a33dadc2d9a9aca573ea9319fa.html">auton</a></li><li class="navelem"><a class="el" href="_primitive_params_8cpp.html">PrimitiveParams.cpp</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

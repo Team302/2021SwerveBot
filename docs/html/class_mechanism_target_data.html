@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: MechanismTargetData Class Reference</title>
+<title>Team 302 Swerve Robot: MechanismTargetData Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -102,9 +102,9 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a39ee6396cf884252e81f4ad3d1555756"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mechanism_target_data.html#a39ee6396cf884252e81f4ad3d1555756">MechanismTargetData</a> (std::string state, std::string controller, double target, <a class="el" href="class_mechanism_target_data.html#a1bd7dca52842f28088b36d001b0ac125">SOLENOID</a> solenoid, std::string failoverController, double failoverTarget)</td></tr>
-<tr class="memdesc:a39ee6396cf884252e81f4ad3d1555756"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the <a class="el" href="class_control_data.html">ControlData</a> object that is used to control mechanisms.  <a href="class_mechanism_target_data.html#a39ee6396cf884252e81f4ad3d1555756">More...</a><br /></td></tr>
-<tr class="separator:a39ee6396cf884252e81f4ad3d1555756"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa26a21ae2e82abc24d301ffbf6ea9a78"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mechanism_target_data.html#aa26a21ae2e82abc24d301ffbf6ea9a78">MechanismTargetData</a> (std::string state, std::string controller, std::string controller2, double target, <a class="el" href="class_mechanism_target_data.html#a1bd7dca52842f28088b36d001b0ac125">SOLENOID</a> solenoid, double secondTarget)</td></tr>
+<tr class="memdesc:aa26a21ae2e82abc24d301ffbf6ea9a78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the <a class="el" href="class_control_data.html">ControlData</a> object that is used to control mechanisms.  <a href="class_mechanism_target_data.html#aa26a21ae2e82abc24d301ffbf6ea9a78">More...</a><br /></td></tr>
+<tr class="separator:aa26a21ae2e82abc24d301ffbf6ea9a78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2480a79704a3c9cb3625a90f2ce9de5f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mechanism_target_data.html#a2480a79704a3c9cb3625a90f2ce9de5f">MechanismTargetData</a> ()=delete</td></tr>
 <tr class="separator:a2480a79704a3c9cb3625a90f2ce9de5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65a02439c3c67324893f7dacc405f7a4"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mechanism_target_data.html#a65a02439c3c67324893f7dacc405f7a4">~MechanismTargetData</a> ()=default</td></tr>
@@ -118,21 +118,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a899cdcaf506a4385c9e81a6870d177f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_control_data.html">ControlData</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mechanism_target_data.html#a899cdcaf506a4385c9e81a6870d177f1">GetController</a> () const</td></tr>
 <tr class="memdesc:a899cdcaf506a4385c9e81a6870d177f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the controller.  <a href="class_mechanism_target_data.html#a899cdcaf506a4385c9e81a6870d177f1">More...</a><br /></td></tr>
 <tr class="separator:a899cdcaf506a4385c9e81a6870d177f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a739990f9ccf3393ccf0d3fe9783fa0c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_control_data.html">ControlData</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mechanism_target_data.html#a739990f9ccf3393ccf0d3fe9783fa0c8">GetController2</a> () const</td></tr>
+<tr class="memdesc:a739990f9ccf3393ccf0d3fe9783fa0c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the controller.  <a href="class_mechanism_target_data.html#a739990f9ccf3393ccf0d3fe9783fa0c8">More...</a><br /></td></tr>
+<tr class="separator:a739990f9ccf3393ccf0d3fe9783fa0c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ca5146630ae51b3040363631e4d684d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mechanism_target_data.html#a1ca5146630ae51b3040363631e4d684d">GetTarget</a> () const</td></tr>
 <tr class="memdesc:a1ca5146630ae51b3040363631e4d684d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the target value.  <a href="class_mechanism_target_data.html#a1ca5146630ae51b3040363631e4d684d">More...</a><br /></td></tr>
 <tr class="separator:a1ca5146630ae51b3040363631e4d684d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3573373ee47500efb618cbcbdc2e8405"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_mechanism_target_data.html#a1bd7dca52842f28088b36d001b0ac125">SOLENOID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mechanism_target_data.html#a3573373ee47500efb618cbcbdc2e8405">GetSolenoidState</a> () const</td></tr>
 <tr class="memdesc:a3573373ee47500efb618cbcbdc2e8405"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the solenoid state  <a href="class_mechanism_target_data.html#a3573373ee47500efb618cbcbdc2e8405">More...</a><br /></td></tr>
 <tr class="separator:a3573373ee47500efb618cbcbdc2e8405"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7a7bbd9670132cd60e9d1d51af1351e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mechanism_target_data.html#ac7a7bbd9670132cd60e9d1d51af1351e">GetFailoverControllerString</a> () const</td></tr>
-<tr class="memdesc:ac7a7bbd9670132cd60e9d1d51af1351e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the controller identifier.  <a href="class_mechanism_target_data.html#ac7a7bbd9670132cd60e9d1d51af1351e">More...</a><br /></td></tr>
-<tr class="separator:ac7a7bbd9670132cd60e9d1d51af1351e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab954eaca369aa57b67d107eedf0b9e70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_control_data.html">ControlData</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mechanism_target_data.html#ab954eaca369aa57b67d107eedf0b9e70">GetFailoverController</a> () const</td></tr>
-<tr class="memdesc:ab954eaca369aa57b67d107eedf0b9e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the controller.  <a href="class_mechanism_target_data.html#ab954eaca369aa57b67d107eedf0b9e70">More...</a><br /></td></tr>
-<tr class="separator:ab954eaca369aa57b67d107eedf0b9e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f83b49fd83c293c1443fcf031b7ad07"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mechanism_target_data.html#a1f83b49fd83c293c1443fcf031b7ad07">GetFailoverTarget</a> () const</td></tr>
-<tr class="memdesc:a1f83b49fd83c293c1443fcf031b7ad07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the target value.  <a href="class_mechanism_target_data.html#a1f83b49fd83c293c1443fcf031b7ad07">More...</a><br /></td></tr>
-<tr class="separator:a1f83b49fd83c293c1443fcf031b7ad07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a331aad2db0c39f3c347f2eb82d3a7034"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mechanism_target_data.html#a331aad2db0c39f3c347f2eb82d3a7034">GetSecondTarget</a> () const</td></tr>
+<tr class="memdesc:a331aad2db0c39f3c347f2eb82d3a7034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the target value.  <a href="class_mechanism_target_data.html#a331aad2db0c39f3c347f2eb82d3a7034">More...</a><br /></td></tr>
+<tr class="separator:a331aad2db0c39f3c347f2eb82d3a7034"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba4da6ec1b211b2f3d788cd6096502e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mechanism_target_data.html#aba4da6ec1b211b2f3d788cd6096502e3">Update</a> (std::vector&lt; <a class="el" href="class_control_data.html">ControlData</a> * &gt; data)</td></tr>
 <tr class="memdesc:aba4da6ec1b211b2f3d788cd6096502e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">update to include <a class="el" href="class_control_data.html">ControlData</a>  <a href="class_mechanism_target_data.html#aba4da6ec1b211b2f3d788cd6096502e3">More...</a><br /></td></tr>
 <tr class="separator:aba4da6ec1b211b2f3d788cd6096502e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,8 +160,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a39ee6396cf884252e81f4ad3d1555756"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39ee6396cf884252e81f4ad3d1555756">&#9670;&nbsp;</a></span>MechanismTargetData() <span class="overload">[1/2]</span></h2>
+<a id="aa26a21ae2e82abc24d301ffbf6ea9a78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa26a21ae2e82abc24d301ffbf6ea9a78">&#9670;&nbsp;</a></span>MechanismTargetData() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,6 +181,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>controller2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>target</em>, </td>
         </tr>
@@ -196,14 +199,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>failoverController</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>failoverTarget</em>&#160;</td>
+          <td class="paramname"><em>secondTarget</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -221,8 +218,7 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">target</td><td>- target value <br  />
  </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">solenoid</td><td>value </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">failovercontroller</td><td>- controller indentifer if in failover mode </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">failoverTarget</td><td>- target value if in failover mode </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">secondTarget</td><td>- a second target value that can be used for two independent motors </td></tr>
   </table>
   </dd>
 </dl>
@@ -306,7 +302,37 @@ Public Member Functions</h2></td></tr>
 <p>Retrieve the controller. </p>
 <dl class="section return"><dt>Returns</dt><dd>ControlData* controller </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00063">63</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00062">62</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
+
+</div>
+</div>
+<a id="a739990f9ccf3393ccf0d3fe9783fa0c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a739990f9ccf3393ccf0d3fe9783fa0c8">&#9670;&nbsp;</a></span>GetController2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_control_data.html">ControlData</a>* MechanismTargetData::GetController2 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retrieve the controller. </p>
+<dl class="section return"><dt>Returns</dt><dd>ControlData* controller </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00067">67</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
 
 </div>
 </div>
@@ -336,12 +362,12 @@ Public Member Functions</h2></td></tr>
 <p>Retrieve the controller identifier. </p>
 <dl class="section return"><dt>Returns</dt><dd>std::string controller indentifier </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00059">59</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00058">58</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
 
 </div>
 </div>
-<a id="ab954eaca369aa57b67d107eedf0b9e70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab954eaca369aa57b67d107eedf0b9e70">&#9670;&nbsp;</a></span>GetFailoverController()</h2>
+<a id="a331aad2db0c39f3c347f2eb82d3a7034"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a331aad2db0c39f3c347f2eb82d3a7034">&#9670;&nbsp;</a></span>GetSecondTarget()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -350,67 +376,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_control_data.html">ControlData</a>* MechanismTargetData::GetFailoverController </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Retrieve the controller. </p>
-<dl class="section return"><dt>Returns</dt><dd>ControlData* controller </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00079">79</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
-
-</div>
-</div>
-<a id="ac7a7bbd9670132cd60e9d1d51af1351e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7a7bbd9670132cd60e9d1d51af1351e">&#9670;&nbsp;</a></span>GetFailoverControllerString()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string MechanismTargetData::GetFailoverControllerString </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Retrieve the controller identifier. </p>
-<dl class="section return"><dt>Returns</dt><dd>std::string controller indentifier </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00075">75</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
-
-</div>
-</div>
-<a id="a1f83b49fd83c293c1443fcf031b7ad07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f83b49fd83c293c1443fcf031b7ad07">&#9670;&nbsp;</a></span>GetFailoverTarget()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double MechanismTargetData::GetFailoverTarget </td>
+          <td class="memname">double MechanismTargetData::GetSecondTarget </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -426,7 +392,7 @@ Public Member Functions</h2></td></tr>
 <p>Retrieve the target value. </p>
 <dl class="section return"><dt>Returns</dt><dd>double - target value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00083">83</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00079">79</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
 
 </div>
 </div>
@@ -456,7 +422,7 @@ Public Member Functions</h2></td></tr>
 <p>get the solenoid state </p>
 <dl class="section return"><dt>Returns</dt><dd>SOLENOID state of the solenoid </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00071">71</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00075">75</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
 
 </div>
 </div>
@@ -486,7 +452,7 @@ Public Member Functions</h2></td></tr>
 <p>Retrieve the state indentier string. </p>
 <dl class="section return"><dt>Returns</dt><dd>std::string state identifier </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00055">55</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00054">54</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
 
 </div>
 </div>
@@ -516,7 +482,7 @@ Public Member Functions</h2></td></tr>
 <p>Retrieve the target value. </p>
 <dl class="section return"><dt>Returns</dt><dd>double - target value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00067">67</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mechanism_target_data_8h_source.html#l00071">71</a> of file <a class="el" href="_mechanism_target_data_8h_source.html">MechanismTargetData.h</a>.</p>
 
 </div>
 </div>

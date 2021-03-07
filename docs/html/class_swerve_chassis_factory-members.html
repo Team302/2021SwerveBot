@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: Member List</title>
+<title>Team 302 Swerve Robot: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('class_swerve_chassis_factory.html','')
 <p>This is the complete list of members for <a class="el" href="class_swerve_chassis_factory.html">SwerveChassisFactory</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="class_swerve_chassis_factory.html#a535d7c5b45fd125864492427e600c23a">CreateSwerveChassis</a>(std::shared_ptr&lt; SwerveModule &gt; frontLeft, std::shared_ptr&lt; SwerveModule &gt; frontRight, std::shared_ptr&lt; SwerveModule &gt; backLeft, std::shared_ptr&lt; SwerveModule &gt; backRight, units::length::inch_t wheelBase, units::length::inch_t track, units::velocity::meters_per_second_t maxSpeed, units::radians_per_second_t maxAngularSpeed, units::acceleration::meters_per_second_squared_t maxAcceleration, units::angular_acceleration::radians_per_second_squared_t maxAngularAcceleration)</td><td class="entry"><a class="el" href="class_swerve_chassis_factory.html">SwerveChassisFactory</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_swerve_chassis_factory.html#addff5f93957eb8c947d3af91fc203132">CreateSwerveModule</a>(SwerveModule::ModuleID type, const IDragonMotorControllerMap &amp;motorControllers, std::shared_ptr&lt; ctre::phoenix::sensors::CANCoder &gt; turnSensor, units::length::inch_t wheelDiameter)</td><td class="entry"><a class="el" href="class_swerve_chassis_factory.html">SwerveChassisFactory</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_swerve_chassis_factory.html#a3fcc5914ed42324093b56b663875241f">CreateSwerveModule</a>(SwerveModule::ModuleID type, const IDragonMotorControllerMap &amp;motorControllers, std::shared_ptr&lt; ctre::phoenix::sensors::CANCoder &gt; turnSensor, units::length::inch_t wheelDiameter, double turnP, double turnI, double turnD, double turnF, double turnNominalVal, double turnPeakVal, double turnMaxAcc, double turnCruiseVel)</td><td class="entry"><a class="el" href="class_swerve_chassis_factory.html">SwerveChassisFactory</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_swerve_chassis_factory.html#af5e578652541731ed6db42002ab289bc">GetLeftBackSwerveModule</a>()</td><td class="entry"><a class="el" href="class_swerve_chassis_factory.html">SwerveChassisFactory</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_swerve_chassis_factory.html#a63f713502e9431f832ffef676682c5a5">GetLeftFrontSwerveModule</a>()</td><td class="entry"><a class="el" href="class_swerve_chassis_factory.html">SwerveChassisFactory</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_swerve_chassis_factory.html#abb6bbfe2472f62d9b208c5b32647acf4">GetRightBackSwerveModule</a>()</td><td class="entry"><a class="el" href="class_swerve_chassis_factory.html">SwerveChassisFactory</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>

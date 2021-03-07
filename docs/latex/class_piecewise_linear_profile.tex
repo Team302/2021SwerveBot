@@ -1,0 +1,97 @@
+\hypertarget{class_piecewise_linear_profile}{}\doxysection{Piecewise\+Linear\+Profile Class Reference}
+\label{class_piecewise_linear_profile}\index{PiecewiseLinearProfile@{PiecewiseLinearProfile}}
+
+
+This applies a cubic profile to the input values.  
+
+
+
+
+{\ttfamily \#include $<$Piecewise\+Linear\+Profile.\+h$>$}
+
+Inheritance diagram for Piecewise\+Linear\+Profile\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_piecewise_linear_profile}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_piecewise_linear_profile_ac22f19599bd1e0bfad2fda4e04986ea8}{Piecewise\+Linear\+Profile}} ()
+\item 
+\mbox{\hyperlink{class_piecewise_linear_profile_aa1a054bce4633dc86e965cdb385a525d}{$\sim$\+Piecewise\+Linear\+Profile}} ()=default
+\item 
+double \mbox{\hyperlink{class_piecewise_linear_profile_a7340ea3ca3ae41dd93fa895780a2af58}{Apply\+Profile}} (double input\+Val) const override
+\begin{DoxyCompactList}\small\item\em \+: Apply the profile \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This applies a cubic profile to the input values. 
+
+Definition at line 35 of file Piecewise\+Linear\+Profile.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_piecewise_linear_profile_ac22f19599bd1e0bfad2fda4e04986ea8}\label{class_piecewise_linear_profile_ac22f19599bd1e0bfad2fda4e04986ea8}} 
+\index{PiecewiseLinearProfile@{PiecewiseLinearProfile}!PiecewiseLinearProfile@{PiecewiseLinearProfile}}
+\index{PiecewiseLinearProfile@{PiecewiseLinearProfile}!PiecewiseLinearProfile@{PiecewiseLinearProfile}}
+\doxysubsubsection{\texorpdfstring{PiecewiseLinearProfile()}{PiecewiseLinearProfile()}}
+{\footnotesize\ttfamily Piecewise\+Linear\+Profile\+::\+Piecewise\+Linear\+Profile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 36 of file Piecewise\+Linear\+Profile.\+cpp.
+
+\mbox{\Hypertarget{class_piecewise_linear_profile_aa1a054bce4633dc86e965cdb385a525d}\label{class_piecewise_linear_profile_aa1a054bce4633dc86e965cdb385a525d}} 
+\index{PiecewiseLinearProfile@{PiecewiseLinearProfile}!````~PiecewiseLinearProfile@{$\sim$PiecewiseLinearProfile}}
+\index{````~PiecewiseLinearProfile@{$\sim$PiecewiseLinearProfile}!PiecewiseLinearProfile@{PiecewiseLinearProfile}}
+\doxysubsubsection{\texorpdfstring{$\sim$PiecewiseLinearProfile()}{~PiecewiseLinearProfile()}}
+{\footnotesize\ttfamily Piecewise\+Linear\+Profile\+::$\sim$\+Piecewise\+Linear\+Profile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_piecewise_linear_profile_a7340ea3ca3ae41dd93fa895780a2af58}\label{class_piecewise_linear_profile_a7340ea3ca3ae41dd93fa895780a2af58}} 
+\index{PiecewiseLinearProfile@{PiecewiseLinearProfile}!ApplyProfile@{ApplyProfile}}
+\index{ApplyProfile@{ApplyProfile}!PiecewiseLinearProfile@{PiecewiseLinearProfile}}
+\doxysubsubsection{\texorpdfstring{ApplyProfile()}{ApplyProfile()}}
+{\footnotesize\ttfamily double Piecewise\+Linear\+Profile\+::\+Apply\+Profile (\begin{DoxyParamCaption}\item[{double}]{input\+Val }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+\+: Apply the profile 
+
+Apply the profile.
+
+
+\begin{DoxyParams}{Parameters}
+{\em double} & input\+Val -\/ value to be scaled (have profile applied to) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double -\/ scaled value
+\end{DoxyReturn}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em value} & that needs the profile (scaling) applied \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double profiled (scaled) value 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_i_profile_a38ecdbbe722fafa0079af4b1179e83eb}{I\+Profile}}.
+
+
+
+Definition at line 50 of file Piecewise\+Linear\+Profile.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/gamepad/axis/\mbox{\hyperlink{_piecewise_linear_profile_8h}{Piecewise\+Linear\+Profile.\+h}}\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/gamepad/axis/\mbox{\hyperlink{_piecewise_linear_profile_8cpp}{Piecewise\+Linear\+Profile.\+cpp}}\end{DoxyCompactItemize}

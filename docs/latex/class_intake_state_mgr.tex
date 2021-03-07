@@ -8,7 +8,8 @@
 \begin{DoxyCompactItemize}
 \item 
 enum \mbox{\hyperlink{class_intake_state_mgr_aaa5d73e08f73a95dca5c6aaa1de6b56c}{I\+N\+T\+A\+K\+E\+\_\+\+S\+T\+A\+TE}} \{ \mbox{\hyperlink{class_intake_state_mgr_aaa5d73e08f73a95dca5c6aaa1de6b56ca8ebaf448652ce307bb0332e236495a99}{O\+FF}}, 
-\mbox{\hyperlink{class_intake_state_mgr_aaa5d73e08f73a95dca5c6aaa1de6b56caf6d21481875c74e75a8d895516b88649}{ON}}
+\mbox{\hyperlink{class_intake_state_mgr_aaa5d73e08f73a95dca5c6aaa1de6b56caf6d21481875c74e75a8d895516b88649}{ON}}, 
+\mbox{\hyperlink{class_intake_state_mgr_aaa5d73e08f73a95dca5c6aaa1de6b56ca820efa88b53ddab362a6f41b2b843e3a}{M\+A\+X\+\_\+\+I\+N\+T\+A\+K\+E\+\_\+\+S\+T\+A\+T\+ES}}
  \}
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
@@ -50,6 +51,10 @@ O\+FF&\\
 ON&\\
 \hline
 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX\_INTAKE\_STATES@{MAX\_INTAKE\_STATES}!IntakeStateMgr@{IntakeStateMgr}}\index{IntakeStateMgr@{IntakeStateMgr}!MAX\_INTAKE\_STATES@{MAX\_INTAKE\_STATES}}}\mbox{\Hypertarget{class_intake_state_mgr_aaa5d73e08f73a95dca5c6aaa1de6b56ca820efa88b53ddab362a6f41b2b843e3a}\label{class_intake_state_mgr_aaa5d73e08f73a95dca5c6aaa1de6b56ca820efa88b53ddab362a6f41b2b843e3a}} 
+M\+A\+X\+\_\+\+I\+N\+T\+A\+K\+E\+\_\+\+S\+T\+A\+T\+ES&\\
+\hline
+
 \end{DoxyEnumFields}
 
 
@@ -73,7 +78,7 @@ I\+N\+T\+A\+K\+E\+\_\+\+S\+T\+A\+TE -\/ the current state
 \end{DoxyReturn}
 
 
-Definition at line 59 of file Intake\+State\+Mgr.\+h.
+Definition at line 61 of file Intake\+State\+Mgr.\+h.
 
 \mbox{\Hypertarget{class_intake_state_mgr_a9e8b03c92d18d2c115f8f352d63569fe}\label{class_intake_state_mgr_a9e8b03c92d18d2c115f8f352d63569fe}} 
 \index{IntakeStateMgr@{IntakeStateMgr}!GetInstance@{GetInstance}}
@@ -106,8 +111,16 @@ run the current state
 void 
 \end{DoxyReturn}
 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em I\+N\+T\+A\+K\+E\+\_\+\+S\+T\+A\+TE} & -\/ state to run\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
 
-Definition at line 116 of file Intake\+State\+Mgr.\+cpp.
+
+Definition at line 120 of file Intake\+State\+Mgr.\+cpp.
 
 \mbox{\Hypertarget{class_intake_state_mgr_a1e25c496c344124e7a52b7bbdfa09f87}\label{class_intake_state_mgr_a1e25c496c344124e7a52b7bbdfa09f87}} 
 \index{IntakeStateMgr@{IntakeStateMgr}!SetCurrentState@{SetCurrentState}}
@@ -133,7 +146,7 @@ void
 \end{DoxyReturn}
 
 
-Definition at line 146 of file Intake\+State\+Mgr.\+cpp.
+Definition at line 145 of file Intake\+State\+Mgr.\+cpp.
 
 
 

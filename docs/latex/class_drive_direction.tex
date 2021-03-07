@@ -1,0 +1,142 @@
+\hypertarget{class_drive_direction}{}\doxysection{Drive\+Direction Class Reference}
+\label{class_drive_direction}\index{DriveDirection@{DriveDirection}}
+
+
+{\ttfamily \#include $<$Drive\+Direction.\+h$>$}
+
+Inheritance diagram for Drive\+Direction\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_drive_direction}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_drive_direction_a99b6a2623fab6087c309e6cbebb089b6}{Is\+Done}} () override
+\item 
+void \mbox{\hyperlink{class_drive_direction_a8372381ebc2dea98cc74924d2a963cf6}{Init}} (\mbox{\hyperlink{class_primitive_params}{Primitive\+Params}} $\ast$params) override
+\item 
+void \mbox{\hyperlink{class_drive_direction_abebf60cab04bcc4a77b149d2a6afb685}{Run}} () override
+\item 
+\mbox{\hyperlink{class_drive_direction_a0ed8ebb422b00d796a3ca220f81f2040}{Drive\+Direction}} ()
+\item 
+virtual \mbox{\hyperlink{class_drive_direction_a2426e8533fc43808126e5315ccd4107f}{$\sim$\+Drive\+Direction}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t \mbox{\hyperlink{class_drive_direction_a04a638bb8aa60f5d9925b93cb1f774e3}{Get\+Current\+Speed}} ()
+\item 
+void \mbox{\hyperlink{class_drive_direction_a61a86300deb9652b13f4cbcc4f2e7a49}{Update\+Speed}} (units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t new\+Speed)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 31 of file Drive\+Direction.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_drive_direction_a0ed8ebb422b00d796a3ca220f81f2040}\label{class_drive_direction_a0ed8ebb422b00d796a3ca220f81f2040}} 
+\index{DriveDirection@{DriveDirection}!DriveDirection@{DriveDirection}}
+\index{DriveDirection@{DriveDirection}!DriveDirection@{DriveDirection}}
+\doxysubsubsection{\texorpdfstring{DriveDirection()}{DriveDirection()}}
+{\footnotesize\ttfamily Drive\+Direction\+::\+Drive\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 42 of file Drive\+Direction.\+cpp.
+
+\mbox{\Hypertarget{class_drive_direction_a2426e8533fc43808126e5315ccd4107f}\label{class_drive_direction_a2426e8533fc43808126e5315ccd4107f}} 
+\index{DriveDirection@{DriveDirection}!````~DriveDirection@{$\sim$DriveDirection}}
+\index{````~DriveDirection@{$\sim$DriveDirection}!DriveDirection@{DriveDirection}}
+\doxysubsubsection{\texorpdfstring{$\sim$DriveDirection()}{~DriveDirection()}}
+{\footnotesize\ttfamily virtual Drive\+Direction\+::$\sim$\+Drive\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_drive_direction_a04a638bb8aa60f5d9925b93cb1f774e3}\label{class_drive_direction_a04a638bb8aa60f5d9925b93cb1f774e3}} 
+\index{DriveDirection@{DriveDirection}!GetCurrentSpeed@{GetCurrentSpeed}}
+\index{GetCurrentSpeed@{GetCurrentSpeed}!DriveDirection@{DriveDirection}}
+\doxysubsubsection{\texorpdfstring{GetCurrentSpeed()}{GetCurrentSpeed()}}
+{\footnotesize\ttfamily units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t Drive\+Direction\+::\+Get\+Current\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 41 of file Drive\+Direction.\+h.
+
+\mbox{\Hypertarget{class_drive_direction_a8372381ebc2dea98cc74924d2a963cf6}\label{class_drive_direction_a8372381ebc2dea98cc74924d2a963cf6}} 
+\index{DriveDirection@{DriveDirection}!Init@{Init}}
+\index{Init@{Init}!DriveDirection@{DriveDirection}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void Drive\+Direction\+::\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_primitive_params}{Primitive\+Params}} $\ast$}]{params }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_primitive_abe9e4c3b5a5b806d2c551c0f56a075d2}{I\+Primitive}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{class_drive_time_a3b30617186899fe32b099904dea31259}{Drive\+Time}}, and \mbox{\hyperlink{class_drive_distance_a180cc58f8494bd298b44201fd8bba1a9}{Drive\+Distance}}.
+
+
+
+Definition at line 53 of file Drive\+Direction.\+cpp.
+
+\mbox{\Hypertarget{class_drive_direction_a99b6a2623fab6087c309e6cbebb089b6}\label{class_drive_direction_a99b6a2623fab6087c309e6cbebb089b6}} 
+\index{DriveDirection@{DriveDirection}!IsDone@{IsDone}}
+\index{IsDone@{IsDone}!DriveDirection@{DriveDirection}}
+\doxysubsubsection{\texorpdfstring{IsDone()}{IsDone()}}
+{\footnotesize\ttfamily bool Drive\+Direction\+::\+Is\+Done (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_primitive_a5b62801261f9bd974be04217bd86f668}{I\+Primitive}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{class_drive_time_a2cb7c304e83f109a7f35f719a5b95495}{Drive\+Time}}, and \mbox{\hyperlink{class_drive_distance_acbd6bfcdbecd3b81ddb9201d8025f0d6}{Drive\+Distance}}.
+
+
+
+Definition at line 79 of file Drive\+Direction.\+cpp.
+
+\mbox{\Hypertarget{class_drive_direction_abebf60cab04bcc4a77b149d2a6afb685}\label{class_drive_direction_abebf60cab04bcc4a77b149d2a6afb685}} 
+\index{DriveDirection@{DriveDirection}!Run@{Run}}
+\index{Run@{Run}!DriveDirection@{DriveDirection}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily void Drive\+Direction\+::\+Run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_primitive_a3c34bd0f5ddbfe150ecade13303b6cd6}{I\+Primitive}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{class_drive_time_a5d686a5f2ffa3fd6a0429b7841aeb0c7}{Drive\+Time}}, and \mbox{\hyperlink{class_drive_distance_a5658e8083b0b1cc87580297e173a9a27}{Drive\+Distance}}.
+
+
+
+Definition at line 67 of file Drive\+Direction.\+cpp.
+
+\mbox{\Hypertarget{class_drive_direction_a61a86300deb9652b13f4cbcc4f2e7a49}\label{class_drive_direction_a61a86300deb9652b13f4cbcc4f2e7a49}} 
+\index{DriveDirection@{DriveDirection}!UpdateSpeed@{UpdateSpeed}}
+\index{UpdateSpeed@{UpdateSpeed}!DriveDirection@{DriveDirection}}
+\doxysubsubsection{\texorpdfstring{UpdateSpeed()}{UpdateSpeed()}}
+{\footnotesize\ttfamily void Drive\+Direction\+::\+Update\+Speed (\begin{DoxyParamCaption}\item[{units\+::velocity\+::meters\+\_\+per\+\_\+second\+\_\+t}]{new\+Speed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 42 of file Drive\+Direction.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/auton/primitives/\mbox{\hyperlink{_drive_direction_8h}{Drive\+Direction.\+h}}\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/auton/primitives/\mbox{\hyperlink{_drive_direction_8cpp}{Drive\+Direction.\+cpp}}\end{DoxyCompactItemize}

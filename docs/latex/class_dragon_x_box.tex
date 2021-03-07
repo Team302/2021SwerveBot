@@ -29,9 +29,9 @@ void \mbox{\hyperlink{class_dragon_x_box_a24c136c43190bafa852455835c8f9d56}{Set\
 \begin{DoxyCompactList}\small\item\em Method\+: Set\+Axis\+Deadband Description\+: Specify what deadband behavior is desired such as none, standard, standard with scaling. Returns\+: void \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_dragon_x_box_a82af2dd78979078b136da5d07a4182c8}{Set\+Axis\+Profile}} (\mbox{\hyperlink{class_i_dragon_game_pad_a6ba0408b15301dd149474ebad9b4972b}{A\+X\+I\+S\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}} axis, \mbox{\hyperlink{class_i_dragon_game_pad_a3b3c3165d9fc69500bd69ba575216676}{A\+X\+I\+S\+\_\+\+P\+R\+O\+F\+I\+LE}} curve) override
 \item 
-void \mbox{\hyperlink{class_dragon_x_box_a05f594a2bdc751aef180e34637116e61}{Set\+Axis\+Scale}} (\mbox{\hyperlink{class_i_dragon_game_pad_a6ba0408b15301dd149474ebad9b4972b}{A\+X\+I\+S\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}} axis, float scale\+Factor) override
+void \mbox{\hyperlink{class_dragon_x_box_a6131312a9cff051e96b9c5993b25a0ac}{Set\+Axis\+Scale}} (\mbox{\hyperlink{class_i_dragon_game_pad_a6ba0408b15301dd149474ebad9b4972b}{A\+X\+I\+S\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}} axis, double scale\+Factor) override
 \item 
-void \mbox{\hyperlink{class_dragon_x_box_ad921a60514fd12babc7f7b699bdc1ef4}{Set\+Slew\+Limit}} (\mbox{\hyperlink{class_i_dragon_game_pad_a6ba0408b15301dd149474ebad9b4972b}{A\+X\+I\+S\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}} axis, float slew\+Rate\+Factor) override
+void \mbox{\hyperlink{class_dragon_x_box_ae82c34573e3e6a35929ef06953d39643}{Set\+Slew\+Limit}} (\mbox{\hyperlink{class_i_dragon_game_pad_a6ba0408b15301dd149474ebad9b4972b}{A\+X\+I\+S\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}} axis, double slew\+Rate\+Factor) override
 \item 
 void \mbox{\hyperlink{class_dragon_x_box_a40119662c127dd11a27fb2085d4719f0}{Set\+Button\+Mode}} (\mbox{\hyperlink{class_i_dragon_game_pad_a07a7fc32b5cb69f2019006c0eb0f7d29}{B\+U\+T\+T\+O\+N\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}} button, \mbox{\hyperlink{class_i_dragon_game_pad_af3915fb49841ce1fc53b35c9e24d3417}{B\+U\+T\+T\+O\+N\+\_\+\+M\+O\+DE}} mode) override
 \begin{DoxyCompactList}\small\item\em Method\+: Set\+Button\+Mode Description\+: Specify how the button should behave. Examples include (but not limited to)\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -154,11 +154,11 @@ Implements \mbox{\hyperlink{class_i_dragon_game_pad_ac0f51e1292e7a3b17962642e2a5
 
 Definition at line 180 of file Dragon\+X\+Box.\+cpp.
 
-\mbox{\Hypertarget{class_dragon_x_box_a05f594a2bdc751aef180e34637116e61}\label{class_dragon_x_box_a05f594a2bdc751aef180e34637116e61}} 
+\mbox{\Hypertarget{class_dragon_x_box_a6131312a9cff051e96b9c5993b25a0ac}\label{class_dragon_x_box_a6131312a9cff051e96b9c5993b25a0ac}} 
 \index{DragonXBox@{DragonXBox}!SetAxisScale@{SetAxisScale}}
 \index{SetAxisScale@{SetAxisScale}!DragonXBox@{DragonXBox}}
 \doxysubsubsection{\texorpdfstring{SetAxisScale()}{SetAxisScale()}}
-{\footnotesize\ttfamily void Dragon\+X\+Box\+::\+Set\+Axis\+Scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_i_dragon_game_pad_a6ba0408b15301dd149474ebad9b4972b}{A\+X\+I\+S\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}}}]{axis,  }\item[{float}]{scale\+Factor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void Dragon\+X\+Box\+::\+Set\+Axis\+Scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_i_dragon_game_pad_a6ba0408b15301dd149474ebad9b4972b}{A\+X\+I\+S\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}}}]{axis,  }\item[{double}]{scale\+Factor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 \DoxyHorRuler{0}
  Method\+: Set\+Scale Description\+: Scale the returned value to a range between the specified negative scale factor and the scale factor. This is used to reduce the maximum value returned.
@@ -170,7 +170,7 @@ This affects values returned from Get\+Axis calls. \hypertarget{class_dragon_x_b
 This affects values returned from Get\+Axis calls. \hypertarget{class_dragon_x_box_autotoc_md3}{}\doxysubsubsection{Returns\+:     void}\label{class_dragon_x_box_autotoc_md3}
 
 
-Implements \mbox{\hyperlink{class_i_dragon_game_pad_a471db7f67ec6604d042195ab65231116}{I\+Dragon\+Game\+Pad}}.
+Implements \mbox{\hyperlink{class_i_dragon_game_pad_ac555ebafd89a6757810326c0452a9dc7}{I\+Dragon\+Game\+Pad}}.
 
 
 
@@ -203,15 +203,15 @@ Implements \mbox{\hyperlink{class_i_dragon_game_pad_a0fc4a2d497a912d10ab2755018b
 
 Definition at line 257 of file Dragon\+X\+Box.\+cpp.
 
-\mbox{\Hypertarget{class_dragon_x_box_ad921a60514fd12babc7f7b699bdc1ef4}\label{class_dragon_x_box_ad921a60514fd12babc7f7b699bdc1ef4}} 
+\mbox{\Hypertarget{class_dragon_x_box_ae82c34573e3e6a35929ef06953d39643}\label{class_dragon_x_box_ae82c34573e3e6a35929ef06953d39643}} 
 \index{DragonXBox@{DragonXBox}!SetSlewLimit@{SetSlewLimit}}
 \index{SetSlewLimit@{SetSlewLimit}!DragonXBox@{DragonXBox}}
 \doxysubsubsection{\texorpdfstring{SetSlewLimit()}{SetSlewLimit()}}
-{\footnotesize\ttfamily void Dragon\+X\+Box\+::\+Set\+Slew\+Limit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_i_dragon_game_pad_a6ba0408b15301dd149474ebad9b4972b}{A\+X\+I\+S\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}}}]{axis,  }\item[{float}]{slew\+Rate\+Factor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void Dragon\+X\+Box\+::\+Set\+Slew\+Limit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_i_dragon_game_pad_a6ba0408b15301dd149474ebad9b4972b}{A\+X\+I\+S\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}}}]{axis,  }\item[{double}]{slew\+Rate\+Factor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Implements \mbox{\hyperlink{class_i_dragon_game_pad_a03b3f6d85337b2857586b69c9d590686}{I\+Dragon\+Game\+Pad}}.
+Implements \mbox{\hyperlink{class_i_dragon_game_pad_a86b16cb5f79811fa79b60755646ff611}{I\+Dragon\+Game\+Pad}}.
 
 
 

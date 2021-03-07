@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: DragonXBox Class Reference</title>
+<title>Team 302 Swerve Robot: DragonXBox Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -122,10 +122,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a24c136c43190bafa852455835c8f9d56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82af2dd78979078b136da5d07a4182c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_x_box.html#a82af2dd78979078b136da5d07a4182c8">SetAxisProfile</a> (<a class="el" href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972b">AXIS_IDENTIFIER</a> axis, <a class="el" href="class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676">AXIS_PROFILE</a> curve) override</td></tr>
 <tr class="separator:a82af2dd78979078b136da5d07a4182c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05f594a2bdc751aef180e34637116e61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_x_box.html#a05f594a2bdc751aef180e34637116e61">SetAxisScale</a> (<a class="el" href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972b">AXIS_IDENTIFIER</a> axis, float scaleFactor) override</td></tr>
-<tr class="separator:a05f594a2bdc751aef180e34637116e61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad921a60514fd12babc7f7b699bdc1ef4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_x_box.html#ad921a60514fd12babc7f7b699bdc1ef4">SetSlewLimit</a> (<a class="el" href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972b">AXIS_IDENTIFIER</a> axis, float slewRateFactor) override</td></tr>
-<tr class="separator:ad921a60514fd12babc7f7b699bdc1ef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6131312a9cff051e96b9c5993b25a0ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_x_box.html#a6131312a9cff051e96b9c5993b25a0ac">SetAxisScale</a> (<a class="el" href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972b">AXIS_IDENTIFIER</a> axis, double scaleFactor) override</td></tr>
+<tr class="separator:a6131312a9cff051e96b9c5993b25a0ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae82c34573e3e6a35929ef06953d39643"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_x_box.html#ae82c34573e3e6a35929ef06953d39643">SetSlewLimit</a> (<a class="el" href="class_i_dragon_game_pad.html#a6ba0408b15301dd149474ebad9b4972b">AXIS_IDENTIFIER</a> axis, double slewRateFactor) override</td></tr>
+<tr class="separator:ae82c34573e3e6a35929ef06953d39643"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40119662c127dd11a27fb2085d4719f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_x_box.html#a40119662c127dd11a27fb2085d4719f0">SetButtonMode</a> (<a class="el" href="class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29">BUTTON_IDENTIFIER</a> button, <a class="el" href="class_i_dragon_game_pad.html#af3915fb49841ce1fc53b35c9e24d3417">BUTTON_MODE</a> mode) override</td></tr>
 <tr class="memdesc:a40119662c127dd11a27fb2085d4719f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method: SetButtonMode Description: Specify how the button should behave. Examples include (but not limited to):  <a href="class_dragon_x_box.html#a40119662c127dd11a27fb2085d4719f0">More...</a><br /></td></tr>
 <tr class="separator:a40119662c127dd11a27fb2085d4719f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -236,10 +236,14 @@ Additional Inherited Members</h2></td></tr>
 <a class="el" href="class_i_dragon_game_pad.html#afde07811ccdd7565bc40c381adecee4da3e9cb3dad8d2ac03edb396a797968c01">MAX_DEADBANDS</a>
  }</td></tr>
 <tr class="separator:afde07811ccdd7565bc40c381adecee4d inherit pub_types_class_i_dragon_game_pad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b3c3165d9fc69500bd69ba575216676 inherit pub_types_class_i_dragon_game_pad"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676">AXIS_PROFILE</a> { <a class="el" href="class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676abdde71687676a038262ff33d2492bcbf">LINEAR</a>, 
+<tr class="memitem:a3b3c3165d9fc69500bd69ba575216676 inherit pub_types_class_i_dragon_game_pad"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676">AXIS_PROFILE</a> { <br />
+&#160;&#160;<a class="el" href="class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676abdde71687676a038262ff33d2492bcbf">LINEAR</a>, 
 <a class="el" href="class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676a7d94c01ced44b8a2c7a121e96c369ebc">SQUARED</a>, 
 <a class="el" href="class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676a356559cd793745311f007aa46a127033">CUBED</a>, 
-<a class="el" href="class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676a7fc93528fdb8c6e235b2c5879c2597bf">MAX_PROFILES</a>
+<a class="el" href="class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676ae5f652e848c4766826857e477bb4f294">PIECEWISE_LINEAR</a>, 
+<br />
+&#160;&#160;<a class="el" href="class_i_dragon_game_pad.html#a3b3c3165d9fc69500bd69ba575216676a7fc93528fdb8c6e235b2c5879c2597bf">MAX_PROFILES</a>
+<br />
  }</td></tr>
 <tr class="separator:a3b3c3165d9fc69500bd69ba575216676 inherit pub_types_class_i_dragon_game_pad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -463,8 +467,8 @@ Returns:     void</h2>
 
 </div>
 </div>
-<a id="a05f594a2bdc751aef180e34637116e61"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05f594a2bdc751aef180e34637116e61">&#9670;&nbsp;</a></span>SetAxisScale()</h2>
+<a id="a6131312a9cff051e96b9c5993b25a0ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6131312a9cff051e96b9c5993b25a0ac">&#9670;&nbsp;</a></span>SetAxisScale()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -481,7 +485,7 @@ Returns:     void</h2>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>scaleFactor</em>&#160;</td>
         </tr>
         <tr>
@@ -507,7 +511,7 @@ Returns:     void</h2>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Returns:     void</h2>
 
-<p>Implements <a class="el" href="class_i_dragon_game_pad.html#a471db7f67ec6604d042195ab65231116">IDragonGamePad</a>.</p>
+<p>Implements <a class="el" href="class_i_dragon_game_pad.html#ac555ebafd89a6757810326c0452a9dc7">IDragonGamePad</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_dragon_x_box_8cpp_source.html#l00201">201</a> of file <a class="el" href="_dragon_x_box_8cpp_source.html">DragonXBox.cpp</a>.</p>
 
@@ -565,8 +569,8 @@ Returns:     void</h2>
 
 </div>
 </div>
-<a id="ad921a60514fd12babc7f7b699bdc1ef4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad921a60514fd12babc7f7b699bdc1ef4">&#9670;&nbsp;</a></span>SetSlewLimit()</h2>
+<a id="ae82c34573e3e6a35929ef06953d39643"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae82c34573e3e6a35929ef06953d39643">&#9670;&nbsp;</a></span>SetSlewLimit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -583,7 +587,7 @@ Returns:     void</h2>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>slewRateFactor</em>&#160;</td>
         </tr>
         <tr>
@@ -599,7 +603,7 @@ Returns:     void</h2>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="class_i_dragon_game_pad.html#a03b3f6d85337b2857586b69c9d590686">IDragonGamePad</a>.</p>
+<p>Implements <a class="el" href="class_i_dragon_game_pad.html#a86b16cb5f79811fa79b60755646ff611">IDragonGamePad</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_dragon_x_box_8cpp_source.html#l00213">213</a> of file <a class="el" href="_dragon_x_box_8cpp_source.html">DragonXBox.cpp</a>.</p>
 

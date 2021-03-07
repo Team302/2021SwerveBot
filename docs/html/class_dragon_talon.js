@@ -12,6 +12,7 @@ var class_dragon_talon =
     [ "EnableCurrentLimiting", "class_dragon_talon.html#a11ce6b9a0281ae2dbddf655c2913a133", null ],
     [ "GetCountsPerRev", "class_dragon_talon.html#aa15b4b16690b25e03377e4de519b804b", null ],
     [ "GetCurrent", "class_dragon_talon.html#aa5fe4416de572b8c84ee1e063fd1b66e", null ],
+    [ "GetGearRatio", "class_dragon_talon.html#a211756f0b511e10e8b26a2bc44cf16f8", null ],
     [ "GetID", "class_dragon_talon.html#a7a7bf5cd79bd0458363892bcdf7f2b46", null ],
     [ "GetRotations", "class_dragon_talon.html#ae86a7edc78d019aea370ec7f49eddf6c", null ],
     [ "GetRPS", "class_dragon_talon.html#a6037fe288a4e4d73e8aefaff347af3eb", null ],
@@ -22,13 +23,16 @@ var class_dragon_talon =
     [ "Set", "class_dragon_talon.html#a32074257a1082666c5c25fbb9cb90d33", null ],
     [ "Set", "class_dragon_talon.html#aefde37c10d274681d3850ceab178365c", null ],
     [ "SetAsFollowerMotor", "class_dragon_talon.html#a964c602e7737daf03ffb60f01c145c96", null ],
-    [ "SetControlConstants", "class_dragon_talon.html#a051e7d9a21b9caf9db65bcb2c613808e", null ],
+    [ "SetControlConstants", "class_dragon_talon.html#a798f56a9ad9b2021f3074cc2ff62cecd", null ],
     [ "SetControlMode", "class_dragon_talon.html#a51ae73cebf47695a4c37cc874d7dd0b3", null ],
     [ "SetDiameter", "class_dragon_talon.html#a741ea243997b62373ef198f75846704d", null ],
     [ "SetForwardLimitSwitch", "class_dragon_talon.html#a443cf82313c085b34dd35dedd86f21a9", null ],
+    [ "SetFramePeriodPriority", "class_dragon_talon.html#a8357e689a6e0745411d60eda6963bff3", null ],
     [ "SetRemoteSensor", "class_dragon_talon.html#abfd29c75d1892ea7607114a337fe232b", null ],
     [ "SetReverseLimitSwitch", "class_dragon_talon.html#ada032141404f5abda96dcb08ea6d7eba", null ],
     [ "SetRotationOffset", "class_dragon_talon.html#a50cab200ce935067feed69d862f48156", null ],
     [ "SetSensorInverted", "class_dragon_talon.html#a87d056ac6683ceec4a985dff184b42e5", null ],
-    [ "SetVoltageRamping", "class_dragon_talon.html#a1e450e634cd6d34cd0ba8f9bb0aebea1", null ]
+    [ "SetVoltage", "class_dragon_talon.html#a26ee74999b0df1bf60dc14c8372571b9", null ],
+    [ "SetVoltageRamping", "class_dragon_talon.html#a1e450e634cd6d34cd0ba8f9bb0aebea1", null ],
+    [ "UpdateFramePeriods", "class_dragon_talon.html#a6522d93f816e76a2c46b884633856ad1", null ]
 ];

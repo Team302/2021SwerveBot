@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/subsys/Mech1IndMotor.h Source File</title>
+<title>Team 302 Swerve Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/subsys/Mech1IndMotor.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -143,73 +143,66 @@ $(document).ready(function(){initNavTree('_mech1_ind_motor_8h_source.html',''); 
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        std::string <a class="code" href="class_mech1_ind_motor.html#a512adb78dcb9d2a8f7cf33dd3e7f75a3">GetNetworkTableName</a>() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech1_ind_motor.html#a2ea51d20899048beb5776eb677fbda06">ActivateLogging</a></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        (</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            units::second_t                 millisecondsBetweenLogging</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        ) <span class="keyword">override</span> <span class="keyword">final</span>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech1_ind_motor.html#a14e69788c1af3292dde755421d224250">DeactivateLogging</a>() override final;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech1_ind_motor.html#a1b171fd34edb87e31237a40dcec125df">LogData</a>() override;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech1_ind_motor.html#a55626a8ad6f24b69b6472465fbcda416">Update</a>() override;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech1_ind_motor.html#a999fd41ccd8773e87018d5e6ac849e84">UpdateTarget</a></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        (</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="keywordtype">double</span>      target</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        ) override;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech1_ind_motor.html#a1b171fd34edb87e31237a40dcec125df">LogData</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech1_ind_motor.html#a55626a8ad6f24b69b6472465fbcda416">Update</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech1_ind_motor.html#a999fd41ccd8773e87018d5e6ac849e84">UpdateTarget</a></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        (</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordtype">double</span>      target</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        ) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="class_mech1_ind_motor.html#a3f2d85ee70cab5942178f9fa15d0abb6">GetPosition</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="class_mech1_ind_motor.html#af1c04bfbb55bc4fcd9f2972e61ddd7b0">GetSpeed</a>() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="class_mech1_ind_motor.html#a3f2d85ee70cab5942178f9fa15d0abb6">GetPosition</a>() const override;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="class_mech1_ind_motor.html#af1c04bfbb55bc4fcd9f2972e61ddd7b0">GetSpeed</a>() const override;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech1_ind_motor.html#a8278edecfa6865dad58493ce6f4012e2">SetControlConstants</a></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        (</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <a class="code" href="class_control_data.html">ControlData</a>*                                pid                 </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        ) override;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    private:</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <a class="code" href="class_mechanism_types.html">MechanismTypes</a>::MECHANISM_TYPE              m_type;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        std::<span class="keywordtype">string</span>                                 m_controlFile;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        std::<span class="keywordtype">string</span>                                 m_ntName;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordtype">bool</span>                                        m_logging;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        units::second_t                             m_milliSecondsBetweenLogging;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        units::second_t                             m_lastTime;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        std::unique_ptr&lt;frc2::Timer&gt;                m_timer;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        std::shared_ptr&lt;<a class="code" href="class_i_dragon_motor_controller.html">IDragonMotorController</a>&gt;     m_motor;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordtype">double</span>                                      m_target;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;};</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_mech1_ind_motor.html#a036b4b6aa4e3ab16281633b4b709899e">SetControlConstants</a></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        (</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keywordtype">int</span>                                         slot,</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <a class="code" href="class_control_data.html">ControlData</a>*                                pid                 </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        ) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <a class="code" href="class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284b">MechanismTypes::MECHANISM_TYPE</a>              m_type;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        std::string                                 m_controlFile;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        std::string                                 m_ntName;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordtype">bool</span>                                        m_logging;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        units::second_t                             m_milliSecondsBetweenLogging;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        units::second_t                             m_lastTime;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        std::unique_ptr&lt;frc2::Timer&gt;                m_timer;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        std::shared_ptr&lt;IDragonMotorController&gt;     m_motor;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordtype">double</span>                                      m_target;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_mech1_ind_motor_html_a2ea51d20899048beb5776eb677fbda06"><div class="ttname"><a href="class_mech1_ind_motor.html#a2ea51d20899048beb5776eb677fbda06">Mech1IndMotor::ActivateLogging</a></div><div class="ttdeci">void ActivateLogging(units::second_t millisecondsBetweenLogging) override final</div><div class="ttdoc">Activates logging key values to network table.</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00081">Mech1IndMotor.cpp:82</a></div></div>
-<div class="ttc" id="aclass_mech1_ind_motor_html_a512adb78dcb9d2a8f7cf33dd3e7f75a3"><div class="ttname"><a href="class_mech1_ind_motor.html#a512adb78dcb9d2a8f7cf33dd3e7f75a3">Mech1IndMotor::GetNetworkTableName</a></div><div class="ttdeci">std::string GetNetworkTableName() const override</div><div class="ttdoc">indicate the Network Table name used to setting tracking parameters</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00074">Mech1IndMotor.cpp:74</a></div></div>
+<div class="ttc" id="aclass_mech1_ind_motor_html_a512adb78dcb9d2a8f7cf33dd3e7f75a3"><div class="ttname"><a href="class_mech1_ind_motor.html#a512adb78dcb9d2a8f7cf33dd3e7f75a3">Mech1IndMotor::GetNetworkTableName</a></div><div class="ttdeci">std::string GetNetworkTableName() const override</div><div class="ttdoc">indicate the Network Table name used to setting tracking parameters</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00080">Mech1IndMotor.cpp:80</a></div></div>
 <div class="ttc" id="aclass_mech1_ind_motor_html"><div class="ttname"><a href="class_mech1_ind_motor.html">Mech1IndMotor</a></div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8h_source.html#l00040">Mech1IndMotor.h:41</a></div></div>
-<div class="ttc" id="aclass_mechanism_types_html"><div class="ttname"><a href="class_mechanism_types.html">MechanismTypes</a></div><div class="ttdoc">This contains the enum for the mechanism types.</div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_types_8h_source.html#l00023">MechanismTypes.h:24</a></div></div>
-<div class="ttc" id="aclass_mech1_ind_motor_html_a15be2c611560b84ec8d5955cbb09408f"><div class="ttname"><a href="class_mech1_ind_motor.html#a15be2c611560b84ec8d5955cbb09408f">Mech1IndMotor::GetType</a></div><div class="ttdeci">MechanismTypes::MECHANISM_TYPE GetType() const override</div><div class="ttdoc">Indicates the type of mechanism this is.</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00059">Mech1IndMotor.cpp:59</a></div></div>
+<div class="ttc" id="aclass_mech1_ind_motor_html_a15be2c611560b84ec8d5955cbb09408f"><div class="ttname"><a href="class_mech1_ind_motor.html#a15be2c611560b84ec8d5955cbb09408f">Mech1IndMotor::GetType</a></div><div class="ttdeci">MechanismTypes::MECHANISM_TYPE GetType() const override</div><div class="ttdoc">Indicates the type of mechanism this is.</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00065">Mech1IndMotor.cpp:65</a></div></div>
 <div class="ttc" id="a_i_mech1_ind_motor_8h_html"><div class="ttname"><a href="_i_mech1_ind_motor_8h.html">IMech1IndMotor.h</a></div></div>
-<div class="ttc" id="aclass_mech1_ind_motor_html_a999fd41ccd8773e87018d5e6ac849e84"><div class="ttname"><a href="class_mech1_ind_motor.html#a999fd41ccd8773e87018d5e6ac849e84">Mech1IndMotor::UpdateTarget</a></div><div class="ttdeci">void UpdateTarget(double target) override</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00117">Mech1IndMotor.cpp:118</a></div></div>
+<div class="ttc" id="aclass_mech1_ind_motor_html_a999fd41ccd8773e87018d5e6ac849e84"><div class="ttname"><a href="class_mech1_ind_motor.html#a999fd41ccd8773e87018d5e6ac849e84">Mech1IndMotor::UpdateTarget</a></div><div class="ttdeci">void UpdateTarget(double target) override</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00100">Mech1IndMotor.cpp:101</a></div></div>
 <div class="ttc" id="aclass_control_modes_html"><div class="ttname"><a href="class_control_modes.html">ControlModes</a></div><div class="ttdoc">This contains the enum for the mechanism parameters.</div><div class="ttdef"><b>Definition:</b> <a href="_control_modes_8h_source.html#l00021">ControlModes.h:22</a></div></div>
-<div class="ttc" id="aclass_mech1_ind_motor_html_a288fa2d239e052e868b71395c2db11a3"><div class="ttname"><a href="class_mech1_ind_motor.html#a288fa2d239e052e868b71395c2db11a3">Mech1IndMotor::GetControlFileName</a></div><div class="ttdeci">std::string GetControlFileName() const override</div><div class="ttdoc">indicate the file used to get the control parameters from</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00066">Mech1IndMotor.cpp:66</a></div></div>
-<div class="ttc" id="aclass_mech1_ind_motor_html_a55626a8ad6f24b69b6472465fbcda416"><div class="ttname"><a href="class_mech1_ind_motor.html#a55626a8ad6f24b69b6472465fbcda416">Mech1IndMotor::Update</a></div><div class="ttdeci">void Update() override</div><div class="ttdoc">update the output to the mechanism using the current controller and target value(s)</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00109">Mech1IndMotor.cpp:109</a></div></div>
+<div class="ttc" id="aclass_mech1_ind_motor_html_a288fa2d239e052e868b71395c2db11a3"><div class="ttname"><a href="class_mech1_ind_motor.html#a288fa2d239e052e868b71395c2db11a3">Mech1IndMotor::GetControlFileName</a></div><div class="ttdeci">std::string GetControlFileName() const override</div><div class="ttdoc">indicate the file used to get the control parameters from</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00072">Mech1IndMotor.cpp:72</a></div></div>
+<div class="ttc" id="aclass_mech1_ind_motor_html_a55626a8ad6f24b69b6472465fbcda416"><div class="ttname"><a href="class_mech1_ind_motor.html#a55626a8ad6f24b69b6472465fbcda416">Mech1IndMotor::Update</a></div><div class="ttdeci">void Update() override</div><div class="ttdoc">update the output to the mechanism using the current controller and target value(s)</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00090">Mech1IndMotor.cpp:90</a></div></div>
 <div class="ttc" id="aclass_mechanism_types_html_adad17689ea795c3d65e2062bdc09284b"><div class="ttname"><a href="class_mechanism_types.html#adad17689ea795c3d65e2062bdc09284b">MechanismTypes::MECHANISM_TYPE</a></div><div class="ttdeci">MECHANISM_TYPE</div><div class="ttdef"><b>Definition:</b> <a href="_mechanism_types_8h_source.html#l00031">MechanismTypes.h:32</a></div></div>
-<div class="ttc" id="aclass_mech1_ind_motor_html_a14e69788c1af3292dde755421d224250"><div class="ttname"><a href="class_mech1_ind_motor.html#a14e69788c1af3292dde755421d224250">Mech1IndMotor::DeactivateLogging</a></div><div class="ttdeci">void DeactivateLogging() override final</div><div class="ttdoc">Stop updating the key values to network table.</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00104">Mech1IndMotor.cpp:104</a></div></div>
-<div class="ttc" id="aclass_mech1_ind_motor_html_a3f2d85ee70cab5942178f9fa15d0abb6"><div class="ttname"><a href="class_mech1_ind_motor.html#a3f2d85ee70cab5942178f9fa15d0abb6">Mech1IndMotor::GetPosition</a></div><div class="ttdeci">double GetPosition() const override</div><div class="ttdoc">Return the current position of the mechanism. The value is in inches or degrees.</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00127">Mech1IndMotor.cpp:127</a></div></div>
-<div class="ttc" id="aclass_i_dragon_motor_controller_html"><div class="ttname"><a href="class_i_dragon_motor_controller.html">IDragonMotorController</a></div><div class="ttdoc">The general interface to motor controllers so that the specific mechanisms that use motors,...</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_motor_controller_8h_source.html#l00038">IDragonMotorController.h:39</a></div></div>
-<div class="ttc" id="aclass_mech1_ind_motor_html_af1c04bfbb55bc4fcd9f2972e61ddd7b0"><div class="ttname"><a href="class_mech1_ind_motor.html#af1c04bfbb55bc4fcd9f2972e61ddd7b0">Mech1IndMotor::GetSpeed</a></div><div class="ttdeci">double GetSpeed() const override</div><div class="ttdoc">Get the current speed of the mechanism. The value is in inches per second or degrees per second.</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00135">Mech1IndMotor.cpp:135</a></div></div>
+<div class="ttc" id="aclass_mech1_ind_motor_html_a3f2d85ee70cab5942178f9fa15d0abb6"><div class="ttname"><a href="class_mech1_ind_motor.html#a3f2d85ee70cab5942178f9fa15d0abb6">Mech1IndMotor::GetPosition</a></div><div class="ttdeci">double GetPosition() const override</div><div class="ttdoc">Return the current position of the mechanism. The value is in inches or degrees.</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00110">Mech1IndMotor.cpp:110</a></div></div>
+<div class="ttc" id="aclass_i_dragon_motor_controller_html"><div class="ttname"><a href="class_i_dragon_motor_controller.html">IDragonMotorController</a></div><div class="ttdoc">The general interface to motor controllers so that the specific mechanisms that use motors,...</div><div class="ttdef"><b>Definition:</b> <a href="_i_dragon_motor_controller_8h_source.html#l00039">IDragonMotorController.h:40</a></div></div>
+<div class="ttc" id="aclass_mech1_ind_motor_html_af1c04bfbb55bc4fcd9f2972e61ddd7b0"><div class="ttname"><a href="class_mech1_ind_motor.html#af1c04bfbb55bc4fcd9f2972e61ddd7b0">Mech1IndMotor::GetSpeed</a></div><div class="ttdeci">double GetSpeed() const override</div><div class="ttdoc">Get the current speed of the mechanism. The value is in inches per second or degrees per second.</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00118">Mech1IndMotor.cpp:118</a></div></div>
 <div class="ttc" id="aclass_control_data_html"><div class="ttname"><a href="class_control_data.html">ControlData</a></div><div class="ttdef"><b>Definition:</b> <a href="_control_data_8h_source.html#l00022">ControlData.h:23</a></div></div>
 <div class="ttc" id="aclass_i_mech1_ind_motor_html"><div class="ttname"><a href="class_i_mech1_ind_motor.html">IMech1IndMotor</a></div><div class="ttdoc">This is the interface for mechanisms that have one independently controlled motor.</div><div class="ttdef"><b>Definition:</b> <a href="_i_mech1_ind_motor_8h_source.html#l00038">IMech1IndMotor.h:39</a></div></div>
 <div class="ttc" id="aclass_mech1_ind_motor_html_a6b24044173d6bffb08b2752944cc5665"><div class="ttname"><a href="class_mech1_ind_motor.html#a6b24044173d6bffb08b2752944cc5665">Mech1IndMotor::~Mech1IndMotor</a></div><div class="ttdeci">~Mech1IndMotor() override=default</div></div>
-<div class="ttc" id="aclass_mech1_ind_motor_html_a8278edecfa6865dad58493ce6f4012e2"><div class="ttname"><a href="class_mech1_ind_motor.html#a8278edecfa6865dad58493ce6f4012e2">Mech1IndMotor::SetControlConstants</a></div><div class="ttdeci">void SetControlConstants(ControlData *pid) override</div><div class="ttdoc">Set the control constants (e.g. PIDF values).</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00145">Mech1IndMotor.cpp:146</a></div></div>
+<div class="ttc" id="aclass_mech1_ind_motor_html_a036b4b6aa4e3ab16281633b4b709899e"><div class="ttname"><a href="class_mech1_ind_motor.html#a036b4b6aa4e3ab16281633b4b709899e">Mech1IndMotor::SetControlConstants</a></div><div class="ttdeci">void SetControlConstants(int slot, ControlData *pid) override</div><div class="ttdoc">Set the control constants (e.g. PIDF values).</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00128">Mech1IndMotor.cpp:129</a></div></div>
 <div class="ttc" id="a_mechanism_types_8h_html"><div class="ttname"><a href="_mechanism_types_8h.html">MechanismTypes.h</a></div></div>
 <div class="ttc" id="aclass_mech1_ind_motor_html_a6a226c816d43b227a05bde24d0bd8a34"><div class="ttname"><a href="class_mech1_ind_motor.html#a6a226c816d43b227a05bde24d0bd8a34">Mech1IndMotor::Mech1IndMotor</a></div><div class="ttdeci">Mech1IndMotor()=delete</div></div>
-<div class="ttc" id="aclass_mech1_ind_motor_html_a1b171fd34edb87e31237a40dcec125df"><div class="ttname"><a href="class_mech1_ind_motor.html#a1b171fd34edb87e31237a40dcec125df">Mech1IndMotor::LogData</a></div><div class="ttdeci">void LogData() override</div><div class="ttdoc">log data to the network table if it is activated and time period has past</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00091">Mech1IndMotor.cpp:91</a></div></div>
+<div class="ttc" id="aclass_mech1_ind_motor_html_a1b171fd34edb87e31237a40dcec125df"><div class="ttname"><a href="class_mech1_ind_motor.html#a1b171fd34edb87e31237a40dcec125df">Mech1IndMotor::LogData</a></div><div class="ttdeci">void LogData() override</div><div class="ttdoc">log data to the network table if it is activated and time period has past</div><div class="ttdef"><b>Definition:</b> <a href="_mech1_ind_motor_8cpp_source.html#l00086">Mech1IndMotor.cpp:86</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_ac84794d7bd2f341951dcef92c7613df.html">subsys</a></li><li class="navelem"><a class="el" href="_mech1_ind_motor_8h.html">Mech1IndMotor.h</a></li>
+    <li class="navelem"><a class="el" href="dir_4a8796b0ba1d3dc122873832137fbe4e.html">GitRepos</a></li><li class="navelem"><a class="el" href="dir_1c47665bf58b31faa465c1927c1a00b8.html">2021SwerveBot</a></li><li class="navelem"><a class="el" href="dir_4c5ca149a7966e928c927d1b502f4c6f.html">src</a></li><li class="navelem"><a class="el" href="dir_6d6810671ff2e85cbf46bcf7f794863c.html">main</a></li><li class="navelem"><a class="el" href="dir_62e39780e9d5ee1b2eb3d29e32dcab01.html">cpp</a></li><li class="navelem"><a class="el" href="dir_f06fce08f279d4ac2e1d8ad0e7d85859.html">subsys</a></li><li class="navelem"><a class="el" href="_mech1_ind_motor_8h.html">Mech1IndMotor.h</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

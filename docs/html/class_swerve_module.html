@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: SwerveModule Class Reference</title>
+<title>Team 302 Swerve Robot: SwerveModule Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -103,29 +103,41 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2c519cdb2558ed28a5e38bb6a57d2515"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a2c519cdb2558ed28a5e38bb6a57d2515">SwerveModule</a> (<a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">ModuleID</a> type, std::shared_ptr&lt; <a class="el" href="class_i_dragon_motor_controller.html">IDragonMotorController</a> &gt; driveMotor, std::shared_ptr&lt; <a class="el" href="class_i_dragon_motor_controller.html">IDragonMotorController</a> &gt; turningMotor, std::shared_ptr&lt; ctre::phoenix::sensors::CANCoder &gt; canCoder, units::length::inch_t wheelDiameter)</td></tr>
-<tr class="memdesc:a2c519cdb2558ed28a5e38bb6a57d2515"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a Swerve Module. This is assuming 2 TalonFX (Falcons) with a CanCoder for the turn angle.  <a href="class_swerve_module.html#a2c519cdb2558ed28a5e38bb6a57d2515">More...</a><br /></td></tr>
-<tr class="separator:a2c519cdb2558ed28a5e38bb6a57d2515"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6d3427d5ba2351a1d383405a1f5037e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#ad6d3427d5ba2351a1d383405a1f5037e">SwerveModule</a> (<a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">ModuleID</a> type, std::shared_ptr&lt; <a class="el" href="class_i_dragon_motor_controller.html">IDragonMotorController</a> &gt; driveMotor, std::shared_ptr&lt; <a class="el" href="class_i_dragon_motor_controller.html">IDragonMotorController</a> &gt; turningMotor, std::shared_ptr&lt; ctre::phoenix::sensors::CANCoder &gt; canCoder, units::length::inch_t wheelDiameter, double turnP, double turnI, double turnD, double turnF, double turnNominalPos, double turnNominalNeg, double turnMaxAcc, double turnCruiseVel)</td></tr>
+<tr class="memdesc:ad6d3427d5ba2351a1d383405a1f5037e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a Swerve Module. This is assuming 2 TalonFX (Falcons) with a CanCoder for the turn angle.  <a href="class_swerve_module.html#ad6d3427d5ba2351a1d383405a1f5037e">More...</a><br /></td></tr>
+<tr class="separator:ad6d3427d5ba2351a1d383405a1f5037e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a352021a91784a69e20b68b68b4977fc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a352021a91784a69e20b68b68b4977fc2">Init</a> (units::velocity::meters_per_second_t maxVelocity, units::angular_velocity::radians_per_second_t maxAngularVelocity, units::acceleration::meters_per_second_squared_t maxAcceleration, units::angular_acceleration::radians_per_second_squared_t maxAngularAcceleration)</td></tr>
 <tr class="separator:a352021a91784a69e20b68b68b4977fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83b4f8530f6bcbbc262fd65df43add9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a83b4f8530f6bcbbc262fd65df43add9f">ZeroAlignModule</a> ()</td></tr>
 <tr class="memdesc:a83b4f8530f6bcbbc262fd65df43add9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn all of the wheel to zero degrees yaw according to the pigeon.  <a href="class_swerve_module.html#a83b4f8530f6bcbbc262fd65df43add9f">More...</a><br /></td></tr>
 <tr class="separator:a83b4f8530f6bcbbc262fd65df43add9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a104ba1520704cfc70869aa95eca838f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a104ba1520704cfc70869aa95eca838f6">SetEncodersToZero</a> ()</td></tr>
+<tr class="memdesc:a104ba1520704cfc70869aa95eca838f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set all motor encoders to zero.  <a href="class_swerve_module.html#a104ba1520704cfc70869aa95eca838f6">More...</a><br /></td></tr>
+<tr class="separator:a104ba1520704cfc70869aa95eca838f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d641dd7f7d3ef7ab2881b2a8e724055"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a3d641dd7f7d3ef7ab2881b2a8e724055">GetEncoderValues</a> ()</td></tr>
+<tr class="memdesc:a3d641dd7f7d3ef7ab2881b2a8e724055"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the encoder values.  <a href="class_swerve_module.html#a3d641dd7f7d3ef7ab2881b2a8e724055">More...</a><br /></td></tr>
+<tr class="separator:a3d641dd7f7d3ef7ab2881b2a8e724055"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a573bd5c53def321adc412e020d5e673d"><td class="memItemLeft" align="right" valign="top">frc::SwerveModuleState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a573bd5c53def321adc412e020d5e673d">GetState</a> () const</td></tr>
 <tr class="memdesc:a573bd5c53def321adc412e020d5e673d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current state of the module (speed of the wheel and angle of the wheel)  <a href="class_swerve_module.html#a573bd5c53def321adc412e020d5e673d">More...</a><br /></td></tr>
 <tr class="separator:a573bd5c53def321adc412e020d5e673d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4872ebaaa09fb0b1727b574b3b96934a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a4872ebaaa09fb0b1727b574b3b96934a">SetDesiredState</a> (const frc::SwerveModuleState &amp;state)</td></tr>
 <tr class="memdesc:a4872ebaaa09fb0b1727b574b3b96934a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current state of the module (speed of the wheel and angle of the wheel)  <a href="class_swerve_module.html#a4872ebaaa09fb0b1727b574b3b96934a">More...</a><br /></td></tr>
 <tr class="separator:a4872ebaaa09fb0b1727b574b3b96934a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50df5147c881967af63a249efe3918ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a50df5147c881967af63a249efe3918ed">RunCurrentState</a> ()</td></tr>
+<tr class="separator:a50df5147c881967af63a249efe3918ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4aa933adb396e8913e8e26dfc1e5ea01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_swerve_module.html#a63f05945d3858366ee0382523df173f3">ModuleID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a4aa933adb396e8913e8e26dfc1e5ea01">GetType</a> ()</td></tr>
 <tr class="memdesc:a4aa933adb396e8913e8e26dfc1e5ea01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return which module this is.  <a href="class_swerve_module.html#a4aa933adb396e8913e8e26dfc1e5ea01">More...</a><br /></td></tr>
 <tr class="separator:a4aa933adb396e8913e8e26dfc1e5ea01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff3fd7a6da70381d6d281cc4d154b7db"><td class="memItemLeft" align="right" valign="top">units::length::inch_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#aff3fd7a6da70381d6d281cc4d154b7db">GetWheelDiameter</a> () const</td></tr>
 <tr class="separator:aff3fd7a6da70381d6d281cc4d154b7db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f37b8b05af33e24d19bf39288257b1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#a1f37b8b05af33e24d19bf39288257b1f">SetDriveScale</a> (double scale)</td></tr>
+<tr class="separator:a1f37b8b05af33e24d19bf39288257b1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd4382362f6ff33eec8bfd6f95f31123"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swerve_module.html#afd4382362f6ff33eec8bfd6f95f31123">StopMotors</a> ()</td></tr>
+<tr class="separator:afd4382362f6ff33eec8bfd6f95f31123"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8h_source.html#l00022">22</a> of file <a class="el" href="_swerve_module_8h_source.html">SwerveModule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8h_source.html#l00046">46</a> of file <a class="el" href="_swerve_module_8h_source.html">SwerveModule.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a63f05945d3858366ee0382523df173f3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a63f05945d3858366ee0382523df173f3">&#9670;&nbsp;</a></span>ModuleID</h2>
@@ -145,13 +157,13 @@ Public Member Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a63f05945d3858366ee0382523df173f3a5eb4c5f751d7e777fec191d0ce41681f"></a>RIGHT_BACK&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8h_source.html#l00025">25</a> of file <a class="el" href="_swerve_module_8h_source.html">SwerveModule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8h_source.html#l00049">49</a> of file <a class="el" href="_swerve_module_8h_source.html">SwerveModule.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a2c519cdb2558ed28a5e38bb6a57d2515"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c519cdb2558ed28a5e38bb6a57d2515">&#9670;&nbsp;</a></span>SwerveModule()</h2>
+<a id="ad6d3427d5ba2351a1d383405a1f5037e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6d3427d5ba2351a1d383405a1f5037e">&#9670;&nbsp;</a></span>SwerveModule()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,7 +196,55 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">units::length::inch_t&#160;</td>
-          <td class="paramname"><em>wheelDiameter</em>&#160;</td>
+          <td class="paramname"><em>wheelDiameter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnD</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnF</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnNominalPos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnNominalNeg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnMaxAcc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>turnCruiseVel</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -207,11 +267,35 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00056">56</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00059">59</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3d641dd7f7d3ef7ab2881b2a8e724055"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d641dd7f7d3ef7ab2881b2a8e724055">&#9670;&nbsp;</a></span>GetEncoderValues()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double SwerveModule::GetEncoderValues </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the encoder values. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd>
+<dd>
+double </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00193">193</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a573bd5c53def321adc412e020d5e673d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a573bd5c53def321adc412e020d5e673d">&#9670;&nbsp;</a></span>GetState()</h2>
 
@@ -230,7 +314,7 @@ Public Member Functions</h2></td></tr>
 <p>Get the current state of the module (speed of the wheel and angle of the wheel) </p>
 <dl class="section return"><dt>Returns</dt><dd>SwerveModuleState </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00183">183</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00212">212</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -260,7 +344,7 @@ Public Member Functions</h2></td></tr>
 <p>Return which module this is. </p>
 <dl class="section return"><dt>Returns</dt><dd>ModuleID </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8h_source.html#l00069">69</a> of file <a class="el" href="_swerve_module_8h_source.html">SwerveModule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8h_source.html#l00111">111</a> of file <a class="el" href="_swerve_module_8h_source.html">SwerveModule.h</a>.</p>
 
 </div>
 </div>
@@ -287,7 +371,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8h_source.html#l00070">70</a> of file <a class="el" href="_swerve_module_8h_source.html">SwerveModule.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8h_source.html#l00112">112</a> of file <a class="el" href="_swerve_module_8h_source.html">SwerveModule.h</a>.</p>
 
 </div>
 </div>
@@ -328,9 +412,27 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>auto turnCTL = make_unique&lt;ControlData&gt;( ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE, ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER, string("TurnProfile"), 1.0, 0.0, 0.0, 0.5, 0.0, maxAngularAcceleration.to&lt;double&gt;(), maxAngularVelocity.to&lt;double&gt;(), maxAngularVelocity.to&lt;double&gt;(), 0.0 );</p>
 
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00122">122</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00157">157</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a50df5147c881967af63a249efe3918ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50df5147c881967af63a249efe3918ed">&#9670;&nbsp;</a></span>RunCurrentState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SwerveModule::RunCurrentState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00310">310</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -357,9 +459,86 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">const</td><td>SwerveModuleState&amp; targetState: state to set the module to </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00201">201</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00230">230</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a1f37b8b05af33e24d19bf39288257b1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f37b8b05af33e24d19bf39288257b1f">&#9670;&nbsp;</a></span>SetDriveScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SwerveModule::SetDriveScale </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>scale</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8h_source.html#l00114">114</a> of file <a class="el" href="_swerve_module_8h_source.html">SwerveModule.h</a>.</p>
+
+</div>
+</div>
+<a id="a104ba1520704cfc70869aa95eca838f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a104ba1520704cfc70869aa95eca838f6">&#9670;&nbsp;</a></span>SetEncodersToZero()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SwerveModule::SetEncodersToZero </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set all motor encoders to zero. </p>
+<dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
+<p>void </p>
+
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00183">183</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
+
+</div>
+</div>
+<a id="afd4382362f6ff33eec8bfd6f95f31123"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd4382362f6ff33eec8bfd6f95f31123">&#9670;&nbsp;</a></span>StopMotors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SwerveModule::StopMotors </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00394">394</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
 
 </div>
 </div>
@@ -381,7 +560,7 @@ Public Member Functions</h2></td></tr>
 <p>Turn all of the wheel to zero degrees yaw according to the pigeon. </p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00175">175</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_swerve_module_8cpp_source.html#l00203">203</a> of file <a class="el" href="_swerve_module_8cpp_source.html">SwerveModule.cpp</a>.</p>
 
 </div>
 </div>

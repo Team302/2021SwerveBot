@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "Team 302 Robot", "index.html", [
+  [ "Team 302 Swerve Robot", "index.html", [
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ]
     ] ],
@@ -56,12 +56,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_analog_axis_8cpp.html",
-"_mechanism_factory_8h.html",
-"class_button_decorator.html#ab45d2c847a52d4f083c58656b34aa864",
-"class_dragon_vision.html#a49052f9ed6b6b518a735efba95dadf3e",
-"class_intake_state.html#a9d3ced7fd3e2fef18c5ac9effaaf064f",
-"class_shooter_hood_manual.html#a81d68e67dcef1ad6d81dbce23807aa43",
-"functions_eval_m.html"
+"_limelight_aim_8cpp.html",
+"class_analog_axis.html#a16dc4ab6eb26221fc1f43c4f9cb67fa2",
+"class_dragon_limelight.html#a4968de97dbb55b78eb63a6e3ab398f40",
+"class_i_dragon_game_pad.html#a07a7fc32b5cb69f2019006c0eb0f7d29ae4f26dd3f6ef04fb1de86244f3f7bd1d",
+"class_mechanism_defn.html#a44d1658e1d4434471ce4d0b6d10c2545",
+"class_swerve_module.html#a104ba1520704cfc70869aa95eca838f6"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

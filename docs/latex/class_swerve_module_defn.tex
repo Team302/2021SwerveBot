@@ -17,7 +17,7 @@ Create a chassis from an X\+ML definition. C\+H\+A\+S\+S\+I\+S\+\_\+\+T\+Y\+PE (
 virtual \mbox{\hyperlink{class_swerve_module_defn_a4e68d768be85c192f248dd0998356e9e}{$\sim$\+Swerve\+Module\+Defn}} ()=default
 \begin{DoxyCompactList}\small\item\em destroy a \mbox{\hyperlink{class_swerve_module_defn}{Swerve\+Module\+Defn}} object and free the memory \end{DoxyCompactList}\item 
 std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} $>$ \mbox{\hyperlink{class_swerve_module_defn_a7cb91ac98da5870ad65770e75a56d8b6}{Parse\+X\+ML}} (pugi\+::xml\+\_\+node Swerve\+Module\+Node)
-\begin{DoxyCompactList}\small\item\em Parse the chassie element (and it children). When this is done a \mbox{\hyperlink{class_i_chassis}{I\+Chassis}} object exists. It can be retrieved from the factory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Parse the chassie element (and it children). When this is done a \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} object exists. It can be retrieved from the factory. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -61,7 +61,7 @@ destroy a \mbox{\hyperlink{class_swerve_module_defn}{Swerve\+Module\+Defn}} obje
 
 
 
-Parse the chassie element (and it children). When this is done a \mbox{\hyperlink{class_i_chassis}{I\+Chassis}} object exists. It can be retrieved from the factory. 
+Parse the chassie element (and it children). When this is done a \mbox{\hyperlink{class_swerve_module}{Swerve\+Module}} object exists. It can be retrieved from the factory. 
 
 
 \begin{DoxyParams}[1]{Parameters}
@@ -69,7 +69,7 @@ Parse the chassie element (and it children). When this is done a \mbox{\hyperlin
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-std\+::shared\+\_\+ptr$<$\+I\+Chassis$>$ ~\newline
+std\+::shared\+\_\+ptr$<$\+Swerve\+Module$>$ ~\newline
 
 \end{DoxyReturn}
 
@@ -78,11 +78,12 @@ std\+::shared\+\_\+ptr$<$\+I\+Chassis$>$ ~\newline
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-void 
+void shared\+\_\+ptr$<$\+Swerve\+Module$>$ ~\newline
+ 
 \end{DoxyReturn}
 
 
-Definition at line 58 of file Swerve\+Module\+Defn.\+cpp.
+Definition at line 56 of file Swerve\+Module\+Defn.\+cpp.
 
 
 

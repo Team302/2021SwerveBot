@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/states/chassis/SwerveDrive.h Source File</title>
+<title>Team 302 Swerve Robot: C:/GitRepos/2021SwerveBot/src/main/cpp/states/chassis/SwerveDrive.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -124,32 +124,30 @@ $(document).ready(function(){initNavTree('_swerve_drive_8h_source.html',''); ini
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_swerve_drive.html#ae9a616d967f2010edf87a0a368a7e4b3">AtTarget</a>() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_swerve_drive.html#a33d0af68416c036b4f594b78630f59f8">RunCurrentState</a>();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keyword">inline</span> <a class="code" href="class_teleop_control.html">TeleopControl</a>* GetController()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_controller; }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        std::shared_ptr&lt;SwerveChassis&gt; m_chassis;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="class_teleop_control.html">TeleopControl</a>* m_controller;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">inline</span> <a class="code" href="class_teleop_control.html">TeleopControl</a>* GetController()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_controller; }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        std::shared_ptr&lt;SwerveChassis&gt;      m_chassis;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="class_teleop_control.html">TeleopControl</a>*                      m_controller;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">bool</span>                                m_usePWLinearProfile;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_swerve_drive_html_aa4d7dd862100800547789e7948fba29a"><div class="ttname"><a href="class_swerve_drive.html#aa4d7dd862100800547789e7948fba29a">SwerveDrive::Init</a></div><div class="ttdeci">void Init() override</div><div class="ttdoc">initialize the profiles for the various gamepad inputs</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_drive_8cpp_source.html#l00052">SwerveDrive.cpp:52</a></div></div>
+<div class="ttc" id="aclass_swerve_drive_html_aa4d7dd862100800547789e7948fba29a"><div class="ttname"><a href="class_swerve_drive.html#aa4d7dd862100800547789e7948fba29a">SwerveDrive::Init</a></div><div class="ttdeci">void Init() override</div><div class="ttdoc">initialize the profiles for the various gamepad inputs</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_drive_8cpp_source.html#l00053">SwerveDrive.cpp:53</a></div></div>
 <div class="ttc" id="aclass_i_state_html"><div class="ttname"><a href="class_i_state.html">IState</a></div><div class="ttdoc">Interface for state classes.</div><div class="ttdef"><b>Definition:</b> <a href="_i_state_8h_source.html#l00021">IState.h:22</a></div></div>
 <div class="ttc" id="a_teleop_control_8h_html"><div class="ttname"><a href="_teleop_control_8h.html">TeleopControl.h</a></div></div>
 <div class="ttc" id="a_dragon_pigeon_8h_html"><div class="ttname"><a href="_dragon_pigeon_8h.html">DragonPigeon.h</a></div></div>
-<div class="ttc" id="aclass_swerve_drive_html_a86051579f0bd35e9ab865b40192d3046"><div class="ttname"><a href="class_swerve_drive.html#a86051579f0bd35e9ab865b40192d3046">SwerveDrive::Run</a></div><div class="ttdeci">void Run() override</div><div class="ttdoc">calculate the output for the wheels on the chassis from the throttle and steer components</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_drive_8cpp_source.html#l00067">SwerveDrive.cpp:67</a></div></div>
+<div class="ttc" id="aclass_swerve_drive_html_a86051579f0bd35e9ab865b40192d3046"><div class="ttname"><a href="class_swerve_drive.html#a86051579f0bd35e9ab865b40192d3046">SwerveDrive::Run</a></div><div class="ttdeci">void Run() override</div><div class="ttdoc">calculate the output for the wheels on the chassis from the throttle and steer components</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_drive_8cpp_source.html#l00080">SwerveDrive.cpp:80</a></div></div>
 <div class="ttc" id="a_swerve_chassis_8h_html"><div class="ttname"><a href="_swerve_chassis_8h.html">SwerveChassis.h</a></div></div>
 <div class="ttc" id="aclass_swerve_drive_html_a62dd433144b73a5bc003d88d2d2dd399"><div class="ttname"><a href="class_swerve_drive.html#a62dd433144b73a5bc003d88d2d2dd399">SwerveDrive::~SwerveDrive</a></div><div class="ttdeci">~SwerveDrive()=default</div></div>
 <div class="ttc" id="aclass_swerve_drive_html"><div class="ttname"><a href="class_swerve_drive.html">SwerveDrive</a></div><div class="ttdef"><b>Definition:</b> <a href="_swerve_drive_8h_source.html#l00027">SwerveDrive.h:28</a></div></div>
-<div class="ttc" id="aclass_swerve_drive_html_ae9a616d967f2010edf87a0a368a7e4b3"><div class="ttname"><a href="class_swerve_drive.html#ae9a616d967f2010edf87a0a368a7e4b3">SwerveDrive::AtTarget</a></div><div class="ttdeci">bool AtTarget() const override</div><div class="ttdoc">indicates that we are not at our target</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_drive_8cpp_source.html#l00096">SwerveDrive.cpp:96</a></div></div>
+<div class="ttc" id="aclass_swerve_drive_html_ae9a616d967f2010edf87a0a368a7e4b3"><div class="ttname"><a href="class_swerve_drive.html#ae9a616d967f2010edf87a0a368a7e4b3">SwerveDrive::AtTarget</a></div><div class="ttdeci">bool AtTarget() const override</div><div class="ttdoc">indicates that we are not at our target</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_drive_8cpp_source.html#l00128">SwerveDrive.cpp:128</a></div></div>
 <div class="ttc" id="aclass_swerve_drive_html_aacd77a27d9152ef64788ce19c7fd9209"><div class="ttname"><a href="class_swerve_drive.html#aacd77a27d9152ef64788ce19c7fd9209">SwerveDrive::SwerveDrive</a></div><div class="ttdeci">SwerveDrive()</div><div class="ttdoc">initialize the object and validate the necessary items are not nullptrs</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_drive_8cpp_source.html#l00035">SwerveDrive.cpp:35</a></div></div>
 <div class="ttc" id="a_i_state_8h_html"><div class="ttname"><a href="_i_state_8h.html">IState.h</a></div></div>
 <div class="ttc" id="aclass_teleop_control_html"><div class="ttname"><a href="class_teleop_control.html">TeleopControl</a></div><div class="ttdef"><b>Definition:</b> <a href="_teleop_control_8h_source.html#l00034">TeleopControl.h:35</a></div></div>
-<div class="ttc" id="aclass_swerve_drive_html_a33d0af68416c036b4f594b78630f59f8"><div class="ttname"><a href="class_swerve_drive.html#a33d0af68416c036b4f594b78630f59f8">SwerveDrive::RunCurrentState</a></div><div class="ttdeci">void RunCurrentState()</div><div class="ttdef"><b>Definition:</b> <a href="_swerve_drive_8cpp_source.html#l00101">SwerveDrive.cpp:101</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_5eb159725f84c66aafd839904a4acdd0.html">main</a></li><li class="navelem"><a class="el" href="dir_fdf2b31f12d3ebb2f617242d0514024b.html">cpp</a></li><li class="navelem"><a class="el" href="dir_41c41181ce15b7c19c61d1bd081a9910.html">states</a></li><li class="navelem"><a class="el" href="dir_3ebb3bbee479f88bcbe3dc041d4a8a9b.html">chassis</a></li><li class="navelem"><a class="el" href="_swerve_drive_8h.html">SwerveDrive.h</a></li>
+    <li class="navelem"><a class="el" href="dir_4a8796b0ba1d3dc122873832137fbe4e.html">GitRepos</a></li><li class="navelem"><a class="el" href="dir_1c47665bf58b31faa465c1927c1a00b8.html">2021SwerveBot</a></li><li class="navelem"><a class="el" href="dir_4c5ca149a7966e928c927d1b502f4c6f.html">src</a></li><li class="navelem"><a class="el" href="dir_6d6810671ff2e85cbf46bcf7f794863c.html">main</a></li><li class="navelem"><a class="el" href="dir_62e39780e9d5ee1b2eb3d29e32dcab01.html">cpp</a></li><li class="navelem"><a class="el" href="dir_6690ad191a400a686898d515d289d6e4.html">states</a></li><li class="navelem"><a class="el" href="dir_a4354302b1c7464cd622d99c5b58d0a1.html">chassis</a></li><li class="navelem"><a class="el" href="_swerve_drive_8h.html">SwerveDrive.h</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

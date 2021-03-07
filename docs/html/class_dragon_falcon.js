@@ -12,6 +12,7 @@ var class_dragon_falcon =
     [ "EnableCurrentLimiting", "class_dragon_falcon.html#a8a76c720cf50e2bc79fb7c9f1a1cd771", null ],
     [ "GetCountsPerRev", "class_dragon_falcon.html#ae894f55f2c1a4ffb5da2a8055d62fc9b", null ],
     [ "GetCurrent", "class_dragon_falcon.html#aef9e7316a70af58f1dc02a9fae5cfd8a", null ],
+    [ "GetGearRatio", "class_dragon_falcon.html#a83cb79704403799050396f81f888a0d8", null ],
     [ "GetID", "class_dragon_falcon.html#a09c99e5934e299873e65068b1c74fd2b", null ],
     [ "GetRotations", "class_dragon_falcon.html#aee9013f3c3bf7f48d891d650b919253e", null ],
     [ "GetRPS", "class_dragon_falcon.html#aa376bdad28a3d55b6bcb221887920a63", null ],
@@ -22,14 +23,16 @@ var class_dragon_falcon =
     [ "Set", "class_dragon_falcon.html#acf967485e409c54f5932732f276cb44d", null ],
     [ "Set", "class_dragon_falcon.html#a61856e9790dee0e61cb15670d64f95cd", null ],
     [ "SetAsFollowerMotor", "class_dragon_falcon.html#aa158b4baf0b216d99fb44457d432477c", null ],
-    [ "SetControlConstants", "class_dragon_falcon.html#a1504585d6a7671449c274adb254d6aa6", null ],
+    [ "SetControlConstants", "class_dragon_falcon.html#a6b34b7b6faac4550a1abecc684f989b4", null ],
     [ "SetControlMode", "class_dragon_falcon.html#a4a582d3070a1623396dbf5120bb4f390", null ],
     [ "SetDiameter", "class_dragon_falcon.html#a58a336a886347ec83d2b393569fc9d19", null ],
     [ "SetForwardLimitSwitch", "class_dragon_falcon.html#ac27bea9fdfe7ba6134244d51f5369fa4", null ],
+    [ "SetFramePeriodPriority", "class_dragon_falcon.html#a1d71d968b3323ba9a86bdff04b563d31", null ],
     [ "SetRemoteSensor", "class_dragon_falcon.html#ac2802287e9336cb907c5e0ce77e03d26", null ],
     [ "SetReverseLimitSwitch", "class_dragon_falcon.html#af55d7051e52f7b65dedbff53d9e81c0f", null ],
     [ "SetRotationOffset", "class_dragon_falcon.html#ab9080ba4bfbada1afa05f9c532564251", null ],
     [ "SetSensorInverted", "class_dragon_falcon.html#a4efe5d7355a1d82577a8232fdbc9fe7d", null ],
-    [ "SetVoltage", "class_dragon_falcon.html#a16d9bde1c10c8146a62cb86b3ce8331a", null ],
-    [ "SetVoltageRamping", "class_dragon_falcon.html#a596613a088e7d87182377b04ced5b16a", null ]
+    [ "SetVoltage", "class_dragon_falcon.html#af1c829e220dc76fb7c3b900f292dc0b8", null ],
+    [ "SetVoltageRamping", "class_dragon_falcon.html#a596613a088e7d87182377b04ced5b16a", null ],
+    [ "UpdateFramePeriods", "class_dragon_falcon.html#ab2202a24efc28956e5c0879026927744", null ]
 ];

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['hardwareidvalidation_2ecpp_1089',['HardwareIDValidation.cpp',['../_hardware_i_d_validation_8cpp.html',1,'']]],
-  ['hardwareidvalidation_2eh_1090',['HardwareIDValidation.h',['../_hardware_i_d_validation_8h.html',1,'']]],
-  ['holdturretposition_2ecpp_1091',['HoldTurretPosition.cpp',['../_hold_turret_position_8cpp.html',1,'']]],
-  ['holdturretposition_2eh_1092',['HoldTurretPosition.h',['../_hold_turret_position_8h.html',1,'']]]
+  ['galacticsearchfinder_2ecpp_1203',['GalacticSearchFinder.cpp',['../_galactic_search_finder_8cpp.html',1,'']]],
+  ['galacticsearchfinder_2eh_1204',['GalacticSearchFinder.h',['../_galactic_search_finder_8h.html',1,'']]],
+  ['goaldetection_2ecpp_1205',['GoalDetection.cpp',['../_goal_detection_8cpp.html',1,'']]],
+  ['goaldetection_2eh_1206',['GoalDetection.h',['../_goal_detection_8h.html',1,'']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: DragonFalcon Class Reference</title>
+<title>Team 302 Swerve Robot: DragonFalcon Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -144,9 +144,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a01a9cbfe59d25b805ec376d94af0cfdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4efe5d7355a1d82577a8232fdbc9fe7d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_falcon.html#a4efe5d7355a1d82577a8232fdbc9fe7d">SetSensorInverted</a> (bool inverted) override</td></tr>
 <tr class="separator:a4efe5d7355a1d82577a8232fdbc9fe7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1504585d6a7671449c274adb254d6aa6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_falcon.html#a1504585d6a7671449c274adb254d6aa6">SetControlConstants</a> (<a class="el" href="class_control_data.html">ControlData</a> *controlInfo) override</td></tr>
-<tr class="memdesc:a1504585d6a7671449c274adb254d6aa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control constants (e.g. PIDF values).  <a href="class_dragon_falcon.html#a1504585d6a7671449c274adb254d6aa6">More...</a><br /></td></tr>
-<tr class="separator:a1504585d6a7671449c274adb254d6aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b34b7b6faac4550a1abecc684f989b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_falcon.html#a6b34b7b6faac4550a1abecc684f989b4">SetControlConstants</a> (int slot, <a class="el" href="class_control_data.html">ControlData</a> *controlInfo) override</td></tr>
+<tr class="memdesc:a6b34b7b6faac4550a1abecc684f989b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control constants (e.g. PIDF values).  <a href="class_dragon_falcon.html#a6b34b7b6faac4550a1abecc684f989b4">More...</a><br /></td></tr>
+<tr class="separator:a6b34b7b6faac4550a1abecc684f989b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a801071a9180910e6d5d2cdf120b54bbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_falcon.html#a801071a9180910e6d5d2cdf120b54bbf">SelectClosedLoopProfile</a> (int slot, int pidIndex)</td></tr>
 <tr class="separator:a801071a9180910e6d5d2cdf120b54bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5d07e0a8a7ce81204563711cb726f72"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_falcon.html#ad5d07e0a8a7ce81204563711cb726f72">ConfigSelectedFeedbackSensor</a> (ctre::phoenix::motorcontrol::FeedbackDevice feedbackDevice, int pidIdx, int timeoutMs)</td></tr>
@@ -169,15 +169,30 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac2802287e9336cb907c5e0ce77e03d26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58a336a886347ec83d2b393569fc9d19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_falcon.html#a58a336a886347ec83d2b393569fc9d19">SetDiameter</a> (double diameter) override</td></tr>
 <tr class="separator:a58a336a886347ec83d2b393569fc9d19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16d9bde1c10c8146a62cb86b3ce8331a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_falcon.html#a16d9bde1c10c8146a62cb86b3ce8331a">SetVoltage</a> (units::volt_t output)</td></tr>
-<tr class="separator:a16d9bde1c10c8146a62cb86b3ce8331a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1c829e220dc76fb7c3b900f292dc0b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_falcon.html#af1c829e220dc76fb7c3b900f292dc0b8">SetVoltage</a> (units::volt_t output) override</td></tr>
+<tr class="separator:af1c829e220dc76fb7c3b900f292dc0b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae894f55f2c1a4ffb5da2a8055d62fc9b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_falcon.html#ae894f55f2c1a4ffb5da2a8055d62fc9b">GetCountsPerRev</a> () const override</td></tr>
 <tr class="separator:ae894f55f2c1a4ffb5da2a8055d62fc9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2202a24efc28956e5c0879026927744"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_falcon.html#ab2202a24efc28956e5c0879026927744">UpdateFramePeriods</a> (ctre::phoenix::motorcontrol::StatusFrameEnhanced frame, uint8_t milliseconds) override</td></tr>
+<tr class="separator:ab2202a24efc28956e5c0879026927744"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d71d968b3323ba9a86bdff04b563d31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_falcon.html#a1d71d968b3323ba9a86bdff04b563d31">SetFramePeriodPriority</a> (<a class="el" href="class_i_dragon_motor_controller.html#aa318b4b9dd9603fda549de42c386fcd2">MOTOR_PRIORITY</a> priority) override</td></tr>
+<tr class="separator:a1d71d968b3323ba9a86bdff04b563d31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83cb79704403799050396f81f888a0d8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dragon_falcon.html#a83cb79704403799050396f81f888a0d8">GetGearRatio</a> () const override</td></tr>
+<tr class="separator:a83cb79704403799050396f81f888a0d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_i_dragon_motor_controller"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_i_dragon_motor_controller')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_i_dragon_motor_controller.html">IDragonMotorController</a></td></tr>
 <tr class="memitem:abd89e75a66f4aa8ab989b2196e5d912f inherit pub_methods_class_i_dragon_motor_controller"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#abd89e75a66f4aa8ab989b2196e5d912f">IDragonMotorController</a> ()=default</td></tr>
 <tr class="separator:abd89e75a66f4aa8ab989b2196e5d912f inherit pub_methods_class_i_dragon_motor_controller"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93f40b43658f5744e50292dbf6fc470b inherit pub_methods_class_i_dragon_motor_controller"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#a93f40b43658f5744e50292dbf6fc470b">~IDragonMotorController</a> ()=default</td></tr>
 <tr class="separator:a93f40b43658f5744e50292dbf6fc470b inherit pub_methods_class_i_dragon_motor_controller"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_class_i_dragon_motor_controller"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_i_dragon_motor_controller')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_i_dragon_motor_controller.html">IDragonMotorController</a></td></tr>
+<tr class="memitem:aa318b4b9dd9603fda549de42c386fcd2 inherit pub_types_class_i_dragon_motor_controller"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#aa318b4b9dd9603fda549de42c386fcd2">MOTOR_PRIORITY</a> { <a class="el" href="class_i_dragon_motor_controller.html#aa318b4b9dd9603fda549de42c386fcd2af8b1a69321524d92b9dec3eb6b95c50d">HIGH</a>, 
+<a class="el" href="class_i_dragon_motor_controller.html#aa318b4b9dd9603fda549de42c386fcd2ac5df8b2359a0263857b7060a4aa5209e">MEDIUM</a>, 
+<a class="el" href="class_i_dragon_motor_controller.html#aa318b4b9dd9603fda549de42c386fcd2ab25b1f33cbe7fcf9cd6f12159ca0ca62">LOW</a>
+ }</td></tr>
+<tr class="separator:aa318b4b9dd9603fda549de42c386fcd2 inherit pub_types_class_i_dragon_motor_controller"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -251,7 +266,6 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>TalonFXConfiguration configs; m_talon.get()-&gt;GetAllConfigs(configs, 50); string key = string("talonFx") + to_string(deviceID); <a class="el" href="class_logger.html#ae85cfbef8b7e6940475a5012fa1935c6" title="Find or create the singleton logger.">Logger::GetLogger()</a>-&gt;LogError(Logger::LOGGER_LEVEL::PRINT_ONCE, key, configs.toString());</p>
 
 <p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00047">47</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
@@ -309,7 +323,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00584">584</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00685">685</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -339,7 +353,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00555">555</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00654">654</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -369,7 +383,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00526">526</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00623">623</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -467,7 +481,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_dragon_motor_controller.html#a35b6fe6bc4b6a582d99ec223206e4add">IDragonMotorController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00445">445</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00540">540</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -497,7 +511,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_dragon_motor_controller.html#aabc3307852ea64aebdf940f37cade673">IDragonMotorController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00428">428</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00521">521</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -526,7 +540,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_dragon_motor_controller.html#adad0d5e0e39fddd18961e8c880ede086">IDragonMotorController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8h_source.html#l00126">126</a> of file <a class="el" href="_dragon_falcon_8h_source.html">DragonFalcon.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8h_source.html#l00127">127</a> of file <a class="el" href="_dragon_falcon_8h_source.html">DragonFalcon.h</a>.</p>
 
 </div>
 </div>
@@ -562,6 +576,35 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a83cb79704403799050396f81f888a0d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83cb79704403799050396f81f888a0d8">&#9670;&nbsp;</a></span>GetGearRatio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double DragonFalcon::GetGearRatio </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_i_dragon_motor_controller.html#a3b753bd72bad542f7866785ca397c33a">IDragonMotorController</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8h_source.html#l00138">138</a> of file <a class="el" href="_dragon_falcon_8h_source.html">DragonFalcon.h</a>.</p>
+
+</div>
+</div>
 <a id="a09c99e5934e299873e65068b1c74fd2b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a09c99e5934e299873e65068b1c74fd2b">&#9670;&nbsp;</a></span>GetID()</h2>
 
@@ -590,7 +633,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_dragon_motor_controller.html#ad70e1b0a007c03cc07a6ee531d6701d6">IDragonMotorController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00465">465</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00560">560</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -718,7 +761,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_dragon_motor_controller.html#a0b4ae4352bf46cae7d783c4e8c36aa6e">IDragonMotorController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00460">460</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00555">555</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -748,7 +791,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_dragon_motor_controller.html#aae1077a659ed6c8f89d565f6411e56a3">IDragonMotorController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00450">450</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00545">545</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -778,7 +821,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00475">475</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00570">570</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -808,7 +851,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_dragon_motor_controller.html#adacee402a923d6a10d50abd1c850138e">IDragonMotorController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00395">395</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00486">486</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -848,7 +891,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_dragon_motor_controller.html#a23921e5a5bc9f4db45e95c7f587f4674">IDragonMotorController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00314">314</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00381">381</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -868,12 +911,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00613">613</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00716">716</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a1504585d6a7671449c274adb254d6aa6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1504585d6a7671449c274adb254d6aa6">&#9670;&nbsp;</a></span>SetControlConstants()</h2>
+<a id="a6b34b7b6faac4550a1abecc684f989b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b34b7b6faac4550a1abecc684f989b4">&#9670;&nbsp;</a></span>SetControlConstants()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -884,9 +927,19 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void DragonFalcon::SetControlConstants </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_control_data.html">ControlData</a> *&#160;</td>
-          <td class="paramname"><em>controlInfo</em></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>slot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="class_control_data.html">ControlData</a> *&#160;</td>
+          <td class="paramname"><em>controlInfo</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -899,15 +952,16 @@ Public Member Functions</h2></td></tr>
 <p>Set the control constants (e.g. PIDF values). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">int</td><td>slot - hardware slot to use </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ControlData*</td><td>pid - the control constants </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Implements <a class="el" href="class_i_dragon_motor_controller.html#abdca297c707d0c1f5e36bc0be37396d5">IDragonMotorController</a>.</p>
+<p>Implements <a class="el" href="class_i_dragon_motor_controller.html#a0431ed9a17473910613b2faf37704036">IDragonMotorController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00625">625</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00729">729</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -967,7 +1021,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_dragon_motor_controller.html#ae94b716ecf9b1bb64c7184d904ef9e6d">IDragonMotorController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00754">754</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00880">880</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -987,7 +1041,37 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00710">710</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00830">830</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a1d71d968b3323ba9a86bdff04b563d31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d71d968b3323ba9a86bdff04b563d31">&#9670;&nbsp;</a></span>SetFramePeriodPriority()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DragonFalcon::SetFramePeriodPriority </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_i_dragon_motor_controller.html#aa318b4b9dd9603fda549de42c386fcd2">MOTOR_PRIORITY</a>&#160;</td>
+          <td class="paramname"><em>priority</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_i_dragon_motor_controller.html#ab25248538d3b61655a4638ba6bf84f77">IDragonMotorController</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00323">323</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -1027,7 +1111,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_dragon_motor_controller.html#a5f5568cf4e1c64b327795135753678a1">IDragonMotorController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00736">736</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00860">860</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -1047,7 +1131,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00723">723</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00845">845</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -1077,7 +1161,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_dragon_motor_controller.html#ab8ceadc2e3c436b6c5b281e526d4007d">IDragonMotorController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00404">404</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00495">495</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -1107,15 +1191,18 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_dragon_motor_controller.html#a108645163a4c281f5c83b72136fe5cae">IDragonMotorController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00455">455</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00550">550</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a16d9bde1c10c8146a62cb86b3ce8331a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16d9bde1c10c8146a62cb86b3ce8331a">&#9670;&nbsp;</a></span>SetVoltage()</h2>
+<a id="af1c829e220dc76fb7c3b900f292dc0b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1c829e220dc76fb7c3b900f292dc0b8">&#9670;&nbsp;</a></span>SetVoltage()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void DragonFalcon::SetVoltage </td>
@@ -1125,9 +1212,16 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00762">762</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p>Implements <a class="el" href="class_i_dragon_motor_controller.html#acecacc07a8d110ff7470be2cfc615364">IDragonMotorController</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00888">888</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>
@@ -1167,7 +1261,47 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_dragon_motor_controller.html#adf68e251d62ea48a3cf1ca4c395529a6">IDragonMotorController</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00410">410</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00501">501</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab2202a24efc28956e5c0879026927744"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2202a24efc28956e5c0879026927744">&#9670;&nbsp;</a></span>UpdateFramePeriods()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DragonFalcon::UpdateFramePeriods </td>
+          <td>(</td>
+          <td class="paramtype">ctre::phoenix::motorcontrol::StatusFrameEnhanced&#160;</td>
+          <td class="paramname"><em>frame</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>milliseconds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_i_dragon_motor_controller.html#a436bc02bae19f53f567e0f4e8c67a6f9">IDragonMotorController</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="_dragon_falcon_8cpp_source.html#l00314">314</a> of file <a class="el" href="_dragon_falcon_8cpp_source.html">DragonFalcon.cpp</a>.</p>
 
 </div>
 </div>

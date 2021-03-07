@@ -1,0 +1,179 @@
+\hypertarget{class_ball_hopper_state_mgr}{}\doxysection{Ball\+Hopper\+State\+Mgr Class Reference}
+\label{class_ball_hopper_state_mgr}\index{BallHopperStateMgr@{BallHopperStateMgr}}
+
+
+{\ttfamily \#include $<$Ball\+Hopper\+State\+Mgr.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bcee}{B\+A\+L\+L\+\_\+\+H\+O\+P\+P\+E\+R\+\_\+\+S\+T\+A\+TE}} \{ \newline
+\mbox{\hyperlink{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceea60b11b7f282568e6ee7c7acdebfa4c5c}{O\+FF}}, 
+\mbox{\hyperlink{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceead985a3d1267b4a50c853400769c1318a}{H\+O\+LD}}, 
+\mbox{\hyperlink{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceea6dec07f3da1ccd5706505c733d616763}{R\+A\+P\+I\+D\+\_\+\+R\+E\+L\+E\+A\+SE}}, 
+\mbox{\hyperlink{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceea8c1b2cce9f8d32a0af01468388e4c62b}{S\+L\+O\+W\+\_\+\+R\+E\+L\+E\+A\+SE}}, 
+\newline
+\mbox{\hyperlink{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceeaf2c87f384479e94af34a2a48b3783cd7}{M\+A\+X\+\_\+\+B\+A\+L\+L\+\_\+\+H\+O\+P\+P\+E\+R\+\_\+\+S\+T\+A\+T\+ES}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_ball_hopper_state_mgr_a958456ae99e1ec65bc9d9b675e6b8b6c}{Run\+Current\+State}} ()
+\begin{DoxyCompactList}\small\item\em run the current state \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_ball_hopper_state_mgr_a05aadb330dfbb685b5282e9df92c4a3d}{Set\+Current\+State}} (\mbox{\hyperlink{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bcee}{B\+A\+L\+L\+\_\+\+H\+O\+P\+P\+E\+R\+\_\+\+S\+T\+A\+TE}} state, bool run)
+\begin{DoxyCompactList}\small\item\em set the current state, initialize it and run it \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bcee}{B\+A\+L\+L\+\_\+\+H\+O\+P\+P\+E\+R\+\_\+\+S\+T\+A\+TE}} \mbox{\hyperlink{class_ball_hopper_state_mgr_af36125619d2e51cb53d179d5cf5ea083}{Get\+Current\+State}} () const
+\begin{DoxyCompactList}\small\item\em return the current state \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_i_state}{I\+State}} $\ast$ \mbox{\hyperlink{class_ball_hopper_state_mgr_a3018a7cc6064838144826b7c626a6d66}{Get\+State}} (\mbox{\hyperlink{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bcee}{B\+A\+L\+L\+\_\+\+H\+O\+P\+P\+E\+R\+\_\+\+S\+T\+A\+TE}} state)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_ball_hopper_state_mgr}{Ball\+Hopper\+State\+Mgr}} $\ast$ \mbox{\hyperlink{class_ball_hopper_state_mgr_ad3412703309274fcb593ac60214b5f18}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Find or create the state manager. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 25 of file Ball\+Hopper\+State\+Mgr.\+h.
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bcee}\label{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bcee}} 
+\index{BallHopperStateMgr@{BallHopperStateMgr}!BALL\_HOPPER\_STATE@{BALL\_HOPPER\_STATE}}
+\index{BALL\_HOPPER\_STATE@{BALL\_HOPPER\_STATE}!BallHopperStateMgr@{BallHopperStateMgr}}
+\doxysubsubsection{\texorpdfstring{BALL\_HOPPER\_STATE}{BALL\_HOPPER\_STATE}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bcee}{Ball\+Hopper\+State\+Mgr\+::\+B\+A\+L\+L\+\_\+\+H\+O\+P\+P\+E\+R\+\_\+\+S\+T\+A\+TE}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OFF@{OFF}!BallHopperStateMgr@{BallHopperStateMgr}}\index{BallHopperStateMgr@{BallHopperStateMgr}!OFF@{OFF}}}\mbox{\Hypertarget{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceea60b11b7f282568e6ee7c7acdebfa4c5c}\label{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceea60b11b7f282568e6ee7c7acdebfa4c5c}} 
+O\+FF&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HOLD@{HOLD}!BallHopperStateMgr@{BallHopperStateMgr}}\index{BallHopperStateMgr@{BallHopperStateMgr}!HOLD@{HOLD}}}\mbox{\Hypertarget{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceead985a3d1267b4a50c853400769c1318a}\label{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceead985a3d1267b4a50c853400769c1318a}} 
+H\+O\+LD&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RAPID\_RELEASE@{RAPID\_RELEASE}!BallHopperStateMgr@{BallHopperStateMgr}}\index{BallHopperStateMgr@{BallHopperStateMgr}!RAPID\_RELEASE@{RAPID\_RELEASE}}}\mbox{\Hypertarget{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceea6dec07f3da1ccd5706505c733d616763}\label{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceea6dec07f3da1ccd5706505c733d616763}} 
+R\+A\+P\+I\+D\+\_\+\+R\+E\+L\+E\+A\+SE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLOW\_RELEASE@{SLOW\_RELEASE}!BallHopperStateMgr@{BallHopperStateMgr}}\index{BallHopperStateMgr@{BallHopperStateMgr}!SLOW\_RELEASE@{SLOW\_RELEASE}}}\mbox{\Hypertarget{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceea8c1b2cce9f8d32a0af01468388e4c62b}\label{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceea8c1b2cce9f8d32a0af01468388e4c62b}} 
+S\+L\+O\+W\+\_\+\+R\+E\+L\+E\+A\+SE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX\_BALL\_HOPPER\_STATES@{MAX\_BALL\_HOPPER\_STATES}!BallHopperStateMgr@{BallHopperStateMgr}}\index{BallHopperStateMgr@{BallHopperStateMgr}!MAX\_BALL\_HOPPER\_STATES@{MAX\_BALL\_HOPPER\_STATES}}}\mbox{\Hypertarget{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceeaf2c87f384479e94af34a2a48b3783cd7}\label{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bceeaf2c87f384479e94af34a2a48b3783cd7}} 
+M\+A\+X\+\_\+\+B\+A\+L\+L\+\_\+\+H\+O\+P\+P\+E\+R\+\_\+\+S\+T\+A\+T\+ES&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 29 of file Ball\+Hopper\+State\+Mgr.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_ball_hopper_state_mgr_af36125619d2e51cb53d179d5cf5ea083}\label{class_ball_hopper_state_mgr_af36125619d2e51cb53d179d5cf5ea083}} 
+\index{BallHopperStateMgr@{BallHopperStateMgr}!GetCurrentState@{GetCurrentState}}
+\index{GetCurrentState@{GetCurrentState}!BallHopperStateMgr@{BallHopperStateMgr}}
+\doxysubsubsection{\texorpdfstring{GetCurrentState()}{GetCurrentState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bcee}{B\+A\+L\+L\+\_\+\+H\+O\+P\+P\+E\+R\+\_\+\+S\+T\+A\+TE}} Ball\+Hopper\+State\+Mgr\+::\+Get\+Current\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+return the current state 
+
+\begin{DoxyReturn}{Returns}
+B\+A\+L\+L\+\_\+\+H\+O\+P\+P\+E\+R\+\_\+\+S\+T\+A\+TE -\/ the current state 
+\end{DoxyReturn}
+
+
+Definition at line 59 of file Ball\+Hopper\+State\+Mgr.\+h.
+
+\mbox{\Hypertarget{class_ball_hopper_state_mgr_ad3412703309274fcb593ac60214b5f18}\label{class_ball_hopper_state_mgr_ad3412703309274fcb593ac60214b5f18}} 
+\index{BallHopperStateMgr@{BallHopperStateMgr}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!BallHopperStateMgr@{BallHopperStateMgr}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_ball_hopper_state_mgr}{Ball\+Hopper\+State\+Mgr}} $\ast$ Ball\+Hopper\+State\+Mgr\+::\+Get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Find or create the state manager. 
+
+\begin{DoxyReturn}{Returns}
+Ball\+Hopper\+State\+Mgr$\ast$ pointer to the state manager 
+\end{DoxyReturn}
+
+
+Definition at line 41 of file Ball\+Hopper\+State\+Mgr.\+cpp.
+
+\mbox{\Hypertarget{class_ball_hopper_state_mgr_a3018a7cc6064838144826b7c626a6d66}\label{class_ball_hopper_state_mgr_a3018a7cc6064838144826b7c626a6d66}} 
+\index{BallHopperStateMgr@{BallHopperStateMgr}!GetState@{GetState}}
+\index{GetState@{GetState}!BallHopperStateMgr@{BallHopperStateMgr}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_i_state}{I\+State}}$\ast$ Ball\+Hopper\+State\+Mgr\+::\+Get\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bcee}{B\+A\+L\+L\+\_\+\+H\+O\+P\+P\+E\+R\+\_\+\+S\+T\+A\+TE}}}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 61 of file Ball\+Hopper\+State\+Mgr.\+h.
+
+\mbox{\Hypertarget{class_ball_hopper_state_mgr_a958456ae99e1ec65bc9d9b675e6b8b6c}\label{class_ball_hopper_state_mgr_a958456ae99e1ec65bc9d9b675e6b8b6c}} 
+\index{BallHopperStateMgr@{BallHopperStateMgr}!RunCurrentState@{RunCurrentState}}
+\index{RunCurrentState@{RunCurrentState}!BallHopperStateMgr@{BallHopperStateMgr}}
+\doxysubsubsection{\texorpdfstring{RunCurrentState()}{RunCurrentState()}}
+{\footnotesize\ttfamily void Ball\+Hopper\+State\+Mgr\+::\+Run\+Current\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+run the current state 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em B\+A\+L\+L\+\_\+\+H\+O\+P\+P\+E\+R\+\_\+\+S\+T\+A\+TE} & -\/ state to run \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+
+void 
+\end{DoxyReturn}
+
+
+Definition at line 137 of file Ball\+Hopper\+State\+Mgr.\+cpp.
+
+\mbox{\Hypertarget{class_ball_hopper_state_mgr_a05aadb330dfbb685b5282e9df92c4a3d}\label{class_ball_hopper_state_mgr_a05aadb330dfbb685b5282e9df92c4a3d}} 
+\index{BallHopperStateMgr@{BallHopperStateMgr}!SetCurrentState@{SetCurrentState}}
+\index{SetCurrentState@{SetCurrentState}!BallHopperStateMgr@{BallHopperStateMgr}}
+\doxysubsubsection{\texorpdfstring{SetCurrentState()}{SetCurrentState()}}
+{\footnotesize\ttfamily void Ball\+Hopper\+State\+Mgr\+::\+Set\+Current\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_ball_hopper_state_mgr_a764db11538c5d9ba1a87eb074009bcee}{B\+A\+L\+L\+\_\+\+H\+O\+P\+P\+E\+R\+\_\+\+S\+T\+A\+TE}}}]{state\+Enum,  }\item[{bool}]{run }\end{DoxyParamCaption})}
+
+
+
+set the current state, initialize it and run it 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em B\+A\+L\+L\+\_\+\+H\+O\+P\+P\+E\+R\+\_\+\+S\+T\+A\+TE} & -\/ state to set \\
+\hline
+\mbox{\texttt{ in}}  & {\em run} & -\/ true mean run, false just initialize \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+
+void 
+\end{DoxyReturn}
+
+
+Definition at line 153 of file Ball\+Hopper\+State\+Mgr.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/states/ballhopper/\mbox{\hyperlink{_ball_hopper_state_mgr_8h}{Ball\+Hopper\+State\+Mgr.\+h}}\item 
+C\+:/\+Git\+Repos/2021\+Swerve\+Bot/src/main/cpp/states/ballhopper/\mbox{\hyperlink{_ball_hopper_state_mgr_8cpp}{Ball\+Hopper\+State\+Mgr.\+cpp}}\end{DoxyCompactItemize}

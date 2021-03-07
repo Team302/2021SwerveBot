@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: Mech Class Reference</title>
+<title>Team 302 Swerve Robot: Mech Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -111,12 +111,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a502d8be2ff8725323c22371cba93dd37"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mech.html#a502d8be2ff8725323c22371cba93dd37">GetNetworkTableName</a> () const override</td></tr>
 <tr class="memdesc:a502d8be2ff8725323c22371cba93dd37"><td class="mdescLeft">&#160;</td><td class="mdescRight">indicate the Network Table name used to setting tracking parameters  <a href="class_mech.html#a502d8be2ff8725323c22371cba93dd37">More...</a><br /></td></tr>
 <tr class="separator:a502d8be2ff8725323c22371cba93dd37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2cfbcb9033be2844d450aeea6a92f78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mech.html#ad2cfbcb9033be2844d450aeea6a92f78">ActivateLogging</a> (units::second_t millisecondsBetweenLogging) override final</td></tr>
-<tr class="memdesc:ad2cfbcb9033be2844d450aeea6a92f78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activates logging key values to network table.  <a href="class_mech.html#ad2cfbcb9033be2844d450aeea6a92f78">More...</a><br /></td></tr>
-<tr class="separator:ad2cfbcb9033be2844d450aeea6a92f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9ad0746220c95dde4abe97c34710fc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mech.html#ac9ad0746220c95dde4abe97c34710fc2">DeactivateLogging</a> () override final</td></tr>
-<tr class="memdesc:ac9ad0746220c95dde4abe97c34710fc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop updating the key values to network table.  <a href="class_mech.html#ac9ad0746220c95dde4abe97c34710fc2">More...</a><br /></td></tr>
-<tr class="separator:ac9ad0746220c95dde4abe97c34710fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8e245e9cf0061ef1acf09a9103e41c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mech.html#ab8e245e9cf0061ef1acf09a9103e41c4">LogData</a> () override</td></tr>
 <tr class="memdesc:ab8e245e9cf0061ef1acf09a9103e41c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">log data to the network table if it is activated and time period has past  <a href="class_mech.html#ab8e245e9cf0061ef1acf09a9103e41c4">More...</a><br /></td></tr>
 <tr class="separator:ab8e245e9cf0061ef1acf09a9103e41c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -234,76 +228,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad2cfbcb9033be2844d450aeea6a92f78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2cfbcb9033be2844d450aeea6a92f78">&#9670;&nbsp;</a></span>ActivateLogging()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Mech::ActivateLogging </td>
-          <td>(</td>
-          <td class="paramtype">units::second_t&#160;</td>
-          <td class="paramname"><em>millisecondsBetweenLogging</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Activates logging key values to network table. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">int</td><td>indicate how many millisecondsBetweenLogging updates to the network table <br  />
- </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="class_i_mech.html#ae36bb88f573108e3bd6c462ac73a65a5">IMech</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="_mech_8cpp_source.html#l00092">92</a> of file <a class="el" href="_mech_8cpp_source.html">Mech.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ac9ad0746220c95dde4abe97c34710fc2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9ad0746220c95dde4abe97c34710fc2">&#9670;&nbsp;</a></span>DeactivateLogging()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Mech::DeactivateLogging </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Stop updating the key values to network table. </p>
-
-<p>Implements <a class="el" href="class_i_mech.html#aab6c09d4742d031c1c4e0720df90a6ef">IMech</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="_mech_8cpp_source.html#l00115">115</a> of file <a class="el" href="_mech_8cpp_source.html">Mech.cpp</a>.</p>
-
-</div>
-</div>
 <a id="a920a923776b0a1b827e5ad689bc6ecf8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a920a923776b0a1b827e5ad689bc6ecf8">&#9670;&nbsp;</a></span>GetControlFileName()</h2>
 
@@ -333,7 +257,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_mech.html#a696bed03ac45f3da85cbe26e8658e0fd">IMech</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_mech_8cpp_source.html#l00077">77</a> of file <a class="el" href="_mech_8cpp_source.html">Mech.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mech_8cpp_source.html#l00073">73</a> of file <a class="el" href="_mech_8cpp_source.html">Mech.cpp</a>.</p>
 
 </div>
 </div>
@@ -367,7 +291,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_mech.html#ab817a939691114a20840a82d40f894fa">IMech</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_mech_8cpp_source.html#l00085">85</a> of file <a class="el" href="_mech_8cpp_source.html">Mech.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mech_8cpp_source.html#l00081">81</a> of file <a class="el" href="_mech_8cpp_source.html">Mech.cpp</a>.</p>
 
 </div>
 </div>
@@ -399,7 +323,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_mech.html#aa3c52c74a67a5f1caa2c11c13dacccdb">IMech</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_mech_8cpp_source.html#l00070">70</a> of file <a class="el" href="_mech_8cpp_source.html">Mech.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mech_8cpp_source.html#l00066">66</a> of file <a class="el" href="_mech_8cpp_source.html">Mech.cpp</a>.</p>
 
 </div>
 </div>
@@ -430,7 +354,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_i_mech.html#a8ef8718f9a677623b49da0e2250fa326">IMech</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_mech_8cpp_source.html#l00102">102</a> of file <a class="el" href="_mech_8cpp_source.html">Mech.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mech_8cpp_source.html#l00088">88</a> of file <a class="el" href="_mech_8cpp_source.html">Mech.cpp</a>.</p>
 
 </div>
 </div>

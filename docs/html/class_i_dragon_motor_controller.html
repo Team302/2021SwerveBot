@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: IDragonMotorController Interface Reference</title>
+<title>Team 302 Swerve Robot: IDragonMotorController Interface Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -82,6 +82,7 @@ $(document).ready(function(){initNavTree('class_i_dragon_motor_controller.html',
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_i_dragon_motor_controller-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -104,6 +105,14 @@ Inheritance diagram for IDragonMotorController:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aa318b4b9dd9603fda549de42c386fcd2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#aa318b4b9dd9603fda549de42c386fcd2">MOTOR_PRIORITY</a> { <a class="el" href="class_i_dragon_motor_controller.html#aa318b4b9dd9603fda549de42c386fcd2af8b1a69321524d92b9dec3eb6b95c50d">HIGH</a>, 
+<a class="el" href="class_i_dragon_motor_controller.html#aa318b4b9dd9603fda549de42c386fcd2ac5df8b2359a0263857b7060a4aa5209e">MEDIUM</a>, 
+<a class="el" href="class_i_dragon_motor_controller.html#aa318b4b9dd9603fda549de42c386fcd2ab25b1f33cbe7fcf9cd6f12159ca0ca62">LOW</a>
+ }</td></tr>
+<tr class="separator:aa318b4b9dd9603fda549de42c386fcd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aaebed7f496f5e56709a5dda5d7749782"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#aaebed7f496f5e56709a5dda5d7749782">GetRotations</a> () const =0</td></tr>
@@ -144,23 +153,53 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a108645163a4c281f5c83b72136fe5cae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae94b716ecf9b1bb64c7184d904ef9e6d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#ae94b716ecf9b1bb64c7184d904ef9e6d">SetDiameter</a> (double diameter)=0</td></tr>
 <tr class="separator:ae94b716ecf9b1bb64c7184d904ef9e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abdca297c707d0c1f5e36bc0be37396d5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#abdca297c707d0c1f5e36bc0be37396d5">SetControlConstants</a> (<a class="el" href="class_control_data.html">ControlData</a> *controlInfo)=0</td></tr>
-<tr class="memdesc:abdca297c707d0c1f5e36bc0be37396d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control constants (e.g. PIDF values).  <a href="class_i_dragon_motor_controller.html#abdca297c707d0c1f5e36bc0be37396d5">More...</a><br /></td></tr>
-<tr class="separator:abdca297c707d0c1f5e36bc0be37396d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acecacc07a8d110ff7470be2cfc615364"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#acecacc07a8d110ff7470be2cfc615364">SetVoltage</a> (units::volt_t output)=0</td></tr>
+<tr class="separator:acecacc07a8d110ff7470be2cfc615364"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0431ed9a17473910613b2faf37704036"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#a0431ed9a17473910613b2faf37704036">SetControlConstants</a> (int slot, <a class="el" href="class_control_data.html">ControlData</a> *controlInfo)=0</td></tr>
+<tr class="memdesc:a0431ed9a17473910613b2faf37704036"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control constants (e.g. PIDF values).  <a href="class_i_dragon_motor_controller.html#a0431ed9a17473910613b2faf37704036">More...</a><br /></td></tr>
+<tr class="separator:a0431ed9a17473910613b2faf37704036"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f5568cf4e1c64b327795135753678a1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#a5f5568cf4e1c64b327795135753678a1">SetRemoteSensor</a> (int canID, ctre::phoenix::motorcontrol::RemoteSensorSource deviceType)=0</td></tr>
 <tr class="separator:a5f5568cf4e1c64b327795135753678a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a436bc02bae19f53f567e0f4e8c67a6f9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#a436bc02bae19f53f567e0f4e8c67a6f9">UpdateFramePeriods</a> (ctre::phoenix::motorcontrol::StatusFrameEnhanced frame, uint8_t milliseconds)=0</td></tr>
+<tr class="separator:a436bc02bae19f53f567e0f4e8c67a6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab25248538d3b61655a4638ba6bf84f77"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#ab25248538d3b61655a4638ba6bf84f77">SetFramePeriodPriority</a> (<a class="el" href="class_i_dragon_motor_controller.html#aa318b4b9dd9603fda549de42c386fcd2">MOTOR_PRIORITY</a> priority)=0</td></tr>
+<tr class="separator:ab25248538d3b61655a4638ba6bf84f77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adad0d5e0e39fddd18961e8c880ede086"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#adad0d5e0e39fddd18961e8c880ede086">GetCountsPerRev</a> () const =0</td></tr>
 <tr class="separator:adad0d5e0e39fddd18961e8c880ede086"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd89e75a66f4aa8ab989b2196e5d912f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#abd89e75a66f4aa8ab989b2196e5d912f">IDragonMotorController</a> ()=default</td></tr>
 <tr class="separator:abd89e75a66f4aa8ab989b2196e5d912f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93f40b43658f5744e50292dbf6fc470b"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#a93f40b43658f5744e50292dbf6fc470b">~IDragonMotorController</a> ()=default</td></tr>
 <tr class="separator:a93f40b43658f5744e50292dbf6fc470b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b753bd72bad542f7866785ca397c33a"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_dragon_motor_controller.html#a3b753bd72bad542f7866785ca397c33a">GetGearRatio</a> () const =0</td></tr>
+<tr class="separator:a3b753bd72bad542f7866785ca397c33a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The general interface to motor controllers so that the specific mechanisms that use motors, don't need to special case what motor controller is being used. </p>
 
-<p class="definition">Definition at line <a class="el" href="_i_dragon_motor_controller_8h_source.html#l00038">38</a> of file <a class="el" href="_i_dragon_motor_controller_8h_source.html">IDragonMotorController.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="_i_dragon_motor_controller_8h_source.html#l00039">39</a> of file <a class="el" href="_i_dragon_motor_controller_8h_source.html">IDragonMotorController.h</a>.</p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="aa318b4b9dd9603fda549de42c386fcd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa318b4b9dd9603fda549de42c386fcd2">&#9670;&nbsp;</a></span>MOTOR_PRIORITY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_i_dragon_motor_controller.html#aa318b4b9dd9603fda549de42c386fcd2">IDragonMotorController::MOTOR_PRIORITY</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa318b4b9dd9603fda549de42c386fcd2af8b1a69321524d92b9dec3eb6b95c50d"></a>HIGH&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa318b4b9dd9603fda549de42c386fcd2ac5df8b2359a0263857b7060a4aa5209e"></a>MEDIUM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa318b4b9dd9603fda549de42c386fcd2ab25b1f33cbe7fcf9cd6f12159ca0ca62"></a>LOW&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_i_dragon_motor_controller_8h_source.html#l00043">43</a> of file <a class="el" href="_i_dragon_motor_controller_8h_source.html">IDragonMotorController.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abd89e75a66f4aa8ab989b2196e5d912f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abd89e75a66f4aa8ab989b2196e5d912f">&#9670;&nbsp;</a></span>IDragonMotorController()</h2>
 
@@ -322,6 +361,33 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>double - amperage usage for the controller </dd></dl>
 
 <p>Implemented in <a class="el" href="class_dragon_talon.html#aa5fe4416de572b8c84ee1e063fd1b66e">DragonTalon</a>, and <a class="el" href="class_dragon_falcon.html#aef9e7316a70af58f1dc02a9fae5cfd8a">DragonFalcon</a>.</p>
+
+</div>
+</div>
+<a id="a3b753bd72bad542f7866785ca397c33a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b753bd72bad542f7866785ca397c33a">&#9670;&nbsp;</a></span>GetGearRatio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double IDragonMotorController::GetGearRatio </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_dragon_talon.html#a211756f0b511e10e8b26a2bc44cf16f8">DragonTalon</a>, and <a class="el" href="class_dragon_falcon.html#a83cb79704403799050396f81f888a0d8">DragonFalcon</a>.</p>
 
 </div>
 </div>
@@ -569,8 +635,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="abdca297c707d0c1f5e36bc0be37396d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abdca297c707d0c1f5e36bc0be37396d5">&#9670;&nbsp;</a></span>SetControlConstants()</h2>
+<a id="a0431ed9a17473910613b2faf37704036"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0431ed9a17473910613b2faf37704036">&#9670;&nbsp;</a></span>SetControlConstants()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -581,9 +647,19 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void IDragonMotorController::SetControlConstants </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_control_data.html">ControlData</a> *&#160;</td>
-          <td class="paramname"><em>controlInfo</em></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>slot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="class_control_data.html">ControlData</a> *&#160;</td>
+          <td class="paramname"><em>controlInfo</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -596,13 +672,14 @@ Public Member Functions</h2></td></tr>
 <p>Set the control constants (e.g. PIDF values). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">int</td><td>slot - hardware slot to use </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ControlData*</td><td>pid - the control constants </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p>Implemented in <a class="el" href="class_dragon_talon.html#a051e7d9a21b9caf9db65bcb2c613808e">DragonTalon</a>, and <a class="el" href="class_dragon_falcon.html#a1504585d6a7671449c274adb254d6aa6">DragonFalcon</a>.</p>
+<p>Implemented in <a class="el" href="class_dragon_talon.html#a798f56a9ad9b2021f3074cc2ff62cecd">DragonTalon</a>, and <a class="el" href="class_dragon_falcon.html#a6b34b7b6faac4550a1abecc684f989b4">DragonFalcon</a>.</p>
 
 </div>
 </div>
@@ -659,6 +736,34 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="class_dragon_talon.html#a741ea243997b62373ef198f75846704d">DragonTalon</a>, and <a class="el" href="class_dragon_falcon.html#a58a336a886347ec83d2b393569fc9d19">DragonFalcon</a>.</p>
+
+</div>
+</div>
+<a id="ab25248538d3b61655a4638ba6bf84f77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab25248538d3b61655a4638ba6bf84f77">&#9670;&nbsp;</a></span>SetFramePeriodPriority()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void IDragonMotorController::SetFramePeriodPriority </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_i_dragon_motor_controller.html#aa318b4b9dd9603fda549de42c386fcd2">MOTOR_PRIORITY</a>&#160;</td>
+          <td class="paramname"><em>priority</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_dragon_talon.html#a8357e689a6e0745411d60eda6963bff3">DragonTalon</a>, and <a class="el" href="class_dragon_falcon.html#a1d71d968b3323ba9a86bdff04b563d31">DragonFalcon</a>.</p>
 
 </div>
 </div>
@@ -756,6 +861,34 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="acecacc07a8d110ff7470be2cfc615364"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acecacc07a8d110ff7470be2cfc615364">&#9670;&nbsp;</a></span>SetVoltage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void IDragonMotorController::SetVoltage </td>
+          <td>(</td>
+          <td class="paramtype">units::volt_t&#160;</td>
+          <td class="paramname"><em>output</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_dragon_talon.html#a26ee74999b0df1bf60dc14c8372571b9">DragonTalon</a>, and <a class="el" href="class_dragon_falcon.html#af1c829e220dc76fb7c3b900f292dc0b8">DragonFalcon</a>.</p>
+
+</div>
+</div>
 <a id="adf68e251d62ea48a3cf1ca4c395529a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adf68e251d62ea48a3cf1ca4c395529a6">&#9670;&nbsp;</a></span>SetVoltageRamping()</h2>
 
@@ -791,6 +924,44 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="class_dragon_talon.html#a1e450e634cd6d34cd0ba8f9bb0aebea1">DragonTalon</a>, and <a class="el" href="class_dragon_falcon.html#a596613a088e7d87182377b04ced5b16a">DragonFalcon</a>.</p>
+
+</div>
+</div>
+<a id="a436bc02bae19f53f567e0f4e8c67a6f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a436bc02bae19f53f567e0f4e8c67a6f9">&#9670;&nbsp;</a></span>UpdateFramePeriods()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void IDragonMotorController::UpdateFramePeriods </td>
+          <td>(</td>
+          <td class="paramtype">ctre::phoenix::motorcontrol::StatusFrameEnhanced&#160;</td>
+          <td class="paramname"><em>frame</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>milliseconds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_dragon_talon.html#a6522d93f816e76a2c46b884633856ad1">DragonTalon</a>, and <a class="el" href="class_dragon_falcon.html#ab2202a24efc28956e5c0879026927744">DragonFalcon</a>.</p>
 
 </div>
 </div>

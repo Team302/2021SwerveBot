@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team 302 Robot: Member List</title>
+<title>Team 302 Swerve Robot: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team 302 Robot
+   <div id="projectname">Team 302 Swerve Robot
    </div>
   </td>
  </tr>
@@ -89,12 +89,16 @@ $(document).ready(function(){initNavTree('class_shooter_state.html',''); initRes
 <p>This is the complete list of members for <a class="el" href="class_shooter_state.html">ShooterState</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="class_mech2_motor_state.html#a6cda4b518f7af0761cf119fbe3b4459d">AtTarget</a>() const override</td><td class="entry"><a class="el" href="class_mech2_motor_state.html">Mech2MotorState</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_mech2_motor_state.html#a91742b31f260870a2b58af2f2eb43d5c">GetPrimaryRPS</a>() const</td><td class="entry"><a class="el" href="class_mech2_motor_state.html">Mech2MotorState</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_mech2_motor_state.html#a3fa1128cbed902ccedde13b27b99a7db">GetPrimaryTarget</a>() const</td><td class="entry"><a class="el" href="class_mech2_motor_state.html">Mech2MotorState</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_mech2_motor_state.html#ae6a5dd330fca29caf4cd4417656394ea">GetSecondaryRPS</a>() const</td><td class="entry"><a class="el" href="class_mech2_motor_state.html">Mech2MotorState</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_mech2_motor_state.html#ac6a0abdf23ebf31bd8c32070d1daf369">GetSecondaryTarget</a>() const</td><td class="entry"><a class="el" href="class_mech2_motor_state.html">Mech2MotorState</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_mech2_motor_state.html#a430785c96c31d43bd1479497a32dc6d5">Init</a>() override</td><td class="entry"><a class="el" href="class_mech2_motor_state.html">Mech2MotorState</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_i_state.html#ae6590bd1d41bcb788780f9f0f4767f66">IState</a>()=default</td><td class="entry"><a class="el" href="class_i_state.html">IState</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_mech2_motor_state.html#a54b18f34138a406196ae861acc1bf0ca">Mech2MotorState</a>(IMech2IndMotors *mechanism, ControlData *control, double primaryTarget, double secondaryTarget)</td><td class="entry"><a class="el" href="class_mech2_motor_state.html">Mech2MotorState</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_mech2_motor_state.html#ab7bdb26aed2ec1f6c797eb50fc599825">Mech2MotorState</a>(IMech2IndMotors *mechanism, ControlData *control, ControlData *control2, double primaryTarget, double secondaryTarget)</td><td class="entry"><a class="el" href="class_mech2_motor_state.html">Mech2MotorState</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_mech2_motor_state.html#a40bc3064af9b0410bd17e5701585747a">Mech2MotorState</a>()=delete</td><td class="entry"><a class="el" href="class_mech2_motor_state.html">Mech2MotorState</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_mech2_motor_state.html#af5f910af18c1b36f2e301b6c6bebd88a">Run</a>() override</td><td class="entry"><a class="el" href="class_mech2_motor_state.html">Mech2MotorState</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_shooter_state.html#aac59e0bbc8268cc49279d311a007f918">ShooterState</a>(ControlData *controlData, double target)</td><td class="entry"><a class="el" href="class_shooter_state.html">ShooterState</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_shooter_state.html#a07e9446ae691b334a42a15358316d35c">ShooterState</a>(ControlData *controlData, ControlData *controlData2, double target1, double target2)</td><td class="entry"><a class="el" href="class_shooter_state.html">ShooterState</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_shooter_state.html#a083ce3135c990443a3319af663c83caf">ShooterState</a>()=delete</td><td class="entry"><a class="el" href="class_shooter_state.html">ShooterState</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_i_state.html#a28a7b15d44be7a1d40ccf5d0790f7ec8">~IState</a>()=default</td><td class="entry"><a class="el" href="class_i_state.html">IState</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_mech2_motor_state.html#aa281cf971bc5282b1b1d2e6c29d6b780">~Mech2MotorState</a>()=default</td><td class="entry"><a class="el" href="class_mech2_motor_state.html">Mech2MotorState</a></td><td class="entry"></td></tr>

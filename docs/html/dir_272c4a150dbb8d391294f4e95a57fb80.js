@@ -6,6 +6,10 @@ var dir_272c4a150dbb8d391294f4e95a57fb80 =
     [ "ConversionUtils.h", "_conversion_utils_8h.html", [
       [ "ConversionUtils", "class_conversion_utils.html", "class_conversion_utils" ]
     ] ],
+    [ "GoalDetection.cpp", "_goal_detection_8cpp.html", null ],
+    [ "GoalDetection.h", "_goal_detection_8h.html", [
+      [ "GoalDetection", "class_goal_detection.html", "class_goal_detection" ]
+    ] ],
     [ "HardwareIDValidation.cpp", "_hardware_i_d_validation_8cpp.html", null ],
     [ "HardwareIDValidation.h", "_hardware_i_d_validation_8h.html", [
       [ "HardwareIDValidation", "class_hardware_i_d_validation.html", null ]
