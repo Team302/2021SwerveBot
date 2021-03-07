@@ -81,7 +81,8 @@ SwerveModule::SwerveModule
     m_nt(),
     m_currentState(),
     m_maxVelocity(1_mps),
-    m_scale(0.25)
+    m_scale(0.25),
+    m_runClosedLoopDrive(false)
 {
     Rotation2d ang { units::angle::degree_t(0.0)};
     m_currentState.angle = ang;
@@ -90,10 +91,15 @@ SwerveModule::SwerveModule
     // Set up the Drive Motor
     auto motor = m_driveMotor.get()->GetSpeedController();
     auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
+
+    fx->ConfigOpenloopRamp(0.4, 0);
+    fx->ConfigClosedloopRamp(0.4, 0);
+
     fx->ConfigSelectedFeedbackSensor( ctre::phoenix::motorcontrol::FeedbackDevice::IntegratedSensor, 0, 10 );
     fx->ConfigIntegratedSensorInitializationStrategy(BootToZero);
     auto driveMotorSensors = fx->GetSensorCollection();
     driveMotorSensors.SetIntegratedSensorPosition(0, 0);
+
 
     // Set up the Absolute Turn Sensor
     m_turnSensor.get()->ConfigAbsoluteSensorRange(AbsoluteSensorRange::Signed_PlusMinus180, 0);
@@ -109,7 +115,7 @@ SwerveModule::SwerveModule
     turnMotorSensors.SetIntegratedSensorPosition(0, 0);
     auto turnCData = make_shared<ControlData>(  ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE,
                                                 ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
-                                                string("Turn Angle"),
+                                                std::string("Turn Angle"),
                                                 turnP,
                                                 turnI,
                                                 turnD,
@@ -159,7 +165,7 @@ void SwerveModule::Init
     m_maxVelocity = maxVelocity;
     auto driveCData = make_shared<ControlData>( ControlModes::CONTROL_TYPE::VELOCITY_RPS,
                                                 ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
-                                                string("DriveSpeed"),
+                                                std::string("DriveSpeed"),
                                                 0.01,  // 0.01
                                                 0.0,
                                                 0.0,
@@ -196,18 +202,6 @@ double SwerveModule::GetEncoderValues()
 /// @returns void
 void SwerveModule::ZeroAlignModule()
 {
-    /*
-    auto motor = m_turnMotor.get()->GetSpeedController();
-    auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
-    auto sensor = fx->GetSensorCollection();
-
-    sensor.SetIntegratedSensorPosition(0, 0);
-
-    double currentTicks = sensor.GetIntegratedSensorPosition();
-    Logger::GetLogger()->ToNtTable(m_nt, string("currentTicks"), currentTicks );
-    Logger::GetLogger()->ToNtTable(m_nt, string("current angle"), m_turnSensor.get()->GetAbsolutePosition() );
-    */
-
     // Desired State
     SetTurnAngle(units::degree_t(0));
 }
@@ -243,7 +237,9 @@ void SwerveModule::SetDesiredState
     // if it is more than 90 degrees (90 to 270), the can turn the opposite direction -- increase the angle by 180 degrees -- and negate the wheel speed
     // finally, get the value between -90 and 90
     Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
-    auto optimizedState = Optimize(targetState, currAngle);
+   auto optimizedState = Optimize(targetState, currAngle);
+   // auto optimizedState = SwerveModuleState::Optimize(targetState, currAngle);
+   // auto optimizedState = targetState;
 
     // Set Turn Target 
     SetTurnAngle(optimizedState.angle.Degrees());
@@ -260,8 +256,25 @@ SwerveModuleState SwerveModule::Optimize
     const Rotation2d& currentAngle
 ) 
 {
+
     auto delta = desiredState.angle - currentAngle;
 
+    Logger::GetLogger()->ToNtTable("Optimize", "current", currentAngle.Degrees().to<double>());
+    Logger::GetLogger()->ToNtTable("Optimize", "target", desiredState.angle.Degrees().to<double>());
+    Logger::GetLogger()->ToNtTable("Optimize", "delta", delta.Degrees().to<double>());
+    /**
+    auto tanDelta = tan(delta.Radians().to<double>());
+    auto rads = units::angle::radian_t(tanDelta);
+    units::angle::degree_t degs = rads;
+
+    // if the delta is > 90 degrees, rotate the 
+    if ((units::math::abs(degs) - 90_deg) > 0.1_deg) 
+    {
+        return {-desiredState.speed, desiredState.angle + Rotation2d{180_deg}};
+    } 
+    return {desiredState.speed, desiredState.angle};
+    **/
+    
     // make sure the delta is between -180.0 and 180.0
     if (delta.Degrees() < -180.0_deg)
     {
@@ -279,12 +292,15 @@ SwerveModuleState SwerveModule::Optimize
     }
 
     // if the delta is > 90 degrees, rotate the 
-    if ((units::math::abs(delta.Degrees()) - 90_deg) > 0.1_deg) 
+//    if ((units::math::abs(delta.Degrees()) - 90_deg) > 0.1_deg) 
+    if ((units::math::abs(delta.Degrees()) - 160_deg) > 0.1_deg) 
     {
+        Logger::GetLogger()->ToNtTable("Optimize", "optimized", (desiredState.angle + Rotation2d{180_deg}).Degrees().to<double>());
         return {-desiredState.speed, desiredState.angle + Rotation2d{180_deg}};
     } 
     else 
     {
+        Logger::GetLogger()->ToNtTable("Optimize", "optimized", desiredState.angle.Degrees().to<double>());
         return {desiredState.speed, desiredState.angle};
     }
 }
@@ -311,21 +327,30 @@ void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
     {
         m_currentState.speed = speed;
     }
-
     Logger::GetLogger()->ToNtTable(m_nt, string("State Speed - mps"), m_currentState.speed.to<double>() );
     Logger::GetLogger()->ToNtTable(m_nt, string("Wheel Diameter - meters"), units::length::meter_t(m_wheelDiameter).to<double>() );
-       
-    // convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel
-    auto driveTarget = m_currentState.speed.to<double>() / (units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi);  
-    driveTarget /= m_driveMotor.get()->GetGearRatio();
-    driveTarget *= m_scale;
-    
-    Logger::GetLogger()->ToNtTable(m_nt, string("drive motor id"), m_driveMotor.get()->GetID() );
-    Logger::GetLogger()->ToNtTable(m_nt, string("drive target"), driveTarget );
-    Logger::GetLogger()->ToNtTable(m_nt, string("drive scale"), m_scale );
-     
-    m_driveMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::VELOCITY_RPS);
-    m_driveMotor.get()->Set(m_nt, driveTarget);
+
+    if (m_runClosedLoopDrive)
+    {
+        // convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel
+        auto driveTarget = m_currentState.speed.to<double>() / (units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi);  
+        driveTarget /= m_driveMotor.get()->GetGearRatio();
+        driveTarget *= m_scale;
+        
+        Logger::GetLogger()->ToNtTable(m_nt, string("drive motor id"), m_driveMotor.get()->GetID() );
+        Logger::GetLogger()->ToNtTable(m_nt, string("drive target"), driveTarget );
+        Logger::GetLogger()->ToNtTable(m_nt, string("drive scale"), m_scale );
+        
+        m_driveMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::VELOCITY_RPS);
+        m_driveMotor.get()->Set(m_nt, driveTarget);
+    }
+    else
+    {
+        auto percent = m_currentState.speed / m_maxVelocity;
+        percent *= m_scale;
+        m_driveMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::PERCENT_OUTPUT);
+        m_driveMotor.get()->Set(m_nt, percent);
+    }
 }
 
 void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )

@@ -250,7 +250,7 @@ void DrivePath::CalcCurrentAndDesiredStates()
 
     Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseX", m_desiredState.pose.X().to<double>());
     Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseY", m_desiredState.pose.Y().to<double>());
-    Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseOmega", m_desiredState.pose.Rotation().Degrees().to<double>());
+    Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseOmega", desiredPose.pose.Rotation().Degrees().to<double>());
     Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", m_currentChassisPosition.X().to<double>());
     Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", m_currentChassisPosition.Y().to<double>());
     Logger::GetLogger()->ToNtTable("DeltaValues", "DeltaX", m_desiredState.pose.X().to<double>() - m_currentChassisPosition.X().to<double>());
