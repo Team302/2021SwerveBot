@@ -52,7 +52,7 @@ using namespace pugi;
 using namespace std;
 
 
-/// @brief  Parse the chassie element (and it children).  When this is done a IChassis object exists.
+/// @brief  Parse the chassie element (and it children).  When this is done a SwerveChassis object exists.
 ///		   It can be retrieved from the factory.
 /// @param [in]  pugi::xml_node the chassis element in the XML document
 /// @return void

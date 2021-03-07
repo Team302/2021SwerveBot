@@ -40,10 +40,10 @@ class SwerveChassisDefn
 		/// @brief destroy a SwerveChassisDefn object and free the memory
 		virtual ~SwerveChassisDefn() = default;
 
-    	/// @brief  Parse the chassie element (and it children).  When this is done a IChassis object exists.
+    	/// @brief  Parse the chassie element (and it children).  When this is done a SwerveChassis object exists.
 		///		   It can be retrieved from the factory.
 		/// @param [in]  pugi::xml_node the chassis element in the XML document
-    	/// @return std::shared_ptr<IChassis> 
+    	/// @return std::shared_ptr<SwerveChassis> 
 		std::shared_ptr<SwerveChassis>  ParseXML
 		(
 			pugi::xml_node      chassisNode
