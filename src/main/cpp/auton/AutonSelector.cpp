@@ -141,6 +141,7 @@ void AutonSelector::PutChoicesOnDashboard()
 	m_chooser.AddOption("Barrel Racing Path", "barrel.xml");
 	m_chooser.AddOption("Slalom Path", "slalom.xml");
 	m_chooser.AddOption("Zero Wheels", "zero_wheels.xml");
+	m_chooser.AddOption("Calibrate", "calibrate.xml");
 
 	frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 }

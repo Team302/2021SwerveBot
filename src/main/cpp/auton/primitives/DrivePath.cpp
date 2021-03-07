@@ -51,6 +51,7 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
     Logger::GetLogger()->ToNtTable("DrivePath", "Running", "False");
     Logger::GetLogger()->ToNtTable("DrivePath", "Done", "False");
     Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", 0);
+    
 }
 void DrivePath::Init(PrimitiveParams *params)
 {
@@ -65,6 +66,10 @@ void DrivePath::Init(PrimitiveParams *params)
 
         Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", m_currentChassisPosition.X().to<double>());
         Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", m_currentChassisPosition.Y().to<double>());
+
+        Logger::GetLogger()->ToNtTable("Deltas", "iDeltaX", "0");
+        Logger::GetLogger()->ToNtTable("Deltas", "iDeltaX", "0");
+
         m_PosChgTimer.get()->Start(); // start scan timer to detect motion
 
         if (m_runHoloController)
@@ -102,6 +107,7 @@ void DrivePath::Run()
         //Pose2d pull out attributes
         Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseX", desiredPose.pose.X().to<double>());
         Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseY", desiredPose.pose.Y().to<double>());
+        Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseOmega", desiredPose.pose.Rotation().Degrees().to<double>());
         Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", m_currentChassisPosition.X().to<double>());
         Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", m_currentChassisPosition.Y().to<double>());
         Logger::GetLogger()->ToNtTable("DeltaValues", "DeltaX", desiredPose.pose.X().to<double>() - m_currentChassisPosition.X().to<double>());
@@ -133,7 +139,9 @@ bool DrivePath::IsDone()
     {
         // Check if the current pose and the trajectory's final pose are the same
         auto curPos = m_chassis.get()->GetPose().GetEstimatedPosition();
-        isDone = IsSamePose(m_targetPose, curPos);
+        isDone = IsSamePose(curPos, m_targetPose);
+
+        /*
         if ( !isDone )
         {
             // Now check if the current pose is getting closer or farther from the target pose 
@@ -153,7 +161,8 @@ bool DrivePath::IsDone()
                 isDone = ((abs(m_deltaX) < 0.1 && abs(m_deltaY) < 0.1));
             }
         }       
-    
+        */
+
         // Motion Detection //
         if (!isDone) 
         {
@@ -172,14 +181,20 @@ bool DrivePath::IsDone()
         // a new state.
         if (!isDone)
         {
-            return (units::second_t(m_timer.get()->Get()) >= m_trajectory.TotalTime()); 
+            //return (units::second_t(m_timer.get()->Get()) >= m_trajectory.TotalTime()); 
         }
     }
     else
     {
+        Logger::GetLogger()->ToNtTable("DrivePath", "Done", "True");
         return true;
     }
+    if (isDone)
+    {
+        Logger::GetLogger()->ToNtTable("DrivePath", "Done", "True");
+    }
     return isDone;
+    
 }
 bool DrivePath::IsSamePose(frc::Pose2d lCurPos, frc::Pose2d lPrevPos)
 {
@@ -199,6 +214,9 @@ bool DrivePath::IsSamePose(frc::Pose2d lCurPos, frc::Pose2d lPrevPos)
     int iDeltaY = abs(iPrevPosY - iCurPosY);
 
     int iMovThresHold = 1; // cm used for detecting no motion adust this for encoder noise if needed.
+
+    Logger::GetLogger()->ToNtTable("Deltas", "iDeltaX", to_string(iDeltaX));
+    Logger::GetLogger()->ToNtTable("Deltas", "iDeltaY", to_string(iDeltaY));
 
     //  If Position of X or Y has moved since last scan..  Using Delta X/Y
     return (iDeltaX <= iMovThresHold && iDeltaY <= iMovThresHold);

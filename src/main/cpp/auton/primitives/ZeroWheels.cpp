@@ -30,14 +30,16 @@ ZeroWheels::ZeroWheels() : IPrimitive(),
 
 void ZeroWheels::Init(PrimitiveParams* params)
 {
-    m_chassis.get()->ZeroAlignSwerveModules();
+    //m_chassis.get()->ZeroAlignSwerveModules();
 }
 
 void ZeroWheels::Run()
 {
+    m_chassis.get()->ZeroAlignSwerveModules();
 }
 
 bool ZeroWheels::IsDone()
 {
-    return true;
+    //return true;
+    return false;
 }
