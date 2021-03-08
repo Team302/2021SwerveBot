@@ -142,7 +142,13 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		m_buttonIDs[SHOOTER_PREPARE_TO_SHOOT] = IDragonGamePad::POV_0;	
 	
 		m_controllerIndex[TURRET_LIMELIGHT_AIM] = ctrlNo;
-		m_buttonIDs[TURRET_LIMELIGHT_AIM] = IDragonGamePad::LEFT_BUMPER;	
+		m_buttonIDs[TURRET_LIMELIGHT_AIM] = IDragonGamePad::LEFT_BUMPER;
+
+		m_controllerIndex[HOLD] = ctrlNo;
+		m_buttonIDs[HOLD] = IDragonGamePad::LEFT_TRIGGER_PRESSED;
+
+		m_controllerIndex[INTAKE] = ctrlNo;
+		m_buttonIDs[INTAKE] = IDragonGamePad::RIGHT_TRIGGER_PRESSED;
 	}
     else if ( m_controllers[ctrlNo] != nullptr )
     {
