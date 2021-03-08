@@ -139,12 +139,28 @@ class SwerveChassis
         void SetDriveScaleFactor( double scale );
 
     private:
+        frc::ChassisSpeeds GetFieldRelativeSpeeds
+        (
+            units::meters_per_second_t xSpeed,
+            units::meters_per_second_t ySpeed,
+            units::radians_per_second_t rot        
+        );
+
+        void CalcSwerveModuleStates
+        (
+            frc::ChassisSpeeds 
+        );
 
         std::shared_ptr<SwerveModule>                               m_frontLeft;
         std::shared_ptr<SwerveModule>                               m_frontRight;
         std::shared_ptr<SwerveModule>                               m_backLeft;
         std::shared_ptr<SwerveModule>                               m_backRight;
 
+        frc::SwerveModuleState                                      m_flState;
+        frc::SwerveModuleState                                      m_frState;
+        frc::SwerveModuleState                                      m_blState;
+        frc::SwerveModuleState                                      m_brState;
+        
         units::length::inch_t                                       m_wheelBase;       
         units::length::inch_t                                       m_track;
         units::velocity::meters_per_second_t                        m_maxSpeed;
