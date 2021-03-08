@@ -137,19 +137,6 @@ BallHopperStateMgr::BallHopperStateMgr() : m_currentState(nullptr),
 /// @return void
 void BallHopperStateMgr::RunCurrentState()
 {
-    //process teleop/manual interrupts
-    auto controller = TeleopControl::GetInstance();
-    if ( controller != nullptr)
-    {
-        if (controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::HOLD))
-        {
-            SetCurrentState( BALL_HOPPER_STATE::HOLD, false);
-        }
-        else if (controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::INTAKE))
-        {
-            SetCurrentState( BALL_HOPPER_STATE::RAPID_RELEASE, false);
-        }
-    }
     //run the current state
     if ( m_currentState != nullptr)
     {
