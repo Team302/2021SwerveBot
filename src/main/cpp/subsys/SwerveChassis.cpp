@@ -135,7 +135,7 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
         units::degree_t yaw{m_pigeon->GetYaw()};
         Rotation2d currentOrientation {yaw};
 
-        ChassisSpeeds speeds= fieldRelative ? ChassisSpeeds{xSpeed, ySpeed, rot} : GetFieldRelativeSpeeds(xSpeed,ySpeed, rot);
+        ChassisSpeeds speeds= fieldRelative ? GetFieldRelativeSpeeds(xSpeed,ySpeed, rot) : ChassisSpeeds{xSpeed, ySpeed, rot};
         CalcSwerveModuleStates(speeds);
         //auto states = m_kinematics.ToSwerveModuleStates
         //                        (fieldRelative ?  ChassisSpeeds::FromFieldRelativeSpeeds(xSpeed, ySpeed, rot, currentOrientation) : 
@@ -300,12 +300,13 @@ void SwerveChassis::CalcSwerveModuleStates
     // D = Vy + omega * W/2
     //
     // Where:
-    // Vx forward vector
-    // Vy is the sideways (strafe) vector
+    // Vx is the sideways (strafe) vector
+    // Vy is the forward vector
     // omega is the rotation about Z vector
     // L is the wheelbase (front to back)
     // W is the wheeltrack (side to side)
     //
+    // Since our Vx is forward and Vy is strafe we need to rotate the vectors
     // We will use these variable names in the code to help tie back to the document.
     // Variable names, though, will follow C++ standards and start with a lower case letter.
 
@@ -317,8 +318,8 @@ void SwerveChassis::CalcSwerveModuleStates
     auto l = GetWheelBase();
     auto w = GetTrack();
 
-    auto vx = speeds.vx;
-    auto vy = speeds.vy;
+    auto vy = 1.0 * speeds.vx;
+    auto vx = -1.0 * speeds.vy;
     auto omega = speeds.omega;
 
     units::velocity::meters_per_second_t omegaL = omega.to<double>() * l / 2.0 / 1_s ;
@@ -330,14 +331,16 @@ void SwerveChassis::CalcSwerveModuleStates
     auto d = vy + omegaW;
 
     // here we'll negate the angle to conform to the positive CCW convention
-    m_flState.angle = units::angle::radian_t(-1.0 * atan2(b.to<double>(), d.to<double>()));
+    m_flState.angle = units::angle::radian_t(atan2(b.to<double>(), d.to<double>()));
+    m_flState.angle = -1.0 * m_flState.angle.Degrees();
     m_flState.speed = units::velocity::meters_per_second_t(sqrt( pow(b.to<double>(),2) + pow(d.to<double>(),2) ));
     auto maxCalcSpeed = abs(m_flState.speed.to<double>());
 
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Front Left Angle", m_flState.angle.Degrees().to<double>());
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Front Left Speed", m_flState.speed.to<double>());
 
-    m_frState.angle = units::angle::radian_t(-1.0 * atan2(b.to<double>(), c.to<double>()));
+    m_frState.angle = units::angle::radian_t(atan2(b.to<double>(), c.to<double>()));
+    m_frState.angle = -1.0 * m_frState.angle.Degrees();
     m_frState.speed = units::velocity::meters_per_second_t(sqrt( pow(b.to<double>(),2) + pow(c.to<double>(),2) ));
     if (abs(m_frState.speed.to<double>())>maxCalcSpeed)
     {
@@ -347,7 +350,8 @@ void SwerveChassis::CalcSwerveModuleStates
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Front Right Angle", m_frState.angle.Degrees().to<double>());
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Front Right Speed - raw", m_frState.speed.to<double>());
 
-    m_blState.angle = units::angle::radian_t(-1.0 * atan2(a.to<double>(), d.to<double>()));
+    m_blState.angle = units::angle::radian_t(atan2(a.to<double>(), d.to<double>()));
+    m_blState.angle = -1.0 * m_blState.angle.Degrees();
     m_blState.speed = units::velocity::meters_per_second_t(sqrt( pow(a.to<double>(),2) + pow(d.to<double>(),2) ));
     if (abs(m_blState.speed.to<double>())>maxCalcSpeed)
     {
@@ -357,7 +361,8 @@ void SwerveChassis::CalcSwerveModuleStates
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Back Left Angle", m_blState.angle.Degrees().to<double>());
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Back Left Speed - raw", m_blState.speed.to<double>());
 
-    m_brState.angle = units::angle::radian_t(-1.0 * atan2(a.to<double>(), c.to<double>()));
+    m_brState.angle = units::angle::radian_t(atan2(a.to<double>(), c.to<double>()));
+    m_brState.angle = -1.0 * m_brState.angle.Degrees();
     m_brState.speed = units::velocity::meters_per_second_t(sqrt( pow(a.to<double>(),2) + pow(c.to<double>(),2) ));
     if (abs(m_brState.speed.to<double>())>maxCalcSpeed)
     {
