@@ -33,6 +33,7 @@
 #include <subsys/MechanismFactory.h>
 #include <subsys/MechanismTypes.h>
 #include <states/ballhopper/BallHopperSlowRelease.h>
+#include <gamepad/TeleopControl.h>
 
 
 using namespace std;

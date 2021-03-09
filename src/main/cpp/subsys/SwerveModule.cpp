@@ -81,7 +81,7 @@ SwerveModule::SwerveModule
     m_nt(),
     m_currentState(),
     m_maxVelocity(1_mps),
-    m_scale(0.25),
+    m_scale(1.0),
     m_runClosedLoopDrive(false)
 {
     Rotation2d ang { units::angle::degree_t(0.0)};

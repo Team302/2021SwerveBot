@@ -8,12 +8,12 @@
                      value="0.0"/>
     <mechanismTarget stateIdentifier="BALLHOPPERHOLD" 
 	                 controlDataIdentifier="openloop"
-                     value="-0.5"/>
+                     value="-0.1"/>
     <mechanismTarget stateIdentifier="BALLHOPPERSLOWRELEASE" 
 	                 controlDataIdentifier="openloop"
                      value="1.5"/>
     <mechanismTarget stateIdentifier="BALLHOPPERRAPIDRELEASE" 
 	                 controlDataIdentifier="openloop"
-                     value="1.0"/>
+                     value="1"/>
 
 </statedata>
