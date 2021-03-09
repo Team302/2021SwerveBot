@@ -135,7 +135,7 @@ bool DrivePath::IsDone()
         auto curPos = m_chassis.get()->GetPose().GetEstimatedPosition();
         isDone = IsSamePose(curPos, m_targetPose);
 
-        /*
+        
         if ( !isDone )
         {
             // Now check if the current pose is getting closer or farther from the target pose 
@@ -155,7 +155,7 @@ bool DrivePath::IsDone()
                 isDone = ((abs(m_deltaX) < 0.1 && abs(m_deltaY) < 0.1));
             }
         }       
-        */
+        
 
         // Motion Detection //
         if (!isDone) 
