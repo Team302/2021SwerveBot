@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE auton SYSTEM "auton.dtd">
 <auton>
-	<primitive id="RESET_POSITION"
-			   pathname="GS_B_RED.wpilib.json"/>
 	<primitive id="DRIVE_PATH"
 			   pathname="GS_B_RED.wpilib.json"/>
 </auton>

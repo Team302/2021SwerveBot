@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+ <?xml version="1.0"?>
 <!DOCTYPE robot SYSTEM "robot.dtd">
 <robot>
 	<!-- pdp canId="0" / -->
@@ -30,14 +30,14 @@
     <swervechassis   type="SWERVE"
                      wheelBase="14.0"  
                      track="14.0"
-                     maxVelocity="23.27"
+                     maxVelocity="194.4"
                      maxAngularVelocity="1591.2"
-                     maxAcceleration="1"
-                     maxAngularAcceleration="1">
+                     maxAcceleration="48"
+                     maxAngularAcceleration="24">
 			 
         <swervemodule type="RIGHT_BACK"
-                      turn_p="0.1"
-                      turn_i="0.01"
+                      turn_p="0.025"
+                      turn_i="0.0"
                       turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
@@ -91,8 +91,8 @@
 
        <!-- .25 -->
         <swervemodule type="LEFT_BACK"
-                      turn_p="0.1"
-                      turn_i="0.01"
+                      turn_p="0.025"
+                      turn_i="0.0"
                       turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
@@ -145,8 +145,8 @@
 
        <!-- .25 -->
         <swervemodule type="RIGHT_FRONT"
-                      turn_p="0.1"
-                      turn_i="0.01"
+                      turn_p="0.025"
+                      turn_i="0.0"
                       turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
@@ -199,8 +199,8 @@
 
        <!-- 0.25 -->
         <swervemodule type="LEFT_FRONT"
-                      turn_p="0.1"
-                      turn_i="0.01"
+                      turn_p="0.025"
+                      turn_i="0.0"
                       turn_d="0.0"
                       turn_f="0.0"
                       turn_nominal_val="0.0"
