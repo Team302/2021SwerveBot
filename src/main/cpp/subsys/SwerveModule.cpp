@@ -285,7 +285,7 @@ SwerveModuleState SwerveModule::Optimize
 
     // if the delta is > 90 degrees, rotate the 
     //if ((units::math::abs(delta.Degrees()) - 160_deg) > 0.1_deg) 
-    if ((units::math::abs(delta.Degrees()) - 90_deg) > 0.1_deg) 
+    if ((units::math::abs(delta) - 90_deg) > 0.1_deg) 
     {
         Logger::GetLogger()->ToNtTable("Optimize", "optimized", (desiredState.angle + Rotation2d{180_deg}).Degrees().to<double>());
         return {-desiredState.speed, desiredState.angle + Rotation2d{180_deg}};
