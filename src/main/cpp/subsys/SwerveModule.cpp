@@ -282,9 +282,19 @@ SwerveModuleState SwerveModule::Optimize
         optimizedState.angle += Rotation2d{180_deg};
         Logger::GetLogger()->ToNtTable("Optimize", "reversing", delta.to<double>());
     }
-    Logger::GetLogger()->ToNtTable("Optimize", "optimized", optimizedState.angle.Degrees().to<double>());
-    Logger::GetLogger()->ToNtTable("Optimize", "optimized", optimizedState.speed.to<double>());
-    return optimizedState;
+
+    // if the delta is > 90 degrees, rotate the 
+    //if ((units::math::abs(delta.Degrees()) - 160_deg) > 0.1_deg) 
+    if ((units::math::abs(delta.Degrees()) - 90_deg) > 0.1_deg) 
+    {
+        Logger::GetLogger()->ToNtTable("Optimize", "optimized", (desiredState.angle + Rotation2d{180_deg}).Degrees().to<double>());
+        return {-desiredState.speed, desiredState.angle + Rotation2d{180_deg}};
+    } 
+    else 
+    {
+        Logger::GetLogger()->ToNtTable("Optimize", "optimized", desiredState.angle.Degrees().to<double>());
+        return {desiredState.speed, desiredState.angle};
+    }
 }
 
 void SwerveModule::RunCurrentState()
