@@ -124,7 +124,7 @@ class SwerveModule
             const frc::Rotation2d& currentAngle
         );
 
-    //    frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward {1_V, 0.5_V / 1_rad_per_s};
+
         frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward {1_V, 0.05_V / 1_rad_per_s};
         void SetDriveSpeed( units::velocity::meters_per_second_t speed );
         void SetTurnAngle( units::angle::degree_t angle );

@@ -36,6 +36,7 @@
 #include <subsys/SwerveChassis.h>
 #include <subsys/SwerveChassisFactory.h>
 #include <subsys/SwerveModule.h>
+#include <utils/AngleUtils.h>
 #include <utils/Logger.h>
 
 // Third Party Includes
@@ -256,56 +257,35 @@ SwerveModuleState SwerveModule::Optimize
     const Rotation2d& currentAngle
 ) 
 {
+    SwerveModuleState optimizedState;
+    optimizedState.angle = desiredState.angle;
+    optimizedState.speed = desiredState.speed;
 
-    auto delta = desiredState.angle - currentAngle;
+    auto delta = AngleUtils::GetDeltaAngle(currentAngle.Degrees(), optimizedState.angle.Degrees());
 
     Logger::GetLogger()->ToNtTable("Optimize", "current", currentAngle.Degrees().to<double>());
-    Logger::GetLogger()->ToNtTable("Optimize", "target", desiredState.angle.Degrees().to<double>());
-    Logger::GetLogger()->ToNtTable("Optimize", "delta", delta.Degrees().to<double>());
-    /**
-    auto tanDelta = tan(delta.Radians().to<double>());
-    auto rads = units::angle::radian_t(tanDelta);
-    units::angle::degree_t degs = rads;
-
-    // if the delta is > 90 degrees, rotate the 
-    if ((units::math::abs(degs) - 90_deg) > 0.1_deg) 
-    {
-        return {-desiredState.speed, desiredState.angle + Rotation2d{180_deg}};
-    } 
-    return {desiredState.speed, desiredState.angle};
-    **/
+    Logger::GetLogger()->ToNtTable("Optimize", "target", optimizedState.angle.Degrees().to<double>());
+    Logger::GetLogger()->ToNtTable("Optimize", "delta", delta.to<double>());
     
-    // make sure the delta is between -180.0 and 180.0
-    if (delta.Degrees() < -180.0_deg)
+    // deal with roll over issues (e.g. want to go from -180 degrees to 180 degrees or vice versa)
+    // keep the current angle
+    if ((units::math::abs(delta) > 359_deg))
     {
-        while (delta.Degrees() < -180.0_deg )
-        {
-            delta.Degrees() = delta.Degrees() + 360.0_deg;
-        }
+        optimizedState.angle = currentAngle.Degrees();
     }
-    else if (delta.Degrees() > 180.0_deg)
+    // if delta is > 90 degrees or < -90 degrees, we can turn the wheel the otherway and
+    // reverse the wheel direction (negate speed)
+    // if the delta is > 90 degrees, rotate the module the opposite direction and negate the speed
+    else if ((units::math::abs(delta)) > 90_deg) 
     {
-        while (delta.Degrees() > 180.0_deg)
-        {
-            delta.Degrees() = delta.Degrees() - 360.0_deg;
-        }
+        optimizedState.speed *= -1.0;
+        optimizedState.angle += Rotation2d{180_deg};
+        Logger::GetLogger()->ToNtTable("Optimize", "reversing", delta.to<double>());
     }
-
-    // if the delta is > 90 degrees, rotate the 
-    //if ((units::math::abs(delta.Degrees()) - 160_deg) > 0.1_deg) 
-    if ((units::math::abs(delta.Degrees()) - 90_deg) > 0.1_deg) 
-    {
-        Logger::GetLogger()->ToNtTable("Optimize", "optimized", (desiredState.angle + Rotation2d{180_deg}).Degrees().to<double>());
-        return {-desiredState.speed, desiredState.angle + Rotation2d{180_deg}};
-    } 
-    else 
-    {
-        Logger::GetLogger()->ToNtTable("Optimize", "optimized", desiredState.angle.Degrees().to<double>());
-        return {desiredState.speed, desiredState.angle};
-    }
+    Logger::GetLogger()->ToNtTable("Optimize", "optimized", optimizedState.angle.Degrees().to<double>());
+    Logger::GetLogger()->ToNtTable("Optimize", "optimized", optimizedState.speed.to<double>());
+    return optimizedState;
 }
-
-
 
 void SwerveModule::RunCurrentState()
 {
