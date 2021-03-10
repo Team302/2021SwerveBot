@@ -19,6 +19,7 @@
 //FRC Includes
 #include <frc/PIDController.h>
 #include <frc/controller/ProfiledPIDController.h>
+#include <units/angular_velocity.h>
 
 // 302 Includes
 #include <auton/primitives/DrivePath.h>
@@ -115,6 +116,7 @@ void DrivePath::Run()
         // debugging
         Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsX", refChassisSpeeds.vx());
         Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsY", refChassisSpeeds.vy());
+        Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsZ", units::degrees_per_second_t(refChassisSpeeds.omega()).to<double>());
 
         // Run the chassis
         m_chassis->Drive(refChassisSpeeds, false);
@@ -253,6 +255,7 @@ void DrivePath::CalcCurrentAndDesiredStates()
     Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseOmega", m_desiredState.pose.Rotation().Degrees().to<double>());
     Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", m_currentChassisPosition.X().to<double>());
     Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", m_currentChassisPosition.Y().to<double>());
+    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosOmega", m_desiredState.pose.Rotation().Degrees().to<double>());
     Logger::GetLogger()->ToNtTable("DeltaValues", "DeltaX", m_desiredState.pose.X().to<double>() - m_currentChassisPosition.X().to<double>());
     Logger::GetLogger()->ToNtTable("DeltaValues", "DeltaY", m_desiredState.pose.Y().to<double>() - m_currentChassisPosition.Y().to<double>());
 
