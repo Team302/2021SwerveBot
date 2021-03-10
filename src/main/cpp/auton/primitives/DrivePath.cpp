@@ -92,6 +92,7 @@ void DrivePath::Init(PrimitiveParams *params)
         auto trans = m_targetPose - currPose;
         m_deltaX = trans.X().to<double>();
         m_deltaY = trans.Y().to<double>();
+        m_chassis.get()->RunWPIAlgorithm(true);
     }
     m_timesRun = 0;
 }

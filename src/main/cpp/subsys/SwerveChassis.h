@@ -137,6 +137,7 @@ class SwerveChassis
         frc::SwerveDrivePoseEstimator<4> GetPose() const { return m_poseEstimator; }  
 
         void SetDriveScaleFactor( double scale );
+        void RunWPIAlgorithm(bool runWPI ) { m_runWPI = runWPI; }
 
     private:
         frc::ChassisSpeeds GetFieldRelativeSpeeds
@@ -170,6 +171,7 @@ class SwerveChassis
 
         DragonPigeon*                                               m_pigeon;
         double                                                      m_scale;
+        bool                                                        m_runWPI;
 
         const double                                                m_deadband = 0.1;
         

@@ -70,6 +70,7 @@ void SwerveDrive::Init()
         controller->SetDeadBand(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, IDragonGamePad::AXIS_DEADBAND::APPLY_STANDARD_DEADBAND);
         controller->SetAxisScaleFactor(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, -2.0);
         //controller->SetSlewRateLimiter(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, 3.0);
+        m_chassis.get()->RunWPIAlgorithm(false);
    }
 }
 

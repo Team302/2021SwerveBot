@@ -263,9 +263,11 @@ SwerveModuleState SwerveModule::Optimize
 
     auto delta = AngleUtils::GetDeltaAngle(currentAngle.Degrees(), optimizedState.angle.Degrees());
 
-    Logger::GetLogger()->ToNtTable("Optimize", "current", currentAngle.Degrees().to<double>());
-    Logger::GetLogger()->ToNtTable("Optimize", "target", optimizedState.angle.Degrees().to<double>());
-    Logger::GetLogger()->ToNtTable("Optimize", "delta", delta.to<double>());
+    string ntname = "Optimize";
+    ntname += to_string(m_type);
+    Logger::GetLogger()->ToNtTable(ntname, "current", currentAngle.Degrees().to<double>());
+    Logger::GetLogger()->ToNtTable(ntname, "target", optimizedState.angle.Degrees().to<double>());
+    Logger::GetLogger()->ToNtTable(ntname, "delta", delta.to<double>());
     
     // deal with roll over issues (e.g. want to go from -180 degrees to 180 degrees or vice versa)
     // keep the current angle
@@ -280,19 +282,19 @@ SwerveModuleState SwerveModule::Optimize
     {
         optimizedState.speed *= -1.0;
         optimizedState.angle += Rotation2d{180_deg};
-        Logger::GetLogger()->ToNtTable("Optimize", "reversing", delta.to<double>());
+        Logger::GetLogger()->ToNtTable(ntname, "reversing", delta.to<double>());
     }
 
     // if the delta is > 90 degrees, rotate the 
     //if ((units::math::abs(delta.Degrees()) - 160_deg) > 0.1_deg) 
     if ((units::math::abs(delta) - 90_deg) > 0.1_deg) 
     {
-        Logger::GetLogger()->ToNtTable("Optimize", "optimized", (desiredState.angle + Rotation2d{180_deg}).Degrees().to<double>());
+        Logger::GetLogger()->ToNtTable(ntname, "optimized", (desiredState.angle + Rotation2d{180_deg}).Degrees().to<double>());
         return {-desiredState.speed, desiredState.angle + Rotation2d{180_deg}};
     } 
     else 
     {
-        Logger::GetLogger()->ToNtTable("Optimize", "optimized", desiredState.angle.Degrees().to<double>());
+        Logger::GetLogger()->ToNtTable(ntname, "optimized", desiredState.angle.Degrees().to<double>());
         return {desiredState.speed, desiredState.angle};
     }
 }
