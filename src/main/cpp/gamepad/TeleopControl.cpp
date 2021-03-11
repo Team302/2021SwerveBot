@@ -100,17 +100,20 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		m_controllerIndex[ REZERO_PIGEON ]				= ctrlNo;
 		m_buttonIDs[ REZERO_PIGEON ]					= IDragonGamePad::X_BUTTON;
 
-		m_controllerIndex[DRIVE_FULL] = ctrlNo;
-		m_buttonIDs[DRIVE_FULL] = IDragonGamePad::POV_0;	
-
-		m_controllerIndex[DRIVE_75PERCENT] = ctrlNo;
-		m_buttonIDs[DRIVE_75PERCENT] = IDragonGamePad::POV_90;	
-
-		m_controllerIndex[DRIVE_50PERCENT] = ctrlNo;
-		m_buttonIDs[DRIVE_50PERCENT] = IDragonGamePad::POV_270;	
-
-		m_controllerIndex[DRIVE_25PERCENT] = ctrlNo;
-		m_buttonIDs[DRIVE_25PERCENT] = IDragonGamePad::POV_180;	
+		m_controllerIndex[DRIVE_FULL] 		= ctrlNo;
+		m_buttonIDs[DRIVE_FULL] 			= IDragonGamePad::POV_0;	
+		m_controllerIndex[DRIVE_75PERCENT] 	= ctrlNo;
+		m_buttonIDs[DRIVE_75PERCENT] 		= IDragonGamePad::POV_90;	
+		m_controllerIndex[DRIVE_50PERCENT] 	= ctrlNo;
+		m_buttonIDs[DRIVE_50PERCENT] 		= IDragonGamePad::POV_270;	
+		m_controllerIndex[DRIVE_25PERCENT] 	= ctrlNo;
+		m_buttonIDs[DRIVE_25PERCENT] 		= IDragonGamePad::POV_180;	
+		m_controllerIndex[DRIVE_SHIFT_UP] 	= ctrlNo;
+		m_buttonIDs[DRIVE_SHIFT_UP] 		= IDragonGamePad::RIGHT_BUMPER;	
+		m_controllerIndex[DRIVE_SHIFT_DOWN] = ctrlNo;
+		m_buttonIDs[DRIVE_SHIFT_DOWN] 		= IDragonGamePad::LEFT_BUMPER;	
+		m_controllerIndex[DRIVE_BOOST] 		= ctrlNo;
+		m_axisIDs[ DRIVE_BOOST]	     		= IDragonGamePad::RIGHT_TRIGGER;
     }
     else
     {

@@ -72,6 +72,7 @@ SwerveChassis::SwerveChassis
     m_maxAngularAcceleration(maxAngularAcceleration),
     m_pigeon(PigeonFactory::GetFactory()->GetPigeon()),
     m_scale(1.0),
+    m_boost(0.0),
     m_runWPI(false),
     m_frontLeftLocation(wheelBase/2.0, track/2.0),
     m_frontRightLocation(wheelBase/2.0, -1.0*track/2.0),
@@ -103,6 +104,15 @@ void SwerveChassis::SetDriveScaleFactor( double scale )
     m_backRight.get()->SetDriveScale(m_scale);
 }
 
+void SwerveChassis::SetBoost( double boost )
+{
+    m_boost = boost;
+    m_frontLeft.get()->SetBoost(m_boost);
+    m_frontRight.get()->SetBoost(m_boost);
+    m_backLeft.get()->SetBoost(m_boost);
+    m_backRight.get()->SetBoost(m_boost);
+
+}
 
 
 /// @brief Drive the chassis

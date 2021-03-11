@@ -14,7 +14,10 @@
 //====================================================================================================================================================
 
 //C++ Includes
+#include <algorithm>
 #include <memory>
+
+//FRC includes
 #include <units/velocity.h>
 #include <units/angular_velocity.h>
 
@@ -70,6 +73,9 @@ void SwerveDrive::Init()
         controller->SetDeadBand(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, IDragonGamePad::AXIS_DEADBAND::APPLY_STANDARD_DEADBAND);
         controller->SetAxisScaleFactor(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, -2.0);
         //controller->SetSlewRateLimiter(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, 3.0);
+        
+        controller->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::DRIVE_BOOST, IDragonGamePad::AXIS_PROFILE::LINEAR );
+
         m_chassis.get()->RunWPIAlgorithm(false);
    }
 }
@@ -109,11 +115,30 @@ void SwerveDrive::Run( )
         {
             m_chassis->SetDriveScaleFactor(0.25);
         }
+        else if (controller->IsButtonPressed(TeleopControl::DRIVE_SHIFT_UP))
+        {
+            auto scale = m_chassis->GetScaleFactor();
+            scale += 0.25;
+            auto newscale = clamp(scale, 0.25, 1.0);
+            m_chassis->SetDriveScaleFactor(newscale);
+        }        
+        else if (controller->IsButtonPressed(TeleopControl::DRIVE_SHIFT_DOWN))
+        {
+            auto scale = m_chassis->GetScaleFactor();
+            scale += 0.25;
+            auto newscale = clamp(scale, 0.25, 1.0);
+            m_chassis->SetDriveScaleFactor(newscale);
+        }
         else
         {
-            drive  = controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE) ;
-            steer  = controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER);
-            rotate = controller->GetAxisValue( TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
+            drive  = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE) ;
+            steer  = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER);
+            rotate = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
+
+            auto boost = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::DRIVE_BOOST);
+            boost *= 0.25;
+            boost = clamp(boost, 0.0, 0.25);
+            m_chassis->SetBoost(boost);
         }
     }
 

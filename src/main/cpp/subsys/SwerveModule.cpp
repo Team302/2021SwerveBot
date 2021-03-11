@@ -83,6 +83,7 @@ SwerveModule::SwerveModule
     m_currentState(),
     m_maxVelocity(1_mps),
     m_scale(1.0),
+    m_boost(0.0),
     m_runClosedLoopDrive(false)
 {
     Rotation2d ang { units::angle::degree_t(0.0)};
@@ -116,7 +117,7 @@ SwerveModule::SwerveModule
     turnMotorSensors.SetIntegratedSensorPosition(0, 0);
     auto turnCData = make_shared<ControlData>(  ControlModes::CONTROL_TYPE::POSITION_ABSOLUTE,
                                                 ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
-                                                std::string("Turn Angle"),
+                                                string("Turn Angle"),
                                                 turnP,
                                                 turnI,
                                                 turnD,
@@ -172,7 +173,7 @@ void SwerveModule::Init
     m_maxVelocity = maxVelocity;
     auto driveCData = make_shared<ControlData>( ControlModes::CONTROL_TYPE::VELOCITY_RPS,
                                                 ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
-                                                std::string("DriveSpeed"),
+                                                string("DriveSpeed"),
                                                 0.01,  // 0.01
                                                 0.0,
                                                 0.0,
@@ -340,7 +341,7 @@ void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
         // convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel
         auto driveTarget = m_currentState.speed.to<double>() / (units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi);  
         driveTarget /= m_driveMotor.get()->GetGearRatio();
-        driveTarget *= m_scale;
+        driveTarget *= clamp((m_scale + m_boost), 0.25, 1.0);
         
         Logger::GetLogger()->ToNtTable(m_nt, string("drive target - rps"), driveTarget );
         
@@ -350,7 +351,7 @@ void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
     else
     {
         auto percent = m_currentState.speed / m_maxVelocity;
-        percent *= m_scale;
+        percent *= clamp((m_scale + m_boost), 0.25, 1.0);
 
         Logger::GetLogger()->ToNtTable(m_nt, string("drive target - percent"), percent );
 
