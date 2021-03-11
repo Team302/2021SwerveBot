@@ -38,7 +38,9 @@ using namespace std;
 SwerveDrive::SwerveDrive() : IState(),
                              m_chassis( SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis() ),
                              m_controller( TeleopControl::GetInstance() ),
-                             m_usePWLinearProfile(false)
+                             m_usePWLinearProfile(false),
+                             m_lastUp(false),
+                             m_lastDown(false)
 {
     if ( m_controller == nullptr )
     {
@@ -98,48 +100,69 @@ void SwerveDrive::Run( )
             auto m_pigeon = factory->GetPigeon();
             m_pigeon->ReZeroPigeon( 0, 0);
             m_chassis.get()->ZeroAlignSwerveModules();
+            m_lastUp   = false;
+            m_lastDown = false;
         }
         else if (controller->IsButtonPressed( TeleopControl::DRIVE_FULL))
         {
             m_chassis->SetDriveScaleFactor(1.0);
+            m_lastUp   = false;
+            m_lastDown = false;
         }
         else if (controller->IsButtonPressed(TeleopControl::DRIVE_75PERCENT))
         {
             m_chassis->SetDriveScaleFactor(0.75);
+            m_lastUp   = false;
+            m_lastDown = false;
         }
         else if (controller->IsButtonPressed(TeleopControl::DRIVE_50PERCENT))
         {
             m_chassis->SetDriveScaleFactor(0.50);
+            m_lastUp   = false;
+            m_lastDown = false;
         }
         else if (controller->IsButtonPressed(TeleopControl::DRIVE_25PERCENT))
         {
             m_chassis->SetDriveScaleFactor(0.25);
+            m_lastUp   = false;
+            m_lastDown = false;
         }
         else if (controller->IsButtonPressed(TeleopControl::DRIVE_SHIFT_UP))
         {
-            auto scale = m_chassis->GetScaleFactor();
-            scale += 0.25;
-            auto newscale = clamp(scale, 0.25, 1.0);
-            m_chassis->SetDriveScaleFactor(newscale);
+            if (!m_lastUp)
+            {
+                auto scale = m_chassis->GetScaleFactor();
+                scale += 0.25;
+                auto newscale = clamp(scale, 0.25, 1.0);
+                m_chassis->SetDriveScaleFactor(newscale);
+            }
+            m_lastUp = true;
         }        
         else if (controller->IsButtonPressed(TeleopControl::DRIVE_SHIFT_DOWN))
         {
-            auto scale = m_chassis->GetScaleFactor();
-            scale += 0.25;
-            auto newscale = clamp(scale, 0.25, 1.0);
-            m_chassis->SetDriveScaleFactor(newscale);
+            if (!m_lastDown)
+            {
+                auto scale = m_chassis->GetScaleFactor();
+                scale -= 0.25;
+                auto newscale = clamp(scale, 0.25, 1.0);
+                m_chassis->SetDriveScaleFactor(newscale);
+            }
+            m_lastDown = true;
         }
         else
         {
-            drive  = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE) ;
-            steer  = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER);
-            rotate = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
-
-            auto boost = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::DRIVE_BOOST);
-            boost *= 0.25;
-            boost = clamp(boost, 0.0, 0.25);
-            m_chassis->SetBoost(boost);
+            m_lastUp   = false;
+            m_lastDown = false;
         }
+        
+        drive  = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE) ;
+        steer  = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER);
+        rotate = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
+
+        auto boost = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::DRIVE_BOOST);
+        boost *= 0.25;
+        boost = clamp(boost, 0.0, 0.25);
+        m_chassis->SetBoost(boost);
     }
 
     Logger::GetLogger()->ToNtTable("Swerve Drive", "drive", drive);
