@@ -52,23 +52,21 @@ double PiecewiseLinearProfile::ApplyProfile
     double      inputVal            // <I> - value to apply profile to
 ) const 
 {
-    double output = inputVal;
     if (inputVal > m_intercept)
     {
-        output = m_inflectionY + (inputVal-m_intercept)*((1.0-m_inflectionY)/(1-m_intercept));
+        return m_inflectionY + (inputVal-m_intercept)*((1.0-m_inflectionY)/(1-m_intercept));
     }
     else if (inputVal >= 0.0)
     {
-        output = m_intercept + ((m_inflectionY-m_intercept) / m_inflectionX) * inputVal ;
+        return m_intercept + ((m_inflectionY-m_intercept) / m_inflectionX) * inputVal ;
     }
     else if (inputVal >= -m_intercept)
     {
-        output = -m_intercept + ((m_inflectionY-m_intercept)/m_inflectionX) * inputVal;
+        return (-m_intercept + ((m_inflectionY-m_intercept)/m_inflectionX) * inputVal);
     }
     else
     {
-        output = -m_inflectionY + (inputVal+m_intercept)*((1-m_inflectionY)/(1-m_intercept));
+        return (-m_inflectionY + (inputVal+m_intercept)*((1-m_inflectionY)/(1-m_intercept)));
     }
-    
-    return output;
+    return inputVal;
 }

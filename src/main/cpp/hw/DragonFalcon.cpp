@@ -280,7 +280,6 @@ DragonFalcon::DragonFalcon
 	if ( error != ErrorCode::OKAY )
 	{
 		Logger::GetLogger()->LogError(prompt, string("ConfigRemoteFeedbackFilter error"));
-		error = ErrorCode::OKAY;
 	}
 }
 
@@ -626,7 +625,7 @@ int DragonFalcon::ConfigPeakCurrentLimit
 	int timeoutMs
 )
 {
-	int error = 0;
+	int ierror = 0;
 	if ( m_talon.get() != nullptr )
 	{
 		auto prompt = string("Dragon Falcon");
@@ -643,12 +642,13 @@ int DragonFalcon::ConfigPeakCurrentLimit
 		{
 			Logger::GetLogger()->LogError(prompt, string("ConfigSupplyCurrentLimit error"));
 		}
+		ierror = error;
 	}
 	else
 	{
         Logger::GetLogger()->LogError( string("DragonFalcon::ConfigPeakCurrentLimit"), string("m_talon is a nullptr"));
 	}
-	return error;
+	return ierror;
 }
 
 int DragonFalcon::ConfigPeakCurrentDuration

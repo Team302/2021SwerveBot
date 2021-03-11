@@ -271,7 +271,6 @@ DragonTalon::DragonTalon
 	if ( error != ErrorCode::OKAY )
 	{
 		Logger::GetLogger()->LogError(prompt, string("ConfigRemoteFeedbackFilter error"));
-		error = ErrorCode::OKAY;
 	}
 }
 

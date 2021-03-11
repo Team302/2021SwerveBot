@@ -140,7 +140,6 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
             auto states = m_kinematics.ToSwerveModuleStates
                                     (fieldRelative ?  ChassisSpeeds::FromFieldRelativeSpeeds(xSpeed, ySpeed, rot, currentOrientation) : 
                                                     ChassisSpeeds{xSpeed, ySpeed, rot} );
-            //auto states = m_kinematics.ToSwerveModuleStates(ChassisSpeeds{xSpeed, ySpeed, rot} );
 
             m_kinematics.NormalizeWheelSpeeds(&states, m_maxSpeed);
 
@@ -155,7 +154,13 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
         {
             ChassisSpeeds speeds = fieldRelative ? GetFieldRelativeSpeeds(xSpeed,ySpeed, rot) : 
                                                    ChassisSpeeds{xSpeed, ySpeed, rot};
+            // TODO: need to spin our own kinematics module, but in the mean time do the following to get
+            // approximate updates
+            auto states = m_kinematics.ToSwerveModuleStates(speeds);
+            m_kinematics.NormalizeWheelSpeeds(&states, m_maxSpeed);
+
             CalcSwerveModuleStates(speeds);
+
             m_frontLeft.get()->SetDesiredState(m_flState);
             m_frontRight.get()->SetDesiredState(m_frState);
             m_backLeft.get()->SetDesiredState(m_blState);

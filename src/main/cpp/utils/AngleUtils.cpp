@@ -50,6 +50,19 @@ units::angle::degree_t AngleUtils::GetDeltaAngle
     // compute delta which is between 0 and 360 degrees
     auto delta = units::angle::degree_t(normTarget - normStart);
 
+    // if moving 3/4 of a turn or more in one direction, is the same as turning less  
+    // than a quarter turn in the other direction. This is accounting for roll-over 
+    // situations.   Not going to a bigger angle because this necessitates dealing 
+    // with potentially reversing the wheel direction in some cases.  So, we'll let 
+    // downstream code deal with these cases.
+    if (delta.to<double>() > 270.0)
+    {
+        delta -= 360_deg;
+    }
+    else if (delta.to<double>() < -270.0)
+    {
+        delta += 360_deg;
+    }
     Logger::GetLogger()->ToNtTable("AngleUtils", "delta", delta.to<double>());
 
     return delta;
