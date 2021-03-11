@@ -126,7 +126,7 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
                         {
                             pathName = attr.value();
                         }
-                        else if ( strcmp ( attr.name(), "intakeState") == 0)
+                        else if ( strcmp ( attr.name(), "runIntake") == 0)
                         {
                             runIntake = strcmp( attr.value(), "INTAKE") == 0;
                         }
