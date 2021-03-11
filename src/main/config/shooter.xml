@@ -22,7 +22,8 @@
 	<mechanismTarget stateIdentifier="SHOOTEROFF"
 	                 controlDataIdentifier="openloop"
 	                 controlDataIdentifier2="openloop"
-					 value="0.0"/>
+					 value="0.0"
+					 secondValue="0.0"/>
 	<mechanismTarget stateIdentifier="SHOOTERGETREADY"
 	                 controlDataIdentifier="openloop"
 	                 controlDataIdentifier2="openloop"

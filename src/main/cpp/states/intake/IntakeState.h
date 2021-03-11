@@ -1,3 +1,4 @@
+
 //====================================================================================================================================================
 /// Copyright 2020 Lake Orion Robotics FIRST Team 302 
 ///
@@ -15,18 +16,20 @@
 
 #pragma once
 
-#include <states/Mech1MotorState.h>
+#include <states/Mech2MotorState.h>
 
 class ControlData;
 
-class IntakeState : public Mech1MotorState
+class IntakeState : public Mech2MotorState
 {
     public:
 
     IntakeState
     (
-        ControlData* control,
-        double target
+        ControlData*                    controlData,
+        ControlData*                    controlData2,
+        double                          target1,
+        double                          target2
     );
     IntakeState() = delete;
     ~IntakeState() = default;
