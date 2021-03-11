@@ -28,8 +28,9 @@ using namespace std;
 
 Intake::Intake
 (
-    std::shared_ptr<IDragonMotorController>     motorController
-) : Mech1IndMotor( MechanismTypes::MECHANISM_TYPE::INTAKE,  string("intake.xml"),  string("IntakeNT"), motorController )
+    shared_ptr<IDragonMotorController> motor1,
+    shared_ptr<IDragonMotorController> motor2
+) : Mech2IndMotors( MechanismTypes::MECHANISM_TYPE::INTAKE,  string("intake.xml"),  string("IntakeNT"), motor1, motor2 )
 {
 }
 

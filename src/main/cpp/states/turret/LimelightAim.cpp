@@ -38,7 +38,7 @@ LimelightAim::LimelightAim
     ControlData*    control, 
     double          target
 ) : IState(),
-    m_motorState( make_unique<Mech1MotorState>(MechanismFactory::GetMechanismFactory()->GetIntake().get(), control, target)),
+    m_motorState( make_unique<Mech1MotorState>(MechanismFactory::GetMechanismFactory()->GetTurret().get(), control, target)),
     m_turret(MechanismFactory::GetMechanismFactory()->GetTurret()),
     m_atTarget(false),
     m_target(target),

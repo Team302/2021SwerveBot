@@ -20,7 +20,7 @@
 // Team 302 includes
 #include <controllers/ControlData.h>
 #include <states/intake/IntakeState.h>
-#include <states/Mech1MotorState.h>
+#include <states/Mech2MotorState.h>
 #include <subsys/MechanismFactory.h>
 
 // Third Party Includes
@@ -28,9 +28,11 @@
 
 IntakeState::IntakeState
 (
-    ControlData* control,
-    double target
-) : Mech1MotorState(MechanismFactory::GetMechanismFactory()->GetIntake().get(), control, target)
+    ControlData*                    controlData,
+    ControlData*                    controlData2,
+    double                          target1,
+    double                          target2
+) : Mech2MotorState(MechanismFactory::GetMechanismFactory()->GetIntake().get(), controlData, controlData2, target1, target2)
 {
 }
 

@@ -70,13 +70,11 @@ MechanismFactory* MechanismFactory::GetMechanismFactory()
 
 MechanismFactory::MechanismFactory()  : m_balltransfer(),
 										m_ballhopper(),
-										m_intake1(),
-										//m_intake2(),
+										m_intake(),
 										m_shooter(),
 										m_turret()   
 {
-	Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Intake1"), string("not created"));
-	Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Intake2"), string("not created"));
+	Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Intake"), string("not created"));
 	Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Ball Hopper"), string("not created"));
 	Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Ball Transfer"), string("not created"));
 	Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Shooter"), string("not created"));
@@ -109,25 +107,22 @@ void  MechanismFactory::CreateIMechanism
 	{
 		case MechanismTypes::MECHANISM_TYPE::INTAKE:
 		{
-			auto motor = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE );
-			if ( motor.get() != nullptr )
+			auto motor1 = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE );
+			auto motor2 = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE2 );
+			if ( motor1.get() != nullptr && motor2.get() != nullptr )
 			{
-				motor.get()->SetFramePeriodPriority( IDragonMotorController::MOTOR_PRIORITY::LOW);
-				//motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
-				//motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
+				motor1.get()->SetFramePeriodPriority( IDragonMotorController::MOTOR_PRIORITY::LOW);
+				//motor1.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
+				//motor1.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
+				motor2.get()->SetFramePeriodPriority( IDragonMotorController::MOTOR_PRIORITY::LOW);
+				//motor2.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
+				//motor2.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
 
-				if ( m_intake1.get() == nullptr )
+				if ( m_intake.get() == nullptr )
 				{
-					m_intake1 = make_shared<Intake>( motor );
-					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Intake1"), string("created"));
+					m_intake = make_shared<Intake>( motor1, motor2 );
+					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Intake"), string("created"));
 				}
-				/**
-				else if ( m_intake2.get() == nullptr )
-				{
-					m_intake2 = make_shared<Intake>( motor );
-					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Intake2"), string("created"));
-				}
-				**/
 				else
 				{
 					found = true;
