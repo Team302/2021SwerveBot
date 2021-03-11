@@ -76,19 +76,21 @@ IntakeStateMgr::IntakeStateMgr() : m_states(),
             if ( m_states[stateEnum] == nullptr )
             {
                 auto controlData = td->GetController();
-                auto target = td->GetTarget();
+                auto controlData2 = td->GetController2();
+                auto target1 = td->GetTarget();
+                auto target2 = td->GetSecondTarget();
                 switch ( stateEnum )
                 {
                     case INTAKE_STATE::ON:
                     {   
-                        auto thisState = new IntakeState( controlData, target);
+                        auto thisState = new IntakeState(controlData, controlData2, target1, target2);
                         m_states[stateEnum] = thisState;
                     }
                     break;
 
                     case INTAKE_STATE::OFF:
                     {   
-                        auto thisState = new IntakeState( controlData, target);
+                        auto thisState = new IntakeState(controlData, controlData2, target1, target2);
                         m_states[stateEnum] = thisState;
                         m_currentState = thisState;
                         m_currentStateEnum = stateEnum;

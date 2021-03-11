@@ -5,10 +5,12 @@
 	             mode="PERCENT_OUTPUT"/>
 	<mechanismTarget stateIdentifier="INTAKEOFF"
 	                 controlDataIdentifier="openloop"
+	                 controlDataIdentifier2="openloop"
 					 value="0.0"
-					 solenoid="ON"/>
+					 secondValue="0.0"/>
 	<mechanismTarget stateIdentifier="INTAKEON"
 	                 controlDataIdentifier="openloop"
-					 value=".75"
-					 solenoid="OFF"/>
+	                 controlDataIdentifier2="openloop"
+					 value="1.0"
+					 secondValue="1.0"/>
 </statedata>
