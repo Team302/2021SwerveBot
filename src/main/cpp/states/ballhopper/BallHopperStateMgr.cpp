@@ -191,12 +191,14 @@ void BallHopperStateMgr::SetCurrentState
             }
         }
     }
-    else if (state == nullptr)
+    else //if (state == nullptr)
     {
         nt.get()->PutString("Current State", "nullptr");
-    }    
+    }   
+    /** 
     else 
     {
         nt.get()->PutString("Current State", "same state");
     }
+    **/
 }

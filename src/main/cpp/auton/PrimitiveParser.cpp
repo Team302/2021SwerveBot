@@ -38,17 +38,6 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
 
     PrimitiveParamsVector paramVector;
 
-    PRIMITIVE_IDENTIFIER        primitiveType = UNKNOWN_PRIMITIVE;
-    float                       time = 15.0;
-    float                       distance = 0.0;
-    float                       heading = 0.0;
-    float                       startDriveSpeed = 0.0;
-    float                       endDriveSpeed = 0.0;
-    float                       xloc = 0.0;
-    float                       yloc = 0.0;
-    bool                        runIntake = false;
-    std::string                 pathName;
-    bool hasError = false;
     string fulldirfile = string("/home/lvuser/deploy/autonxml/");
     fulldirfile += fileName;
     // initialize the xml string to enum maps
@@ -76,6 +65,17 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
                 Logger::GetLogger()->LogError( string("PrimitiveParser::ParseXML"), string(primitiveNode.name()));
                 if ( strcmp( primitiveNode.name(), "primitive") == 0 )
                 {
+                    bool hasError = false;
+                    PRIMITIVE_IDENTIFIER        primitiveType = UNKNOWN_PRIMITIVE;
+                    float                       time = 15.0;
+                    float                       distance = 0.0;
+                    float                       heading = 0.0;
+                    float                       startDriveSpeed = 0.0;
+                    float                       endDriveSpeed = 0.0;
+                    float                       xloc = 0.0;
+                    float                       yloc = 0.0;
+                    bool                        runIntake = false;
+                    std::string                 pathName;
 
                     for (xml_attribute attr = primitiveNode.first_attribute(); attr; attr = attr.next_attribute())
                     {

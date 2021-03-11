@@ -155,6 +155,12 @@ SwerveModule::SwerveModule
     m_nt = nt::NetworkTableInstance::GetDefault().GetTable(ntName);
 }
 
+/// @brief initialize the swerve module with information that the swerve chassis knows about
+/// @param [in] units::velocity::meters_per_second_t - maxVelocity: maximum linear velocity of the chassis
+/// @param [in] units::angular_velocity::radians_per_second_t - maxAngularVelocity: maximum angular velocity of the chassis
+/// @param [in] units::acceleration::meters_per_second_squared_t - maxAcceleration: maximum linear acceleration of the chassis
+/// @param [in] units::angular_acceleration::radians_per_second_squared_t - maxAngularAcceleration: maximum angular acceleration of the chassis
+
 void SwerveModule::Init
 (
     units::velocity::meters_per_second_t                        maxVelocity,
@@ -190,7 +196,7 @@ void SwerveModule::SetEncodersToZero()
 } 
 
 /// @brief Get the encoder values
-/// @returns double
+/// @returns double - the integrated sensor position
 double SwerveModule::GetEncoderValues()
 {
     auto motor = m_driveMotor.get()->GetSpeedController();
@@ -249,8 +255,15 @@ void SwerveModule::SetDesiredState
     SetDriveSpeed(optimizedState.speed);
 }
 
-// Note:  the following was taken from the WPI code and tweaked because we were seeing some weird 
-//        reversals that we believe was due to not using a tolerance
+/// @brief Given a desired swerve module state and the current angle of the swerve module, determine
+///        if the changing the desired swerve module angle by 180 degrees is a smaller turn or not.
+///        If it is, return a state that has that angle and the reversed speed.  Otherwise, return the 
+///        original desired state.
+/// Note:  the following was taken from the WPI code and tweaked because we were seeing some weird 
+///        reversals that we believe was due to not using a tolerance
+/// @param [in] const SwerveModuleState& desired state of the swerve module
+/// @param [in] const Rotation2d& current angle of the swerve module
+/// @returns SwerveModuleState optimized swerve module state
 SwerveModuleState SwerveModule::Optimize
 ( 
     const SwerveModuleState& desiredState,
@@ -299,28 +312,28 @@ SwerveModuleState SwerveModule::Optimize
     }
 }
 
+/// @brief Run the swerve module at the same speed and angle
+/// @returns void
 void SwerveModule::RunCurrentState()
 {
     SetDriveSpeed(m_currentState.speed);
-    //SetTurnAngle(m_currentState.angle.Degrees());
 
     auto motor = m_turnMotor.get()->GetSpeedController();
     auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
     fx->StopMotor();  
 }
 
+/// @brief run the drive motor at a specified speed
+/// @param [in] speed to drive the drive wheel as
+/// @returns void
 void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
 {
-    if ( abs(speed.to<double>()/m_maxVelocity.to<double>()) < 0.05 )
-    {
-        m_currentState.speed = 0_mps;
-    }
-    else
-    {
-        m_currentState.speed = speed;
-    }
+    m_currentState.speed = ( abs(speed.to<double>()/m_maxVelocity.to<double>()) < 0.05 ) ? 0_mps : speed;
+
     Logger::GetLogger()->ToNtTable(m_nt, string("State Speed - mps"), m_currentState.speed.to<double>() );
     Logger::GetLogger()->ToNtTable(m_nt, string("Wheel Diameter - meters"), units::length::meter_t(m_wheelDiameter).to<double>() );
+    Logger::GetLogger()->ToNtTable(m_nt, string("drive motor id"), m_driveMotor.get()->GetID() );
+    Logger::GetLogger()->ToNtTable(m_nt, string("drive scale"), m_scale );
 
     if (m_runClosedLoopDrive)
     {
@@ -329,9 +342,7 @@ void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
         driveTarget /= m_driveMotor.get()->GetGearRatio();
         driveTarget *= m_scale;
         
-        Logger::GetLogger()->ToNtTable(m_nt, string("drive motor id"), m_driveMotor.get()->GetID() );
-        Logger::GetLogger()->ToNtTable(m_nt, string("drive target"), driveTarget );
-        Logger::GetLogger()->ToNtTable(m_nt, string("drive scale"), m_scale );
+        Logger::GetLogger()->ToNtTable(m_nt, string("drive target - rps"), driveTarget );
         
         m_driveMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::VELOCITY_RPS);
         m_driveMotor.get()->Set(m_nt, driveTarget);
@@ -340,23 +351,42 @@ void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
     {
         auto percent = m_currentState.speed / m_maxVelocity;
         percent *= m_scale;
+
+        Logger::GetLogger()->ToNtTable(m_nt, string("drive target - percent"), percent );
+
         m_driveMotor.get()->SetControlMode(ControlModes::CONTROL_TYPE::PERCENT_OUTPUT);
         m_driveMotor.get()->Set(m_nt, percent);
     }
 }
 
+/// @brief Turn the swerve module to a specified angle
+/// @param [in] units::angle::degree_t the target angle to turn the wheel to
+/// @returns void
 void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
 {
     m_currentState.angle = targetAngle;
+
+    Logger::GetLogger()->ToNtTable(m_nt, string("turn motor id"), m_turnMotor.get()->GetID() );
+    Logger::GetLogger()->ToNtTable(m_nt, string("target angle"), targetAngle.to<double>() );
+
+    auto currAngle  = units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition());
+    auto deltaAngle = AngleUtils::GetDeltaAngle(currAngle, targetAngle);
+
+    Logger::GetLogger()->ToNtTable(m_nt, string("current angle"), currAngle.to<double>() );
+    Logger::GetLogger()->ToNtTable(m_nt, string("delta angle"), deltaAngle.to<double>() );
+
+    if ( abs(deltaAngle.to<double>()) > 1.0 )
+
+    /**
     Rotation2d currAngle = Rotation2d(units::angle::degree_t(m_turnSensor.get()->GetAbsolutePosition()));
     Rotation2d deltaAngle = targetAngle - currAngle.Degrees();
 
-    Logger::GetLogger()->ToNtTable(m_nt, string("turn motor id"), m_turnMotor.get()->GetID() );
     Logger::GetLogger()->ToNtTable(m_nt, string("current angle"), currAngle.Degrees().to<double>() );
-    Logger::GetLogger()->ToNtTable(m_nt, string("target angle"), targetAngle.to<double>() );
     Logger::GetLogger()->ToNtTable(m_nt, string("delta angle"), deltaAngle.Degrees().to<double>() );
-     
+
     if ( abs(deltaAngle.Degrees().to<double>()) > 1.0 )
+    **/
+
     {
         auto motor = m_turnMotor.get()->GetSpeedController();
         auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
@@ -364,7 +394,8 @@ void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
         //=============================================================================
         // 5592 counts on the falcon for 76.729 degree change on the CANCoder (wheel)
         //=============================================================================
-        double deltaTicks = (deltaAngle.Degrees().to<double>() * 5592 / 76.729); 
+        //double deltaTicks = (deltaAngle.Degrees().to<double>() * 5592 / 76.729); 
+        double deltaTicks = (deltaAngle.to<double>() * 5592 / 76.729); 
         double currentTicks = sensors.GetIntegratedSensorPosition();
         double desiredTicks = currentTicks + deltaTicks;
 
@@ -383,6 +414,8 @@ void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
 
 }
 
+/// @brief stop the drive and turn motors
+/// @return void
 void SwerveModule::StopMotors()
 {
     m_turnMotor.get()->GetSpeedController()->StopMotor();

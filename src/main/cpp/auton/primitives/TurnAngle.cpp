@@ -120,8 +120,6 @@ void TurnAngle::Init
 
 void TurnAngle::Run()
 {
-    units::meters_per_second_t      xSpeed(0);
-    units::meters_per_second_t      ySpeed(0);
 
     static constexpr units::second_t kDt = 20_ms;
 
@@ -132,10 +130,13 @@ void TurnAngle::Run()
     units::angular_velocity::radians_per_second_t radianTrapezoidSpeed(m_setpoint.velocity.to<double>() * m_distanceToAngleConversion);
 
     //Angular speed calculation
+    units::meters_per_second_t      xSpeed(0);
+    units::meters_per_second_t      ySpeed(0);
     if (m_reverse)
     {
         m_chassis->Drive(xSpeed, ySpeed, -1 * radianTrapezoidSpeed, true);
-    } else if (!m_reverse)
+    } 
+    else
     {
         m_chassis->Drive(xSpeed, ySpeed, radianTrapezoidSpeed, true);
     }        
@@ -153,7 +154,8 @@ bool TurnAngle::IsDone()
     if( units::math::abs(currentChassisPos.Rotation().Degrees() - m_targetAngle) <= tolerance)
     {
         m_isDone = true;
-    } else 
+    } 
+    else 
     {
         m_isDone = false;
     }
@@ -161,7 +163,8 @@ bool TurnAngle::IsDone()
     if(m_timer->HasPeriodPassed( m_maxTime ))
     {
         m_isDone = true;
-    }else 
+    }
+    else 
     {
         m_isDone = false;
     }
