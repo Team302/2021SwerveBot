@@ -109,12 +109,12 @@ void  MechanismFactory::CreateIMechanism
 		{
 			auto motor1 = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE );
 			auto motor2 = GetMotorController( motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::INTAKE2 );
-			if ( motor.get() != nullptr )
+			if ( motor1.get() != nullptr && motor2.get() != nullptr )
 			{
 				motor1.get()->SetFramePeriodPriority( IDragonMotorController::MOTOR_PRIORITY::LOW);
 				//motor1.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
 				//motor1.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
-				motr2.get()->SetFramePeriodPriority( IDragonMotorController::MOTOR_PRIORITY::LOW);
+				motor2.get()->SetFramePeriodPriority( IDragonMotorController::MOTOR_PRIORITY::LOW);
 				//motor2.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
 				//motor2.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 120);
 

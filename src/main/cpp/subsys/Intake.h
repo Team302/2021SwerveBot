@@ -21,13 +21,13 @@
 // FRC includes
 
 // Team 302 includes
-#include <subsys/Mech2IndMotor.h>
+#include <subsys/Mech2IndMotors.h>
 
 // Third Party Includes
 
 class IDragonMotorController;
 
-class Intake : public Mech2IndMotor
+class Intake : public Mech2IndMotors
 {
     public:
 

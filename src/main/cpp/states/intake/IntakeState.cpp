@@ -32,7 +32,7 @@ IntakeState::IntakeState
     ControlData*                    controlData2,
     double                          target1,
     double                          target2
-) : Mech1MotorState(MechanismFactory::GetMechanismFactory()->GetIntake().get(), controlData, controlData2, target1, target2)
+) : Mech2MotorState(MechanismFactory::GetMechanismFactory()->GetIntake().get(), controlData, controlData2, target1, target2)
 {
 }
 

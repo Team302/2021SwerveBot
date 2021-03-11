@@ -30,7 +30,7 @@ Intake::Intake
 (
     shared_ptr<IDragonMotorController> motor1,
     shared_ptr<IDragonMotorController> motor2
-) : Mech2IndMotor( MechanismTypes::MECHANISM_TYPE::INTAKE,  string("intake.xml"),  string("IntakeNT"), motor1, motor2 )
+) : Mech2IndMotors( MechanismTypes::MECHANISM_TYPE::INTAKE,  string("intake.xml"),  string("IntakeNT"), motor1, motor2 )
 {
 }
 
