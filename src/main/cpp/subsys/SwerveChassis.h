@@ -137,7 +137,9 @@ class SwerveChassis
         frc::SwerveDrivePoseEstimator<4> GetPose() const { return m_poseEstimator; }  
 
         void SetDriveScaleFactor( double scale );
+        void SetBoost( double boost );
         void RunWPIAlgorithm(bool runWPI ) { m_runWPI = runWPI; }
+        double GetScaleFactor() const {return m_scale;}
 
     private:
         frc::ChassisSpeeds GetFieldRelativeSpeeds
@@ -171,6 +173,7 @@ class SwerveChassis
 
         DragonPigeon*                                               m_pigeon;
         double                                                      m_scale;
+        double                                                      m_boost;
         bool                                                        m_runWPI;
 
         const double                                                m_deadband = 0.1;
@@ -179,8 +182,11 @@ class SwerveChassis
         frc::Translation2d m_frontRightLocation;
         frc::Translation2d m_backLeftLocation;
         frc::Translation2d m_backRightLocation;
+        frc::SwerveDriveKinematics<4> m_kinematics{m_frontLeftLocation, 
+                                                   m_frontRightLocation, 
+                                                   m_backLeftLocation, 
+                                                   m_backRightLocation};
 
-        frc::SwerveDriveKinematics<4> m_kinematics{m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation};
 
         // Gains are for example purposes only - must be determined for your own robot!
         //Clean up to get clearer information

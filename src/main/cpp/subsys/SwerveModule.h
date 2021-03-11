@@ -111,7 +111,8 @@ class SwerveModule
         ModuleID GetType() {return m_type;}
         units::length::inch_t GetWheelDiameter() const {return m_wheelDiameter;}
 
-        void SetDriveScale( double scale ) { m_scale = scale; }
+        void SetDriveScale(double scale) { m_scale = scale; }
+        void SetBoost(double boost) { m_boost=boost;}
 
         void StopMotors();
         
@@ -146,5 +147,6 @@ class SwerveModule
         frc::SwerveModuleState                              m_currentState;
         units::velocity::meters_per_second_t                m_maxVelocity;
         double                                              m_scale;
+        double                                              m_boost;
         bool                                                m_runClosedLoopDrive;
 };
