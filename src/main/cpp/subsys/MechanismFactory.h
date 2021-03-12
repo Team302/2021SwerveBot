@@ -27,7 +27,6 @@
 #include <subsys/MechanismTypes.h>
 #include <hw/usages/IDragonMotorControllerMap.h>
 #include <hw/usages/DigitalInputMap.h>
-#include <hw/usages/ServoMap.h>
 
 #include <subsys/BallHopper.h>
 #include <subsys/BallTransfer.h>
@@ -43,7 +42,6 @@
 
 // forward declares
 class DragonDigitalInput;
-class DragonServo;
 class IDragonMotorController;
 class IMechanism;
 
@@ -75,7 +73,6 @@ class MechanismFactory
 		(
 			MechanismTypes::MECHANISM_TYPE							type,
 			const IDragonMotorControllerMap&        				motorControllers,   // <I> - Motor Controllers
-			const ServoMap&						    				servos,
 			const DigitalInputMap&									digitalInputs,
 			std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder
 		);
@@ -95,11 +92,6 @@ class MechanismFactory
 		(
 			const IDragonMotorControllerMap&				motorControllers,
 			MotorControllerUsage::MOTOR_CONTROLLER_USAGE	usage
-		);
-		std::shared_ptr<DragonServo> GetServo
-		(
-			const ServoMap&									servos,
-			ServoUsage::SERVO_USAGE							usage
 		);
 		std::shared_ptr<DragonDigitalInput> GetDigitalInput
 		(

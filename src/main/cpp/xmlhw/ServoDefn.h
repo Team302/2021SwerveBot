@@ -23,22 +23,7 @@
 // FRC includes
 
 // Team 302 includes
-#include <hw/DragonServo.h>
 
 // Third Party Includes
 #include <pugixml/pugixml.hpp>
 
-class ServoDefn
-{
-    public:
-        ServoDefn() = default;
-        virtual ~ServoDefn() = default;
-
-
-        /// @brief Parse a servo XML element and create a DragonServo from its definition.
-        /// @return std::shared_ptr<DragonServo> servo
-        std::shared_ptr<DragonServo> ParseXML
-        (
-            pugi::xml_node      ServoNode
-        );
-};

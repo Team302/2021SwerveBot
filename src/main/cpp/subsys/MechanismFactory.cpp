@@ -33,8 +33,7 @@
 #include <hw/interfaces/IDragonMotorController.h>
 #include <hw/usages/IDragonMotorControllerMap.h>
 #include <hw/usages/DigitalInputMap.h>
-#include <hw/usages/ServoMap.h>
-#include <hw/DragonServo.h>
+
 #include <hw/DragonDigitalInput.h>
 #include <subsys/BallTransfer.h>
 #include <subsys/Intake.h>
@@ -93,7 +92,6 @@ void  MechanismFactory::CreateIMechanism
 (
 	MechanismTypes::MECHANISM_TYPE			type,
 	const IDragonMotorControllerMap&        motorControllers,   // <I> - Motor Controllers
-	const ServoMap&						    servos,
 	const DigitalInputMap&					digitalInputs,
 	shared_ptr<CANCoder>					canCoder
 )
@@ -264,34 +262,7 @@ shared_ptr<IDragonMotorController> MechanismFactory::GetMotorController
 }
 
 
-shared_ptr<DragonServo> MechanismFactory::GetServo
-(
-	const ServoMap&									servos,
-	ServoUsage::SERVO_USAGE							usage
-)
-{
-	shared_ptr<DragonServo> servo;
-	auto it = servos.find( usage );
-	if ( it != servos.end() )  // found it
-	{
-		servo = it->second;
-	}
-	else
-	{
-		string msg = "servo not found; usage = ";
-		msg += to_string( usage );
-		Logger::GetLogger()->LogError( string( "MechanismFactory::GetServo" ), msg );
-	}
-	
-	if ( servo.get() == nullptr )
-	{
-		string msg = "servo is nullptr; usage = ";
-		msg += to_string( usage );
-		Logger::GetLogger()->LogError( string( "MechanismFactory::GetServo" ), msg );
-	}
-	return servo;
 
-}
 shared_ptr<DragonDigitalInput> MechanismFactory::GetDigitalInput
 (
 	const DigitalInputMap&							digitaInputs,
