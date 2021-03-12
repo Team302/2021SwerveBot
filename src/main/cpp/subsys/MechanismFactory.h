@@ -37,7 +37,6 @@
 #include <subsys/Turret.h>
 
 
-#include <subsys/ShooterHood.h>
 
 
 // Third Party Includes
@@ -87,7 +86,7 @@ class MechanismFactory
 		inline std::shared_ptr<Shooter> GetShooter() const { return m_shooter;};
 		inline std::shared_ptr<Turret> GetTurret() const { return m_turret;};
 		
-		inline std::shared_ptr<ShooterHood> GetShooterHood() const { return nullptr; }
+		
 
 	
 

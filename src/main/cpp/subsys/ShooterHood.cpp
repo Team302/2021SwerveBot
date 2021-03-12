@@ -20,7 +20,7 @@
 // FRC includes
 
 // Team 302 includes
-#include <subsys/ShooterHood.h>
+
 #include <hw/interfaces/IDragonMotorController.h>
 #include <utils/logger.h> 
 
@@ -31,28 +31,13 @@ using namespace std;
 using namespace ctre::phoenix::sensors;
 using namespace ctre::phoenix::motorcontrol;
 
-ShooterHood::ShooterHood
-(
-    shared_ptr<IDragonMotorController>     motorController,
-	shared_ptr<CANCoder>				   canCoder
-) : Mech1IndMotor( MechanismTypes::MECHANISM_TYPE::SHOOTER_HOOD, string("shooterhood.xml"), string("ShooterHood"), motorController ),
-    m_encoder(canCoder)
-{
-    motorController.get()->SetRemoteSensor( canCoder.get()->GetDeviceNumber(), RemoteSensorSource::RemoteSensorSource_CANCoder );
-}
+
 
 
 /// @brief  Return the current position of the mechanism.  The value is in inches or degrees. 
 /// @return double  position in inches (translating mechanisms) or degrees (rotating mechanisms) 
-double ShooterHood :: GetPosition() const  
-{ 
-    return m_encoder.get() != nullptr ? m_encoder.get()->GetAbsolutePosition() : 0.0;
-} 
+
 
 /// @brief  Get the current speed of the mechanism.  The value is in inches per second or degrees per second. 
 /// @return double  speed in inches/second (translating mechanisms) or degrees/second (rotating mechanisms) 
-double ShooterHood ::GetSpeed() const  
-{ 
-    return m_encoder.get() != nullptr ? m_encoder.get()->GetVelocity()*10.0 : 0.0;
-} 
 

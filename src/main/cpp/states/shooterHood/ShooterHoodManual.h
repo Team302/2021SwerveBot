@@ -5,17 +5,3 @@
 
 class ControlData;
 
-class ShooterHoodManual : public Mech1MotorState
-{
-    public:
-    ShooterHoodManual
-    (
-        ControlData* control,
-        double target
-    );
-    ShooterHoodManual() = delete;
-    ~ShooterHoodManual() = default;
-
-    void Init() override;
-    void Run() override;
-};

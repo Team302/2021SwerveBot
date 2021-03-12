@@ -32,4 +32,3 @@ class BallTransferState : public Mech1MotorState
         );
         ~BallTransferState() = default;
 };
-

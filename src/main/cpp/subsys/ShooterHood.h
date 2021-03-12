@@ -28,32 +28,3 @@
 
 class IDragonMotorController;
 
-class ShooterHood : public Mech1IndMotor
-{
-    public:
-        ShooterHood
-        (
-            std::shared_ptr<IDragonMotorController>             motorController,
-            std::shared_ptr<ctre::phoenix::sensors::CANCoder>   encoder
-        );
-        ~ShooterHood() override = default;
-        ShooterHood() = delete;
-
-
-
-        /// @brief  Return the current position of the mechanism.  The value is in inches or degrees. 
-        /// @return double  position in inches (translating mechanisms) or degrees (rotating mechanisms) 
-            double GetPosition() const override; 
-
-
-        /// @brief  Get the current speed of the mechanism.  The value is in inches per second or degrees per second. 
-        /// @return double  speed in inches/second (translating mechanisms) or degrees/second (rotating mechanisms) 
-            double GetSpeed() const override;  
-
-
-
-         
-    private:  
-        std::shared_ptr<ctre::phoenix::sensors::CANCoder>   m_encoder;
-
-}; 
