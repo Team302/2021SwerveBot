@@ -229,10 +229,18 @@ void SwerveChassis::UpdateOdometry()
     units::degree_t yaw{m_pigeon->GetYaw()};
     Rotation2d r2d {yaw};
 
+    auto currentPose = m_poseEstimator.GetEstimatedPosition();
+    Logger::GetLogger()->ToNtTable("Robot Odometry", "Current X", currentPose.X().to<double>());
+    Logger::GetLogger()->ToNtTable("Robot Odometry", "Current Y", currentPose.Y().to<double>());
+
     m_poseEstimator.Update(r2d, m_frontLeft.get()->GetState(),
                                 m_frontRight.get()->GetState(), 
                                 m_backLeft.get()->GetState(),
                                 m_backRight.get()->GetState());
+
+    auto updatedPose = m_poseEstimator.GetEstimatedPosition();
+    Logger::GetLogger()->ToNtTable("Robot Odometry", "Updated X", updatedPose.X().to<double>());
+    Logger::GetLogger()->ToNtTable("Robot Odometry", "Updated Y", updatedPose.Y().to<double>());
 }
 
 /// @brief set all of the encoders to zero
