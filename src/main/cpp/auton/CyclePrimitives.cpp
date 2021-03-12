@@ -118,6 +118,10 @@ void CyclePrimitives::GetNextPrim()
 		{
 			  IntakeStateMgr::GetInstance()->SetCurrentState(IntakeStateMgr::ON, false);
 		}
+		else if (m_hasIntake)
+		{
+			  IntakeStateMgr::GetInstance()->SetCurrentState(IntakeStateMgr::OFF, false);
+		}
 		m_timer->Reset();
 		m_timer->Start();
 		m_currentPrim->Run();
