@@ -82,8 +82,8 @@ void Robot::UpdateOdometry()
     if ( swerveChassis.get() != nullptr )
     {
         swerveChassis.get()->UpdateOdometry();
+        auto pose = swerveChassis.get()->GetPose().GetEstimatedPosition();
     }
-
 }
 
 /// @brief Runs every 20 milliseconds when the autonomous state is active.
@@ -94,12 +94,6 @@ void Robot::AutonomousPeriodic()
 
     //Real auton magic right here:
     m_cyclePrims->Run();
-    //auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
-    //if ( swerveChassis.get() != nullptr )
-    //{
-    //    swerveChassis.get()->Drive(1.0, 0.0, 0.0, false);
-    //}
-
 }
 
 
