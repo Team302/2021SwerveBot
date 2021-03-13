@@ -76,7 +76,8 @@ void SwerveDrive::Init()
         controller->SetAxisScaleFactor(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, -2.0);
         //controller->SetSlewRateLimiter(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE, 3.0);
         
-        controller->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::DRIVE_BOOST, IDragonGamePad::AXIS_PROFILE::LINEAR );
+        controller->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::DRIVE_TURBO, IDragonGamePad::AXIS_PROFILE::LINEAR );
+        controller->SetAxisProfile( TeleopControl::FUNCTION_IDENTIFIER::DRIVE_NITRO, IDragonGamePad::AXIS_PROFILE::LINEAR );
 
         m_chassis.get()->RunWPIAlgorithm(false);
    }
@@ -159,10 +160,15 @@ void SwerveDrive::Run( )
         steer  = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER);
         rotate = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
 
-        auto boost = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::DRIVE_BOOST);
+        auto boost = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::DRIVE_TURBO);
         boost *= 0.25;
         boost = clamp(boost, 0.0, 0.25);
         m_chassis->SetBoost(boost);
+
+        auto nitro = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::DRIVE_NITRO);
+        nitro *= 0.5;
+        nitro = clamp(nitro, 0.0, 0.5);
+        m_chassis->SetNitro(nitro);
     }
 
     Logger::GetLogger()->ToNtTable("Swerve Drive", "drive", drive);

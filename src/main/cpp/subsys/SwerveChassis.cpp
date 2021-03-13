@@ -74,6 +74,7 @@ SwerveChassis::SwerveChassis
     m_pigeon(PigeonFactory::GetFactory()->GetPigeon()),
     m_scale(1.0),
     m_boost(0.0),
+    m_nitro(0.0),
     m_runWPI(false),
     m_poseOpt(PoseEstimationMethod::EULER_AT_CHASSIS),
     m_pose(),
@@ -122,7 +123,15 @@ void SwerveChassis::SetBoost( double boost )
     m_frontRight.get()->SetBoost(m_boost);
     m_backLeft.get()->SetBoost(m_boost);
     m_backRight.get()->SetBoost(m_boost);
+}
 
+void SwerveChassis::SetNitro( double nitro )
+{
+    m_nitro = nitro;
+    m_frontLeft.get()->SetNitro(m_nitro);
+    m_frontRight.get()->SetNitro(m_nitro);
+    m_backLeft.get()->SetNitro(m_nitro);
+    m_backRight.get()->SetNitro(m_nitro);
 }
 
 
@@ -157,9 +166,9 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
     }
     else
     {   
-        m_drive = units::velocity::meters_per_second_t(xSpeed*(m_scale+m_boost));
-        m_steer = units::velocity::meters_per_second_t(ySpeed*(m_scale+m_boost));
-        m_rotate = units::angular_velocity::radians_per_second_t(rot*(m_scale+m_boost));
+        m_drive = units::velocity::meters_per_second_t(xSpeed*(m_scale+m_boost+m_nitro));
+        m_steer = units::velocity::meters_per_second_t(ySpeed*(m_scale+m_boost+m_nitro));
+        m_rotate = units::angular_velocity::radians_per_second_t(rot*(m_scale+m_boost+m_nitro));
 
         if ( m_runWPI )
         {
@@ -373,7 +382,7 @@ void SwerveChassis::ResetPosition
     m_offsetPoseAngle = units::angle::degree_t(m_pigeon->GetYaw()) - angle.Degrees();
 
     Transform2d t_fl {m_frontLeftLocation,angle};
-    auto flPose = pose + t_fl;
+    auto flPose = m_pose + t_fl;
     m_frontLeft.get()->UpdateCurrPose(flPose.X(), flPose.Y());
 
     Transform2d t_fr {m_frontRightLocation,angle};

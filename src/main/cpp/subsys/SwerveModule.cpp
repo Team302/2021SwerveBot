@@ -87,6 +87,7 @@ SwerveModule::SwerveModule
     m_maxVelocity(1_mps),
     m_scale(1.0),
     m_boost(0.0),
+    m_nitro(0.0),
     m_runClosedLoopDrive(false)
 {
     m_timer.Reset();
@@ -352,7 +353,7 @@ void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
         // convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel
         auto driveTarget = m_activeState.speed.to<double>() / (units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi);  
         driveTarget /= m_driveMotor.get()->GetGearRatio();
-        driveTarget *= clamp((m_scale + m_boost), 0.25, 1.0);
+        driveTarget *= clamp((m_scale + m_boost + m_nitro), 0.25, 1.0);
         
         Logger::GetLogger()->ToNtTable(m_nt, string("drive target - rps"), driveTarget );
         
@@ -362,7 +363,7 @@ void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
     else
     {
         auto percent = m_activeState.speed / m_maxVelocity;
-        percent *= clamp((m_scale + m_boost), 0.25, 1.0);
+        percent *= clamp((m_scale + m_boost + m_nitro), 0.25, 1.0);
 
         Logger::GetLogger()->ToNtTable(m_nt, string("drive target - percent"), percent );
 
