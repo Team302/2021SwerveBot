@@ -143,7 +143,6 @@ class SwerveChassis
 
         void SetDriveScaleFactor( double scale );
         void SetBoost( double boost );
-        void SetNitro( double nitro );
         void RunWPIAlgorithm(bool runWPI ) { m_runWPI = runWPI; }
         void SetPoseEstOption(PoseEstimationMethod opt ) { m_poseOpt = opt; }
         double GetScaleFactor() const {return m_scale;}
@@ -181,7 +180,6 @@ class SwerveChassis
         DragonPigeon*                                               m_pigeon;
         double                                                      m_scale;
         double                                                      m_boost;
-        double                                                      m_nitro;
         bool                                                        m_runWPI;
         PoseEstimationMethod                                        m_poseOpt;
         frc::Pose2d                                                 m_pose;
