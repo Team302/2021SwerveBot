@@ -134,7 +134,6 @@ void SwerveChassis::SetNitro( double nitro )
     m_backRight.get()->SetNitro(m_nitro);
 }
 
-
 /// @brief Drive the chassis
 /// @param [in] units::velocity::meters_per_second_t            xSpeed:         forward/reverse speed (positive is forward)
 /// @param [in] units::velocity::meters_per_second_t            ySpeed:         left/right speed (positive is left)
@@ -166,9 +165,9 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
     }
     else
     {   
-        m_drive = units::velocity::meters_per_second_t(xSpeed*(m_scale+m_boost+m_nitro));
-        m_steer = units::velocity::meters_per_second_t(ySpeed*(m_scale+m_boost+m_nitro));
-        m_rotate = units::angular_velocity::radians_per_second_t(rot*(m_scale+m_boost+m_nitro));
+        m_drive = units::velocity::meters_per_second_t(xSpeed*(m_scale+m_boost));
+        m_steer = units::velocity::meters_per_second_t(ySpeed*(m_scale+m_boost));
+        m_rotate = units::angular_velocity::radians_per_second_t(rot*(m_scale+m_boost));
 
         if ( m_runWPI )
         {
@@ -294,10 +293,14 @@ void SwerveChassis::UpdateOdometry()
         // xk+1 = xk + vk cos θk T
         // yk+1 = yk + vk sin θk T
         // Thetak+1 = Thetagyro,k+1
-        units::length::meter_t currentX = startX +                        // starting X (meters)
-                                          m_drive * deltaT;               // mps * seconds
-        units::length::meter_t currentY = startY +                        // starting X (meters)
-                                          m_steer * deltaT;               // mps * seconds
+        units::angle::radian_t rads = yaw;          // convert angle to radians
+        double cosAng = cos(rads.to<double>());
+        double sinAng = sin(rads.to<double>());
+        auto vx = m_drive * cosAng + m_steer * sinAng;
+        auto vy = m_drive * sinAng + m_steer * cosAng;
+
+        units::length::meter_t currentX = startX + vx * deltaT;
+        units::length::meter_t currentY = startY + vy * deltaT;
 
         Logger::GetLogger()->ToNtTable("AWheelCalc", "startX", startX.to<double>());
         Logger::GetLogger()->ToNtTable("AWheelCalc", "currentX", currentX.to<double>());
@@ -382,7 +385,7 @@ void SwerveChassis::ResetPosition
     m_offsetPoseAngle = units::angle::degree_t(m_pigeon->GetYaw()) - angle.Degrees();
 
     Transform2d t_fl {m_frontLeftLocation,angle};
-    auto flPose = m_pose + t_fl;
+    auto flPose = pose + t_fl;
     m_frontLeft.get()->UpdateCurrPose(flPose.X(), flPose.Y());
 
     Transform2d t_fr {m_frontRightLocation,angle};

@@ -115,7 +115,7 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		m_controllerIndex[DRIVE_TURBO] 		= ctrlNo;
 		m_axisIDs[ DRIVE_TURBO]	     		= IDragonGamePad::RIGHT_TRIGGER;
 		m_controllerIndex[DRIVE_NITRO] 		= ctrlNo;
-		m_axisIDs[ DRIVE_NITRO]	     		= IDragonGamePad::LEFT_TRIGGER;
+		m_axisIDs[ DRIVE_NITRO]	     		= IDragonGamePad::RIGHT_TRIGGER;
     }
     else
     {

@@ -91,6 +91,8 @@ SwerveModule::SwerveModule
     m_runClosedLoopDrive(false)
 {
     m_timer.Reset();
+    m_timer.Start();
+    
     Rotation2d ang { units::angle::degree_t(0.0)};
     m_activeState.angle = ang;
     m_activeState.speed = 0_mps;
