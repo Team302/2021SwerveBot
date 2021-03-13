@@ -115,6 +115,7 @@ class SwerveModule
 
         void SetDriveScale(double scale) { m_scale = scale; }
         void SetBoost(double boost) { m_boost=boost;}
+        void SetNitro(double nitro) { m_nitro=nitro;}
 
         void StopMotors();
 
@@ -162,5 +163,6 @@ class SwerveModule
 
         double                                              m_scale;
         double                                              m_boost;
+        double                                              m_nitro;
         bool                                                m_runClosedLoopDrive;
 };
