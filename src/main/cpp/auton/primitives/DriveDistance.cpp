@@ -39,7 +39,7 @@ void DriveDistance::Init(PrimitiveParams* params)
 {
     m_distance = units::length::inch_t(params->GetDistance());
     m_startSpeed = units::velocity::feet_per_second_t(params->GetDriveSpeed()/12.0);
-    m_startPose = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis().get()->GetPose().GetEstimatedPosition();
+    m_startPose = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis().get()->GetPose();
 }
 
 void DriveDistance::Run()
@@ -56,7 +56,7 @@ void DriveDistance::Run()
 
 double DriveDistance::PercentToTarget()
 {
-    auto currentPose = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis().get()->GetPose().GetEstimatedPosition();
+    auto currentPose = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis().get()->GetPose();
     Translation2d transStart { m_startPose.X(), m_startPose.Y() };
     Translation2d transCurrent{ currentPose.X(), currentPose.Y() };
     units::length::inch_t dist = transCurrent.Distance(transStart);

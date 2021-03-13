@@ -144,10 +144,7 @@ void TurnAngle::Run()
 
 bool TurnAngle::IsDone()
 {
-
-    frc::SwerveDrivePoseEstimator<4> chassisPoseEstimatorDone = m_chassis.get()->GetPose();
-
-    Pose2d currentChassisPos = chassisPoseEstimatorDone.GetEstimatedPosition();
+    Pose2d currentChassisPos = m_chassis.get()->GetPose();
 
     units::degree_t tolerance(2);
 

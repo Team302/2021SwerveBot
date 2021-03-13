@@ -25,6 +25,8 @@
 #include <frc/kinematics/SwerveDriveKinematics.h>
 #include <frc/kinematics/SwerveDriveOdometry.h>
 
+#include <frc2/Timer.h>
+
 #include <units/acceleration.h>
 #include <units/angular_acceleration.h>
 #include <units/angular_velocity.h>
@@ -36,11 +38,13 @@
 #include <hw/factories/PigeonFactory.h>
 #include <hw/DragonPigeon.h>
 #include <subsys/SwerveModule.h>
+#include <subsys/PoseEstimatorEnum.h>
 
 
 class SwerveChassis
 {
     public:
+
         /// @brief Construct a swerve chassis
         /// @param [in] std::shared_ptr<SwerveModule>     frontleft:          front left swerve module
         /// @param [in] std::shared_ptr<SwerveModule>     frontright:         front right swerve module
@@ -134,11 +138,13 @@ class SwerveChassis
         std::shared_ptr<SwerveModule> GetFrontRight() const { return m_frontRight;}
         std::shared_ptr<SwerveModule> GetBackLeft() const { return m_backLeft;}
         std::shared_ptr<SwerveModule> GetBackRight() const { return m_backRight;}
-        frc::SwerveDrivePoseEstimator<4> GetPose() const { return m_poseEstimator; }  
+        frc::SwerveDrivePoseEstimator<4> GetPoseEst() const { return m_poseEstimator; }  
+        frc::Pose2d GetPose() const;
 
         void SetDriveScaleFactor( double scale );
         void SetBoost( double boost );
         void RunWPIAlgorithm(bool runWPI ) { m_runWPI = runWPI; }
+        void SetPoseEstOption(PoseEstimationMethod opt ) { m_poseOpt = opt; }
         double GetScaleFactor() const {return m_scale;}
 
     private:
@@ -175,6 +181,13 @@ class SwerveChassis
         double                                                      m_scale;
         double                                                      m_boost;
         bool                                                        m_runWPI;
+        PoseEstimationMethod                                        m_poseOpt;
+        frc::Pose2d                                                 m_pose;
+        units::angle::degree_t                                      m_offsetPoseAngle;
+        frc2::Timer                                                 m_timer;
+        units::velocity::meters_per_second_t                        m_drive;
+        units::velocity::meters_per_second_t                        m_steer;
+        units::angular_velocity::radians_per_second_t               m_rotate;
 
         const double                                                m_deadband = 0.1;
         

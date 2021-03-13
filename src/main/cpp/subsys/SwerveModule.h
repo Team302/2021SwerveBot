@@ -20,10 +20,10 @@
 
 // FRC Includes
 #include <frc/Encoder.h>
+#include <frc/geometry/Pose2d.h>
 #include <frc/geometry/Rotation2d.h>
-#include <frc/controller/PIDController.h>
-#include <frc/controller/ProfiledPIDController.h>
-#include <frc/controller/SimpleMotorFeedforward.h>
+#include <frc/geometry/Translation2d.h>
+
 #include <frc/kinematics/SwerveModuleState.h>
 
 #include <units/acceleration.h>
@@ -38,6 +38,7 @@
 // Team 302 Includes
 #include <hw/DragonFalcon.h>
 #include <hw/interfaces/IDragonMotorController.h>
+#include <subsys/PoseEstimatorEnum.h>
 
 // Third Party Includes
 #include <ctre/phoenix/sensors/CANCoder.h>
@@ -80,7 +81,8 @@ class SwerveModule
             units::velocity::meters_per_second_t                        maxVelocity,
             units::angular_velocity::radians_per_second_t               maxAngularVelocity,
             units::acceleration::meters_per_second_squared_t            maxAcceleration,
-            units::angular_acceleration::radians_per_second_squared_t   maxAngularAcceleration
+            units::angular_acceleration::radians_per_second_squared_t   maxAngularAcceleration,
+            frc::Translation2d                                          offsetFromRobotCenter
         );
         
         /// @brief Turn all of the wheel to zero degrees yaw according to the pigeon
@@ -115,6 +117,14 @@ class SwerveModule
         void SetBoost(double boost) { m_boost=boost;}
 
         void StopMotors();
+
+        frc::Pose2d GetCurrentPose(PoseEstimationMethod opt);
+
+        void UpdateCurrPose
+        (
+            units::length::meter_t  x,
+            units::length::meter_t  y
+        );
         
     private:
         // Note:  the following was taken from the WPI code and tweaked because we were seeing some weird 
@@ -126,26 +136,30 @@ class SwerveModule
         );
 
 
-        frc::SimpleMotorFeedforward<units::radians> m_turnFeedforward {1_V, 0.05_V / 1_rad_per_s};
         void SetDriveSpeed( units::velocity::meters_per_second_t speed );
         void SetTurnAngle( units::angle::degree_t angle );
 
 
-        ModuleID m_type;
+        ModuleID                                            m_type;
+
         std::shared_ptr<IDragonMotorController>             m_driveMotor;
         std::shared_ptr<IDragonMotorController>             m_turnMotor;
         std::shared_ptr<ctre::phoenix::sensors::CANCoder>   m_turnSensor;
-        units::length::inch_t                               m_wheelDiameter;
-        // the controller below is initialized here, but the actual values are set in the constructor
-        frc::ProfiledPIDController<units::radians>          m_turningPIDController{ 0.5, 0.0, 0.25, 
-                                                                                    { wpi::math::pi * 1_rad_per_s, 
-                                                                                      wpi::math::pi * 2_rad_per_s / 1_s}};
 
-        double                                              m_initialAngle;
-        int                                                 m_initialCounts;
-        std::shared_ptr<nt::NetworkTable>                   m_nt;        
-        frc::SwerveModuleState                              m_currentState;
+        units::length::inch_t                               m_wheelDiameter;
+
+        std::shared_ptr<nt::NetworkTable>                   m_nt;     
+
+        frc::SwerveModuleState                              m_activeState;
+        frc::Pose2d                                         m_currentPose;
+        units::angular_velocity::revolutions_per_minute_t   m_currentSpeed;
+        double                                              m_currentEncoder;
+        frc2::Timer                                         m_timer;
+
+
+
         units::velocity::meters_per_second_t                m_maxVelocity;
+
         double                                              m_scale;
         double                                              m_boost;
         bool                                                m_runClosedLoopDrive;

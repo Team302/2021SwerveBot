@@ -33,6 +33,7 @@
 #include <controllers/ControlData.h>
 #include <controllers/ControlModes.h>
 
+#include <subsys/PoseEstimatorEnum.h>
 #include <subsys/SwerveChassis.h>
 #include <subsys/SwerveChassisFactory.h>
 #include <subsys/SwerveModule.h>
@@ -77,18 +78,21 @@ SwerveModule::SwerveModule
     m_turnMotor(turnMotor), 
     m_turnSensor(canCoder), 
     m_wheelDiameter(wheelDiameter),
-    m_initialAngle(canCoder.get()->GetAbsolutePosition()),
-    m_initialCounts(0),
     m_nt(),
-    m_currentState(),
+    m_activeState(),
+    m_currentPose(),
+    m_currentSpeed(0.0_rpm),
+    m_currentEncoder(0.0),
+    m_timer(),
     m_maxVelocity(1_mps),
     m_scale(1.0),
     m_boost(0.0),
     m_runClosedLoopDrive(false)
 {
+    m_timer.Reset();
     Rotation2d ang { units::angle::degree_t(0.0)};
-    m_currentState.angle = ang;
-    m_currentState.speed = 0_mps;
+    m_activeState.angle = ang;
+    m_activeState.speed = 0_mps;
     
     // Set up the Drive Motor
     auto motor = m_driveMotor.get()->GetSpeedController();
@@ -167,7 +171,8 @@ void SwerveModule::Init
     units::velocity::meters_per_second_t                        maxVelocity,
     units::angular_velocity::radians_per_second_t               maxAngularVelocity,
     units::acceleration::meters_per_second_squared_t            maxAcceleration,
-    units::angular_acceleration::radians_per_second_squared_t   maxAngularAcceleration
+    units::angular_acceleration::radians_per_second_squared_t   maxAngularAcceleration,
+    Translation2d                                               offsetFromCenterOfRobot
 )
 {
     m_maxVelocity = maxVelocity;
@@ -184,6 +189,9 @@ void SwerveModule::Init
                                                 maxVelocity.to<double>(),
                                                 0.0 );
     m_driveMotor.get()->SetControlConstants( 0, driveCData.get() );
+
+    auto trans = Transform2d(offsetFromCenterOfRobot, Rotation2d() );
+    m_currentPose = m_currentPose + trans;
 }
 
 /// @brief Set all motor encoders to zero
@@ -317,7 +325,7 @@ SwerveModuleState SwerveModule::Optimize
 /// @returns void
 void SwerveModule::RunCurrentState()
 {
-    SetDriveSpeed(m_currentState.speed);
+    SetDriveSpeed(m_activeState.speed);
 
     auto motor = m_turnMotor.get()->GetSpeedController();
     auto fx = dynamic_cast<WPI_TalonFX*>(motor.get());
@@ -329,9 +337,9 @@ void SwerveModule::RunCurrentState()
 /// @returns void
 void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
 {
-    m_currentState.speed = ( abs(speed.to<double>()/m_maxVelocity.to<double>()) < 0.05 ) ? 0_mps : speed;
+    m_activeState.speed = ( abs(speed.to<double>()/m_maxVelocity.to<double>()) < 0.05 ) ? 0_mps : speed;
 
-    Logger::GetLogger()->ToNtTable(m_nt, string("State Speed - mps"), m_currentState.speed.to<double>() );
+    Logger::GetLogger()->ToNtTable(m_nt, string("State Speed - mps"), m_activeState.speed.to<double>() );
     Logger::GetLogger()->ToNtTable(m_nt, string("Wheel Diameter - meters"), units::length::meter_t(m_wheelDiameter).to<double>() );
     Logger::GetLogger()->ToNtTable(m_nt, string("drive motor id"), m_driveMotor.get()->GetID() );
     Logger::GetLogger()->ToNtTable(m_nt, string("drive scale"), m_scale );
@@ -339,7 +347,7 @@ void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
     if (m_runClosedLoopDrive)
     {
         // convert mps to unitless rps by taking the speed and dividing by the circumference of the wheel
-        auto driveTarget = m_currentState.speed.to<double>() / (units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi);  
+        auto driveTarget = m_activeState.speed.to<double>() / (units::length::meter_t(m_wheelDiameter).to<double>() * wpi::math::pi);  
         driveTarget /= m_driveMotor.get()->GetGearRatio();
         driveTarget *= clamp((m_scale + m_boost), 0.25, 1.0);
         
@@ -350,7 +358,7 @@ void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
     }
     else
     {
-        auto percent = m_currentState.speed / m_maxVelocity;
+        auto percent = m_activeState.speed / m_maxVelocity;
         percent *= clamp((m_scale + m_boost), 0.25, 1.0);
 
         Logger::GetLogger()->ToNtTable(m_nt, string("drive target - percent"), percent );
@@ -365,7 +373,7 @@ void SwerveModule::SetDriveSpeed( units::velocity::meters_per_second_t speed )
 /// @returns void
 void SwerveModule::SetTurnAngle( units::angle::degree_t targetAngle )
 {
-    m_currentState.angle = targetAngle;
+    m_activeState.angle = targetAngle;
 
     Logger::GetLogger()->ToNtTable(m_nt, string("turn motor id"), m_turnMotor.get()->GetID() );
     Logger::GetLogger()->ToNtTable(m_nt, string("target angle"), targetAngle.to<double>() );
@@ -423,5 +431,105 @@ void SwerveModule::StopMotors()
     m_driveMotor.get()->GetSpeedController()->StopMotor();
 }
 
+frc::Pose2d SwerveModule::GetCurrentPose(PoseEstimationMethod opt)
+{
+    // get change in time
+    auto deltaT = m_timer.Get();
+    m_timer.Reset();
 
+    // get the information from the last pose
+    auto startX         = m_currentPose.X();
+    auto startY         = m_currentPose.Y();
+    auto startAngle     = m_currentPose.Rotation().Radians();
+    auto startSpeed     = m_currentSpeed;
+    //auto startEncoder   = m_currentEncoder;
 
+    // read sensor info (cancoder, encoders) for current speed and angle of the module
+    // calculate the average from the last 
+    auto currentAngle   = units::angle::radian_t(units::angle::degree_t(m_turnSensor.get()->GetPosition()));
+    auto avgAngle       = (currentAngle - startAngle) / 2.0;
+
+    auto currentSpeed   = units::angular_velocity::revolutions_per_minute_t(m_driveMotor.get()->GetRPS()*60.0);
+    auto avgSpeed       = (currentSpeed - startSpeed) / 2.0;
+
+    units::length::meter_t currentX {units::length::meter_t(0)};
+    units::length::meter_t currentY {units::length::meter_t(0)};
+
+    if (opt == PoseEstimationMethod::EULER_USING_MODULES)
+    {
+        // Euler Method
+        //
+        // xk+1 = xk + vk cos θk T
+        // yk+1 = yk + vk sin θk T
+        // Thetak+1 = Thetagyro,k+1
+        //
+        // Would it be more accurate to use either the start or end angle instead of the average of 
+        // the two?  
+        currentX = startX + units::length::inch_t(avgSpeed.to<double>() * 60.0 *    // average speed (rps)
+                                                  m_wheelDiameter * wpi::math::pi * // distance per revolution (inches)
+                                                  cos(avgAngle.to<double>()) *      // cosine of the average angle
+                                                  deltaT.to<double>());             // delta T (seconds)
+        currentY = startY + units::length::inch_t(avgSpeed.to<double>() * 60.0 *    // average speed (rps)
+                                                  m_wheelDiameter * wpi::math::pi * // distance per revolution (inches)
+                                                  sin(avgAngle.to<double>()) *      // sine of the average angle
+                                                  deltaT.to<double>());             // delta T (seconds)
+    }
+    else if (opt == PoseEstimationMethod::POSE_EST_USING_MODULES)
+    {
+        // Pose estimation method from Controls Engineering in FIRST Robotics Competition by 
+        // Tyler Veness
+        //   
+        // variables:
+        //   dX - delta X - Change in pose's X (forward/backward directions)
+        //   dY - delta Y - Change in pose's Y (strafe directions)
+        //   dT - delta theta - Change in pose's theta (rotation about its center of rotation)
+        //    T - theta - Starting Angle in global coordinate frame
+        //    t - time since last pose update
+        //    vx - velocity along X-axis
+        //    vy - velocity along Y-axis
+        //    w - omega - angular velocity
+        //
+        //   Matrices with a G are in global space and R are in Robot space
+        //
+        //  G -    -       -                     - R-                                  - R-    -
+        //    | dX |       | cos(T)  -sin(T)   0 |  | sin(wt) / w     cos(wt)-1 / w  0 |  | vx |
+        //    | dY |   =   | sin(T)   cos(T)   0 |  | 1-cos(wt) / w   sin(wt) / w    0 |  | vy |
+        //    | dt |       |   0       0       1 |  |      0               0         t |  | w  |
+        //    -    -       -                     -  -                                  -  -    -
+        //
+        // or
+        //
+        //  G -    -       -                     - R-                                    - R-    -
+        //    | dX |       | cos(T)  -sin(T)   0 |  | sin(dT) / dT     cos(dT)-1 / dT  0 |  | dX |
+        //    | dY |   =   | sin(T)   cos(T)   0 |  | 1-cos(dT) / dT   sin(dT) / dT    0 |  | dY |
+        //    | dt |       |   0       0       1 |  |      0               0           1 |  | dY |
+        //    -    -       -                     -  -                                    -  -    -
+        // TODO:  if Euler isn't accurate enough implement this
+        // If so, can we use the Euler matrix library to do this or do we need to manually do it ourselves?
+
+    }
+
+    // update the pose (do we need to look if our encoder distance matches and adjust here???)
+    auto newpose = Pose2d(currentX, currentY, Rotation2d(currentAngle));
+    auto trans   = newpose - m_currentPose;
+    m_currentPose += trans;
+    m_currentSpeed = currentSpeed;
+
+    // m_currentEncoder = m_driveMotor.get()->GetRotations();
+    // Do we need to do any alterations based on the actual distance driven since we're 
+    // approximating the path with an average vector instead of an arc
+    // auto deltaEncoder   = m_currentEncoder - startEncoder;
+    // auto distTravelled  = deltaEncoder * m_wheelDiameter*wpi::math::pi;
+
+    return m_currentPose;
+}
+
+void SwerveModule::UpdateCurrPose
+(
+    units::length::meter_t  x,
+    units::length::meter_t  y
+)
+{
+    m_currentPose += { Translation2d{x,y}, 
+                        Rotation2d{units::angle::degree_t(m_turnSensor.get()->GetPosition())}};
+}
