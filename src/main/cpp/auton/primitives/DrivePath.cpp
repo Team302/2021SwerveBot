@@ -54,11 +54,14 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
     Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "False");
     Logger::GetLogger()->ToNtTable("DrivePath", "Running", "False");
     Logger::GetLogger()->ToNtTable("DrivePath", "Done", "False");
+    Logger::GetLogger()->ToNtTable("DrivePath", "WhyDone", "Not done");
     Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", 0);
 }
 void DrivePath::Init(PrimitiveParams *params)
 {
     m_trajectoryStates.clear();
+
+    m_wasMoving = false;
 
     Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
 
@@ -142,6 +145,7 @@ bool DrivePath::IsDone()
         {
             whyDone = "Current Pose = Trajectory final pose";
         }
+        
 
         
         if ( !isDone )
@@ -169,24 +173,15 @@ bool DrivePath::IsDone()
         }       
         
 
-        /*
-        // Motion Detection //
-        if (!isDone) 
+        auto moving = IsSamePose(curPos, m_PrevPos);
+
+        if (!moving && m_wasMoving)
         {
-            // Next if we are not done, due to position, 
-            // if we haven't moved for three quarters of a second; we're done
-            if (m_PosChgTimer.get()->Get() >= .75) // Scan time for comparing current pose with previous pose
-            {
-                isDone = IsSamePose(curPos, m_PrevPos);
-                m_PrevPos = curPos;
-                m_PosChgTimer.get()->Reset(); //reset scan for change timer
-                if (IsSamePose(curPos, m_PrevPos))
-                {
-                    whyDone = "Have not moved for three quarters of a second";
-                }
-            }
+            isDone = true;
+            whyDone = "Stopped moving";
         }
-        */
+        m_PrevPos = curPos;
+        m_wasMoving = moving;
 
         // finally, do it based on time (we have no more states);  if we want to keep 
         // going, we need to understand where in the trajectory we are, so we can generate
@@ -204,6 +199,7 @@ bool DrivePath::IsDone()
     if (isDone)
     {
         Logger::GetLogger()->ToNtTable("DrivePath", "Done", "True");
+        Logger::GetLogger()->ToNtTable("DrivePath", "WhyDone", whyDone);
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "DrivePath", "Is done because: " + whyDone);
     }
     return isDone;
