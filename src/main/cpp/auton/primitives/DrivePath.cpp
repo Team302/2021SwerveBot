@@ -131,12 +131,17 @@ void DrivePath::Run()
 
 bool DrivePath::IsDone()
 {   
+    string whyDone = "";
     bool isDone = false;
     if (!m_trajectoryStates.empty()) 
     {
         // Check if the current pose and the trajectory's final pose are the same
         auto curPos = m_chassis.get()->GetPose();
         isDone = IsSamePose(curPos, m_targetPose);
+        if (IsSamePose(curPos, m_targetPose))
+        {
+            whyDone = "Current Pose = Trajectory final pose";
+        }
 
         
         if ( !isDone )
@@ -156,10 +161,15 @@ bool DrivePath::IsDone()
                 // Assume that once we get within a tenth of a meter (just under 4 inches), if we get
                 // farther away we are passing the target, so we should stop.  Otherwise, keep trying.
                 isDone = ((abs(m_deltaX) < 0.1 && abs(m_deltaY) < 0.1));
+                if ((abs(m_deltaX) < 0.1 && abs(m_deltaY) < 0.1))
+                {
+                    whyDone = "Within 4 inches of target or getting farther away from target";
+                }
             }
         }       
         
 
+        /*
         // Motion Detection //
         if (!isDone) 
         {
@@ -170,8 +180,13 @@ bool DrivePath::IsDone()
                 isDone = IsSamePose(curPos, m_PrevPos);
                 m_PrevPos = curPos;
                 m_PosChgTimer.get()->Reset(); //reset scan for change timer
+                if (IsSamePose(curPos, m_PrevPos))
+                {
+                    whyDone = "Have not moved for three quarters of a second";
+                }
             }
         }
+        */
 
         // finally, do it based on time (we have no more states);  if we want to keep 
         // going, we need to understand where in the trajectory we are, so we can generate
@@ -189,6 +204,7 @@ bool DrivePath::IsDone()
     if (isDone)
     {
         Logger::GetLogger()->ToNtTable("DrivePath", "Done", "True");
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "DrivePath", "Is done because: " + whyDone);
     }
     return isDone;
     

@@ -49,6 +49,12 @@ void ResetPosition::Init(PrimitiveParams* params)
         m_chassis->SetEncodersToZero();
 
         m_chassis->ResetPosition(m_trajectory.InitialPose(), StartAngle);
+
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "ResetPosX", to_string(m_chassis.get()->GetPose().X().to<double>()));
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "ResetPosY", to_string(m_chassis.get()->GetPose().Y().to<double>()));
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "InitialPoseX", to_string(m_trajectory.InitialPose().X().to<double>()));
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "InitialPoseY", to_string(m_trajectory.InitialPose().Y().to<double>()));
+        
     }
 }
 

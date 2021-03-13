@@ -75,7 +75,7 @@ SwerveChassis::SwerveChassis
     m_scale(1.0),
     m_boost(0.0),
     m_runWPI(false),
-    m_poseOpt(PoseEstimationMethod::WPI),
+    m_poseOpt(PoseEstimationMethod::EULER_AT_CHASSIS),
     m_pose(),
     m_offsetPoseAngle(0_deg),
     m_timer(),
@@ -88,6 +88,7 @@ SwerveChassis::SwerveChassis
     m_backRightLocation(-1.0*wheelBase/2.0, -1.0*track/2.0)
 {
     m_timer.Reset();
+    m_timer.Start();
 
     frontLeft.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration, m_frontLeftLocation );
     frontRight.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration, m_frontRightLocation );
@@ -289,6 +290,11 @@ void SwerveChassis::UpdateOdometry()
         units::length::meter_t currentY = startY +                        // starting X (meters)
                                           m_steer * deltaT;               // mps * seconds
 
+        Logger::GetLogger()->ToNtTable("AWheelCalc", "startX", startX.to<double>());
+        Logger::GetLogger()->ToNtTable("AWheelCalc", "currentX", currentX.to<double>());
+        Logger::GetLogger()->ToNtTable("AWheelCalc", "startY", startY.to<double>());
+        Logger::GetLogger()->ToNtTable("AWheelCalc", "currentY", currentY.to<double>());
+
         Pose2d currPose{currentX, currentY, rot2d};
         auto trans = currPose - m_pose;
         m_pose += trans;
@@ -361,7 +367,9 @@ void SwerveChassis::ResetPosition
 )
 {
     m_poseEstimator.ResetPosition(pose, angle);
-    m_pose = pose;
+    auto trans = pose - m_pose;
+    m_pose += trans;
+
     m_offsetPoseAngle = units::angle::degree_t(m_pigeon->GetYaw()) - angle.Degrees();
 
     Transform2d t_fl {m_frontLeftLocation,angle};

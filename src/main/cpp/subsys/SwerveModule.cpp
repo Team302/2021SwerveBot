@@ -93,6 +93,9 @@ SwerveModule::SwerveModule
     Rotation2d ang { units::angle::degree_t(0.0)};
     m_activeState.angle = ang;
     m_activeState.speed = 0_mps;
+
+    Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "CurrentPoseX", to_string(m_currentPose.X().to<double>()));
+    Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "CurrentPoseY", to_string(m_currentPose.Y().to<double>()));
     
     // Set up the Drive Motor
     auto motor = m_driveMotor.get()->GetSpeedController();
@@ -190,8 +193,8 @@ void SwerveModule::Init
                                                 0.0 );
     m_driveMotor.get()->SetControlConstants( 0, driveCData.get() );
 
-    auto trans = Transform2d(offsetFromCenterOfRobot, Rotation2d() );
-    m_currentPose = m_currentPose + trans;
+    //auto trans = Transform2d(offsetFromCenterOfRobot, Rotation2d() );
+    //m_currentPose = m_currentPose + trans;
 }
 
 /// @brief Set all motor encoders to zero
@@ -465,14 +468,22 @@ frc::Pose2d SwerveModule::GetCurrentPose(PoseEstimationMethod opt)
         //
         // Would it be more accurate to use either the start or end angle instead of the average of 
         // the two?  
-        currentX = startX + units::length::inch_t(avgSpeed.to<double>() * 60.0 *    // average speed (rps)
+        currentX = startX + units::length::meter_t(units::length::inch_t(startSpeed.to<double>() * 60.0 *    // average speed (rps)
                                                   m_wheelDiameter * wpi::math::pi * // distance per revolution (inches)
-                                                  cos(avgAngle.to<double>()) *      // cosine of the average angle
-                                                  deltaT.to<double>());             // delta T (seconds)
-        currentY = startY + units::length::inch_t(avgSpeed.to<double>() * 60.0 *    // average speed (rps)
+                                                  cos(startAngle.to<double>()) *      // cosine of the average angle
+                                                  deltaT.to<double>()));             // delta T (seconds)
+        Logger::GetLogger()->ToNtTable("AWheelCalc", "AvgSpeed", avgSpeed.to<double>());
+        Logger::GetLogger()->ToNtTable("AWheelCalc", "WheelDiameter", m_wheelDiameter.to<double>());
+        Logger::GetLogger()->ToNtTable("AWheelCalc", "CosAvgAngle", cos(avgAngle.to<double>()));
+        Logger::GetLogger()->ToNtTable("AWheelCalc", "DeltaT", deltaT.to<double>());
+        Logger::GetLogger()->ToNtTable("AWheelCalc", "CurrentX", currentX.to<double>());
+        Logger::GetLogger()->ToNtTable("AWheelCalc", "startX", startX.to<double>());
+
+
+        currentY = startY + units::length::meter_t(units::length::inch_t(startSpeed.to<double>() * 60.0 *    // average speed (rps)
                                                   m_wheelDiameter * wpi::math::pi * // distance per revolution (inches)
-                                                  sin(avgAngle.to<double>()) *      // sine of the average angle
-                                                  deltaT.to<double>());             // delta T (seconds)
+                                                  sin(startAngle.to<double>()) *      // sine of the average angle
+                                                  deltaT.to<double>()));             // delta T (seconds)
     }
     else if (opt == PoseEstimationMethod::POSE_EST_USING_MODULES)
     {
@@ -514,6 +525,11 @@ frc::Pose2d SwerveModule::GetCurrentPose(PoseEstimationMethod opt)
     auto trans   = newpose - m_currentPose;
     m_currentPose += trans;
     m_currentSpeed = currentSpeed;
+
+    Logger::GetLogger()->ToNtTable("ANewPose", "NewPoseX", newpose.X().to<double>());
+    Logger::GetLogger()->ToNtTable("ANewPose", "NewPoseY", newpose.Y().to<double>());
+    Logger::GetLogger()->ToNtTable("ATrans", "TransX", trans.X().to<double>());
+    Logger::GetLogger()->ToNtTable("ATrans", "TransY", trans.Y().to<double>());
 
     // m_currentEncoder = m_driveMotor.get()->GetRotations();
     // Do we need to do any alterations based on the actual distance driven since we're 
