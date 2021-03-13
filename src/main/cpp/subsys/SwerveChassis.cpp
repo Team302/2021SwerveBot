@@ -74,6 +74,7 @@ SwerveChassis::SwerveChassis
     m_pigeon(PigeonFactory::GetFactory()->GetPigeon()),
     m_scale(1.0),
     m_boost(0.0),
+    m_nitro(0.0),
     m_runWPI(false),
     m_poseOpt(PoseEstimationMethod::EULER_AT_CHASSIS),
     m_pose(),
@@ -122,9 +123,16 @@ void SwerveChassis::SetBoost( double boost )
     m_frontRight.get()->SetBoost(m_boost);
     m_backLeft.get()->SetBoost(m_boost);
     m_backRight.get()->SetBoost(m_boost);
-
 }
 
+void SwerveChassis::SetNitro( double nitro )
+{
+    m_nitro = nitro;
+    m_frontLeft.get()->SetNitro(m_nitro);
+    m_frontRight.get()->SetNitro(m_nitro);
+    m_backLeft.get()->SetNitro(m_nitro);
+    m_backRight.get()->SetNitro(m_nitro);
+}
 
 /// @brief Drive the chassis
 /// @param [in] units::velocity::meters_per_second_t            xSpeed:         forward/reverse speed (positive is forward)
@@ -285,10 +293,14 @@ void SwerveChassis::UpdateOdometry()
         // xk+1 = xk + vk cos θk T
         // yk+1 = yk + vk sin θk T
         // Thetak+1 = Thetagyro,k+1
-        units::length::meter_t currentX = startX +                        // starting X (meters)
-                                          m_drive * deltaT;               // mps * seconds
-        units::length::meter_t currentY = startY +                        // starting X (meters)
-                                          m_steer * deltaT;               // mps * seconds
+        units::angle::radian_t rads = yaw;          // convert angle to radians
+        double cosAng = cos(rads.to<double>());
+        double sinAng = sin(rads.to<double>());
+        auto vx = m_drive * cosAng + m_steer * sinAng;
+        auto vy = m_drive * sinAng + m_steer * cosAng;
+
+        units::length::meter_t currentX = startX + vx * deltaT;
+        units::length::meter_t currentY = startY + vy * deltaT;
 
         Logger::GetLogger()->ToNtTable("AWheelCalc", "startX", startX.to<double>());
         Logger::GetLogger()->ToNtTable("AWheelCalc", "currentX", currentX.to<double>());
