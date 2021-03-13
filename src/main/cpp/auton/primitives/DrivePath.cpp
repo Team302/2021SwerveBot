@@ -51,22 +51,25 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
 
 {
     m_trajectoryStates.clear();
-    Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "False");
-    Logger::GetLogger()->ToNtTable("DrivePath", "Running", "False");
-    Logger::GetLogger()->ToNtTable("DrivePath", "Done", "False");
-    Logger::GetLogger()->ToNtTable("DrivePath", "WhyDone", "Not done");
-    Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", 0);
 }
 void DrivePath::Init(PrimitiveParams *params)
 {
+    auto m_pathname = params->GetPathName();
+
+    Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Initialized", "False");
+    Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Running", "False");
+    Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Done", "False");
+    Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "WhyDone", "Not done");
+    Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Times Ran", 0);
+
     m_trajectoryStates.clear();
 
     m_wasMoving = false;
 
-    Logger::GetLogger()->ToNtTable("DrivePath", "Initialized", "True");
+    Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Initialized", "True");
 
     GetTrajectory(params->GetPathName());
-    Logger::GetLogger()->ToNtTable("Trajectory", "Time", m_trajectory.TotalTime().to<double>());
+    Logger::GetLogger()->ToNtTable(m_pathname + "Trajectory", "Time", m_trajectory.TotalTime().to<double>());
     if (!m_trajectoryStates.empty()) // only go if path name found
     {
         m_desiredState = m_trajectoryStates.front();
@@ -80,6 +83,7 @@ void DrivePath::Init(PrimitiveParams *params)
         Logger::GetLogger()->ToNtTable("Deltas", "iDeltaX", "0");
         Logger::GetLogger()->ToNtTable("Deltas", "iDeltaX", "0");
 
+        m_PosChgTimer.get()->Reset();
         m_PosChgTimer.get()->Start(); // start scan timer to detect motion
 
         if (m_runHoloController)
@@ -102,13 +106,13 @@ void DrivePath::Init(PrimitiveParams *params)
 }
 void DrivePath::Run()
 {
-    Logger::GetLogger()->ToNtTable("DrivePath", "Running", "True");
+    Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Running", "True");
 
     if (!m_trajectoryStates.empty()) 
     {
         // debugging
         m_timesRun++;
-        Logger::GetLogger()->ToNtTable("DrivePath", "Times Ran", m_timesRun);
+        Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Times Ran", m_timesRun);
 
         // calculate where we are and where we want to be
         CalcCurrentAndDesiredStates();
@@ -129,19 +133,21 @@ void DrivePath::Run()
     {
         m_chassis->Drive(0, 0, 0, false);
     }
+
 }
 
-
 bool DrivePath::IsDone()
-{   
-    string whyDone = "";
+{
+
     bool isDone = false;
+    string whyDone = "";
+    
     if (!m_trajectoryStates.empty()) 
     {
         // Check if the current pose and the trajectory's final pose are the same
         auto curPos = m_chassis.get()->GetPose();
-        isDone = IsSamePose(curPos, m_targetPose);
-        if (IsSamePose(curPos, m_targetPose))
+        isDone = IsSamePose(curPos, m_targetPose, 100.0);
+        if (IsSamePose(curPos, m_targetPose, 100.0))
         {
             whyDone = "Current Pose = Trajectory final pose";
         }
@@ -173,15 +179,19 @@ bool DrivePath::IsDone()
         }       
         
 
-        auto moving = IsSamePose(curPos, m_PrevPos);
 
-        if (!moving && m_wasMoving)
+        if (m_PosChgTimer.get()->Get() > 1.0)
         {
-            isDone = true;
-            whyDone = "Stopped moving";
+            auto moving = !IsSamePose(curPos, m_PrevPos, 7.5);
+
+            if (!moving && m_wasMoving)
+            {
+                isDone = true;
+                whyDone = "Stopped moving";
+            }
+            m_PrevPos = curPos;
+            m_wasMoving = moving;
         }
-        m_PrevPos = curPos;
-        m_wasMoving = moving;
 
         // finally, do it based on time (we have no more states);  if we want to keep 
         // going, we need to understand where in the trajectory we are, so we can generate
@@ -193,42 +203,35 @@ bool DrivePath::IsDone()
     }
     else
     {
-        Logger::GetLogger()->ToNtTable("DrivePath", "Done", "True");
+        Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Done", "True");
         return true;
     }
     if (isDone)
     {
-        Logger::GetLogger()->ToNtTable("DrivePath", "Done", "True");
-        Logger::GetLogger()->ToNtTable("DrivePath", "WhyDone", whyDone);
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "DrivePath", "Is done because: " + whyDone);
+        Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Done", "True");
+        Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "WhyDone", whyDone);
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "DrivePath" + m_pathname, "Is done because: " + whyDone);
     }
     return isDone;
     
 }
-bool DrivePath::IsSamePose(frc::Pose2d lCurPos, frc::Pose2d lPrevPos)
+
+bool DrivePath::IsSamePose(frc::Pose2d lCurPos, frc::Pose2d lPrevPos, double tolerance)
 {
     // Detect if the two poses are the same within a tolerance
-    double dCurPosX = lCurPos.X().to<double>() * 100; //cm
-    double dCurPosY = lCurPos.Y().to<double>() * 100;
-    double dPrevPosX = lPrevPos.X().to<double>() * 100;
-    double dPrevPosY = lPrevPos.Y().to<double>() * 100;
+    double dCurPosX = lCurPos.X().to<double>() * 1000; //cm
+    double dCurPosY = lCurPos.Y().to<double>() * 1000;
+    double dPrevPosX = lPrevPos.X().to<double>() * 1000;
+    double dPrevPosY = lPrevPos.Y().to<double>() * 1000;
 
-    int iCurPosX = dCurPosX;
-    int iCurPosY = dCurPosY;
+    double dDeltaX = abs(dPrevPosX - dCurPosX);
+    double dDeltaY = abs(dPrevPosY - dCurPosY);
 
-    int iPrevPosX = dPrevPosX; //remove decimals
-    int iPrevPosY = dPrevPosY;
-
-    int iDeltaX = abs(iPrevPosX - iCurPosX);
-    int iDeltaY = abs(iPrevPosY - iCurPosY);
-
-    int iMovThresHold = 1; // cm used for detecting no motion adust this for encoder noise if needed.
-
-    Logger::GetLogger()->ToNtTable("Deltas", "iDeltaX", to_string(iDeltaX));
-    Logger::GetLogger()->ToNtTable("Deltas", "iDeltaY", to_string(iDeltaY));
+    Logger::GetLogger()->ToNtTable("Deltas", "iDeltaX", to_string(dDeltaX));
+    Logger::GetLogger()->ToNtTable("Deltas", "iDeltaY", to_string(dDeltaY));
 
     //  If Position of X or Y has moved since last scan..  Using Delta X/Y
-    return (iDeltaX <= iMovThresHold && iDeltaY <= iMovThresHold);
+    return (dDeltaX <= tolerance && dDeltaY <= tolerance);
 }
 
 void DrivePath::GetTrajectory
@@ -238,7 +241,7 @@ void DrivePath::GetTrajectory
 {
     if (!path.empty()) // only go if path name found
     {
-        Logger::GetLogger()->LogError(string("DrivePath"), string("Finding Deploy Directory"));
+        Logger::GetLogger()->LogError(string("DrivePath" + m_pathname), string("Finding Deploy Directory"));
 
         // Read path into trajectory for deploy directory.  JSON File ex. Bounce1.wpilid.json
         wpi::SmallString<64> deployDir;
