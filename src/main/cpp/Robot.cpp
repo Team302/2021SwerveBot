@@ -82,7 +82,6 @@ void Robot::UpdateOdometry()
     if ( swerveChassis.get() != nullptr )
     {
         swerveChassis.get()->UpdateOdometry();
-        auto pose = swerveChassis.get()->GetPose().GetEstimatedPosition();
     }
 }
 

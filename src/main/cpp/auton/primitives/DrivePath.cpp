@@ -31,7 +31,7 @@ using namespace wpi::math;
 
 DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis()),
                          m_timer(make_unique<Timer>()),
-                         m_currentChassisPosition(m_chassis.get()->GetPose().GetEstimatedPosition()),
+                         m_currentChassisPosition(m_chassis.get()->GetPose()),
                          m_trajectory(),
                          m_runHoloController(false),
                          m_ramseteController(),
@@ -40,7 +40,7 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
                                           frc::ProfiledPIDController<units::radian>{1, 0, 0,
                                                                                     frc::TrapezoidProfile<units::radian>::Constraints{6.28_rad_per_s, 3.14_rad_per_s / 1_s}}),
                          //max velocity of 1 rotation per second and a max acceleration of 180 degrees per second squared.
-                         m_PrevPos(m_chassis.get()->GetPose().GetEstimatedPosition()),
+                         m_PrevPos(m_chassis.get()->GetPose()),
                          m_PosChgTimer(make_unique<Timer>()),
                          m_timesRun(0),
                          m_targetPose(),
@@ -89,7 +89,7 @@ void DrivePath::Init(PrimitiveParams *params)
         }
         auto targetState = m_trajectory.Sample(m_trajectory.TotalTime());
         m_targetPose = targetState.pose;
-        auto currPose = m_chassis.get()->GetPose().GetEstimatedPosition();
+        auto currPose = m_chassis.get()->GetPose();
         auto trans = m_targetPose - currPose;
         m_deltaX = trans.X().to<double>();
         m_deltaY = trans.Y().to<double>();
@@ -135,7 +135,7 @@ bool DrivePath::IsDone()
     if (!m_trajectoryStates.empty()) 
     {
         // Check if the current pose and the trajectory's final pose are the same
-        auto curPos = m_chassis.get()->GetPose().GetEstimatedPosition();
+        auto curPos = m_chassis.get()->GetPose();
         isDone = IsSamePose(curPos, m_targetPose);
 
         
@@ -244,7 +244,7 @@ void DrivePath::GetTrajectory
 
 void DrivePath::CalcCurrentAndDesiredStates()
 {
-    m_currentChassisPosition = m_chassis.get()->GetPose().GetEstimatedPosition();
+    m_currentChassisPosition = m_chassis.get()->GetPose();
     auto sampleTime = units::time::second_t(m_timer.get()->Get()); //+ 0.02
 
     m_desiredState = m_trajectory.Sample(sampleTime);
