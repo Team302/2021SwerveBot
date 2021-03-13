@@ -71,6 +71,7 @@ private:
     frc::Pose2d                             m_currentChassisPosition;
     frc::Trajectory                         m_trajectory;
     bool                                    m_runHoloController;
+    bool                                    m_wasMoving;
     frc::RamseteController                  m_ramseteController;
     frc::HolonomicDriveController           m_holoController;
     frc::Pose2d                             m_PrevPos;          // previous position of robot for compare to current position.
