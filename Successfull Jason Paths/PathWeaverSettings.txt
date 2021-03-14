@@ -1,0 +1,3 @@
+Slolom MA=1.0   MV=1.7
+Barrel MA=1.0	MV=2.5
+Bounce MA=1.0	MV=2.5
