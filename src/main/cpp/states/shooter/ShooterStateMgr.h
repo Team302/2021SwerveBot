@@ -33,11 +33,11 @@ class ShooterStateMgr
         enum SHOOTER_STATE
         {
             OFF,
-            GET_READY,
-            SHOOTGREEN,
-            SHOOTYELLOW,
-            SHOOTBLUE,
-            SHOOTRED,
+            GET_READY_SHOOTGREEN,
+            GET_READY_SHOOTYELLOW,
+            GET_READY_SHOOTBLUE,
+            GET_READY_SHOOTRED,
+            SHOOT,
             MAX_SHOOTER_STATES
         };
 
@@ -70,6 +70,7 @@ class ShooterStateMgr
         std::array<IState*,MAX_SHOOTER_STATES> m_states;
         IState* m_currentState;
         SHOOTER_STATE m_currentStateEnum;
+        SHOOTER_STATE m_prevStateEnum;
 
 		static ShooterStateMgr*	m_instance;
 
