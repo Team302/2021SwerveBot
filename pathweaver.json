@@ -4,6 +4,6 @@
   "maxVelocity": 2.5,
   "maxAcceleration": 1.0,
   "wheelBase": 0.3356,
-  "gameName": "Bounce Path",
-  "outputDir": ""
+  "gameName": "Slalom Path",
+  "outputDir": "../../test1out"
 }
