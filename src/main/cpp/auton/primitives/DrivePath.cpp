@@ -149,6 +149,7 @@ bool DrivePath::IsDone()
         isDone = IsSamePose(curPos, m_targetPose, 100.0);
         if (IsSamePose(curPos, m_targetPose, 100.0))
         {
+            isDone = true;
             whyDone = "Current Pose = Trajectory final pose";
         }
         
