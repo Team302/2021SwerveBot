@@ -146,7 +146,7 @@ bool DrivePath::IsDone()
     {
         // Check if the current pose and the trajectory's final pose are the same
         auto curPos = m_chassis.get()->GetPose();
-        isDone = IsSamePose(curPos, m_targetPose, 100.0);
+        //isDone = IsSamePose(curPos, m_targetPose, 100.0);
         if (IsSamePose(curPos, m_targetPose, 100.0))
         {
             isDone = true;

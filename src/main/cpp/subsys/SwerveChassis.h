@@ -18,6 +18,7 @@
 #include <memory>
 
 #include <frc/AnalogGyro.h>
+#include <frc/BuiltInAccelerometer.h>
 #include <frc/estimator/SwerveDrivePoseEstimator.h>
 #include <frc/geometry/Pose2d.h>
 #include <frc/geometry/Translation2d.h>
@@ -180,6 +181,7 @@ class SwerveChassis
         units::angular_acceleration::radians_per_second_squared_t   m_maxAngularAcceleration;
 
         DragonPigeon*                                               m_pigeon;
+        frc::BuiltInAccelerometer                                   m_accel;
         bool                                                        m_isMoving;
         double                                                      m_scale;
         double                                                      m_boost;
