@@ -32,10 +32,23 @@ using namespace std;
 /// @param [in] IDragonMotorController* the motor controller that will run the ball transfer
 Turret::Turret
 (
-    shared_ptr<IDragonMotorController>   motorController
+    shared_ptr<IDragonMotorController>      motorController,
+    shared_ptr<DragonDigitalInput>          minTurnSensor,
+    shared_ptr<DragonDigitalInput>          maxTurnSensor
 ) : Mech1IndMotor( MechanismTypes::MECHANISM_TYPE::TURRET, 
                     string("turret.xml"), 
                     string("turretNT"), 
                     motorController )
 {
+}
+
+void Turret::Update()
+{
+    auto target = GetTarget();
+    if ( (m_min.get()->Get() && target > 0.0) || 
+         (m_max.get()->Get() && target < 0.0) || 
+         (!m_min.get()->Get() && !m_max.get()) )
+    {
+        Mech1IndMotor::Update();
+    }
 }

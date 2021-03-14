@@ -97,6 +97,8 @@ class Mech1IndMotor : public IMech1IndMotor
             ControlData*                                pid                 
         ) override;
 
+    protected:
+        double GetTarget() const { return m_target; }
 
     private:
         MechanismTypes::MECHANISM_TYPE              m_type;
