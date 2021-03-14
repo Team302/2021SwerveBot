@@ -179,15 +179,17 @@ bool DrivePath::IsDone()
         }       
         
 
+        
+
 
         if (m_PosChgTimer.get()->Get() > 1.0)
         {
-            auto moving = !IsSamePose(curPos, m_PrevPos, 7.5);
+            bool moving = !IsSamePose(curPos, m_PrevPos, 1);
 
             if (!moving && m_wasMoving)
             {
-                isDone = true;
-                whyDone = "Stopped moving";
+                    isDone = true;
+                    whyDone = "Stopped moving";                    
             }
             m_PrevPos = curPos;
             m_wasMoving = moving;
