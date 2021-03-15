@@ -146,9 +146,10 @@ bool DrivePath::IsDone()
     {
         // Check if the current pose and the trajectory's final pose are the same
         auto curPos = m_chassis.get()->GetPose();
-        isDone = IsSamePose(curPos, m_targetPose, 100.0);
+        //isDone = IsSamePose(curPos, m_targetPose, 100.0);
         if (IsSamePose(curPos, m_targetPose, 100.0))
         {
+            isDone = true;
             whyDone = "Current Pose = Trajectory final pose";
         }
         
@@ -182,8 +183,8 @@ bool DrivePath::IsDone()
 
         if (m_PosChgTimer.get()->Get() > 1.0)
         {
-            auto moving = !IsSamePose(curPos, m_PrevPos, 7.5);
-
+           //auto moving = !IsSamePose(curPos, m_PrevPos, 7.5);
+            auto moving = m_chassis.get()->IsMoving();
             if (!moving && m_wasMoving)
             {
                 isDone = true;

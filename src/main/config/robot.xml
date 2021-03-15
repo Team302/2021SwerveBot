@@ -370,44 +370,26 @@
                      type="TALONSRX"
                      inverted="false"
                      sensorInverted="false"
-                     feedbackDevice="INTERNAL"
-                     countsPerRev="2048"
-                     gearRatio="8.4"
+                     feedbackDevice="QUADENCODER"
+                     countsPerRev="518.4127"
+                     gearRatio="1.0"
                      brakeMode="true"
                      follow="-1"
-                     peakCurrentDuration="15.0"
-                     continuousCurrentLimit="40.0"
-                     peakCurrentLimit="50.0"
-                     currentLimiting="true" 
-                     forwardlimitswitch="true"
-                     forwardlimitswitchopen="true"
-                     reverselimitswitch="true"
-                     reverselimitswitchopen="true"/>        
-
-	</mechanism>
-    
-	<!-- mechanism type="INTAKE">
-		<motor usage="INTAKE"
-                     canId="7"
-                     pdpID="7"
-                     type="FALCON"
-                     inverted="false"
-                     sensorInverted="false"
-                     feedbackDevice="INTERNAL"
-                     countsPerRev="2048"
-                     gearRatio="1.0"
-                     brakeMode="false"
-                     follow="-1"
-                     peakCurrentDuration="15.0"
-                     continuousCurrentLimit="40.0"
-                     peakCurrentLimit="50.0"
+                     peakCurrentDuration="50.0"
+                     continuousCurrentLimit="30.0"
+                     peakCurrentLimit="40.0"
                      currentLimiting="true" 
                      forwardlimitswitch="false"
-                     forwardlimitswitchopen="true"
+                     forwardlimitswitchopen="false"
                      reverselimitswitch="false"
-                     reverselimitswitchopen="true"/>        
-	</mechanism -->
-
+                     reverselimitswitchopen="false"/>        
+              <digitalInput usage="TURRET_ANGLE_MIN"
+                            digitalId="0"
+                            reversed="false"/>
+              <digitalInput usage="TURRET_ANGLE_MAX"
+                            digitalId="1"
+                            reversed="false"/>
+	</mechanism>
     
 	<mechanism type="BALL_HOPPER">
 		<motor usage="BALL_HOPPER"

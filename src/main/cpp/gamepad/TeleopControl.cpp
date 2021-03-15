@@ -128,23 +128,20 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		m_controllerIndex[ OFF ] = ctrlNo;
 		m_buttonIDs[ OFF ] = IDragonGamePad::START_BUTTON;
 
-		m_controllerIndex[ SHOOTER_MANUAL_SHOOT_GREEN ] = ctrlNo;
-		m_buttonIDs[ SHOOTER_MANUAL_SHOOT_GREEN ] = IDragonGamePad::A_BUTTON;
+		m_controllerIndex[ SHOOTER_PREPARE_TO_SHOOT_GREEN ] = ctrlNo;
+		m_buttonIDs[ SHOOTER_PREPARE_TO_SHOOT_GREEN ] = IDragonGamePad::A_BUTTON;
 
-		m_controllerIndex[ SHOOTER_MANUAL_SHOOT_RED] = ctrlNo;
-		m_buttonIDs[ SHOOTER_MANUAL_SHOOT_RED ] = IDragonGamePad::B_BUTTON;
+		m_controllerIndex[ SHOOTER_PREPARE_TO_SHOOT_RED] = ctrlNo;
+		m_buttonIDs[ SHOOTER_PREPARE_TO_SHOOT_RED ] = IDragonGamePad::B_BUTTON;
 
-		m_controllerIndex[ SHOOTER_MANUAL_SHOOT_BLUE ] = ctrlNo;
-		m_buttonIDs[ SHOOTER_MANUAL_SHOOT_BLUE ] = IDragonGamePad::X_BUTTON;
+		m_controllerIndex[ SHOOTER_PREPARE_TO_SHOOT_BLUE ] = ctrlNo;
+		m_buttonIDs[ SHOOTER_PREPARE_TO_SHOOT_BLUE ] = IDragonGamePad::X_BUTTON;
 		
-		m_controllerIndex[ SHOOTER_MANUAL_SHOOT_YELLOW] = ctrlNo;
-		m_buttonIDs[ SHOOTER_MANUAL_SHOOT_YELLOW ] = IDragonGamePad::Y_BUTTON;
+		m_controllerIndex[ SHOOTER_PREPARE_TO_SHOOT_YELLOW] = ctrlNo;
+		m_buttonIDs[ SHOOTER_PREPARE_TO_SHOOT_YELLOW ] = IDragonGamePad::Y_BUTTON;
 	
-		m_controllerIndex[SHOOTER_PREPARE_TO_SHOOT] = ctrlNo;
-		m_buttonIDs[SHOOTER_PREPARE_TO_SHOOT] = IDragonGamePad::RIGHT_BUMPER;	
-	
-		m_controllerIndex[SHOOTER_PREPARE_TO_SHOOT] = ctrlNo;
-		m_buttonIDs[SHOOTER_PREPARE_TO_SHOOT] = IDragonGamePad::POV_0;	
+		m_controllerIndex[SHOOTER_SHOOT] = ctrlNo;
+		m_buttonIDs[SHOOTER_SHOOT] = IDragonGamePad::RIGHT_BUMPER;	
 	
 		m_controllerIndex[TURRET_LIMELIGHT_AIM] = ctrlNo;
 		m_buttonIDs[TURRET_LIMELIGHT_AIM] = IDragonGamePad::LEFT_BUMPER;

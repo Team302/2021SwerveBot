@@ -18,6 +18,7 @@
 #include <memory>
 
 #include <frc/AnalogGyro.h>
+#include <frc/BuiltInAccelerometer.h>
 #include <frc/estimator/SwerveDrivePoseEstimator.h>
 #include <frc/geometry/Pose2d.h>
 #include <frc/geometry/Translation2d.h>
@@ -147,6 +148,7 @@ class SwerveChassis
         void RunWPIAlgorithm(bool runWPI ) { m_runWPI = runWPI; }
         void SetPoseEstOption(PoseEstimationMethod opt ) { m_poseOpt = opt; }
         double GetScaleFactor() const {return m_scale;}
+        bool IsMoving() const { return m_isMoving;}
 
     private:
         frc::ChassisSpeeds GetFieldRelativeSpeeds
@@ -179,6 +181,8 @@ class SwerveChassis
         units::angular_acceleration::radians_per_second_squared_t   m_maxAngularAcceleration;
 
         DragonPigeon*                                               m_pigeon;
+        frc::BuiltInAccelerometer                                   m_accel;
+        bool                                                        m_isMoving;
         double                                                      m_scale;
         double                                                      m_boost;
         double                                                      m_nitro;

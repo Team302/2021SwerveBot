@@ -72,6 +72,8 @@ SwerveChassis::SwerveChassis
     m_maxAcceleration(maxAcceleration),
     m_maxAngularAcceleration(maxAngularAcceleration),
     m_pigeon(PigeonFactory::GetFactory()->GetPigeon()),
+    m_accel(BuiltInAccelerometer()),
+    m_isMoving(false),
     m_scale(1.0),
     m_boost(0.0),
     m_nitro(0.0),
@@ -162,6 +164,7 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
         m_drive = units::velocity::meters_per_second_t(0.0);
         m_steer = units::velocity::meters_per_second_t(0.0);
         m_rotate = units::angular_velocity::radians_per_second_t(0.0);
+        m_isMoving = false;
     }
     else
     {   
@@ -184,7 +187,12 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
             m_frontLeft.get()->SetDesiredState(fl);
             m_frontRight.get()->SetDesiredState(fr);
             m_backLeft.get()->SetDesiredState(bl);
-            m_backRight.get()->SetDesiredState(br);        
+            m_backRight.get()->SetDesiredState(br); 
+            auto ax = m_accel.GetX();
+            auto ay = m_accel.GetY();
+            auto az = m_accel.GetZ();
+
+            m_isMoving = (abs(ax) > 0.0 || abs(ay) > 0.0 || abs(az) > 0.0 );
         }
         else
         {
@@ -201,6 +209,12 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
             m_frontRight.get()->SetDesiredState(m_frState);
             m_backLeft.get()->SetDesiredState(m_blState);
             m_backRight.get()->SetDesiredState(m_brState);
+
+            auto ax = m_accel.GetX();
+            auto ay = m_accel.GetY();
+            auto az = m_accel.GetZ();
+
+            m_isMoving = (abs(ax) > 0.0 || abs(ay) > 0.0 || abs(az) > 0.0 );
         }
     }
 }
