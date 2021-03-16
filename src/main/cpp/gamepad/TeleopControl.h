@@ -48,7 +48,7 @@ class TeleopControl
             DRIVE_SHIFT_UP,
             DRIVE_SHIFT_DOWN,
             DRIVE_TURBO,
-            DRIVE_NITRO,
+            DRIVE_BRAKE,
             INTAKE_ON,
             INTAKE_OFF,
             BALL_TRANSFER_OFF,
