@@ -76,7 +76,7 @@ SwerveChassis::SwerveChassis
     m_isMoving(false),
     m_scale(1.0),
     m_boost(0.0),
-    m_nitro(0.0),
+    m_brake(0.0),
     m_runWPI(false),
     m_poseOpt(PoseEstimationMethod::EULER_AT_CHASSIS),
     m_pose(),
@@ -127,13 +127,13 @@ void SwerveChassis::SetBoost( double boost )
     m_backRight.get()->SetBoost(m_boost);
 }
 
-void SwerveChassis::SetNitro( double nitro )
+void SwerveChassis::SetBrake( double brake )
 {
-    m_nitro = nitro;
-    m_frontLeft.get()->SetNitro(m_nitro);
-    m_frontRight.get()->SetNitro(m_nitro);
-    m_backLeft.get()->SetNitro(m_nitro);
-    m_backRight.get()->SetNitro(m_nitro);
+    m_brake = brake;
+    m_frontLeft.get()->SetBrake(m_brake);
+    m_frontRight.get()->SetBrake(m_brake);
+    m_backLeft.get()->SetBrake(m_brake);
+    m_backRight.get()->SetBrake(m_brake);
 }
 
 /// @brief Drive the chassis

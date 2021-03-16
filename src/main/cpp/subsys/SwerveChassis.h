@@ -144,7 +144,7 @@ class SwerveChassis
 
         void SetDriveScaleFactor( double scale );
         void SetBoost( double boost );
-        void SetNitro( double nitro );
+        void SetBrake( double brake );
         void RunWPIAlgorithm(bool runWPI ) { m_runWPI = runWPI; }
         void SetPoseEstOption(PoseEstimationMethod opt ) { m_poseOpt = opt; }
         double GetScaleFactor() const {return m_scale;}
@@ -185,7 +185,7 @@ class SwerveChassis
         bool                                                        m_isMoving;
         double                                                      m_scale;
         double                                                      m_boost;
-        double                                                      m_nitro;
+        double                                                      m_brake;
         bool                                                        m_runWPI;
         PoseEstimationMethod                                        m_poseOpt;
         frc::Pose2d                                                 m_pose;
