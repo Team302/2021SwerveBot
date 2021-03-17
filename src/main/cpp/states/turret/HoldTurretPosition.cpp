@@ -37,8 +37,13 @@ HoldTurretPosition::HoldTurretPosition
 
 void HoldTurretPosition::Init()
 {
-    auto turret = MechanismFactory::GetMechanismFactory()->GetTurret();
-    auto pos = turret.get()->GetPosition();
-
-    turret.get()->UpdateTarget(pos);
+    Mech1MotorState::Init();
+    
+    auto cd = GetControlData();
+    if (cd->GetMode()==ControlModes::CONTROL_TYPE::POSITION_DEGREES)
+    {
+        auto turret = MechanismFactory::GetMechanismFactory()->GetTurret();
+        auto pos = turret.get()->GetPosition();
+        turret.get()->UpdateTarget(pos);
+    }
 }

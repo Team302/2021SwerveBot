@@ -57,7 +57,7 @@ class TurretStateMgr {
 
     private:
 
-        std::vector<IState*> m_stateVector;
+        std::array<IState*, MAX_TURRET_STATES> m_states;
         IState* m_currentState;
         TURRET_STATE m_currentStateEnum;
         double m_approxTargetAngle;

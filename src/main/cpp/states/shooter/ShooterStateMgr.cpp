@@ -55,7 +55,8 @@ ShooterStateMgr* ShooterStateMgr::GetInstance()
 
 /// @brief    initialize the state manager, parse the configuration file and create the states.
 ShooterStateMgr::ShooterStateMgr() : m_states(),
-                                     m_currentState()
+                                     m_currentState(),
+                                     m_prevStateEnum(ShooterStateMgr::SHOOTER_STATE::OFF)
 {
     // Parse the configuration file 
     auto stateXML = make_unique<StateDataDefn>();

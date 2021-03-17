@@ -6,8 +6,11 @@
 	<controlData identifier="closedloop"
 				 mode="POSITION_DEGREES"
 				 proportional="5.0"/>
+	<controlData identifier="closedloop2"
+				 mode="POSITION_DEGREES"
+				 proportional="5.0"/>
 	<mechanismTarget stateIdentifier="TURRETHOLD"
-	                 controlDataIdentifier="openloop"
+	                 controlDataIdentifier="closedloop2"
 					 value="0.0"/>
 	<mechanismTarget stateIdentifier="TURRETAUTOAIM"
 	                 controlDataIdentifier="closedloop"

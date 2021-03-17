@@ -103,6 +103,7 @@ void Robot::TeleopInit()
     m_drive = make_shared<SwerveDrive>();
     m_drive.get()->Init();
 
+    /**
     auto shooter = MechanismFactory::GetMechanismFactory()->GetShooter();
     m_shooterState = ( shooter.get() != nullptr ) ? ShooterStateMgr::GetInstance() : nullptr;
     if ( m_shooterState != nullptr )
@@ -113,6 +114,7 @@ void Robot::TeleopInit()
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("TeleopInit"), string("no shooter state manager"));
     }
+    **/
 
     //set camera to drivermode to stream to dashboard
     if ( m_limelight != nullptr)
@@ -129,6 +131,7 @@ void Robot::TeleopPeriodic()
     UpdateOdometry();       // intentionally didn't do this in robot periodic to avoid traffic during disable
 
     m_drive.get()->Run();
+    /**
     if ( m_shooterState != nullptr )
     {
         m_shooterState->RunCurrentState();
@@ -137,7 +140,7 @@ void Robot::TeleopPeriodic()
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT_ONCE, "robot", "no shooter");
     }
-    
+    **/    
 }
 
 
