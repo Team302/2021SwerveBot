@@ -71,6 +71,7 @@ ControlData* ControlDataDefn::ParseXML
     modeMap[string("MOTION_PROFILE_ARC")] = ControlModes::CONTROL_TYPE::MOTION_PROFILE_ARC;
 	modeMap[string("PERCENT_OUTPUT")] = ControlModes::CONTROL_TYPE::PERCENT_OUTPUT;
     modeMap[string("POSITION_DEGREES")] = ControlModes::CONTROL_TYPE::POSITION_DEGREES;
+    modeMap[string("POSITION_ABSOLUTE")] = ControlModes::CONTROL_TYPE::POSITION_DEGREES_ABSOLUTE;
 	
 	map<string, ControlModes::CONTROL_RUN_LOCS> serverMap;
 	serverMap[string("MOTORCONTROLLER")] = ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER;

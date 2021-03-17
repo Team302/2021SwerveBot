@@ -41,6 +41,9 @@ class Mech1MotorState : public IState
         double GetTarget() const {return m_target;}
         double GetRPS() const {return m_mechanism->GetSpeed();}
 
+    protected:
+        ControlData*    GetControlData() const {return m_control;}
+
     private:
 
         IMech1IndMotor*                 m_mechanism;

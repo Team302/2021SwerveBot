@@ -43,7 +43,7 @@ TurretStateMgr* TurretStateMgr::GetInstance()
 	return TurretStateMgr::m_instance;
 }
 
-TurretStateMgr::TurretStateMgr() : m_stateVector(),
+TurretStateMgr::TurretStateMgr() : m_states(),
                                    m_currentState(),
                                    m_approxTargetAngle( 0.0 )
 {
@@ -57,7 +57,10 @@ TurretStateMgr::TurretStateMgr() : m_stateVector(),
     map<string, TURRET_STATE> stateMap;
     stateMap["TURRETHOLD"] = TURRET_STATE::HOLD;
     stateMap["TURRETAUTOAIM"] = TURRET_STATE::LIMELIGHT_AIM;
-    m_stateVector.resize(4);
+    for (auto inx=0; inx<MAX_TURRET_STATES; ++inx)
+    {
+       m_states[inx] = nullptr;
+    }
 
     for ( auto td: targetData )
     {
@@ -66,7 +69,7 @@ TurretStateMgr::TurretStateMgr() : m_stateVector(),
         if ( stateItr != stateMap.end() )
         {
             auto stateEnum = stateItr->second;
-            if ( m_stateVector[stateEnum] == nullptr )
+            if ( m_states[stateEnum] == nullptr )
             {
                 auto controlData = td->GetController();
                 auto target = td->GetTarget();
@@ -75,7 +78,7 @@ TurretStateMgr::TurretStateMgr() : m_stateVector(),
                     case TURRET_STATE::HOLD:
                     {
                         auto thisState = new HoldTurretPosition(controlData, m_approxTargetAngle);
-                        m_stateVector[stateEnum] = thisState;
+                        m_states[stateEnum] = thisState;
                         m_currentState = thisState;
                         m_currentStateEnum = stateEnum;
                         m_currentState->Init();
@@ -85,7 +88,7 @@ TurretStateMgr::TurretStateMgr() : m_stateVector(),
                     case TURRET_STATE::LIMELIGHT_AIM:
                     {
                         auto thisState = new LimelightAim(controlData, target);
-                        m_stateVector[stateEnum] = thisState;
+                        m_states[stateEnum] = thisState;
                     }
                     break;
 
@@ -129,7 +132,7 @@ void TurretStateMgr::SetCurrentState
     bool         run
 )
 {
-    auto state = m_stateVector[stateEnum];
+    auto state = m_states[stateEnum];
     if ( state != nullptr && state != m_currentState )
     {
         m_currentState = state;
