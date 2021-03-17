@@ -5,8 +5,4 @@
 			   pathname="Slalom1.wpilib.json"/>
 	<primitive id="DRIVE_PATH"
 			   pathname="Slalom1.wpilib.json"/>
-	<primitive id="DRIVE_PATH"
-			   pathname="Slalom2.wpilib.json"/>
-	<primitive id="DRIVE_PATH"
-			   pathname="Slalom3.wpilib.json"/>
 </auton>
