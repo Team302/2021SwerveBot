@@ -154,8 +154,8 @@ class SwerveModule
         frc::SwerveModuleState                              m_activeState;
         frc::Pose2d                                         m_currentPose;
         units::angular_velocity::revolutions_per_minute_t   m_currentSpeed;
-        double                                              m_currentEncoder;
-        frc2::Timer                                         m_timer;
+        double                                              m_currentRotations;
+        //frc2::Timer                                         m_timer;
 
 
 

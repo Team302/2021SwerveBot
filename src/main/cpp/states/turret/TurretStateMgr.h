@@ -19,6 +19,10 @@
 #include <map>
 #include <vector>
 
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
+
 #include <states/IState.h>
 
 class TurretStateMgr {
@@ -61,6 +65,8 @@ class TurretStateMgr {
         IState* m_currentState;
         TURRET_STATE m_currentStateEnum;
         double m_approxTargetAngle;
+        std::shared_ptr<nt::NetworkTable> m_nt;
+
 
         TurretStateMgr();
         ~TurretStateMgr() = default;

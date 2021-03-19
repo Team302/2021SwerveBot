@@ -45,10 +45,10 @@ Turret::Turret
 void Turret::Update()
 {
     auto target = GetTarget();
-    if ( (m_min.get()->Get() && target > 0.0) || 
-         (m_max.get()->Get() && target < 0.0) || 
-         (!m_min.get()->Get() && !m_max.get()) )
-    {
+    //if ( (m_min.get()->Get() && target > 0.0) || 
+    //     (m_max.get()->Get() && target < 0.0) || 
+    //     (!m_min.get()->Get() && !m_max.get()) )
+    //{
         Mech1IndMotor::Update();
-    }
+    //}
 }

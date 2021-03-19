@@ -103,24 +103,30 @@ void Robot::TeleopInit()
     m_drive = make_shared<SwerveDrive>();
     m_drive.get()->Init();
 
-    /**
     auto shooter = MechanismFactory::GetMechanismFactory()->GetShooter();
+
+    auto ntable = nt::NetworkTableInstance::GetDefault().GetTable("fred");
+    Logger::GetLogger()->ToNtTable(ntable, "robot", "about to get shooter state mgr");
+
     m_shooterState = ( shooter.get() != nullptr ) ? ShooterStateMgr::GetInstance() : nullptr;
     if ( m_shooterState != nullptr )
     {
+        Logger::GetLogger()->ToNtTable(ntable, "robot", "about to set current shooter state off");
         m_shooterState->SetCurrentState(ShooterStateMgr::SHOOTER_STATE::OFF, true);
     }
     else 
     {
+        Logger::GetLogger()->ToNtTable(ntable, "robot", "state mgr error");
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("TeleopInit"), string("no shooter state manager"));
     }
-    **/
 
     //set camera to drivermode to stream to dashboard
+    /**
     if ( m_limelight != nullptr)
     {
         m_driverMode->SetCamToDriveMode( m_limelight );
     }
+    **/
 }
 
 
@@ -131,7 +137,7 @@ void Robot::TeleopPeriodic()
     UpdateOdometry();       // intentionally didn't do this in robot periodic to avoid traffic during disable
 
     m_drive.get()->Run();
-    /**
+
     if ( m_shooterState != nullptr )
     {
         m_shooterState->RunCurrentState();
@@ -140,7 +146,6 @@ void Robot::TeleopPeriodic()
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT_ONCE, "robot", "no shooter");
     }
-    **/    
 }
 
 

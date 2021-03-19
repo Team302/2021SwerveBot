@@ -20,6 +20,9 @@
 #include <vector>
 
 // FRC includes
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
 
 // Team 302 includes
 #include <states/IState.h>
@@ -71,6 +74,7 @@ class ShooterStateMgr
         IState* m_currentState;
         SHOOTER_STATE m_currentStateEnum;
         SHOOTER_STATE m_prevStateEnum;
+        std::shared_ptr<nt::NetworkTable> m_nt;
 
 		static ShooterStateMgr*	m_instance;
 

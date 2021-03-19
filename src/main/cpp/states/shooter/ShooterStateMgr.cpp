@@ -19,8 +19,13 @@
 #include <vector>
 
 // FRC includes
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
 
 // Team 302 includes
+#include <hw/factories/LimelightFactory.h>
+#include <hw/DragonLimelight.h>
 #include <states/IState.h>
 #include <states/balltransfer/BallTransferStateMgr.h>
 #include <states/ballhopper/BallHopperStateMgr.h>
@@ -47,17 +52,24 @@ ShooterStateMgr* ShooterStateMgr::GetInstance()
         // Create the shooter state manager, ball transfer state manager, turret state manager and hopper state manager
 		ShooterStateMgr::m_instance = new ShooterStateMgr();
         BallTransferStateMgr::GetInstance();
-        TurretStateMgr::GetInstance();
         BallHopperStateMgr::GetInstance();
-	}
+	    TurretStateMgr::GetInstance();
+    }
 	return ShooterStateMgr::m_instance;
 }
 
 /// @brief    initialize the state manager, parse the configuration file and create the states.
 ShooterStateMgr::ShooterStateMgr() : m_states(),
                                      m_currentState(),
-                                     m_prevStateEnum(ShooterStateMgr::SHOOTER_STATE::OFF)
+                                     m_prevStateEnum(ShooterStateMgr::SHOOTER_STATE::OFF),
+                                     m_nt(nt::NetworkTableInstance::GetDefault().GetTable(string("Shooter State Manager")))    
 {
+    auto shooter = MechanismFactory::GetMechanismFactory()->GetShooter();
+    if ( shooter.get() != nullptr)
+    {
+        m_nt = nt::NetworkTableInstance::GetDefault().GetTable("fred");
+    }
+
     // Parse the configuration file 
     auto stateXML = make_unique<StateDataDefn>();
     vector<MechanismTargetData*> targetData = stateXML.get()->ParseXML( MechanismTypes::MECHANISM_TYPE::SHOOTER );
@@ -71,13 +83,12 @@ ShooterStateMgr::ShooterStateMgr() : m_states(),
     stateStringToEnumMap["SHOOTERSHOOTBLUE"] = SHOOTER_STATE::GET_READY_SHOOTBLUE;
     stateStringToEnumMap["SHOOTERSHOOTRED"] = SHOOTER_STATE::GET_READY_SHOOTRED;
 
-    auto ntName = MechanismFactory::GetMechanismFactory()->GetShooter().get()->GetNetworkTableName();
-    Logger::GetLogger()->ToNtTable(ntName, "SHOOTEROFF", "not created");
-    Logger::GetLogger()->ToNtTable(ntName, "SHOOTERON", "not created");
-    Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTGREEN", "not created");
-    Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTYELLOW", "not created");
-    Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTBLUE", "not created");
-    Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTRED", "not created");
+    Logger::GetLogger()->ToNtTable(m_nt, string("SHOOTEROFF"), string("not created"));
+    Logger::GetLogger()->ToNtTable(m_nt, "SHOOTERON", "not created");
+    Logger::GetLogger()->ToNtTable(m_nt, "SHOOTERSHOOTGREEN", "not created");
+    Logger::GetLogger()->ToNtTable(m_nt, "SHOOTERSHOOTYELLOW", "not created");
+    Logger::GetLogger()->ToNtTable(m_nt, "SHOOTERSHOOTBLUE", "not created");
+    Logger::GetLogger()->ToNtTable(m_nt, "SHOOTERSHOOTRED", "not created");
     for (auto inx=0; inx<MAX_SHOOTER_STATES; ++inx)
     {
        m_states[inx] = nullptr;
@@ -102,46 +113,46 @@ ShooterStateMgr::ShooterStateMgr() : m_states(),
                 {
                     case SHOOTER_STATE::OFF:
                     {   
-                        m_states[SHOOTER_STATE::OFF] = new ShooterState( controlData, controlData2, target1, target2 );
+                        m_states[stateEnum] = new ShooterState( controlData, controlData2, target1, target2 );
                         m_currentState = m_states[SHOOTER_STATE::OFF];
                         m_currentStateEnum = stateEnum;
                         m_currentState->Init();
-                        Logger::GetLogger()->ToNtTable(ntName, "SHOOTEROFF", "created");
+                        Logger::GetLogger()->ToNtTable(m_nt, "SHOOTEROFF", "created");
                     }
                     break;
 
                     case SHOOTER_STATE::SHOOT:
                     {   
                         m_states[stateEnum] = new ShooterState( controlData, controlData2, target1, target2 );
-                        Logger::GetLogger()->ToNtTable(ntName, "SHOOTERON", "created");
+                        Logger::GetLogger()->ToNtTable(m_nt, "SHOOTERON", "created");
                     }
                     break;
 
                     case SHOOTER_STATE::GET_READY_SHOOTGREEN:
                     {   
                         m_states[stateEnum] = new ShooterState( controlData, controlData2, target1, target2 );
-                        Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTGREEN", "created");
+                        Logger::GetLogger()->ToNtTable(m_nt, "SHOOTERSHOOTGREEN", "created");
                     }
                     break;
 
                     case SHOOTER_STATE::GET_READY_SHOOTYELLOW:
                     {   
                         m_states[stateEnum] = new ShooterState( controlData, controlData2, target1, target2 );
-                        Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTYELLOW", "created");
+                        Logger::GetLogger()->ToNtTable(m_nt, "SHOOTERSHOOTYELLOW", "created");
                     }
                     break;
 
                     case SHOOTER_STATE::GET_READY_SHOOTBLUE:
                     {   
                         m_states[stateEnum] = new ShooterState( controlData, controlData2, target1, target2 );
-                        Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTBLUE", "created");
+                        Logger::GetLogger()->ToNtTable(m_nt, "SHOOTERSHOOTBLUE", "created");
                     }
                     break;
                     
                     case SHOOTER_STATE::GET_READY_SHOOTRED:
                     {   
                         m_states[stateEnum] = new ShooterState( controlData, controlData2, target1, target2 );
-                        Logger::GetLogger()->ToNtTable(ntName, "SHOOTERSHOOTRED", "created");
+                        Logger::GetLogger()->ToNtTable(m_nt, "SHOOTERSHOOTRED", "created");
                     }
                     break;
 
@@ -168,14 +179,13 @@ ShooterStateMgr::ShooterStateMgr() : m_states(),
 /// @return void
 void ShooterStateMgr::RunCurrentState()
 {
-    auto ntName = MechanismFactory::GetMechanismFactory()->GetShooter().get()->GetNetworkTableName();
     auto controller = TeleopControl::GetInstance();
 
     if (controller != nullptr)
     {
         if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOT ))
         {
-            Logger::GetLogger()->ToNtTable(ntName, "Current State", "Shoot");
+            Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot");
             SetCurrentState( SHOOTER_STATE::SHOOT, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::RAPID_RELEASE, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
@@ -183,35 +193,35 @@ void ShooterStateMgr::RunCurrentState()
         }
         else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT_GREEN ))
         {
-            Logger::GetLogger()->ToNtTable(ntName, "Current State", "Shoot Green");
+            Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Green");
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTGREEN, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
-            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
+//            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
         }
         else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT_YELLOW ))
         {
-            Logger::GetLogger()->ToNtTable(ntName, "Current State", "Shoot Yellow");
+            Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Yellow");
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTYELLOW, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
-            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
+//            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
         }
         else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT_BLUE ))
         {
-            Logger::GetLogger()->ToNtTable(ntName, "Current State", "Shoot Blue");
+            Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Blue");
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTBLUE, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
-            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
+//            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
         }
         else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT_RED ))
         {
-            Logger::GetLogger()->ToNtTable(ntName, "Current State", "Shoot Red");
+            Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Red");
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTRED, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
-            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
+//            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
         }
         else
         {
@@ -233,25 +243,28 @@ void ShooterStateMgr::RunCurrentState()
 /// @return void
 void ShooterStateMgr::SetCurrentState
 (
-    SHOOTER_STATE  stateEnum,
+    SHOOTER_STATE   stateEnum,
     bool            run
 )
 {
     auto state = m_states[stateEnum];
-//    if ( state != nullptr && state != m_currentState )
     if ( state != nullptr )
     {
-        auto ntName = MechanismFactory::GetMechanismFactory()->GetShooter().get()->GetNetworkTableName();
-        Logger::GetLogger()->ToNtTable(ntName, "Current State", "none");
+        Logger::GetLogger()->ToNtTable(m_nt, "Current State", "none");
         
         m_prevStateEnum = (m_currentStateEnum == stateEnum) ? m_prevStateEnum : m_currentStateEnum;
 
+        auto limelight = LimelightFactory::GetLimelightFactory()->GetLimelight();
         m_currentState = state;
         m_currentStateEnum = stateEnum;
         m_currentState->Init();
         if ( stateEnum == SHOOTER_STATE::SHOOT )
         {
-            Logger::GetLogger()->ToNtTable(ntName, "Current State", "Prepare to Shoot");
+            if ( limelight != nullptr )
+            {
+                limelight->SetPipeline(1);
+            }
+            Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot");
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, run );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::RAPID_RELEASE, run);
             TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::HOLD, run);
@@ -259,24 +272,28 @@ void ShooterStateMgr::SetCurrentState
         else if ( stateEnum == SHOOTER_STATE::GET_READY_SHOOTBLUE || stateEnum == SHOOTER_STATE::GET_READY_SHOOTGREEN ||
                   stateEnum == SHOOTER_STATE::GET_READY_SHOOTRED  || stateEnum == SHOOTER_STATE::GET_READY_SHOOTYELLOW )
         {
+            if ( limelight != nullptr )
+            {
+                limelight->SetPipeline(1);
+            }
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, run );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, run);
-            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, run);
+           // TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, run);
             if ( stateEnum == SHOOTER_STATE::GET_READY_SHOOTBLUE)
             {
-                Logger::GetLogger()->ToNtTable(ntName, "Current State", "Shoot Blue");
+                Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Blue");
             }
             else if ( stateEnum == SHOOTER_STATE::GET_READY_SHOOTGREEN)
             {
-                Logger::GetLogger()->ToNtTable(ntName, "Current State", "Shoot Green");
+                Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Green");
             }
             else if ( stateEnum == SHOOTER_STATE::GET_READY_SHOOTRED)
             {
-                Logger::GetLogger()->ToNtTable(ntName, "Current State", "Shoot Red");
+                Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Red");
             }
             else
             {
-                Logger::GetLogger()->ToNtTable(ntName, "Current State", "Shoot Yellow");
+                Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Yellow");
             }
         }
         if ( run )
@@ -284,6 +301,11 @@ void ShooterStateMgr::SetCurrentState
             m_currentState->Run();
         }
     }
+    else
+    {
+        Logger::GetLogger()->ToNtTable(m_nt, "state", "nullptr" );
+    }
+    
 }
 
 

@@ -17,7 +17,12 @@
 #include <map>
 #include <vector>
 
-#include "states/turret/TurretStateMgr.h"
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
+
+
+#include <states/turret/TurretStateMgr.h>
 #include <states/IState.h>
 #include <xmlmechdata/StateDataDefn.h>
 #include <controllers/MechanismTargetData.h>
@@ -45,15 +50,23 @@ TurretStateMgr* TurretStateMgr::GetInstance()
 
 TurretStateMgr::TurretStateMgr() : m_states(),
                                    m_currentState(),
-                                   m_approxTargetAngle( 0.0 )
+                                   m_approxTargetAngle( 0.0 ),
+                                   m_nt(nt::NetworkTableInstance::GetDefault().GetTable(string("Turret State Manager")))    
 {
     auto turret = MechanismFactory::GetMechanismFactory()->GetTurret();
-    m_approxTargetAngle = turret->GetPosition();
+    if ( turret.get() != nullptr)
+    {
+        m_approxTargetAngle = turret.get()->GetPosition();
+        m_nt = nt::NetworkTableInstance::GetDefault().GetTable(turret.get()->GetNetworkTableName());
+    }
+
 
     // Parse the configuration file 
     auto stateXML = make_unique<StateDataDefn>();
     vector<MechanismTargetData*> targetData = stateXML.get()->ParseXML( MechanismTypes::MECHANISM_TYPE::TURRET );
 
+    Logger::GetLogger()->ToNtTable(m_nt, "statemgr: Turret Hold", "not created");
+    Logger::GetLogger()->ToNtTable(m_nt, "statemgr: Limelight Aim", "not created");
     map<string, TURRET_STATE> stateMap;
     stateMap["TURRETHOLD"] = TURRET_STATE::HOLD;
     stateMap["TURRETAUTOAIM"] = TURRET_STATE::LIMELIGHT_AIM;
@@ -82,6 +95,7 @@ TurretStateMgr::TurretStateMgr() : m_states(),
                         m_currentState = thisState;
                         m_currentStateEnum = stateEnum;
                         m_currentState->Init();
+                        Logger::GetLogger()->ToNtTable(m_nt, "statemgr: Turret Hold", "created");
                     }
                     break;
 
@@ -89,6 +103,7 @@ TurretStateMgr::TurretStateMgr() : m_states(),
                     {
                         auto thisState = new LimelightAim(controlData, target);
                         m_states[stateEnum] = thisState;
+                        Logger::GetLogger()->ToNtTable(m_nt, "statemgr: Limelight Aim", "created");
                     }
                     break;
 
@@ -99,10 +114,6 @@ TurretStateMgr::TurretStateMgr() : m_states(),
                     break;
                 }
             }
-            {
-                
-            }
-            
         }
     }
 }
@@ -140,11 +151,16 @@ void TurretStateMgr::SetCurrentState
         m_currentState->Init();
         if ( stateEnum == LIMELIGHT_AIM )
         {
+            Logger::GetLogger()->ToNtTable(m_nt, "statemgr: Current State", "Limelight Aim");
             auto llAim = dynamic_cast<LimelightAim*>(m_currentState);
             if ( llAim != nullptr )
             {
                 llAim->UpdateTarget( m_approxTargetAngle );
             }
+        }
+        else if (stateEnum==HOLD)
+        {
+            Logger::GetLogger()->ToNtTable(m_nt, "statemgr: Current State", "Hold Position");
         }
 
         

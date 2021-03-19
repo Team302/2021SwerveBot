@@ -82,16 +82,16 @@ SwerveModule::SwerveModule
     m_activeState(),
     m_currentPose(),
     m_currentSpeed(0.0_rpm),
-    m_currentEncoder(0.0),
-    m_timer(),
+    m_currentRotations(0.0),
+    //m_timer(),
     m_maxVelocity(1_mps),
     m_scale(1.0),
     m_boost(0.0),
     m_brake(0.0),
     m_runClosedLoopDrive(false)
 {
-    m_timer.Reset();
-    m_timer.Start();
+    //m_timer.Reset();
+    //m_timer.Start();
     
     Rotation2d ang { units::angle::degree_t(0.0)};
     m_activeState.angle = ang;
@@ -429,23 +429,23 @@ void SwerveModule::StopMotors()
 frc::Pose2d SwerveModule::GetCurrentPose(PoseEstimationMethod opt)
 {
     // get change in time
-    auto deltaT = m_timer.Get();
-    m_timer.Reset();
+    //auto deltaT = m_timer.Get();
+    //m_timer.Reset();
 
     // get the information from the last pose
     auto startX         = m_currentPose.X();
     auto startY         = m_currentPose.Y();
     auto startAngle     = m_currentPose.Rotation().Radians();
-    auto startSpeed     = m_currentSpeed;
-    //auto startEncoder   = m_currentEncoder;
+    //auto startSpeed     = m_currentSpeed;
+    auto startRotations = m_currentRotations;
 
     // read sensor info (cancoder, encoders) for current speed and angle of the module
     // calculate the average from the last 
     auto currentAngle   = units::angle::radian_t(units::angle::degree_t(m_turnSensor.get()->GetPosition()));
-    auto avgAngle       = (currentAngle - startAngle) / 2.0;
-
-    auto currentSpeed   = units::angular_velocity::revolutions_per_minute_t(m_driveMotor.get()->GetRPS()*60.0);
-    auto avgSpeed       = (currentSpeed - startSpeed) / 2.0;
+    //auto avgAngle       = (currentAngle - startAngle) / 2.0;
+    auto currentRotations = m_driveMotor.get()->GetRotations();
+    //auto currentSpeed   = units::angular_velocity::revolutions_per_minute_t(m_driveMotor.get()->GetRPS()*60.0);
+    //auto avgSpeed       = (currentSpeed - startSpeed) / 2.0;
 
     units::length::meter_t currentX {units::length::meter_t(0)};
     units::length::meter_t currentY {units::length::meter_t(0)};
@@ -454,28 +454,47 @@ frc::Pose2d SwerveModule::GetCurrentPose(PoseEstimationMethod opt)
     {
         // Euler Method
         //
-        // xk+1 = xk + vk cos θk T
-        // yk+1 = yk + vk sin θk T
+        // xk+1 = xk + vk cos θk T = xk + delta * cos θk
+        // yk+1 = yk + vk sin θk T = yk + delta * sin θk
         // Thetak+1 = Thetagyro,k+1
+
+        auto delta  = currentRotations - startRotations;
+        auto circum = wpi::math::pi * m_wheelDiameter;
+
+        currentX = startX + cos(startAngle.to<double>()) * circum;
+        currentY = startY + sin(startAngle.to<double>()) * circum;
+        //auto delta = units::length::meter_t((currentRotations - startRotations) * wpi::math::pi * m_wheelDiameter);
+        //currentX = startX + cos(startAngle.to<double>())*delta;
+        //currentY = startY + sin(startAngle.to<double>())*delta;
+
+        Logger::GetLogger()->ToNtTable(m_nt, "start rotations",startRotations);
+        Logger::GetLogger()->ToNtTable(m_nt, "current rotations",currentRotations);
+        Logger::GetLogger()->ToNtTable(m_nt, "delta", delta);
+        Logger::GetLogger()->ToNtTable(m_nt, "circumference", circum.to<double>());
+
         //
         // Would it be more accurate to use either the start or end angle instead of the average of 
-        // the two?  
+        // the two?
+        /**  
         currentX = startX + units::length::meter_t(units::length::inch_t(startSpeed.to<double>() * 60.0 *    // average speed (rps)
                                                   m_wheelDiameter * wpi::math::pi * // distance per revolution (inches)
                                                   cos(startAngle.to<double>()) *      // cosine of the average angle
                                                   deltaT.to<double>()));             // delta T (seconds)
-        Logger::GetLogger()->ToNtTable("AWheelCalc", "AvgSpeed", avgSpeed.to<double>());
-        Logger::GetLogger()->ToNtTable("AWheelCalc", "WheelDiameter", m_wheelDiameter.to<double>());
-        Logger::GetLogger()->ToNtTable("AWheelCalc", "CosAvgAngle", cos(avgAngle.to<double>()));
-        Logger::GetLogger()->ToNtTable("AWheelCalc", "DeltaT", deltaT.to<double>());
-        Logger::GetLogger()->ToNtTable("AWheelCalc", "CurrentX", currentX.to<double>());
-        Logger::GetLogger()->ToNtTable("AWheelCalc", "startX", startX.to<double>());
+        Logger::GetLogger()->ToNtTable(m_nt, "AvgSpeed", avgSpeed.to<double>());
+        Logger::GetLogger()->ToNtTable(m_nt, "CosAvgAngle", cos(avgAngle.to<double>()));
+        Logger::GetLogger()->ToNtTable(m_nt, "DeltaT", deltaT.to<double>());
+        **/
+        Logger::GetLogger()->ToNtTable(m_nt, "WheelDiameter", m_wheelDiameter.to<double>());
+        Logger::GetLogger()->ToNtTable(m_nt, "CurrentX", currentX.to<double>());
+        Logger::GetLogger()->ToNtTable(m_nt, "CurrentY", currentY.to<double>());
+        Logger::GetLogger()->ToNtTable(m_nt, "startX", startX.to<double>());
+        Logger::GetLogger()->ToNtTable(m_nt, "startY", startY.to<double>());
 
 
-        currentY = startY + units::length::meter_t(units::length::inch_t(startSpeed.to<double>() * 60.0 *    // average speed (rps)
-                                                  m_wheelDiameter * wpi::math::pi * // distance per revolution (inches)
-                                                  sin(startAngle.to<double>()) *      // sine of the average angle
-                                                  deltaT.to<double>()));             // delta T (seconds)
+        //currentY = startY + units::length::meter_t(units::length::inch_t(startSpeed.to<double>() * 60.0 *    // average speed (rps)
+        //                                          m_wheelDiameter * wpi::math::pi * // distance per revolution (inches)
+        //                                          sin(startAngle.to<double>()) *      // sine of the average angle
+        //                                          deltaT.to<double>()));             // delta T (seconds)
     }
     else if (opt == PoseEstimationMethod::POSE_EST_USING_MODULES)
     {
@@ -516,17 +535,17 @@ frc::Pose2d SwerveModule::GetCurrentPose(PoseEstimationMethod opt)
     auto newpose = Pose2d(currentX, currentY, Rotation2d(currentAngle));
     auto trans   = newpose - m_currentPose;
     m_currentPose += trans;
-    m_currentSpeed = currentSpeed;
+    //m_currentSpeed = currentSpeed;
 
-    Logger::GetLogger()->ToNtTable("ANewPose", "NewPoseX", newpose.X().to<double>());
-    Logger::GetLogger()->ToNtTable("ANewPose", "NewPoseY", newpose.Y().to<double>());
-    Logger::GetLogger()->ToNtTable("ATrans", "TransX", trans.X().to<double>());
-    Logger::GetLogger()->ToNtTable("ATrans", "TransY", trans.Y().to<double>());
+    Logger::GetLogger()->ToNtTable(m_nt, "NewPoseX", newpose.X().to<double>());
+    Logger::GetLogger()->ToNtTable(m_nt, "NewPoseY", newpose.Y().to<double>());
+    Logger::GetLogger()->ToNtTable(m_nt, "TransX", trans.X().to<double>());
+    Logger::GetLogger()->ToNtTable(m_nt, "TransY", trans.Y().to<double>());
 
-    // m_currentEncoder = m_driveMotor.get()->GetRotations();
+    m_currentRotations = currentRotations;
     // Do we need to do any alterations based on the actual distance driven since we're 
     // approximating the path with an average vector instead of an arc
-    // auto deltaEncoder   = m_currentEncoder - startEncoder;
+    // auto deltaEncoder   = m_currentRotations - startRotations;
     // auto distTravelled  = deltaEncoder * m_wheelDiameter*wpi::math::pi;
 
     return m_currentPose;
