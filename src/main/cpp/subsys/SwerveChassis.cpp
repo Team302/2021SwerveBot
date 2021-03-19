@@ -51,8 +51,10 @@ SwerveChassis::SwerveChassis
     shared_ptr<SwerveModule>                                    frontRight,
     shared_ptr<SwerveModule>                                    backLeft, 
     shared_ptr<SwerveModule>                                    backRight, 
+    units::length::inch_t                                       wheelDiameter,
     units::length::inch_t                                       wheelBase,
     units::length::inch_t                                       track,
+    double                                                      odometryComplianceCoefficient,
     units::velocity::meters_per_second_t                        maxSpeed,
     units::radians_per_second_t                                 maxAngularSpeed,
     units::acceleration::meters_per_second_squared_t            maxAcceleration,
@@ -65,8 +67,10 @@ SwerveChassis::SwerveChassis
     m_frState(),
     m_blState(),
     m_brState(),
+    m_wheelDiameter(wheelDiameter),
     m_wheelBase(wheelBase),
     m_track(track),
+    m_odometryComplianceCoefficient(odometryComplianceCoefficient),
     m_maxSpeed(maxSpeed),
     m_maxAngularSpeed(maxAngularSpeed),
     m_maxAcceleration(maxAcceleration),
@@ -93,10 +97,10 @@ SwerveChassis::SwerveChassis
     m_timer.Reset();
     m_timer.Start();
 
-    frontLeft.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration, m_frontLeftLocation );
-    frontRight.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration, m_frontRightLocation );
-    backLeft.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration, m_backLeftLocation );
-    backRight.get()->Init( maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration, m_backRightLocation );
+    frontLeft.get()->Init( wheelDiameter, maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration, m_frontLeftLocation );
+    frontRight.get()->Init( wheelDiameter, maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration, m_frontRightLocation );
+    backLeft.get()->Init( wheelDiameter, maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration, m_backLeftLocation );
+    backRight.get()->Init( wheelDiameter, maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration, m_backRightLocation );
 
     ZeroAlignSwerveModules();
 }
@@ -275,6 +279,11 @@ Pose2d SwerveChassis::GetPose() const
 /// @brief update the chassis odometry based on current states of the swerve modules and the pigeon
 void SwerveChassis::UpdateOdometry() 
 {
+    if ( !IsMoving() )  // not moving, so odometry isn't changing
+    {
+        return;
+    }
+
     units::degree_t yaw{m_pigeon->GetYaw()};
     Rotation2d rot2d {yaw+m_offsetPoseAngle};
     Rotation2d realAngle {yaw};
@@ -313,16 +322,8 @@ void SwerveChassis::UpdateOdometry()
         auto vx = m_drive * cosAng + m_steer * sinAng;
         auto vy = m_drive * sinAng + m_steer * cosAng;
 
-        //const double scalefactor = 0.875;
-        const double scalefactor = 1.119;
-
-        units::length::meter_t currentX = startX + scalefactor*(vx * deltaT);
-        units::length::meter_t currentY = startY + scalefactor*(vy * deltaT);
-
-        Logger::GetLogger()->ToNtTable("AWheelCalc", "startX", startX.to<double>());
-        Logger::GetLogger()->ToNtTable("AWheelCalc", "currentX", currentX.to<double>());
-        Logger::GetLogger()->ToNtTable("AWheelCalc", "startY", startY.to<double>());
-        Logger::GetLogger()->ToNtTable("AWheelCalc", "currentY", currentY.to<double>());
+        units::length::meter_t currentX = startX + m_odometryComplianceCoefficient*(vx * deltaT);
+        units::length::meter_t currentY = startY + m_odometryComplianceCoefficient*(vy * deltaT);
 
         Pose2d currPose{currentX, currentY, rot2d};
         auto trans = currPose - m_pose;
@@ -342,26 +343,6 @@ void SwerveChassis::UpdateOdometry()
         auto trans = currPose - m_pose;
         m_pose += trans;
 
-        Logger::GetLogger()->ToNtTable("Odometry", "FL X", flPose.X().to<double>());
-        Logger::GetLogger()->ToNtTable("Odometry", "FL Y", flPose.Y().to<double>());
-        Logger::GetLogger()->ToNtTable("Odometry", "FL theta", flPose.Rotation().Degrees().to<double>());
-
-        Logger::GetLogger()->ToNtTable("Odometry", "FR X", frPose.X().to<double>());
-        Logger::GetLogger()->ToNtTable("Odometry", "FR Y", frPose.Y().to<double>());
-        Logger::GetLogger()->ToNtTable("Odometry", "FR theta", frPose.Rotation().Degrees().to<double>());
-
-        Logger::GetLogger()->ToNtTable("Odometry", "BL X", blPose.X().to<double>());
-        Logger::GetLogger()->ToNtTable("Odometry", "BL Y", blPose.Y().to<double>());
-        Logger::GetLogger()->ToNtTable("Odometry", "BL theta", blPose.Rotation().Degrees().to<double>());
-
-        Logger::GetLogger()->ToNtTable("Odometry", "BR X", brPose.X().to<double>());
-        Logger::GetLogger()->ToNtTable("Odometry", "BR Y", brPose.Y().to<double>());
-        Logger::GetLogger()->ToNtTable("Odometry", "BR theta", brPose.Rotation().Degrees().to<double>());
-
-
-        Logger::GetLogger()->ToNtTable("Odometry", "Pose X", m_pose.X().to<double>());
-        Logger::GetLogger()->ToNtTable("Odometry", "Pose Y", m_pose.Y().to<double>());
-        Logger::GetLogger()->ToNtTable("Odometry", "Pose theta", m_pose.Rotation().Degrees().to<double>());
 
         // Get the swerve modules the correct position from the resolved pose
         /**

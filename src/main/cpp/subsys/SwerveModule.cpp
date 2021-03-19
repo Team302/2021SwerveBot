@@ -64,7 +64,6 @@ SwerveModule::SwerveModule
     shared_ptr<IDragonMotorController>                          driveMotor, 
     shared_ptr<IDragonMotorController>                          turnMotor, 
     std::shared_ptr<ctre::phoenix::sensors::CANCoder>		    canCoder,
-    units::length::inch_t                                       wheelDiameter,
     double                                                      turnP,
     double                                                      turnI,
     double                                                      turnD,
@@ -77,7 +76,7 @@ SwerveModule::SwerveModule
     m_driveMotor(driveMotor), 
     m_turnMotor(turnMotor), 
     m_turnSensor(canCoder), 
-    m_wheelDiameter(wheelDiameter),
+    m_wheelDiameter(0.0),
     m_nt(),
     m_activeState(),
     m_currentPose(),
@@ -174,6 +173,7 @@ SwerveModule::SwerveModule
 
 void SwerveModule::Init
 (
+    units::length::inch_t                                       wheelDiameter,
     units::velocity::meters_per_second_t                        maxVelocity,
     units::angular_velocity::radians_per_second_t               maxAngularVelocity,
     units::acceleration::meters_per_second_squared_t            maxAcceleration,
@@ -181,6 +181,7 @@ void SwerveModule::Init
     Translation2d                                               offsetFromCenterOfRobot
 )
 {
+    m_wheelDiameter = wheelDiameter;
     m_maxVelocity = maxVelocity;
     auto driveCData = make_shared<ControlData>( ControlModes::CONTROL_TYPE::VELOCITY_RPS,
                                                 ControlModes::CONTROL_RUN_LOCS::MOTOR_CONTROLLER,
