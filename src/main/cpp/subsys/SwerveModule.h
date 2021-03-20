@@ -60,12 +60,10 @@ class SwerveModule
         /// @param [in] shared_ptr<IDragonMotorController>                      driveMotor:     Motor that makes the robot move  
         /// @param [in] shared_ptr<IDragonMotorController>                      turnMotor:      Motor that turns the swerve module 
         /// @param [in] std::shared_ptr<ctre::phoenix::sensors::CANCoder>		canCoder:       Sensor for detecting the angle of the wheel
-        /// @param [in] units::length::inch_t                                   wheelDiameter   Diameter of the wheel
         SwerveModule( ModuleID                                                  type, 
                       std::shared_ptr<IDragonMotorController>                   driveMotor, 
                       std::shared_ptr<IDragonMotorController>                   turningMotor,
                       std::shared_ptr<ctre::phoenix::sensors::CANCoder>		    canCoder, 
-                      units::length::inch_t                                     wheelDiameter,
                       double                                                    turnP,
                       double                                                    turnI,
                       double                                                    turnD,
@@ -78,6 +76,7 @@ class SwerveModule
 
         void Init
         (
+            units::length::inch_t                                       wheelDiameter,
             units::velocity::meters_per_second_t                        maxVelocity,
             units::angular_velocity::radians_per_second_t               maxAngularVelocity,
             units::acceleration::meters_per_second_squared_t            maxAcceleration,

@@ -63,7 +63,6 @@ std::shared_ptr<SwerveModule> SwerveModuleDefn::ParseXML
 
     // initialize the attributes to the default values
     SwerveModule::ModuleID position = SwerveModule::ModuleID::LEFT_FRONT;
-    units::length::inch_t wheelDiameter(0.0);
     double turnP = 0.0;
     double turnI = 0.0;
     double turnD = 0.0;
@@ -138,10 +137,6 @@ std::shared_ptr<SwerveModule> SwerveModuleDefn::ParseXML
         {
         	turnCruiseVel = attr.as_double();
         }
-        else if (  attrName.compare("wheelDiameter") == 0 )
-        {
-        	wheelDiameter = units::length::inch_t(attr.as_double());
-        }
         else   // log errors
         {
             string msg = "unknown attribute ";
@@ -193,7 +188,6 @@ std::shared_ptr<SwerveModule> SwerveModuleDefn::ParseXML
         module = SwerveChassisFactory::GetSwerveChassisFactory()->CreateSwerveModule(position, 
                                                                                      motors, 
                                                                                      turnsensor, 
-                                                                                     wheelDiameter,
                                                                                      turnP,
                                                                                      turnI,
                                                                                      turnD,

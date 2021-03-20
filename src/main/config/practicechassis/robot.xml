@@ -30,8 +30,10 @@
      Chassis
      ====================================================  -->
     <swervechassis   type="SWERVE"
+                     wheelDiameter="4.13"
                      wheelBase="14.0"  
                      track="14.0"
+                     odometryComplianceCoefficient="1.119"
                      maxVelocity="157.48"
                      maxAngularVelocity="1591.2"
                      maxAcceleration="24"
@@ -45,9 +47,7 @@
                       turn_nominal_val="0.0"
                       turn_peak_val="0.9"
                       turn_max_acc="20"
-                      turn_cruise_vel="50"
-                      wheelDiameter="4.13"
->
+                      turn_cruise_vel="50">
             <motor  usage="DRIVE"
                     canId="3"
                     pdpID="3"
@@ -98,8 +98,7 @@
                       turn_nominal_val="0.0"
                       turn_peak_val="0.9"
                       turn_max_acc="10"
-                      turn_cruise_vel="50"
-			 wheelDiameter="4.13">
+                      turn_cruise_vel="50">
             <motor  usage="DRIVE"
                     canId="1"
                     pdpID="1"
@@ -150,8 +149,7 @@
                       turn_nominal_val="0.0"
                       turn_peak_val="0.9"
                       turn_max_acc="10"
-                      turn_cruise_vel="50"
-			 wheelDiameter="4.13">
+                      turn_cruise_vel="50">
             <motor  usage="DRIVE"
                     canId="13"
                     pdpID="13"
@@ -202,8 +200,7 @@
                       turn_nominal_val="0.0"
                       turn_peak_val="0.9"
                       turn_max_acc="10"
-                      turn_cruise_vel="50"
-			 wheelDiameter="4.13">
+                      turn_cruise_vel="50">
             <motor  usage="DRIVE"
                     canId="15"
                     pdpID="15"

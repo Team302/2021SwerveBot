@@ -47,10 +47,11 @@ class SwerveChassis
     public:
 
         /// @brief Construct a swerve chassis
-        /// @param [in] std::shared_ptr<SwerveModule>     frontleft:          front left swerve module
-        /// @param [in] std::shared_ptr<SwerveModule>     frontright:         front right swerve module
-        /// @param [in] std::shared_ptr<SwerveModule>     backleft:           back left swerve module
-        /// @param [in] std::shared_ptr<SwerveModule>     backright:          back right swerve module
+        /// @param [in] std::shared_ptr<SwerveModule>           frontleft:          front left swerve module
+        /// @param [in] std::shared_ptr<SwerveModule>           frontright:         front right swerve module
+        /// @param [in] std::shared_ptr<SwerveModule>           backleft:           back left swerve module
+        /// @param [in] std::shared_ptr<SwerveModule>           backright:          back right swerve module
+        /// @param [in] units::length::inch_t                   wheelDiameter:      Diameter of the wheel
         /// @param [in] units::length::inch_t                   wheelBase:          distance between the front and rear wheels
         /// @param [in] units::length::inch_t                   track:              distance between the left and right wheels
         /// @param [in] units::velocity::meters_per_second_t    maxSpeed:           maximum linear speed of the chassis 
@@ -62,8 +63,10 @@ class SwerveChassis
 			std::shared_ptr<SwerveModule>                               frontRight,
 			std::shared_ptr<SwerveModule>                               backLeft, 
 			std::shared_ptr<SwerveModule>                               backRight, 
+            units::length::inch_t                                       wheelDiameter,
 			units::length::inch_t                                       wheelBase,
 			units::length::inch_t                                       track,
+            double                                                      odometryComplianceCoefficient,
 			units::velocity::meters_per_second_t                        maxSpeed,
 			units::radians_per_second_t                                 maxAngularSpeed,
 			units::acceleration::meters_per_second_squared_t            maxAcceleration,
@@ -129,6 +132,7 @@ class SwerveChassis
         //static constexpr auto MaxSpeed = 3.0_mps; 
         //static constexpr units::angular_velocity::radians_per_second_t MaxAngularSpeed{wpi::math::pi};
 
+        units::length::inch_t GetWheelDiameter() const {return m_wheelDiameter; }  
         units::length::inch_t GetWheelBase() const {return m_wheelBase; }  
         units::length::inch_t GetTrack() const {return m_track;}
         units::velocity::meters_per_second_t GetMaxSpeed() const {return m_maxSpeed;}
@@ -149,6 +153,7 @@ class SwerveChassis
         void SetPoseEstOption(PoseEstimationMethod opt ) { m_poseOpt = opt; }
         double GetScaleFactor() const {return m_scale;}
         bool IsMoving() const { return m_isMoving;}
+        double GetodometryComplianceCoefficient() const { return m_odometryComplianceCoefficient; }
 
     private:
         frc::ChassisSpeeds GetFieldRelativeSpeeds
@@ -173,8 +178,10 @@ class SwerveChassis
         frc::SwerveModuleState                                      m_blState;
         frc::SwerveModuleState                                      m_brState;
         
+        units::length::inch_t                                       m_wheelDiameter;       
         units::length::inch_t                                       m_wheelBase;       
         units::length::inch_t                                       m_track;
+        double                                                      m_odometryComplianceCoefficient;
         units::velocity::meters_per_second_t                        m_maxSpeed;
         units::radians_per_second_t                                 m_maxAngularSpeed;
         units::acceleration::meters_per_second_squared_t            m_maxAcceleration;

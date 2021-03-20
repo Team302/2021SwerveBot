@@ -61,7 +61,6 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
     SwerveModule::ModuleID                                      type, 
     const IDragonMotorControllerMap&        				    motorControllers,   // <I> - Motor Controllers
     std::shared_ptr<ctre::phoenix::sensors::CANCoder>		    canCoder,
-    units::length::inch_t                                       wheelDiameter,
     double                                                      turnP,
     double                                                      turnI,
     double                                                      turnD,
@@ -85,7 +84,6 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
                                                         driveMotor, 
                                                         turnMotor, 
                                                         canCoder, 
-                                                        wheelDiameter, 
                                                         turnP,
                                                         turnI,
                                                         turnD,
@@ -105,7 +103,6 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
                                                         driveMotor, 
                                                         turnMotor, 
                                                         canCoder, 
-                                                        wheelDiameter, 
                                                         turnP,
                                                         turnI,
                                                         turnD,
@@ -126,7 +123,6 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
                                                          driveMotor, 
                                                          turnMotor, 
                                                          canCoder, 
-                                                         wheelDiameter, 
                                                          turnP,
                                                          turnI,
                                                          turnD,
@@ -146,7 +142,6 @@ std::shared_ptr<SwerveModule> SwerveChassisFactory::CreateSwerveModule
                                                         driveMotor, 
                                                         turnMotor, 
                                                         canCoder, 
-                                                        wheelDiameter, 
                                                         turnP,
                                                         turnI,
                                                         turnD,
@@ -178,8 +173,10 @@ shared_ptr<SwerveChassis> SwerveChassisFactory::CreateSwerveChassis
     std::shared_ptr<SwerveModule>                               frontRight,
     std::shared_ptr<SwerveModule>                               backLeft, 
     std::shared_ptr<SwerveModule>                               backRight, 
+    units::length::inch_t                                       wheelDiameter,
     units::length::inch_t                                       wheelBase,
     units::length::inch_t                                       track,
+    double                                                      odometryComplianceCoefficient,
     units::velocity::meters_per_second_t                        maxSpeed,
     units::radians_per_second_t                                 maxAngularSpeed,
     units::acceleration::meters_per_second_squared_t            maxAcceleration,
@@ -188,7 +185,18 @@ shared_ptr<SwerveChassis> SwerveChassisFactory::CreateSwerveChassis
 {
     if ( m_chassis.get() == nullptr )
     {
-        m_chassis = make_shared<SwerveChassis>(frontLeft, frontRight, backLeft, backRight, wheelBase, track, maxSpeed, maxAngularSpeed, maxAcceleration, maxAngularAcceleration );
+        m_chassis = make_shared<SwerveChassis>(frontLeft, 
+                                               frontRight, 
+                                               backLeft, 
+                                               backRight, 
+                                               wheelDiameter,
+                                               wheelBase, 
+                                               track, 
+                                               odometryComplianceCoefficient,
+                                               maxSpeed, 
+                                               maxAngularSpeed, 
+                                               maxAcceleration, 
+                                               maxAngularAcceleration);
     }
 
     return m_chassis;

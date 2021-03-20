@@ -71,12 +71,14 @@
 <!ELEMENT swervechassis (swervemodule*) >
 <!ATTLIST swervechassis 
           type              ( SWERVE ) "SWERVE"
-          wheelBase                 CDATA #REQUIRED
-          track                     CDATA #REQUIRED
-          maxVelocity               CDATA #REQUIRED
-          maxAngularVelocity        CDATA #REQUIRED
-          maxAcceleration           CDATA #REQUIRED
-          maxAngularAcceleration    CDATA #REQUIRED
+          wheelDiameter                     CDATA #REQUIRED
+          wheelBase                         CDATA #REQUIRED
+          track                             CDATA #REQUIRED
+          odometryComplianceCoefficient     CDATA "1.0"
+          maxVelocity                       CDATA #REQUIRED
+          maxAngularVelocity                CDATA #REQUIRED
+          maxAcceleration                   CDATA #REQUIRED
+          maxAngularAcceleration            CDATA #REQUIRED
 >
 
 <!ELEMENT swervemodule (motor*, cancoder? ) >
@@ -90,7 +92,6 @@
           turn_peak_val     CDATA "1.0"
           turn_max_acc      CDATA "0.0"
           turn_cruise_vel   CDATA "0.0"
-          wheelDiameter     CDATA #REQUIRED
 >
 
 
