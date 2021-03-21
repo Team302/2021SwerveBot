@@ -1,5 +1,5 @@
 //====================================================================================================================================================
-// Copyright 2020 Lake Orion Robotics FIRST Team 302
+// Copyright 2021 Lake Orion Robotics FIRST Team 302
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
 // to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
@@ -13,37 +13,42 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
 
-#pragma once
-
-//C++ Libraries
+//C++ includes
 #include <memory>
 
 //Team 302 includes
-#include <subsys/SwerveChassis.h>
-#include <gamepad/TeleopControl.h>
-#include <states/IState.h>
-#include <hw/DragonPigeon.h>
+#include <auton/PrimitiveParams.h>
+#include <subsys/SwerveChassisFactory.h>
+#include <auton/primitives/IPrimitive.h>
 #include <auton/shooterlevels/DriveToShooterLevel.h>
+#include <auton/PrimitiveFactory.h>
 
-class SwerveDrive : public IState
+using namespace std;
+
+DriveToShooterLevel::DriveToShooterLevel() : m_primitive(nullptr),
+                                             m_primFactory(PrimitiveFactory::GetInstance())
 {
-    public:
+}
 
-        SwerveDrive();
-        ~SwerveDrive() = default;
+void DriveToShooterLevel::DriveToLevel(double distance, double startSpeed)
+{
 
-        void Init() override;
+    if (m_primitive == nullptr)
+    {
 
-        void Run() override;
-
-        bool AtTarget() const override;
-
-    private:
-        inline TeleopControl* GetController() const { return m_controller; }
-        std::shared_ptr<SwerveChassis>      m_chassis;
-        TeleopControl*                      m_controller;
-        bool                                m_usePWLinearProfile;
-        bool                                m_lastUp;
-        bool                                m_lastDown;
-        DriveToShooterLevel*                m_shooterLevel;
-};
+    auto params = new PrimitiveParams( DRIVE_DISTANCE,  //identifer
+                                       0.0,             //time
+                                       distance,        //distance
+                                       0.0,             //target x location
+                                       0.0,             //target y location
+                                       0.0,             //heading
+                                       startSpeed,      //start drive speed
+                                       0.0,             //end drive speed
+                                       false,           //run the intake
+                                       string("")      //pathname
+                                       );                                       
+        m_primitive = m_primFactory->GetIPrimitive(params);
+        m_primitive->Init(params);
+    }
+    m_primitive->Run();
+}
