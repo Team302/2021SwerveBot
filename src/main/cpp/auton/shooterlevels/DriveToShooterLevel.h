@@ -1,5 +1,5 @@
 //====================================================================================================================================================
-// Copyright 2020 Lake Orion Robotics FIRST Team 302
+// Copyright 2021 Lake Orion Robotics FIRST Team 302
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
 // to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
@@ -12,38 +12,21 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 //====================================================================================================================================================
-
 #pragma once
 
-//C++ Libraries
+//C++ Includes
 #include <memory>
 
-//Team 302 includes
-#include <subsys/SwerveChassis.h>
-#include <gamepad/TeleopControl.h>
-#include <states/IState.h>
-#include <hw/DragonPigeon.h>
-#include <auton/shooterlevels/DriveToShooterLevel.h>
-
-class SwerveDrive : public IState
+class DriveToShooterLevel
 {
     public:
+        void DriveToLevel(double distance, double startSpeed);
 
-        SwerveDrive();
-        ~SwerveDrive() = default;
-
-        void Init() override;
-
-        void Run() override;
-
-        bool AtTarget() const override;
+        DriveToShooterLevel();
+        virtual ~DriveToShooterLevel() = default;
 
     private:
-        inline TeleopControl* GetController() const { return m_controller; }
-        std::shared_ptr<SwerveChassis>      m_chassis;
-        TeleopControl*                      m_controller;
-        bool                                m_usePWLinearProfile;
-        bool                                m_lastUp;
-        bool                                m_lastDown;
-        DriveToShooterLevel*                m_shooterLevel;
+    IPrimitive*         m_primitive;
+    PrimitiveFactory*   m_primFactory;
+
 };

@@ -30,6 +30,7 @@
 #include <subsys/SwerveChassisFactory.h>
 #include <hw/factories/PigeonFactory.h>
 #include <utils/Logger.h>
+#include <auton/shooterlevels/DriveToShooterLevel.h>
 
 
 using namespace std;
@@ -40,7 +41,8 @@ SwerveDrive::SwerveDrive() : IState(),
                              m_controller( TeleopControl::GetInstance() ),
                              m_usePWLinearProfile(false),
                              m_lastUp(false),
-                             m_lastDown(false)
+                             m_lastDown(false),
+                             m_shooterLevel(new DriveToShooterLevel())
 {
     if ( m_controller == nullptr )
     {
@@ -149,6 +151,16 @@ void SwerveDrive::Run( )
                 m_chassis->SetDriveScaleFactor(newscale);
             }
             m_lastDown = true;
+        }
+        else if (controller->IsButtonPressed(TeleopControl::AUTO_DRIVE_TO_YELLOW))
+        {
+            //Want to drive 172 inches backwards or around 14.3 feet
+            m_shooterLevel->DriveToLevel(-14.3, 1.0);  //First arg is distance in feet, second is speed in feet   
+        }
+        else if (controller->IsButtonPressed(TeleopControl::AUTO_DRIVE_TO_LOADING_ZONE))
+        {
+            //Want to drive 172 inches forwards or around 14.3 feet
+            m_shooterLevel->DriveToLevel(14.3, 1.0);  //First arg is distance in feet, second is speed in feet
         }
         else
         {
