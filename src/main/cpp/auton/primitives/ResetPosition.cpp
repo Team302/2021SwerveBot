@@ -22,6 +22,7 @@
 #include <auton/PrimitiveParams.h>
 #include <auton/primitives/IPrimitive.h>
 #include <subsys/SwerveChassisFactory.h>
+#include <hw/factories/PigeonFactory.h>
 
 using namespace std;
 using namespace frc;
@@ -49,6 +50,8 @@ void ResetPosition::Init(PrimitiveParams* params)
         m_chassis->SetEncodersToZero();
 
         m_chassis->ResetPosition(m_trajectory.InitialPose(), StartAngle);
+
+        PigeonFactory::GetFactory()->GetPigeon()->ReZeroPigeon(0, 0);
 
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "ResetPosX", to_string(m_chassis.get()->GetPose().X().to<double>()));
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "ResetPosY", to_string(m_chassis.get()->GetPose().Y().to<double>()));
