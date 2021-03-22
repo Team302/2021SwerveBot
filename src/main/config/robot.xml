@@ -21,9 +21,10 @@
                   secondcrosshairx="0.25"
                   secondcrosshairy="0.25" />
 
+       <!--
 	<blinkin position = "front" 
 		  pwmId = "0"/>
-
+       -->
 <!-- ====================================================
      Chassis
      ====================================================  -->
@@ -31,10 +32,10 @@
                      wheelDiameter="4.13"
                      wheelBase="14.0"  
                      track="14.0"
-                     odometryComplianceCoefficient="0.875"
+                     odometryComplianceCoefficient="0.85"
                      maxVelocity="194.4"
                      maxAngularVelocity="1591.2"
-                     maxAcceleration="48"
+                     maxAcceleration="118.11"
                      maxAngularAcceleration="24">
 			 
         <swervemodule type="RIGHT_BACK"
@@ -380,12 +381,12 @@
                      forwardlimitswitchopen="false"
                      reverselimitswitch="false"
                      reverselimitswitchopen="false"/>        
-              <digitalInput usage="TURRET_ANGLE_MIN"
+              <!-- digitalInput usage="TURRET_ANGLE_MIN"
                             digitalId="0"
                             reversed="false"/>
               <digitalInput usage="TURRET_ANGLE_MAX"
                             digitalId="1"
-                            reversed="false"/>
+                            reversed="false"/ -->
 	</mechanism>
     
 	<mechanism type="BALL_HOPPER">

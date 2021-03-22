@@ -10,7 +10,8 @@
 	<controlData identifier="closedloopyellow"
 				 mode="VELOCITY_RPS"
 				 proportional="0.16"
-				 feedforward="0.055"/>
+				 integral="0.005"
+				 feedforward="0.04"/>
 	<controlData identifier="closedloopgreen"
 				 mode="VELOCITY_RPS"
 				 proportional="0.185"
@@ -39,8 +40,8 @@
 	<mechanismTarget stateIdentifier="SHOOTERSHOOTYELLOW"
 	                 controlDataIdentifier="closedloopyellow"
 	                 controlDataIdentifier2="closedloopyellow"
-					 value="32"
-					 secondValue="22.4"/>
+					 value="33.5"
+					 secondValue="25"/>
 
 	<mechanismTarget stateIdentifier="SHOOTERSHOOTBLUE"
 					 controlDataIdentifier="closedloopblue"

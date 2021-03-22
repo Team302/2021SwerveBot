@@ -71,16 +71,25 @@ GoalDetection* GoalDetection::GetInstance()
     return GoalDetection::m_instance;
 }
 
-GoalDetection::GoalDetection()
+GoalDetection::GoalDetection() : m_camera(LimelightFactory::GetLimelightFactory()->GetLimelight()),
+                                 m_queriesSinceLastSeen(100),
+                                 m_lastHor(360_deg),
+                                 m_lastVert(360_deg),
+                                 m_lastDist(units::length::inch_t(360.0))
 {
-    m_camera = LimelightFactory::GetLimelightFactory()->GetLimelight();
-    m_camera->SetLEDMode(DragonLimelight::LED_ON);
+    m_camera->SetPipeline(1);
 }
 
 bool GoalDetection::SeeOuterGoal() const
 {
-    auto cam = m_camera;
-    return (cam != nullptr && cam->HasTarget() );
+    Logger::GetLogger()->ToNtTable(string("Goal Detection"), string("camera"), m_camera != nullptr ? "true" : "false");
+    Logger::GetLogger()->ToNtTable(string("Goal Detection"), string("target"), m_camera != nullptr ? (m_camera->HasTarget() ? "true" : "false") : "false");
+    
+    auto seen =  (m_camera != nullptr && m_camera->HasTarget() );
+    m_queriesSinceLastSeen = seen ? 0 : m_queriesSinceLastSeen+1;
+
+    seen = m_queriesSinceLastSeen < 3 && !seen ? true : seen;
+    return seen;
 }
 bool GoalDetection::SeeInnerGoal() const
 {
@@ -89,13 +98,14 @@ bool GoalDetection::SeeInnerGoal() const
 
 units::angle::degree_t GoalDetection::GetHorizontalAngleToOuterGoal() const
 {
-    units::angle::degree_t angle = 0_deg;
-    auto cam = m_camera;
-    if (cam != nullptr && cam->HasTarget() )
+    auto seen =  (m_camera != nullptr && m_camera->HasTarget() );
+    auto angle = m_lastHor;
+    if ( seen )
     {
-        angle = cam->GetTargetHorizontalOffset();
+        angle = m_camera->GetTargetHorizontalOffset();
+        m_lastHor = angle;
     }
-    return angle;
+    return angle;   
 }
 units::angle::degree_t GoalDetection::GetHorizontalAngleToInnerGoal() const
 {
@@ -104,13 +114,14 @@ units::angle::degree_t GoalDetection::GetHorizontalAngleToInnerGoal() const
 
 units::angle::degree_t GoalDetection::GetVerticalAngleToOuterGoal() const
 {
-    units::angle::degree_t angle = 0_deg;
-    auto cam = m_camera;
-    if (cam != nullptr && cam->HasTarget() )
+    auto seen =  (m_camera != nullptr && m_camera->HasTarget() );
+    auto angle = m_lastVert;
+    if ( seen )
     {
-        angle = cam->GetTargetHorizontalOffset();
+        angle = m_camera->GetTargetVerticalOffset();
+        m_lastVert = angle;
     }
-    return angle;
+    return angle;   
 }
 units::angle::degree_t GoalDetection::GetVerticalAngleToInnerGoal() const
 {
@@ -125,15 +136,17 @@ units::angle::degree_t GoalDetection::GetVerticalAngleToInnerGoal() const
 
 units::length::inch_t GoalDetection::GetDistanceToOuterGoal() const
 {
-    units::length::inch_t dist = units::length::inch_t(0.0);
-    if (m_camera != nullptr && m_camera->HasTarget() )
+    auto seen =  (m_camera != nullptr && m_camera->HasTarget() );
+    auto dist = m_lastDist;
+    if ( seen )
     {
         dist = m_camera->EstimateTargetDistance();
+        m_lastDist = dist;
     }
-    return dist;
+    return dist;   
 }
 
 units::length::inch_t GoalDetection::GetDistanceToInnerGoal() const
 {
-    return GetDistanceToInnerGoal();
+    return GetDistanceToOuterGoal();
 }

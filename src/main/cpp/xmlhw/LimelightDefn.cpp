@@ -156,24 +156,21 @@ DragonLimelight* LimelightDefn::ParseXML(pugi::xml_node    limelightNode)
 
         if(!hasError)
         {
-            limelight = LimelightFactory::GetLimelightFactory()->CreateLimelight
-            (
-                tableName,
-                mountingHeight,
-                horizontalOffset,
-                rotation,
-                mountingAngle,
-                targetHeight,
-                targetHeight2,
-                ledMode,
-                camMode,
-                streamMode,
-                snapMode,
-                defaultXHairX,
-                defaultXHairY,
-                secXHairX,
-                secXHairY
-            );
+            limelight = LimelightFactory::GetLimelightFactory()->CreateLimelight(   tableName,
+                                                                                    mountingHeight,
+                                                                                    horizontalOffset,
+                                                                                    rotation,
+                                                                                    mountingAngle,
+                                                                                    targetHeight,
+                                                                                    targetHeight2,
+                                                                                    ledMode,
+                                                                                    camMode,
+                                                                                    streamMode,
+                                                                                    snapMode,
+                                                                                    defaultXHairX,
+                                                                                    defaultXHairY,
+                                                                                    secXHairX,
+                                                                                    secXHairY );
         }
     }
     return limelight;

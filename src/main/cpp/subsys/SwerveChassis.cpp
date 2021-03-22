@@ -279,10 +279,10 @@ Pose2d SwerveChassis::GetPose() const
 /// @brief update the chassis odometry based on current states of the swerve modules and the pigeon
 void SwerveChassis::UpdateOdometry() 
 {
-    if ( !IsMoving() )  // not moving, so odometry isn't changing
-    {
-        return;
-    }
+   // if ( !IsMoving() )  // not moving, so odometry isn't changing
+   // {
+   //    return;
+   // }
 
     units::degree_t yaw{m_pigeon->GetYaw()};
     Rotation2d rot2d {yaw+m_offsetPoseAngle};

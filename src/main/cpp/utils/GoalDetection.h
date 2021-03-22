@@ -50,6 +50,10 @@ class GoalDetection
         GoalDetection();
         ~GoalDetection() = default;
 
-        DragonLimelight*        m_camera;
+        DragonLimelight*                m_camera;
+        mutable int                     m_queriesSinceLastSeen;
+        mutable units::angle::degree_t  m_lastHor;
+        mutable units::angle::degree_t  m_lastVert;
+        mutable units::length::inch_t   m_lastDist;
 
 };

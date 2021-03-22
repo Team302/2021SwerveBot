@@ -183,21 +183,25 @@ void ShooterStateMgr::RunCurrentState()
 
     if (controller != nullptr)
     {
-        if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOT ))
+        if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_SHOOT ))
         {
             Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot");
-            SetCurrentState( SHOOTER_STATE::SHOOT, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::RAPID_RELEASE, false);
-            BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
             TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::HOLD, false);
         }
-        else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT_GREEN ))
+        else
+        {
+            Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot");
+            BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
+        }
+
+        if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT_GREEN ))
         {
             Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Green");
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTGREEN, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
-//            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
+            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
         }
         else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT_YELLOW ))
         {
@@ -205,7 +209,7 @@ void ShooterStateMgr::RunCurrentState()
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTYELLOW, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
-//            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
+            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
         }
         else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT_BLUE ))
         {
@@ -213,7 +217,7 @@ void ShooterStateMgr::RunCurrentState()
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTBLUE, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
-//            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
+            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
         }
         else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT_RED ))
         {
@@ -221,12 +225,12 @@ void ShooterStateMgr::RunCurrentState()
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTRED, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
-//            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
+            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, false);
         }
-        else
-        {
-            SetCurrentState( m_prevStateEnum, false);
-        }
+//        else
+//        {
+//            SetCurrentState( m_prevStateEnum, false);
+//        }
     }
 
     // run the current state
@@ -278,7 +282,7 @@ void ShooterStateMgr::SetCurrentState
             }
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, run );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, run);
-           // TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, run);
+            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::LIMELIGHT_AIM, run);
             if ( stateEnum == SHOOTER_STATE::GET_READY_SHOOTBLUE)
             {
                 Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Blue");
@@ -296,6 +300,16 @@ void ShooterStateMgr::SetCurrentState
                 Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Yellow");
             }
         }
+        /**
+        else
+        {
+            ShooterStateMgr::GetInstance()->SetCurrentState(ShooterStateMgr::SHOOTER_STATE::OFF, run);
+            BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, run );
+            BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, run);
+            TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::HOLD, run);
+        }
+        **/
+        
         if ( run )
         {
             m_currentState->Run();

@@ -19,7 +19,7 @@
 // FRC includes
 
 // Team 302 includes
-#include <hw/DragonDigitalInput.h>
+//#include <hw/DragonDigitalInput.h>
 #include <subsys/Mech1IndMotor.h>
 
 // Third Party Includes
@@ -36,9 +36,9 @@ class Turret : public Mech1IndMotor
         /// @param [in] IDragonMotorController* the motor controller that will run the turret
         Turret
         (
-            std::shared_ptr<IDragonMotorController>   motorController,
-            std::shared_ptr<DragonDigitalInput>       minTurnSensor,
-            std::shared_ptr<DragonDigitalInput>       maxTurnSensor
+            std::shared_ptr<IDragonMotorController>   motorController//,
+//            std::shared_ptr<DragonDigitalInput>       minTurnSensor,
+//            std::shared_ptr<DragonDigitalInput>       maxTurnSensor
         );
 
         /// @brief Destroy the object and free memory
@@ -46,9 +46,9 @@ class Turret : public Mech1IndMotor
 
         /// @brief update the output to the mechanism using the current controller and target value(s)
         /// @return void 
-        void Update() override;
+        //void Update() override;
 
     private:
-        std::shared_ptr<DragonDigitalInput>             m_min;
-        std::shared_ptr<DragonDigitalInput>             m_max;
+//        std::shared_ptr<DragonDigitalInput>             m_min;
+//        std::shared_ptr<DragonDigitalInput>             m_max;
 };

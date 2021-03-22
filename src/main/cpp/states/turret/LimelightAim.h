@@ -38,11 +38,15 @@ class LimelightAim : public IState
     private:
         std::unique_ptr<Mech1MotorState>    m_motorState;
         std::shared_ptr<Turret>             m_turret;
-        DragonLimelight*                    m_limelight;
+        //DragonLimelight*                    m_limelight;
 
         ControlData* m_controlData;
         bool m_atTarget;
         double m_target;
         double m_targetPosition;
         bool m_start;
+
+        const double m_min    = -0.237;
+        const double m_max    = 0.237;
+        const double m_zero   = 0.0;
 };

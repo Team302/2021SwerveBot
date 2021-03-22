@@ -37,6 +37,7 @@
 #include <hw/DragonLimelight.h>
 #include <vision/DriverMode.h>
 #include <states/shooter/ShooterStateMgr.h>
+#include <states/turret/TurretStateMgr.h>
 #include <auton/CyclePrimitives.h>
 
 
@@ -68,5 +69,6 @@ class Robot : public frc::TimedRobot
     DriverMode*                       m_driverMode;
     std::shared_ptr<SwerveDrive>      m_drive;
     ShooterStateMgr*                  m_shooterState;
+    TurretStateMgr*                   m_turretState;
     CyclePrimitives*                  m_cyclePrims;
 };

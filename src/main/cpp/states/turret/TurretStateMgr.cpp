@@ -152,11 +152,13 @@ void TurretStateMgr::SetCurrentState
         if ( stateEnum == LIMELIGHT_AIM )
         {
             Logger::GetLogger()->ToNtTable(m_nt, "statemgr: Current State", "Limelight Aim");
+            /**
             auto llAim = dynamic_cast<LimelightAim*>(m_currentState);
             if ( llAim != nullptr )
             {
                 llAim->UpdateTarget( m_approxTargetAngle );
             }
+            **/
         }
         else if (stateEnum==HOLD)
         {

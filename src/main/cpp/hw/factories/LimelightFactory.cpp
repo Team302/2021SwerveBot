@@ -76,8 +76,4 @@ DragonLimelight* LimelightFactory::CreateLimelight
     return m_limelight;
 }
 
-DragonLimelight* LimelightFactory::GetLimelight() const
-{
-    return m_limelight;
-}
 

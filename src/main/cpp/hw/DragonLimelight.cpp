@@ -59,7 +59,7 @@ DragonLimelight::DragonLimelight
     m_targetHeight( targetHeight ),
     m_targetHeight2( targetHeight2 )
 {
-    SetLEDMode( DragonLimelight::LED_MODE::LED_OFF);
+    //SetLEDMode( DragonLimelight::LED_MODE::LED_OFF);
 }
 
 std::vector<double> DragonLimelight::Get3DSolve() const
@@ -76,19 +76,23 @@ units::angle::degree_t DragonLimelight::GetTargetHorizontalOffset() const
 {
     units::angle::degree_t tx = units::angle::degree_t(m_networktable.get()->GetNumber("tx", 0.0));
     units::angle::degree_t ty = units::angle::degree_t(m_networktable.get()->GetNumber("ty", 0.0));
-    if(m_rotation == units::angle::degree_t(0.0))
+    if ( abs(m_rotation.to<double>()) < 1.0 )
+    //if(m_rotation == units::angle::degree_t(0.0))
     {
         return tx;
     }
-    else if(m_rotation == units::angle::degree_t(90.0))
+//    else if(m_rotation == units::angle::degree_t(90.0))
+    else if ( abs(m_rotation.to<double>()-90.0) < 1.0 )
     {
         return -ty;
     }
-    else if(m_rotation == units::angle::degree_t(180.0))
+//    else if(m_rotation == units::angle::degree_t(180.0))
+    else if ( abs(m_rotation.to<double>()-180.0) < 1.0 )
     {
         return -tx;
     }
-    else if(m_rotation == units::angle::degree_t(270.0))
+//    else if(m_rotation == units::angle::degree_t(270.0))
+    else if ( abs(m_rotation.to<double>()-270.0) < 1.0 )
     {
         return ty;
     }
@@ -97,27 +101,29 @@ units::angle::degree_t DragonLimelight::GetTargetHorizontalOffset() const
         Logger::GetLogger()->LogError("DragonLimelight::GetTargetVerticalOffset", "Invalid limelight rotation");
         return units::angle::degree_t(-180.0);
     }
-    
-   
 }
 
 units::angle::degree_t DragonLimelight::GetTargetVerticalOffset() const
 {
     units::angle::degree_t tx = units::angle::degree_t(m_networktable.get()->GetNumber("tx", 0.0));
     units::angle::degree_t ty = units::angle::degree_t(m_networktable.get()->GetNumber("ty", 0.0));
-    if(m_rotation == units::angle::degree_t(0.0))
+    if ( abs(m_rotation.to<double>()) < 1.0 )
+    //if(m_rotation == units::angle::degree_t(0.0))
     {
         return ty;
     }
-    else if(m_rotation == units::angle::degree_t(90.0))
+//    else if(m_rotation == units::angle::degree_t(90.0))
+    else if ( abs(m_rotation.to<double>()-90.0) < 1.0 )
     {
         return tx;
     }
-    else if(m_rotation == units::angle::degree_t(180.0))
+//    else if(m_rotation == units::angle::degree_t(180.0))
+    else if ( abs(m_rotation.to<double>()-180.0) < 1.0 )
     {
         return -ty;
     }
-    else if(m_rotation == units::angle::degree_t(270.0))
+//    else if(m_rotation == units::angle::degree_t(270.0))
+    else if ( abs(m_rotation.to<double>()-270.0) < 1.0 )
     {
         return -tx;
     }
@@ -203,7 +209,10 @@ void DragonLimelight::PrintValues()
 
 units::length::inch_t DragonLimelight::EstimateTargetDistance() const
 {
-    units::angle::degree_t angleDifference = (GetMountingAngle() + GetTargetVerticalOffset());
-    units::angle::radian_t angleRad = angleDifference;
-    return (GetTargetHeight()-GetMountingHeight()) / tan(angleRad.to<double>());
+    units::angle::degree_t angleFromHorizon = (GetMountingAngle() + GetTargetVerticalOffset());
+    units::angle::radian_t angleRad = angleFromHorizon;
+    double tanAngle = tan(angleRad.to<double>());
+    return (GetTargetHeight()-GetMountingHeight()) / tanAngle;
 }
+
+

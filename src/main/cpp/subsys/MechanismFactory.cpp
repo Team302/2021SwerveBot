@@ -201,14 +201,16 @@ void  MechanismFactory::CreateIMechanism
 		{
 			if ( m_turret.get() == nullptr )
 			{
-				auto minTurn = GetDigitalInput(digitalInputs, DigitalInputUsage::TURRET_ANGLE_MIN);
-				auto maxTurn = GetDigitalInput(digitalInputs, DigitalInputUsage::TURRET_ANGLE_MAX);
+				//auto minTurn = GetDigitalInput(digitalInputs, DigitalInputUsage::TURRET_ANGLE_MIN);
+				//auto maxTurn = GetDigitalInput(digitalInputs, DigitalInputUsage::TURRET_ANGLE_MAX);
 				auto motor = GetMotorController(motorControllers, MotorControllerUsage::MOTOR_CONTROLLER_USAGE::TURRET);
-				if(motor.get() != nullptr && minTurn.get() != nullptr && maxTurn.get() != nullptr)
+				//if(motor.get() != nullptr && minTurn.get() != nullptr && maxTurn.get() != nullptr)
+				if(motor.get() != nullptr)
 				{
 					motor.get()->SetFramePeriodPriority( IDragonMotorController::MOTOR_PRIORITY::MEDIUM);
 					//motor.get()->UpdateFramePeriods(StatusFrameEnhanced::Status_1_General, 60);
-					m_turret = make_shared<Turret>(motor, minTurn, maxTurn);
+					//m_turret = make_shared<Turret>(motor, minTurn, maxTurn);
+					m_turret = make_shared<Turret>(motor);
 					Logger::GetLogger()->ToNtTable(string("MechanismFactory"), string("Turret"), string("created"));
 				}
 			}

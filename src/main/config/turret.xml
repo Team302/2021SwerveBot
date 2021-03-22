@@ -10,9 +10,9 @@
 				 mode="POSITION_DEGREES"
 				 proportional="5.0"/>
 	<mechanismTarget stateIdentifier="TURRETHOLD"
-	                 controlDataIdentifier="closedloop2"
+	                 controlDataIdentifier="closedloop"
 					 value="0.0"/>
 	<mechanismTarget stateIdentifier="TURRETAUTOAIM"
-	                 controlDataIdentifier="closedloop"
-					 value="0.01"/>
+	                 controlDataIdentifier="openloop"
+					 value="0.15"/>
 </statedata>

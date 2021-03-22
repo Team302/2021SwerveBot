@@ -25,6 +25,7 @@
 #include <Robot.h>
 #include <states/chassis/SwerveDrive.h>
 #include <states/shooter/ShooterStateMgr.h>
+#include <states/turret/TurretStateMgr.h>
 #include <subsys/MechanismFactory.h>
 #include <subsys/Shooter.h>
 #include <subsys/SwerveChassisFactory.h>
@@ -33,6 +34,8 @@
 #include <vision/DriverMode.h>
 #include <xmlhw/RobotDefn.h>
 #include <hw/interfaces/IDragonSensor.h>
+
+#include <utils/GoalDetection.h>
 
 
 using namespace std;
@@ -54,9 +57,15 @@ void Robot::RobotInit()
     unique_ptr<RobotDefn>  robotXml = make_unique<RobotDefn>();
     robotXml->ParseXML();
 
+    // auton magic
+    m_cyclePrims= new CyclePrimitives();
+
     //create the limelight camera
     m_limelight = LimelightFactory::GetLimelightFactory()->GetLimelight();
-    m_cyclePrims= new CyclePrimitives();
+    if ( m_limelight != nullptr)
+    {
+        m_driverMode->SetCamToDriveMode( m_limelight );
+    }
 }
 
 /// @brief This function is called every robot packet, no matter the  mode. This is used for items like diagnostics that run 
@@ -104,27 +113,22 @@ void Robot::TeleopInit()
     m_drive.get()->Init();
 
     auto shooter = MechanismFactory::GetMechanismFactory()->GetShooter();
-
-    auto ntable = nt::NetworkTableInstance::GetDefault().GetTable("fred");
-    Logger::GetLogger()->ToNtTable(ntable, "robot", "about to get shooter state mgr");
-
     m_shooterState = ( shooter.get() != nullptr ) ? ShooterStateMgr::GetInstance() : nullptr;
     if ( m_shooterState != nullptr )
     {
-        Logger::GetLogger()->ToNtTable(ntable, "robot", "about to set current shooter state off");
         m_shooterState->SetCurrentState(ShooterStateMgr::SHOOTER_STATE::OFF, true);
     }
     else 
     {
-        Logger::GetLogger()->ToNtTable(ntable, "robot", "state mgr error");
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("TeleopInit"), string("no shooter state manager"));
     }
 
-    //set camera to drivermode to stream to dashboard
     /**
-    if ( m_limelight != nullptr)
+    auto turret = MechanismFactory::GetMechanismFactory()->GetTurret();
+    m_turretState = (turret.get() != nullptr) ? TurretStateMgr::GetInstance() : nullptr;
+    if ( m_turretState != nullptr )
     {
-        m_driverMode->SetCamToDriveMode( m_limelight );
+        m_turretState->SetCurrentState(TurretStateMgr::TURRET_STATE::HOLD, true);
     }
     **/
 }
@@ -138,6 +142,15 @@ void Robot::TeleopPeriodic()
 
     m_drive.get()->Run();
 
+    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Horizontal Angle - inner (degrees)"),  GoalDetection::GetInstance()->GetHorizontalAngleToInnerGoal().to<double>());
+    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Horizontal Angle - outer (degrees)"),  GoalDetection::GetInstance()->GetHorizontalAngleToOuterGoal().to<double>());
+    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Vertical Angle - inner (degrees)"),  GoalDetection::GetInstance()->GetVerticalAngleToInnerGoal().to<double>());
+    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Vertical Angle - outer (degrees)"),  GoalDetection::GetInstance()->GetVerticalAngleToOuterGoal().to<double>());
+    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Distance - inner (inches)"),  GoalDetection::GetInstance()->GetDistanceToInnerGoal().to<double>());
+    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Distance - outer (inches)"),  GoalDetection::GetInstance()->GetDistanceToOuterGoal().to<double>());
+    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("See Inner"),  GoalDetection::GetInstance()->SeeInnerGoal() ? "true" : "false");
+    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("See Outer"),  GoalDetection::GetInstance()->SeeOuterGoal() ? "true" : "false");
+ 
     if ( m_shooterState != nullptr )
     {
         m_shooterState->RunCurrentState();
@@ -146,6 +159,13 @@ void Robot::TeleopPeriodic()
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT_ONCE, "robot", "no shooter");
     }
+
+    /**
+    if ( m_turretState != nullptr )
+    {
+        m_turretState->RunCurrentState();
+    }
+    **/
 }
 
 

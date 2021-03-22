@@ -28,6 +28,7 @@
 #include <subsys/MechanismFactory.h>
 #include <subsys/Turret.h>
 #include <utils/GoalDetection.h>
+#include <utils/Logger.h>
 
 // Third Party Includes
 
@@ -40,6 +41,7 @@ LimelightAim::LimelightAim
 ) : IState(),
     m_motorState( make_unique<Mech1MotorState>(MechanismFactory::GetMechanismFactory()->GetTurret().get(), control, target)),
     m_turret(MechanismFactory::GetMechanismFactory()->GetTurret()),
+    m_controlData(control),
     m_atTarget(false),
     m_target(target),
     m_targetPosition(0.0),
@@ -54,11 +56,49 @@ void LimelightAim::Init()
 
 void LimelightAim::Run()
 {
+    auto target = m_target;
+    if ( abs(target) < 0.1 )
+    {
+        m_target = 0.15;
+        target = 0.15;
+    }
+    auto angle = units::angle::degree_t(360.0);
+    auto goal = GoalDetection::GetInstance();
+    if ( goal->SeeInnerGoal() )
+    {
+        angle = goal->GetHorizontalAngleToInnerGoal();
+        if (abs(angle.to<double>()) < 1.0)
+        {
+            target = 0.0;
+        }
+    }
+
+    auto pos = m_turret.get()->GetPosition() / 360.0;
+    if (pos > m_max && target > 0.0)
+    {
+        target *= -1.0;
+    }
+    else if (pos < m_min && target < 0.0)
+    {
+        target *= -1.0;
+    }
+
+
+    target = (angle.to<double>() > 0.0) ? -1.0 * target : target;
+
+    Logger::GetLogger()->ToNtTable("LimelightAim", "angle", angle.to<double>());
+    Logger::GetLogger()->ToNtTable("LimelightAim", "output", target);
+
+    m_turret.get()->UpdateTarget(target);
+    m_turret.get()->Update();
+
+    /**
    auto targetHorizontalOffset = GoalDetection::GetInstance()->GetHorizontalAngleToInnerGoal();
    double currentPosition = m_turret.get()->GetPosition();
    //m_turret.get()->UpdateTarget((currentPosition + targetHorizontalOffset + 2.0));
    m_turret.get()->UpdateTarget((currentPosition + targetHorizontalOffset.to<double>()));
    m_turret.get()->Update();
+   **/
 }
 
 bool LimelightAim::AtTarget() const

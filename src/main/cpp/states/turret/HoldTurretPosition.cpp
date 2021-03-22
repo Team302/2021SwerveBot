@@ -47,3 +47,4 @@ void HoldTurretPosition::Init()
         turret.get()->UpdateTarget(pos);
     }
 }
+

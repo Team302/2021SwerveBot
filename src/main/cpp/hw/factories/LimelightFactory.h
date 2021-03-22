@@ -28,7 +28,7 @@ class LimelightFactory
   public:
     static LimelightFactory* GetLimelightFactory();
 
-    DragonLimelight* GetLimelight() const;
+    DragonLimelight* GetLimelight() const { return m_limelight;}
 
     DragonLimelight* CreateLimelight
     (
