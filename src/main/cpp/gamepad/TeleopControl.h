@@ -75,6 +75,8 @@ class TeleopControl
             SHOOT,
             TRANSFER_UP,
             TRANSFER_DOWN,
+            AUTO_DRIVE_TO_YELLOW,
+            AUTO_DRIVE_TO_LOADING_ZONE,
             MAX_FUNCTIONS
         };
 
