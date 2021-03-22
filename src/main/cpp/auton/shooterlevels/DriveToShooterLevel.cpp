@@ -38,14 +38,14 @@ void DriveToShooterLevel::DriveToLevel(double distance, double startSpeed)
 
     auto params = new PrimitiveParams( DRIVE_DISTANCE,  //identifer
                                        0.0,             //time
-                                       distance,        //distance
+                                       distance,        //distance  in inches
                                        0.0,             //target x location
                                        0.0,             //target y location
-                                       0.0,             //heading
-                                       startSpeed,      //start drive speed
+                                       0.0,             //heading in degrees
+                                       startSpeed,      //start drive speed in inches
                                        0.0,             //end drive speed
                                        false,           //run the intake
-                                       string("")      //pathname
+                                       string("")       //pathname
                                        );                                       
         m_primitive = m_primFactory->GetIPrimitive(params);
         m_primitive->Init(params);

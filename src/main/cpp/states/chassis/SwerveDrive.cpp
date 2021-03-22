@@ -154,13 +154,13 @@ void SwerveDrive::Run( )
         }
         else if (controller->IsButtonPressed(TeleopControl::AUTO_DRIVE_TO_YELLOW))
         {
-            //Want to drive 172 inches backwards or around 14.3 feet
-            m_shooterLevel->DriveToLevel(-14.3, 1.0);  //First arg is distance in feet, second is speed in feet   
+            //Want to drive 172 inches backwards
+            m_shooterLevel->DriveToLevel(-172, 39.7);  //First arg is distance in inches, second is speed in inches per second  
         }
         else if (controller->IsButtonPressed(TeleopControl::AUTO_DRIVE_TO_LOADING_ZONE))
         {
-            //Want to drive 172 inches forwards or around 14.3 feet
-            m_shooterLevel->DriveToLevel(14.3, 1.0);  //First arg is distance in feet, second is speed in feet
+            //Want to drive 172 inches forwards
+            m_shooterLevel->DriveToLevel(172, 39.7);  //First arg is distance in inches, second is speed in inches per second
         }
         else
         {

@@ -17,6 +17,10 @@
 //C++ Includes
 #include <memory>
 
+//Team 302 Includes
+#include <auton/primitives/IPrimitive.h>
+#include <auton/PrimitiveFactory.h>
+
 class DriveToShooterLevel
 {
     public:
