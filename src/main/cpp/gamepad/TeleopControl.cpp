@@ -100,6 +100,11 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		m_controllerIndex[ REZERO_PIGEON ]				= ctrlNo;
 		m_buttonIDs[ REZERO_PIGEON ]					= IDragonGamePad::X_BUTTON;
 
+		m_controllerIndex[ AUTO_DRIVE_TO_YELLOW ]		= ctrlNo;
+		m_buttonIDs[ AUTO_DRIVE_TO_YELLOW ]				= IDragonGamePad::Y_BUTTON;
+		m_controllerIndex[ AUTO_DRIVE_TO_LOADING_ZONE ]	= ctrlNo;
+		m_buttonIDs[ AUTO_DRIVE_TO_LOADING_ZONE ]		= IDragonGamePad::B_BUTTON;
+
 		m_controllerIndex[DRIVE_FULL] 		= ctrlNo;
 		m_buttonIDs[DRIVE_FULL] 			= IDragonGamePad::POV_0;	
 		m_controllerIndex[DRIVE_75PERCENT] 	= ctrlNo;

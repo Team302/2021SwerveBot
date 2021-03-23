@@ -58,6 +58,8 @@ class TeleopControl
             SHOOTER_SHOOT,
             TURRET_LIMELIGHT_AIM,
             REZERO_PIGEON,
+            AUTO_DRIVE_TO_YELLOW,
+            AUTO_DRIVE_TO_LOADING_ZONE,
             MAX_FUNCTIONS
         };
 
