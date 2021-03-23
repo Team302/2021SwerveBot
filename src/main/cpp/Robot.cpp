@@ -61,11 +61,13 @@ void Robot::RobotInit()
     m_cyclePrims= new CyclePrimitives();
 
     //create the limelight camera
+    /**
     m_limelight = LimelightFactory::GetLimelightFactory()->GetLimelight();
     if ( m_limelight != nullptr)
     {
         m_driverMode->SetCamToDriveMode( m_limelight );
     }
+    **/
 }
 
 /// @brief This function is called every robot packet, no matter the  mode. This is used for items like diagnostics that run 

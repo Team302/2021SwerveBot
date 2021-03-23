@@ -50,7 +50,7 @@ std::string AutonSelector::GetSelectedAutoFile()
 {
 	//Logger::GetLogger()->LogError(string("Auton Selector Get Selected Auton"), m_chooser.GetSelected());
 	
-	//If statement to grab the corrent galactic search path xml from limelight with GalacticSearchChooser
+	//If statement to grab the corrent galactic search path xml from raspberry pi with GalacticSearchChooser
 
 
 	if ( m_chooser.GetSelected() == "GS")

@@ -125,9 +125,6 @@ TeleopControl::TeleopControl() : m_axisIDs(),
     ctrlNo = 1;
     if ( m_controllers[ctrlNo] != nullptr && ds->GetJoystickIsXbox(ctrlNo) )
     {
-		m_controllerIndex[ OFF ] = ctrlNo;
-		m_buttonIDs[ OFF ] = IDragonGamePad::START_BUTTON;
-
 		m_controllerIndex[ SHOOTER_PREPARE_TO_SHOOT_GREEN ] = ctrlNo;
 		m_buttonIDs[ SHOOTER_PREPARE_TO_SHOOT_GREEN ] = IDragonGamePad::A_BUTTON;
 
@@ -160,19 +157,6 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 	}
     else if ( m_controllers[ctrlNo] != nullptr )
     {
-		m_controllerIndex[INTAKE_ON] = ctrlNo;
-		m_buttonIDs[INTAKE_ON] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_1;
-		m_controllerIndex[INTAKE_OFF] = ctrlNo;
-		m_buttonIDs[INTAKE_OFF] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_2;
-
-
-		m_controllerIndex[BALL_TRANSFER_OFF] = ctrlNo;
-		m_buttonIDs[BALL_TRANSFER_OFF] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_6;
-
-		m_controllerIndex[BALL_TRANSFER_TO_SHOOTER] = ctrlNo;
-		m_buttonIDs[BALL_TRANSFER_TO_SHOOTER] = IDragonGamePad::BUTTON_IDENTIFIER::GAMEPAD_BUTTON_8;
-		
-
 	}
 	else
 	{
