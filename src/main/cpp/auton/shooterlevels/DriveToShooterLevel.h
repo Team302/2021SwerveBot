@@ -24,13 +24,17 @@
 class DriveToShooterLevel
 {
     public:
-        void DriveToLevel(double distance, double startSpeed);
+        void DriveToLevel();
+        void Init(double distance, double startSpeed);
+        void Run();
+        bool IsDone();
 
         DriveToShooterLevel();
-        virtual ~DriveToShooterLevel() = default;
+        virtual ~DriveToShooterLevel();
 
     private:
     IPrimitive*         m_primitive;
     PrimitiveFactory*   m_primFactory;
+    bool                m_initialized;
 
 };

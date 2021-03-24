@@ -30,9 +30,15 @@ DriveToShooterLevel::DriveToShooterLevel() : m_primitive(nullptr),
 {
 }
 
-void DriveToShooterLevel::DriveToLevel(double distance, double startSpeed)
+void DriveToShooterLevel::DriveToLevel()
 {
 
+   
+    m_primitive->Run();
+}
+
+void DriveToShooterLevel::Init(double distance, double startSpeed)
+{
     if (m_primitive == nullptr)
     {
 
@@ -50,5 +56,20 @@ void DriveToShooterLevel::DriveToLevel(double distance, double startSpeed)
         m_primitive = m_primFactory->GetIPrimitive(params);
         m_primitive->Init(params);
     }
+}
+
+void DriveToShooterLevel::Run()
+{
     m_primitive->Run();
+}
+
+bool DriveToShooterLevel::IsDone()
+{
+    return m_primitive->IsDone();
+}
+
+     DriveToShooterLevel::~DriveToShooterLevel()
+{
+    delete m_primitive;
+    delete m_primFactory;
 }
