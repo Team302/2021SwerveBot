@@ -46,7 +46,10 @@ class LimelightAim : public IState
         double m_targetPosition;
         bool m_start;
 
-        const double m_min    = -0.237;
-        const double m_max    = 0.237;
+        //const double m_min    = -0.237;
+        //const double m_max    = 0.237;
+        const double m_min    = -42.0;
+        const double m_max    = 42.0;
         const double m_zero   = 0.0;
+        const double m_increment = 10.0;
 };

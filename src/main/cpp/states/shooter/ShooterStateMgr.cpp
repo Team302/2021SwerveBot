@@ -183,6 +183,8 @@ void ShooterStateMgr::RunCurrentState()
 
     if (controller != nullptr)
     {
+        auto cam = LimelightFactory::GetLimelightFactory()->GetLimelight();
+        
         if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_SHOOT ))
         {
             Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot");
@@ -198,6 +200,10 @@ void ShooterStateMgr::RunCurrentState()
         if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT_GREEN ))
         {
             Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Green");
+            if ( cam != nullptr )
+            {
+                cam->SetPipeline(1);
+            }
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTGREEN, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
@@ -206,6 +212,10 @@ void ShooterStateMgr::RunCurrentState()
         else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT_YELLOW ))
         {
             Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Yellow");
+            if ( cam != nullptr )
+            {
+                cam->SetPipeline(1);
+            }
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTYELLOW, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
@@ -214,6 +224,10 @@ void ShooterStateMgr::RunCurrentState()
         else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT_BLUE ))
         {
             Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Blue");
+            if ( cam != nullptr )
+            {
+                cam->SetPipeline(1);
+            }
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTBLUE, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );
@@ -222,6 +236,10 @@ void ShooterStateMgr::RunCurrentState()
         else if ( controller->IsButtonPressed( TeleopControl::FUNCTION_IDENTIFIER::SHOOTER_PREPARE_TO_SHOOT_RED ))
         {
             Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Red");
+            if ( cam != nullptr )
+            {
+                cam->SetPipeline(1);
+            }
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTRED, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
             BallTransferStateMgr::GetInstance()->SetCurrentState( BallTransferStateMgr::BALL_TRANSFER_STATE::TO_SHOOTER, false );

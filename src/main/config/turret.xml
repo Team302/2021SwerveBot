@@ -12,7 +12,10 @@
 	<mechanismTarget stateIdentifier="TURRETHOLD"
 	                 controlDataIdentifier="closedloop"
 					 value="0.0"/>
-	<mechanismTarget stateIdentifier="TURRETAUTOAIM"
+	<!-- mechanismTarget stateIdentifier="TURRETAUTOAIM"
 	                 controlDataIdentifier="openloop"
-					 value="0.15"/>
+					 value="0.025"/ -->
+	<mechanismTarget stateIdentifier="TURRETAUTOAIM"
+	                 controlDataIdentifier="closedloop"
+					 value="0.01"/>
 </statedata>

@@ -56,49 +56,81 @@ void LimelightAim::Init()
 
 void LimelightAim::Run()
 {
-    auto target = m_target;
-    if ( abs(target) < 0.1 )
-    {
-        m_target = 0.15;
-        target = 0.15;
-    }
-    auto angle = units::angle::degree_t(360.0);
     auto goal = GoalDetection::GetInstance();
-    if ( goal->SeeInnerGoal() )
+    auto seeTarget = goal->SeeInnerGoal();
+    double currentPosition = m_turret.get()->GetPosition();  // degrees
+
+    if (seeTarget)
     {
-        angle = goal->GetHorizontalAngleToInnerGoal();
-        if (abs(angle.to<double>()) < 1.0)
+        /**
+        auto target = m_target;
+        if ( abs(target) < 0.1 )
         {
-            target = 0.0;
+            m_target = 0.15;
+            target = 0.15;
         }
-    }
+        auto angle = units::angle::degree_t(360.0);
+        if ( goal->SeeInnerGoal() )
+        {
+            angle = goal->GetHorizontalAngleToInnerGoal();
+            if (abs(angle.to<double>()) < 2.0)
+            {
+                target = 0.0;
+            }
+        }
 
-    auto pos = m_turret.get()->GetPosition() / 360.0;
-    if (pos > m_max && target > 0.0)
+        auto pos = m_turret.get()->GetPosition() / 360.0;
+        if (pos > m_max && target > 0.0)
+        {
+            target *= -1.0;
+        }
+        else if (pos < m_min && target < 0.0)
+        {
+            target *= -1.0;
+        }
+
+
+        target = (angle.to<double>() > 0.0) ? -1.0 * target : target;
+
+        Logger::GetLogger()->ToNtTable("LimelightAim", "angle", angle.to<double>());
+        Logger::GetLogger()->ToNtTable("LimelightAim", "output", target);
+
+        m_turret.get()->UpdateTarget(target);
+        m_turret.get()->Update();
+        **/
+
+        /** **/
+        auto targetHorizontalOffset = goal->GetHorizontalAngleToInnerGoal();
+        //m_turret.get()->UpdateTarget((currentPosition + targetHorizontalOffset + 2.0));
+        m_turret.get()->UpdateTarget((currentPosition + targetHorizontalOffset.to<double>()));
+        /** **/
+    }
+    else
     {
-        target *= -1.0;
+        double target = m_targetPosition;
+        if (currentPosition > m_min && currentPosition < m_max)
+        {
+            if (target >= 0.0)
+            {
+                target += m_increment;
+            }
+            else if (target < 0.0)
+            {
+                target -= m_increment;
+            }
+            m_targetPosition = clamp(target, m_min, m_max);
+        }
+        else if (currentPosition < m_min)
+        {
+            m_targetPosition = m_increment;
+        }
+        else if (currentPosition > m_max)
+        {
+            m_targetPosition = -1.0 * m_increment;
+        }
+        m_turret.get()->UpdateTarget(m_targetPosition);
     }
-    else if (pos < m_min && target < 0.0)
-    {
-        target *= -1.0;
-    }
-
-
-    target = (angle.to<double>() > 0.0) ? -1.0 * target : target;
-
-    Logger::GetLogger()->ToNtTable("LimelightAim", "angle", angle.to<double>());
-    Logger::GetLogger()->ToNtTable("LimelightAim", "output", target);
-
-    m_turret.get()->UpdateTarget(target);
     m_turret.get()->Update();
-
-    /**
-   auto targetHorizontalOffset = GoalDetection::GetInstance()->GetHorizontalAngleToInnerGoal();
-   double currentPosition = m_turret.get()->GetPosition();
-   //m_turret.get()->UpdateTarget((currentPosition + targetHorizontalOffset + 2.0));
-   m_turret.get()->UpdateTarget((currentPosition + targetHorizontalOffset.to<double>()));
-   m_turret.get()->Update();
-   **/
 }
 
 bool LimelightAim::AtTarget() const
