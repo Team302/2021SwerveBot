@@ -5,7 +5,9 @@
 	             mode="PERCENT_OUTPUT"/>
 	<controlData identifier="closedloop"
 				 mode="POSITION_DEGREES"
-				 proportional="5.0"/>
+				 proportional="1.0"
+				 integral="0.01"
+				 derivative="0.1"/>
 	<controlData identifier="closedloop2"
 				 mode="POSITION_DEGREES"
 				 proportional="5.0"/>

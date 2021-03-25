@@ -48,8 +48,10 @@ class LimelightAim : public IState
 
         //const double m_min    = -0.237;
         //const double m_max    = 0.237;
-        const double m_min    = -42.0;
-        const double m_max    = 42.0;
+        //const double m_min    = -42.0;
+        //const double m_max    = 42.0;
+        const double m_min    = -30.0;
+        const double m_max    = 30.0;
         const double m_zero   = 0.0;
-        const double m_increment = 10.0;
+        const double m_increment = 2.0;
 };

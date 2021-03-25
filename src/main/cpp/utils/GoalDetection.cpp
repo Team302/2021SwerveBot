@@ -102,7 +102,7 @@ units::angle::degree_t GoalDetection::GetHorizontalAngleToOuterGoal() const
     auto angle = m_lastHor;
     if ( seen )
     {
-        angle = m_camera->GetTargetHorizontalOffset();
+        angle = -1.0 * m_camera->GetTargetHorizontalOffset();
         m_lastHor = angle;
     }
     return angle;   

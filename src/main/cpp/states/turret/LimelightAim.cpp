@@ -60,6 +60,9 @@ void LimelightAim::Run()
     auto seeTarget = goal->SeeInnerGoal();
     double currentPosition = m_turret.get()->GetPosition();  // degrees
 
+    Logger::GetLogger()->ToNtTable("LimelightAim", "target", seeTarget ? "true" : "false");
+    Logger::GetLogger()->ToNtTable("LimelightAim", "current Pos", currentPosition);
+
     if (seeTarget)
     {
         /**
@@ -102,7 +105,7 @@ void LimelightAim::Run()
         /** **/
         auto targetHorizontalOffset = goal->GetHorizontalAngleToInnerGoal();
         //m_turret.get()->UpdateTarget((currentPosition + targetHorizontalOffset + 2.0));
-        m_turret.get()->UpdateTarget((currentPosition + targetHorizontalOffset.to<double>()));
+        m_targetPosition = currentPosition + targetHorizontalOffset.to<double>();
         /** **/
     }
     else
@@ -128,8 +131,9 @@ void LimelightAim::Run()
         {
             m_targetPosition = -1.0 * m_increment;
         }
-        m_turret.get()->UpdateTarget(m_targetPosition);
     }
+    Logger::GetLogger()->ToNtTable("LimelightAim", "target Pos", m_targetPosition);
+    m_turret.get()->UpdateTarget(m_targetPosition);
     m_turret.get()->Update();
 }
 

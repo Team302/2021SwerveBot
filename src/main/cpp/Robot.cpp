@@ -87,14 +87,6 @@ void Robot::AutonomousInit()
     m_cyclePrims->Init();
 }
 
-void Robot::UpdateOdometry()
-{
-    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
-    if ( swerveChassis.get() != nullptr )
-    {
-        swerveChassis.get()->UpdateOdometry();
-    }
-}
 
 /// @brief Runs every 20 milliseconds when the autonomous state is active.
 /// @return void
@@ -124,15 +116,6 @@ void Robot::TeleopInit()
     {
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("TeleopInit"), string("no shooter state manager"));
     }
-
-    /**
-    auto turret = MechanismFactory::GetMechanismFactory()->GetTurret();
-    m_turretState = (turret.get() != nullptr) ? TurretStateMgr::GetInstance() : nullptr;
-    if ( m_turretState != nullptr )
-    {
-        m_turretState->SetCurrentState(TurretStateMgr::TURRET_STATE::HOLD, true);
-    }
-    **/
 }
 
 
@@ -143,31 +126,20 @@ void Robot::TeleopPeriodic()
     UpdateOdometry();       // intentionally didn't do this in robot periodic to avoid traffic during disable
 
     m_drive.get()->Run();
-
-    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Horizontal Angle - inner (degrees)"),  GoalDetection::GetInstance()->GetHorizontalAngleToInnerGoal().to<double>());
-    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Horizontal Angle - outer (degrees)"),  GoalDetection::GetInstance()->GetHorizontalAngleToOuterGoal().to<double>());
-    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Vertical Angle - inner (degrees)"),  GoalDetection::GetInstance()->GetVerticalAngleToInnerGoal().to<double>());
-    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Vertical Angle - outer (degrees)"),  GoalDetection::GetInstance()->GetVerticalAngleToOuterGoal().to<double>());
-    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Distance - inner (inches)"),  GoalDetection::GetInstance()->GetDistanceToInnerGoal().to<double>());
-    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Distance - outer (inches)"),  GoalDetection::GetInstance()->GetDistanceToOuterGoal().to<double>());
-    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("See Inner"),  GoalDetection::GetInstance()->SeeInnerGoal() ? "true" : "false");
-    Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("See Outer"),  GoalDetection::GetInstance()->SeeOuterGoal() ? "true" : "false");
- 
+   
     if ( m_shooterState != nullptr )
     {
+        Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Horizontal Angle - inner (degrees)"),  GoalDetection::GetInstance()->GetHorizontalAngleToInnerGoal().to<double>());
+        Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Horizontal Angle - outer (degrees)"),  GoalDetection::GetInstance()->GetHorizontalAngleToOuterGoal().to<double>());
+        Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Vertical Angle - inner (degrees)"),  GoalDetection::GetInstance()->GetVerticalAngleToInnerGoal().to<double>());
+        Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Vertical Angle - outer (degrees)"),  GoalDetection::GetInstance()->GetVerticalAngleToOuterGoal().to<double>());
+        Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Distance - inner (inches)"),  GoalDetection::GetInstance()->GetDistanceToInnerGoal().to<double>());
+        Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Distance - outer (inches)"),  GoalDetection::GetInstance()->GetDistanceToOuterGoal().to<double>());
+        Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("See Inner"),  GoalDetection::GetInstance()->SeeInnerGoal() ? "true" : "false");
+        Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("See Outer"),  GoalDetection::GetInstance()->SeeOuterGoal() ? "true" : "false");
+ 
         m_shooterState->RunCurrentState();
     }
-    else
-    {
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT_ONCE, "robot", "no shooter");
-    }
-
-    /**
-    if ( m_turretState != nullptr )
-    {
-        m_turretState->RunCurrentState();
-    }
-    **/
 }
 
 
@@ -185,6 +157,15 @@ void Robot::TestInit()
 void Robot::TestPeriodic() 
 {
 
+}
+
+void Robot::UpdateOdometry()
+{
+    auto swerveChassis = SwerveChassisFactory::GetSwerveChassisFactory()->GetSwerveChassis();
+    if ( swerveChassis.get() != nullptr )
+    {
+        swerveChassis.get()->UpdateOdometry();
+    }
 }
 
 #ifndef RUNNING_FRC_TESTS

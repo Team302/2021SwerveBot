@@ -214,7 +214,7 @@ void ShooterStateMgr::RunCurrentState()
             Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Yellow");
             if ( cam != nullptr )
             {
-                cam->SetPipeline(1);
+                cam->SetPipeline(2);
             }
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTYELLOW, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
@@ -226,7 +226,7 @@ void ShooterStateMgr::RunCurrentState()
             Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Blue");
             if ( cam != nullptr )
             {
-                cam->SetPipeline(1);
+                cam->SetPipeline(3);
             }
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTBLUE, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
@@ -238,7 +238,7 @@ void ShooterStateMgr::RunCurrentState()
             Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot Red");
             if ( cam != nullptr )
             {
-                cam->SetPipeline(1);
+                cam->SetPipeline(4);
             }
             SetCurrentState( SHOOTER_STATE::GET_READY_SHOOTRED, false );
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
