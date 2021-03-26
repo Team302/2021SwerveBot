@@ -1,4 +1,9 @@
 
+#pragma once
+
+//C++ Includes
+#include <memory>
+
 #include <auton/GalacticSearchFinder.h>
 
 using namespace std;
@@ -25,7 +30,7 @@ std::string GalacticSearchFinder::GetGalacticSearchPath()
   std::string lPath2Load = "";
 
   //routine to Fetch Galactic seach path based on vision results from network table.
-  std::string lPath = lGetGSPathFromVisionTbl();
+  std::string lPath = GetGSPathFromVisionTbl();
   if (lPath == "GS_A_Red.wpilib.json" || lPath == "GS_A_Blue.wpilib.json" 
                                       || lPath == "GS_B_Red.wpilib.json" 
                                       || lPath == "GS_B_Blue.wpilib.json")
@@ -35,14 +40,14 @@ std::string GalacticSearchFinder::GetGalacticSearchPath()
   else
   {
     // error // anything other than a path name is an error text//
-    Logger::GetLogger()->LogError(string("DrivePath"), string("lGetGSPathFromVisionTbl return not Valid"));
+    Logger::GetLogger()->LogError(string("DrivePath"), string("GetGSPathFromVisionTbl return not Valid"));
     lPath2Load = "";
   }
 
   return lPath2Load;
 }
 
-std::string GalacticSearchFinder::lGetGSPathFromVisionTbl()
+std::string GalacticSearchFinder::GetGSPathFromVisionTbl()
 {
   //get id
   //SwerveModule::ModuleID id = m_SwerveModule.get()->GetType();
@@ -52,10 +57,15 @@ std::string GalacticSearchFinder::lGetGSPathFromVisionTbl()
         "CellVisionLateralTranslation"
         "CellVisionLongitundinalTranslation"
   */
+  
   std::string lGSPath2Load = "";
   auto NetTable = inst.GetTable(sTableName);
-  double dNTDistance = NetTable->GetNumber(sRef_TblCVDistance, 999.9);
-  double dNTAngle = NetTable->GetNumber(sRef_TblCVAngle, 999.9);
+ // double dNTDistance = NetTable->GetNumber(sRef_TblCVDistance, 999.9);
+ // double dNTAngle = NetTable->GetNumber(sRef_TblCVAngle, 999.9);
+  //debug
+  double dNTDistance = NetTable->GetNumber("GS Distance", 999.9);
+  double dNTAngle = NetTable->GetNumber("GS Angle", 999.9);
+  
   // returns a 999.9 (default) if table not found
   if (dNTAngle == 999.9 || dNTDistance == 999.9)
   {
@@ -99,7 +109,7 @@ std::string GalacticSearchFinder::lGetGSPathFromVisionTbl()
   TargetFound = CheckTarget(GS_A_RedTarget, d_TransX, d_TransY, dPercentTolX, dPercentTolY);
   if (TargetFound)
   {
-    lGSPath2Load = "GS_A_Red.wpilib.json";
+    lGSPath2Load = "galactic_red_a.xml";
     nFoundCnt++;
   }
   TargetFound = false;
@@ -108,7 +118,7 @@ std::string GalacticSearchFinder::lGetGSPathFromVisionTbl()
   TargetFound = CheckTarget(GS_A_BlueTarget, d_TransX, d_TransY, dPercentTolX, dPercentTolY);
   if (TargetFound)
   {
-    lGSPath2Load = "GS_A_Blue.wpilib.json";
+    lGSPath2Load = "galactic_blue_a.xml";
     nFoundCnt++;
   }
 
@@ -117,7 +127,7 @@ std::string GalacticSearchFinder::lGetGSPathFromVisionTbl()
   TargetFound = CheckTarget(GS_B_RedTarget, d_TransX, d_TransY, dPercentTolX, dPercentTolY);
   if (TargetFound)
   {
-    lGSPath2Load = "GS_B_Red.wpilib.json";
+    lGSPath2Load = "galactic_red_b.xml";
     nFoundCnt++;
   }
 
@@ -126,7 +136,7 @@ std::string GalacticSearchFinder::lGetGSPathFromVisionTbl()
   TargetFound = CheckTarget(GS_B_BlueTarget, d_TransX, d_TransY, dPercentTolX, dPercentTolY);
   if (TargetFound)
   {
-    lGSPath2Load = "GS_B_Blue.wpilib.json";
+    lGSPath2Load = "galactic_blue_b.xml";
     nFoundCnt++;
   }
 

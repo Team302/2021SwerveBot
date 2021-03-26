@@ -37,10 +37,11 @@ public:
     virtual ~GalacticSearchFinder() = default;
 
     std::string GetGalacticSearchPath() ;  // return path name for galatic search
+    std::string GetGSPathFromVisionTbl(); 
 
 private:
 
-    std::string lGetGSPathFromVisionTbl();
+    
 
     bool CheckTarget(double*, double, double, double,double);
 

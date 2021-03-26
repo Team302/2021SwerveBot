@@ -25,6 +25,7 @@
 //Team302 includes
 #include <auton/AutonSelector.h>
 #include <utils/Logger.h>
+#include <auton/GalacticSearchFinder.h>
 
 
 using namespace std;
@@ -56,6 +57,8 @@ std::string AutonSelector::GetSelectedAutoFile()
 	if ( m_chooser.GetSelected() == "GS")
 	{
 		//return GalacticSearchChooser.GetPath();
+		
+		return GalacticSearchFinder().GetGSPathFromVisionTbl();
 	}
 
 	return m_chooser.GetSelected();
@@ -145,5 +148,11 @@ void AutonSelector::PutChoicesOnDashboard()
 	m_chooser.AddOption("Sandbox", "sandbox.xml");
 
 	frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
+//GS Testing....
+
+	frc::SmartDashboard::PutNumber("GS Angle", 0);
+  	frc::SmartDashboard::PutNumber("GS Distance", 0);
+
 }
 
