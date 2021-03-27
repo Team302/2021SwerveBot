@@ -189,8 +189,8 @@ void SwerveDrive::Run( )
         rotate = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
 
         auto boost = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::DRIVE_TURBO);
-        boost *= 0.25;
-        boost = clamp(boost, 0.0, 0.25);
+        boost *= 0.50;
+        boost = clamp(boost, 0.0, 0.50);
         m_chassis->SetBoost(boost);
 
         auto brake = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::DRIVE_BRAKE);

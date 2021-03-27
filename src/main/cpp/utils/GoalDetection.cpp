@@ -88,7 +88,7 @@ bool GoalDetection::SeeOuterGoal() const
     auto seen =  (m_camera != nullptr && m_camera->HasTarget() );
     m_queriesSinceLastSeen = seen ? 0 : m_queriesSinceLastSeen+1;
 
-    seen = m_queriesSinceLastSeen < 3 && !seen ? true : seen;
+    seen = m_queriesSinceLastSeen < 5 && !seen ? true : seen;
     return seen;
 }
 bool GoalDetection::SeeInnerGoal() const

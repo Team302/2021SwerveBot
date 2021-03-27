@@ -123,11 +123,11 @@ void LimelightAim::Run()
             }
             m_targetPosition = clamp(target, m_min, m_max);
         }
-        else if (currentPosition < m_min)
+        else if (currentPosition <= m_min+m_increment)
         {
             m_targetPosition = m_increment;
         }
-        else if (currentPosition > m_max)
+        else if (currentPosition >= m_max-m_increment)
         {
             m_targetPosition = -1.0 * m_increment;
         }
