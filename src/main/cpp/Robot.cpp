@@ -49,6 +49,13 @@ using namespace frc;
 void Robot::RobotInit() 
 {
 
+    //GS Testing....
+
+    Logger::GetLogger()->ToNtTable("visionTable","horAngle",999.9);
+    Logger::GetLogger()->ToNtTable("visionTable","CellDistance",999.9);
+
+
+
     sleep(2);
 
     // Read the robot definition from the xml configuration files and

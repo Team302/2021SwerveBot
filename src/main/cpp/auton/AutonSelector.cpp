@@ -149,10 +149,6 @@ void AutonSelector::PutChoicesOnDashboard()
 
 	frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
-//GS Testing....
-
-	frc::SmartDashboard::PutNumber("GS Angle", 0);
-  	frc::SmartDashboard::PutNumber("GS Distance", 0);
 
 }
 
