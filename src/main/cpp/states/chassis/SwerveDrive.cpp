@@ -41,7 +41,8 @@ SwerveDrive::SwerveDrive() : IState(),
                              m_controller( TeleopControl::GetInstance() ),
                              m_usePWLinearProfile(false),
                              m_lastUp(false),
-                             m_lastDown(false)
+                             m_lastDown(false),
+                             m_shooterLevel()
                              //m_shooterLevel(new DriveToShooterLevel())
 {
     if ( m_controller == nullptr )
@@ -173,10 +174,13 @@ void SwerveDrive::Run( )
             m_lastDown = false;
 
             //Auto shooter level driving logic
-            m_shooterLevel->Run();
-            if(m_shooterLevel->IsDone())
+            if (m_shooterLevel != nullptr)
             {
-                delete m_shooterLevel;
+                m_shooterLevel->Run();
+                if(m_shooterLevel->IsDone())
+                {
+                    delete m_shooterLevel;
+                }
             }
         }
         

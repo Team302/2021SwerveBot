@@ -38,8 +38,9 @@ DragonPigeon::DragonPigeon
 
     m_pigeon.get()->SetStatusFramePeriod( PigeonIMU_StatusFrame::PigeonIMU_BiasedStatus_4_Mag, 120, 0);
     m_pigeon.get()->SetStatusFramePeriod( PigeonIMU_StatusFrame::PigeonIMU_CondStatus_11_GyroAccum, 120, 0);
-    m_pigeon.get()->SetStatusFramePeriod( PigeonIMU_StatusFrame::PigeonIMU_CondStatus_9_SixDeg_YPR, 120, 0); // using fused heading not yaw
-    
+    m_pigeon.get()->SetStatusFramePeriod( PigeonIMU_StatusFrame::PigeonIMU_BiasedStatus_6_Accel, 120, 0); // using fused heading not yaw
+//    m_pigeon.get()->SetStatusFramePeriod( PigeonIMU_StatusFrame::PigeonIMU_CondStatus_9_SixDeg_YPR, 120, 0); // using fused heading not yaw
+
     /**
     double ypr[3];
     m_pigeon.get()->GetYawPitchRoll(ypr);
@@ -98,10 +99,10 @@ double DragonPigeon::GetRawRoll()
 
 double DragonPigeon::GetRawYaw()
 {
-    double yaw = m_pigeon.get()->GetFusedHeading();
-    //double ypr[3]; // yaw = 0 pitch = 1 roll = 2
-    //m_pigeon.get()->GetYawPitchRoll(ypr);
-    //double yaw = ypr[0];
+    //double yaw = m_pigeon.get()->GetFusedHeading();
+    double ypr[3]; // yaw = 0 pitch = 1 roll = 2
+    m_pigeon.get()->GetYawPitchRoll(ypr);
+    double yaw = ypr[0];
     // normalize it to be between -180 and + 180
     if ( yaw > 180 )
     {
