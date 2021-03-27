@@ -1,9 +1,13 @@
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 //C++ Includes
 #include <memory>
 
 #include <auton/GalacticSearchFinder.h>
+#include <utils/Logger.h>
 
 using namespace std;
 using namespace frc;
@@ -59,16 +63,15 @@ std::string GalacticSearchFinder::GetGSPathFromVisionTbl()
   
   std::string lGSPath2Load = "";
   auto NetTable = inst.GetTable(sTableName);
- // double dNTDistance = NetTable->GetNumber(sRef_TblCVDistance, 999.9);
- // double dNTAngle = NetTable->GetNumber(sRef_TblCVAngle, 999.9);
+
+ double dNTDistance = NetTable->GetNumber(sRef_TblCVDistance, 999.9);
+ double dNTAngle = NetTable->GetNumber(sRef_TblCVAngle, 999.9);
   //debug
-  double dNTDistance = NetTable->GetNumber("GS Distance", 999.9);
-  double dNTAngle = NetTable->GetNumber("GS Angle", 999.9);
-  
+   
   // returns a 999.9 (default) if table not found
   if (dNTAngle == 999.9 || dNTDistance == 999.9)
   {
-    Logger::GetLogger()->LogError(string("DrivePath"), string("visionTable No Read error"));
+    Logger::GetLogger()->LogError(string("DrivePath"), string("visionTable No Read error 999.9"));
     return "NT_Error"; //network table not read returning default values.
   }
 
@@ -76,10 +79,22 @@ std::string GalacticSearchFinder::GetGSPathFromVisionTbl()
   units::meter_t Dis2d = units::meter_t(dNTDistance);
   frc::Rotation2d Rot2d = units::degree_t(dNTAngle);
   frc::Translation2d NT2dTransLate{Dis2d, Rot2d};
+
+
+  Logger::GetLogger()->ToNtTable("visionTable", "dNTDistance", dNTDistance);
+  Logger::GetLogger()->ToNtTable("visionTable", "dNTAngle", dNTAngle);
+          
+  //frc::SmartDashboard::PutNumber("GS Angle", 0);
+  //frc::SmartDashboard::PutNumber("GS Distance", 0);
+
+
   // use field relative offset starting point of x .6096 (1.5ft)  y -2.285 (7.5ft) camara
   // position at starting point
   double d_TransX = (double)NT2dTransLate.X() + (0.6096); //1.5ft // always positive
   double d_TransY = (double)NT2dTransLate.Y() - (2.285);  // neg or positive
+
+  Logger::GetLogger()->ToNtTable("visionTable", "d_TransX", d_TransX);
+  Logger::GetLogger()->ToNtTable("visionTable", "d_TransY", d_TransY);
 
   // setup window of %tolerance for detecting which path to run based on vision targets
   /*  GS_A_Blue, GS_A_Red, GS_B_Blue, GS_B_Red
@@ -139,13 +154,15 @@ std::string GalacticSearchFinder::GetGSPathFromVisionTbl()
     nFoundCnt++;
   }
 
-  if (nFoundCnt > 1) // if more than one course found then return error
+  if (nFoundCnt > 1) // if more than one course found then log error but run last found path
   {
+    Logger::GetLogger()->LogError(string("GS Path"), lGSPath2Load);
     Logger::GetLogger()->LogError(string("DrivePath"), string("Error - GS Courses found > 1"));
-    return "Error - GS Courses found > 1";
+    return lGSPath2Load;
   }
   else
   {
+    Logger::GetLogger()->LogError(string("GS Path"), lGSPath2Load);
     return lGSPath2Load; // returns Path Name for Galatic search or "TargetNotFound"
   }
 }

@@ -32,7 +32,11 @@ class GalacticSearchFinder// : public IPrimitive
 
 {
 public:
+<<<<<<< Updated upstream
     GalacticSearchFinder() = default;
+=======
+     GalacticSearchFinder() = default;
+>>>>>>> Stashed changes
 
     virtual ~GalacticSearchFinder() = default;
 
@@ -51,6 +55,6 @@ private:
     nt::NetworkTableInstance inst = nt::NetworkTableInstance().GetDefault();
      
     wpi::Twine sTableName = "visionTable";
-    wpi::StringRef sRef_TblCVAngle = "CellVisionAngle";
-    wpi::StringRef sRef_TblCVDistance = "CellVisionDistance";
+    wpi::StringRef sRef_TblCVAngle = "horAngle";
+    wpi::StringRef sRef_TblCVDistance = "CellDistance";
  };
