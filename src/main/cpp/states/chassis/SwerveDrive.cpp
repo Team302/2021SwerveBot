@@ -128,7 +128,8 @@ void SwerveDrive::Run( )
         }
         else if (controller->IsButtonPressed(TeleopControl::DRIVE_25PERCENT))
         {
-            m_chassis->SetDriveScaleFactor(0.25);
+            //m_chassis->SetDriveScaleFactor(0.25);
+            m_chassis->SetDriveScaleFactor(0.35);
             m_lastUp   = false;
             m_lastDown = false;
         }
