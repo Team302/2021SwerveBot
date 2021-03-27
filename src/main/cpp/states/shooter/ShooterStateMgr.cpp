@@ -180,7 +180,6 @@ ShooterStateMgr::ShooterStateMgr() : m_states(),
 void ShooterStateMgr::RunCurrentState()
 {
     auto controller = TeleopControl::GetInstance();
-
     if (controller != nullptr)
     {
         auto cam = LimelightFactory::GetLimelightFactory()->GetLimelight();
@@ -191,7 +190,11 @@ void ShooterStateMgr::RunCurrentState()
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::RAPID_RELEASE, false);
             TurretStateMgr::GetInstance()->SetCurrentState(TurretStateMgr::TURRET_STATE::HOLD, false);
         }
-        else
+        else if ( m_currentStateEnum==ShooterStateMgr::SHOOTER_STATE::OFF)
+        {
+                // keep everything the same
+        }
+        else    // revert to holding the ball
         {
             Logger::GetLogger()->ToNtTable(m_nt, "Current State", "Shoot");
             BallHopperStateMgr::GetInstance()->SetCurrentState( BallHopperStateMgr::HOLD, false);
