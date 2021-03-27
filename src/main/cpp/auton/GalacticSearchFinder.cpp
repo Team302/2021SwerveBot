@@ -1,5 +1,4 @@
 
-#pragma once
 
 //C++ Includes
 #include <memory>

@@ -32,7 +32,7 @@ class GalacticSearchFinder// : public IPrimitive
 
 {
 public:
-    GalacticSearchFinder();
+    GalacticSearchFinder() = default;
 
     virtual ~GalacticSearchFinder() = default;
 
