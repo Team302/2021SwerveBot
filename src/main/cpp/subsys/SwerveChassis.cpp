@@ -151,6 +151,7 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
                            units::radians_per_second_t rot, 
                            bool fieldRelative) 
 {
+
     Logger::GetLogger()->ToNtTable("Swerve Chassis", "XSpeed", xSpeed.to<double>() );
     Logger::GetLogger()->ToNtTable("Swerve Chassis", "YSpeed", ySpeed.to<double>() );
     Logger::GetLogger()->ToNtTable("Swerve Chassis", "ZSpeed", rot.to<double>() );
@@ -182,7 +183,7 @@ void SwerveChassis::Drive( units::meters_per_second_t xSpeed,
             Rotation2d currentOrientation {yaw};
             auto states = m_kinematics.ToSwerveModuleStates
                                     (fieldRelative ?  ChassisSpeeds::FromFieldRelativeSpeeds(xSpeed, ySpeed, rot, currentOrientation) : 
-                                                    ChassisSpeeds{xSpeed, ySpeed, rot} );
+                                                      ChassisSpeeds{xSpeed, ySpeed, rot} );
 
             m_kinematics.NormalizeWheelSpeeds(&states, m_maxSpeed);
 

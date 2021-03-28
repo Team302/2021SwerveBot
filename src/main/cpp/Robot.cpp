@@ -66,15 +66,6 @@ void Robot::RobotInit()
 
     // auton magic
     m_cyclePrims= new CyclePrimitives();
-
-    //create the limelight camera
-    /**
-    m_limelight = LimelightFactory::GetLimelightFactory()->GetLimelight();
-    if ( m_limelight != nullptr)
-    {
-        m_driverMode->SetCamToDriveMode( m_limelight );
-    }
-    **/
 }
 
 /// @brief This function is called every robot packet, no matter the  mode. This is used for items like diagnostics that run 
@@ -119,10 +110,6 @@ void Robot::TeleopInit()
     {
         m_shooterState->SetCurrentState(ShooterStateMgr::SHOOTER_STATE::OFF, true);
     }
-    else 
-    {
-        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::ERROR_ONCE, string("TeleopInit"), string("no shooter state manager"));
-    }
 }
 
 
@@ -134,8 +121,10 @@ void Robot::TeleopPeriodic()
 
     m_drive.get()->Run();
    
+   
     if ( m_shooterState != nullptr )
     {
+        /**
         Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Horizontal Angle - inner (degrees)"),  GoalDetection::GetInstance()->GetHorizontalAngleToInnerGoal().to<double>());
         Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Horizontal Angle - outer (degrees)"),  GoalDetection::GetInstance()->GetHorizontalAngleToOuterGoal().to<double>());
         Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Vertical Angle - inner (degrees)"),  GoalDetection::GetInstance()->GetVerticalAngleToInnerGoal().to<double>());
@@ -144,7 +133,8 @@ void Robot::TeleopPeriodic()
         Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("Distance - outer (inches)"),  GoalDetection::GetInstance()->GetDistanceToOuterGoal().to<double>());
         Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("See Inner"),  GoalDetection::GetInstance()->SeeInnerGoal() ? "true" : "false");
         Logger::GetLogger()->ToNtTable(string("GoalDetection"), string("See Outer"),  GoalDetection::GetInstance()->SeeOuterGoal() ? "true" : "false");
- 
+        **/
+       
         m_shooterState->RunCurrentState();
     }
 }

@@ -188,6 +188,7 @@ void SwerveDrive::Run( )
         drive  = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE) ;
         steer  = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_STEER);
         rotate = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_ROTATE);
+        rotate = abs(rotate)<0.3 ? 0.0 : rotate;
 
         auto boost = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::DRIVE_TURBO);
         boost *= 0.50;
@@ -200,10 +201,12 @@ void SwerveDrive::Run( )
         m_chassis->SetBrake(brake);
     }
 
+    /**
     Logger::GetLogger()->ToNtTable("Swerve Drive", "drive", drive);
     Logger::GetLogger()->ToNtTable("Swerve Drive", "steer", steer);
     Logger::GetLogger()->ToNtTable("Swerve Drive", "rotate", rotate);
-    
+    **/
+   
     m_chassis.get()->Drive(drive, steer, rotate, true);
 }
 
