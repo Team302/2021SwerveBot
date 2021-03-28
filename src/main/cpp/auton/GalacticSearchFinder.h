@@ -37,14 +37,17 @@ class GalacticSearchFinder// : public IPrimitive
 
         virtual ~GalacticSearchFinder() = default;
 
-        std::string GetGalacticSearchPath() ;  // return path name for galatic search
-        std::string GetGSPathFromVisionTbl(); 
+       
+        std::string GetGSPathFromVisionTbl_FP(); 
+        std::string GetGSPathFromVisionTbl_Angle(); 
 
     private:
 
         
 
         bool CheckTarget(double*, double, double, double,double);
+        bool CheckTarget_Angle(double, double, double,double);// angle only
+
 
         // network table reading
         // Using Default table no referances for Swerve Drive Module m_nt.
