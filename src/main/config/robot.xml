@@ -39,7 +39,7 @@
                      maxAngularAcceleration="24">
 			 
         <swervemodule type="RIGHT_BACK"
-                      turn_p="0.175"
+                      turn_p="0.125"
                       turn_i="0.00045"
                       turn_d="0.0"
                       turn_f="0.0"
@@ -92,7 +92,7 @@
 
        <!-- .25 -->
         <swervemodule type="LEFT_BACK"
-                      turn_p="0.175"
+                      turn_p="0.125"
                       turn_i="0.00045"
                       turn_d="0.0"
                       turn_f="0.0"
@@ -140,12 +140,12 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="0"
-                            offset="18.727"/>
+                            offset="67.061"/>
         </swervemodule>
 
        <!-- .25 -->
         <swervemodule type="RIGHT_FRONT"
-                      turn_p="0.175"
+                      turn_p="0.125"
                       turn_i="0.00045"
                       turn_d="0.0"
                       turn_f="0.0"
@@ -193,12 +193,12 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="12"
-                            offset="89.033"/>
+                            offset="108.105"/>
         </swervemodule>
 
        <!-- 0.25 -->
         <swervemodule type="LEFT_FRONT"
-                      turn_p="0.175"
+                      turn_p="0.125"
                       turn_i="0.0045"
                       turn_d="0.0"
                       turn_f="0.0"
@@ -246,7 +246,7 @@
                     reverselimitswitch="false"
                     reverselimitswitchopen="true"/>        
 		    <cancoder canId="14"
-                            offset="-144.053"/>
+                            offset="-72.07"/>
         </swervemodule>
 
     </swervechassis>  
