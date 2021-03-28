@@ -15,6 +15,7 @@
 #pragma once
 
 //C++ Includes
+#include <string>
 
 //Team302 Includes
 #include <auton/PrimitiveParams.h>
@@ -31,30 +32,26 @@
 class GalacticSearchFinder// : public IPrimitive
 
 {
-public:
-<<<<<<< Updated upstream
-    GalacticSearchFinder() = default;
-=======
-     GalacticSearchFinder() = default;
->>>>>>> Stashed changes
+    public:
+        GalacticSearchFinder() = default;
 
-    virtual ~GalacticSearchFinder() = default;
+        virtual ~GalacticSearchFinder() = default;
 
-    std::string GetGalacticSearchPath() ;  // return path name for galatic search
-    std::string GetGSPathFromVisionTbl(); 
+        std::string GetGalacticSearchPath() ;  // return path name for galatic search
+        std::string GetGSPathFromVisionTbl(); 
 
-private:
+    private:
 
-    
+        
 
-    bool CheckTarget(double*, double, double, double,double);
+        bool CheckTarget(double*, double, double, double,double);
 
-    // network table reading
-    // Using Default table no referances for Swerve Drive Module m_nt.
-    // May need to create a link to m_nt if more than one network table is used.
-    nt::NetworkTableInstance inst = nt::NetworkTableInstance().GetDefault();
-     
-    wpi::Twine sTableName = "visionTable";
-    wpi::StringRef sRef_TblCVAngle = "horAngle";
-    wpi::StringRef sRef_TblCVDistance = "CellDistance";
+        // network table reading
+        // Using Default table no referances for Swerve Drive Module m_nt.
+        // May need to create a link to m_nt if more than one network table is used.
+        nt::NetworkTableInstance inst = nt::NetworkTableInstance().GetDefault();
+        
+        wpi::Twine sTableName = "visionTable";
+        wpi::StringRef sRef_TblCVAngle = "horAngle";
+        wpi::StringRef sRef_TblCVDistance = "CellDistance";
  };
