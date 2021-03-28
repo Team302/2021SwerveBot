@@ -57,8 +57,9 @@ std::string AutonSelector::GetSelectedAutoFile()
 	if ( m_chooser.GetSelected() == "GS")
 	{
 		//return GalacticSearchChooser.GetPath();
-		
-		return GalacticSearchFinder().GetGSPathFromVisionTbl();
+		//Use angle only or Field Position with Angle distance converted to field position.
+		return GalacticSearchFinder().GetGSPathFromVisionTbl_Angle();
+		//return GalacticSearchFinder().GetGSPathFromVisionTbl_FP();
 	}
 
 	return m_chooser.GetSelected();
