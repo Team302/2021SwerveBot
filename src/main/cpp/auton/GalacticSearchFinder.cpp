@@ -36,11 +36,13 @@ std::string GalacticSearchFinder::GetGSPathFromVisionTbl_FP()
     //debug
 
     // returns a 999.9 (default) if table not found
+    /**
     if (dNTAngle == 999.9 || dNTDistance == 999.9)
     {
         Logger::GetLogger()->LogError(string("DrivePath"), string("visionTable No Read error 999.9"));
         return "NT_Error"; //network table not read returning default values.
     }
+    **/
 
     //Convert from polar coordinates to Cartesian coordinates XY.
     units::meter_t Dis2d = units::meter_t(dNTDistance);
@@ -119,11 +121,11 @@ std::string GalacticSearchFinder::GetGSPathFromVisionTbl_FP()
         nFoundCnt++;
     }
 
-      if (nFoundCnt == 0)
-        {
-            Logger::GetLogger()->LogError(string("GS Path"), string("Error - GS Courses found = 0"));
-            lGSPath2Load = "galactic_blue_a.xml"; // what to do if no targets found
-        }
+    if (nFoundCnt == 0)
+    {
+        Logger::GetLogger()->LogError(string("GS Path"), string("Error - GS Courses found = 0"));
+        lGSPath2Load = "galactic_blue_a.xml"; // what to do if no targets found
+    }
 
     if (nFoundCnt > 1) // if more than one course found then log error but run last found path
     {
@@ -187,12 +189,14 @@ std::string GalacticSearchFinder::GetGSPathFromVisionTbl_Angle()
     //debug
 
     // returns a 999.9 (default) if table not found
+    /**
     if (dNTAngle == 999.9)
     {
        // Logger::GetLogger()->LogError(string("GS Path"), string("Angle visionTable No Read error 999.9"));
         Logger::GetLogger()->ToNtTable("visionTable", "Error", "No NT Read 999");
         return "NT_Error"; //network table not read returning default values.
     }
+    **/
 
  
     Logger::GetLogger()->ToNtTable("visionTable", "dNTAngle", dNTAngle);
@@ -212,17 +216,23 @@ std::string GalacticSearchFinder::GetGSPathFromVisionTbl_Angle()
      
   
     // x=lentgh of field  y=width  30ftX15ft
-    double dPercentTol_Angle = .15;  // Allow +/- 15 Percent
+    //double dPercentTol_Angle = .15;  // Allow +/- 15 Percent
 
-    double GS_A_RedTarget = 35.0; double GS_A_RedUpWin = 45.0 ;double GS_A_RedLowWin = 25.0;// Vision angle = 0 
-    double GS_A_BlueTarget = 44.0; double GS_A_BlueUpWin = 60.0 ;double GS_A_BlueLowWin = 40.0;// FP = x4.572,  y -3.81
+    // there ranges overlap - moved slightly to eliminate JW
+    //double GS_A_RedTarget = 35.0; double GS_A_RedUpWin = 45.0 ;double GS_A_RedLowWin = 25.0;// Vision angle = 0 
+    //double GS_A_BlueTarget = 44.0; double GS_A_BlueUpWin = 60.0 ;double GS_A_BlueLowWin = 40.0;// FP = x4.572,  y -3.81
+    //double GS_B_RedTarget = -23.0; double GS_B_RedUpWin = -15.0 ;double GS_B_RedLowWin = -65.0;//FP = x2.286,  y -1.524
+    //double GS_B_BlueTarget = 55.0; double GS_B_BlueUpWin = 65.0 ;double GS_B_BlueLowWin = 45.1;//FP = x4.572,  y -3.048
     double GS_B_RedTarget = -23.0; double GS_B_RedUpWin = -15.0 ;double GS_B_RedLowWin = -65.0;//FP = x2.286,  y -1.524
-    double GS_B_BlueTarget = 55.0; double GS_B_BlueUpWin = 65.0 ;double GS_B_BlueLowWin = 45.1;//FP = x4.572,  y -3.048
+    double GS_A_RedTarget = 35.0; double GS_A_RedUpWin = 39.5 ;double GS_A_RedLowWin = 25.0;// Vision angle = 0 
+    //double GS_A_BlueTarget = 44.0; double GS_A_BlueUpWin = 49.5 ;double GS_A_BlueLowWin = 39.6;// FP = x4.572,  y -3.81
+    double GS_B_BlueTarget = 55.0; double GS_B_BlueUpWin = 65.0 ;double GS_B_BlueLowWin = 49.6;//FP = x4.572,  y -3.048
 
     bool TargetFound = false;
     int nFoundCnt = 0;
 
     
+    // Since ranges don't overlap should we just break out once found (or use else ifs)
     TargetFound = CheckTarget_Angle(GS_A_RedTarget, dNTAngle,GS_A_RedUpWin,GS_A_RedLowWin);
     if (TargetFound)
     {
@@ -320,7 +330,7 @@ double GalacticSearchFinder::Angle_Filtered()
         if(dTempRead < 0) 
             {
                 bNegRead=true;
-                dNTNegValue == dTempRead;
+                dNTNegValue = dTempRead;  // switch == to =
                 break;
             }
 

@@ -13,7 +13,7 @@
           enddrivespeed     CDATA "0.0"
           xloc				CDATA "0.0"
           yloc				CDATA "0.0"
-          intakeState       ( OFF | INTAKE ) "OFF"
+          runIntake         ( OFF | INTAKE ) "OFF"
           pathname          CDATA #IMPLIED
 >
 

@@ -57,5 +57,5 @@ class GalacticSearchFinder// : public IPrimitive
         
         wpi::Twine sTableName = "visionTable";
         wpi::StringRef sRef_TblCVAngle = "NearestCellHorizontalAngle";
-        wpi::StringRef sRef_TblCVDistance = "NearestCellDistanceDistance";
+        wpi::StringRef sRef_TblCVDistance = "NearestCellDistance";
  };

@@ -2,7 +2,9 @@
 <!DOCTYPE auton SYSTEM "auton.dtd">
 <auton>
 	<primitive id="RESET_POSITION"
+			   runIntake="INTAKE"
 			   pathname="GS_A_Red.wpilib.json"/>	
 	<primitive id="DRIVE_PATH"
+			   runIntake="INTAKE"
 			   pathname="GS_A_Red.wpilib.json"/>
 </auton>
