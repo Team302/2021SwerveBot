@@ -47,6 +47,7 @@ class GalacticSearchFinder// : public IPrimitive
 
         bool CheckTarget(double*, double, double, double,double);
         bool CheckTarget_Angle(double, double, double,double);// angle only
+        double Angle_Filtered();
 
 
         // network table reading
@@ -55,6 +56,6 @@ class GalacticSearchFinder// : public IPrimitive
         nt::NetworkTableInstance inst = nt::NetworkTableInstance().GetDefault();
         
         wpi::Twine sTableName = "visionTable";
-        wpi::StringRef sRef_TblCVAngle = "horAngle";
-        wpi::StringRef sRef_TblCVDistance = "CellDistance";
+        wpi::StringRef sRef_TblCVAngle = "NearestCellHorizontalAngle";
+        wpi::StringRef sRef_TblCVDistance = "NearestCellDistanceDistance";
  };

@@ -5,6 +5,7 @@
 
 #include <auton/GalacticSearchFinder.h>
 #include <utils/Logger.h>
+#include <unistd.h>
 
 using namespace std;
 using namespace frc;
@@ -180,7 +181,9 @@ std::string GalacticSearchFinder::GetGSPathFromVisionTbl_Angle()
     auto NetTable = inst.GetTable(sTableName);
 
    // double dNTDistance = NetTable->GetNumber(sRef_TblCVDistance, 999.9);
-    double dNTAngle = NetTable->GetNumber(sRef_TblCVAngle, 999.9);
+   // double dNTAngle = NetTable->GetNumber(sRef_TblCVAngle, 999.9);
+
+    double dNTAngle = Angle_Filtered();
     //debug
 
     // returns a 999.9 (default) if table not found
@@ -211,10 +214,10 @@ std::string GalacticSearchFinder::GetGSPathFromVisionTbl_Angle()
     // x=lentgh of field  y=width  30ftX15ft
     double dPercentTol_Angle = .15;  // Allow +/- 15 Percent
 
-    double GS_A_RedTarget = 0.0; double GS_A_RedUpWin = 10.0 ;double GS_A_RedLowWin = -10.0;// Vision angle = 0 
+    double GS_A_RedTarget = 35.0; double GS_A_RedUpWin = 45.0 ;double GS_A_RedLowWin = 25.0;// Vision angle = 0 
     double GS_A_BlueTarget = 44.0; double GS_A_BlueUpWin = 60.0 ;double GS_A_BlueLowWin = 40.0;// FP = x4.572,  y -3.81
-    double GS_B_RedTarget = -44.5; double GS_B_RedUpWin = -25.0 ;double GS_B_RedLowWin = -65.0;//FP = x2.286,  y -1.524
-    double GS_B_BlueTarget = 32.0; double GS_B_BlueUpWin = 39.9 ;double GS_B_BlueLowWin = 10.0;//FP = x4.572,  y -3.048
+    double GS_B_RedTarget = -23.0; double GS_B_RedUpWin = -15.0 ;double GS_B_RedLowWin = -65.0;//FP = x2.286,  y -1.524
+    double GS_B_BlueTarget = 55.0; double GS_B_BlueUpWin = 65.0 ;double GS_B_BlueLowWin = 45.1;//FP = x4.572,  y -3.048
 
     bool TargetFound = false;
     int nFoundCnt = 0;
@@ -229,12 +232,12 @@ std::string GalacticSearchFinder::GetGSPathFromVisionTbl_Angle()
     TargetFound = false;
 
     
-    TargetFound = CheckTarget_Angle(GS_A_BlueTarget, dNTAngle,GS_A_BlueUpWin,GS_A_BlueLowWin);
-    if (TargetFound)
-    {
-        lGSPath2Load = "galactic_blue_a.xml";
-        nFoundCnt++;
-    }
+   // TargetFound = CheckTarget_Angle(GS_A_BlueTarget, dNTAngle,GS_A_BlueUpWin,GS_A_BlueLowWin);
+   // if (TargetFound)
+   // {
+   //     lGSPath2Load = "galactic_blue_a.xml";
+   //     nFoundCnt++;
+   // }
 
     TargetFound = false;
     
@@ -257,7 +260,7 @@ std::string GalacticSearchFinder::GetGSPathFromVisionTbl_Angle()
     if (nFoundCnt == 0)
         {
             Logger::GetLogger()->LogError(string("GS Path"), string("Angle Error - GS Courses found = 0"));
-            Logger::GetLogger()->ToNtTable("visionTable", "Error", "Angle Not Found");
+            Logger::GetLogger()->ToNtTable("visionTable", "Error", "Angle Not Found - default");
             Logger::GetLogger()->ToNtTable("visionTable", "Path", lGSPath2Load);
             lGSPath2Load = "galactic_blue_a.xml"; // what to do if no targets found
             return lGSPath2Load;
@@ -301,4 +304,38 @@ bool GalacticSearchFinder::CheckTarget_Angle(double dTarget,double DNT_Angle,  d
 
 //**********************************************************************************
 //********************************************************************************************
+double GalacticSearchFinder::Angle_Filtered()
+{
+    auto NetTable = inst.GetTable(sTableName);
+    double dNTAngle;
+    double dTempRead=0;
+    double dNTNegValue = 0;
+    bool bNegRead = false;
 
+    for (int i = 0; i < 10; ++i)
+    {
+        
+        dTempRead = NetTable->GetNumber(sRef_TblCVAngle, 999.9);        
+        dNTAngle = dTempRead;
+        if(dTempRead < 0) 
+            {
+                bNegRead=true;
+                dNTNegValue == dTempRead;
+                break;
+            }
+
+        sleep(.010);
+    }
+
+    if (bNegRead == true)
+    {
+        return dNTNegValue;
+
+    }else
+    {
+        return dNTAngle;
+    }
+    
+
+
+}
