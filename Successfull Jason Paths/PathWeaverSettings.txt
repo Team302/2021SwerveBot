@@ -3,7 +3,7 @@ Barrel MV=2.5  MA=1.0
 Bounce MV=2.25 MA=2.75	  Success at 10.9sec on 3.27.21
 
 GS_A_Red MV=1.75  MA=2.0
-GS_A_Blue MV=1.75  MA=2.0
+GS_A_Blue MV=2.0  MA=2.25
 
 GS_B_Red MV=2.0   MA=2.5
 GS_B_Blue MV=2.0  MA=2.5
