@@ -1,8 +1,8 @@
-Slolom MV=1.7  MA=1.0 
-Barrel MV=2.5  MA=1.0	
+Slolom MV=2.25  MA=3.0
+Barrel MV=2.25  MA=3.0	
 Bounce MV=2.25 MA=2.75	  Success at 10.9sec on 3.27.21
 
-GS_A_Red MV=1.75  MA=2.0
+GS_A_Red MV=2.0  MA=2.25
 GS_A_Blue MV=2.0  MA=2.25
 
 GS_B_Red MV=2.0   MA=2.5
