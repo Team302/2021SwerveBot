@@ -15,5 +15,6 @@
           yloc				CDATA "0.0"
           runIntake         ( OFF | INTAKE ) "OFF"
           pathname          CDATA #IMPLIED
+          drivemode         ( RAMSETE | HOLONOMIC ) "RAMSETE"
 >
 

@@ -54,6 +54,23 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
 }
 void DrivePath::Init(PrimitiveParams *params)
 {
+
+    //Drive mode switcher
+    if (params->GetDriveMode() == "RAMSETE")
+    {
+        m_runHoloController = false;
+    }
+    else if (params->GetDriveMode() == "HOLONOMIC")
+    {
+        m_runHoloController = true;
+    }
+    else
+    {
+        Logger::GetLogger()->LogError(Logger::GetLogger()->ERROR_ONCE, "DrivePath Drive Mode Switcher", "Invalid drive mode");
+    }
+    
+
+
     auto m_pathname = params->GetPathName();
 
     Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Initialized", "False");
@@ -89,10 +106,12 @@ void DrivePath::Init(PrimitiveParams *params)
         if (m_runHoloController)
         {
             m_holoController.SetEnabled(true);
+            m_ramseteController.SetEnabled(false);
         }
         else
         {
             m_ramseteController.SetEnabled(true);
+            m_holoController.SetEnabled(false);
         }
         auto targetState = m_trajectory.Sample(m_trajectory.TotalTime());
         m_targetPose = targetState.pose;
