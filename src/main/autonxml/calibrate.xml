@@ -3,8 +3,8 @@
 <auton>	
 	<primitive id="RESET_POSITION"
 			   pathname="Calibrate.wpilib.json"
-			   drivemode="RAMSETE"/>				   
+			   drivemode="HOLONOMIC"/>				   
 	<primitive id="DRIVE_PATH"
 			   pathname="Calibrate.wpilib.json"
-			   drivemode="RAMSETE"/>	
+			   drivemode="HOLONOMIC"/>	
 </auton>
