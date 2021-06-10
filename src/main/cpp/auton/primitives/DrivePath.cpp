@@ -73,6 +73,8 @@ void DrivePath::Init(PrimitiveParams *params)
 
     auto m_pathname = params->GetPathName();
 
+    m_heading = params->GetHeading();
+
     Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Initialized", "False");
     Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Running", "False");
     Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Done", "False");
@@ -125,6 +127,7 @@ void DrivePath::Init(PrimitiveParams *params)
 }
 void DrivePath::Run()
 {
+
     Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Running", "True");
 
     if (!m_trajectoryStates.empty()) 
@@ -144,6 +147,34 @@ void DrivePath::Run()
         Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsX", refChassisSpeeds.vx());
         Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsY", refChassisSpeeds.vy());
         Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsZ", units::degrees_per_second_t(refChassisSpeeds.omega()).to<double>());
+
+        //stop z rotation
+        refChassisSpeeds.omega = units::angular_velocity::radians_per_second_t(0);
+
+        //correct z rotation by comparing primitive param heading to pigeon yaw
+        //print out error using frc2::PIDController().GetPositionError
+        /*
+        DragonPigeon* pigeon = PigeonFactory::GetFactory()->GetPigeon();
+        bool turn = m_heading == pigeon->GetYaw() ? true : false;
+        double delta = pigeon->GetYaw() - m_heading;
+        units::angular_velocity::radians_per_second_t speedRads;
+         if (turn)
+         {
+             if (delta < 0)
+             {
+                 speedRads = units::radians_per_second_t(0.1745);
+             }
+             else if (delta > 0)
+             {
+                speedRads = units::radians_per_second_t(-0.1745);
+             }
+         }
+         else
+         {
+             speedRads = units::radians_per_second_t(0);
+         }
+         */
+         
 
         // Run the chassis
         m_chassis->Drive(refChassisSpeeds, false);
@@ -166,7 +197,7 @@ bool DrivePath::IsDone()
         // Check if the current pose and the trajectory's final pose are the same
         auto curPos = m_chassis.get()->GetPose();
         //isDone = IsSamePose(curPos, m_targetPose, 100.0);
-        if (IsSamePose(curPos, m_targetPose, 100.0))
+        if (IsSamePose(curPos, m_targetPose, 10.0))
         {
             isDone = true;
             whyDone = "Current Pose = Trajectory final pose";
@@ -193,7 +224,7 @@ bool DrivePath::IsDone()
                 isDone = ((abs(m_deltaX) < 0.1 && abs(m_deltaY) < 0.1));
                 if ((abs(m_deltaX) < 0.1 && abs(m_deltaY) < 0.1))
                 {
-                    whyDone = "Within 4 inches of target or getting farther away from target";
+                    whyDone = "Within 4 inches of target or getting farther away from target";  
                 }
             }
         }       
@@ -241,16 +272,20 @@ bool DrivePath::IsDone()
 bool DrivePath::IsSamePose(frc::Pose2d lCurPos, frc::Pose2d lPrevPos, double tolerance)
 {
     // Detect if the two poses are the same within a tolerance
-    double dCurPosX = lCurPos.X().to<double>() * 1000; //cm
-    double dCurPosY = lCurPos.Y().to<double>() * 1000;
-    double dPrevPosX = lPrevPos.X().to<double>() * 1000;
-    double dPrevPosY = lPrevPos.Y().to<double>() * 1000;
+    double dCurPosX = lCurPos.X().to<double>() * 100; //cm
+    double dCurPosY = lCurPos.Y().to<double>() * 100;
+    double dPrevPosX = lPrevPos.X().to<double>() * 100;
+    double dPrevPosY = lPrevPos.Y().to<double>() * 100;
 
     double dDeltaX = abs(dPrevPosX - dCurPosX);
     double dDeltaY = abs(dPrevPosY - dCurPosY);
 
     Logger::GetLogger()->ToNtTable("Deltas", "iDeltaX", to_string(dDeltaX));
     Logger::GetLogger()->ToNtTable("Deltas", "iDeltaY", to_string(dDeltaY));
+    Logger::GetLogger()->ToNtTable("Deltas", "curPosX", to_string(dCurPosX));
+    Logger::GetLogger()->ToNtTable("Deltas", "curPosY", to_string(dCurPosY));
+    Logger::GetLogger()->ToNtTable("Deltas", "prevPosX", to_string(dPrevPosX));
+    Logger::GetLogger()->ToNtTable("Deltas", "prevPosY", to_string(dPrevPosY));
 
     //  If Position of X or Y has moved since last scan..  Using Delta X/Y
     return (dDeltaX <= tolerance && dDeltaY <= tolerance);
@@ -293,7 +328,7 @@ void DrivePath::CalcCurrentAndDesiredStates()
     Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseOmega", m_desiredState.pose.Rotation().Degrees().to<double>());
     Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", m_currentChassisPosition.X().to<double>());
     Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", m_currentChassisPosition.Y().to<double>());
-    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosOmega", m_desiredState.pose.Rotation().Degrees().to<double>());
+    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosOmega", m_currentChassisPosition.Rotation().Degrees().to<double>());
     Logger::GetLogger()->ToNtTable("DeltaValues", "DeltaX", m_desiredState.pose.X().to<double>() - m_currentChassisPosition.X().to<double>());
     Logger::GetLogger()->ToNtTable("DeltaValues", "DeltaY", m_desiredState.pose.Y().to<double>() - m_currentChassisPosition.Y().to<double>());
 

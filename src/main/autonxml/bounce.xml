@@ -7,6 +7,9 @@
 	<primitive id="DRIVE_PATH"
 			   pathname="Bounce1.wpilib.json"
 			   drivemode="HOLONOMIC"/>
+	<primitive id="DRIVE_PATH"
+			   pathname="Bounce2Small.wpilib.json"
+			   drivemode="HOLONOMIC"/>
 
 	<!--		   
 	<primitive id="DRIVE_PATH"
