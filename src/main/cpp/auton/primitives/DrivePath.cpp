@@ -34,12 +34,15 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
                          m_currentChassisPosition(m_chassis.get()->GetPose()),
                          m_trajectory(),
                          m_runHoloController(false),
+                         m_xPIDController(frc2::PIDController(1, 0, 0)),
+                         m_yPIDController(frc2::PIDController(1, 0, 0)),
+                         m_thetaPIDController(frc::ProfiledPIDController<units::radian>(1, 0, 0, 
+    frc::TrapezoidProfile<units::radian>::Constraints(6.28_rad_per_s, 3.14_rad_per_s / 1_s))),
+    //max velocity of 1 rotation per second and a max acceleration of 180 degrees per second squared.
                          m_ramseteController(),
-                         m_holoController(frc2::PIDController{1, 0, 0},
-                                          frc2::PIDController{1, 0, 0},
-                                          frc::ProfiledPIDController<units::radian>{1, 0, 0,
-                                                                                    frc::TrapezoidProfile<units::radian>::Constraints{6.28_rad_per_s, 3.14_rad_per_s / 1_s}}),
-                         //max velocity of 1 rotation per second and a max acceleration of 180 degrees per second squared.
+                         m_holoController(m_xPIDController,
+                                          m_yPIDController,
+                                          m_thetaPIDController),
                          m_PrevPos(m_chassis.get()->GetPose()),
                          m_PosChgTimer(make_unique<Timer>()),
                          m_timesRun(0),
@@ -54,7 +57,6 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
 }
 void DrivePath::Init(PrimitiveParams *params)
 {
-
     //Drive mode switcher
     if (params->GetDriveMode() == "RAMSETE")
     {
@@ -149,31 +151,42 @@ void DrivePath::Run()
         Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsZ", units::degrees_per_second_t(refChassisSpeeds.omega()).to<double>());
 
         //stop z rotation
-        refChassisSpeeds.omega = units::angular_velocity::radians_per_second_t(0);
+        //refChassisSpeeds.omega = units::angular_velocity::radians_per_second_t(0);
 
         //correct z rotation by comparing primitive param heading to pigeon yaw
-        //print out error using frc2::PIDController().GetPositionError
-        /*
+        //print out error using frc2::PIDController().GetPositionErrors
+
+        //set goal of thetaPIDController to the desired state of holo controller
+        m_thetaPIDController.SetGoal(m_desiredState.pose.Rotation().Radians());
+        
         DragonPigeon* pigeon = PigeonFactory::GetFactory()->GetPigeon();
-        bool turn = m_heading == pigeon->GetYaw() ? true : false;
+        
+        bool turn = m_heading == pigeon->GetYaw() ? false : true;
         double delta = pigeon->GetYaw() - m_heading;
         units::angular_velocity::radians_per_second_t speedRads;
-         if (turn)
-         {
-             if (delta < 0)
-             {
-                 speedRads = units::radians_per_second_t(0.1745);
-             }
-             else if (delta > 0)
-             {
-                speedRads = units::radians_per_second_t(-0.1745);
-             }
-         }
-         else
-         {
-             speedRads = units::radians_per_second_t(0);
-         }
-         */
+        if (turn)
+        {
+            if (delta < 0)
+            {
+               //speedRads = units::radians_per_second_t(0.2618);//.1745 works below 2.5 m/s for velocity
+               speedRads = units::radians_per_second_t((pigeon->GetYaw() / 10) * -0.2618);
+            }
+            else if (delta > 0)
+            {
+               //speedRads = units::radians_per_second_t(-0.2618);
+               speedRads = units::radians_per_second_t((pigeon->GetYaw() / 10) * -0.2618);
+            }
+        }
+        else
+        {
+            speedRads = units::radians_per_second_t(0);
+        }
+
+        refChassisSpeeds.omega = speedRads;
+
+        //print out error for z rotation in network table
+        Logger::GetLogger()->ToNtTable("APIDValues", "ZError", m_thetaPIDController.GetPositionError().to<double>());
+        Logger::GetLogger()->ToNtTable("APIDValues", "YawValue", pigeon->GetYaw());
          
 
         // Run the chassis
