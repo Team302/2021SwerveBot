@@ -87,5 +87,8 @@ private:
     std::vector<frc::Trajectory::State>     m_trajectoryStates;
     frc::Trajectory::State                  m_desiredState;
     double                                  m_heading;
-    
+
+    double                                  m_deltaXHoloDebug;
+    double                                  m_deltaYHoloDebug;
+
 };

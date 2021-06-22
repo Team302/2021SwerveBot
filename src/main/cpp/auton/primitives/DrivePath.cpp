@@ -50,7 +50,9 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
                          m_deltaX(0.0),
                          m_deltaY(0.0),
                          m_trajectoryStates(),
-                         m_desiredState()
+                         m_desiredState(),
+                         m_deltaXHoloDebug(),
+                         m_deltaYHoloDebug()
 
 {
     m_trajectoryStates.clear();
@@ -164,17 +166,30 @@ void DrivePath::Run()
         bool turn = m_heading == pigeon->GetYaw() ? false : true;
         double delta = pigeon->GetYaw() - m_heading;
         units::angular_velocity::radians_per_second_t speedRads;
-        if (turn)
+        if (pigeon->GetYaw() > (m_heading + 2))
         {
             if (delta < 0)
             {
                //speedRads = units::radians_per_second_t(0.2618);//.1745 works below 2.5 m/s for velocity
-               speedRads = units::radians_per_second_t((pigeon->GetYaw() / 10) * -0.2618);
+               speedRads = units::radians_per_second_t((delta / 10) * 0.2618);
             }
             else if (delta > 0)
             {
                //speedRads = units::radians_per_second_t(-0.2618);
-               speedRads = units::radians_per_second_t((pigeon->GetYaw() / 10) * -0.2618);
+               speedRads = units::radians_per_second_t((delta / 10) * -0.2618);
+            }
+        }
+        else if (pigeon->GetYaw() < (m_heading - 2))
+        {
+            if (delta < 0)
+            {
+               //speedRads = units::radians_per_second_t(0.2618);//.1745 works below 2.5 m/s for velocity
+               speedRads = units::radians_per_second_t((delta / 10) * -0.2618);
+            }
+            else if (delta > 0)
+            {
+               //speedRads = units::radians_per_second_t(-0.2618);
+               speedRads = units::radians_per_second_t((delta / 10) * 0.2618);
             }
         }
         else
@@ -182,10 +197,10 @@ void DrivePath::Run()
             speedRads = units::radians_per_second_t(0);
         }
 
+
         refChassisSpeeds.omega = speedRads;
 
         //print out error for z rotation in network table
-        Logger::GetLogger()->ToNtTable("APIDValues", "ZError", m_thetaPIDController.GetPositionError().to<double>());
         Logger::GetLogger()->ToNtTable("APIDValues", "YawValue", pigeon->GetYaw());
          
 
@@ -204,6 +219,7 @@ bool DrivePath::IsDone()
 
     bool isDone = false;
     string whyDone = "";
+    m_targetPose.Rotation().Degrees() = units::degree_t(m_heading);
     
     if (!m_trajectoryStates.empty()) 
     {
@@ -246,7 +262,7 @@ bool DrivePath::IsDone()
         
 
 
-        if (m_PosChgTimer.get()->Get() > 1.0)
+        if (m_PosChgTimer.get()->Get() > 0.25)
         {
            //auto moving = !IsSamePose(curPos, m_PrevPos, 7.5);
             auto moving = m_chassis.get()->IsMoving();
@@ -276,8 +292,18 @@ bool DrivePath::IsDone()
     {
         Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Done", "True");
         Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "WhyDone", whyDone);
+        Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "DeltaX", to_string(m_deltaXHoloDebug));
+        Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "DeltaY", to_string(m_deltaYHoloDebug));
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "DrivePath" + m_pathname, "Is done because: " + whyDone);
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "DrivePath" + m_pathname, "DeltaX = " + to_string(m_deltaXHoloDebug));
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "DrivePath" + m_pathname, "DeltaY = " + to_string(m_deltaYHoloDebug));
     }
+    else
+    {
+        Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Done", "False");
+        Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "WhyDone", "Not done yet");
+    }
+    
     return isDone;
     
 }
@@ -292,6 +318,9 @@ bool DrivePath::IsSamePose(frc::Pose2d lCurPos, frc::Pose2d lPrevPos, double tol
 
     double dDeltaX = abs(dPrevPosX - dCurPosX);
     double dDeltaY = abs(dPrevPosY - dCurPosY);
+
+    m_deltaXHoloDebug = dDeltaX;
+    m_deltaYHoloDebug = dDeltaY;
 
     Logger::GetLogger()->ToNtTable("Deltas", "iDeltaX", to_string(dDeltaX));
     Logger::GetLogger()->ToNtTable("Deltas", "iDeltaY", to_string(dDeltaY));
