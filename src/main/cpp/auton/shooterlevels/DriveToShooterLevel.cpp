@@ -51,8 +51,9 @@ void DriveToShooterLevel::Init(double distance, double startSpeed)
                                        startSpeed,      //start drive speed in inches
                                        0.0,             //end drive speed
                                        false,           //run the intake
-                                       string("")       //pathname
-                                       );                                       
+                                       string(""),       //pathname
+                                       string("RAMSETE") //drive mode
+                                      );                                       
         m_primitive = m_primFactory->GetIPrimitive(params);
         m_primitive->Init(params);
     }

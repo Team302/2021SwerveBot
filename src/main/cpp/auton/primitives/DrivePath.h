@@ -72,6 +72,9 @@ private:
     frc::Trajectory                         m_trajectory;
     bool                                    m_runHoloController;
     bool                                    m_wasMoving;
+    frc2::PIDController                            m_xPIDController;
+    frc2::PIDController                            m_yPIDController;
+    frc::ProfiledPIDController<units::radian>      m_thetaPIDController;
     frc::RamseteController                  m_ramseteController;
     frc::HolonomicDriveController           m_holoController;
     frc::Pose2d                             m_PrevPos;          // previous position of robot for compare to current position.
@@ -83,5 +86,9 @@ private:
     double                                  m_deltaY;
     std::vector<frc::Trajectory::State>     m_trajectoryStates;
     frc::Trajectory::State                  m_desiredState;
- 
+    double                                  m_heading;
+
+    double                                  m_deltaXHoloDebug;
+    double                                  m_deltaYHoloDebug;
+
 };

@@ -34,12 +34,15 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
                          m_currentChassisPosition(m_chassis.get()->GetPose()),
                          m_trajectory(),
                          m_runHoloController(false),
+                         m_xPIDController(frc2::PIDController(1, 0, 0)),
+                         m_yPIDController(frc2::PIDController(1, 0, 0)),
+                         m_thetaPIDController(frc::ProfiledPIDController<units::radian>(1, 0, 0, 
+    frc::TrapezoidProfile<units::radian>::Constraints(6.28_rad_per_s, 3.14_rad_per_s / 1_s))),
+    //max velocity of 1 rotation per second and a max acceleration of 180 degrees per second squared.
                          m_ramseteController(),
-                         m_holoController(frc2::PIDController{1, 0, 0},
-                                          frc2::PIDController{1, 0, 0},
-                                          frc::ProfiledPIDController<units::radian>{1, 0, 0,
-                                                                                    frc::TrapezoidProfile<units::radian>::Constraints{6.28_rad_per_s, 3.14_rad_per_s / 1_s}}),
-                         //max velocity of 1 rotation per second and a max acceleration of 180 degrees per second squared.
+                         m_holoController(m_xPIDController,
+                                          m_yPIDController,
+                                          m_thetaPIDController),
                          m_PrevPos(m_chassis.get()->GetPose()),
                          m_PosChgTimer(make_unique<Timer>()),
                          m_timesRun(0),
@@ -47,14 +50,34 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
                          m_deltaX(0.0),
                          m_deltaY(0.0),
                          m_trajectoryStates(),
-                         m_desiredState()
+                         m_desiredState(),
+                         m_deltaXHoloDebug(),
+                         m_deltaYHoloDebug()
 
 {
     m_trajectoryStates.clear();
 }
 void DrivePath::Init(PrimitiveParams *params)
 {
+    //Drive mode switcher
+    if (params->GetDriveMode() == "RAMSETE")
+    {
+        m_runHoloController = false;
+    }
+    else if (params->GetDriveMode() == "HOLONOMIC")
+    {
+        m_runHoloController = true;
+    }
+    else
+    {
+        Logger::GetLogger()->LogError(Logger::GetLogger()->ERROR_ONCE, "DrivePath Drive Mode Switcher", "Invalid drive mode");
+    }
+    
+
+
     auto m_pathname = params->GetPathName();
+
+    m_heading = params->GetHeading();
 
     Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Initialized", "False");
     Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Running", "False");
@@ -89,10 +112,12 @@ void DrivePath::Init(PrimitiveParams *params)
         if (m_runHoloController)
         {
             m_holoController.SetEnabled(true);
+            m_ramseteController.SetEnabled(false);
         }
         else
         {
             m_ramseteController.SetEnabled(true);
+            m_holoController.SetEnabled(false);
         }
         auto targetState = m_trajectory.Sample(m_trajectory.TotalTime());
         m_targetPose = targetState.pose;
@@ -106,6 +131,7 @@ void DrivePath::Init(PrimitiveParams *params)
 }
 void DrivePath::Run()
 {
+
     Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Running", "True");
 
     if (!m_trajectoryStates.empty()) 
@@ -126,6 +152,58 @@ void DrivePath::Run()
         Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsY", refChassisSpeeds.vy());
         Logger::GetLogger()->ToNtTable("DrivePathValues", "ChassisSpeedsZ", units::degrees_per_second_t(refChassisSpeeds.omega()).to<double>());
 
+        //stop z rotation
+        //refChassisSpeeds.omega = units::angular_velocity::radians_per_second_t(0);
+
+        //correct z rotation by comparing primitive param heading to pigeon yaw
+        //print out error using frc2::PIDController().GetPositionErrors
+
+        //set goal of thetaPIDController to the desired state of holo controller
+        m_thetaPIDController.SetGoal(m_desiredState.pose.Rotation().Radians());
+        
+        DragonPigeon* pigeon = PigeonFactory::GetFactory()->GetPigeon();
+        
+        bool turn = m_heading == pigeon->GetYaw() ? false : true;
+        double delta = pigeon->GetYaw() - m_heading;
+        units::angular_velocity::radians_per_second_t speedRads;
+        if (pigeon->GetYaw() > (m_heading + 2))
+        {
+            if (delta < 0)
+            {
+               //speedRads = units::radians_per_second_t(0.2618);//.1745 works below 2.5 m/s for velocity
+               speedRads = units::radians_per_second_t((delta / 10) * 0.2618);
+            }
+            else if (delta > 0)
+            {
+               //speedRads = units::radians_per_second_t(-0.2618);
+               speedRads = units::radians_per_second_t((delta / 10) * -0.2618);
+            }
+        }
+        else if (pigeon->GetYaw() < (m_heading - 2))
+        {
+            if (delta < 0)
+            {
+               //speedRads = units::radians_per_second_t(0.2618);//.1745 works below 2.5 m/s for velocity
+               speedRads = units::radians_per_second_t((delta / 10) * -0.2618);
+            }
+            else if (delta > 0)
+            {
+               //speedRads = units::radians_per_second_t(-0.2618);
+               speedRads = units::radians_per_second_t((delta / 10) * 0.2618);
+            }
+        }
+        else
+        {
+            speedRads = units::radians_per_second_t(0);
+        }
+
+
+        refChassisSpeeds.omega = speedRads;
+
+        //print out error for z rotation in network table
+        Logger::GetLogger()->ToNtTable("APIDValues", "YawValue", pigeon->GetYaw());
+         
+
         // Run the chassis
         m_chassis->Drive(refChassisSpeeds, false);
     }
@@ -141,13 +219,14 @@ bool DrivePath::IsDone()
 
     bool isDone = false;
     string whyDone = "";
+    m_targetPose.Rotation().Degrees() = units::degree_t(m_heading);
     
     if (!m_trajectoryStates.empty()) 
     {
         // Check if the current pose and the trajectory's final pose are the same
         auto curPos = m_chassis.get()->GetPose();
         //isDone = IsSamePose(curPos, m_targetPose, 100.0);
-        if (IsSamePose(curPos, m_targetPose, 100.0))
+        if (IsSamePose(curPos, m_targetPose, 10.0))
         {
             isDone = true;
             whyDone = "Current Pose = Trajectory final pose";
@@ -174,7 +253,7 @@ bool DrivePath::IsDone()
                 isDone = ((abs(m_deltaX) < 0.1 && abs(m_deltaY) < 0.1));
                 if ((abs(m_deltaX) < 0.1 && abs(m_deltaY) < 0.1))
                 {
-                    whyDone = "Within 4 inches of target or getting farther away from target";
+                    whyDone = "Within 4 inches of target or getting farther away from target";  
                 }
             }
         }       
@@ -183,7 +262,7 @@ bool DrivePath::IsDone()
         
 
 
-        if (m_PosChgTimer.get()->Get() > 1.0)
+        if (m_PosChgTimer.get()->Get() > 0.25)
         {
            //auto moving = !IsSamePose(curPos, m_PrevPos, 7.5);
             auto moving = m_chassis.get()->IsMoving();
@@ -213,8 +292,18 @@ bool DrivePath::IsDone()
     {
         Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Done", "True");
         Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "WhyDone", whyDone);
+        Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "DeltaX", to_string(m_deltaXHoloDebug));
+        Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "DeltaY", to_string(m_deltaYHoloDebug));
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "DrivePath" + m_pathname, "Is done because: " + whyDone);
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "DrivePath" + m_pathname, "DeltaX = " + to_string(m_deltaXHoloDebug));
+        Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "DrivePath" + m_pathname, "DeltaY = " + to_string(m_deltaYHoloDebug));
     }
+    else
+    {
+        Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Done", "False");
+        Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "WhyDone", "Not done yet");
+    }
+    
     return isDone;
     
 }
@@ -222,16 +311,23 @@ bool DrivePath::IsDone()
 bool DrivePath::IsSamePose(frc::Pose2d lCurPos, frc::Pose2d lPrevPos, double tolerance)
 {
     // Detect if the two poses are the same within a tolerance
-    double dCurPosX = lCurPos.X().to<double>() * 1000; //cm
-    double dCurPosY = lCurPos.Y().to<double>() * 1000;
-    double dPrevPosX = lPrevPos.X().to<double>() * 1000;
-    double dPrevPosY = lPrevPos.Y().to<double>() * 1000;
+    double dCurPosX = lCurPos.X().to<double>() * 100; //cm
+    double dCurPosY = lCurPos.Y().to<double>() * 100;
+    double dPrevPosX = lPrevPos.X().to<double>() * 100;
+    double dPrevPosY = lPrevPos.Y().to<double>() * 100;
 
     double dDeltaX = abs(dPrevPosX - dCurPosX);
     double dDeltaY = abs(dPrevPosY - dCurPosY);
 
+    m_deltaXHoloDebug = dDeltaX;
+    m_deltaYHoloDebug = dDeltaY;
+
     Logger::GetLogger()->ToNtTable("Deltas", "iDeltaX", to_string(dDeltaX));
     Logger::GetLogger()->ToNtTable("Deltas", "iDeltaY", to_string(dDeltaY));
+    Logger::GetLogger()->ToNtTable("Deltas", "curPosX", to_string(dCurPosX));
+    Logger::GetLogger()->ToNtTable("Deltas", "curPosY", to_string(dCurPosY));
+    Logger::GetLogger()->ToNtTable("Deltas", "prevPosX", to_string(dPrevPosX));
+    Logger::GetLogger()->ToNtTable("Deltas", "prevPosY", to_string(dPrevPosY));
 
     //  If Position of X or Y has moved since last scan..  Using Delta X/Y
     return (dDeltaX <= tolerance && dDeltaY <= tolerance);
@@ -274,7 +370,7 @@ void DrivePath::CalcCurrentAndDesiredStates()
     Logger::GetLogger()->ToNtTable("DrivePathValues", "DesiredPoseOmega", m_desiredState.pose.Rotation().Degrees().to<double>());
     Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", m_currentChassisPosition.X().to<double>());
     Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosY", m_currentChassisPosition.Y().to<double>());
-    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosOmega", m_desiredState.pose.Rotation().Degrees().to<double>());
+    Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosOmega", m_currentChassisPosition.Rotation().Degrees().to<double>());
     Logger::GetLogger()->ToNtTable("DeltaValues", "DeltaX", m_desiredState.pose.X().to<double>() - m_currentChassisPosition.X().to<double>());
     Logger::GetLogger()->ToNtTable("DeltaValues", "DeltaY", m_desiredState.pose.Y().to<double>() - m_currentChassisPosition.Y().to<double>());
 

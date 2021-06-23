@@ -64,6 +64,7 @@ class CyclePrimitives : public IState
 		double                          m_maxTime;
 		bool							m_isDone;
 		std::string						m_pathName;
+		std::string						m_driveMode;
 		bool							m_runIntake;
 		bool 							m_hasIntake;
 };

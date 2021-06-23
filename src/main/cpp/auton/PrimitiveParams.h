@@ -1,4 +1,3 @@
-
 //====================================================================================================================================================
 // Copyright 2020 Lake Orion Robotics FIRST Team 302
 //
@@ -46,7 +45,8 @@ class PrimitiveParams
                 float                                               startDriveSpeed,
                 float                                               endDriveSpeed,
                 bool                                                runIntake,
-                std::string                                         pathName
+                std::string                                         pathName,
+                std::string                                         driveMode
         );//Constructor. Takes in all parameters
 
         PrimitiveParams() = delete;
@@ -64,6 +64,7 @@ class PrimitiveParams
         float GetEndDriveSpeed() const;
         bool GetIntakeState() const;
         std::string GetPathName() const;
+        std::string GetDriveMode() const;
 
         //Setters
         void SetDistance(float distance);
@@ -80,6 +81,7 @@ class PrimitiveParams
         float                                               m_endDriveSpeed;
         std::string                                         m_pathName;
         bool                                                m_runIntake;
+        std::string                                         m_driveMode;
 };
 
 typedef std::vector<PrimitiveParams*> PrimitiveParamsVector;
