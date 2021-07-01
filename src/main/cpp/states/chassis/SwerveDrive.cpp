@@ -169,6 +169,20 @@ void SwerveDrive::Run( )
             m_shooterLevel = new DriveToShooterLevel();
             m_shooterLevel->Init(172, 39.7);
         }
+        else if (controller->IsButtonPressed(TeleopControl::TURN_AROUND_FRONT_RIGHT))
+        {
+            //Offset L and W values in swerve module position calculations to turn around front right wheel
+            //Each wheel is half of wheelbase and half of track away
+            //FL = (L + 0.5Wheelbase W - 0.5Track)                  FR = (L + 0.5Wheelbase W + 0.5Track)
+            //                                      Center = (L W)
+            //BL = (L - 0.5Wheelbase W - 0.5Track)                  BR = (L - 0.5Wheelbase W + 0.5Track)
+            double xOffset = 0.5;     //percent of wheel base to offset rotate point by
+            double yOffset = 0.5;     //percent of track to offset rotate point by
+
+            double xOffsetInches = xOffset * m_chassis->GetWheelBase().to<double>();
+            double yOffsetInches = yOffset * m_chassis->GetTrack().to<double>();
+            m_offset = frc::Vector2d(xOffsetInches, yOffsetInches);
+        }
         else
         {
             m_lastUp   = false;
@@ -207,7 +221,7 @@ void SwerveDrive::Run( )
     Logger::GetLogger()->ToNtTable("Swerve Drive", "rotate", rotate);
     **/
    
-    m_chassis.get()->Drive(drive, steer, rotate, true);
+    m_chassis.get()->Drive(drive, steer, rotate, true, m_offset);
 }
 
 /// @brief indicates that we are not at our target
