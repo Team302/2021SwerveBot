@@ -268,6 +268,38 @@ void SwerveChassis::Drive( double drive, double steer, double rotate, bool field
     }
 }
 
+void SwerveChassis::Drive(double drive, double steer, double rotate, bool fieldRelative, frc::Vector2d rotateOffset )
+{
+
+    m_rotateOffset = rotateOffset;
+
+    if ( abs(drive)  < m_deadband && 
+         abs(steer)  < m_deadband && 
+         abs(rotate) < m_deadband )
+    {
+        // feed the motors
+        m_frontLeft.get()->StopMotors();
+        m_frontRight.get()->StopMotors();
+        m_backLeft.get()->StopMotors();
+        m_backRight.get()->StopMotors();       
+    }
+    else
+    {    
+        // scale joystick values to velocities using max chassis values
+        auto maxSpeed = GetMaxSpeed();
+        auto maxRotation = GetMaxAngularSpeed();
+
+        Logger::GetLogger()->ToNtTable("Swerve Chassis", "MaxSpeed", maxSpeed.to<double>() );
+        Logger::GetLogger()->ToNtTable("Swerve Chassis", "maxRotation", maxRotation.to<double>() );
+
+        units::velocity::meters_per_second_t            driveSpeed = drive * maxSpeed;
+        units::velocity::meters_per_second_t            steerSpeed = steer * maxSpeed;
+        units::angular_velocity::radians_per_second_t   rotateSpeed = rotate * maxRotation;
+
+        Drive( driveSpeed, steerSpeed, rotateSpeed, fieldRelative );
+    }
+}
+
 Pose2d SwerveChassis::GetPose() const
 {
     if (m_poseOpt==PoseEstimationMethod::WPI)
@@ -495,8 +527,8 @@ void SwerveChassis::CalcSwerveModuleStates
     auto vx = -1.0 * speeds.vy;
     auto omega = speeds.omega;
 
-    units::velocity::meters_per_second_t omegaL = omega.to<double>() * l / 2.0 / 1_s ;
-    units::velocity::meters_per_second_t omegaW = omega.to<double>() * w / 2.0 / 1_s;
+    units::velocity::meters_per_second_t omegaL = omega.to<double>() * (l + units::length::inch_t(m_rotateOffset.x)) / 2.0 / 1_s ;
+    units::velocity::meters_per_second_t omegaW = omega.to<double>() * (w + units::length::inch_t(m_rotateOffset.y)) / 2.0 / 1_s;
     
     auto a = vx - omegaL;
     auto b = vx + omegaL;

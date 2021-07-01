@@ -60,6 +60,7 @@ class TeleopControl
             REZERO_PIGEON,
             AUTO_DRIVE_TO_YELLOW,
             AUTO_DRIVE_TO_LOADING_ZONE,
+            TURN_AROUND_FRONT_RIGHT,
             MAX_FUNCTIONS
         };
 

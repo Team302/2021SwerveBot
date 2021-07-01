@@ -105,6 +105,9 @@ TeleopControl::TeleopControl() : m_axisIDs(),
 		m_controllerIndex[ AUTO_DRIVE_TO_LOADING_ZONE ]	= ctrlNo;
 		m_buttonIDs[ AUTO_DRIVE_TO_LOADING_ZONE ]		= IDragonGamePad::B_BUTTON;
 
+		m_controllerIndex[ TURN_AROUND_FRONT_RIGHT ] 	= ctrlNo;
+		m_buttonIDs[ TURN_AROUND_FRONT_RIGHT ] 			= IDragonGamePad::A_BUTTON;
+
 		m_controllerIndex[DRIVE_FULL] 		= ctrlNo;
 		m_buttonIDs[DRIVE_FULL] 			= IDragonGamePad::POV_0;	
 		m_controllerIndex[DRIVE_75PERCENT] 	= ctrlNo;
