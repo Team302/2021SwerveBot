@@ -34,12 +34,10 @@
 
 #include <hw/usages/IDragonMotorControllerMap.h>
 #include <hw/usages/DigitalInputMap.h>
-#include <hw/usages/ServoMap.h>
 
 #include <xmlhw/CanCoderDefn.h>
 #include <xmlhw/DigitalInputDefn.h>
 #include <xmlhw/MotorDefn.h>
-#include <xmlhw/ServoDefn.h> 
 
 #include <subsys/MechanismTypes.h>
 
@@ -119,11 +117,9 @@ void MechanismDefn::ParseXML
     // Parse/validate subobject xml
     unique_ptr<MotorDefn> motorXML = make_unique<MotorDefn>();
     unique_ptr<DigitalInputDefn> digitalXML = make_unique<DigitalInputDefn>();
-    unique_ptr<ServoDefn> servoXML = make_unique<ServoDefn>();
     unique_ptr<CanCoderDefn> cancoderXML = make_unique<CanCoderDefn>();
 
     IDragonMotorControllerMap motors;
-    ServoMap servos;
     DigitalInputMap digitalInputs;
     shared_ptr<ctre::phoenix::sensors::CANCoder> canCoder = nullptr;
 
@@ -145,14 +141,6 @@ void MechanismDefn::ParseXML
                 digitalInputs[digitalIn.get()->GetType()] = digitalIn;
             }
         }
-        else if ( strcmp( child.name(), "servo") == 0 )
-        {
-            auto servo = servoXML->ParseXML(child);
-            if ( servo.get() != nullptr )
-            {
-                servos[servo.get()->GetUsage()] = servo;
-            }
-        }
         else if ( strcmp( child.name(), "cancoder" ) == 0)
         {
             canCoder = cancoderXML.get()->ParseXML(child);
@@ -163,13 +151,5 @@ void MechanismDefn::ParseXML
             msg += child.name();
             Logger::GetLogger()->LogError( string("MechanismDefn"), msg );
         }
-    }
-
-
-    // create instance
-    if ( !hasError )
-    {
-        MechanismFactory* factory =  MechanismFactory::GetMechanismFactory();
-        factory->CreateIMechanism( type, motors, servos, digitalInputs, canCoder );
     }
 }

@@ -16,10 +16,6 @@
 
 #pragma once
 
-//========================================================================================================
-/// @interface IMech1Servo
-/// @brief     This is the interface for mechanisms that have one independently controlled servo.
-//========================================================================================================
 
 // C++ Includes
 
@@ -32,22 +28,8 @@
 // Third Party Includes
 
 
-///	 @interface IMech1Servo
 ///  @brief	    Interface for subsystems
-class IMech1Servo 
-{
-	public:
-        /// @brief      Move servo to the desired angle
-        /// @param [in] double angle: Target angle in degrees
-        /// @return     void
-        virtual void SetAngle
-        (
-            double angle       
-        ) = 0;
 
-	    IMech1Servo() = default;
-	    virtual ~IMech1Servo() = default;
-};
 
 
 
