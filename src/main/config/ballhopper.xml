@@ -14,6 +14,6 @@
                      value="1.5"/>
     <mechanismTarget stateIdentifier="BALLHOPPERRAPIDRELEASE" 
 	                 controlDataIdentifier="openloop"
-                     value="0.75"/>
+                     value="0.25"/>
 
 </statedata>
