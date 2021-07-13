@@ -173,20 +173,29 @@ void SwerveDrive::Run( )
         {
             //Offset L and W values in swerve module position calculations to turn around front right wheel
             //Each wheel is half of wheelbase and half of track away
-            //FL = (L + 0.5Wheelbase W - 0.5Track)                  FR = (L + 0.5Wheelbase W + 0.5Track)
+            //FL = (L + Wheelbase W - Track)                  FR = (L + Wheelbase W + Track)
             //                                      Center = (L W)
-            //BL = (L - 0.5Wheelbase W - 0.5Track)                  BR = (L - 0.5Wheelbase W + 0.5Track)
-            double xOffset = 0.5;     //percent of wheel base to offset rotate point by
-            double yOffset = 0.5;     //percent of track to offset rotate point by
+            //BL = (L - Wheelbase W - Track)                  BR = (L - 5Wheelbase W + Track)
+            double xOffset = 1;     //percent of wheel base to offset rotate point by
+            double yOffset = 1;     //percent of track to offset rotate point by
 
             double xOffsetInches = xOffset * m_chassis->GetWheelBase().to<double>();
             double yOffsetInches = yOffset * m_chassis->GetTrack().to<double>();
-            m_offset = frc::Vector2d(xOffsetInches, yOffsetInches);
+
+            frc::Vector2d offset = frc::Vector2d(xOffsetInches, yOffsetInches);
+
+            m_offset = offset;
+
+            Logger::GetLogger()->ToNtTable("ATurnAbout", "Is A Pressed?", "True");
+
         }
         else
         {
             m_lastUp   = false;
             m_lastDown = false;
+
+            //Debugging for TurnAboutPoint
+            Logger::GetLogger()->ToNtTable("ATurnAbout", "Is A Pressed?", "False");
 
             //Auto shooter level driving logic
             if (m_shooterLevel != nullptr)
