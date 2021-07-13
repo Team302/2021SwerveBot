@@ -527,9 +527,26 @@ void SwerveChassis::CalcSwerveModuleStates
     auto vx = -1.0 * speeds.vy;
     auto omega = speeds.omega;
 
-    units::velocity::meters_per_second_t omegaL = omega.to<double>() * (l + units::length::inch_t(m_rotateOffset.x)) / 2.0 / 1_s ;
-    units::velocity::meters_per_second_t omegaW = omega.to<double>() * (w + units::length::inch_t(m_rotateOffset.y)) / 2.0 / 1_s;
+    units::velocity::meters_per_second_t omegaL = omega * (l + units::length::inch_t(m_rotateOffset.x)) / 2.0 / 1_s;
+    units::velocity::meters_per_second_t omegaW = omega * (w + units::length::inch_t(m_rotateOffset.y)) / 2.0 / 1_s;
+
+    //double omegaLD = omega.to<double>() * (l.to<double>() + m_rotateOffset.x) / 2.0;
+    //double omegaWD = omega.to<double>() * (w.to<double>() + m_rotateOffset.y) / 2.0;
+
+    //units::meters_per_second_t omegaL = units::meters_per_second_t(omegaLD);
+    //units::meters_per_second_t omegaW = units::meters_per_second_t(omegaWD);
     
+
+    //Debugging for turn around point
+    Logger::GetLogger()->ToNtTable("ATurnAbout", "omegaL MPS", omegaL.to<double>());
+    Logger::GetLogger()->ToNtTable("ATurnAbout", "omegaW MPS", omegaW.to<double>());
+    Logger::GetLogger()->ToNtTable("ATurnAbout", "rotateOffset.x", m_rotateOffset.x);
+    Logger::GetLogger()->ToNtTable("ATurnAbout", "rotateOffset.y", m_rotateOffset.y);
+    Logger::GetLogger()->ToNtTable("ATurnAbout", "l / WheelBase", l.to<double>());
+    Logger::GetLogger()->ToNtTable("ATurnAbout", "w / Track", w.to<double>());
+
+    //rotateOffset.x and y should be equal to l and w
+
     auto a = vx - omegaL;
     auto b = vx + omegaL;
     auto c = vy - omegaW;
