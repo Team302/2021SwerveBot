@@ -103,7 +103,7 @@ class SwerveChassis
         /// @param [in] bool    fieldRelative:  true: movement is based on the field (e.g., push it goes away from the driver regardless of the robot orientation),
         ///                                     false: direction is based on robot front/back
         /// @param [in] frc::Vector2d   rotateOffset:   the offset of the rotation point (value is a percent of chassis wheelbase or track)
-        void Drive(double drivePercent, double steerPercent, double rotatePercent, bool fieldRelative, frc::Vector2d rotateOffset );
+        void Drive(double drivePercent, double steerPercent, double rotatePercent, bool fieldRelative, frc::Translation2d rotateOffset );
 
         /// @brief Drive the chassis
         /// @param [in] frc::ChassisSpeeds  speeds:         kinematics for how to move the chassis
@@ -212,7 +212,7 @@ class SwerveChassis
         units::velocity::meters_per_second_t                        m_steer;
         units::angular_velocity::radians_per_second_t               m_rotate;
 
-        frc::Vector2d                                               m_rotateOffset;
+        frc::Translation2d                                          m_rotateOffset;
 
         const double                                                m_deadband = 0.1;
         
