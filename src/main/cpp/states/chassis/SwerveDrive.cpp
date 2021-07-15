@@ -42,7 +42,8 @@ SwerveDrive::SwerveDrive() : IState(),
                              m_usePWLinearProfile(false),
                              m_lastUp(false),
                              m_lastDown(false),
-                             m_shooterLevel()
+                             m_shooterLevel(),
+                             m_offset(frc::Translation2d())
                              //m_shooterLevel(new DriveToShooterLevel())
 {
     if ( m_controller == nullptr )
@@ -179,10 +180,13 @@ void SwerveDrive::Run( )
             double xOffset = 1;     //percent of wheel base to offset rotate point by
             double yOffset = 1;     //percent of track to offset rotate point by
 
-            double xOffsetInches = xOffset * m_chassis->GetWheelBase().to<double>();
-            double yOffsetInches = yOffset * m_chassis->GetTrack().to<double>();
+            units::inch_t xOffsetInches = units::inch_t(xOffset * m_chassis->GetWheelBase().to<double>());
+            units::inch_t yOffsetInches = units::inch_t(yOffset * m_chassis->GetTrack().to<double>());
 
-            frc::Vector2d offset = frc::Vector2d(xOffsetInches, yOffsetInches);
+            units::meter_t xOffsetMeters = units::meter_t(xOffsetInches);
+            units::meter_t yOffsetMeters = units::meter_t(yOffsetInches);
+
+            frc::Translation2d offset = frc::Translation2d(xOffsetMeters, yOffsetMeters);
 
             m_offset = offset;
 
