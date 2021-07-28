@@ -51,6 +51,7 @@ CyclePrimitives::CyclePrimitives() : m_primParams(),
 									 m_maxTime( 0.0 ),
 									 m_isDone( false ),
 									 m_pathName(""),
+									 m_driveMode("RAMSETE"),
 									 m_runIntake( false ),
 									 m_hasIntake( MechanismFactory::GetMechanismFactory()->GetIntake().get() != nullptr )
 {
@@ -144,7 +145,8 @@ void CyclePrimitives::RunDoNothing()
 		                                   0.0,                 // start drive speed
 		                                   0.0,					// end drive speed
 										   false,				//run the intake
-										   string("")   		//empty string for pathName               
+										   string(""),   		//empty string for pathName
+										   string("RAMSETE")    //default drive mode
 										   );             
 		m_doNothing = m_primFactory->GetIPrimitive(params);
 		m_doNothing->Init(params);

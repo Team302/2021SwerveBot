@@ -76,6 +76,7 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
                     float                       yloc = 0.0;
                     bool                        runIntake = false;
                     std::string                 pathName;
+                    std::string                 driveMode;
 
                     for (xml_attribute attr = primitiveNode.first_attribute(); attr; attr = attr.next_attribute())
                     {
@@ -130,6 +131,10 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
                         {
                             runIntake = strcmp( attr.value(), "INTAKE") == 0;
                         }
+                        else if ( strcmp( attr.name(), "drivemode") == 0)
+                        {
+                            driveMode = attr.value();
+                        }
                         else
                         {
                             Logger::GetLogger()->LogError( string("PrimitiveParser::ParseXML invalid attribute"), attr.name());
@@ -147,7 +152,8 @@ PrimitiveParamsVector PrimitiveParser::ParseXML
                                                                        startDriveSpeed,
                                                                        endDriveSpeed,
                                                                        runIntake,
-                                                                       pathName) );
+                                                                       pathName,
+                                                                       driveMode) );
                     }
                     else 
                     {
