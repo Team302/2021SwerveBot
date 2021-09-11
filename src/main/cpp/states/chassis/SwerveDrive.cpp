@@ -24,8 +24,8 @@
 //Team 302 Includes
 #include <states/chassis/SwerveDrive.h>
 #include <hw/DragonPigeon.h>
-#include <gamepad/IDragonGamePad.h>
-#include <gamepad/TeleopControl.h>
+#include <team302/gamepad/IDragonGamePad.h>
+#include <team302/gamepad/TeleopControl.h>
 #include <states/IState.h>
 #include <subsys/SwerveChassisFactory.h>
 #include <hw/factories/PigeonFactory.h>
@@ -34,6 +34,7 @@
 
 
 using namespace std;
+using namespace team302::gamepad;
 
 /// @brief initialize the object and validate the necessary items are not nullptrs
 SwerveDrive::SwerveDrive() : IState(),

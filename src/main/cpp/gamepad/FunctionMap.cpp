@@ -20,9 +20,11 @@
 // FRC includes
 
 // Team 302 includes
-#include <gamepad/IDragonGamePad.h>
-#include <gamepad/TeleopControl.h>
+#include <team302/gamepad/IDragonGamePad.h>
+#include <team302/gamepad/TeleopControl.h>
 #include <gamepad/FunctionMap.h>
+
+using namespace team302::gamepad;
 
 // Third Party Includes
 
@@ -32,11 +34,11 @@
 /// @brief      The contructor initializes the object to default values
 FunctionMap::FunctionMap() : m_function( TeleopControl::FUNCTION_IDENTIFIER::UNKNOWN_FUNCTION ),
                              m_controllerIndex( 0 ),
-                             m_axisID( IDragonGamePad::AXIS_IDENTIFIER::UNDEFINED_AXIS ),
-                             m_axisDeadband( IDragonGamePad::AXIS_DEADBAND::APPLY_STANDARD_DEADBAND ),
-                             m_axisProfile( IDragonGamePad::AXIS_PROFILE::CUBED ),
-                             m_buttonID( IDragonGamePad::BUTTON_IDENTIFIER::UNDEFINED_BUTTON ),
-                             m_buttonMode( IDragonGamePad::BUTTON_MODE::STANDARD )
+                             m_axisID( team302::gamepad::IDragonGamePad::AXIS_IDENTIFIER::UNDEFINED_AXIS ),
+                             m_axisDeadband( team302::gamepad::IDragonGamePad::AXIS_DEADBAND::APPLY_STANDARD_DEADBAND ),
+                             m_axisProfile( team302::gamepad::IDragonGamePad::AXIS_PROFILE::CUBED ),
+                             m_buttonID( team302::gamepad::IDragonGamePad::BUTTON_IDENTIFIER::UNDEFINED_BUTTON ),
+                             m_buttonMode( team302::gamepad::IDragonGamePad::BUTTON_MODE::STANDARD )
 {
 }
 /// @brief      The contructor initializes the object
@@ -51,11 +53,11 @@ FunctionMap::FunctionMap
 (
     TeleopControl::FUNCTION_IDENTIFIER  function,
     int                                 controllerIndex,
-    IDragonGamePad::AXIS_IDENTIFIER     axisID,
-    IDragonGamePad::AXIS_DEADBAND       deadBand,
-    IDragonGamePad::AXIS_PROFILE        profile,
-    IDragonGamePad::BUTTON_IDENTIFIER   buttonID,
-    IDragonGamePad::BUTTON_MODE         buttonType
+    team302::gamepad::IDragonGamePad::AXIS_IDENTIFIER     axisID,
+    team302::gamepad::IDragonGamePad::AXIS_DEADBAND       deadBand,
+    team302::gamepad::IDragonGamePad::AXIS_PROFILE        profile,
+    team302::gamepad::IDragonGamePad::BUTTON_IDENTIFIER   buttonID,
+    team302::gamepad::IDragonGamePad::BUTTON_MODE         buttonType
 ) : m_function( function ),
     m_controllerIndex( controllerIndex ),
     m_axisID( axisID ),
@@ -85,7 +87,7 @@ int FunctionMap::GetControllerIndex() const
 
 /// @brief  Returns the axis identifier
 /// @return int the axis this is valid for (UNDEFINED_AXIS means this isn't using an axis) 
-IDragonGamePad::AXIS_IDENTIFIER FunctionMap::GetAxisID() const
+team302::gamepad::IDragonGamePad::AXIS_IDENTIFIER FunctionMap::GetAxisID() const
 {
     return m_axisID;
 
@@ -94,7 +96,7 @@ IDragonGamePad::AXIS_IDENTIFIER FunctionMap::GetAxisID() const
 
 /// @brief  Returns the axis deadband type
 /// @return IDragonGamePad::AXIS_DEADBAND the axis deadband type 
-IDragonGamePad::AXIS_DEADBAND FunctionMap::GetDeadband() const
+team302::gamepad::IDragonGamePad::AXIS_DEADBAND FunctionMap::GetDeadband() const
 {
     return m_axisDeadband;
 }
@@ -103,7 +105,7 @@ IDragonGamePad::AXIS_DEADBAND FunctionMap::GetDeadband() const
 
 /// @brief  Returns the axis profile type
 /// @return IDragonGamePad::AXIS_PROFILE the axis profile type 
-IDragonGamePad::AXIS_PROFILE FunctionMap::GetProfile() const
+team302::gamepad::IDragonGamePad::AXIS_PROFILE FunctionMap::GetProfile() const
 {
     return m_axisProfile;
 }
@@ -111,7 +113,7 @@ IDragonGamePad::AXIS_PROFILE FunctionMap::GetProfile() const
 
 /// @brief  Returns the button identifier
 /// @return int the button this is valid for (UNDEFINED_BUTTON means this isn't using a button) 
-IDragonGamePad::BUTTON_IDENTIFIER FunctionMap::GetButtonID() const
+team302::gamepad::IDragonGamePad::BUTTON_IDENTIFIER FunctionMap::GetButtonID() const
 {
     return m_buttonID;
 }
@@ -120,7 +122,7 @@ IDragonGamePad::BUTTON_IDENTIFIER FunctionMap::GetButtonID() const
 
 /// @brief  Returns the button mode
 /// @return IDragonGamePad::BUTTON_MODE the button mode 
-IDragonGamePad::BUTTON_MODE FunctionMap::GetMode() const
+team302::gamepad::IDragonGamePad::BUTTON_MODE FunctionMap::GetMode() const
 {
     return m_buttonMode;
 }

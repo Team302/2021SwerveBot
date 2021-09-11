@@ -27,11 +27,12 @@
 #include <subsys/interfaces/IMech1IndMotor.h>
 #include <utils/Logger.h>
 
-#include <gamepad/TeleopControl.h>
+#include <team302/gamepad/TeleopControl.h>
 
 // Third Party Includes
 
 using namespace std;
+using namespace team302::gamepad;
 
 /// @class Mech1MotorState
 /// @brief information about the control (open loop, closed loop position, closed loop velocity, etc.) for a mechanism state

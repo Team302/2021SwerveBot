@@ -25,8 +25,8 @@
 // Team 302 includes
 
 // Third Party Includes
-#include <gamepad/IDragonGamePad.h>
-#include <gamepad/TeleopControl.h>
+#include <team302/gamepad/IDragonGamePad.h>
+#include <team302/gamepad/TeleopControl.h>
 
 class FunctionMap
 {
@@ -34,31 +34,31 @@ class FunctionMap
         FunctionMap();
         FunctionMap
         ( 
-            TeleopControl::FUNCTION_IDENTIFIER  function,
+            team302::gamepad::TeleopControl::FUNCTION_IDENTIFIER  function,
             int                                 controllerIndex,
-            IDragonGamePad::AXIS_IDENTIFIER     axisID,
-            IDragonGamePad::AXIS_DEADBAND       deadBand,
-            IDragonGamePad::AXIS_PROFILE        profile,
-            IDragonGamePad::BUTTON_IDENTIFIER   buttonID,
-            IDragonGamePad::BUTTON_MODE         buttonType
+            team302::gamepad::IDragonGamePad::AXIS_IDENTIFIER     axisID,
+            team302::gamepad::IDragonGamePad::AXIS_DEADBAND       deadBand,
+            team302::gamepad::IDragonGamePad::AXIS_PROFILE        profile,
+            team302::gamepad::IDragonGamePad::BUTTON_IDENTIFIER   buttonID,
+            team302::gamepad::IDragonGamePad::BUTTON_MODE         buttonType
         );
         ~FunctionMap() = default;
 
-        TeleopControl::FUNCTION_IDENTIFIER GetFunction() const;
+        team302::gamepad::TeleopControl::FUNCTION_IDENTIFIER GetFunction() const;
         int GetControllerIndex() const;
-        IDragonGamePad::AXIS_IDENTIFIER GetAxisID() const;
-        IDragonGamePad::AXIS_DEADBAND GetDeadband() const;
-        IDragonGamePad::AXIS_PROFILE GetProfile() const;
-        IDragonGamePad::BUTTON_IDENTIFIER GetButtonID() const;
-        IDragonGamePad::BUTTON_MODE GetMode() const;
+        team302::gamepad::IDragonGamePad::AXIS_IDENTIFIER GetAxisID() const;
+        team302::gamepad::IDragonGamePad::AXIS_DEADBAND GetDeadband() const;
+        team302::gamepad::IDragonGamePad::AXIS_PROFILE GetProfile() const;
+        team302::gamepad::IDragonGamePad::BUTTON_IDENTIFIER GetButtonID() const;
+        team302::gamepad::IDragonGamePad::BUTTON_MODE GetMode() const;
 
 
     private:
-        TeleopControl::FUNCTION_IDENTIFIER      m_function;
+        team302::gamepad::TeleopControl::FUNCTION_IDENTIFIER      m_function;
         int                                     m_controllerIndex;
-        IDragonGamePad::AXIS_IDENTIFIER         m_axisID;
-        IDragonGamePad::AXIS_DEADBAND           m_axisDeadband;
-        IDragonGamePad::AXIS_PROFILE            m_axisProfile;
-        IDragonGamePad::BUTTON_IDENTIFIER       m_buttonID;
-        IDragonGamePad::BUTTON_MODE             m_buttonMode;
+        team302::gamepad::IDragonGamePad::AXIS_IDENTIFIER         m_axisID;
+        team302::gamepad::IDragonGamePad::AXIS_DEADBAND           m_axisDeadband;
+        team302::gamepad::IDragonGamePad::AXIS_PROFILE            m_axisProfile;
+        team302::gamepad::IDragonGamePad::BUTTON_IDENTIFIER       m_buttonID;
+        team302::gamepad::IDragonGamePad::BUTTON_MODE             m_buttonMode;
 };

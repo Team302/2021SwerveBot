@@ -26,7 +26,7 @@
 #include <xmlmechdata/StateDataDefn.h>
 #include <controllers/MechanismTargetData.h>
 #include <utils/Logger.h>
-#include <gamepad/TeleopControl.h>
+#include <team302/gamepad/TeleopControl.h>
 #include <states/intake/IntakeState.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <subsys/MechanismFactory.h>
@@ -36,6 +36,7 @@
 // Third Party Includes
 
 using namespace std;
+using namespace team302::gamepad;
 
 IntakeStateMgr* IntakeStateMgr::m_instance = nullptr;
 IntakeStateMgr* IntakeStateMgr::GetInstance()

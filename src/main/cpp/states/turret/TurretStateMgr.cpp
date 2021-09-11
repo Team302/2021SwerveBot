@@ -27,7 +27,7 @@
 #include <xmlmechdata/StateDataDefn.h>
 #include <controllers/MechanismTargetData.h>
 #include <utils/Logger.h>
-#include <gamepad/TeleopControl.h>
+#include <team302/gamepad/TeleopControl.h>
 
 #include <states/turret/LimelightAim.h>
 #include <states/turret/HoldTurretPosition.h>
@@ -37,6 +37,7 @@
 #include <subsys/Turret.h>
 
 using namespace std;
+using namespace team302::gamepad;
 
 TurretStateMgr* TurretStateMgr::m_instance = nullptr;
 TurretStateMgr* TurretStateMgr::GetInstance()

@@ -23,7 +23,7 @@
 
 //Team 302 includes
 #include <subsys/SwerveChassis.h>
-#include <gamepad/TeleopControl.h>
+#include <team302/gamepad/TeleopControl.h>
 #include <states/IState.h>
 #include <hw/DragonPigeon.h>
 #include <auton/shooterlevels/DriveToShooterLevel.h>
@@ -42,9 +42,9 @@ class SwerveDrive : public IState
         bool AtTarget() const override;
 
     private:
-        inline TeleopControl* GetController() const { return m_controller; }
+        inline team302::gamepad::TeleopControl* GetController() const { return m_controller; }
         std::shared_ptr<SwerveChassis>      m_chassis;
-        TeleopControl*                      m_controller;
+        team302::gamepad::TeleopControl*                      m_controller;
         bool                                m_usePWLinearProfile;
         bool                                m_lastUp;
         bool                                m_lastDown;

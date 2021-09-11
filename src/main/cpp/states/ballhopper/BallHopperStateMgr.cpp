@@ -33,10 +33,11 @@
 #include <subsys/MechanismFactory.h>
 #include <subsys/MechanismTypes.h>
 #include <states/ballhopper/BallHopperSlowRelease.h>
-#include <gamepad/TeleopControl.h>
+#include <team302/gamepad/TeleopControl.h>
 
 
 using namespace std;
+using namespace team302::gamepad;
 
 BallHopperStateMgr* BallHopperStateMgr::m_instance = nullptr;
 BallHopperStateMgr* BallHopperStateMgr::GetInstance()

@@ -1,0 +1,22 @@
+{
+    "fileName": "Team302Gamepad.json",
+    "name": "Team302Gamepad",
+    "version": "1.0",
+    "uuid": "016f74a4-db0b-4b49-af09-71cf16ae2590",
+    "mavenUrls": [],
+    "jsonUrl": "",
+    "javaDependencies": [],
+    "jniDependencies": [],
+    "cppDependencies": [
+        {
+            "groupId": "com.team302.gamepad",
+            "artifactId": "Team302-cpp",
+            "version": "1.0",
+            "libName": "Team302Gamepad",
+            "headerClassifier": "headers",
+            "sharedLibrary": false,
+            "skipInvalidPlatforms": true,
+            "binaryPlatforms": []
+        }
+    ]
+}
