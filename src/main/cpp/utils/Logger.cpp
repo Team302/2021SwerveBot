@@ -144,7 +144,10 @@ void Logger::OnDash
     const string&   message                 // <I> - error message
 )
 {
-    SmartDashboard::PutString( locationIdentifier.c_str(), message.c_str());
+    if (m_option != Logger::LOGGER_OPTION::EAT_IT)
+    {
+        SmartDashboard::PutString( locationIdentifier.c_str(), message.c_str());
+    }
 }
 
 /// @brief Write a message to the dashboard
@@ -156,7 +159,10 @@ void Logger::OnDash
     bool            val                 // <I> - error message
 )
 {
-    SmartDashboard::PutBoolean( locationIdentifier.c_str(), val );
+    if (m_option != Logger::LOGGER_OPTION::EAT_IT)
+    {
+        SmartDashboard::PutBoolean( locationIdentifier.c_str(), val );
+    }
 }
 
 void Logger::ToNtTable
@@ -166,8 +172,11 @@ void Logger::ToNtTable
     const std::string&  msg 
 )
 {
-    auto table = nt::NetworkTableInstance::GetDefault().GetTable(ntName);
-	table.get()->PutString(identifier, msg);
+    if (m_option != Logger::LOGGER_OPTION::EAT_IT)
+    {
+        auto table = nt::NetworkTableInstance::GetDefault().GetTable(ntName);
+    	table.get()->PutString(identifier, msg);
+    }
 }
 
 void Logger::ToNtTable
@@ -177,8 +186,11 @@ void Logger::ToNtTable
     double              value 
 )
 {
-    auto table = nt::NetworkTableInstance::GetDefault().GetTable(ntName);
-	table.get()->PutNumber(identifier, value);
+    if (m_option != Logger::LOGGER_OPTION::EAT_IT)
+    {   
+        auto table = nt::NetworkTableInstance::GetDefault().GetTable(ntName);
+	    table.get()->PutNumber(identifier, value);
+    }
 }
 
 void Logger::ToNtTable
@@ -188,7 +200,10 @@ void Logger::ToNtTable
     const std::string&                  msg 
 )
 {
-	ntable.get()->PutString(identifier, msg);
+    if (m_option != Logger::LOGGER_OPTION::EAT_IT)
+    {
+	    ntable.get()->PutString(identifier, msg);
+    }
 }
 
 void Logger::ToNtTable
@@ -198,10 +213,13 @@ void Logger::ToNtTable
     double                              value 
 )
 {
-	ntable.get()->PutNumber(identifier, value);
+    if (m_option != Logger::LOGGER_OPTION::EAT_IT)
+    {
+	    ntable.get()->PutNumber(identifier, value);
+    }
 }
 
-Logger::Logger() : m_option( LOGGER_OPTION::CONSOLE ), 
+Logger::Logger() : m_option( LOGGER_OPTION::EAT_IT ), 
                    m_level( LOGGER_LEVEL::PRINT ),
                    m_alreadyDisplayed()
 {
