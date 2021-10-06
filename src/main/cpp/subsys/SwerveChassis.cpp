@@ -271,7 +271,6 @@ void SwerveChassis::Drive( double drive, double steer, double rotate, bool field
 
 void SwerveChassis::Drive(double drive, double steer, double rotate, bool fieldRelative, frc::Translation2d rotateOffset )
 {
-
     m_rotateOffset = rotateOffset;
 
     if ( abs(drive)  < m_deadband && 
@@ -529,35 +528,109 @@ void SwerveChassis::CalcSwerveModuleStates
     auto omega = speeds.omega;
 
 
-    //original code
-    //units::velocity::meters_per_second_t omegaL = omega * units::meter_t((l + units::length::inch_t(m_rotateOffset.X()))) / 2.0 / 1_s;
-    //units::velocity::meters_per_second_t omegaW = omega * units::meter_t((w + units::length::inch_t(m_rotateOffset.Y()))) / 2.0 / 1_s;
+    /*----Change center of rotation on robot 10/4/2021----
 
-    //updated troubleshooting
-    //units::meter_t omegaL = (omega.to<double>() * units::meter_t((l + units::length::inch_t(m_rotateOffset.X()))) / 2.0);
-    //units::meter_t omegaW = (omega.to<double>() * units::meter_t((w + units::length::inch_t(m_rotateOffset.Y()))) / 2.0);
+        (L/2, W/2) = center of robot = (0,0)
+        Feeding in a different value for these does not change center of rotation, only scales the robot
+                            Track(L)
+        (B,D)Wheel2*(L, 0)--------(L,W)*Wheel1(B,C)
+                              |
+                              *Center (L/2,W/2)
+                              |Wheelbase(W)
+        (A,D)Wheel3*(0, 0)--------(0,W)*Wheel4(A,C)
 
-    //this is the basic concept of the two above
-    //units::meter_t omegaL = (omega.to<double>() * units::meter_t((l + l)) / 2.0);
-    //units::meter_t omegaW = (omega.to<double>() * units::meter_t((w + w)) / 2.0);
+        Give center of rotation as Point2d(x and y), then find where that is on the robot
+        !!May not need the side measurements W, x, y, z = sides  W = left, X = right, Y = top, Z = bottom
+        S, t, u, v = wheels S = Top Right wheel , T = Top left wheel , U = Bottom left wheel , V = bottom right wheel
 
-    units::meter_t omegaL = units::meter_t(100);
-    units::meter_t omegaW = units::meter_t(100);    
+
+        (0, 0) = 0 * L, 0 * W
+        (100, 100) = 1 * L, 1 * W
+
+        !!May not need the side measurements
+        If COR(Center of Rotation) = (25, 25):  !!This is only a length, not a coordinate
+        W length from COR = x. (. = as decimal) * L  -- For example: 0.25 * L(14)
+        X length from COR = 1 - x. * L -- 0.25 * L(14) 
+        Y length from COR = 1 - y. * W -- 0.25 * W(14)
+        Z length from COR = y. * W -- 0.25 * L(14)
+
+        !! X = Track, Y = Wheelbase
+        S Equations -- S on coordinate grid is (100, 100), distance from COR is (S.x - COR.x) * L, (S.y - COR.y) * W
+        V1x = Vx + omega(L(S.x. - COR.x.))
+        V1y = Vy - omega(W(S.y. - COR.y.))
+
+        V1x = Vx + omega(L(1.00 - 0.25))
+        V1y = Vy - omega(W(1.00 - 0.25))
+
+        T Equations -- T on grid is (0, 100)
+        V2x = Vx + omega(L(T.x. - COR.x.))
+        V2y = Vy + omega(W(T.y. - COR.y.))
+
+        V2x = Vx + omega(L(0 - 0.25))
+        V2y = Vy + omega(W(100 - 0.25))
+
+        U Equations -- U on grid is (0, 0)
+        V3x = Vx - omega(L(0 - COR.x.))
+        V3y = Vy + omega(W(0 - COR.y.))
+
+        V3x = Vx - omega(L(W.x. - 0.25))
+        V3y = Vy + omega(W(W.y. - 0.25))
+
+        V Equations -- V on grid is (100, 0)
+        V4x = Vx + omega(L(V.x. - COR.x.))
+        V4y = Vy + omega(W(V.y. - COR.y.))
+
+        V4x = Vx + omega(L(100 - 0.25))
+        V4y = Vy + omega(W(0 - 0.25))
+
+        Code that needs to written:
+        Done S, T, U, V need to be defined, Translation2d
+        Done Map S, T, U, V to grid
+        Done Define Center of Rotation, Translation2d
+        Re-work code to use individual equations for each wheel, opposed to a, b, c, d
+        Done Make sure STUV.x and .y can be converted to decimal, probably just use * 0.01
+
+        NEW CODE:
+
+        Translation2d SWheelGrid = new Translation2d(100, 100);
+        Translation2d TWheelGrid = new Translation2d(0, 100);
+        Translation2d UWheelGrid = new Translation2d(0, 0);
+        Translation2d VWheelGrid = new Translation2d(100, 0);
+
+        Translation2d m_centerOfRotationGrid; will be fed from Drive Function
+
+        !!V#x = B, A
+        !!V#y = C, D
+        m_flState.speed = units::velocity::meters_per_second_t(sqrt( pow(b.to<double>(),2) + pow(d.to<double>(),2) ));
+        ->
+        (T)m_flState.speed = units::velocity::meters_per_second_t(sqrt( pow((Vx + omega(L(T.x. - COR.x.)).to<double>())),2) + pow((V2y = Vy + omega(W(T.y. - COR.y.)).to<double>())),2) )
+        m_flState.angle = units::angle::radian_t(atan2((Vx + omega(L(T.x. - COR.x.)).to<double>()), (V2y = Vy + omega(W(T.y. - COR.y.)).to<double>())));
+        ->
+        m_flState.angle = units::angle::radian_t((Vx + omega(L(T.x. - COR.x.)).to<double>()), (V2y = Vy + omega(W(T.y. - COR.y.)).to<double>())));
+    */
+
+
+    
+
+    //original code from main
+    units::meter_t omegaL = omega.to<double>() * l / 2.0 / 1_s; 
+    units::meter_t omegaW = omega.to<double>() * w / 2.0 / 1_s;   
 
     //Debugging for turn around point
+    /*
     Logger::GetLogger()->ToNtTable("ATurnAbout", "omegaL MPS", omegaL.to<double>());
     Logger::GetLogger()->ToNtTable("ATurnAbout", "omegaW MPS", omegaW.to<double>());
     Logger::GetLogger()->ToNtTable("ATurnAbout", "rotateOffset.x", m_rotateOffset.X().to<double>());
     Logger::GetLogger()->ToNtTable("ATurnAbout", "rotateOffset.y", m_rotateOffset.Y().to<double>());
     Logger::GetLogger()->ToNtTable("ATurnAbout", "l / WheelBase", l.to<double>());
-    Logger::GetLogger()->ToNtTable("ATurnAbout", "w / Track", w.to<double>());
+    Logger::GetLogger()->ToNtTable("ATurnAbout", "w / Track", w.to<double>());  */
 
     //rotateOffset.x and y should be equal to l and w
 
-    auto a = vx - (omegaL / 1_s);
-    auto b = vx + (omegaL / 1_s);
-    auto c = vy - (omegaW / 1_s);
-    auto d = vy + (omegaW / 1_s);
+    auto a = vx - omegaL;
+    auto b = vx + omegaL;
+    auto c = vy - omegaW;
+    auto d = vy + omegaW;
 
     // here we'll negate the angle to conform to the positive CCW convention
     m_flState.angle = units::angle::radian_t(atan2(b.to<double>(), d.to<double>()));
@@ -617,5 +690,4 @@ void SwerveChassis::CalcSwerveModuleStates
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Back Left Speed - normalized", m_blState.speed.to<double>());
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Back Right Speed - normalized", m_brState.speed.to<double>());
 }
-
 
