@@ -212,7 +212,7 @@ class SwerveChassis
         units::velocity::meters_per_second_t                        m_steer;
         units::angular_velocity::radians_per_second_t               m_rotate;
 
-        frc::Translation2d                                          m_rotateOffset;
+        frc::Translation2d                                          m_centerOfRotationGrid;
 
         const double                                                m_deadband = 0.1;
         

@@ -49,5 +49,5 @@ class SwerveDrive : public IState
         bool                                m_lastUp;
         bool                                m_lastDown;
         DriveToShooterLevel*                m_shooterLevel;
-        frc::Translation2d                  m_offset;
+        frc::Translation2d                  m_centerOfRotation;
 };

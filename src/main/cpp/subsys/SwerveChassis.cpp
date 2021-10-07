@@ -89,7 +89,7 @@ SwerveChassis::SwerveChassis
     m_drive(units::velocity::meters_per_second_t(0.0)),
     m_steer(units::velocity::meters_per_second_t(0.0)),
     m_rotate(units::angular_velocity::radians_per_second_t(0.0)),
-    m_rotateOffset(frc::Translation2d()),
+    m_centerOfRotationGrid(frc::Translation2d(units::meter_t(0.50), units::meter_t(0.50))),
     m_frontLeftLocation(wheelBase/2.0, track/2.0),
     m_frontRightLocation(wheelBase/2.0, -1.0*track/2.0),
     m_backLeftLocation(-1.0*wheelBase/2.0, track/2.0),
@@ -269,9 +269,9 @@ void SwerveChassis::Drive( double drive, double steer, double rotate, bool field
     }
 }
 
-void SwerveChassis::Drive(double drive, double steer, double rotate, bool fieldRelative, frc::Translation2d rotateOffset )
+void SwerveChassis::Drive(double drive, double steer, double rotate, bool fieldRelative, frc::Translation2d centerOfRotationGrid )
 {
-    m_rotateOffset = rotateOffset;
+    m_centerOfRotationGrid = centerOfRotationGrid;
 
     if ( abs(drive)  < m_deadband && 
          abs(steer)  < m_deadband && 
@@ -601,79 +601,71 @@ void SwerveChassis::CalcSwerveModuleStates
 
         !!V#x = B, A
         !!V#y = C, D
-        m_flState.speed = units::velocity::meters_per_second_t(sqrt( pow(b.to<double>(),2) + pow(d.to<double>(),2) ));
+        (T)m_flState.speed = units::velocity::meters_per_second_t(sqrt( pow(b.to<double>(),2) + pow(d.to<double>(),2) ));
         ->
         (T)m_flState.speed = units::velocity::meters_per_second_t(sqrt( pow((Vx + omega(L(T.x. - COR.x.)).to<double>())),2) + pow((V2y = Vy + omega(W(T.y. - COR.y.)).to<double>())),2) )
-        m_flState.angle = units::angle::radian_t(atan2((Vx + omega(L(T.x. - COR.x.)).to<double>()), (V2y = Vy + omega(W(T.y. - COR.y.)).to<double>())));
+        (T)m_flState.angle = units::angle::radian_t(atan2((Vx + omega(L(T.x. - COR.x.)).to<double>()), (V2y = Vy + omega(W(T.y. - COR.y.)).to<double>())));
         ->
-        m_flState.angle = units::angle::radian_t((Vx + omega(L(T.x. - COR.x.)).to<double>()), (V2y = Vy + omega(W(T.y. - COR.y.)).to<double>())));
+        (T)m_flState.angle = units::angle::radian_t((Vx + omega(L(T.x. - COR.x.)).to<double>()), (V2y = Vy + omega(W(T.y. - COR.y.)).to<double>())));
+
+        (S)m_frState.angle = units::angle::radian_t(atan2((Vx + omega(L(S.x. - COR.x.)).to<double>()), c.to<double>()));
+        ->
+        (S)m_frState.angle = units::angle::radian_t(atan2(b.to<double>(), c.to<double>()));
     */
 
+    //New swerve code to enable turn around point
+    //These are wheel positions on robot "grid"
 
-    
+    Translation2d* SWheelGrid = new Translation2d(units::meter_t(1.00), units::meter_t(1.00));
+    Translation2d* TWheelGrid = new Translation2d(units::meter_t(0.0), units::meter_t(1.00));
+    Translation2d* UWheelGrid = new Translation2d(units::meter_t(0.0), units::meter_t(0.0));
+    Translation2d* VWheelGrid = new Translation2d(units::meter_t(1.00), units::meter_t(0.0));
+
+    //Speed and position calculations for wheels
+    //The sign between vx/y and omega may cause problems in the future, wheels fighting, not seeing change in COR, etc.
+    units::velocity::meters_per_second_t Svx = vx + (omega * (l * (SWheelGrid->X().to<double>() - m_centerOfRotationGrid.X().to<double>())) / units::radian_t(1));
+    units::velocity::meters_per_second_t Svy = vy - (omega * (w * (SWheelGrid->Y().to<double>() - m_centerOfRotationGrid.Y().to<double>())) / units::radian_t(1));
+
+    units::velocity::meters_per_second_t Tvx = vx + (omega * (l * (TWheelGrid->X().to<double>() - m_centerOfRotationGrid.X().to<double>())) / units::radian_t(1));
+    units::velocity::meters_per_second_t Tvy = vy + (omega * (w * (TWheelGrid->Y().to<double>() - m_centerOfRotationGrid.Y().to<double>())) / units::radian_t(1));
+
+    units::velocity::meters_per_second_t Uvx = vx - (omega * (l * (UWheelGrid->X().to<double>() - m_centerOfRotationGrid.X().to<double>())) / units::radian_t(1));
+    units::velocity::meters_per_second_t Uvy = vy + (omega * (w * (UWheelGrid->Y().to<double>() - m_centerOfRotationGrid.Y().to<double>())) / units::radian_t(1));
+
+    units::velocity::meters_per_second_t Vvx = vx - (omega * (l * (VWheelGrid->X().to<double>() - m_centerOfRotationGrid.X().to<double>())) / units::radian_t(1));
+    units::velocity::meters_per_second_t Vvy = vy - (omega * (w * (VWheelGrid->Y().to<double>() - m_centerOfRotationGrid.Y().to<double>())) / units::radian_t(1));
 
     //original code from main
-    units::meter_t omegaL = omega.to<double>() * l / 2.0 / 1_s; 
-    units::meter_t omegaW = omega.to<double>() * w / 2.0 / 1_s;   
+    //units::velocity::meters_per_second_t omegaL = omega.to<double>() * l / 2.0 / 1_s; 
+    //units::velocity::meters_per_second_t omegaW = omega.to<double>() * w / 2.0 / 1_s;   
+
+    //Original swerve code before turn about point update
+    //auto a = vx - omegaL;
+    //auto b = vx + omegaL;
+    //auto c = vy - omegaW;
+    //auto d = vy + omegaW;  
 
     //Debugging for turn around point
-    /*
-    Logger::GetLogger()->ToNtTable("ATurnAbout", "omegaL MPS", omegaL.to<double>());
-    Logger::GetLogger()->ToNtTable("ATurnAbout", "omegaW MPS", omegaW.to<double>());
-    Logger::GetLogger()->ToNtTable("ATurnAbout", "rotateOffset.x", m_rotateOffset.X().to<double>());
-    Logger::GetLogger()->ToNtTable("ATurnAbout", "rotateOffset.y", m_rotateOffset.Y().to<double>());
-    Logger::GetLogger()->ToNtTable("ATurnAbout", "l / WheelBase", l.to<double>());
-    Logger::GetLogger()->ToNtTable("ATurnAbout", "w / Track", w.to<double>());  */
-
-    //rotateOffset.x and y should be equal to l and w
-
-    auto a = vx - omegaL;
-    auto b = vx + omegaL;
-    auto c = vy - omegaW;
-    auto d = vy + omegaW;
-
-    //original code
-    //units::velocity::meters_per_second_t omegaL = omega * units::meter_t((l + units::length::inch_t(m_rotateOffset.X()))) / 2.0 / 1_s;
-    //units::velocity::meters_per_second_t omegaW = omega * units::meter_t((w + units::length::inch_t(m_rotateOffset.Y()))) / 2.0 / 1_s;
-
-    //updated troubleshooting
-    //units::meter_t omegaL = (omega.to<double>() * units::meter_t((l + units::length::inch_t(m_rotateOffset.X()))) / 2.0);
-    //units::meter_t omegaW = (omega.to<double>() * units::meter_t((w + units::length::inch_t(m_rotateOffset.Y()))) / 2.0);
-
-    //this is the basic concept of the two above
-    //units::meter_t omegaL = (omega.to<double>() * units::meter_t((l + l)) / 2.0);
-    //units::meter_t omegaW = (omega.to<double>() * units::meter_t((w + w)) / 2.0);
-
-    units::meter_t omegaL = units::meter_t(100);
-    units::meter_t omegaW = units::meter_t(100);    
-
-    //Debugging for turn around point
-    Logger::GetLogger()->ToNtTable("ATurnAbout", "omegaL MPS", omegaL.to<double>());
-    Logger::GetLogger()->ToNtTable("ATurnAbout", "omegaW MPS", omegaW.to<double>());
-    Logger::GetLogger()->ToNtTable("ATurnAbout", "rotateOffset.x", m_rotateOffset.X().to<double>());
-    Logger::GetLogger()->ToNtTable("ATurnAbout", "rotateOffset.y", m_rotateOffset.Y().to<double>());
-    Logger::GetLogger()->ToNtTable("ATurnAbout", "l / WheelBase", l.to<double>());
-    Logger::GetLogger()->ToNtTable("ATurnAbout", "w / Track", w.to<double>());
-
-    //rotateOffset.x and y should be equal to l and w
-
-    auto a = vx - (omegaL / 1_s);
-    auto b = vx + (omegaL / 1_s);
-    auto c = vy - (omegaW / 1_s);
-    auto d = vy + (omegaW / 1_s);
+    Logger::GetLogger()->ToNtTable("ATurnAbout", "Center of Rotation X", m_centerOfRotationGrid.X().to<double>());
+    Logger::GetLogger()->ToNtTable("ATurnAbout", "Center of Rotation Y", m_centerOfRotationGrid.Y().to<double>());
 
     // here we'll negate the angle to conform to the positive CCW convention
-    m_flState.angle = units::angle::radian_t(atan2(b.to<double>(), d.to<double>()));
+    //This is wheel T
+    m_flState.angle = units::angle::radian_t(atan2(Tvx.to<double>(), Tvy.to<double>()));
     m_flState.angle = -1.0 * m_flState.angle.Degrees();
-    m_flState.speed = units::velocity::meters_per_second_t(sqrt( pow(b.to<double>(),2) + pow(d.to<double>(),2) ));
+    m_flState.speed = units::velocity::meters_per_second_t(sqrt( pow(Tvx.to<double>(),2) + pow(Tvy.to<double>(),2) ));
     auto maxCalcSpeed = abs(m_flState.speed.to<double>());
 
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Front Left Angle", m_flState.angle.Degrees().to<double>());
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Front Left Speed", m_flState.speed.to<double>());
+    Logger::GetLogger()->ToNtTable("AWheelDebug", "Tvx", Tvx.to<double>());
+    Logger::GetLogger()->ToNtTable("AWheelDebug", "Tvy", Tvy.to<double>());
+    
 
-    m_frState.angle = units::angle::radian_t(atan2(b.to<double>(), c.to<double>()));
+    //Wheel S
+    m_frState.angle = units::angle::radian_t(atan2(Svx.to<double>(), Svy.to<double>()));
     m_frState.angle = -1.0 * m_frState.angle.Degrees();
-    m_frState.speed = units::velocity::meters_per_second_t(sqrt( pow(b.to<double>(),2) + pow(c.to<double>(),2) ));
+    m_frState.speed = units::velocity::meters_per_second_t(sqrt( pow(Svx.to<double>(),2) + pow(Svy.to<double>(),2) ));
     if (abs(m_frState.speed.to<double>())>maxCalcSpeed)
     {
         maxCalcSpeed = abs(m_frState.speed.to<double>());
@@ -681,10 +673,13 @@ void SwerveChassis::CalcSwerveModuleStates
 
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Front Right Angle", m_frState.angle.Degrees().to<double>());
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Front Right Speed - raw", m_frState.speed.to<double>());
+    Logger::GetLogger()->ToNtTable("AWheelDebug", "Svx", Svx.to<double>());
+    Logger::GetLogger()->ToNtTable("AWheelDebug", "Svy", Svy.to<double>());
 
-    m_blState.angle = units::angle::radian_t(atan2(a.to<double>(), d.to<double>()));
+    //Wheel U
+    m_blState.angle = units::angle::radian_t(atan2(Uvx.to<double>(), Uvy.to<double>()));
     m_blState.angle = -1.0 * m_blState.angle.Degrees();
-    m_blState.speed = units::velocity::meters_per_second_t(sqrt( pow(a.to<double>(),2) + pow(d.to<double>(),2) ));
+    m_blState.speed = units::velocity::meters_per_second_t(sqrt( pow(Uvx.to<double>(),2) + pow(Uvy.to<double>(),2) ));
     if (abs(m_blState.speed.to<double>())>maxCalcSpeed)
     {
         maxCalcSpeed = abs(m_blState.speed.to<double>());
@@ -692,10 +687,13 @@ void SwerveChassis::CalcSwerveModuleStates
 
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Back Left Angle", m_blState.angle.Degrees().to<double>());
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Back Left Speed - raw", m_blState.speed.to<double>());
+    Logger::GetLogger()->ToNtTable("AWheelDebug", "Uvx", Uvx.to<double>());
+    Logger::GetLogger()->ToNtTable("AWheelDebug", "Uvy", Uvy.to<double>());
 
-    m_brState.angle = units::angle::radian_t(atan2(a.to<double>(), c.to<double>()));
+    //Wheel V
+    m_brState.angle = units::angle::radian_t(atan2(Vvx.to<double>(), Vvy.to<double>()));
     m_brState.angle = -1.0 * m_brState.angle.Degrees();
-    m_brState.speed = units::velocity::meters_per_second_t(sqrt( pow(a.to<double>(),2) + pow(c.to<double>(),2) ));
+    m_brState.speed = units::velocity::meters_per_second_t(sqrt( pow(Vvx.to<double>(),2) + pow(Vvy.to<double>(),2) ));
     if (abs(m_brState.speed.to<double>())>maxCalcSpeed)
     {
         maxCalcSpeed = abs(m_brState.speed.to<double>());
@@ -703,6 +701,8 @@ void SwerveChassis::CalcSwerveModuleStates
 
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Back Right Angle", m_brState.angle.Degrees().to<double>());
     Logger::GetLogger()->ToNtTable("Swerve Calcs", "Back Right Speed - raw", m_brState.speed.to<double>());
+    Logger::GetLogger()->ToNtTable("AWheelDebug", "Vvx", Vvx.to<double>());
+    Logger::GetLogger()->ToNtTable("AWheelDebug", "Vvy", Vvy.to<double>());
 
 
     // normalize speeds if necessary (maxCalcSpeed > max attainable speed)

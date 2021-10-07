@@ -43,7 +43,7 @@ SwerveDrive::SwerveDrive() : IState(),
                              m_lastUp(false),
                              m_lastDown(false),
                              m_shooterLevel(),
-                             m_offset(frc::Translation2d())
+                             m_centerOfRotation(frc::Translation2d())
                              //m_shooterLevel(new DriveToShooterLevel())
 {
     if ( m_controller == nullptr )
@@ -172,25 +172,16 @@ void SwerveDrive::Run( )
         }
         else if (controller->IsButtonPressed(TeleopControl::TURN_AROUND_FRONT_RIGHT))
         {
-            //Offset L and W values in swerve module position calculations to turn around front right wheel
-            //Each wheel is half of wheelbase and half of track away
-            //FL = (L + Wheelbase W - Track)                  FR = (L + Wheelbase W + Track)
-            //                                      Center = (L W)
-            //BL = (L - Wheelbase W - Track)                  BR = (L - 5Wheelbase W + Track)
-            double xOffset = 1;     //percent of wheel base to offset rotate point by
-            double yOffset = 1;     //percent of track to offset rotate point by
+            double centerOfRotationX = 1.00;//Represents point on "grid" of robot, 0, 0 = back left, 1.00, 1.00 = front right
+            double centerOfRotationY = 1.00;
 
-            units::inch_t xOffsetInches = units::inch_t(xOffset * m_chassis->GetWheelBase().to<double>());
-            units::inch_t yOffsetInches = units::inch_t(yOffset * m_chassis->GetTrack().to<double>());
+            frc::Translation2d centerOfRotation = frc::Translation2d(units::meter_t(centerOfRotationX), units::meter_t(centerOfRotationY));
 
-            units::meter_t xOffsetMeters = units::meter_t(xOffsetInches);
-            units::meter_t yOffsetMeters = units::meter_t(yOffsetInches);
+            m_centerOfRotation = centerOfRotation;
 
-            frc::Translation2d offset = frc::Translation2d(xOffsetMeters, yOffsetMeters);
-
-            m_offset = offset;
-
+            //debugging
             Logger::GetLogger()->ToNtTable("ATurnAbout", "Is A Pressed?", "True");
+
 
         }
         else
@@ -210,6 +201,16 @@ void SwerveDrive::Run( )
                     delete m_shooterLevel;
                 }
             }
+        }
+
+        if (!controller->IsButtonPressed(TeleopControl::TURN_AROUND_FRONT_RIGHT))
+        {
+            double centerOfRotationX = 0.50;//Represents point on "grid" of robot, 0, 0 = back left, 1.00, 1.00 = front right
+            double centerOfRotationY = 0.50;
+
+            frc::Translation2d centerOfRotation = frc::Translation2d(units::meter_t(centerOfRotationX), units::meter_t(centerOfRotationY));
+
+            m_centerOfRotation = centerOfRotation;
         }
         
         drive  = controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::SWERVE_DRIVE_DRIVE) ;
@@ -234,7 +235,7 @@ void SwerveDrive::Run( )
     Logger::GetLogger()->ToNtTable("Swerve Drive", "rotate", rotate);
     **/
    
-    m_chassis.get()->Drive(drive, steer, rotate, true, m_offset);
+    m_chassis.get()->Drive(drive, steer, rotate, true, m_centerOfRotation);
 }
 
 /// @brief indicates that we are not at our target
