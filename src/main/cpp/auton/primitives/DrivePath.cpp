@@ -54,7 +54,7 @@ DrivePath::DrivePath() : m_chassis(SwerveChassisFactory::GetSwerveChassisFactory
 }
 void DrivePath::Init(PrimitiveParams *params)
 {
-    auto m_pathname = params->GetPathName();
+    auto m_pathname = params->GetPathName(); //Grabs path name from auton xml
 
     Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Initialized", "False");
     Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Running", "False");
@@ -62,19 +62,19 @@ void DrivePath::Init(PrimitiveParams *params)
     Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "WhyDone", "Not done");
     Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Times Ran", 0);
 
-    m_trajectoryStates.clear();
+    m_trajectoryStates.clear(); //Clears the primitive of previous path/trajectory
 
     m_wasMoving = false;
 
-    Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Initialized", "True");
+    Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Initialized", "True"); //Signals that drive path is initialized in the console
 
-    GetTrajectory(params->GetPathName());
-    Logger::GetLogger()->ToNtTable(m_pathname + "Trajectory", "Time", m_trajectory.TotalTime().to<double>());
+    GetTrajectory(params->GetPathName());  //Parses path from json file based on path name given in xml
+    Logger::GetLogger()->ToNtTable(m_pathname + "Trajectory", "Time", m_trajectory.TotalTime().to<double>());// Debugging
     if (!m_trajectoryStates.empty()) // only go if path name found
     {
-        m_desiredState = m_trajectoryStates.front();
+        m_desiredState = m_trajectoryStates.front(); //m_desiredState is the first state, or starting position
 
-        m_timer.get()->Reset();
+        m_timer.get()->Reset(); //Restarts and starts timer
         m_timer.get()->Start();
 
         Logger::GetLogger()->ToNtTable("DrivePathValues", "CurrentPosX", m_currentChassisPosition.X().to<double>());
@@ -83,9 +83,12 @@ void DrivePath::Init(PrimitiveParams *params)
         Logger::GetLogger()->ToNtTable("Deltas", "iDeltaX", "0");
         Logger::GetLogger()->ToNtTable("Deltas", "iDeltaX", "0");
 
-        m_PosChgTimer.get()->Reset();
+        //A timer used for position change detection
+        m_PosChgTimer.get()->Reset(); 
         m_PosChgTimer.get()->Start(); // start scan timer to detect motion
 
+        //Is used to determine what controller/ "drive mode" pathweaver will run in
+        //Holo / Holonomic = Swerve X, y, z movement   Ramsete = Differential / Tank x, y movement
         if (m_runHoloController)
         {
             m_holoController.SetEnabled(true);
@@ -94,13 +97,21 @@ void DrivePath::Init(PrimitiveParams *params)
         {
             m_ramseteController.SetEnabled(true);
         }
-        auto targetState = m_trajectory.Sample(m_trajectory.TotalTime());
-        m_targetPose = targetState.pose;
-        auto currPose = m_chassis.get()->GetPose();
-        auto trans = m_targetPose - currPose;
-        m_deltaX = trans.X().to<double>();
+
+
+        //Sampling means to grab a state based on the time, if we want to know what state we should be running at 5 seconds,
+        //we will sample the 5 second state.
+        auto targetState = m_trajectory.Sample(m_trajectory.TotalTime());  //"Samples" or grabs the position we should be at based on time
+
+        m_targetPose = targetState.pose;  //Target pose represents the pose that we want to be at, based on the target state from above
+
+        auto currPose = m_chassis.get()->GetPose(); //Grabs the current pose of the robot to compare to the target pose
+        auto trans = m_targetPose - currPose; //Translation / Delta of the target pose and current pose
+
+        m_deltaX = trans.X().to<double>();  //Separates the delta "trans" from above into two variables for x and y
         m_deltaY = trans.Y().to<double>();
-        m_chassis.get()->RunWPIAlgorithm(true);
+
+        m_chassis.get()->RunWPIAlgorithm(true); //Determines what pose estimation method we will use, we have a few using different methods/equations
     }
     m_timesRun = 0;
 }
@@ -108,7 +119,7 @@ void DrivePath::Run()
 {
     Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Running", "True");
 
-    if (!m_trajectoryStates.empty()) 
+    if (!m_trajectoryStates.empty()) //If we have a path parsed / have states to run
     {
         // debugging
         m_timesRun++;
@@ -129,20 +140,20 @@ void DrivePath::Run()
         // Run the chassis
         m_chassis->Drive(refChassisSpeeds, false);
     }
-    else
+    else //If we don't have states to run, don't move the robot
     {
         m_chassis->Drive(0, 0, 0, false);
     }
 
 }
 
-bool DrivePath::IsDone()
+bool DrivePath::IsDone() //Default primitive function to determine if the primitive is done running
 {
 
     bool isDone = false;
-    string whyDone = "";
+    string whyDone = ""; //debugging variable that we used to determine why the path was stopping
     
-    if (!m_trajectoryStates.empty()) 
+    if (!m_trajectoryStates.empty()) //If we have states... 
     {
         // Check if the current pose and the trajectory's final pose are the same
         auto curPos = m_chassis.get()->GetPose();
@@ -183,11 +194,11 @@ bool DrivePath::IsDone()
         
 
 
-        if (m_PosChgTimer.get()->Get() > 1.0)
-        {
+        if (m_PosChgTimer.get()->Get() > 1.0) //This if statement makes sure that we aren't checking for position change right at the start
+        {                                   //caused problems that would signal we are done when the path hasn't started
            //auto moving = !IsSamePose(curPos, m_PrevPos, 7.5);
-            auto moving = m_chassis.get()->IsMoving();
-            if (!moving && m_wasMoving)
+            auto moving = m_chassis.get()->IsMoving();  //Is moving checks to make sure we are moving
+            if (!moving && m_wasMoving)  //If we aren't moving and last state we were moving, then...
             {
                     isDone = true;
                     whyDone = "Stopped moving";                    
@@ -210,7 +221,7 @@ bool DrivePath::IsDone()
         return true;
     }
     if (isDone)
-    {
+    {   //debugging
         Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "Done", "True");
         Logger::GetLogger()->ToNtTable("DrivePath" + m_pathname, "WhyDone", whyDone);
         Logger::GetLogger()->LogError(Logger::LOGGER_LEVEL::PRINT, "DrivePath" + m_pathname, "Is done because: " + whyDone);
@@ -219,7 +230,7 @@ bool DrivePath::IsDone()
     
 }
 
-bool DrivePath::IsSamePose(frc::Pose2d lCurPos, frc::Pose2d lPrevPos, double tolerance)
+bool DrivePath::IsSamePose(frc::Pose2d lCurPos, frc::Pose2d lPrevPos, double tolerance) //position checking functions
 {
     // Detect if the two poses are the same within a tolerance
     double dCurPosX = lCurPos.X().to<double>() * 1000; //cm
@@ -237,7 +248,7 @@ bool DrivePath::IsSamePose(frc::Pose2d lCurPos, frc::Pose2d lPrevPos, double tol
     return (dDeltaX <= tolerance && dDeltaY <= tolerance);
 }
 
-void DrivePath::GetTrajectory
+void DrivePath::GetTrajectory //Parses pathweaver json to create a series of points that we can drive the robot to
 (
     string  path
 )
@@ -247,14 +258,14 @@ void DrivePath::GetTrajectory
         Logger::GetLogger()->LogError(string("DrivePath" + m_pathname), string("Finding Deploy Directory"));
 
         // Read path into trajectory for deploy directory.  JSON File ex. Bounce1.wpilid.json
-        wpi::SmallString<64> deployDir;
-        frc::filesystem::GetDeployDirectory(deployDir);
-        wpi::sys::path::append(deployDir, "paths");
+        wpi::SmallString<64> deployDir;  //creates a string variable
+        frc::filesystem::GetDeployDirectory(deployDir);  //grabs the deploy directory: "/lvuser/deploy" on roborio
+        wpi::sys::path::append(deployDir, "paths");  //goes into "/lvuser/deploy/paths" on roborio
         wpi::sys::path::append(deployDir, path); // load path from deploy directory
 
-        Logger::GetLogger()->LogError(string("Deploy path is "), deployDir.str());
-        m_trajectory = frc::TrajectoryUtil::FromPathweaverJson(deployDir);
-        m_trajectoryStates = m_trajectory.States();
+        Logger::GetLogger()->LogError(string("Deploy path is "), deployDir.str()); //Debugging
+        m_trajectory = frc::TrajectoryUtil::FromPathweaverJson(deployDir);  //Creates a trajectory or path that can be used in the code, parsed from pathweaver json
+        m_trajectoryStates = m_trajectory.States();  //Creates a vector of all the states or "waypoints" the robot needs to get to
         Logger::GetLogger()->LogError(string("DrivePath - Loaded = "), path);
         Logger::GetLogger()->ToNtTable("DrivePathValues", "TrajectoryTotalTime", m_trajectory.TotalTime().to<double>());
     }
@@ -262,10 +273,10 @@ void DrivePath::GetTrajectory
 
 void DrivePath::CalcCurrentAndDesiredStates()
 {
-    m_currentChassisPosition = m_chassis.get()->GetPose();
-    auto sampleTime = units::time::second_t(m_timer.get()->Get()); //+ 0.02
+    m_currentChassisPosition = m_chassis.get()->GetPose(); //Grabs current pose / position
+    auto sampleTime = units::time::second_t(m_timer.get()->Get()); //+ 0.02  //Grabs the time that we should sample a state from
 
-    m_desiredState = m_trajectory.Sample(sampleTime);
+    m_desiredState = m_trajectory.Sample(sampleTime); //Gets the target state based on the current time
 
     // May need to do our own sampling based on position and time     
 
